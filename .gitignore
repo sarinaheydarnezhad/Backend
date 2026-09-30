@@ -1,0 +1,16 @@
+**/bin/
+**/obj/
+.dotnet/
+.nuget/
+.vs/
+.vscode/
+.idea/
+TestResults/
+*.user
+*.suo
+*.pfx
+**/appsettings.Local.json
+**/appsettings.*.local.json
+.env
+.env.*
+!.env.example
