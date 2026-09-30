@@ -22,10 +22,11 @@ public sealed class UserService(FlashcardsDbContext database, IPasswordHasher<Us
         var newUser = new User { Email = trimmedEmail, NormalizedEmail = normalizedEmail, DisplayName = displayName.Trim() };
         newUser.PasswordHash = passwordHasher.HashPassword(newUser, password);
         database.Users.Add(newUser);
+        database.SyncHeads.Add(new SyncHead { UserId = newUser.Id });
         try { await database.SaveChangesAsync(cancellationToken); }
         catch (DbUpdateException)
         {
-            database.Entry(newUser).State = EntityState.Detached;
+            database.ChangeTracker.Clear();
             if (await database.Users.AnyAsync(user => user.NormalizedEmail == normalizedEmail, cancellationToken))
                 return null;
             throw;

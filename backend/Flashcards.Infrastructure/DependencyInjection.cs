@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Flashcards.Domain;
 using Flashcards.Infrastructure.Auth;
 using Flashcards.Infrastructure.Persistence;
+using Flashcards.Infrastructure.Sync;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -52,6 +53,7 @@ public static class DependencyInjection
         services.AddScoped<UserService>();
         services.AddScoped<TokenService>();
         services.AddScoped<AuthService>();
+        services.AddScoped<SyncService>();
         services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         var connectionString = configuration.GetConnectionString("FlashcardsDb");
         if (!string.IsNullOrWhiteSpace(connectionString))

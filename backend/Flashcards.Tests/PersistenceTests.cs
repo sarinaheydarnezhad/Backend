@@ -16,7 +16,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         var model = database.Model;
-        Assert.Equal(8, model.GetEntityTypes().Count());
+        Assert.Equal(10, model.GetEntityTypes().Count());
         var state = model.FindEntityType(typeof(CardReviewState))!;
         Assert.Equal(nameof(CardReviewState.CardId), state.FindPrimaryKey()!.Properties.Single().Name);
         var settings = model.FindEntityType(typeof(UserSettings))!;
@@ -31,6 +31,12 @@ public sealed class PersistenceTests
         var refreshToken = model.FindEntityType(typeof(RefreshToken))!;
         Assert.Contains(refreshToken.GetIndexes(), index => index.IsUnique && index.Properties.Single().Name == nameof(RefreshToken.TokenHash));
         Assert.All(refreshToken.GetForeignKeys(), key => Assert.Equal(DeleteBehavior.NoAction, key.DeleteBehavior));
+        var syncChange = model.FindEntityType(typeof(SyncChange))!;
+        Assert.Equal([nameof(SyncChange.UserId), nameof(SyncChange.Version)],
+            syncChange.FindPrimaryKey()!.Properties.Select(property => property.Name));
+        Assert.Contains(syncChange.GetIndexes(), index => index.IsUnique && index.Properties.Select(property => property.Name)
+            .SequenceEqual([nameof(SyncChange.UserId), nameof(SyncChange.DeviceId), nameof(SyncChange.ClientChangeId)]));
+        Assert.All(syncChange.GetForeignKeys(), key => Assert.Equal(DeleteBehavior.NoAction, key.DeleteBehavior));
     }
 
     [Fact]
@@ -38,7 +44,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         Assert.False(database.Database.HasPendingModelChanges());
-        Assert.Equal(2, database.Database.GetMigrations().Count());
+        Assert.Equal(3, database.Database.GetMigrations().Count());
         var script = database.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         Assert.Contains("CREATE TABLE [ReviewEvents]", script);
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_ReviewEvents_Immutable]", script);
@@ -47,6 +53,11 @@ public sealed class PersistenceTests
         Assert.Contains("__EFMigrationsHistory", script);
         Assert.Contains("CREATE TABLE [AuthSessions]", script);
         Assert.Contains("CREATE TABLE [RefreshTokens]", script);
+        Assert.Contains("CREATE TABLE [SyncChanges]", script);
+        Assert.Contains("CREATE TABLE [SyncHeads]", script);
+        Assert.Contains("INSERT INTO [SyncHeads]", script);
+        Assert.Contains("EXEC(N'CREATE TRIGGER [TR_SyncChanges_Immutable]", script);
+        Assert.Contains("THROW 50002", script);
         Assert.DoesNotContain("ON DELETE CASCADE", script, StringComparison.OrdinalIgnoreCase);
     }
 

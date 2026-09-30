@@ -50,6 +50,7 @@ public sealed class Deck
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
     public DateTimeOffset? ArchivedAtUtc { get; set; }
+    public long SyncVersion { get; set; }
     public ICollection<Card> Cards { get; } = new List<Card>();
 }
 
@@ -66,6 +67,7 @@ public sealed class Card
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
     public DateTimeOffset? ArchivedAtUtc { get; set; }
+    public long SyncVersion { get; set; }
     public CardReviewState? ReviewState { get; set; }
 }
 
@@ -81,6 +83,7 @@ public sealed class CardReviewState
     public int TotalSuccesses { get; set; }
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
+    public long SyncVersion { get; set; }
 }
 
 public sealed class ReviewEvent
@@ -113,4 +116,29 @@ public sealed class UserSettings
     public string? PreferredSpeechAccent { get; set; }
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
+    public long SyncVersion { get; set; }
+}
+
+public sealed class SyncHead
+{
+    public Guid UserId { get; set; }
+    public User User { get; set; } = null!;
+    public long Version { get; set; }
+}
+
+public sealed class SyncChange
+{
+    public Guid UserId { get; set; }
+    public long Version { get; set; }
+    public User User { get; set; } = null!;
+    public Guid DeviceId { get; set; }
+    public Guid ClientChangeId { get; set; }
+    public DateTimeOffset ClientChangedAtUtc { get; set; }
+    public DateTimeOffset ServerChangedAtUtc { get; set; }
+    public string EntityType { get; set; } = string.Empty;
+    public Guid EntityId { get; set; }
+    public string Operation { get; set; } = string.Empty;
+    public long ExpectedVersion { get; set; }
+    public string PayloadJson { get; set; } = string.Empty;
+    public string Fingerprint { get; set; } = string.Empty;
 }

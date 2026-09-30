@@ -13,6 +13,8 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
     public DbSet<UserSettings> UserSettings => Set<UserSettings>();
     public DbSet<AuthSession> AuthSessions => Set<AuthSession>();
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+    public DbSet<SyncHead> SyncHeads => Set<SyncHead>();
+    public DbSet<SyncChange> SyncChanges => Set<SyncChange>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -46,6 +48,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.Property(item => item.TypographySize).HasMaxLength(6).IsUnicode(false).IsRequired();
             entity.HasIndex(item => new { item.UserId, item.ArchivedAtUtc, item.Name });
             entity.HasIndex(item => new { item.UserId, item.UpdatedAtUtc, item.Id });
+            entity.Property(item => item.SyncVersion).HasDefaultValue(0L);
             ConfigureDates(entity);
         });
 
@@ -62,6 +65,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.Property(item => item.ExamplesJson).IsRequired();
             entity.HasIndex(item => new { item.DeckId, item.ArchivedAtUtc, item.Id });
             entity.HasIndex(item => new { item.DeckId, item.UpdatedAtUtc, item.Id });
+            entity.Property(item => item.SyncVersion).HasDefaultValue(0L);
             ConfigureDates(entity);
         });
 
@@ -77,6 +81,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.Property(item => item.DueDate).HasColumnType("date");
             entity.HasIndex(item => new { item.DueDate, item.CardId });
             entity.HasIndex(item => new { item.UpdatedAtUtc, item.CardId });
+            entity.Property(item => item.SyncVersion).HasDefaultValue(0L);
             ConfigureDates(entity);
         });
 
@@ -119,6 +124,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.Property(item => item.PreferredSpeechAccent).HasMaxLength(2).IsUnicode(false);
             entity.Property(item => item.DailyReminderTime).HasColumnType("time(0)");
             entity.HasIndex(item => item.UpdatedAtUtc);
+            entity.Property(item => item.SyncVersion).HasDefaultValue(0L);
             ConfigureDates(entity);
         });
 
@@ -144,6 +150,33 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.HasIndex(item => new { item.AuthSessionId, item.ConsumedAtUtc });
             entity.Property(item => item.CreatedAtUtc).HasColumnType("datetimeoffset(7)");
             entity.Property(item => item.ExpiresAtUtc).HasColumnType("datetimeoffset(7)");
+        });
+
+        modelBuilder.Entity<SyncHead>(entity =>
+        {
+            entity.ToTable("SyncHeads", table => table.HasCheckConstraint("CK_SyncHeads_Version", "[Version] >= 0"));
+            entity.HasKey(item => item.UserId);
+            entity.HasOne(item => item.User).WithMany().HasForeignKey(item => item.UserId).OnDelete(DeleteBehavior.NoAction);
+        });
+
+        modelBuilder.Entity<SyncChange>(entity =>
+        {
+            entity.ToTable("SyncChanges", table =>
+            {
+                table.HasTrigger("TR_SyncChanges_Immutable");
+                table.HasCheckConstraint("CK_SyncChanges_Version", "[Version] > 0 AND [ExpectedVersion] >= 0");
+                table.HasCheckConstraint("CK_SyncChanges_Payload", "ISJSON([PayloadJson]) = 1");
+            });
+            entity.HasKey(item => new { item.UserId, item.Version });
+            entity.HasOne(item => item.User).WithMany().HasForeignKey(item => item.UserId).OnDelete(DeleteBehavior.NoAction);
+            entity.HasIndex(item => new { item.UserId, item.DeviceId, item.ClientChangeId }).IsUnique();
+            entity.HasIndex(item => new { item.UserId, item.EntityType, item.EntityId, item.Version });
+            entity.Property(item => item.EntityType).HasMaxLength(24).IsUnicode(false).IsRequired();
+            entity.Property(item => item.Operation).HasMaxLength(12).IsUnicode(false).IsRequired();
+            entity.Property(item => item.PayloadJson).IsRequired();
+            entity.Property(item => item.Fingerprint).HasMaxLength(64).IsUnicode(false).IsRequired();
+            entity.Property(item => item.ClientChangedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ServerChangedAtUtc).HasColumnType("datetimeoffset(7)");
         });
     }
 
@@ -172,10 +205,10 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
         var now = DateTimeOffset.UtcNow;
         foreach (var entry in ChangeTracker.Entries())
         {
-            if (entry.Entity is ReviewEvent && entry.State is EntityState.Modified or EntityState.Deleted)
-                throw new InvalidOperationException("Review events are immutable.");
+            if (entry.Entity is ReviewEvent or SyncChange && entry.State is EntityState.Modified or EntityState.Deleted)
+                throw new InvalidOperationException("Historical records are immutable.");
 
-            if (entry.State == EntityState.Added)
+            if (entry.State == EntityState.Added && entry.Entity is not (SyncHead or SyncChange))
             {
                 entry.Property("CreatedAtUtc").CurrentValue = now;
                 if (entry.Entity is ReviewEvent) continue;

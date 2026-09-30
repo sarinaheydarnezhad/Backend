@@ -2,7 +2,10 @@ using System.ComponentModel.DataAnnotations;
 using Flashcards.Application.Abstractions;
 using Flashcards.Infrastructure.Auth;
 using Flashcards.Infrastructure.Persistence;
+using Flashcards.Infrastructure.Sync;
 using System.Security.Claims;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Flashcards.Api.Endpoints;
 
@@ -81,6 +84,51 @@ public static class V1Endpoints
                 settings.Theme, settings.HapticsEnabled, settings.Language, settings.DailyReminderEnabled,
                 settings.DailyReminderTime, settings.PreferredSpeechLanguage, settings.PreferredSpeechAccent
             });
+        });
+
+        var sync = v1.MapGroup("/sync").WithTags("sync").RequireAuthorization();
+        sync.MapPost("/push", async (HttpContext context, ClaimsPrincipal principal, SyncService service, CancellationToken cancellationToken) =>
+        {
+            const int maxBytes = 131_072;
+            if (context.Request.ContentLength > maxBytes) return Results.StatusCode(StatusCodes.Status413PayloadTooLarge);
+            if (!context.Request.HasJsonContentType()) return Results.StatusCode(StatusCodes.Status415UnsupportedMediaType);
+            using var buffer = new MemoryStream();
+            var chunk = new byte[8192];
+            int read;
+            while ((read = await context.Request.Body.ReadAsync(chunk, cancellationToken)) > 0)
+            {
+                if (buffer.Length + read > maxBytes) return Results.StatusCode(StatusCodes.Status413PayloadTooLarge);
+                buffer.Write(chunk, 0, read);
+            }
+
+            SyncPushRequest? request;
+            try
+            {
+                request = JsonSerializer.Deserialize<SyncPushRequest>(buffer.ToArray(),
+                    new JsonSerializerOptions(JsonSerializerDefaults.Web) { UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow });
+            }
+            catch (JsonException) { return Results.BadRequest(new { error = "Invalid sync JSON." }); }
+
+            try
+            {
+                context.Response.Headers.CacheControl = "no-store";
+                return Results.Ok(await service.PushAsync(AuthenticatedIdentity.FromClaims(principal).UserId, request!, cancellationToken));
+            }
+            catch (SyncException exception)
+            {
+                return exception.Conflict is null
+                    ? Results.BadRequest(new { error = exception.Message })
+                    : Results.Conflict(new { error = exception.Message, conflict = exception.Conflict });
+            }
+        });
+        sync.MapGet("/pull", async (long cursor, int? limit, ClaimsPrincipal principal, SyncService service, HttpContext context, CancellationToken cancellationToken) =>
+        {
+            try
+            {
+                context.Response.Headers.CacheControl = "no-store";
+                return Results.Ok(await service.PullAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cursor, limit ?? 100, cancellationToken));
+            }
+            catch (SyncException exception) { return Results.BadRequest(new { error = exception.Message }); }
         });
 
         return endpoints;
