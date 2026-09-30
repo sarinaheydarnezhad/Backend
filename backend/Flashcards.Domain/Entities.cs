@@ -4,11 +4,37 @@ public sealed class User
 {
     public Guid Id { get; set; } = Guid.NewGuid();
     public string DisplayName { get; set; } = string.Empty;
+    public string? Email { get; set; }
+    public string? NormalizedEmail { get; set; }
+    public string? PasswordHash { get; set; }
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
     public DateTimeOffset? ArchivedAtUtc { get; set; }
     public ICollection<Deck> Decks { get; } = new List<Deck>();
     public UserSettings? Settings { get; set; }
+    public ICollection<AuthSession> AuthSessions { get; } = new List<AuthSession>();
+}
+
+public sealed class AuthSession
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid UserId { get; set; }
+    public User User { get; set; } = null!;
+    public DateTimeOffset CreatedAtUtc { get; set; }
+    public DateTimeOffset ExpiresAtUtc { get; set; }
+    public DateTimeOffset? RevokedAtUtc { get; set; }
+    public ICollection<RefreshToken> RefreshTokens { get; } = new List<RefreshToken>();
+}
+
+public sealed class RefreshToken
+{
+    public Guid Id { get; set; } = Guid.NewGuid();
+    public Guid AuthSessionId { get; set; }
+    public AuthSession AuthSession { get; set; } = null!;
+    public string TokenHash { get; set; } = string.Empty;
+    public DateTimeOffset CreatedAtUtc { get; set; }
+    public DateTimeOffset ExpiresAtUtc { get; set; }
+    public DateTimeOffset? ConsumedAtUtc { get; set; }
 }
 
 public sealed class Deck

@@ -16,7 +16,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         var model = database.Model;
-        Assert.Equal(6, model.GetEntityTypes().Count());
+        Assert.Equal(8, model.GetEntityTypes().Count());
         var state = model.FindEntityType(typeof(CardReviewState))!;
         Assert.Equal(nameof(CardReviewState.CardId), state.FindPrimaryKey()!.Properties.Single().Name);
         var settings = model.FindEntityType(typeof(UserSettings))!;
@@ -28,6 +28,9 @@ public sealed class PersistenceTests
         Assert.Contains(model.FindEntityType(typeof(Deck))!.GetKeys(), key => key.Properties.Select(property => property.Name)
             .SequenceEqual([nameof(Deck.UserId), nameof(Deck.Id)]));
         Assert.Equal("date", state.FindProperty(nameof(CardReviewState.DueDate))!.GetColumnType());
+        var refreshToken = model.FindEntityType(typeof(RefreshToken))!;
+        Assert.Contains(refreshToken.GetIndexes(), index => index.IsUnique && index.Properties.Single().Name == nameof(RefreshToken.TokenHash));
+        Assert.All(refreshToken.GetForeignKeys(), key => Assert.Equal(DeleteBehavior.NoAction, key.DeleteBehavior));
     }
 
     [Fact]
@@ -35,13 +38,15 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         Assert.False(database.Database.HasPendingModelChanges());
-        Assert.Single(database.Database.GetMigrations());
+        Assert.Equal(2, database.Database.GetMigrations().Count());
         var script = database.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         Assert.Contains("CREATE TABLE [ReviewEvents]", script);
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_ReviewEvents_Immutable]", script);
         Assert.Contains("THROW 50001", script);
         Assert.Contains("CK_ReviewStates_Box", script);
         Assert.Contains("__EFMigrationsHistory", script);
+        Assert.Contains("CREATE TABLE [AuthSessions]", script);
+        Assert.Contains("CREATE TABLE [RefreshTokens]", script);
         Assert.DoesNotContain("ON DELETE CASCADE", script, StringComparison.OrdinalIgnoreCase);
     }
 

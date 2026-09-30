@@ -11,6 +11,8 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
     public DbSet<CardReviewState> CardReviewStates => Set<CardReviewState>();
     public DbSet<ReviewEvent> ReviewEvents => Set<ReviewEvent>();
     public DbSet<UserSettings> UserSettings => Set<UserSettings>();
+    public DbSet<AuthSession> AuthSessions => Set<AuthSession>();
+    public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -19,6 +21,10 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.ToTable("Users");
             entity.HasKey(item => item.Id);
             entity.Property(item => item.DisplayName).HasMaxLength(120).IsRequired();
+            entity.Property(item => item.Email).HasMaxLength(256);
+            entity.Property(item => item.NormalizedEmail).HasMaxLength(256);
+            entity.Property(item => item.PasswordHash).HasMaxLength(512);
+            entity.HasIndex(item => item.NormalizedEmail).IsUnique().HasFilter("[NormalizedEmail] IS NOT NULL");
             entity.HasIndex(item => item.UpdatedAtUtc);
             ConfigureDates(entity);
         });
@@ -115,6 +121,30 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.HasIndex(item => item.UpdatedAtUtc);
             ConfigureDates(entity);
         });
+
+        modelBuilder.Entity<AuthSession>(entity =>
+        {
+            entity.ToTable("AuthSessions");
+            entity.HasKey(item => item.Id);
+            entity.HasOne(item => item.User).WithMany(item => item.AuthSessions)
+                .HasForeignKey(item => item.UserId).OnDelete(DeleteBehavior.NoAction);
+            entity.HasIndex(item => new { item.UserId, item.RevokedAtUtc });
+            entity.Property(item => item.CreatedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ExpiresAtUtc).HasColumnType("datetimeoffset(7)");
+        });
+
+        modelBuilder.Entity<RefreshToken>(entity =>
+        {
+            entity.ToTable("RefreshTokens");
+            entity.HasKey(item => item.Id);
+            entity.HasOne(item => item.AuthSession).WithMany(item => item.RefreshTokens)
+                .HasForeignKey(item => item.AuthSessionId).OnDelete(DeleteBehavior.NoAction);
+            entity.Property(item => item.TokenHash).HasMaxLength(64).IsUnicode(false).IsRequired();
+            entity.HasIndex(item => item.TokenHash).IsUnique();
+            entity.HasIndex(item => new { item.AuthSessionId, item.ConsumedAtUtc });
+            entity.Property(item => item.CreatedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ExpiresAtUtc).HasColumnType("datetimeoffset(7)");
+        });
     }
 
     private static void ConfigureDates<TEntity>(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<TEntity> entity)
@@ -151,7 +181,10 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
                 if (entry.Entity is ReviewEvent) continue;
             }
 
-            if (entry.State is EntityState.Added or EntityState.Modified && entry.Entity is not ReviewEvent)
+            if (entry.Entity is AuthSession or RefreshToken && entry.State == EntityState.Modified)
+                entry.Property("CreatedAtUtc").IsModified = false;
+
+            if (entry.State is EntityState.Added or EntityState.Modified && entry.Entity is User or Deck or Card or CardReviewState or Flashcards.Domain.UserSettings)
             {
                 entry.Property("UpdatedAtUtc").CurrentValue = now;
                 if (entry.State == EntityState.Modified)

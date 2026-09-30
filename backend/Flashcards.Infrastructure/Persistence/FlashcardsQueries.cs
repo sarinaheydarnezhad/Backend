@@ -24,10 +24,15 @@ public sealed class FlashcardsQueries(FlashcardsDbContext database)
             .Where(review => review.UserId == userId && review.CardId == cardId)
             .OrderBy(review => review.ReviewedAtUtc).ThenBy(review => review.Id).ToListAsync(cancellationToken);
 
+    public Task<UserSettings?> GetUserSettingsAsync(Guid userId, CancellationToken cancellationToken = default) =>
+        database.UserSettings.AsNoTracking().SingleOrDefaultAsync(settings => settings.UserId == userId, cancellationToken);
+
     public async Task<UserChanges> GetChangesSinceAsync(Guid userId, DateTimeOffset sinceUtc, CancellationToken cancellationToken = default)
     {
         var user = await database.Users.AsNoTracking()
-            .SingleOrDefaultAsync(item => item.Id == userId && item.UpdatedAtUtc > sinceUtc, cancellationToken);
+            .Where(item => item.Id == userId && item.UpdatedAtUtc > sinceUtc)
+            .Select(item => new UserChange(item.Id, item.DisplayName, item.UpdatedAtUtc, item.ArchivedAtUtc))
+            .SingleOrDefaultAsync(cancellationToken);
         var decks = await database.Decks.AsNoTracking()
             .Where(item => item.UserId == userId && item.UpdatedAtUtc > sinceUtc)
             .OrderBy(item => item.UpdatedAtUtc).ThenBy(item => item.Id).ToListAsync(cancellationToken);
@@ -47,9 +52,11 @@ public sealed class FlashcardsQueries(FlashcardsDbContext database)
 }
 
 public sealed record UserChanges(
-    User? User,
+    UserChange? User,
     IReadOnlyList<Deck> Decks,
     IReadOnlyList<Card> Cards,
     IReadOnlyList<CardReviewState> ReviewStates,
     IReadOnlyList<ReviewEvent> ReviewEvents,
     UserSettings? Settings);
+
+public sealed record UserChange(Guid Id, string DisplayName, DateTimeOffset UpdatedAtUtc, DateTimeOffset? ArchivedAtUtc);

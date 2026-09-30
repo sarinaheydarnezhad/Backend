@@ -14,11 +14,11 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Flashcards.Tests;
 
-public sealed class FoundationTests : IClassFixture<WebApplicationFactory<Program>>
+public sealed class FoundationTests : IClassFixture<TestApiFactory>
 {
-    private readonly WebApplicationFactory<Program> _factory;
+    private readonly TestApiFactory _factory;
 
-    public FoundationTests(WebApplicationFactory<Program> factory) => _factory = factory;
+    public FoundationTests(TestApiFactory factory) => _factory = factory;
 
     [Fact]
     public async Task Api_starts_and_serves_a_versioned_status_dto()
@@ -45,24 +45,21 @@ public sealed class FoundationTests : IClassFixture<WebApplicationFactory<Progra
     [Theory]
     [InlineData("")]
     [InlineData("   ")]
-    public async Task Invalid_boundary_dto_returns_validation_errors(string name)
+    public async Task Anonymous_deck_requests_are_rejected(string name)
     {
         using var client = _factory.CreateClient();
         var response = await client.PostAsJsonAsync("/api/v1/decks", new { name });
 
-        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-        var body = await response.Content.ReadFromJsonAsync<JsonElement>();
-        Assert.True(body.TryGetProperty("errors", out _));
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
     [Fact]
-    public async Task Valid_contract_reaches_the_unimplemented_feature_boundary()
+    public async Task Valid_deck_request_requires_authentication()
     {
         using var client = _factory.CreateClient();
         var response = await client.PostAsJsonAsync("/api/v1/decks", new { name = "Sample" });
 
-        Assert.Equal(HttpStatusCode.NotImplemented, response.StatusCode);
-        Assert.Equal("application/problem+json", response.Content.Headers.ContentType?.MediaType);
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
     [Fact]
@@ -102,7 +99,10 @@ public sealed class FoundationTests : IClassFixture<WebApplicationFactory<Progra
     {
         var config = new ConfigurationBuilder().AddInMemoryCollection(new Dictionary<string, string?>
         {
-            ["ConnectionStrings:FlashcardsDb"] = "Server=localhost;Database=Flashcards;Trusted_Connection=True;TrustServerCertificate=True"
+            ["ConnectionStrings:FlashcardsDb"] = "Server=localhost;Database=Flashcards;Trusted_Connection=True;TrustServerCertificate=True",
+            ["Auth:Issuer"] = "Flashcards.Api",
+            ["Auth:Audience"] = "Flashcards.Mobile",
+            ["Auth:SigningKey"] = TestApiFactory.TestSigningKey
         }).Build();
         var services = new ServiceCollection().AddInfrastructure(config);
         using var provider = services.BuildServiceProvider();
@@ -126,5 +126,22 @@ public sealed class FoundationTests : IClassFixture<WebApplicationFactory<Progra
     private sealed class ThrowingServiceMetadata : IServiceMetadata
     {
         public ServiceMetadata Get() => throw new InvalidOperationException("sensitive test marker");
+    }
+}
+
+public class TestApiFactory : WebApplicationFactory<Program>
+{
+    public static string TestSigningKey { get; } = Convert.ToBase64String(Enumerable.Repeat((byte)0x5a, 32).ToArray());
+
+    public TestApiFactory() => Environment.SetEnvironmentVariable("Auth__SigningKey", TestSigningKey);
+
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
+        {
+            ["Auth:Issuer"] = "Flashcards.Api",
+            ["Auth:Audience"] = "Flashcards.Mobile",
+            ["Auth:SigningKey"] = TestSigningKey
+        }));
     }
 }
