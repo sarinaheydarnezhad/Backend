@@ -167,6 +167,8 @@ public sealed class SyncService(FlashcardsDbContext database)
             {
                 if (!await database.Cards.AnyAsync(item => item.Id == change.EntityId && item.Deck.UserId == userId, cancellationToken))
                     throw new SyncException("Review state card is unavailable.");
+                if (await database.ReviewEvents.AnyAsync(item => item.CardId == change.EntityId && item.UserId == userId, cancellationToken))
+                    throw new SyncException("Review state is derived from immutable review events.");
                 var state = await database.CardReviewStates.SingleOrDefaultAsync(item => item.CardId == change.EntityId, cancellationToken);
                 if (state is null)
                 {
@@ -225,6 +227,25 @@ public sealed class SyncService(FlashcardsDbContext database)
                     PreviousBox = payload.PreviousBox, NewBox = payload.NewBox, Result = payload.Result,
                     ReviewedAtUtc = payload.ReviewedAtUtc, StudySessionId = payload.StudySessionId
                 });
+                var state = await database.CardReviewStates.SingleOrDefaultAsync(item => item.CardId == payload.CardId, cancellationToken);
+                if (state is null)
+                {
+                    state = new CardReviewState { CardId = payload.CardId };
+                    database.CardReviewStates.Add(state);
+                }
+                var effective = state.LastReviewedAtUtc > payload.ReviewedAtUtc
+                    ? state.LastReviewedAtUtc.Value : payload.ReviewedAtUtc;
+                state.Box = payload.Result == "success" ? Math.Min(state.Box + 1, 5) : 1;
+                state.DueDate = DateOnly.FromDateTime(effective.UtcDateTime)
+                    .AddDays(payload.Result == "success" ? 1 << (state.Box - 1) : 0);
+                state.LastReviewedAtUtc = effective;
+                state.TotalReviews++;
+                if (payload.Result == "success")
+                {
+                    state.TotalSuccesses++;
+                    state.ConsecutiveSuccesses++;
+                }
+                else state.ConsecutiveSuccesses = 0;
                 return JsonSerializer.Serialize(payload, SyncValidator.JsonOptions);
             }
             default:

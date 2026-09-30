@@ -58,9 +58,9 @@ public sealed class SyncTests : IAsyncLifetime
         var eventId = Guid.NewGuid();
         var review = Change("reviewEvent", eventId, "create", new ReviewEventPayload(deckId, cardId, 1, 2,
             "success", DateTimeOffset.UtcNow, null));
-        var state = Change("reviewState", cardId, "upsert", new ReviewStatePayload(2, DateOnly.FromDateTime(DateTime.UtcNow),
-            DateTimeOffset.UtcNow, 1, 1, 1));
-        var pushed = await Push(deck, card, review, state);
+        var state = Change("reviewState", cardId, "upsert", new ReviewStatePayload(1, DateOnly.FromDateTime(DateTime.UtcNow),
+            null, 0, 0, 0));
+        var pushed = await Push(deck, card, state, review);
         Assert.Equal(HttpStatusCode.OK, pushed.StatusCode);
         Assert.Equal(4, (await pushed.Content.ReadFromJsonAsync<SyncPushResponse>())!.Cursor);
         var firstPage = await _client.GetFromJsonAsync<SyncPullResponse>("/api/v1/sync/pull?cursor=0&limit=2");
@@ -70,8 +70,8 @@ public sealed class SyncTests : IAsyncLifetime
         var secondPage = await _client.GetFromJsonAsync<SyncPullResponse>("/api/v1/sync/pull?cursor=2");
         Assert.Equal([3L, 4L], secondPage!.Changes.Select(change => change.ServerVersion));
         Assert.False(secondPage.HasMore);
-        Assert.Equal("reviewEvent", secondPage.Changes[0].EntityType);
-        Assert.Equal(eventId, secondPage.Changes[0].EntityId);
+        Assert.Equal("reviewEvent", secondPage.Changes[1].EntityType);
+        Assert.Equal(eventId, secondPage.Changes[1].EntityId);
         Assert.Equal(HttpStatusCode.BadRequest, (await _client.GetAsync("/api/v1/sync/pull?cursor=5")).StatusCode);
 
         using var scope = _factory.Services.CreateScope();
@@ -183,6 +183,40 @@ public sealed class SyncTests : IAsyncLifetime
         Assert.Single(pulled!.Changes);
         Assert.Equal("archive", pulled.Changes[0].Operation);
         Assert.NotEqual(JsonValueKind.Null, pulled.Changes[0].Payload.GetProperty("archivedAtUtc").ValueKind);
+    }
+
+    [Fact]
+    public async Task Separate_devices_append_reviews_and_server_projects_every_result()
+    {
+        await LoginAsync("first@example.com");
+        var deckId = Guid.NewGuid();
+        var cardId = Guid.NewGuid();
+        Assert.Equal(HttpStatusCode.OK, (await Push(
+            Change("deck", deckId, "upsert", new DeckPayload("Words", "", "en", "ltr", "medium")),
+            Change("card", cardId, "upsert", new CardPayload(deckId, "hi", "hello", null, null,
+                JsonSerializer.SerializeToElement(Array.Empty<object>()))))).StatusCode);
+        var deviceA = Guid.NewGuid();
+        var deviceB = Guid.NewGuid();
+        var at = DateTimeOffset.UtcNow;
+        var first = Change("reviewEvent", Guid.NewGuid(), "create",
+            new ReviewEventPayload(deckId, cardId, 1, 2, "success", at, null)) with { DeviceId = deviceA };
+        var second = Change("reviewEvent", Guid.NewGuid(), "create",
+            new ReviewEventPayload(deckId, cardId, 1, 1, "failure", at.AddMinutes(-1), null)) with { DeviceId = deviceB };
+        Assert.Equal(HttpStatusCode.OK, (await Push(first)).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await Push(second)).StatusCode);
+        var feed = await _client.GetFromJsonAsync<SyncPullResponse>("/api/v1/sync/pull?cursor=2");
+        Assert.Equal([first.EntityId, second.EntityId], feed!.Changes.Select(change => change.EntityId));
+
+        using var scope = _factory.Services.CreateScope();
+        var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        Assert.Equal(2, await database.ReviewEvents.CountAsync());
+        var state = await database.CardReviewStates.SingleAsync();
+        Assert.Equal(1, state.Box);
+        Assert.Equal(2, state.TotalReviews);
+        Assert.Equal(1, state.TotalSuccesses);
+        Assert.Equal(HttpStatusCode.BadRequest, (await Push(Change("reviewState", cardId, "upsert",
+            new ReviewStatePayload(5, DateOnly.FromDateTime(DateTime.UtcNow), at, 1, 2, 2)))).StatusCode);
+        Assert.Equal(2, await database.ReviewEvents.CountAsync());
     }
 
     private static SyncPushChange Change<T>(string type, Guid entityId, string operation, T payload, long expectedVersion = 0) =>
