@@ -13,6 +13,7 @@ public static class DependencyInjection
         if (!string.IsNullOrWhiteSpace(connectionString))
         {
             services.AddDbContext<FlashcardsDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddScoped<FlashcardsQueries>();
         }
 
         return services;
