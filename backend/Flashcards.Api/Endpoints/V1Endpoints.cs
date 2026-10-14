@@ -14,6 +14,17 @@ public static class V1Endpoints
     public static IEndpointRouteBuilder MapV1Endpoints(this IEndpointRouteBuilder endpoints)
     {
         var v1 = endpoints.MapGroup("/api/v1").WithTags("v1");
+        v1.AddEndpointFilter(async (context, next) =>
+        {
+            if (context.HttpContext.User.Identity?.IsAuthenticated == true)
+                context.HttpContext.Response.Headers.CacheControl = "no-store";
+            try { return await next(context); }
+            catch (FreeTierLimitException exception)
+            {
+                context.HttpContext.Response.Headers.CacheControl = "no-store";
+                return Results.Json(new { error = exception.Message, code = exception.Code }, statusCode: StatusCodes.Status403Forbidden);
+            }
+        });
 
         v1.MapGet("/status", (IServiceMetadata metadata) =>
             {
@@ -22,13 +33,18 @@ public static class V1Endpoints
             })
             .WithName("GetV1Status");
 
-        // The deck route establishes the boundary contract; implementation follows in a later feature.
-        v1.MapPost("/decks", (CreateDeckRequest request) =>
-            Results.Problem(statusCode: StatusCodes.Status501NotImplemented,
-                title: "Deck creation is not available yet."))
+        v1.MapPost("/decks", async (CreateDeckRequest request, ClaimsPrincipal principal, SyncService service,
+            HttpContext context, CancellationToken cancellationToken) =>
+        {
+            var deck = await service.CreateDeckAsync(AuthenticatedIdentity.FromClaims(principal).UserId,
+                request.Name, cancellationToken);
+            context.Response.Headers.CacheControl = "no-store";
+            return Results.Created("/api/v1/me/decks", new CreateDeckResponse(deck.Id, deck.Name, deck.SyncVersion));
+        })
             .WithName("CreateV1Deck").RequireAuthorization();
 
         var auth = v1.MapGroup("/auth").WithTags("auth").RequireRateLimiting("auth");
+        auth.MapPhoneAuth();
         auth.MapPost("/register", async (RegisterRequest request, AuthService service, HttpContext context, CancellationToken cancellationToken) =>
         {
             var tokens = await service.RegisterAsync(request.Email, request.Password, request.DisplayName, cancellationToken);
@@ -50,9 +66,17 @@ public static class V1Endpoints
             context.Response.Headers.CacheControl = "no-store";
             return Results.Ok(tokens);
         });
-        auth.MapPost("/logout", async (ClaimsPrincipal principal, AuthService service, CancellationToken cancellationToken) =>
+        auth.MapPost("/logout", async (ClaimsPrincipal principal, AuthService service, HttpContext context, CancellationToken cancellationToken) =>
         {
             await service.LogoutAsync(principal, cancellationToken);
+            context.Response.Headers.CacheControl = "no-store";
+            return Results.NoContent();
+        }).RequireAuthorization();
+        auth.MapPost("/logout/{sessionId:guid}", async (Guid sessionId, ClaimsPrincipal principal, AuthService service,
+            HttpContext context, CancellationToken cancellationToken) =>
+        {
+            await service.LogoutSessionAsync(principal, sessionId, cancellationToken);
+            context.Response.Headers.CacheControl = "no-store";
             return Results.NoContent();
         }).RequireAuthorization();
 
@@ -60,7 +84,7 @@ public static class V1Endpoints
         mine.MapGet("/", async (ClaimsPrincipal principal, UserService users, CancellationToken cancellationToken) =>
         {
             var user = await users.FindByIdAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cancellationToken);
-            return user is null ? Results.NotFound() : Results.Ok(new { user.Id, user.DisplayName, user.Email });
+            return user is null ? Results.NotFound() : Results.Ok(new { user.Id, user.DisplayName, user.Email, user.PhoneNumber });
         });
         mine.MapGet("/decks", async (ClaimsPrincipal principal, FlashcardsQueries queries, CancellationToken cancellationToken) =>
             Results.Ok((await queries.GetUserDecksAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cancellationToken: cancellationToken))
@@ -71,7 +95,11 @@ public static class V1Endpoints
         mine.MapGet("/cards/{cardId:guid}/review-state", async (Guid cardId, ClaimsPrincipal principal, FlashcardsQueries queries, CancellationToken cancellationToken) =>
         {
             var state = await queries.GetReviewStateAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cardId, cancellationToken);
-            return state is null ? Results.NotFound() : Results.Ok(new { state.CardId, state.Box, state.DueDate, state.TotalReviews });
+            return state is null ? Results.NotFound() : Results.Ok(new
+            {
+                state.CardId, state.Box, state.DueDate, state.TotalReviews, state.TotalSuccesses,
+                state.ConsecutiveSuccesses, state.LastReviewedAtUtc
+            });
         });
         mine.MapGet("/cards/{cardId:guid}/review-history", async (Guid cardId, ClaimsPrincipal principal, FlashcardsQueries queries, CancellationToken cancellationToken) =>
             Results.Ok((await queries.GetReviewHistoryAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cardId, cancellationToken))
@@ -140,6 +168,8 @@ public sealed record StatusResponse(string Name, string ApiVersion);
 
 public sealed record CreateDeckRequest(
     [property: Required(AllowEmptyStrings = false), StringLength(120, MinimumLength = 1)] string Name);
+
+public sealed record CreateDeckResponse(Guid Id, string Name, long SyncVersion);
 
 public sealed record RegisterRequest(
     [property: Required, EmailAddress, StringLength(256)] string Email,

@@ -22,6 +22,27 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Flashcards.Domain.OtpChallenge", b =>
+                {
+                    b.Property<string>("PhoneNumber").HasMaxLength(16).IsUnicode(false).HasColumnType("varchar(16)");
+                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
+                    b.Property<string>("Purpose").IsRequired().HasMaxLength(12).IsUnicode(false).HasColumnType("varchar(12)");
+                    b.Property<string>("CodeHash").IsRequired().HasMaxLength(64).IsUnicode(false).HasColumnType("varchar(64)");
+                    b.Property<string>("ProofHash").HasMaxLength(64).IsUnicode(false).HasColumnType("varchar(64)");
+                    b.Property<DateTimeOffset>("RequestedAtUtc").HasColumnType("datetimeoffset(7)");
+                    b.Property<DateTimeOffset>("WindowStartedAtUtc").HasColumnType("datetimeoffset(7)");
+                    b.Property<DateTimeOffset>("ExpiresAtUtc").HasColumnType("datetimeoffset(7)");
+                    b.Property<DateTimeOffset?>("VerifiedAtUtc").HasColumnType("datetimeoffset(7)");
+                    b.Property<DateTimeOffset?>("ProofExpiresAtUtc").HasColumnType("datetimeoffset(7)");
+                    b.Property<DateTimeOffset?>("ConsumedAtUtc").HasColumnType("datetimeoffset(7)");
+                    b.Property<int>("Attempts").HasColumnType("int");
+                    b.Property<int>("RequestsInWindow").HasColumnType("int");
+                    b.Property<bool>("Delivered").HasColumnType("bit");
+                    b.HasKey("PhoneNumber");
+                    b.HasIndex("Id").IsUnique();
+                    b.ToTable("OtpChallenges", (string)null);
+                });
+
             modelBuilder.Entity("Flashcards.Domain.AuthSession", b =>
                 {
                     b.Property<Guid>("Id")
@@ -425,6 +446,11 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                         .HasMaxLength(512)
                         .HasColumnType("nvarchar(512)");
 
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(16)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(16)");
+
                     b.Property<DateTimeOffset>("UpdatedAtUtc")
                         .HasColumnType("datetimeoffset(7)");
 
@@ -433,6 +459,10 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                     b.HasIndex("NormalizedEmail")
                         .IsUnique()
                         .HasFilter("[NormalizedEmail] IS NOT NULL");
+
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique()
+                        .HasFilter("[PhoneNumber] IS NOT NULL");
 
                     b.HasIndex("UpdatedAtUtc");
 

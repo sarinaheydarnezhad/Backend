@@ -24,4 +24,7 @@ public sealed class AuthService(UserService users, TokenService tokens)
         var identity = AuthenticatedIdentity.FromClaims(principal);
         return tokens.RevokeSessionAsync(identity.UserId, identity.SessionId, cancellationToken);
     }
+
+    public Task LogoutSessionAsync(ClaimsPrincipal principal, Guid sessionId, CancellationToken cancellationToken = default) =>
+        tokens.RevokeSessionAsync(AuthenticatedIdentity.FromClaims(principal).UserId, sessionId, cancellationToken);
 }

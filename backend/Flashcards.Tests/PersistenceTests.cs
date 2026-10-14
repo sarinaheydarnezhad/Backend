@@ -16,7 +16,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         var model = database.Model;
-        Assert.Equal(10, model.GetEntityTypes().Count());
+        Assert.Equal(11, model.GetEntityTypes().Count());
         var state = model.FindEntityType(typeof(CardReviewState))!;
         Assert.Equal(nameof(CardReviewState.CardId), state.FindPrimaryKey()!.Properties.Single().Name);
         var settings = model.FindEntityType(typeof(UserSettings))!;
@@ -44,7 +44,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         Assert.False(database.Database.HasPendingModelChanges());
-        Assert.Equal(3, database.Database.GetMigrations().Count());
+        Assert.Equal(4, database.Database.GetMigrations().Count());
         var script = database.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         Assert.Contains("CREATE TABLE [ReviewEvents]", script);
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_ReviewEvents_Immutable]", script);
@@ -52,6 +52,8 @@ public sealed class PersistenceTests
         Assert.Contains("CK_ReviewStates_Box", script);
         Assert.Contains("__EFMigrationsHistory", script);
         Assert.Contains("CREATE TABLE [AuthSessions]", script);
+        Assert.Contains("CREATE TABLE [OtpChallenges]", script);
+        Assert.Contains("IX_Users_PhoneNumber", script);
         Assert.Contains("CREATE TABLE [RefreshTokens]", script);
         Assert.Contains("CREATE TABLE [SyncChanges]", script);
         Assert.Contains("CREATE TABLE [SyncHeads]", script);

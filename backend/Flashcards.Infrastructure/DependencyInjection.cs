@@ -53,6 +53,18 @@ public static class DependencyInjection
         services.AddScoped<UserService>();
         services.AddScoped<TokenService>();
         services.AddScoped<AuthService>();
+        services.AddScoped<PhoneAuthService>();
+        services.AddSingleton(TimeProvider.System);
+        var smsProvider = configuration["Sms:Provider"] ?? "Webhook";
+        if (string.Equals(smsProvider, "SmsIr", StringComparison.OrdinalIgnoreCase))
+            services.AddHttpClient<ISmsOtpSender, SmsIrOtpSender>(client => client.Timeout = TimeSpan.FromSeconds(10))
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false })
+                .RedactLoggedHeaders(["x-api-key", "Authorization"]);
+        else if (string.Equals(smsProvider, "Webhook", StringComparison.OrdinalIgnoreCase))
+            services.AddHttpClient<ISmsOtpSender, WebhookSmsOtpSender>(client => client.Timeout = TimeSpan.FromSeconds(10))
+                .RedactLoggedHeaders(["Authorization"]);
+        else
+            throw new InvalidOperationException("Sms:Provider must be SmsIr or Webhook.");
         services.AddScoped<SyncService>();
         services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         var connectionString = configuration.GetConnectionString("FlashcardsDb");

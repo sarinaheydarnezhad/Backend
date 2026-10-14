@@ -7,6 +7,7 @@ public sealed class User
     public string? Email { get; set; }
     public string? NormalizedEmail { get; set; }
     public string? PasswordHash { get; set; }
+    public string? PhoneNumber { get; set; }
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
     public DateTimeOffset? ArchivedAtUtc { get; set; }
@@ -24,6 +25,24 @@ public sealed class AuthSession
     public DateTimeOffset ExpiresAtUtc { get; set; }
     public DateTimeOffset? RevokedAtUtc { get; set; }
     public ICollection<RefreshToken> RefreshTokens { get; } = new List<RefreshToken>();
+}
+
+public sealed class OtpChallenge
+{
+    public string PhoneNumber { get; set; } = string.Empty;
+    public Guid Id { get; set; }
+    public string Purpose { get; set; } = string.Empty;
+    public string CodeHash { get; set; } = string.Empty;
+    public DateTimeOffset RequestedAtUtc { get; set; }
+    public DateTimeOffset WindowStartedAtUtc { get; set; }
+    public int RequestsInWindow { get; set; }
+    public DateTimeOffset ExpiresAtUtc { get; set; }
+    public int Attempts { get; set; }
+    public bool Delivered { get; set; }
+    public DateTimeOffset? VerifiedAtUtc { get; set; }
+    public string? ProofHash { get; set; }
+    public DateTimeOffset? ProofExpiresAtUtc { get; set; }
+    public DateTimeOffset? ConsumedAtUtc { get; set; }
 }
 
 public sealed class RefreshToken

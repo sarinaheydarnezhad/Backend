@@ -8,6 +8,17 @@ namespace Flashcards.Infrastructure.Sync;
 
 public sealed class SyncService(FlashcardsDbContext database)
 {
+    public async Task<Deck> CreateDeckAsync(Guid userId, string name, CancellationToken cancellationToken = default)
+    {
+        var deck = new Deck { Name = name };
+        var payload = new DeckPayload(deck.Name, deck.Description, deck.Language, deck.TextAlignment, deck.TypographySize);
+        var change = new SyncPushChange(Guid.NewGuid(), Guid.NewGuid(), "deck", deck.Id, "upsert",
+            DateTimeOffset.UtcNow, 0, JsonSerializer.SerializeToElement(payload, SyncValidator.JsonOptions));
+
+        await PushAsync(userId, new SyncPushRequest([change]), cancellationToken);
+        return database.Decks.Local.Single(item => item.Id == deck.Id);
+    }
+
     public async Task<SyncPushResponse> PushAsync(Guid userId, SyncPushRequest request, CancellationToken cancellationToken = default)
     {
         var changes = SyncValidator.Validate(request);
@@ -107,6 +118,8 @@ public sealed class SyncService(FlashcardsDbContext database)
                 {
                     if (change.Operation != "upsert" || change.ExpectedVersion != 0)
                         throw await ConflictAsync(userId, change, 0, null, cancellationToken);
+                    if (await database.Decks.CountAsync(item => item.UserId == userId && item.ArchivedAtUtc == null, cancellationToken) >= 1)
+                        throw new FreeTierLimitException("free_tier_deck_limit", "The free plan allows 1 active deck. Existing data is preserved.");
                     deck = new Deck { Id = change.EntityId, UserId = userId };
                     database.Decks.Add(deck);
                 }
@@ -141,6 +154,8 @@ public sealed class SyncService(FlashcardsDbContext database)
                     var parent = await database.Decks.SingleOrDefaultAsync(item => item.Id == incoming.DeckId && item.UserId == userId, cancellationToken);
                     if (parent is null || parent.ArchivedAtUtc is not null)
                         throw new SyncException("Card deck is unavailable.");
+                    if (await database.Cards.CountAsync(item => item.Deck.UserId == userId && item.ArchivedAtUtc == null, cancellationToken) >= 50)
+                        throw new FreeTierLimitException("free_tier_card_limit", "The free plan allows 50 active cards in total. Existing data is preserved.");
                     card = new Card { Id = change.EntityId, DeckId = incoming.DeckId };
                     database.Cards.Add(card);
                 }

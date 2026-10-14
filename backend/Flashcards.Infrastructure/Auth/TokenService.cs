@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Flashcards.Infrastructure.Auth;
 
-public sealed record AuthTokens(string AccessToken, string RefreshToken, DateTimeOffset AccessExpiresAtUtc);
+public sealed record AuthTokens(string AccessToken, string RefreshToken, DateTimeOffset AccessExpiresAtUtc, Guid SessionId, DateTimeOffset SessionExpiresAtUtc);
 
 public sealed class TokenService(FlashcardsDbContext database, AuthSettings settings)
 {
@@ -23,7 +23,7 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
         var rawRefreshToken = CreateRefreshToken(session, now);
         database.AuthSessions.Add(session);
         await database.SaveChangesAsync(cancellationToken);
-        return CreateTokens(user.Id, session.Id, rawRefreshToken, now);
+        return CreateTokens(user.Id, session.Id, rawRefreshToken, now, session.ExpiresAtUtc);
     }
 
     public async Task<AuthTokens?> RotateAsync(string rawRefreshToken, CancellationToken cancellationToken = default)
@@ -60,7 +60,7 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
         await database.SaveChangesAsync(cancellationToken);
         if (!await IsSessionActiveAsync(session.UserId, session.Id, cancellationToken))
             return null;
-        return CreateTokens(session.UserId, session.Id, newRefreshToken, now);
+        return CreateTokens(session.UserId, session.Id, newRefreshToken, now, session.ExpiresAtUtc);
     }
 
     public async Task RevokeSessionAsync(Guid userId, Guid sessionId, CancellationToken cancellationToken = default) =>
@@ -87,7 +87,7 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
         return raw;
     }
 
-    private AuthTokens CreateTokens(Guid userId, Guid sessionId, string refreshToken, DateTimeOffset now)
+    private AuthTokens CreateTokens(Guid userId, Guid sessionId, string refreshToken, DateTimeOffset now, DateTimeOffset sessionExpiresAtUtc)
     {
         var expires = now.Add(AccessLifetime);
         var jwt = new JwtSecurityToken(
@@ -100,7 +100,7 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
             ],
             notBefore: now.UtcDateTime, expires: expires.UtcDateTime,
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(settings.SigningKey), SecurityAlgorithms.HmacSha256));
-        return new AuthTokens(new JwtSecurityTokenHandler().WriteToken(jwt), refreshToken, expires);
+        return new AuthTokens(new JwtSecurityTokenHandler().WriteToken(jwt), refreshToken, expires, sessionId, sessionExpiresAtUtc);
     }
 
     private static string HashToken(string rawToken) =>

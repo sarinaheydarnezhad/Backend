@@ -15,6 +15,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
     public DbSet<SyncHead> SyncHeads => Set<SyncHead>();
     public DbSet<SyncChange> SyncChanges => Set<SyncChange>();
+    public DbSet<OtpChallenge> OtpChallenges => Set<OtpChallenge>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,9 +27,28 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.Property(item => item.Email).HasMaxLength(256);
             entity.Property(item => item.NormalizedEmail).HasMaxLength(256);
             entity.Property(item => item.PasswordHash).HasMaxLength(512);
+            entity.Property(item => item.PhoneNumber).HasMaxLength(16).IsUnicode(false);
+            entity.HasIndex(item => item.PhoneNumber).IsUnique().HasFilter("[PhoneNumber] IS NOT NULL");
             entity.HasIndex(item => item.NormalizedEmail).IsUnique().HasFilter("[NormalizedEmail] IS NOT NULL");
             entity.HasIndex(item => item.UpdatedAtUtc);
             ConfigureDates(entity);
+        });
+
+        modelBuilder.Entity<OtpChallenge>(entity =>
+        {
+            entity.ToTable("OtpChallenges");
+            entity.HasKey(item => item.PhoneNumber);
+            entity.Property(item => item.PhoneNumber).HasMaxLength(16).IsUnicode(false);
+            entity.HasIndex(item => item.Id).IsUnique();
+            entity.Property(item => item.Purpose).HasMaxLength(12).IsUnicode(false).IsRequired();
+            entity.Property(item => item.CodeHash).HasMaxLength(64).IsUnicode(false).IsRequired();
+            entity.Property(item => item.ProofHash).HasMaxLength(64).IsUnicode(false);
+            entity.Property(item => item.RequestedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.WindowStartedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ExpiresAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.VerifiedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ProofExpiresAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ConsumedAtUtc).HasColumnType("datetimeoffset(7)");
         });
 
         modelBuilder.Entity<Deck>(entity =>
@@ -208,7 +228,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             if (entry.Entity is ReviewEvent or SyncChange && entry.State is EntityState.Modified or EntityState.Deleted)
                 throw new InvalidOperationException("Historical records are immutable.");
 
-            if (entry.State == EntityState.Added && entry.Entity is not (SyncHead or SyncChange))
+            if (entry.State == EntityState.Added && entry.Entity is not (SyncHead or SyncChange or OtpChallenge))
             {
                 entry.Property("CreatedAtUtc").CurrentValue = now;
                 if (entry.Entity is ReviewEvent) continue;

@@ -85,6 +85,7 @@ public sealed class AuthTests : IAsyncLifetime
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
         var account = await _client.GetAsync("/api/v1/me/");
         Assert.Equal(HttpStatusCode.OK, account.StatusCode);
+        Assert.Equal("no-store", account.Headers.CacheControl?.ToString());
         var accountJson = await account.Content.ReadFromJsonAsync<JsonElement>();
         Assert.Equal("one@example.com", accountJson.GetProperty("email").GetString());
         Assert.False(accountJson.TryGetProperty("passwordHash", out _));
@@ -104,6 +105,8 @@ public sealed class AuthTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.OK, refreshed.StatusCode);
         var rotated = (await refreshed.Content.ReadFromJsonAsync<AuthTokens>())!;
         Assert.NotEqual(original.RefreshToken, rotated.RefreshToken);
+        Assert.Equal(original.SessionId, rotated.SessionId);
+        Assert.Equal(original.SessionExpiresAtUtc, rotated.SessionExpiresAtUtc);
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", rotated.AccessToken);
         Assert.Equal(HttpStatusCode.OK, (await _client.GetAsync("/api/v1/me/")).StatusCode);
 
@@ -119,12 +122,61 @@ public sealed class AuthTests : IAsyncLifetime
     {
         var tokens = await RegisterAsync("one@example.com");
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
-        Assert.Equal(HttpStatusCode.NotImplemented,
+        Assert.Equal(HttpStatusCode.Created,
             (await _client.PostAsJsonAsync("/api/v1/decks", new { name = "Example" })).StatusCode);
+        using (var dataScope = _factory.Services.CreateScope())
+        {
+            var database = dataScope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+            var deck = await database.Decks.SingleAsync();
+            var card = new Card { Deck = deck, FrontText = "Keep me", Meaning = "Preserved after logout" };
+            var reviewedAt = DateTimeOffset.UtcNow;
+            database.AddRange(card, new CardReviewState { Card = card, Box = 2, DueDate = DateOnly.FromDateTime(reviewedAt.UtcDateTime).AddDays(1),
+                    LastReviewedAtUtc = reviewedAt, TotalReviews = 1, TotalSuccesses = 1, ConsecutiveSuccesses = 1 },
+                new ReviewEvent { UserId = deck.UserId, Card = card, Deck = deck, PreviousBox = 1, NewBox = 2, Result = "success", ReviewedAtUtc = reviewedAt });
+            await database.SaveChangesAsync();
+        }
         Assert.Equal(HttpStatusCode.NoContent, (await _client.PostAsync("/api/v1/auth/logout", null)).StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized,
             (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { refreshToken = tokens.RefreshToken })).StatusCode);
+        using var verification = _factory.Services.CreateScope();
+        var stored = verification.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        Assert.Equal("Example", (await stored.Decks.SingleAsync()).Name);
+        Assert.Equal("Keep me", (await stored.Cards.SingleAsync()).FrontText);
+        Assert.Equal(1, (await stored.CardReviewStates.SingleAsync()).TotalReviews);
+        Assert.Equal("success", (await stored.ReviewEvents.SingleAsync()).Result);
+        Assert.NotNull((await stored.AuthSessions.SingleAsync()).RevokedAtUtc);
+    }
+
+    [Fact]
+    public async Task Deferred_logout_requires_the_same_owner_and_is_idempotent_without_revoking_the_new_session()
+    {
+        var original = await RegisterAsync("original@example.com");
+        var foreign = await RegisterAsync("foreign@example.com");
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", foreign.AccessToken);
+        Assert.Equal(HttpStatusCode.NoContent, (await _client.PostAsync($"/api/v1/auth/logout/{original.SessionId}", null)).StatusCode);
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+            Assert.Null((await database.AuthSessions.SingleAsync(session => session.Id == original.SessionId)).RevokedAtUtc);
+        }
+        using var anonymous = _factory.CreateClient();
+        Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.PostAsync($"/api/v1/auth/logout/{original.SessionId}", null)).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = null;
+        var login = await _client.PostAsJsonAsync("/api/v1/auth/login", new { email = "original@example.com", password = Password });
+        var current = (await login.Content.ReadFromJsonAsync<AuthTokens>())!;
+        Assert.NotEqual(original.SessionId, current.SessionId);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", current.AccessToken);
+        for (var attempt = 0; attempt < 2; attempt++)
+        {
+            var response = await _client.PostAsync($"/api/v1/auth/logout/{original.SessionId}", null);
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.Equal("no-store", response.Headers.CacheControl?.ToString());
+        }
+        Assert.Equal(HttpStatusCode.OK, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", original.AccessToken);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { refreshToken = original.RefreshToken })).StatusCode);
     }
 
     [Fact]
