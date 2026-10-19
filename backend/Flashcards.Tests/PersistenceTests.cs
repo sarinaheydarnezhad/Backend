@@ -16,7 +16,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         var model = database.Model;
-        Assert.Equal(11, model.GetEntityTypes().Count());
+        Assert.Equal(13, model.GetEntityTypes().Count());
         var state = model.FindEntityType(typeof(CardReviewState))!;
         Assert.Equal(nameof(CardReviewState.CardId), state.FindPrimaryKey()!.Properties.Single().Name);
         var settings = model.FindEntityType(typeof(UserSettings))!;
@@ -37,6 +37,15 @@ public sealed class PersistenceTests
         Assert.Contains(syncChange.GetIndexes(), index => index.IsUnique && index.Properties.Select(property => property.Name)
             .SequenceEqual([nameof(SyncChange.UserId), nameof(SyncChange.DeviceId), nameof(SyncChange.ClientChangeId)]));
         Assert.All(syncChange.GetForeignKeys(), key => Assert.Equal(DeleteBehavior.NoAction, key.DeleteBehavior));
+        var backup = model.FindEntityType(typeof(UserBackup))!;
+        Assert.Equal("varbinary(max)", backup.FindProperty(nameof(UserBackup.Payload))!.GetColumnType());
+        Assert.Contains(backup.GetIndexes(), index => index.IsUnique && index.Properties.Select(property => property.Name)
+            .SequenceEqual([nameof(UserBackup.UserId), nameof(UserBackup.RequestId)]));
+        Assert.All(backup.GetForeignKeys(), key => Assert.Equal(DeleteBehavior.NoAction, key.DeleteBehavior));
+        var subscription = model.FindEntityType(typeof(Subscription))!;
+        Assert.All(subscription.GetForeignKeys(), key => Assert.Equal(DeleteBehavior.NoAction, key.DeleteBehavior));
+        Assert.Contains(subscription.GetIndexes(), index => index.IsUnique && index.GetFilter() == "[Status] = 'Active'");
+        Assert.Equal("datetimeoffset(7)", subscription.FindProperty(nameof(Subscription.ExpiresAtUtc))!.GetColumnType());
     }
 
     [Fact]
@@ -44,7 +53,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         Assert.False(database.Database.HasPendingModelChanges());
-        Assert.Equal(4, database.Database.GetMigrations().Count());
+        Assert.Equal(6, database.Database.GetMigrations().Count());
         var script = database.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         Assert.Contains("CREATE TABLE [ReviewEvents]", script);
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_ReviewEvents_Immutable]", script);
@@ -53,6 +62,13 @@ public sealed class PersistenceTests
         Assert.Contains("__EFMigrationsHistory", script);
         Assert.Contains("CREATE TABLE [AuthSessions]", script);
         Assert.Contains("CREATE TABLE [OtpChallenges]", script);
+        Assert.Contains("CREATE TABLE [UserBackups]", script);
+        Assert.Contains("CREATE TABLE [Subscriptions]", script);
+        Assert.Contains("UX_Subscriptions_User_Active", script);
+        Assert.Contains("WHERE [Status] = ''Active''", script);
+        Assert.Contains("CK_Subscriptions_Period", script);
+        Assert.Contains("CK_UserBackups_Completion", script);
+        Assert.Contains("IX_UserBackups_UserId_RequestId", script);
         Assert.Contains("IX_Users_PhoneNumber", script);
         Assert.Contains("CREATE TABLE [RefreshTokens]", script);
         Assert.Contains("CREATE TABLE [SyncChanges]", script);

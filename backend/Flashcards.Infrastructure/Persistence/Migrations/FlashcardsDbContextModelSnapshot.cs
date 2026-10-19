@@ -334,6 +334,58 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                     b.HasAnnotation("SqlServer:UseSqlOutputClause", false);
                 });
 
+            modelBuilder.Entity("Flashcards.Domain.Subscription", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<DateTimeOffset>("ExpiresAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<string>("Plan")
+                        .IsRequired()
+                        .HasMaxLength(8)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(8)");
+
+                    b.Property<DateTimeOffset>("StartsAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(12)");
+
+                    b.Property<DateTimeOffset>("UpdatedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasDatabaseName("UX_Subscriptions_User_Active")
+                        .HasFilter("[Status] = 'Active'");
+
+                    b.HasIndex("UserId", "CreatedAtUtc", "Id");
+
+                    b.ToTable("Subscriptions", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_Subscriptions_Period", "[ExpiresAtUtc] > [StartsAtUtc]");
+
+                            t.HasCheckConstraint("CK_Subscriptions_Plan", "[Plan] IN ('Plus', 'Full')");
+
+                            t.HasCheckConstraint("CK_Subscriptions_Status", "[Status] IN ('Active', 'Expired', 'Cancelled')");
+                        });
+                });
+
             modelBuilder.Entity("Flashcards.Domain.SyncChange", b =>
                 {
                     b.Property<Guid>("UserId")
@@ -467,6 +519,75 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                     b.HasIndex("UpdatedAtUtc");
 
                     b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("Flashcards.Domain.UserBackup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("CompletedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<DateTimeOffset>("ExpiresAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<string>("FailureCode")
+                        .HasMaxLength(48)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(48)");
+
+                    b.Property<int>("FormatVersion")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("Payload")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<Guid>("RequestId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("RequestedSyncVersion")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("RetentionDays")
+                        .HasColumnType("int");
+
+                    b.Property<long?>("SizeBytes")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(12)");
+
+                    b.Property<long?>("SyncVersion")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpiresAtUtc");
+
+                    b.HasIndex("UserId", "RequestId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId", "CreatedAtUtc", "Id");
+
+                    b.ToTable("UserBackups", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_UserBackups_Completion", "([Status] = 'Completed' AND [Payload] IS NOT NULL AND [SizeBytes] IS NOT NULL AND [SizeBytes] > 0 AND [CompletedAtUtc] IS NOT NULL AND [SyncVersion] IS NOT NULL AND [FailureCode] IS NULL) OR ([Status] <> 'Completed' AND [Payload] IS NULL AND [SizeBytes] IS NULL AND [CompletedAtUtc] IS NULL)");
+
+                            t.HasCheckConstraint("CK_UserBackups_Retention", "[RetentionDays] BETWEEN 1 AND 3650 AND [ExpiresAtUtc] > [CreatedAtUtc] AND [FormatVersion] > 0 AND [RequestedSyncVersion] >= 0");
+
+                            t.HasCheckConstraint("CK_UserBackups_Status", "[Status] IN ('Pending', 'Completed', 'Failed')");
+                        });
                 });
 
             modelBuilder.Entity("Flashcards.Domain.UserSettings", b =>
@@ -615,6 +736,17 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Flashcards.Domain.Subscription", b =>
+                {
+                    b.HasOne("Flashcards.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Flashcards.Domain.SyncChange", b =>
                 {
                     b.HasOne("Flashcards.Domain.User", "User")
@@ -627,6 +759,17 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                 });
 
             modelBuilder.Entity("Flashcards.Domain.SyncHead", b =>
+                {
+                    b.HasOne("Flashcards.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Flashcards.Domain.UserBackup", b =>
                 {
                     b.HasOne("Flashcards.Domain.User", "User")
                         .WithMany()

@@ -16,9 +16,49 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
     public DbSet<SyncHead> SyncHeads => Set<SyncHead>();
     public DbSet<SyncChange> SyncChanges => Set<SyncChange>();
     public DbSet<OtpChallenge> OtpChallenges => Set<OtpChallenge>();
+    public DbSet<UserBackup> UserBackups => Set<UserBackup>();
+    public DbSet<Subscription> Subscriptions => Set<Subscription>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Subscription>(entity =>
+        {
+            entity.ToTable("Subscriptions", table =>
+            {
+                table.HasCheckConstraint("CK_Subscriptions_Plan", "[Plan] IN ('Plus', 'Full')");
+                table.HasCheckConstraint("CK_Subscriptions_Status", "[Status] IN ('Active', 'Expired', 'Cancelled')");
+                table.HasCheckConstraint("CK_Subscriptions_Period", "[ExpiresAtUtc] > [StartsAtUtc]");
+            });
+            entity.HasKey(item => item.Id);
+            entity.HasOne(item => item.User).WithMany().HasForeignKey(item => item.UserId).OnDelete(DeleteBehavior.NoAction);
+            entity.HasIndex(item => item.UserId).IsUnique().HasFilter("[Status] = 'Active'")
+                .HasDatabaseName("UX_Subscriptions_User_Active");
+            entity.HasIndex(item => new { item.UserId, item.CreatedAtUtc, item.Id });
+            entity.Property(item => item.Plan).HasConversion<string>().HasMaxLength(8).IsUnicode(false).IsRequired();
+            entity.Property(item => item.Status).HasConversion<string>().HasMaxLength(12).IsUnicode(false).IsRequired();
+            entity.Property(item => item.StartsAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ExpiresAtUtc).HasColumnType("datetimeoffset(7)");
+            ConfigureDates(entity);
+        });
+        modelBuilder.Entity<UserBackup>(entity =>
+        {
+            entity.ToTable("UserBackups", table =>
+            {
+                table.HasCheckConstraint("CK_UserBackups_Status", "[Status] IN ('Pending', 'Completed', 'Failed')");
+                table.HasCheckConstraint("CK_UserBackups_Completion", "([Status] = 'Completed' AND [Payload] IS NOT NULL AND [SizeBytes] IS NOT NULL AND [SizeBytes] > 0 AND [CompletedAtUtc] IS NOT NULL AND [SyncVersion] IS NOT NULL AND [FailureCode] IS NULL) OR ([Status] <> 'Completed' AND [Payload] IS NULL AND [SizeBytes] IS NULL AND [CompletedAtUtc] IS NULL)");
+                table.HasCheckConstraint("CK_UserBackups_Retention", "[RetentionDays] BETWEEN 1 AND 3650 AND [ExpiresAtUtc] > [CreatedAtUtc] AND [FormatVersion] > 0 AND [RequestedSyncVersion] >= 0");
+            });
+            entity.HasKey(item => item.Id);
+            entity.HasOne(item => item.User).WithMany().HasForeignKey(item => item.UserId).OnDelete(DeleteBehavior.NoAction);
+            entity.HasIndex(item => new { item.UserId, item.RequestId }).IsUnique();
+            entity.HasIndex(item => new { item.UserId, item.CreatedAtUtc, item.Id });
+            entity.HasIndex(item => item.ExpiresAtUtc);
+            entity.Property(item => item.Status).HasMaxLength(12).IsUnicode(false).IsRequired();
+            entity.Property(item => item.FailureCode).HasMaxLength(48).IsUnicode(false);
+            entity.Property(item => item.CreatedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.CompletedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ExpiresAtUtc).HasColumnType("datetimeoffset(7)");
+        });
         modelBuilder.Entity<User>(entity =>
         {
             entity.ToTable("Users");
@@ -228,7 +268,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             if (entry.Entity is ReviewEvent or SyncChange && entry.State is EntityState.Modified or EntityState.Deleted)
                 throw new InvalidOperationException("Historical records are immutable.");
 
-            if (entry.State == EntityState.Added && entry.Entity is not (SyncHead or SyncChange or OtpChallenge))
+            if (entry.State == EntityState.Added && entry.Entity is not (SyncHead or SyncChange or OtpChallenge or UserBackup))
             {
                 entry.Property("CreatedAtUtc").CurrentValue = now;
                 if (entry.Entity is ReviewEvent) continue;
@@ -237,7 +277,13 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             if (entry.Entity is AuthSession or RefreshToken && entry.State == EntityState.Modified)
                 entry.Property("CreatedAtUtc").IsModified = false;
 
-            if (entry.State is EntityState.Added or EntityState.Modified && entry.Entity is User or Deck or Card or CardReviewState or Flashcards.Domain.UserSettings)
+            if (entry.Entity is Subscription subscription && entry.State is EntityState.Added or EntityState.Modified)
+            {
+                subscription.StartsAtUtc = subscription.StartsAtUtc.ToUniversalTime();
+                subscription.ExpiresAtUtc = subscription.ExpiresAtUtc.ToUniversalTime();
+            }
+
+            if (entry.State is EntityState.Added or EntityState.Modified && entry.Entity is User or Deck or Card or CardReviewState or Flashcards.Domain.UserSettings or Subscription)
             {
                 entry.Property("UpdatedAtUtc").CurrentValue = now;
                 if (entry.State == EntityState.Modified)

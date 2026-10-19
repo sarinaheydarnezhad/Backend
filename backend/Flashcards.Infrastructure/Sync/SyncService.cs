@@ -2,11 +2,12 @@ using System.Data;
 using System.Text.Json;
 using Flashcards.Domain;
 using Flashcards.Infrastructure.Persistence;
+using Flashcards.Infrastructure.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Flashcards.Infrastructure.Sync;
 
-public sealed class SyncService(FlashcardsDbContext database)
+public sealed class SyncService(FlashcardsDbContext database, EntitlementService entitlements)
 {
     public async Task<Deck> CreateDeckAsync(Guid userId, string name, CancellationToken cancellationToken = default)
     {
@@ -118,8 +119,7 @@ public sealed class SyncService(FlashcardsDbContext database)
                 {
                     if (change.Operation != "upsert" || change.ExpectedVersion != 0)
                         throw await ConflictAsync(userId, change, 0, null, cancellationToken);
-                    if (await database.Decks.CountAsync(item => item.UserId == userId && item.ArchivedAtUtc == null, cancellationToken) >= 1)
-                        throw new FreeTierLimitException("free_tier_deck_limit", "The free plan allows 1 active deck. Existing data is preserved.");
+                    await entitlements.EnsureDeckCreationAllowedAsync(userId, cancellationToken);
                     deck = new Deck { Id = change.EntityId, UserId = userId };
                     database.Decks.Add(deck);
                 }
@@ -154,8 +154,7 @@ public sealed class SyncService(FlashcardsDbContext database)
                     var parent = await database.Decks.SingleOrDefaultAsync(item => item.Id == incoming.DeckId && item.UserId == userId, cancellationToken);
                     if (parent is null || parent.ArchivedAtUtc is not null)
                         throw new SyncException("Card deck is unavailable.");
-                    if (await database.Cards.CountAsync(item => item.Deck.UserId == userId && item.ArchivedAtUtc == null, cancellationToken) >= 50)
-                        throw new FreeTierLimitException("free_tier_card_limit", "The free plan allows 50 active cards in total. Existing data is preserved.");
+                    await entitlements.EnsureCardCreationAllowedAsync(userId, cancellationToken);
                     card = new Card { Id = change.EntityId, DeckId = incoming.DeckId };
                     database.Cards.Add(card);
                 }
@@ -180,8 +179,10 @@ public sealed class SyncService(FlashcardsDbContext database)
             }
             case "reviewState":
             {
-                if (!await database.Cards.AnyAsync(item => item.Id == change.EntityId && item.Deck.UserId == userId, cancellationToken))
+                if (!await database.Cards.AnyAsync(item => item.Id == change.EntityId && item.Deck.UserId == userId &&
+                    item.ArchivedAtUtc == null && item.Deck.ArchivedAtUtc == null, cancellationToken))
                     throw new SyncException("Review state card is unavailable.");
+                await entitlements.EnsureStudyAllowedAsync(userId, cancellationToken);
                 if (await database.ReviewEvents.AnyAsync(item => item.CardId == change.EntityId && item.UserId == userId, cancellationToken))
                     throw new SyncException("Review state is derived from immutable review events.");
                 var state = await database.CardReviewStates.SingleOrDefaultAsync(item => item.CardId == change.EntityId, cancellationToken);
@@ -234,8 +235,9 @@ public sealed class SyncService(FlashcardsDbContext database)
                     throw await ConflictAsync(userId, change, 0, null, cancellationToken);
                 var payload = (ReviewEventPayload)validated.Payload!;
                 if (!await database.Cards.AnyAsync(item => item.Id == payload.CardId && item.DeckId == payload.DeckId &&
-                                                     item.Deck.UserId == userId, cancellationToken))
+                                                     item.Deck.UserId == userId && item.ArchivedAtUtc == null && item.Deck.ArchivedAtUtc == null, cancellationToken))
                     throw new SyncException("Review event card and deck are unavailable.");
+                await entitlements.EnsureStudyAllowedAsync(userId, cancellationToken);
                 database.ReviewEvents.Add(new ReviewEvent
                 {
                     Id = change.EntityId, UserId = userId, DeckId = payload.DeckId, CardId = payload.CardId,

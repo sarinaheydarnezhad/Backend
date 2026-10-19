@@ -38,7 +38,7 @@ The launch profile sets `ASPNETCORE_ENVIRONMENT=Development` and listens at `htt
 - `GET /api/v1/me/`, `/me/decks`, `/me/decks/{deckId}/cards`, `/me/cards/{cardId}/review-state`, `/me/cards/{cardId}/review-history`, `/me/settings`: authenticated reads bound to the token subject. API responses exclude credential hashes.
 - `POST /api/v1/sync/push` and `GET /api/v1/sync/pull?cursor=0&limit=100`: authenticated, user-scoped offline change exchange. No mobile sync engine is included.
 
-Token responses additionally expose `sessionId` and `sessionExpiresAtUtc`. Refresh rotation preserves the original absolute session deadline. Authenticated responses use `Cache-Control: no-store`; logout never deletes account decks/cards/history. No backup service or retention policy is provided; mobile logout may verify the existing sync flow instead. The new owner-scoped revocation/data-preservation tests are authored but not run in this environment (SDK 8.0.100; target net10.0).
+Token responses additionally expose `sessionId` and `sessionExpiresAtUtc`. Refresh rotation preserves the original absolute session deadline. Authenticated responses use `Cache-Control: no-store`; logout never deletes account decks/cards/history. [Retained server backups](BACKUPS.md) add authenticated create/status/list/read APIs, encrypted SQL snapshots, configurable retention and retry-safe request IDs. Restore and scheduled physical cleanup are not implemented. Apply the backup migration and configure a durable protected key-ring directory before enabling creation. See [actual verification results](BACKUP-VERIFICATION.md), including the isolated .NET 10 SDK, focused passing tests and the confirmed pre-existing full-suite failure.
 
 ## Phone authentication
 
@@ -118,6 +118,10 @@ dotnet ef migrations script --idempotent --project backend/Flashcards.Infrastruc
 The initial migration creates the six data tables and a SQL Server trigger that rejects updates/deletes to review events. The second migration adds nullable account credentials for existing users, a filtered unique email index, sessions and hashed refresh tokens. The third migration adds per-user sync heads, an append-only change log, per-entity versions and an immutability trigger on the log. All foreign keys use no cascade deletion. Archive decks/cards instead of deleting history. Migrations are not applied automatically on API startup. Tests use in-memory SQLite for relational CRUD and constraints and validate the SQL Server migration script without contacting SQL Server; applying the migrations to a real SQL Server requires a running server and a configured connection string.
 
 `FlashcardsQueries` exposes async scoped reads for decks by user, cards by deck, review state, review history, and legacy changes after a UTC timestamp. The sync API instead uses server-issued integer cursors, including archived rows and review events.
+
+## Subscriptions
+
+Subscription catalog and deployment requirements are documented in [SUBSCRIPTIONS.md](SUBSCRIPTIONS.md). See [ACCESS-LIMITS.md](ACCESS-LIMITS.md) for creation/study enforcement, provisional offline access, protected operations and verification. Purchases and Full activation are not available.
 
 ## Guest-data copying
 

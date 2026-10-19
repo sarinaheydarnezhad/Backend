@@ -14,6 +14,8 @@ public static class V1Endpoints
     public static IEndpointRouteBuilder MapV1Endpoints(this IEndpointRouteBuilder endpoints)
     {
         var v1 = endpoints.MapGroup("/api/v1").WithTags("v1");
+        v1.MapBackups();
+        v1.MapSubscriptions();
         v1.AddEndpointFilter(async (context, next) =>
         {
             if (context.HttpContext.User.Identity?.IsAuthenticated == true)
@@ -22,7 +24,7 @@ public static class V1Endpoints
             catch (FreeTierLimitException exception)
             {
                 context.HttpContext.Response.Headers.CacheControl = "no-store";
-                return Results.Json(new { error = exception.Message, code = exception.Code }, statusCode: StatusCodes.Status403Forbidden);
+                return Results.Json(new { error = exception.Message, code = exception.Code, limits = exception.Limits, usage = exception.Usage }, statusCode: StatusCodes.Status403Forbidden);
             }
         });
 

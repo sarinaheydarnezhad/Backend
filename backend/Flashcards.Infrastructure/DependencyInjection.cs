@@ -3,6 +3,9 @@ using Flashcards.Domain;
 using Flashcards.Infrastructure.Auth;
 using Flashcards.Infrastructure.Persistence;
 using Flashcards.Infrastructure.Sync;
+using Flashcards.Infrastructure.Backups;
+using Flashcards.Infrastructure.Subscriptions;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -66,6 +69,18 @@ public static class DependencyInjection
         else
             throw new InvalidOperationException("Sms:Provider must be SmsIr or Webhook.");
         services.AddScoped<SyncService>();
+        services.AddSingleton<PlanCatalog>();
+        services.AddScoped<EntitlementService>();
+        var backups = BackupSettings.FromConfiguration(configuration);
+        services.AddSingleton(backups);
+        var protection = services.AddDataProtection().SetApplicationName("Lerona.Backups");
+        if (!string.IsNullOrWhiteSpace(backups.KeyRingPath) && Path.IsPathFullyQualified(backups.KeyRingPath))
+        {
+            protection.PersistKeysToFileSystem(new DirectoryInfo(backups.KeyRingPath));
+            if (OperatingSystem.IsWindows()) protection.ProtectKeysWithDpapi();
+        }
+        services.AddSingleton<IBackupPayloadProtector, BackupPayloadProtector>();
+        services.AddScoped<BackupService>();
         services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         var connectionString = configuration.GetConnectionString("FlashcardsDb");
         if (!string.IsNullOrWhiteSpace(connectionString))
