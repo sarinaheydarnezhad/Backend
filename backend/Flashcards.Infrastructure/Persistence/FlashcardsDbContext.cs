@@ -68,6 +68,8 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.Property(item => item.NormalizedEmail).HasMaxLength(256);
             entity.Property(item => item.PasswordHash).HasMaxLength(512);
             entity.Property(item => item.PhoneNumber).HasMaxLength(16).IsUnicode(false);
+            entity.Property(item => item.GoogleSubject).HasMaxLength(255).IsUnicode(false);
+            entity.HasIndex(item => item.GoogleSubject).IsUnique().HasFilter("[GoogleSubject] IS NOT NULL");
             entity.HasIndex(item => item.PhoneNumber).IsUnique().HasFilter("[PhoneNumber] IS NOT NULL");
             entity.HasIndex(item => item.NormalizedEmail).IsUnique().HasFilter("[NormalizedEmail] IS NOT NULL");
             entity.HasIndex(item => item.UpdatedAtUtc);

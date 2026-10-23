@@ -8,6 +8,7 @@ public sealed class User
     public string? NormalizedEmail { get; set; }
     public string? PasswordHash { get; set; }
     public string? PhoneNumber { get; set; }
+    public string? GoogleSubject { get; set; }
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
     public DateTimeOffset? ArchivedAtUtc { get; set; }

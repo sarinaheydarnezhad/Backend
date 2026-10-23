@@ -47,6 +47,7 @@ public static class V1Endpoints
 
         var auth = v1.MapGroup("/auth").WithTags("auth").RequireRateLimiting("auth");
         auth.MapPhoneAuth();
+        auth.MapGoogleAuth();
         auth.MapPost("/register", async (RegisterRequest request, AuthService service, HttpContext context, CancellationToken cancellationToken) =>
         {
             var tokens = await service.RegisterAsync(request.Email, request.Password, request.DisplayName, cancellationToken);

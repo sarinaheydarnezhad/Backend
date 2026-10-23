@@ -12,6 +12,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Protocols;
+using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 
 namespace Flashcards.Infrastructure;
 
@@ -57,6 +59,13 @@ public static class DependencyInjection
         services.AddScoped<TokenService>();
         services.AddScoped<AuthService>();
         services.AddScoped<PhoneAuthService>();
+        services.AddScoped<GoogleAuthService>();
+        services.AddSingleton<IConfigurationManager<OpenIdConnectConfiguration>>(_ =>
+            new ConfigurationManager<OpenIdConnectConfiguration>(
+                "https://accounts.google.com/.well-known/openid-configuration",
+                new OpenIdConnectConfigurationRetriever(),
+                new HttpDocumentRetriever(new HttpClient { Timeout = TimeSpan.FromSeconds(10) }) { RequireHttps = true }));
+        services.AddSingleton<IGoogleTokenVerifier, GoogleTokenVerifier>();
         services.AddSingleton(TimeProvider.System);
         var smsProvider = configuration["Sms:Provider"] ?? "Webhook";
         if (string.Equals(smsProvider, "SmsIr", StringComparison.OrdinalIgnoreCase))
