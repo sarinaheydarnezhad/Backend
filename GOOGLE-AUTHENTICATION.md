@@ -1,6 +1,6 @@
 # Google sign-in
 
-The mobile app's **Continue with Google** option calls `POST /api/v1/auth/google` with `{ "idToken": "<Google ID token>" }`. First use creates an account; later sign-ins use the same verified Google subject. Responses use the existing application access/refresh token contract and session revocation behavior.
+The mobile app's **Continue with Google** option is temporarily hidden. Its adapter and `POST /api/v1/auth/google` endpoint are retained for later re-enablement and older clients. The endpoint takes `{ "idToken": "<Google ID token>" }`. First use creates an account; later sign-ins use the same verified Google subject. Responses use the existing application access/refresh token contract and session revocation behavior.
 
 ## Deploy
 

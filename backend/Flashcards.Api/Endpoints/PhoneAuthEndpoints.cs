@@ -23,6 +23,8 @@ public static class PhoneAuthEndpoints
         phone.MapPost("/register", (PhoneRegisterRequest request, PhoneAuthService service, CancellationToken cancellationToken) =>
             service.RegisterAsync(request.PhoneNumber, request.RegistrationToken, request.Password,
                 request.ConfirmPassword, request.Username, cancellationToken));
+        phone.MapPost("/register-password", (PhonePasswordRegisterRequest request, PhoneAuthService service, CancellationToken cancellationToken) =>
+            service.RegisterWithPasswordAsync(request.PhoneNumber, request.Password, request.ConfirmPassword, cancellationToken));
         phone.MapPost("/login", (PhoneLoginRequest request, PhoneAuthService service, CancellationToken cancellationToken) =>
             service.LoginAsync(request.PhoneNumber, request.Password, cancellationToken));
         return auth;
@@ -37,5 +39,9 @@ public sealed record PhoneRegisterRequest(
     [property: Required, StringLength(128, MinimumLength = 12)] string Password,
     [property: Required, StringLength(128)] string ConfirmPassword,
     [property: Required, StringLength(120)] string Username);
+public sealed record PhonePasswordRegisterRequest(
+    [property: Required, StringLength(32)] string PhoneNumber,
+    [property: Required, StringLength(128, MinimumLength = 8)] string Password,
+    [property: Required, StringLength(128)] string ConfirmPassword);
 public sealed record PhoneLoginRequest([property: Required, StringLength(32)] string PhoneNumber,
     [property: Required, StringLength(128)] string Password);

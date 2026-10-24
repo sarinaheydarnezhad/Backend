@@ -1,4 +1,5 @@
 using System.Net;
+using System.Data.Common;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -22,6 +24,7 @@ public sealed class SubscriptionTests : IAsyncLifetime
 {
     private readonly SqliteConnection _connection = new("Data Source=:memory:");
     private readonly SubscriptionClock _clock = new();
+    private readonly QueryCounter _queries = new();
     private SubscriptionApiFactory _factory = null!;
     private HttpClient _client = null!;
 
@@ -33,7 +36,7 @@ public sealed class SubscriptionTests : IAsyncLifetime
             catch (JsonException) { return 0; }
         });
         await _connection.OpenAsync();
-        _factory = new SubscriptionApiFactory(_connection, _clock);
+        _factory = new SubscriptionApiFactory(_connection, _clock, _queries);
         _client = _factory.CreateClient();
         using var scope = _factory.Services.CreateScope();
         await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Database.EnsureCreatedAsync();
@@ -55,7 +58,11 @@ public sealed class SubscriptionTests : IAsyncLifetime
         Assert.Equal(new PlanLimits(1, 50), catalog.FreeLimits);
         Assert.Equal(2, catalog.Plans.Count);
         var plus = Assert.Single(catalog.Plans, plan => plan.Plan == "Plus");
-        Assert.Equal(new[] { new PlanPrice(1, 49000), new PlanPrice(6, 279000), new PlanPrice(12, 499000) }, plus.Prices);
+        Assert.Equal(new[] { new PlanPrice(1, 70000), new PlanPrice(6, 294000), new PlanPrice(12, 420000) }, plus.Prices);
+        Assert.Equal(49000, plus.Prices[1].PriceToman / plus.Prices[1].DurationMonths);
+        Assert.Equal(35000, plus.Prices[2].PriceToman / plus.Prices[2].DurationMonths);
+        Assert.Equal(0.7m, (decimal)plus.Prices[1].PriceToman / (plus.Prices[0].PriceToman * 6));
+        Assert.Equal(0.5m, (decimal)plus.Prices[2].PriceToman / (plus.Prices[0].PriceToman * 12));
         Assert.Equal(new PlanLimits(null, null), plus.Limits);
         Assert.Equal(new PlanFeatures(true, true), plus.Features);
         Assert.False(plus.IsPurchasable);
@@ -405,6 +412,60 @@ public sealed class SubscriptionTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.OK, (await _client.GetAsync("/api/v1/sync/pull?cursor=0")).StatusCode);
     }
 
+    [Fact]
+    public async Task Entitlement_reads_combine_usage_counts_and_unlimited_write_guards_skip_them()
+    {
+        var owner = await LoginAsync("queries@example.com");
+        using var scope = _factory.Services.CreateScope();
+        var service = scope.ServiceProvider.GetRequiredService<EntitlementService>();
+        _queries.Commands.Clear();
+        var free = await service.AuthorizeStudyAsync(owner);
+        Assert.Equal(new LearningUsage(0, 0), free.Usage);
+        Assert.Equal(3, _queries.Commands.Count);
+        var usage = Assert.Single(_queries.Commands, command => command.Contains("COUNT(*)"));
+        Assert.Contains("Decks", usage);
+        Assert.Contains("Cards", usage);
+
+        await SeedAsync(owner, SubscriptionStatus.Active, SubscriptionPlan.Plus, _clock.Now.AddHours(-1), _clock.Now.AddHours(1));
+        _queries.Commands.Clear();
+        await service.EnsureDeckCreationAllowedAsync(owner);
+        Assert.Single(_queries.Commands);
+        Assert.DoesNotContain("COUNT(*)", _queries.Commands[0]);
+        _queries.Commands.Clear();
+        Assert.True((await service.AuthorizeStudyAsync(owner)).IsActive);
+        Assert.Equal(2, _queries.Commands.Count);
+    }
+
+    [Fact]
+    public async Task Caught_up_sync_pull_only_reads_the_user_head_and_preserves_cursor_validation()
+    {
+        var owner = await LoginAsync("idle@example.com");
+        using var scope = _factory.Services.CreateScope();
+        var service = scope.ServiceProvider.GetRequiredService<SyncService>();
+        _queries.Commands.Clear();
+        var response = await service.PullAsync(owner, 0);
+        Assert.Empty(response.Changes);
+        Assert.False(response.HasMore);
+        Assert.Equal(0, response.Cursor);
+        Assert.Single(_queries.Commands);
+        Assert.Contains("SyncHeads", _queries.Commands[0]);
+        await Assert.ThrowsAsync<SyncException>(() => service.PullAsync(owner, 1));
+        await Assert.ThrowsAsync<SyncException>(() => service.PullAsync(owner, -1));
+    }
+
+    private sealed class QueryCounter : DbCommandInterceptor
+    {
+        public List<string> Commands { get; } = [];
+
+        public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(
+            DbCommand command, CommandEventData eventData, InterceptionResult<DbDataReader> result,
+            CancellationToken cancellationToken = default)
+        {
+            Commands.Add(command.CommandText);
+            return ValueTask.FromResult(result);
+        }
+    }
+
     private async Task<Guid> LoginAsync(string email)
     {
         var response = await _client.PostAsJsonAsync("/api/v1/auth/register", new { email, password = "A private password for tests!", displayName = "Student" });
@@ -450,7 +511,7 @@ public sealed class SubscriptionTests : IAsyncLifetime
         }
     }
 
-    private sealed class SubscriptionApiFactory(SqliteConnection connection, SubscriptionClock clock) : TestApiFactory
+    private sealed class SubscriptionApiFactory(SqliteConnection connection, SubscriptionClock clock, QueryCounter queries) : TestApiFactory
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -460,7 +521,7 @@ public sealed class SubscriptionTests : IAsyncLifetime
                 services.RemoveAll<DbContextOptions<FlashcardsDbContext>>();
                 services.RemoveAll<IDbContextOptionsConfiguration<FlashcardsDbContext>>();
                 services.AddDbContext<FlashcardsDbContext>(options => options.UseSqlite(connection)
-                    .ReplaceService<IModelCustomizer, SubscriptionModelCustomizer>());
+                    .ReplaceService<IModelCustomizer, SubscriptionModelCustomizer>().AddInterceptors(queries));
                 services.RemoveAll<TimeProvider>();
                 services.AddSingleton<TimeProvider>(clock);
             });

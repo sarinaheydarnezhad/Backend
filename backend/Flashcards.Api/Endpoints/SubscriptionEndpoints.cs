@@ -22,8 +22,7 @@ public static class SubscriptionEndpoints
         mine.MapPost("/study/authorize", async (ClaimsPrincipal principal, EntitlementService service, CancellationToken cancellationToken) =>
         {
             var userId = AuthenticatedIdentity.FromClaims(principal).UserId;
-            await service.EnsureStudyAllowedAsync(userId, cancellationToken);
-            return Results.Ok((await service.GetAsync(userId, cancellationToken)).Entitlements);
+            return Results.Ok(await service.AuthorizeStudyAsync(userId, cancellationToken));
         });
     }
 }

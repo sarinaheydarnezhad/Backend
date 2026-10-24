@@ -51,7 +51,15 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.HasKey(item => item.Id);
             entity.HasOne(item => item.User).WithMany().HasForeignKey(item => item.UserId).OnDelete(DeleteBehavior.NoAction);
             entity.HasIndex(item => new { item.UserId, item.RequestId }).IsUnique();
-            entity.HasIndex(item => new { item.UserId, item.CreatedAtUtc, item.Id });
+            entity.HasIndex(item => new { item.UserId, item.CreatedAtUtc, item.Id })
+                .IsDescending(false, true, false)
+                .IncludeProperties(item => new { item.Status, item.FormatVersion, item.CompletedAtUtc,
+                    item.ExpiresAtUtc, item.RetentionDays, item.SyncVersion, item.SizeBytes, item.FailureCode });
+            entity.HasIndex(item => new { item.UserId, item.FormatVersion, item.CompletedAtUtc, item.Id })
+                .IsDescending(false, false, true, false)
+                .HasFilter("[Status] = 'Completed'")
+                .IncludeProperties(item => new { item.Status, item.CreatedAtUtc, item.ExpiresAtUtc,
+                    item.RetentionDays, item.SyncVersion, item.SizeBytes, item.FailureCode });
             entity.HasIndex(item => item.ExpiresAtUtc);
             entity.Property(item => item.Status).HasMaxLength(12).IsUnicode(false).IsRequired();
             entity.Property(item => item.FailureCode).HasMaxLength(48).IsUnicode(false);

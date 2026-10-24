@@ -44,6 +44,10 @@ Token responses additionally expose `sessionId` and `sessionExpiresAtUtc`. Refre
 
 Phone authentication uses the existing User, password hasher, JWT, AuthSession and refresh-token services. Existing email endpoints remain compatible. A username maps to `User.DisplayName` and is not unique. Phone numbers use international E.164-style format (`+` followed by 8–15 digits); Persian/Arabic digits are normalized. National numbers without a country code are rejected. SMS verification establishes possession, not whether a number is a mobile line in every country.
 
+The mobile UI temporarily hides Google, email and OTP controls. Its current registration flow uses `POST /api/v1/auth/phone/register-password` with only `{ phoneNumber, password, confirmPassword }`, with no SMS/provider dependency. Both passwords must match; registration requires 8–128 characters including letters and numbers and rejects a small common-password list (case/punctuation insensitive). Unicode letters and decimal digits are accepted. This is not a full breached-password check. New accounts default to display name `Learner`. Login remains `/phone/login` and does not apply new registration rules to existing passwords. No database migration is added; deploy the updated API before the updated mobile client.
+
+**The temporary registration flow does not verify phone ownership.** An unused number can be claimed by anyone entering it; do not rely on it as verified identity or for recovery/linking. Existing or archived numbers cannot be registered again or have credentials replaced. Account creation, sync head and token/session issuance are transactional. The separate legacy `/register` endpoint still requires OTP proof, a username and its existing password policy. Legacy Google/email/OTP APIs remain compatible; email-only and Google-only accounts are not automatically migrated to phone accounts.
+
 All routes below are under `/api/v1/auth/phone`, inherit the existing 10-per-minute per-IP limit, and return `Cache-Control: no-store`:
 
 | Route | Request | Successful response |
@@ -51,6 +55,7 @@ All routes below are under `/api/v1/auth/phone`, inherit the existing 10-per-min
 | `POST /otp/request` | `{ phoneNumber, purpose: "register" or "login" }` | `{ challengeId, expiresAtUtc, resendAtUtc }` |
 | `POST /otp/verify` | `{ challengeId, code }` | Registration: `{ registrationToken, expiresAtUtc, tokens: null }`; login: `{ registrationToken: null, expiresAtUtc: null, tokens: { accessToken, refreshToken, accessExpiresAtUtc } }` |
 | `POST /register` | `{ phoneNumber, registrationToken, password, confirmPassword, username }` | Existing access/refresh token response |
+| `POST /register-password` | `{ phoneNumber, password, confirmPassword }` (no OTP) | Existing access/refresh token response |
 | `POST /login` | `{ phoneNumber, password }` | Existing access/refresh token response |
 
 Use the existing `/api/v1/auth/refresh`, `/logout`, and `/api/v1/me/` endpoints after either login method. Known phone-auth errors return `{ error, code }` with 400 for invalid inputs, 401 for invalid/expired/used verification or credentials, 409 for an existing phone, 429 for limits, or 503 for unavailable SMS. Framework request validation still returns validation ProblemDetails.
@@ -102,6 +107,25 @@ Development defaults to Windows SQL Server LocalDB (`FlashcardsDev`); override `
 Authentication endpoints use a per-IP fixed-window limit of 10 requests per minute per API instance, returning 429 when exceeded. Behind a reverse proxy, configure trusted forwarded headers or enforce a shared limit at the edge. Do not forward untrusted client-supplied IP headers as the rate-limit identity.
 
 ## Database updates
+
+### Login fails with `Invalid column name 'GoogleSubject'`
+
+The deployed database is behind the API model. Phone/password login also reads the `User` entity, including `GoogleSubject`; hiding the Google button does not remove the column requirement. Apply the existing `20261022100000_AddGoogleAuthentication` migration to the **same database used by the deployed API**, not just your local development database. No new migration, account reset or database recreation is needed.
+
+Back up the database and use your normal controlled migration deployment process. If every earlier migration is already applied, the EF-generated idempotent script `deploy/20261022100000_AddGoogleAuthentication.sql` can be reviewed and run against that database in SQL Server Management Studio. It adds the nullable column, filtered unique index and migration-history entry without changing existing account data. It assumes a normal EF-managed schema; if the migration is already recorded but the column is absent, investigate schema drift instead of deleting history or running a blind repair.
+
+Alternatively, set `ConnectionStrings__FlashcardsDb` to the deployed API's target database in the migration environment and run the `dotnet ef database update` command below; this applies all pending migrations in order. The design-time factory otherwise defaults to local `FlashcardsDev`, so running the command without the correct connection string will not fix a remote deployment. Do not paste production credentials into chat or commit them.
+
+Verify the deployed database after application:
+
+```sql
+SELECT DB_NAME() AS CurrentDatabase;
+SELECT [MigrationId] FROM [__EFMigrationsHistory]
+WHERE [MigrationId] = N'20261022100000_AddGoogleAuthentication';
+SELECT COL_LENGTH(N'dbo.Users', N'GoogleSubject') AS GoogleSubjectLength;
+```
+
+The migration row should exist and the column length should be `255` (not `NULL`). Retry phone login after successful deployment. The API does not run migrations automatically on startup; restarting it alone does not update the database.
 
 Install the EF Core 10 CLI (`dotnet tool install --global dotnet-ef --version 10.0.11`), set `ConnectionStrings__FlashcardsDb` to the target SQL Server connection string, and run from the repository root:
 

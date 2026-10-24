@@ -25,7 +25,7 @@ public sealed class EntitlementService(FlashcardsDbContext database, PlanCatalog
         var status = EffectiveStatus(subscription, now);
         var plan = subscription is null ? null : catalog.Find(subscription.Plan);
         var active = status == "Active" && plan?.Limits is not null && plan.Features is not null;
-        var usage = new LearningUsage(await DeckCountAsync(userId, cancellationToken), await CardCountAsync(userId, cancellationToken));
+        var usage = await UsageAsync(userId, cancellationToken);
         var entitlements = new EntitlementResponse(active ? plan!.Plan : "Free", active,
             subscription?.StartsAtUtc, subscription?.ExpiresAtUtc, active ? plan!.Features! : PlanCatalog.FreeFeatures,
             active ? plan!.Limits! : PlanCatalog.FreeLimits, active && plan!.IsPurchasable, false,
@@ -48,10 +48,23 @@ public sealed class EntitlementService(FlashcardsDbContext database, PlanCatalog
     public Task EnsureStudyAllowedAsync(Guid userId, CancellationToken cancellationToken = default) =>
         EnsureAllowedAsync(userId, "study", cancellationToken);
 
+    public async Task<EntitlementResponse> AuthorizeStudyAsync(Guid userId, CancellationToken cancellationToken = default)
+    {
+        var response = (await GetAsync(userId, cancellationToken)).Entitlements;
+        EnsureUsageAllowed(response.Limits, response.Usage, "study");
+        return response;
+    }
+
     private async Task EnsureAllowedAsync(Guid userId, string operation, CancellationToken cancellationToken)
     {
         var limits = await EffectiveLimitsAsync(userId, cancellationToken);
-        var usage = new LearningUsage(await DeckCountAsync(userId, cancellationToken), await CardCountAsync(userId, cancellationToken));
+        if (limits.Decks is null && limits.Cards is null) return;
+        var usage = await UsageAsync(userId, cancellationToken);
+        EnsureUsageAllowed(limits, usage, operation);
+    }
+
+    private static void EnsureUsageAllowed(PlanLimits limits, LearningUsage usage, string operation)
+    {
         if (operation == "card" && limits.Cards is int cardMaximum && usage.Cards >= cardMaximum)
             throw new FreeTierLimitException("free_tier_card_limit", $"The free plan allows {cardMaximum} active cards in total. Existing data is preserved.", limits, usage);
         if (operation == "deck" && limits.Decks is int deckMaximum && usage.Decks >= deckMaximum)
@@ -72,11 +85,12 @@ public sealed class EntitlementService(FlashcardsDbContext database, PlanCatalog
             : PlanCatalog.FreeLimits;
     }
 
-    private Task<int> DeckCountAsync(Guid userId, CancellationToken cancellationToken) =>
-        database.Decks.CountAsync(item => item.UserId == userId && item.ArchivedAtUtc == null, cancellationToken);
-
-    private Task<int> CardCountAsync(Guid userId, CancellationToken cancellationToken) =>
-        database.Cards.CountAsync(item => item.Deck.UserId == userId && item.ArchivedAtUtc == null, cancellationToken);
+    private async Task<LearningUsage> UsageAsync(Guid userId, CancellationToken cancellationToken) =>
+        await database.Users.AsNoTracking().Where(item => item.Id == userId)
+            .Select(item => new LearningUsage(
+                database.Decks.Count(deck => deck.UserId == userId && deck.ArchivedAtUtc == null),
+                database.Cards.Count(card => card.Deck.UserId == userId && card.ArchivedAtUtc == null)))
+            .SingleOrDefaultAsync(cancellationToken) ?? new LearningUsage(0, 0);
 
     private static string? EffectiveStatus(Subscription? subscription, DateTimeOffset now)
     {

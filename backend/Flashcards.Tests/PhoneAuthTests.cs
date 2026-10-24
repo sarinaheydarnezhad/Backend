@@ -2,9 +2,11 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text.Json;
+using Flashcards.Domain;
 using Flashcards.Infrastructure.Auth;
 using Flashcards.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +46,145 @@ public sealed class PhoneAuthTests : IAsyncLifetime
         await _factory.DisposeAsync();
         await _connection.DisposeAsync();
     }
+
+    [Theory]
+    [InlineData("Maple7xy")]
+    [InlineData("Private passphrase 2026!")]
+    [InlineData("درختسبز۷")]
+    public async Task Password_registration_needs_no_sms_and_supports_login_refresh_and_logout(string password)
+    {
+        _sms.Configured = false;
+        var response = await RegisterWithPasswordAsync("+۹۸۹۱۲۱۲۳۴۵۶۷", password, password);
+        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("no-store", response.Headers.CacheControl?.ToString());
+        var original = (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", original.AccessToken);
+        var me = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
+        Assert.Equal(Phone, me.GetProperty("phoneNumber").GetString());
+        Assert.Equal("Learner", me.GetProperty("displayName").GetString());
+        Assert.False(me.TryGetProperty("passwordHash", out _));
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+            var user = await database.Users.SingleAsync();
+            Assert.NotEqual(password, user.PasswordHash);
+            Assert.Equal(PasswordVerificationResult.Success,
+                scope.ServiceProvider.GetRequiredService<IPasswordHasher<User>>().VerifyHashedPassword(user, user.PasswordHash!, password));
+            Assert.Single(await database.SyncHeads.ToListAsync());
+            Assert.Single(await database.AuthSessions.ToListAsync());
+            Assert.Empty(await database.OtpChallenges.ToListAsync());
+            Assert.NotEqual(original.RefreshToken, (await database.RefreshTokens.SingleAsync()).TokenHash);
+        }
+        Assert.Equal(0, _sms.Sends);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/phone/login",
+            new { phoneNumber = Phone, password = "wrong-password" })).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await _client.PostAsJsonAsync("/api/v1/auth/phone/login",
+            new { phoneNumber = Phone, password })).StatusCode);
+        var refresh = await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { original.RefreshToken });
+        Assert.Equal(HttpStatusCode.OK, refresh.StatusCode);
+        var rotated = (await refresh.Content.ReadFromJsonAsync<AuthTokens>())!;
+        Assert.NotEqual(original.RefreshToken, rotated.RefreshToken);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", rotated.AccessToken);
+        Assert.Equal(HttpStatusCode.NoContent, (await _client.PostAsync("/api/v1/auth/logout", null)).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { rotated.RefreshToken })).StatusCode);
+    }
+
+    [Theory]
+    [InlineData("")]
+    [InlineData("Maple7x")]
+    [InlineData("12345678")]
+    [InlineData("onlyletters")]
+    [InlineData("........")]
+    [InlineData("Password123!")]
+    [InlineData("pAsSw0Rd!")]
+    [InlineData("Qwerty123")]
+    public async Task Weak_password_registration_is_rejected_without_creating_any_account_state(string password)
+    {
+        Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(Phone, password, password)).StatusCode);
+        using var scope = _factory.Services.CreateScope();
+        var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        Assert.Empty(await database.Users.ToListAsync());
+        Assert.Empty(await database.SyncHeads.ToListAsync());
+        Assert.Empty(await database.AuthSessions.ToListAsync());
+        Assert.Empty(await database.RefreshTokens.ToListAsync());
+        Assert.Empty(await database.OtpChallenges.ToListAsync());
+        Assert.Equal(0, _sms.Sends);
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("Different7xy")]
+    public async Task Password_registration_requires_matching_confirmation(string? confirmation)
+    {
+        Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(Phone, Password, confirmation)).StatusCode);
+        using var scope = _factory.Services.CreateScope();
+        Assert.Empty(await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Users.ToListAsync());
+    }
+
+    [Fact]
+    public async Task Password_registration_enforces_both_password_length_boundaries()
+    {
+        var longest = new string('a', 127) + "1";
+        Assert.True(PhonePasswordPolicy.IsValid(longest));
+        Assert.False(PhonePasswordPolicy.IsValid(longest + "1"));
+        Assert.False(PhonePasswordPolicy.IsValid(null));
+        Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(Phone, longest + "1", longest + "1")).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await RegisterWithPasswordAsync(Phone, longest, longest)).StatusCode);
+    }
+
+    [Theory]
+    [InlineData(false)]
+    [InlineData(true)]
+    public async Task Password_registration_cannot_replace_existing_or_archived_phone_accounts(bool archived)
+    {
+        Assert.Equal(HttpStatusCode.OK, (await RegisterWithPasswordAsync(Phone, Password, Password)).StatusCode);
+        string? originalHash;
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+            var user = await database.Users.SingleAsync();
+            originalHash = user.PasswordHash;
+            if (archived)
+            {
+                user.ArchivedAtUtc = DateTimeOffset.UtcNow;
+                await database.SaveChangesAsync();
+            }
+        }
+        var duplicate = await RegisterWithPasswordAsync(Phone, "Different7xy", "Different7xy");
+        Assert.Equal(HttpStatusCode.Conflict, duplicate.StatusCode);
+        Assert.Equal("duplicate_phone", (await duplicate.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+            Assert.Equal(originalHash, (await database.Users.SingleAsync()).PasswordHash);
+            Assert.Single(await database.AuthSessions.ToListAsync());
+        }
+        var login = await _client.PostAsJsonAsync("/api/v1/auth/phone/login", new { phoneNumber = Phone, password = Password });
+        Assert.Equal(archived ? HttpStatusCode.Unauthorized : HttpStatusCode.OK, login.StatusCode);
+    }
+
+    [Theory]
+    [InlineData("09121234567")]
+    [InlineData("+0000000000")]
+    [InlineData("+98abc1234567")]
+    public async Task Password_registration_rejects_invalid_phone_numbers(string phoneNumber)
+    {
+        Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(phoneNumber, Password, Password)).StatusCode);
+        Assert.Equal(0, _sms.Sends);
+    }
+
+    [Fact]
+    public async Task Password_registration_inherits_the_per_ip_authentication_limit()
+    {
+        for (var attempt = 0; attempt < 10; attempt++)
+            Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(Phone, "onlyletters", "onlyletters")).StatusCode);
+        Assert.Equal(HttpStatusCode.TooManyRequests, (await RegisterWithPasswordAsync(Phone, Password, Password)).StatusCode);
+    }
+
+    private Task<HttpResponseMessage> RegisterWithPasswordAsync(string phoneNumber, string password, string? confirmPassword) =>
+        _client.PostAsJsonAsync("/api/v1/auth/phone/register-password", new { phoneNumber, password, confirmPassword });
 
     [Fact]
     public async Task Verified_registration_hashes_password_and_creates_existing_jwt_session()

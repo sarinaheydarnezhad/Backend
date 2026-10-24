@@ -17,7 +17,7 @@ public sealed class PlanCatalog
     private static readonly PlanDefinition Plus = new("Plus", false, "payment_provider_not_configured",
         new PlanLimits(null, null), new PlanFeatures(true, true), Array.AsReadOnly(new[]
         {
-            new PlanPrice(1, 49000), new PlanPrice(6, 279000), new PlanPrice(12, 499000)
+            new PlanPrice(1, 70000), new PlanPrice(6, 294000), new PlanPrice(12, 420000)
         }));
     private static readonly PlanDefinition Full = new("Full", false, "coming_soon", null, null,
         Array.AsReadOnly(Array.Empty<PlanPrice>()));

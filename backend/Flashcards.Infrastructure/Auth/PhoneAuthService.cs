@@ -137,6 +137,33 @@ public sealed class PhoneAuthService(FlashcardsDbContext database, TokenService 
         return session;
     }
 
+    public async Task<AuthTokens> RegisterWithPasswordAsync(string phoneNumber, string password,
+        string confirmPassword, CancellationToken cancellationToken = default)
+    {
+        var phone = PhoneNumber.Normalize(phoneNumber);
+        if (!PhonePasswordPolicy.IsValid(password))
+            throw new PhoneAuthException(400, "invalid_password", "Use 8–128 characters with letters and numbers, and avoid common passwords.");
+        if (password != confirmPassword)
+            throw new PhoneAuthException(400, "password_mismatch", "The passwords do not match.");
+        await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
+        if (await database.Users.AnyAsync(item => item.PhoneNumber == phone, cancellationToken)) throw DuplicatePhone();
+        var user = new User { PhoneNumber = phone, DisplayName = "Learner" };
+        user.PasswordHash = passwordHasher.HashPassword(user, password);
+        database.Users.Add(user);
+        database.SyncHeads.Add(new SyncHead { UserId = user.Id });
+        try { await database.SaveChangesAsync(cancellationToken); }
+        catch (DbUpdateException)
+        {
+            await transaction.RollbackAsync(cancellationToken);
+            database.ChangeTracker.Clear();
+            if (await database.Users.AnyAsync(item => item.PhoneNumber == phone, cancellationToken)) throw DuplicatePhone();
+            throw;
+        }
+        var session = await tokens.StartSessionAsync(user, cancellationToken);
+        await transaction.CommitAsync(cancellationToken);
+        return session;
+    }
+
     public async Task<AuthTokens> LoginAsync(string phoneNumber, string password, CancellationToken cancellationToken = default)
     {
         var phone = PhoneNumber.Normalize(phoneNumber);

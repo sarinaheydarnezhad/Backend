@@ -53,7 +53,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         Assert.False(database.Database.HasPendingModelChanges());
-        Assert.Equal(7, database.Database.GetMigrations().Count());
+        Assert.Equal(8, database.Database.GetMigrations().Count());
         var script = database.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         Assert.Contains("CREATE TABLE [ReviewEvents]", script);
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_ReviewEvents_Immutable]", script);
@@ -78,6 +78,51 @@ public sealed class PersistenceTests
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_SyncChanges_Immutable]", script);
         Assert.Contains("THROW 50002", script);
         Assert.DoesNotContain("ON DELETE CASCADE", script, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void Google_schema_upgrade_is_additive_and_records_its_migration_for_phone_login()
+    {
+        using var database = SqlServerContext();
+        var script = database.GetService<IMigrator>().GenerateScript(
+            fromMigration: "20261015123452_AddSubscriptions",
+            toMigration: "20261022100000_AddGoogleAuthentication",
+            options: MigrationsSqlGenerationOptions.Idempotent);
+        Assert.Contains("ALTER TABLE [Users] ADD [GoogleSubject] varchar(255) NULL", script);
+        Assert.Contains("CREATE UNIQUE INDEX [IX_Users_GoogleSubject]", script);
+        Assert.Contains("WHERE [GoogleSubject] IS NOT NULL", script);
+        Assert.Contains("IF NOT EXISTS", script);
+        Assert.Contains("INSERT INTO [__EFMigrationsHistory]", script);
+        Assert.Contains("20261022100000_AddGoogleAuthentication", script);
+        Assert.DoesNotContain("DROP ", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("DELETE ", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("UPDATE [Users]", script, StringComparison.OrdinalIgnoreCase);
+        Assert.DoesNotContain("CREATE TABLE [Users]", script, StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public void Backup_metadata_indexes_cover_reads_without_copying_payloads_and_have_reversible_sql()
+    {
+        using var database = SqlServerContext();
+        var backup = database.GetService<IDesignTimeModel>().Model.FindEntityType(typeof(UserBackup))!;
+        var list = Assert.Single(backup.GetIndexes(), index => index.Properties.Select(property => property.Name)
+            .SequenceEqual([nameof(UserBackup.UserId), nameof(UserBackup.CreatedAtUtc), nameof(UserBackup.Id)]));
+        Assert.Equal(new[] { false, true, false }, list.IsDescending);
+        Assert.Contains(nameof(UserBackup.SizeBytes), list.GetIncludeProperties()!);
+        Assert.DoesNotContain(nameof(UserBackup.Payload), list.GetIncludeProperties()!);
+        var status = Assert.Single(backup.GetIndexes(), index => index.GetFilter() == "[Status] = 'Completed'");
+        Assert.Equal(new[] { false, false, true, false }, status.IsDescending);
+        Assert.DoesNotContain(nameof(UserBackup.Payload), status.GetIncludeProperties()!);
+        var migrator = database.GetService<IMigrator>();
+        var upgrade = migrator.GenerateScript("20261022100000_AddGoogleAuthentication", "20261024150000_OptimizeBackupReadIndexes");
+        Assert.Contains("[CreatedAtUtc] DESC", upgrade);
+        Assert.Contains("[CompletedAtUtc] DESC", upgrade);
+        Assert.Contains("INCLUDE (", upgrade);
+        Assert.Contains("WHERE [Status] = 'Completed'", upgrade);
+        Assert.DoesNotContain("[Payload]", upgrade);
+        var rollback = migrator.GenerateScript("20261024150000_OptimizeBackupReadIndexes", "20261022100000_AddGoogleAuthentication");
+        Assert.Contains("DROP INDEX [IX_UserBackups_UserId_FormatVersion_CompletedAtUtc_Id]", rollback);
+        Assert.Contains("CREATE INDEX [IX_UserBackups_UserId_CreatedAtUtc_Id]", rollback);
     }
 
     [Fact]

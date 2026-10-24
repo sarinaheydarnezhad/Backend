@@ -94,6 +94,7 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
         var latest = await database.SyncHeads.AsNoTracking()
             .Where(item => item.UserId == userId).Select(item => (long?)item.Version).SingleOrDefaultAsync(cancellationToken) ?? 0;
         if (cursor > latest) throw new SyncException("Cursor is ahead of the server version.");
+        if (cursor == latest) return new SyncPullResponse(cursor, latest, false, []);
 
         var page = await database.SyncChanges.AsNoTracking()
             .Where(item => item.UserId == userId && item.Version > cursor && item.Version <= latest)

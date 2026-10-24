@@ -587,7 +587,14 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                     b.HasIndex("UserId", "RequestId")
                         .IsUnique();
 
-                    b.HasIndex("UserId", "CreatedAtUtc", "Id");
+                    b.HasIndex("UserId", "CreatedAtUtc", "Id")
+                        .IsDescending(false, true, false)
+                        .HasAnnotation("SqlServer:Include", new[] { "Status", "FormatVersion", "CompletedAtUtc", "ExpiresAtUtc", "RetentionDays", "SyncVersion", "SizeBytes", "FailureCode" });
+
+                    b.HasIndex("UserId", "FormatVersion", "CompletedAtUtc", "Id")
+                        .IsDescending(false, false, true, false)
+                        .HasFilter("[Status] = 'Completed'")
+                        .HasAnnotation("SqlServer:Include", new[] { "Status", "CreatedAtUtc", "ExpiresAtUtc", "RetentionDays", "SyncVersion", "SizeBytes", "FailureCode" });
 
                     b.ToTable("UserBackups", null, t =>
                         {
