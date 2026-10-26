@@ -54,4 +54,15 @@ public sealed class UserService(FlashcardsDbContext database, IPasswordHasher<Us
 
     public Task<User?> FindByIdAsync(Guid userId, CancellationToken cancellationToken = default) =>
         database.Users.AsNoTracking().SingleOrDefaultAsync(user => user.Id == userId && user.ArchivedAtUtc == null, cancellationToken);
+
+    public async Task<User?> UpdateDisplayNameAsync(Guid userId, string displayName, CancellationToken cancellationToken = default)
+    {
+        var name = displayName.Trim();
+        if (name.Length is < 1 or > 120) throw new ArgumentException("Invalid display name.");
+        var user = await database.Users.SingleOrDefaultAsync(item => item.Id == userId && item.ArchivedAtUtc == null, cancellationToken);
+        if (user is null) return null;
+        user.DisplayName = name;
+        await database.SaveChangesAsync(cancellationToken);
+        return user;
+    }
 }

@@ -89,6 +89,13 @@ public static class V1Endpoints
             var user = await users.FindByIdAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cancellationToken);
             return user is null ? Results.NotFound() : Results.Ok(new { user.Id, user.DisplayName, user.Email, user.PhoneNumber });
         });
+        mine.MapPut("/profile", async (UpdateProfileRequest request, ClaimsPrincipal principal, UserService users, CancellationToken cancellationToken) =>
+        {
+            if (string.IsNullOrWhiteSpace(request.DisplayName) || request.DisplayName.Trim().Length > 120)
+                return Results.BadRequest(new { error = "Enter a name between 1 and 120 characters." });
+            var user = await users.UpdateDisplayNameAsync(AuthenticatedIdentity.FromClaims(principal).UserId, request.DisplayName, cancellationToken);
+            return user is null ? Results.NotFound() : Results.Ok(new { user.Id, user.DisplayName, user.Email, user.PhoneNumber });
+        });
         mine.MapGet("/decks", async (ClaimsPrincipal principal, FlashcardsQueries queries, CancellationToken cancellationToken) =>
             Results.Ok((await queries.GetUserDecksAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cancellationToken: cancellationToken))
                 .Select(deck => new { deck.Id, deck.Name, deck.ArchivedAtUtc })));
@@ -173,6 +180,9 @@ public sealed record CreateDeckRequest(
     [property: Required(AllowEmptyStrings = false), StringLength(120, MinimumLength = 1)] string Name);
 
 public sealed record CreateDeckResponse(Guid Id, string Name, long SyncVersion);
+
+public sealed record UpdateProfileRequest(
+    [property: Required, StringLength(120, MinimumLength = 1)] string DisplayName);
 
 public sealed record RegisterRequest(
     [property: Required, EmailAddress, StringLength(256)] string Email,

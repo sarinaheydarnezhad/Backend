@@ -70,6 +70,14 @@ The original HTTPS webhook remains available with `Sms__Provider=Webhook`, `Sms_
 
 The `AddPhoneAuthentication` migration adds the nullable phone column/index and durable OTP challenge table; apply it with the existing migration deployment process before enabling phone auth. Existing accounts are not assigned guessed phone numbers. SQL Server deployment, real SMS delivery and concurrent multi-instance execution must be verified with the deployment infrastructure. Keep `Auth__SigningKey` stable across replicas; it also protects OTP hashes. Restrict database access, avoid logging request bodies, and configure trusted proxy/shared edge rate limits as described above.
 
+## Account display names
+
+`PUT /api/v1/me/profile` accepts `{ "displayName": "Sara" }` for the authenticated user. It trims the name, requires 1–120 characters, saves the existing `Users.DisplayName` column and returns the updated profile. This endpoint does not require a database migration or an active subscription.
+
+Deploy the updated API and Infrastructure assemblies together before using the mobile name editor. Updating the APK alone does not update the backend, and an old `backend/publish` directory can omit this endpoint even when it exists in source. Preserve the deployment's existing application settings, secrets and Liara configuration when refreshing the publish files.
+
+An unauthenticated `PUT /api/v1/me/profile` with an empty JSON object should return **401**, not **404**. A 404 means the profile route is not available on that deployment; rebuild and redeploy the backend rather than changing the mobile request or bypassing authentication. Local tests cover authenticated saves, Persian names, later logins, invalid names and account isolation.
+
 ## Free-tier creation policy
 
 Authenticated writes currently enforce one active (unarchived) deck and 50 active cards in total per user. Card counts include unarchived cards in archived decks; archiving a deck alone does not free card capacity. Existing oversized datasets are preserved: edits, reviews and archival remain permitted. Nothing is automatically deleted.

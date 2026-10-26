@@ -147,7 +147,7 @@ public sealed class PhoneAuthService(FlashcardsDbContext database, TokenService 
             throw new PhoneAuthException(400, "password_mismatch", "The passwords do not match.");
         await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
         if (await database.Users.AnyAsync(item => item.PhoneNumber == phone, cancellationToken)) throw DuplicatePhone();
-        var user = new User { PhoneNumber = phone, DisplayName = "Learner" };
+        var user = new User { PhoneNumber = phone, DisplayName = "" };
         user.PasswordHash = passwordHasher.HashPassword(user, password);
         database.Users.Add(user);
         database.SyncHeads.Add(new SyncHead { UserId = user.Id });

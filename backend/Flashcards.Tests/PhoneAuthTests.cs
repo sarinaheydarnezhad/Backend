@@ -61,7 +61,7 @@ public sealed class PhoneAuthTests : IAsyncLifetime
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", original.AccessToken);
         var me = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
         Assert.Equal(Phone, me.GetProperty("phoneNumber").GetString());
-        Assert.Equal("Learner", me.GetProperty("displayName").GetString());
+        Assert.Equal("", me.GetProperty("displayName").GetString());
         Assert.False(me.TryGetProperty("passwordHash", out _));
         using (var scope = _factory.Services.CreateScope())
         {
@@ -88,6 +88,27 @@ public sealed class PhoneAuthTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.NoContent, (await _client.PostAsync("/api/v1/auth/logout", null)).StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { rotated.RefreshToken })).StatusCode);
+    }
+
+    [Fact]
+    public async Task First_login_name_is_saved_on_the_account_and_returned_on_later_logins()
+    {
+        var registration = await RegisterWithPasswordAsync(Phone, Password, Password);
+        var tokens = (await registration.Content.ReadFromJsonAsync<AuthTokens>())!;
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
+        var initial = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
+        Assert.Equal("", initial.GetProperty("displayName").GetString());
+        var saved = await _client.PutAsJsonAsync("/api/v1/me/profile", new { displayName = "  سارا  " });
+        Assert.Equal(HttpStatusCode.OK, saved.StatusCode);
+        Assert.Equal("no-store", saved.Headers.CacheControl?.ToString());
+        Assert.Equal("سارا", (await saved.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("displayName").GetString());
+        Assert.Equal(HttpStatusCode.NoContent, (await _client.PostAsync("/api/v1/auth/logout", null)).StatusCode);
+        var login = await _client.PostAsJsonAsync("/api/v1/auth/phone/login", new { phoneNumber = Phone, password = Password });
+        var returning = (await login.Content.ReadFromJsonAsync<AuthTokens>())!;
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", returning.AccessToken);
+        var profile = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
+        Assert.Equal("سارا", profile.GetProperty("displayName").GetString());
+        Assert.Equal(initial.GetProperty("id").GetString(), profile.GetProperty("id").GetString());
     }
 
     [Theory]

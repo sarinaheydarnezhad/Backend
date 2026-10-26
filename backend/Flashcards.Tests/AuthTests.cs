@@ -241,6 +241,39 @@ public sealed class AuthTests : IAsyncLifetime
             (await _client.PostAsJsonAsync("/api/v1/auth/login", new { email = "none@example.com", password = Password })).StatusCode);
     }
 
+    [Fact]
+    public async Task Profile_name_updates_require_authentication_and_cannot_change_another_account()
+    {
+        var owner = await RegisterAsync("first@example.com");
+        var other = await RegisterAsync("second@example.com");
+        Assert.Equal(HttpStatusCode.Unauthorized,
+            (await _client.PutAsJsonAsync("/api/v1/me/profile", new { displayName = "Anonymous" })).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", owner.AccessToken);
+        var result = await _client.PutAsJsonAsync("/api/v1/me/profile", new { displayName = "  Sara  " });
+        Assert.Equal(HttpStatusCode.OK, result.StatusCode);
+        var updated = await result.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.Equal("Sara", updated.GetProperty("displayName").GetString());
+        Assert.False(updated.TryGetProperty("passwordHash", out _));
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", other.AccessToken);
+        var unchanged = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
+        Assert.Equal("Student", unchanged.GetProperty("displayName").GetString());
+    }
+
+    [Theory]
+    [InlineData(null)]
+    [InlineData("")]
+    [InlineData("   ")]
+    public async Task Invalid_profile_names_leave_the_saved_name_unchanged(string? displayName)
+    {
+        var tokens = await RegisterAsync("first@example.com");
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
+        foreach (var name in new[] { displayName, new string('a', 121) })
+            Assert.Equal(HttpStatusCode.BadRequest,
+                (await _client.PutAsJsonAsync("/api/v1/me/profile", new { displayName = name })).StatusCode);
+        var profile = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
+        Assert.Equal("Student", profile.GetProperty("displayName").GetString());
+    }
+
     private async Task<AuthTokens> RegisterAsync(string email)
     {
         var response = await _client.PostAsJsonAsync("/api/v1/auth/register", new { email, password = Password, displayName = "Student" });
