@@ -79,6 +79,11 @@ public static class DependencyInjection
             throw new InvalidOperationException("Sms:Provider must be SmsIr or Webhook.");
         services.AddScoped<SyncService>();
         services.AddSingleton<PlanCatalog>();
+        services.AddSingleton(MyketSettings.FromConfiguration(configuration));
+        services.AddScoped<MyketPaymentService>();
+        services.AddHttpClient<IMyketVerifier, MyketVerifier>(client => client.Timeout = TimeSpan.FromSeconds(10))
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false })
+            .RedactLoggedHeaders(["X-Access-Token", "Authorization"]);
         services.AddScoped<EntitlementService>();
         var backups = BackupSettings.FromConfiguration(configuration);
         services.AddSingleton(backups);

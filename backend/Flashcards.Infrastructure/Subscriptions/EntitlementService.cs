@@ -28,7 +28,7 @@ public sealed class EntitlementService(FlashcardsDbContext database, PlanCatalog
         var usage = await UsageAsync(userId, cancellationToken);
         var entitlements = new EntitlementResponse(active ? plan!.Plan : "Free", active,
             subscription?.StartsAtUtc, subscription?.ExpiresAtUtc, active ? plan!.Features! : PlanCatalog.FreeFeatures,
-            active ? plan!.Limits! : PlanCatalog.FreeLimits, active && plan!.IsPurchasable, false,
+            active ? plan!.Limits! : PlanCatalog.FreeLimits, false, false,
             usage.Decks <= PlanCatalog.FreeLimits.Decks && usage.Cards <= PlanCatalog.FreeLimits.Cards, usage, now);
         return new SubscriptionResponse(subscription is null ? null : new SubscriptionInfo(subscription.Id,
             subscription.Plan.ToString(), subscription.Status.ToString(), status!, subscription.StartsAtUtc,

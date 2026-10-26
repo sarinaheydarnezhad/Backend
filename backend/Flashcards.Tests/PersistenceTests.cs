@@ -16,7 +16,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         var model = database.Model;
-        Assert.Equal(13, model.GetEntityTypes().Count());
+        Assert.Equal(14, model.GetEntityTypes().Count());
         var state = model.FindEntityType(typeof(CardReviewState))!;
         Assert.Equal(nameof(CardReviewState.CardId), state.FindPrimaryKey()!.Properties.Single().Name);
         var settings = model.FindEntityType(typeof(UserSettings))!;
@@ -53,7 +53,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         Assert.False(database.Database.HasPendingModelChanges());
-        Assert.Equal(8, database.Database.GetMigrations().Count());
+        Assert.Equal(9, database.Database.GetMigrations().Count());
         var script = database.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         Assert.Contains("CREATE TABLE [ReviewEvents]", script);
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_ReviewEvents_Immutable]", script);
@@ -64,6 +64,8 @@ public sealed class PersistenceTests
         Assert.Contains("CREATE TABLE [OtpChallenges]", script);
         Assert.Contains("CREATE TABLE [UserBackups]", script);
         Assert.Contains("CREATE TABLE [Subscriptions]", script);
+        Assert.Contains("CREATE TABLE [MyketOrders]", script);
+        Assert.Contains("IX_MyketOrders_TokenHash", script);
         Assert.Contains("UX_Subscriptions_User_Active", script);
         Assert.Contains("WHERE [Status] = ''Active''", script);
         Assert.Contains("CK_Subscriptions_Period", script);

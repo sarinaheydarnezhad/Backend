@@ -1,5 +1,7 @@
 # Subscription model and server entitlements
 
+Payment update: Myket checkout/verification is now implemented; see `MYKET-PAYMENTS.md`. The read-only baseline and payment-follow-up limitations described below predate this integration. Purchases remain disabled until configured, while Full remains unavailable.
+
 ## Catalog and product rules
 
 Inspection found no subscription tables/services or existing payment integration. The existing SyncService enforced the free limits directly; it now reuses one EntitlementService. The current targets remain .NET 10 / EF Core 10 and SQL Server.

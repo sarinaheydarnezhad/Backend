@@ -10,8 +10,9 @@ public sealed record PlanDefinition(string Plan, bool IsPurchasable, string Unav
 public sealed record PlanCatalogResponse(string Currency, bool PurchaseSupported, PlanLimits FreeLimits,
     IReadOnlyList<PlanDefinition> Plans);
 
-public sealed class PlanCatalog
+public sealed class PlanCatalog(MyketSettings? myket = null)
 {
+    public bool PurchaseSupported => myket?.IsConfigured == true;
     public static readonly PlanLimits FreeLimits = new(1, 50);
     public static readonly PlanFeatures FreeFeatures = new(false, false);
     private static readonly PlanDefinition Plus = new("Plus", false, "payment_provider_not_configured",
@@ -24,10 +25,17 @@ public sealed class PlanCatalog
 
     public PlanDefinition Find(SubscriptionPlan plan) => plan switch
     {
-        SubscriptionPlan.Plus => Plus,
+        SubscriptionPlan.Plus => Plus with { IsPurchasable = PurchaseSupported,
+            UnavailableReason = PurchaseSupported ? "" : Plus.UnavailableReason },
         SubscriptionPlan.Full => Full,
         _ => throw new InvalidOperationException("Unsupported subscription plan.")
     };
 
-    public PlanCatalogResponse Get() => new("Toman", false, FreeLimits, Array.AsReadOnly(new[] { Plus, Full }));
+    public PlanCatalogResponse Get(bool supportsMyket = true)
+    {
+        var plus = Find(SubscriptionPlan.Plus);
+        if (!supportsMyket && plus.IsPurchasable)
+            plus = plus with { IsPurchasable = false, UnavailableReason = "app_update_required" };
+        return new("Toman", supportsMyket && PurchaseSupported, FreeLimits, Array.AsReadOnly(new[] { plus, Full }));
+    }
 }

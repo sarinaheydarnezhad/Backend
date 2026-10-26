@@ -22,27 +22,6 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Flashcards.Domain.OtpChallenge", b =>
-                {
-                    b.Property<string>("PhoneNumber").HasMaxLength(16).IsUnicode(false).HasColumnType("varchar(16)");
-                    b.Property<Guid>("Id").HasColumnType("uniqueidentifier");
-                    b.Property<string>("Purpose").IsRequired().HasMaxLength(12).IsUnicode(false).HasColumnType("varchar(12)");
-                    b.Property<string>("CodeHash").IsRequired().HasMaxLength(64).IsUnicode(false).HasColumnType("varchar(64)");
-                    b.Property<string>("ProofHash").HasMaxLength(64).IsUnicode(false).HasColumnType("varchar(64)");
-                    b.Property<DateTimeOffset>("RequestedAtUtc").HasColumnType("datetimeoffset(7)");
-                    b.Property<DateTimeOffset>("WindowStartedAtUtc").HasColumnType("datetimeoffset(7)");
-                    b.Property<DateTimeOffset>("ExpiresAtUtc").HasColumnType("datetimeoffset(7)");
-                    b.Property<DateTimeOffset?>("VerifiedAtUtc").HasColumnType("datetimeoffset(7)");
-                    b.Property<DateTimeOffset?>("ProofExpiresAtUtc").HasColumnType("datetimeoffset(7)");
-                    b.Property<DateTimeOffset?>("ConsumedAtUtc").HasColumnType("datetimeoffset(7)");
-                    b.Property<int>("Attempts").HasColumnType("int");
-                    b.Property<int>("RequestsInWindow").HasColumnType("int");
-                    b.Property<bool>("Delivered").HasColumnType("bit");
-                    b.HasKey("PhoneNumber");
-                    b.HasIndex("Id").IsUnique();
-                    b.ToTable("OtpChallenges", (string)null);
-                });
-
             modelBuilder.Entity("Flashcards.Domain.AuthSession", b =>
                 {
                     b.Property<Guid>("Id")
@@ -236,6 +215,128 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
 
                             t.HasCheckConstraint("CK_Decks_TypographySize", "[TypographySize] IN ('small', 'medium', 'large')");
                         });
+                });
+
+            modelBuilder.Entity("Flashcards.Domain.MyketOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("Cancelled")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("CreatedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<int>("DurationMonths")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("ExpiresAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<string>("Payload")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<int>("PriceToman")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Sku")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(200)");
+
+                    b.Property<Guid?>("SubscriptionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TokenHash")
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Payload")
+                        .IsUnique();
+
+                    b.HasIndex("SubscriptionId");
+
+                    b.HasIndex("TokenHash")
+                        .IsUnique()
+                        .HasFilter("[TokenHash] IS NOT NULL");
+
+                    b.HasIndex("UserId", "ExpiresAtUtc");
+
+                    b.ToTable("MyketOrders");
+                });
+
+            modelBuilder.Entity("Flashcards.Domain.OtpChallenge", b =>
+                {
+                    b.Property<string>("PhoneNumber")
+                        .HasMaxLength(16)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(16)");
+
+                    b.Property<int>("Attempts")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CodeHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<DateTimeOffset?>("ConsumedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<bool>("Delivered")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("ExpiresAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<Guid>("Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("ProofExpiresAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<string>("ProofHash")
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<string>("Purpose")
+                        .IsRequired()
+                        .HasMaxLength(12)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(12)");
+
+                    b.Property<DateTimeOffset>("RequestedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<int>("RequestsInWindow")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("VerifiedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<DateTimeOffset>("WindowStartedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
+                    b.HasKey("PhoneNumber");
+
+                    b.HasIndex("Id")
+                        .IsUnique();
+
+                    b.ToTable("OtpChallenges", (string)null);
                 });
 
             modelBuilder.Entity("Flashcards.Domain.RefreshToken", b =>
@@ -513,13 +614,13 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("NormalizedEmail")
-                        .IsUnique()
-                        .HasFilter("[NormalizedEmail] IS NOT NULL");
-
                     b.HasIndex("GoogleSubject")
                         .IsUnique()
                         .HasFilter("[GoogleSubject] IS NOT NULL");
+
+                    b.HasIndex("NormalizedEmail")
+                        .IsUnique()
+                        .HasFilter("[NormalizedEmail] IS NOT NULL");
 
                     b.HasIndex("PhoneNumber")
                         .IsUnique()
@@ -588,13 +689,15 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                         .IsUnique();
 
                     b.HasIndex("UserId", "CreatedAtUtc", "Id")
-                        .IsDescending(false, true, false)
-                        .HasAnnotation("SqlServer:Include", new[] { "Status", "FormatVersion", "CompletedAtUtc", "ExpiresAtUtc", "RetentionDays", "SyncVersion", "SizeBytes", "FailureCode" });
+                        .IsDescending(false, true, false);
+
+                    SqlServerIndexBuilderExtensions.IncludeProperties(b.HasIndex("UserId", "CreatedAtUtc", "Id"), new[] { "Status", "FormatVersion", "CompletedAtUtc", "ExpiresAtUtc", "RetentionDays", "SyncVersion", "SizeBytes", "FailureCode" });
 
                     b.HasIndex("UserId", "FormatVersion", "CompletedAtUtc", "Id")
                         .IsDescending(false, false, true, false)
-                        .HasFilter("[Status] = 'Completed'")
-                        .HasAnnotation("SqlServer:Include", new[] { "Status", "CreatedAtUtc", "ExpiresAtUtc", "RetentionDays", "SyncVersion", "SizeBytes", "FailureCode" });
+                        .HasFilter("[Status] = 'Completed'");
+
+                    SqlServerIndexBuilderExtensions.IncludeProperties(b.HasIndex("UserId", "FormatVersion", "CompletedAtUtc", "Id"), new[] { "Status", "CreatedAtUtc", "ExpiresAtUtc", "RetentionDays", "SyncVersion", "SizeBytes", "FailureCode" });
 
                     b.ToTable("UserBackups", null, t =>
                         {
@@ -710,6 +813,20 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Flashcards.Domain.MyketOrder", b =>
+                {
+                    b.HasOne("Flashcards.Domain.Subscription", null)
+                        .WithMany()
+                        .HasForeignKey("SubscriptionId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Flashcards.Domain.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Flashcards.Domain.RefreshToken", b =>

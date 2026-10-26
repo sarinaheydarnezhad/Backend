@@ -18,9 +18,24 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
     public DbSet<OtpChallenge> OtpChallenges => Set<OtpChallenge>();
     public DbSet<UserBackup> UserBackups => Set<UserBackup>();
     public DbSet<Subscription> Subscriptions => Set<Subscription>();
+    public DbSet<MyketOrder> MyketOrders => Set<MyketOrder>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<MyketOrder>(entity =>
+        {
+            entity.HasKey(item => item.Id);
+            entity.HasOne<User>().WithMany().HasForeignKey(item => item.UserId).OnDelete(DeleteBehavior.NoAction);
+            entity.HasOne<Subscription>().WithMany().HasForeignKey(item => item.SubscriptionId).OnDelete(DeleteBehavior.NoAction);
+            entity.Property(item => item.Sku).HasMaxLength(200).IsUnicode(false).IsRequired();
+            entity.Property(item => item.Payload).HasMaxLength(64).IsUnicode(false).IsRequired();
+            entity.Property(item => item.TokenHash).HasMaxLength(64).IsUnicode(false);
+            entity.HasIndex(item => item.Payload).IsUnique();
+            entity.HasIndex(item => item.TokenHash).IsUnique().HasFilter("[TokenHash] IS NOT NULL");
+            entity.HasIndex(item => new { item.UserId, item.ExpiresAtUtc });
+            entity.Property(item => item.CreatedAtUtc).HasColumnType("datetimeoffset(7)");
+            entity.Property(item => item.ExpiresAtUtc).HasColumnType("datetimeoffset(7)");
+        });
         modelBuilder.Entity<Subscription>(entity =>
         {
             entity.ToTable("Subscriptions", table =>
@@ -278,7 +293,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             if (entry.Entity is ReviewEvent or SyncChange && entry.State is EntityState.Modified or EntityState.Deleted)
                 throw new InvalidOperationException("Historical records are immutable.");
 
-            if (entry.State == EntityState.Added && entry.Entity is not (SyncHead or SyncChange or OtpChallenge or UserBackup))
+            if (entry.State == EntityState.Added && entry.Entity is not (SyncHead or SyncChange or OtpChallenge or UserBackup or MyketOrder))
             {
                 entry.Property("CreatedAtUtc").CurrentValue = now;
                 if (entry.Entity is ReviewEvent) continue;

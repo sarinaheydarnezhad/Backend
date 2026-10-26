@@ -16,6 +16,7 @@ public static class V1Endpoints
         var v1 = endpoints.MapGroup("/api/v1").WithTags("v1");
         v1.MapBackups();
         v1.MapSubscriptions();
+        v1.MapMyketPayments();
         v1.AddEndpointFilter(async (context, next) =>
         {
             if (context.HttpContext.User.Identity?.IsAuthenticated == true)

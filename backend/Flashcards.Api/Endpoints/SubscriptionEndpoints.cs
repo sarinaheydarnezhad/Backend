@@ -8,7 +8,11 @@ public static class SubscriptionEndpoints
 {
     public static void MapSubscriptions(this RouteGroupBuilder v1)
     {
-        v1.MapGet("/plans", (PlanCatalog catalog) => Results.Ok(catalog.Get())).WithTags("subscriptions");
+        v1.MapGet("/plans", (PlanCatalog catalog, HttpContext context) =>
+        {
+            context.Response.Headers.Vary = "X-Lerona-Payments";
+            return Results.Ok(catalog.Get(context.Request.Headers["X-Lerona-Payments"] == "myket-v1"));
+        }).WithTags("subscriptions");
         var mine = v1.MapGroup("/me").WithTags("subscriptions").RequireAuthorization()
             .AddEndpointFilter(async (context, next) =>
             {
