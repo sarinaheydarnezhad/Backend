@@ -49,7 +49,9 @@ public static class BackupSnapshot
             .OrderBy(item => item.Id).Select(item => new
             {
                 item.Id, item.DeckId, item.CardId, item.PreviousBox, item.NewBox, item.Result, item.ReviewedAtUtc,
-                item.StudySessionId, item.CreatedAtUtc
+                item.StudySessionId, item.CreatedAtUtc,
+                ServerVersion = database.SyncChanges.Where(change => change.UserId == userId && change.EntityType == "reviewEvent" &&
+                    change.EntityId == item.Id).Select(change => (long?)change.Version).Min()
             }), cancellationToken);
         await WriteRowsAsync(writer, "settings", database.UserSettings.AsNoTracking().Where(item => item.UserId == userId)
             .Select(item => new

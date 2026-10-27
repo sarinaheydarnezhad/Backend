@@ -316,4 +316,11 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             }
         }
     }
+
+    internal Task<int> SaveRestoredChangesAsync(CancellationToken cancellationToken)
+    {
+        if (ChangeTracker.Entries().Any(entry => entry.State is EntityState.Modified or EntityState.Deleted))
+            throw new InvalidOperationException("Restore may only insert missing records.");
+        return base.SaveChangesAsync(true, cancellationToken);
+    }
 }

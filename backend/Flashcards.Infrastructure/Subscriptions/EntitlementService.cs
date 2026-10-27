@@ -48,6 +48,18 @@ public sealed class EntitlementService(FlashcardsDbContext database, PlanCatalog
     public Task EnsureStudyAllowedAsync(Guid userId, CancellationToken cancellationToken = default) =>
         EnsureAllowedAsync(userId, "study", cancellationToken);
 
+    internal async Task EnsureRestoreAllowedAsync(Guid userId, int addedDecks, int addedCards, CancellationToken cancellationToken)
+    {
+        if (addedDecks == 0 && addedCards == 0) return;
+        var limits = await EffectiveLimitsAsync(userId, cancellationToken);
+        var usage = await UsageAsync(userId, cancellationToken);
+        if (addedDecks > 0 && limits.Decks is int maximumDecks && usage.Decks + addedDecks > maximumDecks)
+            throw new FreeTierLimitException("free_tier_deck_limit", "Restoring these decks would exceed your active deck limit. Existing data is preserved.", limits, usage);
+        if (addedCards > 0 && limits.Cards is int maximumCards && usage.Cards + addedCards > maximumCards)
+            throw new FreeTierLimitException("free_tier_card_limit", "Restoring these cards would exceed your active card limit. Existing data is preserved.", limits, usage);
+        EnsureUsageAllowed(limits, new LearningUsage(usage.Decks + addedDecks, usage.Cards + addedCards), "study");
+    }
+
     public async Task<EntitlementResponse> AuthorizeStudyAsync(Guid userId, CancellationToken cancellationToken = default)
     {
         var response = (await GetAsync(userId, cancellationToken)).Entitlements;

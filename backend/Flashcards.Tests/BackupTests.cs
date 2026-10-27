@@ -20,7 +20,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Flashcards.Tests;
 
-public sealed class BackupTests : IAsyncLifetime
+public sealed partial class BackupTests : IAsyncLifetime
 {
     private readonly SqliteConnection _connection = new("Data Source=:memory:");
     private readonly BackupClock _clock = new();
@@ -142,13 +142,15 @@ public sealed class BackupTests : IAsyncLifetime
         var metadata = (await (await CreateAsync(Guid.NewGuid())).Content.ReadFromJsonAsync<BackupMetadata>())!;
         await LoginAsync("second@example.com");
         Assert.Equal(HttpStatusCode.NotFound, (await _client.GetAsync($"/api/v1/backups/{metadata.Id}")).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await _client.GetAsync($"/api/v1/backups/{metadata.Id}/download")).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await RestoreAsync(metadata.Id)).StatusCode);
         Assert.Empty((await _client.GetFromJsonAsync<BackupPage>("/api/v1/backups/"))!.Items);
         Assert.Null((await _client.GetFromJsonAsync<BackupStatus>("/api/v1/backups/status"))!.LatestCompleted);
         using var anonymous = _factory.CreateClient();
-        foreach (var path in new[] { "/api/v1/backups/", "/api/v1/backups/status", $"/api/v1/backups/{metadata.Id}" })
+        foreach (var path in new[] { "/api/v1/backups/", "/api/v1/backups/status", $"/api/v1/backups/{metadata.Id}", $"/api/v1/backups/{metadata.Id}/download" })
             Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.GetAsync(path)).StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.PostAsJsonAsync("/api/v1/backups/", Request(Guid.NewGuid()))).StatusCode);
-        Assert.Equal(HttpStatusCode.NotFound, (await _client.PostAsJsonAsync($"/api/v1/backups/{metadata.Id}/restore", new { confirm = true })).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.PostAsJsonAsync($"/api/v1/backups/{metadata.Id}/restore", new RestoreBackupRequest("mergeMissing", 0))).StatusCode);
     }
 
     [Fact]
@@ -352,6 +354,8 @@ public sealed class BackupTests : IAsyncLifetime
     private sealed class BackupFailureInterceptor : SaveChangesInterceptor
     {
         public bool FailCompletion { get; set; }
+        public bool FailRestoreAfterSave { get; set; }
+        public Action? OnRestoreSaved { get; set; }
         public Action? OnPendingSaved { get; set; }
         public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {
@@ -362,6 +366,9 @@ public sealed class BackupTests : IAsyncLifetime
         public override ValueTask<int> SavedChangesAsync(SaveChangesCompletedEventData eventData, int result, CancellationToken cancellationToken = default)
         {
             if (eventData.Context!.ChangeTracker.Entries<UserBackup>().Any(entry => entry.Entity.Status == "Pending")) OnPendingSaved?.Invoke();
+            if (FailRestoreAfterSave && eventData.Context!.ChangeTracker.Entries<SyncChange>().Any())
+                throw new DbUpdateException("sensitive restore marker");
+            if (eventData.Context!.ChangeTracker.Entries<SyncChange>().Any()) OnRestoreSaved?.Invoke();
             return ValueTask.FromResult(result);
         }
     }

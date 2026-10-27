@@ -61,7 +61,11 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
                 throw new BackupException(409, "backup_sync_incomplete", "The server has not received the required synchronized account version.");
             var payload = await BackupSnapshot.CaptureAsync(database, userId, backup.Id, clock.GetUtcNow(), version,
                 settings.MaxPayloadBytes, cancellationToken);
-            try { backup.Payload = protector.Protect(userId, backup.Id, backup.FormatVersion, payload); }
+            try
+            {
+                BackupDocument.Read(payload, userId, backup.Id, version);
+                backup.Payload = protector.Protect(userId, backup.Id, backup.FormatVersion, payload);
+            }
             finally { CryptographicOperations.ZeroMemory(payload); }
             cancellationToken.ThrowIfCancellationRequested();
             backup.SizeBytes = backup.Payload.LongLength;
@@ -100,6 +104,45 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
         return row is null ? null : ToMetadata(row);
     }
 
+    public async Task<byte[]> DownloadAsync(Guid userId, Guid backupId, CancellationToken cancellationToken = default) =>
+        (await ReadSnapshotAsync(userId, backupId, cancellationToken)).Payload;
+
+    internal async Task<(byte[] Payload, BackupDocument Document)> ReadSnapshotAsync(Guid userId, Guid backupId,
+        CancellationToken cancellationToken)
+    {
+        EnsureConfigured();
+        byte[]? payload = null;
+        try
+        {
+            var row = await database.UserBackups.AsNoTracking().Where(item => item.UserId == userId && item.Id == backupId)
+                .Select(item => new { item.Status, item.ExpiresAtUtc, item.FormatVersion, item.SyncVersion, item.SizeBytes,
+                    PayloadLength = item.Payload == null ? 0 : item.Payload.Length }).SingleOrDefaultAsync(cancellationToken);
+            if (row is null) throw new BackupException(404, "backup_not_found", "Backup not found.");
+            if (row.ExpiresAtUtc <= clock.GetUtcNow()) throw new BackupException(410, "backup_expired", "This backup has expired.");
+            if (row.Status != "Completed") throw new BackupException(409, "backup_not_completed", "This backup is not completed.");
+            BackupSnapshot.ValidateVersion(row.FormatVersion);
+            if (row.PayloadLength > settings.MaxPayloadBytes + 1024)
+                throw new BackupException(413, "backup_too_large", "The backup exceeds the configured size limit.");
+            if (row.PayloadLength == 0 || row.SizeBytes != row.PayloadLength || row.SyncVersion is null)
+                throw new BackupException(400, "backup_invalid", "The backup storage metadata is inconsistent.");
+            var encrypted = await database.UserBackups.AsNoTracking().Where(item => item.UserId == userId && item.Id == backupId)
+                .Select(item => item.Payload!).SingleAsync(cancellationToken);
+            payload = protector.Unprotect(userId, backupId, row.FormatVersion, encrypted);
+            if (payload.Length > settings.MaxPayloadBytes)
+                throw new BackupException(413, "backup_too_large", "The backup exceeds the configured size limit.");
+            return (payload, BackupDocument.Read(payload, userId, backupId, row.SyncVersion.Value));
+        }
+        catch (Exception exception)
+        {
+            if (payload is not null) CryptographicOperations.ZeroMemory(payload);
+            logger.LogWarning("Backup {BackupId} read failed ({FailureType})", backupId, exception.GetType().Name);
+            if (exception is BackupException or OperationCanceledException) throw;
+            if (exception is CryptographicException)
+                throw new BackupException(422, "backup_unreadable", "The backup could not be authenticated or decrypted.", backupId);
+            throw new BackupException(503, "backup_storage_failed", "Backup storage is unavailable. Retry later.", backupId);
+        }
+    }
+
     public async Task<BackupPage> ListAsync(Guid userId, int page, int limit, CancellationToken cancellationToken = default)
     {
         if (page is < 1 or > 10000 || limit is < 1 or > 100)
@@ -117,13 +160,16 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
                 item.Status == "Completed" && item.ExpiresAtUtc > now && item.FormatVersion == BackupSnapshot.CurrentFormatVersion)
             .OrderByDescending(item => item.CompletedAtUtc).ThenBy(item => item.Id)
             .Select(MetadataProjection).FirstOrDefaultAsync(cancellationToken);
-        return new BackupStatus(row is null ? null : ToMetadata(row), settings.RetentionDays, settings.MaxPayloadBytes);
+        return new BackupStatus(row is null ? null : ToMetadata(row), settings.RetentionDays, settings.MaxPayloadBytes, settings.IsConfigured);
     }
 
     private void EnsureConfigured()
     {
         if (!settings.IsConfigured)
+        {
+            logger.LogWarning("Backup operations unavailable: durable key-ring configuration or backup limits are invalid");
             throw new BackupException(503, "backups_unavailable", "Backup retention, size limits and a durable encryption key-ring path must be configured.");
+        }
     }
 
     private async Task<BackupMetadata?> RecordFailureAsync(UserBackup attempted, string code)
@@ -167,7 +213,8 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
     {
         var expired = row.ExpiresAtUtc <= clock.GetUtcNow();
         return new BackupMetadata(row.Id, expired ? "Expired" : row.Status, row.FormatVersion, row.CreatedAtUtc,
-            row.CompletedAtUtc, row.ExpiresAtUtc, row.RetentionDays, row.SyncVersion, row.SizeBytes, row.FailureCode, expired, false);
+            row.CompletedAtUtc, row.ExpiresAtUtc, row.RetentionDays, row.SyncVersion, row.SizeBytes, row.FailureCode, expired,
+            !expired && row.Status == "Completed" && row.FormatVersion == BackupSnapshot.CurrentFormatVersion && settings.IsConfigured);
     }
 
     private static readonly Expression<Func<UserBackup, UserBackup>> MetadataProjection = row => new UserBackup

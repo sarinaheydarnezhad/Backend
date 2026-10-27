@@ -95,6 +95,7 @@ public static class DependencyInjection
         }
         services.AddSingleton<IBackupPayloadProtector, BackupPayloadProtector>();
         services.AddScoped<BackupService>();
+        services.AddScoped<BackupRestoreService>();
         services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
         var connectionString = configuration.GetConnectionString("FlashcardsDb");
         if (!string.IsNullOrWhiteSpace(connectionString))

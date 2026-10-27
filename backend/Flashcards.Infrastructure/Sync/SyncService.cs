@@ -289,25 +289,25 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
 
     private static JsonElement ParseJson(string json) => JsonSerializer.Deserialize<JsonElement>(json);
 
-    private static string DeckSnapshot(Deck deck) => JsonSerializer.Serialize(new
+    internal static string DeckSnapshot(Deck deck) => JsonSerializer.Serialize(new
     {
         deck.Name, deck.Description, deck.Language, deck.TextAlignment, deck.TypographySize,
         deck.ArchivedAtUtc
     }, SyncValidator.JsonOptions);
 
-    private static string CardSnapshot(Card card) => JsonSerializer.Serialize(new
+    internal static string CardSnapshot(Card card) => JsonSerializer.Serialize(new
     {
         card.DeckId, card.FrontText, card.Meaning, card.Phonetic, card.Category,
         Examples = ParseJson(card.ExamplesJson), card.ArchivedAtUtc
     }, SyncValidator.JsonOptions);
 
-    private static string StateSnapshot(CardReviewState state) => JsonSerializer.Serialize(new
+    internal static string StateSnapshot(CardReviewState state) => JsonSerializer.Serialize(new
     {
         state.Box, state.DueDate, state.LastReviewedAtUtc, state.ConsecutiveSuccesses,
         state.TotalReviews, state.TotalSuccesses
     }, SyncValidator.JsonOptions);
 
-    private static string SettingsSnapshot(UserSettings settings) => JsonSerializer.Serialize(new
+    internal static string SettingsSnapshot(UserSettings settings) => JsonSerializer.Serialize(new
     {
         settings.Theme, settings.HapticsEnabled, settings.Language, settings.DailyReminderEnabled,
         settings.DailyReminderTime, settings.PreferredSpeechLanguage, settings.PreferredSpeechAccent

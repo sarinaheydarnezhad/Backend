@@ -8,6 +8,9 @@ public sealed record BackupCreation(BackupMetadata Backup, bool Replayed);
 public sealed record BackupPage(IReadOnlyList<BackupMetadata> Items, int? NextPage);
 public sealed record BackupStatus(BackupMetadata? LatestCompleted, int RetentionDays, int MaxPayloadBytes,
     bool RestoreSupported = false, bool AutomaticCleanup = false);
+public sealed record RestoreBackupRequest(string Mode, long ExpectedSyncVersion);
+public sealed record BackupRestoreResult(Guid BackupId, string Mode, long Cursor, int Decks, int Cards,
+    int ReviewStates, int ReviewEvents, int Settings, int SkippedDecks, int SkippedCards, int SkippedSettings);
 
 public sealed class BackupException(int statusCode, string code, string message, Guid? backupId = null) : Exception(message)
 {
