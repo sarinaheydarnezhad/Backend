@@ -1,4 +1,5 @@
 using System.Net;
+using System.Data.Common;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
@@ -357,6 +358,7 @@ public sealed partial class BackupTests : IAsyncLifetime
         public bool FailRestoreAfterSave { get; set; }
         public Action? OnRestoreSaved { get; set; }
         public Action? OnPendingSaved { get; set; }
+        public BackupReadFailure ReadFailure { get; } = new();
         public override ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result, CancellationToken cancellationToken = default)
         {
             if (FailCompletion && eventData.Context!.ChangeTracker.Entries<UserBackup>().Any(entry => entry.Entity.Status == "Completed"))
@@ -398,7 +400,7 @@ public sealed partial class BackupTests : IAsyncLifetime
                 services.RemoveAll<DbContextOptions<FlashcardsDbContext>>();
                 services.RemoveAll<IDbContextOptionsConfiguration<FlashcardsDbContext>>();
                 services.AddDbContext<FlashcardsDbContext>(options => options.UseSqlite(connection)
-                    .ReplaceService<IModelCustomizer, BackupModelCustomizer>().AddInterceptors(failure));
+                    .ReplaceService<IModelCustomizer, BackupModelCustomizer>().AddInterceptors(failure, failure.ReadFailure));
                 services.RemoveAll<TimeProvider>();
                 services.AddSingleton<TimeProvider>(clock);
                 services.RemoveAll<BackupSettings>();
@@ -406,6 +408,18 @@ public sealed partial class BackupTests : IAsyncLifetime
                 services.RemoveAll<IDataProtectionProvider>();
                 services.AddSingleton(protection);
             });
+        }
+    }
+
+    private sealed class BackupReadFailure : DbCommandInterceptor
+    {
+        public bool Fail { get; set; }
+
+        public override ValueTask<InterceptionResult<DbDataReader>> ReaderExecutingAsync(DbCommand command,
+            CommandEventData eventData, InterceptionResult<DbDataReader> result, CancellationToken cancellationToken = default)
+        {
+            if (Fail && command.CommandText.Contains("\"UserBackups\"", StringComparison.Ordinal)) throw new TimeoutException("private backup details");
+            return ValueTask.FromResult(result);
         }
     }
 }

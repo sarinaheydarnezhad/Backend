@@ -358,7 +358,7 @@ public sealed class SubscriptionTests : IAsyncLifetime
         Assert.Equal(deckCount, await saved.Decks.CountAsync());
         Assert.Equal(cardCount, await saved.Cards.CountAsync());
         Assert.Equal(allowed ? 1 : 0, await saved.ReviewEvents.CountAsync());
-        Assert.Equal(allowed ? 2 : 0, await saved.SyncChanges.CountAsync());
+        Assert.Equal(allowed ? deckCount + cardCount + 2 : 0, await saved.SyncChanges.CountAsync());
         Assert.Equal(allowed ? 1 : 0, await saved.CardReviewStates.CountAsync());
     }
 
@@ -371,13 +371,15 @@ public sealed class SubscriptionTests : IAsyncLifetime
         using (var scope = _factory.Services.CreateScope())
         {
             var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-            database.Decks.AddRange(new Deck { Id = deckId, UserId = owner, Name = "First", SyncVersion = 1 },
-                new Deck { Id = extraDeck, UserId = owner, Name = "Extra", SyncVersion = 1 });
+            database.Decks.AddRange(new Deck { Id = deckId, UserId = owner, Name = "First" },
+                new Deck { Id = extraDeck, UserId = owner, Name = "Extra" });
             await database.SaveChangesAsync();
         }
+        var initialFeed = (await _client.GetFromJsonAsync<SyncPullResponse>("/api/v1/sync/pull?cursor=0"))!;
+        var extraVersion = initialFeed.Changes.Single(item => item.EntityId == extraDeck).ServerVersion;
         var card = new CardPayload(deckId, "New", "meaning", null, null, JsonSerializer.SerializeToElement(Array.Empty<string>()));
         Assert.Equal(HttpStatusCode.Forbidden, (await PushAsync("card", Guid.NewGuid(), card)).StatusCode);
-        var archive = new SyncPushChange(Guid.NewGuid(), Guid.NewGuid(), "deck", extraDeck, "archive", _clock.Now, 1, JsonSerializer.SerializeToElement<object?>(null));
+        var archive = new SyncPushChange(Guid.NewGuid(), Guid.NewGuid(), "deck", extraDeck, "archive", _clock.Now, extraVersion, JsonSerializer.SerializeToElement<object?>(null));
         Assert.Equal(HttpStatusCode.OK, (await _client.PostAsJsonAsync("/api/v1/sync/push", new SyncPushRequest([archive]))).StatusCode);
         Assert.Equal(HttpStatusCode.OK, (await _client.PostAsync("/api/v1/me/study/authorize", null)).StatusCode);
         Assert.Equal(HttpStatusCode.OK, (await PushAsync("card", Guid.NewGuid(), card)).StatusCode);
@@ -387,7 +389,7 @@ public sealed class SubscriptionTests : IAsyncLifetime
         using var inspect = _factory.Services.CreateScope();
         var saved = inspect.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
         Assert.Single(await saved.Cards.ToListAsync());
-        Assert.Equal(2, await saved.SyncChanges.CountAsync());
+        Assert.Equal(initialFeed.Cursor + 2, await saved.SyncChanges.CountAsync());
         Assert.Equal(2, await saved.Decks.CountAsync());
         Assert.NotNull((await saved.Decks.FindAsync(extraDeck))!.ArchivedAtUtc);
     }
@@ -437,7 +439,7 @@ public sealed class SubscriptionTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task Caught_up_sync_pull_only_reads_the_user_head_and_preserves_cursor_validation()
+    public async Task Caught_up_sync_pull_uses_one_query_and_preserves_cursor_validation()
     {
         var owner = await LoginAsync("idle@example.com");
         using var scope = _factory.Services.CreateScope();

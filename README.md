@@ -1,5 +1,7 @@
 # Flashcards backend
 
+Current backup/sync/atomic guest-copy fixes, API integration requirements and actual test results are in `SYNC-RECOVERY-FIX.md`. Existing clients remain compatible; atomic whole-transfer migration requires the additive authenticated `/api/v1/sync/guest-migration` route. Rebuild the tracked publish artifacts with `deploy/Publish-Backend.ps1` before deployment; deployment settings are preserved.
+
 The backend is a .NET 10 ASP.NET Core API in [`backend/`](backend/) with EF Core 10 SQL Server persistence, email/password accounts, and sync-aware deck creation.
 
 ## Projects
@@ -80,11 +82,11 @@ An unauthenticated `PUT /api/v1/me/profile` with an empty JSON object should ret
 
 ## Free-tier creation policy
 
-Authenticated writes currently enforce one active (unarchived) deck and 50 active cards in total per user. Card counts include unarchived cards in archived decks; archiving a deck alone does not free card capacity. Existing oversized datasets are preserved: edits, reviews and archival remain permitted. Nothing is automatically deleted.
+Free accounts are limited to one active (unarchived) deck and 50 active cards in total. Card counts include unarchived cards in archived decks; archiving a deck alone does not free card capacity. Existing oversized datasets are preserved: viewing, exporting, editing and archival remain available, but study and new content require active Plus entitlement or explicitly reducing active data. Nothing is automatically deleted.
 
 `SyncService` checks quotas inside the existing transaction after acquiring the per-user sync-head write lock. Both `POST /api/v1/decks` and sync push creation use the same policy. A limit failure rolls back the full batch, including entity changes, versions and feed entries, and returns HTTP 403 `{ error, code }` with `free_tier_deck_limit` or `free_tier_card_limit`. Counts use the authenticated owner's ID, never client entitlement/owner claims. Guest data is local mobile storage and is not bound/uploaded by signing in.
 
-No subscription/entitlement authority exists in the current model. All accounts therefore receive these limits until verified backend entitlements are implemented; there is no client-controlled premium exemption or temporary bypass. Active-subscriber support and a safe offline entitlement policy are unresolved dependencies. This policy adds no entities or migrations. Its new tests in `backend/Flashcards.Tests/SyncTests.cs` are not executed in the current SDK-8-only environment because the projects target .NET 10.
+The backend validates current stored subscriptions through `EntitlementService`; active Plus removes deck/card limits, while unavailable, expired or cancelled plans cannot bypass free limits. Guest migration uses the same checks, with no client-controlled premium exemption. Current verification and deployment requirements are documented in `SYNC-RECOVERY-FIX.md`.
 
 ## Sync contract
 

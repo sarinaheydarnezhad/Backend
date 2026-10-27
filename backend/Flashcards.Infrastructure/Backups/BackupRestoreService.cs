@@ -25,8 +25,7 @@ public sealed class BackupRestoreService(FlashcardsDbContext database, BackupSer
             var snapshot = content.Document;
             CryptographicOperations.ZeroMemory(content.Payload);
             await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
-            await database.SyncHeads.Where(item => item.UserId == userId)
-                .ExecuteUpdateAsync(update => update.SetProperty(item => item.Version, item => item.Version), cancellationToken);
+            await SyncBootstrap.LockHeadAsync(database, userId, cancellationToken);
             var head = await database.SyncHeads.AsNoTracking().SingleOrDefaultAsync(item => item.UserId == userId, cancellationToken);
             var version = head?.Version ?? 0;
             if (version != request.ExpectedSyncVersion)

@@ -14,10 +14,10 @@ internal static class SyncValidator
         UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow
     };
 
-    public static IReadOnlyList<ValidatedSyncChange> Validate(SyncPushRequest? request)
+    public static IReadOnlyList<ValidatedSyncChange> Validate(SyncPushRequest? request, int maximumChanges = 50)
     {
-        if (request?.Changes is not { Count: > 0 and <= 50 })
-            throw new SyncException("A push requires between 1 and 50 changes.");
+        if (request?.Changes is not { Count: > 0 } || request.Changes.Count > maximumChanges)
+            throw new SyncException($"A push requires between 1 and {maximumChanges} changes.");
 
         var seen = new HashSet<(Guid DeviceId, Guid ClientChangeId)>();
         var validated = new List<ValidatedSyncChange>(request.Changes.Count);
@@ -109,7 +109,7 @@ internal static class SyncValidator
             case ReviewStatePayload state:
                 if (state.Box is < 1 or > 5 || state.DueDate == default || state.ConsecutiveSuccesses < 0 ||
                     state.TotalReviews < 0 || state.TotalSuccesses < 0 || state.TotalSuccesses > state.TotalReviews ||
-                    state.ConsecutiveSuccesses > state.TotalSuccesses)
+                    state.ConsecutiveSuccesses > state.TotalSuccesses || state.LastReviewedAtUtc == default(DateTimeOffset))
                     throw new SyncException("Invalid review state payload.");
                 break;
             case ReviewEventPayload review:

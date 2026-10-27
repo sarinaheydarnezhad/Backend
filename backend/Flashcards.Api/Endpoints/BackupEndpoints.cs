@@ -1,5 +1,7 @@
 using System.Security.Claims;
 using System.Text.Json;
+using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
 using Flashcards.Infrastructure.Auth;
 using Flashcards.Infrastructure.Backups;
 
@@ -18,6 +20,15 @@ public static class BackupEndpoints
                 {
                     return Results.Json(new { error = exception.Message, code = exception.Code, backupId = exception.BackupId },
                         statusCode: exception.StatusCode);
+                }
+                catch (Exception exception) when (exception is DbException or DbUpdateException or TimeoutException)
+                {
+                    var http = context.HttpContext;
+                    http.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("BackupFailures")
+                        .LogWarning("Backup metadata unavailable ({FailureType}); trace {TraceId}", exception.GetType().Name, http.TraceIdentifier);
+                    http.Response.Headers.RetryAfter = "5";
+                    return Results.Json(new { error = "Backup storage is temporarily unavailable. Retry later.",
+                        code = "backup_storage_failed", backupId = (Guid?)null }, statusCode: StatusCodes.Status503ServiceUnavailable);
                 }
             });
         backups.MapPost("/", async (bool? includeRestoreCapability, HttpRequest httpRequest, ClaimsPrincipal principal, BackupService service, CancellationToken cancellationToken) =>

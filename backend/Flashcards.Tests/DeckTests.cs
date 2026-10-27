@@ -170,8 +170,9 @@ public sealed class DeckTests : IAsyncLifetime
         }
 
         var response = await _client.PostAsJsonAsync("/api/v1/decks", new { name = "Must roll back" });
-        Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
-        Assert.Equal("application/problem+json", response.Content.Headers.ContentType?.MediaType);
+        Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+        Assert.Equal("storage_unavailable", (await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
+        Assert.NotNull(response.Headers.RetryAfter);
         Assert.DoesNotContain("Deck persistence test failure", await response.Content.ReadAsStringAsync());
         using (var scope = _factory.Services.CreateScope())
         {

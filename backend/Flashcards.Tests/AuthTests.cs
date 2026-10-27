@@ -18,12 +18,13 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Flashcards.Tests;
 
-public sealed class AuthTests : IAsyncLifetime
+public sealed partial class AuthTests : IAsyncLifetime
 {
     private const string Password = "My long private passphrase 2026!";
     private readonly SqliteConnection _connection = new("Data Source=:memory:");
     private AuthApiFactory _factory = null!;
     private HttpClient _client = null!;
+    private readonly RefreshFailureInterceptor _failure = new();
 
     public async Task InitializeAsync()
     {
@@ -33,7 +34,7 @@ public sealed class AuthTests : IAsyncLifetime
             catch (JsonException) { return 0; }
         });
         await _connection.OpenAsync();
-        _factory = new AuthApiFactory(_connection);
+        _factory = new AuthApiFactory(_connection, _failure);
         _client = _factory.CreateClient();
         using var scope = _factory.Services.CreateScope();
         await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Database.EnsureCreatedAsync();
@@ -281,7 +282,7 @@ public sealed class AuthTests : IAsyncLifetime
         return (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
     }
 
-    private sealed class AuthApiFactory(SqliteConnection connection) : TestApiFactory
+    private sealed class AuthApiFactory(SqliteConnection connection, RefreshFailureInterceptor failure) : TestApiFactory
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -290,7 +291,7 @@ public sealed class AuthTests : IAsyncLifetime
             {
                 services.RemoveAll<DbContextOptions<FlashcardsDbContext>>();
                 services.RemoveAll<IDbContextOptionsConfiguration<FlashcardsDbContext>>();
-                services.AddDbContext<FlashcardsDbContext>(options => options.UseSqlite(connection));
+                services.AddDbContext<FlashcardsDbContext>(options => options.UseSqlite(connection).AddInterceptors(failure));
             });
         }
     }

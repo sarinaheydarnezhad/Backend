@@ -1,5 +1,7 @@
 # Server-side learning backups
 
+For the subsequent sync/guest-copy recovery, retryable metadata errors, refreshed publish artifacts and current verification, see `SYNC-RECOVERY-FIX.md`. Durable key-ring configuration and operational artifact cleanup remain required; they are not replaced with insecure defaults or silent deletion.
+
 ## Architecture and deployment
 
 This is the single retained-backup implementation. Existing sync remains the only transport for offline account edits; backup creation reads the server's current learning data and does not import a mobile database. Guest data is never included. The target remains .NET 10 / EF Core 10.

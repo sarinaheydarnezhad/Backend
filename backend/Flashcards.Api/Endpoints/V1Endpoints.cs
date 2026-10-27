@@ -6,6 +6,8 @@ using Flashcards.Infrastructure.Sync;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Data.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace Flashcards.Api.Endpoints;
 
@@ -26,6 +28,24 @@ public static class V1Endpoints
             {
                 context.HttpContext.Response.Headers.CacheControl = "no-store";
                 return Results.Json(new { error = exception.Message, code = exception.Code, limits = exception.Limits, usage = exception.Usage }, statusCode: StatusCodes.Status403Forbidden);
+            }
+            catch (SyncException exception)
+            {
+                if (exception.Code is not null)
+                    return Results.Json(new { error = exception.Message, code = exception.Code }, statusCode: exception.StatusCode);
+                return exception.Conflict is null
+                    ? Results.BadRequest(new { error = exception.Message })
+                    : Results.Conflict(new { error = exception.Message, conflict = exception.Conflict });
+            }
+            catch (Exception exception) when (exception is DbException or DbUpdateException or TimeoutException)
+            {
+                var http = context.HttpContext;
+                http.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("StorageFailures")
+                    .LogWarning("Account operation failed ({FailureType}); trace {TraceId}", exception.GetType().Name, http.TraceIdentifier);
+                http.Response.Headers.RetryAfter = "5";
+                http.Response.Headers.CacheControl = "no-store";
+                return Results.Json(new { error = "Storage is temporarily unavailable. Retain local data and retry the same operation.",
+                    code = "storage_unavailable", traceId = http.TraceIdentifier }, statusCode: StatusCodes.Status503ServiceUnavailable);
             }
         });
 
@@ -126,51 +146,48 @@ public static class V1Endpoints
         });
 
         var sync = v1.MapGroup("/sync").WithTags("sync").RequireAuthorization();
-        sync.MapPost("/push", async (HttpContext context, ClaimsPrincipal principal, SyncService service, CancellationToken cancellationToken) =>
-        {
-            const int maxBytes = 131_072;
-            if (context.Request.ContentLength > maxBytes) return Results.StatusCode(StatusCodes.Status413PayloadTooLarge);
-            if (!context.Request.HasJsonContentType()) return Results.StatusCode(StatusCodes.Status415UnsupportedMediaType);
-            using var buffer = new MemoryStream();
-            var chunk = new byte[8192];
-            int read;
-            while ((read = await context.Request.Body.ReadAsync(chunk, cancellationToken)) > 0)
-            {
-                if (buffer.Length + read > maxBytes) return Results.StatusCode(StatusCodes.Status413PayloadTooLarge);
-                buffer.Write(chunk, 0, read);
-            }
-
-            SyncPushRequest? request;
-            try
-            {
-                request = JsonSerializer.Deserialize<SyncPushRequest>(buffer.ToArray(),
-                    new JsonSerializerOptions(JsonSerializerDefaults.Web) { UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow });
-            }
-            catch (JsonException) { return Results.BadRequest(new { error = "Invalid sync JSON." }); }
-
-            try
-            {
-                context.Response.Headers.CacheControl = "no-store";
-                return Results.Ok(await service.PushAsync(AuthenticatedIdentity.FromClaims(principal).UserId, request!, cancellationToken));
-            }
-            catch (SyncException exception)
-            {
-                return exception.Conflict is null
-                    ? Results.BadRequest(new { error = exception.Message })
-                    : Results.Conflict(new { error = exception.Message, conflict = exception.Conflict });
-            }
-        });
+        sync.MapPost("/push", (HttpContext context, ClaimsPrincipal principal, SyncService service, CancellationToken cancellationToken) =>
+            PushAsync(context, principal, service, false, cancellationToken));
+        sync.MapPost("/guest-migration", (HttpContext context, ClaimsPrincipal principal, SyncService service, CancellationToken cancellationToken) =>
+            PushAsync(context, principal, service, true, cancellationToken));
         sync.MapGet("/pull", async (long cursor, int? limit, ClaimsPrincipal principal, SyncService service, HttpContext context, CancellationToken cancellationToken) =>
-        {
-            try
-            {
-                context.Response.Headers.CacheControl = "no-store";
-                return Results.Ok(await service.PullAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cursor, limit ?? 100, cancellationToken));
-            }
-            catch (SyncException exception) { return Results.BadRequest(new { error = exception.Message }); }
-        });
+            Results.Ok(await service.PullAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cursor, limit ?? 100, cancellationToken)));
 
         return endpoints;
+    }
+
+    private static async Task<IResult> PushAsync(HttpContext context, ClaimsPrincipal principal, SyncService service,
+        bool guestMigration, CancellationToken cancellationToken)
+    {
+        var maxBytes = guestMigration ? 10_485_760 : 131_072;
+        if (context.Request.ContentLength > maxBytes) return Results.StatusCode(StatusCodes.Status413PayloadTooLarge);
+        if (!context.Request.HasJsonContentType()) return Results.StatusCode(StatusCodes.Status415UnsupportedMediaType);
+        using var buffer = new MemoryStream();
+        var chunk = new byte[8192];
+        int read;
+        while ((read = await context.Request.Body.ReadAsync(chunk, cancellationToken)) > 0)
+        {
+            if (buffer.Length + read > maxBytes) return Results.StatusCode(StatusCodes.Status413PayloadTooLarge);
+            buffer.Write(chunk, 0, read);
+        }
+
+        SyncPushRequest? request;
+        try
+        {
+            request = JsonSerializer.Deserialize<SyncPushRequest>(buffer.ToArray(),
+                new JsonSerializerOptions(JsonSerializerDefaults.Web) { UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow });
+        }
+        catch (JsonException) { return Results.BadRequest(new { error = "Invalid sync JSON." }); }
+
+        var userId = AuthenticatedIdentity.FromClaims(principal).UserId;
+        var response = guestMigration
+            ? await service.MigrateGuestAsync(userId, request!, cancellationToken)
+            : await service.PushAsync(userId, request!, cancellationToken);
+        if (guestMigration)
+            context.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("GuestMigration")
+                .LogInformation("Guest migration committed {ChangeCount} acknowledgements at cursor {Cursor}; trace {TraceId}",
+                    response.Changes.Count, response.Cursor, context.TraceIdentifier);
+        return Results.Ok(response);
     }
 
 }

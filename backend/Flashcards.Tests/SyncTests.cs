@@ -10,17 +10,19 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Flashcards.Tests;
 
-public sealed class SyncTests : IAsyncLifetime
+public sealed partial class SyncTests : IAsyncLifetime
 {
     private readonly SqliteConnection _connection = new("Data Source=:memory:");
     private SyncApiFactory _factory = null!;
     private HttpClient _client = null!;
     private static readonly Guid DeviceId = Guid.NewGuid();
+    private readonly SyncFailureInterceptor _failure = new();
 
     public async Task InitializeAsync()
     {
@@ -30,7 +32,7 @@ public sealed class SyncTests : IAsyncLifetime
             catch (JsonException) { return 0; }
         });
         await _connection.OpenAsync();
-        _factory = new SyncApiFactory(_connection);
+        _factory = new SyncApiFactory(_connection, _failure);
         _client = _factory.CreateClient();
         using var scope = _factory.Services.CreateScope();
         await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Database.EnsureCreatedAsync();
@@ -405,7 +407,7 @@ public sealed class SyncTests : IAsyncLifetime
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
     }
 
-    private sealed class SyncApiFactory(SqliteConnection connection) : TestApiFactory
+    private sealed class SyncApiFactory(SqliteConnection connection, SyncFailureInterceptor failure, string? connectionString = null) : TestApiFactory
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -414,8 +416,24 @@ public sealed class SyncTests : IAsyncLifetime
             {
                 services.RemoveAll<DbContextOptions<FlashcardsDbContext>>();
                 services.RemoveAll<IDbContextOptionsConfiguration<FlashcardsDbContext>>();
-                services.AddDbContext<FlashcardsDbContext>(options => options.UseSqlite(connection));
+                services.AddDbContext<FlashcardsDbContext>(options =>
+                {
+                    if (connectionString is null) options.UseSqlite(connection);
+                    else options.UseSqlite(connectionString);
+                    options.ReplaceService<IModelCustomizer, SyncModelCustomizer>().AddInterceptors(failure, failure.ReadFailure, new SyncSqliteFunctions());
+                });
             });
+        }
+    }
+
+    private sealed class SyncModelCustomizer(ModelCustomizerDependencies dependencies) : ModelCustomizer(dependencies)
+    {
+        public override void Customize(ModelBuilder modelBuilder, DbContext context)
+        {
+            base.Customize(modelBuilder, context);
+            var converter = new ValueConverter<DateTimeOffset, long>(value => value.UtcTicks, value => new DateTimeOffset(value, TimeSpan.Zero));
+            modelBuilder.Entity<Flashcards.Domain.Card>().Property(item => item.CreatedAtUtc).HasConversion(converter).HasColumnType("bigint");
+            modelBuilder.Entity<Flashcards.Domain.ReviewEvent>().Property(item => item.ReviewedAtUtc).HasConversion(converter).HasColumnType("bigint");
         }
     }
 }

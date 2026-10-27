@@ -31,36 +31,48 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
         if (string.IsNullOrWhiteSpace(rawRefreshToken) || rawRefreshToken.Length > 256)
             return null;
 
-        var hash = HashToken(rawRefreshToken);
-        var token = await database.RefreshTokens.AsNoTracking()
-            .Include(item => item.AuthSession).ThenInclude(session => session.User)
-            .SingleOrDefaultAsync(item => item.TokenHash == hash, cancellationToken);
-        if (token is null) return null;
-
-        var now = DateTimeOffset.UtcNow;
-        var session = token.AuthSession;
-        if (token.ConsumedAtUtc is not null)
+        await using var transaction = await database.Database.BeginTransactionAsync(cancellationToken);
+        try
         {
-            await RevokeSessionAsync(session.UserId, session.Id, cancellationToken);
-            return null;
-        }
-        if (session.RevokedAtUtc is not null || session.ExpiresAtUtc <= now || token.ExpiresAtUtc <= now || session.User.ArchivedAtUtc is not null)
-            return null;
+            var hash = HashToken(rawRefreshToken);
+            var token = await database.RefreshTokens.AsNoTracking()
+                .Include(item => item.AuthSession).ThenInclude(session => session.User)
+                .SingleOrDefaultAsync(item => item.TokenHash == hash, cancellationToken);
+            if (token is null) return null;
 
-        var claimed = await database.RefreshTokens
-            .Where(item => item.Id == token.Id && item.ConsumedAtUtc == null)
-            .ExecuteUpdateAsync(update => update.SetProperty(item => item.ConsumedAtUtc, now), cancellationToken);
-        if (claimed != 1)
+            var now = DateTimeOffset.UtcNow;
+            var session = token.AuthSession;
+            if (token.ConsumedAtUtc is not null)
+            {
+                await RevokeSessionAsync(session.UserId, session.Id, cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+                return null;
+            }
+            if (session.RevokedAtUtc is not null || session.ExpiresAtUtc <= now || token.ExpiresAtUtc <= now || session.User.ArchivedAtUtc is not null)
+                return null;
+
+            var claimed = await database.RefreshTokens
+                .Where(item => item.Id == token.Id && item.ConsumedAtUtc == null)
+                .ExecuteUpdateAsync(update => update.SetProperty(item => item.ConsumedAtUtc, now), cancellationToken);
+            if (claimed != 1)
+            {
+                await RevokeSessionAsync(session.UserId, session.Id, cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
+                return null;
+            }
+
+            var newRefreshToken = CreateRefreshToken(session, now);
+            await database.SaveChangesAsync(cancellationToken);
+            if (!await IsSessionActiveAsync(session.UserId, session.Id, cancellationToken))
+                return null;
+            await transaction.CommitAsync(cancellationToken);
+            return CreateTokens(session.UserId, session.Id, newRefreshToken, now, session.ExpiresAtUtc);
+        }
+        catch
         {
-            await RevokeSessionAsync(session.UserId, session.Id, cancellationToken);
-            return null;
+            database.ChangeTracker.Clear();
+            throw;
         }
-
-        var newRefreshToken = CreateRefreshToken(session, now);
-        await database.SaveChangesAsync(cancellationToken);
-        if (!await IsSessionActiveAsync(session.UserId, session.Id, cancellationToken))
-            return null;
-        return CreateTokens(session.UserId, session.Id, newRefreshToken, now, session.ExpiresAtUtc);
     }
 
     public async Task RevokeSessionAsync(Guid userId, Guid sessionId, CancellationToken cancellationToken = default) =>

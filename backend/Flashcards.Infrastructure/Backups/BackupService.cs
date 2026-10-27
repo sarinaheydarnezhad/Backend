@@ -5,6 +5,7 @@ using Flashcards.Domain;
 using Flashcards.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Flashcards.Infrastructure.Sync;
 
 namespace Flashcards.Infrastructure.Backups;
 
@@ -22,8 +23,7 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
         try
         {
             await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.Serializable, cancellationToken);
-            await database.SyncHeads.Where(item => item.UserId == userId)
-                .ExecuteUpdateAsync(update => update.SetProperty(item => item.Version, item => item.Version), cancellationToken);
+            await SyncBootstrap.LockHeadAsync(database, userId, cancellationToken);
             var backup = await database.UserBackups.SingleOrDefaultAsync(item => item.UserId == userId && item.RequestId == request.RequestId, cancellationToken);
             if (backup is not null)
             {

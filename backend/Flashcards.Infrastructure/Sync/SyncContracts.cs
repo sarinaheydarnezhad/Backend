@@ -36,9 +36,12 @@ public sealed record SyncConflict(
     string EntityType, Guid EntityId, long ExpectedVersion, long ActualVersion,
     JsonElement? ServerValue, JsonElement? ClientValue);
 
-public sealed class SyncException(string message, SyncConflict? conflict = null) : Exception(message)
+public sealed class SyncException(string message, SyncConflict? conflict = null, string? code = null,
+    int? statusCode = null) : Exception(message)
 {
     public SyncConflict? Conflict { get; } = conflict;
+    public string? Code { get; } = code;
+    public int StatusCode { get; } = statusCode ?? (conflict is null ? 400 : 409);
 }
 
 public sealed record DeckPayload(string Name, string Description, string Language, string TextAlignment, string TypographySize);

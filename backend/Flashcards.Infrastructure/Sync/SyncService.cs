@@ -20,21 +20,34 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
         return database.Decks.Local.Single(item => item.Id == deck.Id);
     }
 
-    public async Task<SyncPushResponse> PushAsync(Guid userId, SyncPushRequest request, CancellationToken cancellationToken = default)
-    {
-        var changes = SyncValidator.Validate(request);
-        await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
-        var head = await database.SyncHeads.AsNoTracking().SingleOrDefaultAsync(item => item.UserId == userId, cancellationToken);
-        if (head is null)
-        {
-            database.SyncHeads.Add(new SyncHead { UserId = userId });
-            await database.SaveChangesAsync(cancellationToken);
-        }
+    public Task<SyncPushResponse> PushAsync(Guid userId, SyncPushRequest request, CancellationToken cancellationToken = default) =>
+        PushValidatedAsync(userId, SyncValidator.Validate(request), cancellationToken);
 
-        await database.SyncHeads.Where(item => item.UserId == userId)
-            .ExecuteUpdateAsync(update => update.SetProperty(item => item.Version, item => item.Version), cancellationToken);
+    public Task<SyncPushResponse> MigrateGuestAsync(Guid userId, SyncPushRequest request, CancellationToken cancellationToken = default) =>
+        PushValidatedAsync(userId, GuestMigrationValidator.Validate(request), cancellationToken);
+
+    private async Task<SyncPushResponse> PushValidatedAsync(Guid userId, IReadOnlyList<ValidatedSyncChange> changes,
+        CancellationToken cancellationToken)
+    {
+        try
+        {
+            return await ApplyValidatedAsync(userId, changes, cancellationToken);
+        }
+        catch
+        {
+            database.ChangeTracker.Clear();
+            throw;
+        }
+    }
+
+    private async Task<SyncPushResponse> ApplyValidatedAsync(Guid userId, IReadOnlyList<ValidatedSyncChange> changes,
+        CancellationToken cancellationToken)
+    {
+        await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
+        await SyncBootstrap.LockHeadAsync(database, userId, cancellationToken);
         var version = await database.SyncHeads.AsNoTracking()
             .Where(item => item.UserId == userId).Select(item => item.Version).SingleAsync(cancellationToken);
+        if (version == 0) version = await SyncBootstrap.InitializeAsync(database, userId, cancellationToken);
         var acknowledgements = new List<SyncPushAcknowledgement>(changes.Count);
 
         foreach (var validated in changes)
@@ -90,15 +103,44 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
 
     public async Task<SyncPullResponse> PullAsync(Guid userId, long cursor, int limit = 100, CancellationToken cancellationToken = default)
     {
+        try
+        {
+            return await PullCoreAsync(userId, cursor, limit, cancellationToken);
+        }
+        catch
+        {
+            database.ChangeTracker.Clear();
+            throw;
+        }
+    }
+
+    private async Task<SyncPullResponse> PullCoreAsync(Guid userId, long cursor, int limit, CancellationToken cancellationToken)
+    {
         if (cursor < 0 || limit is < 1 or > 100) throw new SyncException("Invalid cursor or page size.");
-        var latest = await database.SyncHeads.AsNoTracking()
-            .Where(item => item.UserId == userId).Select(item => (long?)item.Version).SingleOrDefaultAsync(cancellationToken) ?? 0;
+        var head = await database.SyncHeads.AsNoTracking().Where(item => item.UserId == userId).Select(item => new
+        {
+            item.Version,
+            HasLegacyData = item.Version == 0 && (database.Decks.Any(deck => deck.UserId == userId) ||
+                database.UserSettings.Any(settings => settings.UserId == userId))
+        }).SingleOrDefaultAsync(cancellationToken);
+        var latest = head?.Version ?? 0;
+        if (head is null || head.HasLegacyData)
+        {
+            await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
+            await SyncBootstrap.LockHeadAsync(database, userId, cancellationToken);
+            latest = await SyncBootstrap.InitializeAsync(database, userId, cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
+        }
         if (cursor > latest) throw new SyncException("Cursor is ahead of the server version.");
         if (cursor == latest) return new SyncPullResponse(cursor, latest, false, []);
 
         var page = await database.SyncChanges.AsNoTracking()
             .Where(item => item.UserId == userId && item.Version > cursor && item.Version <= latest)
             .OrderBy(item => item.Version).Take(limit).ToListAsync(cancellationToken);
+        if (page.Count == 0 || page[0].Version != cursor + 1 ||
+            page.Where((item, index) => item.Version != cursor + index + 1).Any())
+            throw new SyncException("The synchronized history is incomplete. Contact support; local data must be retained.",
+                code: "sync_history_incomplete", statusCode: 409);
         var nextCursor = page.Count == 0 ? cursor : page[^1].Version;
         var changes = page.Select(item => new SyncPullChange(
             item.EntityType, item.EntityId, item.Operation, item.DeviceId, item.ClientChangeId,
