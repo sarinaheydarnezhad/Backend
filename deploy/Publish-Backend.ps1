@@ -20,4 +20,5 @@ foreach ($file in Get-ChildItem -LiteralPath $stage -Recurse -File) {
 }
 
 Write-Output 'Backend publish assemblies refreshed. Existing deployment settings and Liara configuration were preserved.'
-Write-Output 'No deployment or database migration was performed. Review configuration and deploy the complete publish directory together.'
+Write-Output 'No deployment or database migration was performed.'
+Write-Output 'For the native Liara .NET builder, use Stage-CloudBackupRelease.ps1 instead: it requires source .csproj files, not a binaries-only publish directory.'

@@ -18,7 +18,10 @@ public static class BackupEndpoints
                 try { return await next(context); }
                 catch (BackupException exception)
                 {
-                    return Results.Json(new { error = exception.Message, code = exception.Code, backupId = exception.BackupId },
+                    if (exception.StatusCode == StatusCodes.Status503ServiceUnavailable)
+                        context.HttpContext.Response.Headers.RetryAfter = "5";
+                    return Results.Json(new { error = exception.Message, code = exception.Code, backupId = exception.BackupId,
+                        traceId = context.HttpContext.TraceIdentifier },
                         statusCode: exception.StatusCode);
                 }
                 catch (Exception exception) when (exception is DbException or DbUpdateException or TimeoutException)

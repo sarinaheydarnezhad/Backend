@@ -1,0 +1,9 @@
+{
+  "app": "lerona-api",
+  "platform": "dotnet",
+  "dotnet": { "version": "10.0" },
+  "port": 80,
+  "disks": [
+    { "name": "backup-keys", "mountTo": "/data/backup-keys" }
+  ]
+}

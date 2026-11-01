@@ -2,6 +2,8 @@
 
 For the subsequent sync/guest-copy recovery, retryable metadata errors, refreshed publish artifacts and current verification, see `SYNC-RECOVERY-FIX.md`. Durable key-ring configuration and operational artifact cleanup remain required; they are not replaced with insecure defaults or silent deletion.
 
+The November 1 production regression was repaired in release v41 by reattaching the existing encryption-key disk. See [the recovery record](deploy/CLOUD-BACKUP-RECOVERY.md) for the release history, live verification and the deployment command that checks the disk mount.
+
 ## Architecture and deployment
 
 This is the single retained-backup implementation. Existing sync remains the only transport for offline account edits; backup creation reads the server's current learning data and does not import a mobile database. Guest data is never included. The target remains .NET 10 / EF Core 10.
@@ -15,7 +17,7 @@ Configuration uses normal ASP.NET Core configuration providers:
 | `Backups:RetentionDays` / `Backups__RetentionDays`                     | 30 days; configurable from 1 to 3650                                                                         |
 | `Backups:MaxPayloadBytes` / `Backups__MaxPayloadBytes`                 | 10485760 bytes of UTF-8 JSON; configurable from 1024 to 104857600                                            |
 | `Backups:MaxStoredBackupsPerUser` / `Backups__MaxStoredBackupsPerUser` | 20 records, including failed and expired artifacts until operational cleanup; configurable from 1 to 1000    |
-| `Backups:KeyRingPath` / `Backups__KeyRingPath`                         | **Required**, absolute durable directory outside the source tree and web root; not configured by this change |
+| `Backups:KeyRingPath` / `Backups__KeyRingPath`                         | **Required**, absolute durable directory outside the source tree and web root; production settings propose `/data/backup-keys` with the matching reviewed disk mount in `deploy/liara.backups.json` |
 
 Incomplete/invalid backup configuration fails creation closed with 503 `backups_unavailable`, without changing authentication or learning data. Supply the existing JWT signing key and SQL connection configuration as usual. This change does not configure an API URL, provision SQL Server, apply migrations to a live database, or deploy a service.
 

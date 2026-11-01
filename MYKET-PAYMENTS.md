@@ -4,21 +4,24 @@ The Myket purchase implementation supersedes the earlier read-only/payment-unava
 
 ## Required configuration
 
-Set these through private backend environment settings, not mobile environment files:
+The Myket RSA public key is configured in `backend/Flashcards.Api/appsettings.json` and `backend/publish/appsettings.json`. The app receives it from the authenticated backend configuration endpoint. `Payments__Myket__PublicKey` can override it for a different Myket application.
+
+Set the remaining values through private backend environment settings, not mobile environment files:
 
 ```text
 Payments__Myket__Enabled=true
-Payments__Myket__PackageName=<reserved package>
-Payments__Myket__PublicKey=<base64 RSA public key>
+Payments__Myket__PackageName=com.lerona.app
 Payments__Myket__AccessToken=<server-only Myket API token>
-Payments__Myket__Products__1=<one-month SKU>
-Payments__Myket__Products__6=<six-month SKU>
-Payments__Myket__Products__12=<twelve-month SKU>
+Payments__Myket__Products__1=lerona_plus_1month
+Payments__Myket__Products__6=lerona_plus_6months
+Payments__Myket__Products__12=lerona_plus_12months
 ```
 
 Use three distinct consumable products, not auto-renewing store subscriptions. Match the existing server catalog prices: 70,000, 294,000 and 420,000 toman for 1, 6 and 12 months. Confirm the store console's currency. The installed package and reserved Myket package must match exactly.
 
-Apply additive migration `20261026120851_AddMyketOrders` using the normal backed-up SQL Server deployment process, rebuild/publish the API and restart it before enabling payments. No live migration/deployment or real charge has been performed by this task. Do not deploy stale existing `backend/publish` binaries.
+For a new deployment, apply additive migration `20261026120851_AddMyketOrders` using the normal backed-up SQL Server deployment process, rebuild/publish the API and restart it before enabling payments. Do not deploy stale existing `backend/publish` binaries.
+
+Live configuration verified November 1, 2026: the migration was already recorded and `MyketOrders` already existed in the production database. The public key, server verification token and the product IDs above were configured in the private environment of Liara app `lerona-api`; billing was enabled and restart release `v40` was created. No token is stored in this document or source configuration. `https://lerona-app.com/health` returned Healthy, and `/api/v1/plans` with `X-Lerona-Payments: myket-v1` returned purchasable Plus for all three periods. Older clients still receive disabled purchase flags, Full remains unavailable, and unauthenticated billing configuration requests return 401. No database changes or real checkout were performed; provider token validity, store product availability and fulfillment still require a real Android purchase test.
 
 ## Contracts and safeguards
 
