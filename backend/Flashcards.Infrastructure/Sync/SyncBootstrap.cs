@@ -43,21 +43,12 @@ internal static class SyncBootstrap
             var projected = new CardReviewState();
             foreach (var review in history.OrderBy(item => item.ReviewedAtUtc).ThenBy(item => item.Id))
             {
-                projected.Box = review.Result == "success" ? Math.Min(projected.Box + 1, 5) : 1;
-                projected.DueDate = DateOnly.FromDateTime(review.ReviewedAtUtc.UtcDateTime)
-                    .AddDays(review.Result == "success" ? 1 << (projected.Box - 1) : 0);
-                projected.LastReviewedAtUtc = review.ReviewedAtUtc;
-                projected.TotalReviews++;
-                if (review.Result == "success")
-                {
-                    projected.TotalSuccesses++;
-                    projected.ConsecutiveSuccesses++;
-                }
-                else projected.ConsecutiveSuccesses = 0;
+                SchedulerSync.Apply(projected, review.Result, review.ReviewedAtUtc,
+                    decks.Single(item => item.Id == review.DeckId).ReviewSystem);
             }
             if (saved.Box != projected.Box || saved.DueDate != projected.DueDate || saved.LastReviewedAtUtc != projected.LastReviewedAtUtc ||
                 saved.TotalReviews != projected.TotalReviews || saved.TotalSuccesses != projected.TotalSuccesses ||
-                saved.ConsecutiveSuccesses != projected.ConsecutiveSuccesses) throw Inconsistent();
+                saved.ConsecutiveSuccesses != projected.ConsecutiveSuccesses || saved.SchedulerStateJson != projected.SchedulerStateJson) throw Inconsistent();
         }
 
         var now = DateTimeOffset.UtcNow;
@@ -86,7 +77,8 @@ internal static class SyncBootstrap
         }
         foreach (var review in reviews.OrderBy(item => item.ReviewedAtUtc).ThenBy(item => item.Id))
             Record("reviewEvent", review.Id, "create", JsonSerializer.Serialize(new ReviewEventPayload(review.DeckId,
-                review.CardId, review.PreviousBox, review.NewBox, review.Result, review.ReviewedAtUtc, review.StudySessionId),
+                review.CardId, review.PreviousBox, review.NewBox, review.Result, review.ReviewedAtUtc, review.StudySessionId,
+                SchedulerSync.Read<SchedulerEventPayload>(review.SchedulerJson)),
                 SyncValidator.JsonOptions), review.ReviewedAtUtc);
         foreach (var state in states)
         {

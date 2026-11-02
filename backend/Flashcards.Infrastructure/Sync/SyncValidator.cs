@@ -89,7 +89,8 @@ internal static class SyncValidator
                 if (string.IsNullOrWhiteSpace(deck.Name) || deck.Name.Length > 120 ||
                     deck.Description is null || deck.Description.Length > 1000 || !LanguageIsValid(deck.Language) ||
                     deck.TextAlignment is not ("ltr" or "rtl" or "center") ||
-                    deck.TypographySize is not ("small" or "medium" or "large"))
+                    deck.TypographySize is not ("small" or "medium" or "large") ||
+                    deck.ReviewSystem is not (null or "leitner" or "sm2"))
                     throw new SyncException("Invalid deck payload.");
                 break;
             case CardPayload card:
@@ -109,14 +110,15 @@ internal static class SyncValidator
             case ReviewStatePayload state:
                 if (state.Box is < 1 or > 5 || state.DueDate == default || state.ConsecutiveSuccesses < 0 ||
                     state.TotalReviews < 0 || state.TotalSuccesses < 0 || state.TotalSuccesses > state.TotalReviews ||
-                    state.ConsecutiveSuccesses > state.TotalSuccesses || state.LastReviewedAtUtc == default(DateTimeOffset))
+                    state.ConsecutiveSuccesses > state.TotalSuccesses || state.LastReviewedAtUtc == default(DateTimeOffset) ||
+                    !SchedulerSync.ValidState(state.SchedulerState))
                     throw new SyncException("Invalid review state payload.");
                 break;
             case ReviewEventPayload review:
                 if (review.DeckId == Guid.Empty || review.CardId == Guid.Empty ||
                     review.PreviousBox is < 1 or > 5 || review.NewBox is < 1 or > 5 ||
                     review.Result is not ("success" or "failure") || review.ReviewedAtUtc == default ||
-                    review.StudySessionId == Guid.Empty)
+                    review.StudySessionId == Guid.Empty || !SchedulerSync.ValidEvent(review.Scheduler))
                     throw new SyncException("Invalid review event payload.");
                 break;
             case SettingsPayload settings:

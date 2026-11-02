@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Flashcards.Infrastructure.Sync;
 
@@ -44,15 +45,18 @@ public sealed class SyncException(string message, SyncConflict? conflict = null,
     public int StatusCode { get; } = statusCode ?? (conflict is null ? 400 : 409);
 }
 
-public sealed record DeckPayload(string Name, string Description, string Language, string TextAlignment, string TypographySize);
+public sealed record DeckPayload(string Name, string Description, string Language, string TextAlignment, string TypographySize,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? ReviewSystem = null);
 
 public sealed record CardPayload(Guid DeckId, string FrontText, string Meaning, string? Phonetic, string? Category, JsonElement Examples);
 
 public sealed record ReviewStatePayload(int Box, DateOnly DueDate, DateTimeOffset? LastReviewedAtUtc,
-    int ConsecutiveSuccesses, int TotalReviews, int TotalSuccesses);
+    int ConsecutiveSuccesses, int TotalReviews, int TotalSuccesses,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SchedulerStatePayload? SchedulerState = null);
 
 public sealed record ReviewEventPayload(Guid DeckId, Guid CardId, int PreviousBox, int NewBox,
-    string Result, DateTimeOffset ReviewedAtUtc, Guid? StudySessionId);
+    string Result, DateTimeOffset ReviewedAtUtc, Guid? StudySessionId,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SchedulerEventPayload? Scheduler = null);
 
 public sealed record SettingsPayload(string Theme, bool HapticsEnabled, string Language,
     bool DailyReminderEnabled, TimeOnly? DailyReminderTime, string PreferredSpeechLanguage, string? PreferredSpeechAccent);

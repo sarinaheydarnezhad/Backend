@@ -17,7 +17,7 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.11")
+                .HasAnnotation("ProductVersion", "10.0.13")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -124,6 +124,9 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset?>("LastReviewedAtUtc")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<string>("SchedulerStateJson")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<long>("SyncVersion")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
@@ -179,6 +182,14 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                         .IsRequired()
                         .HasMaxLength(120)
                         .HasColumnType("nvarchar(120)");
+
+                    b.Property<string>("ReviewSystem")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(16)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(16)")
+                        .HasDefaultValue("leitner");
 
                     b.Property<long>("SyncVersion")
                         .ValueGeneratedOnAdd()
@@ -402,6 +413,9 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
 
                     b.Property<DateTimeOffset>("ReviewedAtUtc")
                         .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<string>("SchedulerJson")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid?>("StudySessionId")
                         .HasColumnType("uniqueidentifier");

@@ -119,7 +119,7 @@ public static class V1Endpoints
         });
         mine.MapGet("/decks", async (ClaimsPrincipal principal, FlashcardsQueries queries, CancellationToken cancellationToken) =>
             Results.Ok((await queries.GetUserDecksAsync(AuthenticatedIdentity.FromClaims(principal).UserId, cancellationToken: cancellationToken))
-                .Select(deck => new { deck.Id, deck.Name, deck.ArchivedAtUtc })));
+                .Select(deck => new { deck.Id, deck.Name, deck.ReviewSystem, deck.ArchivedAtUtc })));
         mine.MapGet("/decks/{deckId:guid}/cards", async (Guid deckId, ClaimsPrincipal principal, FlashcardsQueries queries, CancellationToken cancellationToken) =>
             Results.Ok((await queries.GetCardsByDeckAsync(AuthenticatedIdentity.FromClaims(principal).UserId, deckId, cancellationToken: cancellationToken))
                 .Select(card => new { card.Id, card.DeckId, card.FrontText, card.Meaning, card.ArchivedAtUtc })));
@@ -129,7 +129,7 @@ public static class V1Endpoints
             return state is null ? Results.NotFound() : Results.Ok(new
             {
                 state.CardId, state.Box, state.DueDate, state.TotalReviews, state.TotalSuccesses,
-                state.ConsecutiveSuccesses, state.LastReviewedAtUtc
+                state.ConsecutiveSuccesses, state.LastReviewedAtUtc, state.SchedulerStateJson
             });
         });
         mine.MapGet("/cards/{cardId:guid}/review-history", async (Guid cardId, ClaimsPrincipal principal, FlashcardsQueries queries, CancellationToken cancellationToken) =>

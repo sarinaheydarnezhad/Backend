@@ -38,6 +38,7 @@ public sealed class BackupRestoreService(FlashcardsDbContext database, BackupSer
                 identifiers => database.Cards.AsNoTracking().Include(item => item.Deck).Where(item => identifiers.Contains(item.Id)), cancellationToken))
                 .ToDictionary(item => item.Id);
             if (existingDecks.Values.Any(item => item.UserId != userId) ||
+                snapshot.Decks.Any(item => existingDecks.TryGetValue(item.Id, out var existing) && existing.ReviewSystem != item.ReviewSystem) ||
                 snapshot.Cards.Any(item => existingCards.TryGetValue(item.Id, out var existing) &&
                     (existing.Deck.UserId != userId || existing.DeckId != item.DeckId)))
                 throw Conflict();
@@ -86,7 +87,7 @@ public sealed class BackupRestoreService(FlashcardsDbContext database, BackupSer
                 var deck = new Deck
                 {
                     Id = saved.Id, UserId = userId, Name = saved.Name, Description = saved.Description,
-                    Language = saved.Language, TextAlignment = saved.TextAlignment, TypographySize = saved.TypographySize,
+                    Language = saved.Language, TextAlignment = saved.TextAlignment, TypographySize = saved.TypographySize, ReviewSystem = saved.ReviewSystem,
                     CreatedAtUtc = saved.CreatedAtUtc, UpdatedAtUtc = saved.UpdatedAtUtc, ArchivedAtUtc = saved.ArchivedAtUtc
                 };
                 Record("deck", deck.Id, deck.ArchivedAtUtc is null ? "upsert" : "archive", SyncService.DeckSnapshot(deck), saved.UpdatedAtUtc);
@@ -110,11 +111,12 @@ public sealed class BackupRestoreService(FlashcardsDbContext database, BackupSer
                 var review = new ReviewEvent
                 {
                     Id = saved.Id, UserId = userId, DeckId = saved.DeckId, CardId = saved.CardId,
-                    PreviousBox = saved.PreviousBox, NewBox = saved.NewBox, Result = saved.Result,
+                    PreviousBox = saved.PreviousBox, NewBox = saved.NewBox, Result = saved.Result, SchedulerJson = saved.SchedulerJson,
                     ReviewedAtUtc = saved.ReviewedAtUtc, StudySessionId = saved.StudySessionId, CreatedAtUtc = saved.CreatedAtUtc
                 };
                 Record("reviewEvent", review.Id, "create", JsonSerializer.Serialize(new ReviewEventPayload(review.DeckId,
-                    review.CardId, review.PreviousBox, review.NewBox, review.Result, review.ReviewedAtUtc, review.StudySessionId),
+                    review.CardId, review.PreviousBox, review.NewBox, review.Result, review.ReviewedAtUtc, review.StudySessionId,
+                    SchedulerSync.Read<SchedulerEventPayload>(review.SchedulerJson)),
                     SyncValidator.JsonOptions), saved.ReviewedAtUtc);
                 database.ReviewEvents.Add(review);
             }
@@ -122,7 +124,7 @@ public sealed class BackupRestoreService(FlashcardsDbContext database, BackupSer
             {
                 var state = new CardReviewState
                 {
-                    CardId = saved.CardId, Box = saved.Box, DueDate = saved.DueDate, LastReviewedAtUtc = saved.LastReviewedAtUtc,
+                    CardId = saved.CardId, Box = saved.Box, SchedulerStateJson = saved.SchedulerStateJson, DueDate = saved.DueDate, LastReviewedAtUtc = saved.LastReviewedAtUtc,
                     TotalReviews = saved.TotalReviews, TotalSuccesses = saved.TotalSuccesses, ConsecutiveSuccesses = saved.ConsecutiveSuccesses,
                     CreatedAtUtc = saved.CreatedAtUtc, UpdatedAtUtc = saved.UpdatedAtUtc
                 };

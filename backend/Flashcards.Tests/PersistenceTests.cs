@@ -53,7 +53,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         Assert.False(database.Database.HasPendingModelChanges());
-        Assert.Equal(9, database.Database.GetMigrations().Count());
+        Assert.Equal(10, database.Database.GetMigrations().Count());
         var script = database.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         Assert.Contains("CREATE TABLE [ReviewEvents]", script);
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_ReviewEvents_Immutable]", script);

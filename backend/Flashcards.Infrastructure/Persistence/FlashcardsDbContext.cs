@@ -131,6 +131,7 @@ public sealed class FlashcardsDbContext(DbContextOptions<FlashcardsDbContext> op
             entity.Property(item => item.Language).HasMaxLength(35).IsUnicode(false).IsRequired();
             entity.Property(item => item.TextAlignment).HasMaxLength(6).IsUnicode(false).IsRequired();
             entity.Property(item => item.TypographySize).HasMaxLength(6).IsUnicode(false).IsRequired();
+            entity.Property(item => item.ReviewSystem).HasMaxLength(16).IsUnicode(false).HasDefaultValue("leitner").IsRequired();
             entity.HasIndex(item => new { item.UserId, item.ArchivedAtUtc, item.Name });
             entity.HasIndex(item => new { item.UserId, item.UpdatedAtUtc, item.Id });
             entity.Property(item => item.SyncVersion).HasDefaultValue(0L);

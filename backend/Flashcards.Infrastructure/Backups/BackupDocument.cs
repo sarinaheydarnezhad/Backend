@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Flashcards.Infrastructure.Sync;
 using System.Text.Json.Serialization;
 using System.Diagnostics.CodeAnalysis;
 
@@ -39,7 +40,7 @@ internal sealed record BackupDocument(int FormatVersion, Guid BackupId, Guid Use
             foreach (var deck in document.Decks)
             {
                 Require(Text(deck.Name, 120, true) && Text(deck.Description, 1000) && Text(deck.Language, 35, true) &&
-                    deck.TextAlignment is "ltr" or "rtl" or "center" && deck.TypographySize is "small" or "medium" or "large");
+                    deck.TextAlignment is "ltr" or "rtl" or "center" && deck.TypographySize is "small" or "medium" or "large" && deck.ReviewSystem is "leitner" or "sm2");
                 document.ValidateDates(deck.CreatedAtUtc, deck.UpdatedAtUtc, deck.ArchivedAtUtc, deck.SyncVersion);
             }
             foreach (var card in document.Cards)
@@ -56,14 +57,22 @@ internal sealed record BackupDocument(int FormatVersion, Guid BackupId, Guid Use
                 Require(cards.ContainsKey(state.CardId) && state.Box is >= 1 and <= 5 && state.DueDate != default &&
                     state.TotalReviews >= 0 && state.TotalSuccesses >= 0 && state.TotalSuccesses <= state.TotalReviews &&
                     state.ConsecutiveSuccesses >= 0 && state.ConsecutiveSuccesses <= state.TotalSuccesses && state.LastReviewedAtUtc != default(DateTimeOffset));
+                var scheduler = SchedulerSync.Read<SchedulerStatePayload>(state.SchedulerStateJson);
+                Require(SchedulerSync.ValidState(scheduler) &&
+                    (scheduler?.SchedulerId ?? "leitner") == decks[cards[state.CardId].DeckId].ReviewSystem);
                 document.ValidateDates(state.CreatedAtUtc, state.UpdatedAtUtc, null, state.SyncVersion);
             }
             foreach (var review in document.ReviewEvents)
+            {
+                var scheduler = SchedulerSync.Read<SchedulerEventPayload>(review.SchedulerJson);
+                Require(SchedulerSync.ValidEvent(scheduler) && decks.TryGetValue(review.DeckId, out var parent) &&
+                    (scheduler?.SchedulerId ?? "leitner") == parent.ReviewSystem);
                 Require(cards.TryGetValue(review.CardId, out var card) && card.DeckId == review.DeckId &&
                     review.PreviousBox is >= 1 and <= 5 && review.NewBox is >= 1 and <= 5 &&
                     review.Result is "success" or "failure" && review.ReviewedAtUtc != default &&
                     review.CreatedAtUtc != default && review.StudySessionId != Guid.Empty && states.ContainsKey(review.CardId) &&
                     (review.ServerVersion is null || review.ServerVersion > 0 && review.ServerVersion <= document.SyncVersion));
+            }
             foreach (var settings in document.Settings)
             {
                 Require(settings.Theme is "system" or "light" or "dark" or "oled" && Text(settings.Language, 35, true) &&
@@ -112,13 +121,13 @@ internal sealed record BackupDocument(int FormatVersion, Guid BackupId, Guid Use
 }
 
 internal sealed record BackupDeck(Guid Id, string Name, string Description, string Language, string TextAlignment,
-    string TypographySize, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, DateTimeOffset? ArchivedAtUtc, long SyncVersion);
+    string TypographySize, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, DateTimeOffset? ArchivedAtUtc, long SyncVersion, string ReviewSystem = "leitner");
 internal sealed record BackupCard(Guid Id, Guid DeckId, string FrontText, string? Phonetic, string? Category,
     string Meaning, string ExamplesJson, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, DateTimeOffset? ArchivedAtUtc, long SyncVersion);
 internal sealed record BackupReviewState(Guid CardId, int Box, DateOnly DueDate, DateTimeOffset? LastReviewedAtUtc,
-    int ConsecutiveSuccesses, int TotalReviews, int TotalSuccesses, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, long SyncVersion);
+    int ConsecutiveSuccesses, int TotalReviews, int TotalSuccesses, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, long SyncVersion, string? SchedulerStateJson = null);
 internal sealed record BackupReviewEvent(Guid Id, Guid DeckId, Guid CardId, int PreviousBox, int NewBox, string Result,
-    DateTimeOffset ReviewedAtUtc, Guid? StudySessionId, DateTimeOffset CreatedAtUtc, long? ServerVersion = null);
+    DateTimeOffset ReviewedAtUtc, Guid? StudySessionId, DateTimeOffset CreatedAtUtc, long? ServerVersion = null, string? SchedulerJson = null);
 internal sealed record BackupUserSettings(string Theme, bool HapticsEnabled, string Language, bool DailyReminderEnabled,
     TimeOnly? DailyReminderTime, string PreferredSpeechLanguage, string? PreferredSpeechAccent,
     DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, long SyncVersion);

@@ -29,7 +29,7 @@ public static class BackupSnapshot
         await WriteRowsAsync(writer, "decks", database.Decks.AsNoTracking().Where(item => item.UserId == userId)
             .OrderBy(item => item.Id).Select(item => new
             {
-                item.Id, item.Name, item.Description, item.Language, item.TextAlignment, item.TypographySize,
+                item.Id, item.Name, item.Description, item.Language, item.TextAlignment, item.TypographySize, item.ReviewSystem,
                 item.CreatedAtUtc, item.UpdatedAtUtc, item.ArchivedAtUtc, item.SyncVersion
             }), cancellationToken);
         await WriteRowsAsync(writer, "cards", database.Cards.AsNoTracking().Where(item => item.Deck.UserId == userId)
@@ -41,7 +41,7 @@ public static class BackupSnapshot
         await WriteRowsAsync(writer, "reviewStates", database.CardReviewStates.AsNoTracking()
             .Where(item => item.Card.Deck.UserId == userId).OrderBy(item => item.CardId).Select(item => new
             {
-                item.CardId, item.Box, item.DueDate, item.LastReviewedAtUtc, item.ConsecutiveSuccesses,
+                item.CardId, item.Box, item.SchedulerStateJson, item.DueDate, item.LastReviewedAtUtc, item.ConsecutiveSuccesses,
                 item.TotalReviews, item.TotalSuccesses, item.CreatedAtUtc, item.UpdatedAtUtc, item.SyncVersion
             }), cancellationToken);
         await WriteRowsAsync(writer, "reviewEvents", database.ReviewEvents.AsNoTracking()
@@ -49,7 +49,7 @@ public static class BackupSnapshot
             .OrderBy(item => item.Id).Select(item => new
             {
                 item.Id, item.DeckId, item.CardId, item.PreviousBox, item.NewBox, item.Result, item.ReviewedAtUtc,
-                item.StudySessionId, item.CreatedAtUtc,
+                item.StudySessionId, item.CreatedAtUtc, item.SchedulerJson,
                 ServerVersion = database.SyncChanges.Where(change => change.UserId == userId && change.EntityType == "reviewEvent" &&
                     change.EntityId == item.Id).Select(change => (long?)change.Version).Min()
             }), cancellationToken);

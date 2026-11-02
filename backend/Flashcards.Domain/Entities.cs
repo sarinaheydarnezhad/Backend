@@ -67,6 +67,7 @@ public sealed class Deck
     public string Language { get; set; } = "en";
     public string TextAlignment { get; set; } = "ltr";
     public string TypographySize { get; set; } = "medium";
+    public string ReviewSystem { get; set; } = "leitner";
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
     public DateTimeOffset? ArchivedAtUtc { get; set; }
@@ -96,6 +97,7 @@ public sealed class CardReviewState
     public Guid CardId { get; set; }
     public Card Card { get; set; } = null!;
     public int Box { get; set; } = 1;
+    public string? SchedulerStateJson { get; set; }
     public DateOnly DueDate { get; set; }
     public DateTimeOffset? LastReviewedAtUtc { get; set; }
     public int ConsecutiveSuccesses { get; set; }
@@ -115,6 +117,7 @@ public sealed class ReviewEvent
     public Card Card { get; set; } = null!;
     public Guid DeckId { get; set; }
     public Deck Deck { get; set; } = null!;
+    public string? SchedulerJson { get; set; }
     public int PreviousBox { get; set; }
     public int NewBox { get; set; }
     public string Result { get; set; } = string.Empty;

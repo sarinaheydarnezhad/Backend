@@ -179,6 +179,9 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                     deck.Language = payload.Language;
                     deck.TextAlignment = payload.TextAlignment;
                     deck.TypographySize = payload.TypographySize;
+                    if (payload.ReviewSystem is not null && deck.SyncVersion > 0 && deck.ReviewSystem != payload.ReviewSystem)
+                        throw new SyncException("A saved deck cannot change review systems.");
+                    deck.ReviewSystem = payload.ReviewSystem ?? deck.ReviewSystem;
                 }
                 deck.SyncVersion = version;
                 return DeckSnapshot(deck);
@@ -239,6 +242,11 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                     throw await ConflictAsync(userId, change, state.SyncVersion, StateSnapshot(state), cancellationToken);
 
                 var payload = (ReviewStatePayload)validated.Payload!;
+                var reviewSystem = await database.Cards.Where(item => item.Id == change.EntityId)
+                    .Select(item => item.Deck.ReviewSystem).SingleAsync(cancellationToken);
+                if ((payload.SchedulerState?.SchedulerId ?? "leitner") != reviewSystem)
+                    throw new SyncException("Review state does not match the deck review system.");
+                state.SchedulerStateJson = SchedulerSync.Json(payload.SchedulerState);
                 state.Box = payload.Box;
                 state.DueDate = payload.DueDate;
                 state.LastReviewedAtUtc = payload.LastReviewedAtUtc;
@@ -281,10 +289,15 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                                                      item.Deck.UserId == userId && item.ArchivedAtUtc == null && item.Deck.ArchivedAtUtc == null, cancellationToken))
                     throw new SyncException("Review event card and deck are unavailable.");
                 await entitlements.EnsureStudyAllowedAsync(userId, cancellationToken);
+                var reviewSystem = await database.Decks.Where(item => item.Id == payload.DeckId)
+                    .Select(item => item.ReviewSystem).SingleAsync(cancellationToken);
+                if ((payload.Scheduler?.SchedulerId ?? "leitner") != reviewSystem)
+                    throw new SyncException("Review event does not match the deck review system.");
                 database.ReviewEvents.Add(new ReviewEvent
                 {
                     Id = change.EntityId, UserId = userId, DeckId = payload.DeckId, CardId = payload.CardId,
                     PreviousBox = payload.PreviousBox, NewBox = payload.NewBox, Result = payload.Result,
+                    SchedulerJson = SchedulerSync.Json(payload.Scheduler),
                     ReviewedAtUtc = payload.ReviewedAtUtc, StudySessionId = payload.StudySessionId
                 });
                 var state = await database.CardReviewStates.SingleOrDefaultAsync(item => item.CardId == payload.CardId, cancellationToken);
@@ -293,19 +306,7 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                     state = new CardReviewState { CardId = payload.CardId };
                     database.CardReviewStates.Add(state);
                 }
-                var effective = state.LastReviewedAtUtc > payload.ReviewedAtUtc
-                    ? state.LastReviewedAtUtc.Value : payload.ReviewedAtUtc;
-                state.Box = payload.Result == "success" ? Math.Min(state.Box + 1, 5) : 1;
-                state.DueDate = DateOnly.FromDateTime(effective.UtcDateTime)
-                    .AddDays(payload.Result == "success" ? 1 << (state.Box - 1) : 0);
-                state.LastReviewedAtUtc = effective;
-                state.TotalReviews++;
-                if (payload.Result == "success")
-                {
-                    state.TotalSuccesses++;
-                    state.ConsecutiveSuccesses++;
-                }
-                else state.ConsecutiveSuccesses = 0;
+                SchedulerSync.Apply(state, payload.Result, payload.ReviewedAtUtc, reviewSystem);
                 return JsonSerializer.Serialize(payload, SyncValidator.JsonOptions);
             }
             default:
@@ -333,7 +334,7 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
 
     internal static string DeckSnapshot(Deck deck) => JsonSerializer.Serialize(new
     {
-        deck.Name, deck.Description, deck.Language, deck.TextAlignment, deck.TypographySize,
+        deck.Name, deck.Description, deck.Language, deck.TextAlignment, deck.TypographySize, deck.ReviewSystem,
         deck.ArchivedAtUtc
     }, SyncValidator.JsonOptions);
 
@@ -346,7 +347,8 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
     internal static string StateSnapshot(CardReviewState state) => JsonSerializer.Serialize(new
     {
         state.Box, state.DueDate, state.LastReviewedAtUtc, state.ConsecutiveSuccesses,
-        state.TotalReviews, state.TotalSuccesses
+        state.TotalReviews, state.TotalSuccesses,
+        SchedulerState = SchedulerSync.Read<SchedulerStatePayload>(state.SchedulerStateJson)
     }, SyncValidator.JsonOptions);
 
     internal static string SettingsSnapshot(UserSettings settings) => JsonSerializer.Serialize(new
