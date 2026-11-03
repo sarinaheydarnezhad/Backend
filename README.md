@@ -1,6 +1,6 @@
 # Flashcards backend
 
-Current backup/sync/atomic guest-copy fixes, API integration requirements and actual test results are in `SYNC-RECOVERY-FIX.md`. Existing clients remain compatible; atomic whole-transfer migration requires the additive authenticated `/api/v1/sync/guest-migration` route. Rebuild the tracked publish artifacts with `deploy/Publish-Backend.ps1` before deployment; deployment settings are preserved.
+Current backup/sync/atomic guest-copy fixes, API integration requirements and actual test results are in `SYNC-RECOVERY-FIX.md`. Existing clients remain compatible; atomic whole-transfer migration requires the additive authenticated `/api/v1/sync/guest-migration` route. For production deployment, run `powershell -NoProfile -ExecutionPolicy Bypass -File deploy/Deploy-Backend.ps1`. It stages current source, explicitly attaches the existing `backup-keys` disk and verifies the live mount. Publishing binaries alone does not preserve a release disk binding. See [backup recovery](deploy/CLOUD-BACKUP-RECOVERY.md).
 
 The backend is a .NET 10 ASP.NET Core API in [`backend/`](backend/) with EF Core 10 SQL Server persistence, email/password accounts, and sync-aware deck creation.
 
