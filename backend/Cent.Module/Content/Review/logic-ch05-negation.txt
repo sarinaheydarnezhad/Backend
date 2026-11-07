@@ -1,0 +1,101 @@
+جزوه لاجیک CEnT — فصل ۵: نقیض و تضاد
+
+CENT LOGIC — PART A · CHAPTER 5 / 13
+فصل ۵: نقیض و تضاد — «not-A» (Negation, Contradictories & Contraries)
+تا اینجا با «not-A» به‌عنوان یک نقیض ساده آشنا شدی. این فصل نشونت می‌ده رایج‌ترین اشتباهِ ساختن نقیض چیه — و چرا انتخاب یک کلمه‌ی «مخالف» تقریباً همیشه اشتباهه.
+Bاین مبحث چیست؟
+هدف این فصل اینه که فرق بین نقیض واقعی (contradictory) یک گزاره و یک گزاره‌ی «متضاد» یا «مخالف» (contrary) رو یاد بگیری. این دو تا شبیه هم به نظر می‌رسن ولی از نظر منطقی خیلی متفاوتن، و آزمون دقیقاً از همین شباهت ظاهری برای طراحی گزینه‌های اشتباه استفاده می‌کنه.
+Cمفهوم اصلی
+قدم ۱ — نقیض (contradictory) گزاره‌ایه که همیشه ارزش درستیِ مخالفِ A رو داره.
+A = "John is at the movies"not-A = "John is not at the movies."
+A
+not-A
+T
+F
+F
+T
+قدم ۲ — رایج‌ترین اشتباه: انتخاب یک کلمه‌ی «مخالف» به‌جای نقیض واقعی.
+A = "The ball is black."
+❌ not-A = "The ball is white." (اشتباه — این نقیض نیست)
+✅ not-A = "The ball is not black." (درست — این نقیضه)
+چرا «white» اشتباهه؟ چون توپ می‌تونه قرمز، آبی یا سبز هم باشه — یعنی هم «black» و هم «white» می‌تونن هم‌زمان هر دو غلط باشن (وقتی توپ قرمزه). ولی نقیض واقعی هیچ‌وقت نمی‌ذاره A و not-A هم‌زمان هر دو غلط باشن.
+قدم ۳ — تعریف رسمی تضاد (contrary): دو گزاره متضاد (contrary) هستن اگه نتونن هم‌زمان هر دو درست باشن، ولی بتونن هم‌زمان هر دو غلط باشن. «black» و «white» دقیقاً همین رابطه رو دارن.
+قدم ۴ — تعریف رسمی نقیض (contradictory): دو گزاره نقیض هم هستن اگه هیچ‌وقت نتونن هم‌زمان هر دو درست باشن، و هیچ‌وقت نتونن هم‌زمان هر دو غلط باشن — یعنی دقیقاً یکی‌شون همیشه درسته و اون یکی همیشه غلط. تنها راه تضمینیِ ساختِ نقیضِ درست، گذاشتنِ «not» درست پشت خودِ کل گزاره‌ست، نه جایگزین کردنش با یک کلمه‌ی هم‌معنیِ مخالف.
+قدم ۵ — تناقض (contradiction) یعنی «A and not-A». این یک نوع خاص از عطف (conjunction) است که همیشه — بدون استثنا — غلطه.
+A
+not-A
+A and not-A
+T
+F
+F
+F
+T
+F
+"John is at the movies and John is not at the movies." → Contradiction (always False)
+"John is at the movies and John is at the store." → Not necessarily a contradiction — depends on the actual truth values.
+گزاره‌ی دوم چون «at the store» نقیضِ «at the movies» نیست (می‌تونه هر دو غلط باشن — یعنی جایی سوم باشه)، صرفاً یک عطف عادیه، نه یک تناقض تضمینی.
+Dقوانین و اصول مهم
+Contradictory (نقیض): دقیقاً یکی درست، دقیقاً یکی غلط — همیشه، بدون استثنا.
+Contrary (تضاد): نمی‌تونن هر دو درست باشن، ولی می‌تونن هر دو غلط باشن.
+ساختن نقیض همیشه یعنی «not» گذاشتن جلوی کل گزاره — نه جایگزینیِ یک کلمه با یک کلمه‌ی «مخالف».
+«A and not-A» (تناقض) همیشه غلطه، فارغ از اینکه A چی باشه.
+Eروش حل
+برای ساختن نقیض یک گزاره، «not» رو مستقیماً به کل گزاره اضافه کن (نه اینکه دنبال یک کلمه‌ی مخالف بگردی).
+برای چک کردن اینکه دو گزاره واقعاً نقیض هم هستن یا فقط متضاد: از خودت بپرس «آیا می‌تونن هم‌زمان هر دو غلط باشن؟» اگه بله، فقط متضادن، نقیض هم نیستن.
+اگه سؤال گزاره‌ای به‌فرم «A and not-A» داد، بدون محاسبه بگو غلطه — این یک تناقض تضمینیه.
+→ جواب: طبق جدول‌های بالا.
+Fمثال آموزشی
+A = "The light is on." Which of the following is the correct contradictory of A: "The light is off" or "The light is not on"?
+پاسخ: "The light is not on". در این مورد خاص، «off» و «not on» تقریباً هم‌ارزن چون چراغ فقط دو حالت داره (روشن/خاموش). ولی روش درست و همیشه-قابل‌اعتماد اینه که مستقیماً «not» بذاری، نه اینکه به یک کلمه‌ی مخالف اعتماد کنی — چون در خیلی موارد دیگه (مثل مثال توپ سیاه/سفید)، این دو یکی نیستن.
+Gمثال امتحانی
+A = "The temperature today is hot." Which of the following is the correct contradictory of A?
+A) "The temperature today is cold."
+B) "The temperature today is not hot."
+C) "The temperature today is mild."
+D) "The temperature today is freezing."
+🎯 EXAM TIP
+هر وقت گزینه‌ای دیدی که یک کلمه رو با یک کلمه‌ی «مخالفِ» ظاهری جایگزین کرده (hot/cold, black/white, up/down, always/never)، مشکوک شو. تست سریع: از خودت بپرس «آیا می‌تونن هم‌زمان هر دو غلط باشن؟» اگه جواب بله‌ست، اون گزینه نقیض نیست، فقط یک تضاده.
+⚡ QUICK METHOD
+اگه سؤال مستقیماً گزاره‌ای به فرم «A and not-A» بهت داد و ازت خواست ارزش درستیش رو بگی، نیازی به هیچ محاسبه‌ای نیست — جواب همیشه False است، چون این یک تناقض تضمینیه.
+⚠️ COMMON MISTAKES
+اشتباه: ساختن نقیض یک گزاره با جایگزین کردن یک کلمه با کلمه‌ی هم‌معنیِ مخالفش.
+چرا اتفاق می‌افته: در زبان روزمره، وقتی می‌خوایم بگیم چیزی «نقیض» یه چیز دیگه‌ست، معمولاً به یاد اولین کلمه‌ی مخالفی که به ذهنمون می‌رسه می‌افتیم (سیاه→سفید، گرم→سرد)، بدون اینکه چک کنیم آیا حالت سومی هم وجود داره یا نه.
+چطور جلوش رو بگیریم: همیشه اول تست «آیا می‌تونن هر دو هم‌زمان غلط باشن؟» رو انجام بده. اگه بله، اون گزینه فقط یک contrary است، نه contradictory — و برای سؤالات نقیض باید ردش کنی.
+🧠 MUST REMEMBER
+Contradictory: دقیقاً یکی درست، یکی غلط — همیشه. Contrary: نمی‌تونن هر دو درست باشن، ولی می‌تونن هر دو غلط باشن. نقیض همیشه = «not» + کل گزاره. «A and not-A» همیشه غلطه.
+📝تمرین
+A = "The door is open." What is the correct contradictory of A?
+A) "The door is broken."
+B) "The door is not open."
+C) "The window is open."
+D) "The door will open soon."
+نمایش پاسخ و توضیح
+پاسخ درست: B. نقیض همیشه یعنی «not» + کل گزاره‌ی اصلی. گزینه‌های دیگه یا موضوع رو کلاً عوض کردن (پنجره به‌جای در) یا اطلاعات نامرتبط اضافه کردن (شکسته بودن، آینده).
+A = "The company's profit increased this quarter." Which statement is a CONTRARY of A, but NOT its contradictory?
+A) "The company's profit decreased this quarter."
+B) "The company's profit did not increase this quarter."
+C) "It is not true that the company's profit increased this quarter."
+D) "The company's profit failed to increase this quarter."
+نمایش پاسخ و توضیح
+پاسخ درست: A. «decreased» و «increased» نمی‌تونن هم‌زمان هر دو درست باشن، ولی می‌تونن هر دو غلط باشن — مثلاً وقتی سود بدون تغییر مونده (نه افزایش، نه کاهش). این دقیقاً تعریف contrary است. گزینه‌های B، C و D همه شکل‌های مختلف همون «not increased» هستن که نقیض واقعیِ A محسوب می‌شن، چون هیچ حالت سومی رو باقی نمی‌ذارن.
+Consider: "The suspect was in the building at 9 PM, and the suspect was not in the building at 9 PM." Without knowing anything about the actual case, what is the truth value of this whole claim?
+A) True, because one of the two parts must be true.
+B) False, with certainty — no further information is needed.
+C) Cannot be determined without more evidence.
+D) True only if the suspect has an alibi.
+نمایش پاسخ و توضیح
+پاسخ درست: B. این گزاره دقیقاً به فرم «A and not-A» است — یک تناقض. طبق قدم ۵ و Quick Method این فصل، چنین گزاره‌ای همیشه غلطه، فارغ از هر شواهد یا اطلاعات بیرونی. گزینه‌ی C دقیقاً همون دامیه که این فصل هشدارش رو می‌ده: این نوع سؤالات هیچ‌وقت به «اطلاعات بیشتر» نیاز ندارن، چون ساختار منطقیشون به‌تنهایی جواب رو مشخص می‌کنه.
+🚀مرور سریع — فصل ۵
+مفاهیم اصلی
+Contradictory: دقیقاً یکی درست، یکی غلط — همیشه.
+Contrary: نمی‌تونن هر دو درست باشن، ولی می‌تونن هر دو غلط باشن.
+«A and not-A» همیشه غلطه (تناقض).
+روش
+نقیض = «not» + کل گزاره، نه یک کلمه‌ی مخالف.
+تست: «آیا می‌تونن هر دو هم‌زمان غلط باشن؟»
+اشتباهات رایج
+جایگزین کردن با کلمه‌ی مخالفِ ظاهری (hot/cold, black/white).
+نادیده گرفتن حالت سوم (mild, gray, no change).
+دام‌های تستی
+گزینه‌هایی که یک contrary رو به‌جای contradictory جا می‌زنن.
+سؤالاتی که به‌نظر نیاز به «اطلاعات بیشتر» دارن ولی صرفاً یک تناقض ساختاری‌ان.

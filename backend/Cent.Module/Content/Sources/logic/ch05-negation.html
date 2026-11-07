@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۵: نقیض و تضاد</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 5 / 13</p>
+  <h1>فصل ۵: نقیض و تضاد — «not-A» (Negation, Contradictories &amp; Contraries)</h1>
+  <p class="lede">تا اینجا با «not-A» به‌عنوان یک نقیض ساده آشنا شدی. این فصل نشونت می‌ده رایج‌ترین اشتباهِ ساختن نقیض چیه — و چرا انتخاب یک کلمه‌ی «مخالف» تقریباً همیشه اشتباهه.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>هدف این فصل اینه که فرق بین <strong>نقیض واقعی (contradictory)</strong> یک گزاره و یک گزاره‌ی «متضاد» یا «مخالف» <strong>(contrary)</strong> رو یاد بگیری. این دو تا شبیه هم به نظر می‌رسن ولی از نظر منطقی خیلی متفاوتن، و آزمون دقیقاً از همین شباهت ظاهری برای طراحی گزینه‌های اشتباه استفاده می‌کنه.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — نقیض (contradictory) گزاره‌ایه که همیشه ارزش درستیِ مخالفِ A رو داره.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>A = "John is at the movies"<br>not-A = "John is <strong>not</strong> at the movies."</p>
+    </div>
+  </div>
+  <table>
+    <tr><th>A</th><th>not-A</th></tr>
+    <tr><td>T</td><td>F</td></tr>
+    <tr><td>F</td><td>T</td></tr>
+  </table>
+
+  <p><strong>قدم ۲ — رایج‌ترین اشتباه: انتخاب یک کلمه‌ی «مخالف» به‌جای نقیض واقعی.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>A = "The ball is black."</p>
+      <p style="margin-top:8px;">❌ not-A = "The ball is white." <span style="color:var(--rust); font-weight:600;">(اشتباه — این نقیض نیست)</span></p>
+      <p style="margin-top:4px;">✅ not-A = "The ball is <strong>not</strong> black." <span style="color:var(--navy); font-weight:600;">(درست — این نقیضه)</span></p>
+    </div>
+    <p style="margin-top:10px;">چرا «white» اشتباهه؟ چون توپ می‌تونه قرمز، آبی یا سبز هم باشه — یعنی هم «black» و هم «white» می‌تونن هم‌زمان <em>هر دو غلط</em> باشن (وقتی توپ قرمزه). ولی نقیض واقعی هیچ‌وقت نمی‌ذاره A و not-A هم‌زمان هر دو غلط باشن.</p>
+  </div>
+
+  <p><strong>قدم ۳ — تعریف رسمی تضاد (contrary):</strong> دو گزاره متضاد <span class="term">(contrary)</span> هستن اگه <strong>نتونن هم‌زمان هر دو درست باشن</strong>، ولی <strong>بتونن هم‌زمان هر دو غلط باشن</strong>. «black» و «white» دقیقاً همین رابطه رو دارن.</p>
+
+  <p><strong>قدم ۴ — تعریف رسمی نقیض (contradictory):</strong> دو گزاره نقیض هم هستن اگه <strong>هیچ‌وقت نتونن هم‌زمان هر دو درست باشن، و هیچ‌وقت نتونن هم‌زمان هر دو غلط باشن</strong> — یعنی دقیقاً یکی‌شون همیشه درسته و اون یکی همیشه غلط. تنها راه تضمینیِ ساختِ نقیضِ درست، گذاشتنِ «not» درست پشت خودِ کل گزاره‌ست، نه جایگزین کردنش با یک کلمه‌ی هم‌معنیِ مخالف.</p>
+
+  <p><strong>قدم ۵ — تناقض (contradiction) یعنی «A and not-A».</strong> این یک نوع خاص از عطف <span class="term">(conjunction)</span> است که همیشه — بدون استثنا — غلطه.</p>
+  <table>
+    <tr><th>A</th><th>not-A</th><th>A and not-A</th></tr>
+    <tr><td>T</td><td>F</td><td>F</td></tr>
+    <tr><td>F</td><td>T</td><td>F</td></tr>
+  </table>
+  <div class="ex-block">
+    <div class="ex-tag">مقایسه</div>
+    <div class="en-block">
+      <p>"John is at the movies <strong>and</strong> John is not at the movies." → <span style="color:var(--rust);">Contradiction (always False)</span></p>
+      <p style="margin-top:6px;">"John is at the movies <strong>and</strong> John is at the store." → <span style="color:var(--navy);">Not necessarily a contradiction — depends on the actual truth values.</span></p>
+    </div>
+    <p style="margin-top:10px;">گزاره‌ی دوم چون «at the store» نقیضِ «at the movies» نیست (می‌تونه هر دو غلط باشن — یعنی جایی سوم باشه)، صرفاً یک عطف عادیه، نه یک تناقض تضمینی.</p>
+  </div>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li><strong>Contradictory (نقیض):</strong> دقیقاً یکی درست، دقیقاً یکی غلط — همیشه، بدون استثنا.</li>
+    <li><strong>Contrary (تضاد):</strong> نمی‌تونن هر دو درست باشن، ولی <em>می‌تونن</em> هر دو غلط باشن.</li>
+    <li>ساختن نقیض همیشه یعنی «not» گذاشتن جلوی کل گزاره — نه جایگزینیِ یک کلمه با یک کلمه‌ی «مخالف».</li>
+    <li>«A and not-A» (تناقض) همیشه غلطه، فارغ از اینکه A چی باشه.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>برای ساختن نقیض یک گزاره، «not» رو مستقیماً به کل گزاره اضافه کن (نه اینکه دنبال یک کلمه‌ی مخالف بگردی).</li>
+    <li>برای چک کردن اینکه دو گزاره واقعاً نقیض هم هستن یا فقط متضاد: از خودت بپرس «آیا می‌تونن هم‌زمان هر دو غلط باشن؟» اگه بله، فقط متضادن، نقیض هم نیستن.</li>
+    <li>اگه سؤال گزاره‌ای به‌فرم «A and not-A» داد، بدون محاسبه بگو غلطه — این یک تناقض تضمینیه.</li>
+    <li class="arrow-final">→ جواب: طبق جدول‌های بالا.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">A = "The light is on." Which of the following is the correct contradictory of A: "The light is off" or "The light is not on"?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: "The light is not on".</strong> در این مورد خاص، «off» و «not on» تقریباً هم‌ارزن چون چراغ فقط دو حالت داره (روشن/خاموش). ولی روش درست و همیشه-قابل‌اعتماد اینه که مستقیماً «not» بذاری، نه اینکه به یک کلمه‌ی مخالف اعتماد کنی — چون در خیلی موارد دیگه (مثل مثال توپ سیاه/سفید)، این دو یکی نیستن.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">A = "The temperature today is hot." Which of the following is the correct contradictory of A?</p>
+      <ul class="options">
+        <li>A) "The temperature today is cold."</li>
+        <li class="correct">B) "The temperature today is not hot."</li>
+        <li>C) "The temperature today is mild."</li>
+        <li>D) "The temperature today is freezing."</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>یادت باشه نقیض همیشه یعنی «not» + کل گزاره، نه یک کلمه‌ی مخالف.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>«hot» و «cold» می‌تونن هم‌زمان هر دو غلط باشن — مثلاً وقتی هوا «mild» یا «warm» است. پس این‌ها رابطه‌ی contrary دارن، نه contradictory.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌های A، C و D همه کلمات «مخالف» یا حالت‌های دیگه‌ی دما هستن — همه‌شون طبق قدم ۲ همون دام رایجی هستن که این فصل دقیقاً درباره‌شه. فقط گزینه‌ی B تضمین می‌کنه که همیشه دقیقاً یکی از دو گزاره درست باشه.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون تعریف رسمی نقیض («هیچ‌وقت هر دو غلط نباشن») رو مستقیماً روی گزینه‌ها تست کردیم، به‌جای اینکه به شهود زبانی اعتماد کنیم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>هر وقت گزینه‌ای دیدی که یک کلمه رو با یک کلمه‌ی «مخالفِ» ظاهری جایگزین کرده (hot/cold, black/white, up/down, always/never)، مشکوک شو. تست سریع: از خودت بپرس «آیا می‌تونن هم‌زمان هر دو غلط باشن؟» اگه جواب بله‌ست، اون گزینه نقیض نیست، فقط یک تضاده.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>اگه سؤال مستقیماً گزاره‌ای به فرم «A and not-A» بهت داد و ازت خواست ارزش درستیش رو بگی، نیازی به هیچ محاسبه‌ای نیست — جواب همیشه <strong>False</strong> است، چون این یک تناقض تضمینیه.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> ساختن نقیض یک گزاره با جایگزین کردن یک کلمه با کلمه‌ی هم‌معنیِ مخالفش.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> در زبان روزمره، وقتی می‌خوایم بگیم چیزی «نقیض» یه چیز دیگه‌ست، معمولاً به یاد اولین کلمه‌ی مخالفی که به ذهنمون می‌رسه می‌افتیم (سیاه→سفید، گرم→سرد)، بدون اینکه چک کنیم آیا حالت سومی هم وجود داره یا نه.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه اول تست «آیا می‌تونن هر دو هم‌زمان غلط باشن؟» رو انجام بده. اگه بله، اون گزینه فقط یک contrary است، نه contradictory — و برای سؤالات نقیض باید ردش کنی.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p><strong>Contradictory:</strong> دقیقاً یکی درست، یکی غلط — همیشه. <strong>Contrary:</strong> نمی‌تونن هر دو درست باشن، ولی می‌تونن هر دو غلط باشن. نقیض همیشه = «not» + کل گزاره. «A and not-A» همیشه غلطه.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">A = "The door is open." What is the correct contradictory of A?</p>
+      <ul class="options">
+        <li>A) "The door is broken."</li>
+        <li class="correct">B) "The door is not open."</li>
+        <li>C) "The window is open."</li>
+        <li>D) "The door will open soon."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> نقیض همیشه یعنی «not» + کل گزاره‌ی اصلی. گزینه‌های دیگه یا موضوع رو کلاً عوض کردن (پنجره به‌جای در) یا اطلاعات نامرتبط اضافه کردن (شکسته بودن، آینده).</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">A = "The company's profit increased this quarter." Which statement is a CONTRARY of A, but NOT its contradictory?</p>
+      <ul class="options">
+        <li class="correct">A) "The company's profit decreased this quarter."</li>
+        <li>B) "The company's profit did not increase this quarter."</li>
+        <li>C) "It is not true that the company's profit increased this quarter."</li>
+        <li>D) "The company's profit failed to increase this quarter."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> «decreased» و «increased» نمی‌تونن هم‌زمان هر دو درست باشن، ولی می‌تونن هر دو غلط باشن — مثلاً وقتی سود <em>بدون تغییر</em> مونده (نه افزایش، نه کاهش). این دقیقاً تعریف contrary است. گزینه‌های B، C و D همه شکل‌های مختلف همون «not increased» هستن که نقیض واقعیِ A محسوب می‌شن، چون هیچ حالت سومی رو باقی نمی‌ذارن.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">Consider: "The suspect was in the building at 9 PM, and the suspect was not in the building at 9 PM." Without knowing anything about the actual case, what is the truth value of this whole claim?</p>
+      <ul class="options">
+        <li>A) True, because one of the two parts must be true.</li>
+        <li class="correct">B) False, with certainty — no further information is needed.</li>
+        <li>C) Cannot be determined without more evidence.</li>
+        <li>D) True only if the suspect has an alibi.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> این گزاره دقیقاً به فرم «A and not-A» است — یک تناقض. طبق قدم ۵ و Quick Method این فصل، چنین گزاره‌ای <strong>همیشه</strong> غلطه، فارغ از هر شواهد یا اطلاعات بیرونی. گزینه‌ی C دقیقاً همون دامیه که این فصل هشدارش رو می‌ده: این نوع سؤالات هیچ‌وقت به «اطلاعات بیشتر» نیاز ندارن، چون ساختار منطقیشون به‌تنهایی جواب رو مشخص می‌کنه.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۵</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>Contradictory: دقیقاً یکی درست، یکی غلط — همیشه.</li>
+          <li>Contrary: نمی‌تونن هر دو درست باشن، ولی می‌تونن هر دو غلط باشن.</li>
+          <li>«A and not-A» همیشه غلطه (تناقض).</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>نقیض = «not» + کل گزاره، نه یک کلمه‌ی مخالف.</li>
+          <li>تست: «آیا می‌تونن هر دو هم‌زمان غلط باشن؟»</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>جایگزین کردن با کلمه‌ی مخالفِ ظاهری (hot/cold, black/white).</li>
+          <li>نادیده گرفتن حالت سوم (mild, gray, no change).</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>گزینه‌هایی که یک contrary رو به‌جای contradictory جا می‌زنن.</li>
+          <li>سؤالاتی که به‌نظر نیاز به «اطلاعات بیشتر» دارن ولی صرفاً یک تناقض ساختاری‌ان.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

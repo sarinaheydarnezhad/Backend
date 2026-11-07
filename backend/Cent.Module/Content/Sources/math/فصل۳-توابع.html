@@ -1,0 +1,2389 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فصل ۳ | توابع (Functions)</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EC;
+    --dot:#E3DCC8;
+    --navy:#1F3A52;
+    --blue:#2C6E8E;   --blue-bg:#EAF4F8;
+    --green:#2E9B6F;  --green-bg:#EAF7F0;
+    --red:#D2534A;    --red-bg:#FBEAE8;
+    --gold:#D79E28;   --gold-bg:#FCF3DD;
+    --purple:#7C4A99; --purple-bg:#F4EDF8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Vazirmatn', sans-serif;
+    background-color:var(--bg);
+    background-image:radial-gradient(var(--dot) 1.4px, transparent 1.4px);
+    background-size:22px 22px;
+    color:var(--navy);
+    line-height:1.9;
+  }
+  .ltr{direction:ltr; unicode-bidi:isolate; display:inline-block;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 18px 60px;}
+
+  /* ---------- نوار ناوبری ---------- */
+  nav.topnav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,246,236,.94);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--dot);
+    overflow-x:auto; white-space:nowrap;
+    padding:10px 14px;
+  }
+  nav.topnav a{
+    display:inline-block;
+    color:var(--navy);
+    text-decoration:none;
+    font-size:.85rem;
+    font-weight:600;
+    padding:7px 14px;
+    margin-inline-end:6px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--dot);
+  }
+  nav.topnav a:hover{background:var(--blue-bg); border-color:var(--blue);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    margin:24px 0 10px;
+    border-radius:22px;
+    padding:46px 30px;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    color:#fff;
+    text-align:center;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:radial-gradient(rgba(255,255,255,.25) 1.5px, transparent 1.5px);
+    background-size:20px 20px;
+    opacity:.35;
+  }
+  .hero > *{position:relative;}
+  .eyebrow{
+    display:inline-block;
+    font-size:.8rem;
+    font-weight:700;
+    background:rgba(255,255,255,.18);
+    padding:6px 16px;
+    border-radius:999px;
+    margin-bottom:16px;
+  }
+  .hero h1{font-size:2.1rem; margin:0 0 12px; font-weight:800;}
+  .hero p.sub{font-size:1.02rem; opacity:.94; max-width:640px; margin:0 auto;}
+
+  /* ---------- بخش راهنمای استفاده ---------- */
+  .usage{margin:36px 0;}
+  .usage h2{text-align:center; font-size:1.4rem;}
+  .cycle{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:22px;
+  }
+  .cycle .step{
+    flex:1 1 160px; max-width:190px;
+    background:#fff; border-radius:16px; padding:18px 14px; text-align:center;
+    border-top:5px solid var(--c);
+    box-shadow:0 2px 10px rgba(31,58,82,.08);
+  }
+  .cycle .step .num{
+    width:34px; height:34px; line-height:34px; border-radius:50%;
+    background:var(--c); color:#fff; font-weight:800; margin:0 auto 10px;
+  }
+  .cycle .step p{margin:0; font-size:.88rem; font-weight:600;}
+
+  /* ---------- بخش‌های عددی ---------- */
+  section.chapter-section{margin:56px 0;}
+  .sec-head{display:flex; align-items:center; gap:14px; margin-bottom:18px;}
+  .sec-badge{
+    width:44px; height:44px; min-width:44px; border-radius:50%;
+    background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:1.1rem;
+  }
+  .sec-label{font-size:.8rem; color:var(--blue); font-weight:700;}
+  .sec-head h2{margin:2px 0 0; font-size:1.35rem;}
+
+  /* ---------- کارت‌ها ---------- */
+  .card{border-radius:16px; padding:20px 22px; margin:16px 0; box-shadow:0 2px 8px rgba(31,58,82,.07);}
+  .card-title{display:flex; align-items:center; gap:10px; font-weight:800; font-size:1.08rem; margin-bottom:12px;}
+  .card-title .ic{font-size:1.2rem;}
+
+  .concept{background:var(--blue-bg); border-right:6px solid var(--blue);}
+  .concept .card-title{color:var(--blue);}
+
+  .example{background:var(--green-bg); border-right:6px solid var(--green); margin:14px 0;}
+  .example .card-title{color:var(--green);}
+
+  .mistake{background:var(--red-bg); border-right:6px solid var(--red);}
+  .mistake .card-title{color:var(--red);}
+
+  .tip{background:var(--gold-bg); border-right:6px solid var(--gold);}
+  .tip .card-title{color:#8a6d1f;}
+
+  .exercise{background:var(--purple-bg); border-right:6px solid var(--purple);}
+  .exercise .card-title{color:var(--purple);}
+
+  .formula-box{
+    background:var(--navy); color:#fff; padding:14px 18px; border-radius:12px;
+    text-align:center; margin:14px 0; font-size:1.15rem; font-weight:700;
+  }
+  ol.steps-list{margin:10px 0; padding-inline-start:22px;}
+  ol.steps-list li{margin:8px 0;}
+
+  .steps{background:rgba(255,255,255,.65); border-radius:10px; padding:12px 16px; margin:10px 0;}
+  .steps p{margin:6px 0; font-size:.96rem;}
+  .result{
+    background:var(--green); color:#fff; padding:7px 14px; border-radius:8px;
+    display:inline-block; font-weight:700; margin-top:8px; font-size:.94rem;
+  }
+
+  ul.icon-list{list-style:none; margin:0; padding:0;}
+  ul.icon-list li{display:flex; gap:10px; margin:10px 0; font-size:.96rem; align-items:flex-start;}
+  ul.icon-list li .bul{font-weight:800; flex-shrink:0;}
+  .mistake ul.icon-list li .bul{color:var(--red);}
+  .tip ul.icon-list li .bul{color:var(--gold);}
+
+  details{background:#fff; border-radius:10px; margin:12px 0; padding:12px 16px; border:1px solid #e3d5ec;}
+  details summary{cursor:pointer; font-weight:700; color:var(--purple);}
+  details .answer-final{font-weight:800; margin-top:8px; display:block;}
+
+  .frac{display:inline-flex; flex-direction:column; vertical-align:middle; text-align:center; margin:0 3px; line-height:1.15;}
+  .frac .num{border-bottom:2px solid currentColor; padding:0 5px;}
+  .frac .den{padding:0 5px;}
+
+  table.law-table{width:100%; border-collapse:collapse; margin:14px 0; background:rgba(255,255,255,.7); border-radius:10px; overflow:hidden;}
+  table.law-table th, table.law-table td{padding:10px 12px; border-bottom:1px solid rgba(31,58,82,.12); font-size:.92rem; text-align:right;}
+  table.law-table th{background:rgba(31,58,82,.08);}
+  table.law-table td:last-child, table.law-table th:last-child{direction:ltr; text-align:left;}
+
+  /* ---------- پانل آناتومی ---------- */
+  .anatomy-panel{border:2px solid var(--navy); border-radius:18px; overflow:hidden; margin:20px 0; background:#fff;}
+  .anatomy-head{background:var(--navy); color:#fff; text-align:center; padding:10px; font-weight:800; letter-spacing:.5px; font-size:.95rem;}
+  .anatomy-body{padding:28px 18px 22px;}
+  .anatomy-expr{font-size:2.3rem; font-weight:800; text-align:center; direction:ltr; unicode-bidi:isolate; margin-bottom:22px;}
+  .anatomy-expr .part{padding:2px 8px; border-radius:8px;}
+  .part-blue{background:var(--blue-bg); color:var(--blue);}
+  .part-green{background:var(--green-bg); color:var(--green);}
+  .part-gold{background:var(--gold-bg); color:#8a6d1f;}
+  .anatomy-legend{direction:ltr; display:flex; flex-wrap:wrap; gap:14px; justify-content:center;}
+  .anatomy-legend .lbl{flex:1 1 150px; max-width:190px; text-align:center; direction:rtl;}
+  .anatomy-legend .arrow{font-size:1.3rem; display:block; margin-bottom:4px;}
+  .anatomy-legend .fa{font-weight:800; font-size:.92rem; display:block;}
+  .anatomy-legend .en{font-size:.72rem; color:#777; display:block;}
+  .anatomy-note{
+    margin:16px auto 0; max-width:520px; background:var(--gold-bg); border-radius:10px;
+    padding:10px 16px; text-align:center; font-size:.92rem; font-weight:600;
+  }
+
+  /* ---------- پیش‌نمایش فصل بعد ---------- */
+  .preview-box{
+    background:var(--purple-bg); border:1.5px dashed var(--purple); border-radius:12px;
+    padding:12px 16px; margin:14px 0; font-size:.92rem;
+  }
+  .preview-box b{color:var(--purple);}
+
+  /* ---------- خانواده توابع (SVG) ---------- */
+  .family-grid{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:16px;}
+  .family-card{
+    background:#fff; border-radius:14px; padding:12px; text-align:center; width:130px;
+    box-shadow:0 2px 8px rgba(31,58,82,.08);
+  }
+  .family-card svg{width:100%; height:70px;}
+  .family-card p{margin:6px 0 0; font-size:.82rem; font-weight:700;}
+  .family-card .soon{font-size:.68rem; color:var(--purple); font-weight:700;}
+
+  /* ---------- جمع‌بندی ---------- */
+  /* ---------- گراف‌ها و دیاگرام‌های بصری ---------- */
+  .graph-box{background:#fff; border-radius:14px; padding:12px; text-align:center; box-shadow:0 2px 8px rgba(31,58,82,.08);}
+  .graph-box svg{width:100%; max-width:300px; height:auto;}
+  .graph-box .cap{font-size:.82rem; font-weight:700; margin-top:6px; color:var(--navy);}
+  .graph-row{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin:16px 0;}
+  .graph-row .graph-box{flex:1 1 210px; max-width:250px;}
+  .graph-row.two .graph-box{flex:1 1 260px; max-width:320px;}
+  .table-demo{width:100%; border-collapse:collapse; margin:10px 0; direction:ltr;}
+  .table-demo th, .table-demo td{border:1px solid var(--dot); padding:8px 14px; text-align:center; font-size:1rem;}
+  .table-demo th{background:var(--navy); color:#fff;}
+  .numberline-box{background:#fff; border-radius:14px; padding:16px 10px; margin:14px 0; box-shadow:0 2px 8px rgba(31,58,82,.08);}
+  .numberline-box svg{width:100%; height:auto;}
+
+  .summary-box{
+    margin:46px 0 20px; border-radius:22px; padding:40px 28px;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    color:#fff; text-align:center;
+  }
+  .summary-box h2{font-size:1.5rem; margin-top:0;}
+  .pills{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:18px 0;}
+  .pills span{background:rgba(255,255,255,.16); padding:6px 14px; border-radius:999px; font-size:.82rem; font-weight:600;}
+  .compass{
+    margin-top:22px; background:rgba(255,255,255,.14); border-radius:14px; padding:16px;
+    max-width:560px; margin-inline:auto; font-size:.95rem;
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a href="#usage">راهنمای استفاده</a>
+  <a href="#sec1">۱. مفهوم و ویژگی‌های تابع</a>
+  <a href="#sec2">۲. توابع پایه و آناتومی نماد</a>
+  <a href="#sec3">۳. معادلهٔ درجه دوم و سهمی</a>
+  <a href="#sec4">۴. قدرمطلق</a>
+  <a href="#sec5">۵. معادلات گویا و گنگ</a>
+  <a href="#sec6">۶. تابع نمایی</a>
+  <a href="#sec7">۷. تابع لگاریتمی</a>
+  <a href="#sec8">۸. تبدیلات نمودار</a>
+  <a href="#sec9">۹. ترکیب و تابع وارون</a>
+  <a href="#sec10">۱۰. تعیین علامت و حل نامعادله</a>
+  <a href="#sec11">۱۱. مقایسهٔ خانواده‌های تابع</a>
+  <a href="#summary">جمع‌بندی</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="eyebrow">فصل ۳ | جزوهٔ آموزشی گام‌به‌گام</span>
+    <h1>توابع (Functions)</h1>
+    <p class="sub">از تعریف ساده‌ی یک تابع تا معادلهٔ درجه دوم، قدرمطلق، معادلات گویا و گنگ، توابع نمایی و لگاریتمی، تبدیلات نمودار، ترکیب و وارون، و تعیین علامت کامل — قدم‌به‌قدم و بدون پرش.</p>
+  </div>
+
+  <!-- راهنمای استفاده -->
+  <section class="usage" id="usage">
+    <h2>چگونه از این جزوه استفاده کنیم؟</h2>
+    <div class="cycle">
+      <div class="step" style="--c:var(--blue)"><div class="num">۱</div><p>فهم مفهوم</p></div>
+      <div class="step" style="--c:var(--green)"><div class="num">۲</div><p>دیدن مثال</p></div>
+      <div class="step" style="--c:var(--red)"><div class="num">۳</div><p>بررسی دام‌ها</p></div>
+      <div class="step" style="--c:var(--gold)"><div class="num">۴</div><p>هایلایت امتحانی</p></div>
+      <div class="step" style="--c:var(--purple)"><div class="num">۵</div><p>حل تمرین</p></div>
+    </div>
+    <p style="text-align:center; max-width:600px; margin:18px auto 0; font-size:.94rem;">
+      هر بخش رو به همین ترتیب جلو برو: اول کارت آبی رو بخون تا مفهوم دستت بیاد، بعد کارت‌های سبز رو قدم‌به‌قدم دنبال کن، حتماً سری به کارت قرمز بزن تا اشتباه‌های رایج رو از قبل بشناسی، نکته‌های طلایی رو برای امتحان تو ذهنت نگه دار، و در آخر تمرین‌های بنفش رو خودت حل کن، بعد پاسخ رو باز کن.
+    </p>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش اول -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec1">
+    <div class="sec-head">
+      <div class="sec-badge">۱</div>
+      <div><div class="sec-label">بخش اول</div><h2>مفهوم تابع، دامنه، برد و ویژگی‌های پایه</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — تابع چیست؟</div>
+      <p>یک <b>تابع</b> قانونی است که به هر ورودی <span class="ltr">x</span> دقیقاً یک خروجی <span class="ltr">y</span> نسبت می‌دهد. نه کمتر، نه بیشتر — دقیقاً یکی.</p>
+      <div class="formula-box"><span class="ltr">f : X → Y</span> &nbsp; و به‌شکل &nbsp; <span class="ltr">y = f(x)</span></div>
+      <p><b>ایدهٔ کلیدی:</b> هر <span class="ltr">x</span> ← فقط یک <span class="ltr">y</span>. برای چک کردن این موضوع روی نمودار از «تست خط عمودی» استفاده می‌کنیم:</p>
+      <ol class="steps-list">
+        <li>یک خط عمودی فرضی رو از چپ به راست روی نمودار حرکت بده.</li>
+        <li>اگه این خط در هر نقطه، نمودار رو فقط در یک جا قطع کنه → رابطه یک تابعه.</li>
+        <li>اگه حتی در یک نقطه، خط عمودی نمودار رو در دو جا یا بیشتر قطع کنه → رابطه تابع نیست.</li>
+      </ol>
+      <p><b>یک تابع رو می‌شه به ۶ روش مختلف نشون داد:</b></p>
+      <ol class="steps-list">
+        <li><b>ضابطه‌ای (فرمول):</b> یک رابطهٔ جبری بین <span class="ltr">x</span> و <span class="ltr">y</span>، مثل <span class="ltr">f(x) = (√(x+۸))/(x²+x)</span>.</li>
+        <li><b>توصیفی (کلامی):</b> با جمله توضیح می‌دیم؛ مثلاً «تابعی که به هر عدد، سه برابرش رو نسبت می‌ده».</li>
+        <li><b>نموداری:</b> با رسم منحنی روی صفحهٔ مختصات.</li>
+        <li><b>جدولی:</b> با یک جدول دو‌ردیفه از مقادیر <span class="ltr">x</span> و <span class="ltr">y</span> مقابل هم.</li>
+        <li><b>زوج‌مرتب:</b> با نوشتن مجموعه‌ای از زوج‌های <span class="ltr">(x, y)</span>، مثل <span class="ltr">f = {(۱,۸), (۴,۱)}</span>.</li>
+        <li><b>پیکانی (دیاگرام ون):</b> با دو مجموعه و یک پیکان از هر ورودی به خروجی متناظرش.</li>
+      </ol>
+      <p>هر ۶ روش دقیقاً یک چیز رو نشون می‌دن، فقط از زاویه‌های متفاوت — مثلاً مقدار تابع در یک نقطهٔ خاص رو می‌شه هم از فرمول، هم از جدول، هم از نمودار پیدا کرد. بیا دو تا از این روش‌ها (جدولی و پیکانی) رو برای همون <span class="ltr">f(x) = ۲x + ۳</span> به‌شکل تصویری ببینیم:</p>
+
+      <p style="font-weight:700; margin-bottom:4px;">۱) نمایش جدولی:</p>
+      <table class="table-demo">
+        <tr><th>x</th><td>۰</td><td>۱</td><td>۲</td><td>۳</td></tr>
+        <tr><th>y</th><td>۳</td><td>۵</td><td>۷</td><td>۹</td></tr>
+      </table>
+      <p style="font-size:.88rem; color:#555;">هر ستون، یک زوج <span class="ltr">(x, y)</span> رو نشون می‌ده — مثلاً ستون سوم یعنی <span class="ltr">f(۲) = ۷</span>.</p>
+
+      <p style="font-weight:700; margin:14px 0 4px;">۲) نمایش پیکانی (دیاگرام ون):</p>
+      <div class="graph-box" style="max-width:420px; margin:0 auto;">
+        <svg viewBox="0 0 300 210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrowhead1" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6 Z" fill="#1F3A52"/>
+            </marker>
+          </defs>
+          <ellipse cx="70" cy="105" rx="55" ry="90" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+          <ellipse cx="230" cy="105" rx="55" ry="90" fill="#EAF7F0" stroke="#2E9B6F" stroke-width="2"/>
+          <text x="70" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#2C6E8E">X (دامنه)</text>
+          <text x="230" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#2E9B6F">Y (برد)</text>
+          <circle cx="70" cy="55" r="4" fill="#1F3A52"/><text x="52" y="59" font-size="14" fill="#1F3A52">۰</text>
+          <circle cx="70" cy="90" r="4" fill="#1F3A52"/><text x="52" y="94" font-size="14" fill="#1F3A52">۱</text>
+          <circle cx="70" cy="125" r="4" fill="#1F3A52"/><text x="52" y="129" font-size="14" fill="#1F3A52">۲</text>
+          <circle cx="70" cy="160" r="4" fill="#1F3A52"/><text x="52" y="164" font-size="14" fill="#1F3A52">۳</text>
+          <circle cx="230" cy="55" r="4" fill="#1F3A52"/><text x="240" y="59" font-size="14" fill="#1F3A52">۳</text>
+          <circle cx="230" cy="90" r="4" fill="#1F3A52"/><text x="240" y="94" font-size="14" fill="#1F3A52">۵</text>
+          <circle cx="230" cy="125" r="4" fill="#1F3A52"/><text x="240" y="129" font-size="14" fill="#1F3A52">۷</text>
+          <circle cx="230" cy="160" r="4" fill="#1F3A52"/><text x="240" y="164" font-size="14" fill="#1F3A52">۹</text>
+          <line x1="76" y1="55" x2="222" y2="55" stroke="#1F3A52" stroke-width="1.5" marker-end="url(#arrowhead1)"/>
+          <line x1="76" y1="90" x2="222" y2="90" stroke="#1F3A52" stroke-width="1.5" marker-end="url(#arrowhead1)"/>
+          <line x1="76" y1="125" x2="222" y2="125" stroke="#1F3A52" stroke-width="1.5" marker-end="url(#arrowhead1)"/>
+          <line x1="76" y1="160" x2="222" y2="160" stroke="#1F3A52" stroke-width="1.5" marker-end="url(#arrowhead1)"/>
+        </svg>
+        <div class="cap">هر پیکان یعنی «این ورودی، دقیقاً به این خروجی می‌رسه» — دقیقاً همون قانون تابع بودن.</div>
+      </div>
+
+      <div class="anatomy-panel">
+        <div class="anatomy-head">Concept Panel — آناتومی نماد تابع</div>
+        <div class="anatomy-body">
+          <div class="anatomy-expr">
+            <span class="part part-blue">f</span>(<span class="part part-green">x</span>) = <span class="part part-gold">y</span>
+          </div>
+          <div class="anatomy-legend">
+            <div class="lbl"><span class="arrow" style="color:var(--blue)">↑</span><span class="fa" style="color:var(--blue)">نام تابع</span><span class="en">(Function name)</span></div>
+            <div class="lbl"><span class="arrow" style="color:var(--green)">↑</span><span class="fa" style="color:var(--green)">ورودی / متغیر مستقل</span><span class="en">(Input)</span></div>
+            <div class="lbl"><span class="arrow" style="color:#8a6d1f">↑</span><span class="fa" style="color:#8a6d1f">خروجی / مقدار تابع</span><span class="en">(Output)</span></div>
+          </div>
+          <div class="anatomy-note">بخون: «<span class="ltr">f(x)</span>» یعنی «مقدار تابع <span class="ltr">f</span> به‌ازای ورودی <span class="ltr">x</span>» — نه «<span class="ltr">f</span> ضربدر <span class="ltr">x</span>»!</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — تشخیص تابع بودن با مجموعه زوج‌مرتب</div>
+      <div class="steps">
+        <p>مجموعهٔ زوج‌مرتب‌های <span class="ltr">{(۱,۲), (۲,۴), (۳,۶)}</span> رو داریم.</p>
+        <p>هر <span class="ltr">x</span> (یعنی ۱، ۲، ۳) فقط یک‌بار تکرار شده و هرکدوم فقط یک <span class="ltr">y</span> داره.</p>
+      </div>
+      <span class="result">پس این رابطه یک تابعه.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — محاسبهٔ مقدار تابع</div>
+      <div class="steps">
+        <p>داریم <span class="ltr">f(x) = 2x + 3</span> و می‌خوایم <span class="ltr">f(4)</span> رو پیدا کنیم.</p>
+        <p>به‌جای <span class="ltr">x</span> عدد <span class="ltr">4</span> رو می‌ذاریم: <span class="ltr">f(4) = 2(4) + 3 = 8 + 3</span></p>
+      </div>
+      <span class="result">f(4) = 11</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — تست خط عمودی روی یک دایره</div>
+      <div class="steps">
+        <p>نمودار یک دایره رو در نظر بگیر (مثل <span class="ltr">x² + y² = ۹</span>).</p>
+        <p>یک خط عمودی مثل <span class="ltr">x = ۱</span> این دایره رو در <b>دو نقطه</b> (بالا و پایین) قطع می‌کنه.</p>
+      </div>
+      <span class="result">پس دایره یک تابع نیست.</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> فکر کردن به <span class="ltr">f(x)</span> به‌عنوان «<span class="ltr">f</span> ضرب در <span class="ltr">x</span>» — این فقط یک اسم‌گذاری برای خروجیه.</li>
+        <li><span class="bul">✗</span> فرض کردن اینکه هر معادله‌ای یک تابعه؛ فراموش نکن باید تست خط عمودی رو چک کنی.</li>
+        <li><span class="bul">✗</span> قاطی کردن دامنه (ورودی‌های مجاز) با برد (خروجی‌های ممکن).</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> اگه سؤال گفت «آیا رابطه تابعه؟» فوراً برو سراغ تست خط عمودی یا چک کردن تکرار <span class="ltr">x</span>‌ها.</li>
+        <li><span class="bul">★</span> برای محاسبهٔ <span class="ltr">f(عدد)</span> فقط جای‌گذاری کن، عجله نکن و علامت‌ها رو با دقت جمع بزن.</li>
+      </ul>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — دامنه و برد</div>
+      <p><b>دامنه (Domain):</b> همهٔ مقادیر مجاز برای <span class="ltr">x</span> (ورودی‌ها).<br><b>برد (Range):</b> همهٔ مقادیر ممکن برای <span class="ltr">y</span> (خروجی‌ها).</p>
+      <p>برای پیدا کردن دامنه، دنبال این سه دام بگرد:</p>
+      <ol class="steps-list">
+        <li><b>تقسیم بر صفر:</b> اگه <span class="ltr">x</span> توی مخرج کسره، مخرج نباید صفر بشه.</li>
+        <li><b>رادیکال با فرجهٔ زوج:</b> عبارت زیر رادیکال باید نامنفی باشه (<span class="ltr">≥ ۰</span>).</li>
+        <li><b>لگاریتم:</b> عبارت داخل لگاریتم باید مثبت باشه (<span class="ltr">> ۰</span>).</li>
+      </ol>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — دامنهٔ یک کسر</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = <span class="frac"><span class="num">۱</span><span class="den">x − ۳</span></span></span></p>
+        <p>مخرج نباید صفر بشه: <span class="ltr">x − ۳ ≠ ۰ ⇒ x ≠ ۳</span></p>
+      </div>
+      <span class="result">دامنه: همهٔ اعداد حقیقی به‌جز ۳</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — دامنهٔ یک رادیکال</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = √(x − ۲)</span></p>
+        <p>عبارت زیر رادیکال باید نامنفی باشه: <span class="ltr">x − ۲ ≥ ۰ ⇒ x ≥ ۲</span></p>
+      </div>
+      <span class="result">دامنه: [۲, ∞)</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — دامنهٔ یک لگاریتم</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = log(x + ۵)</span></p>
+        <p>عبارت داخل لگاریتم باید مثبت باشه: <span class="ltr">x + ۵ > ۰ ⇒ x > −۵</span></p>
+      </div>
+      <span class="result">دامنه: (−۵, ∞)</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> نوشتن <span class="ltr">x − ۳ ≠ ۰</span> و بعد فراموش کردن اینکه جواب باید به‌شکل «به‌جز» نوشته بشه، نه یک بازه.</li>
+        <li><span class="bul">✗</span> برای رادیکال، عبارت زیر رادیکال رو <span class="ltr">> ۰</span> در نظر گرفتن به‌جای <span class="ltr">≥ ۰</span> (صفر هم مجازه چون <span class="ltr">√۰ = ۰</span>).</li>
+        <li><span class="bul">✗</span> برای لگاریتم برعکس، اشتباهاً <span class="ltr">≥ ۰</span> در نظر گرفتن به‌جای <span class="ltr">> ۰</span> (صفر و منفی هر دو ممنوعن).</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> اگه تابع چند دام باهم داشت (مثلاً هم کسر هم رادیکال)، همهٔ شرط‌ها رو جدا پیدا کن و در آخر مشترکشون (اشتراک) رو بگیر.</li>
+        <li><span class="bul">★</span> رادیکال «زوج» → مثبت یا صفر. لگاریتم → فقط مثبت. این دو رو با هم قاطی نکن.</li>
+      </ul>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — ویژگی‌های پایهٔ توابع</div>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span><b>صعودی (Increasing):</b> وقتی <span class="ltr">x</span> بزرگ‌تر می‌شه، <span class="ltr">y</span> هم بزرگ‌تر می‌شه.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>نزولی (Decreasing):</b> وقتی <span class="ltr">x</span> بزرگ‌تر می‌شه، <span class="ltr">y</span> کوچک‌تر می‌شه.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>زوج (Even):</b> <span class="ltr">f(−x) = f(x)</span> — نمودار نسبت به محور <span class="ltr">y</span> قرینه‌ست.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>فرد (Odd):</b> <span class="ltr">f(−x) = −f(x)</span> — نمودار نسبت به مبدأ قرینه‌ست.</li>
+      </ul>
+      <div class="graph-row">
+        <div class="graph-box">
+          <svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="60" x2="130" y2="60" stroke="#bbb" stroke-width="1.5"/>
+            <line x1="70" y1="10" x2="70" y2="110" stroke="#bbb" stroke-width="1.5"/>
+            <path d="M20,95 L115,25" stroke="#2C6E8E" stroke-width="4" fill="none"/>
+          </svg>
+          <div class="cap">صعودی — x↑ ⇒ y↑</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="60" x2="130" y2="60" stroke="#bbb" stroke-width="1.5"/>
+            <line x1="70" y1="10" x2="70" y2="110" stroke="#bbb" stroke-width="1.5"/>
+            <path d="M20,25 L115,95" stroke="#D2534A" stroke-width="4" fill="none"/>
+          </svg>
+          <div class="cap">نزولی — x↑ ⇒ y↓</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="105" x2="130" y2="105" stroke="#bbb" stroke-width="1.5"/>
+            <line x1="70" y1="10" x2="70" y2="115" stroke="#bbb" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <path d="M22,100 Q70,15 118,100" stroke="#2E9B6F" stroke-width="4" fill="none"/>
+            <circle cx="45" cy="63" r="3.5" fill="#1F3A52"/>
+            <circle cx="95" cy="63" r="3.5" fill="#1F3A52"/>
+          </svg>
+          <div class="cap">زوج — قرینه حول محور y</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 140 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="60" x2="130" y2="60" stroke="#bbb" stroke-width="1.5"/>
+            <line x1="70" y1="10" x2="70" y2="110" stroke="#bbb" stroke-width="1.5"/>
+            <path d="M22,100 C55,100 60,60 70,60 C80,60 85,20 118,20" stroke="#7C4A99" stroke-width="4" fill="none"/>
+            <circle cx="40" cy="90" r="3.5" fill="#1F3A52"/>
+            <circle cx="100" cy="30" r="3.5" fill="#1F3A52"/>
+          </svg>
+          <div class="cap">فرد — قرینه حول مبدأ</div>
+        </div>
+      </div>
+
+      <div class="preview-box">
+        <b>پیش‌نمایش فصل بعد (مثلثات):</b> یک ویژگی دیگه هم هست به اسم «تناوب» (Periodicity) — یعنی تابع بعد از یک فاصلهٔ ثابت، دقیقاً همون الگو رو تکرار می‌کنه. توابع سینوس و کسینوس مثال معروف این حالتن؛ فعلاً فقط اسمش رو بشناس، فصل بعد کامل باهاش کار می‌کنیم.
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — بررسی زوج بودن</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = x²</span> → جای <span class="ltr">x</span>، <span class="ltr">−x</span> بذار: <span class="ltr">f(−x) = (−x)² = x²</span></p>
+        <p>پس <span class="ltr">f(−x) = f(x)</span></p>
+      </div>
+      <span class="result">تابع زوجه.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — بررسی فرد بودن</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = x³</span> → <span class="ltr">f(−x) = (−x)³ = −x³ = −f(x)</span></p>
+      </div>
+      <span class="result">تابع فرده.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — نه زوج نه فرد</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = x² + x</span> → <span class="ltr">f(−x) = x² − x</span></p>
+        <p>این نه برابر <span class="ltr">f(x)</span> است، نه برابر <span class="ltr">−f(x)</span>.</p>
+      </div>
+      <span class="result">تابع نه زوجه نه فرد.</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> جای <span class="ltr">−x</span> گذاشتن ولی فراموش کردن پرانتز، که باعث اشتباه در توان‌ها می‌شه.</li>
+        <li><span class="bul">✗</span> فکر کردن اینکه «صعودی بودن» یعنی همیشه مثبت بودن تابع — این دو ربطی به هم ندارن.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> فقط توان‌های زوج (مثل <span class="ltr">x², x⁴</span>) → معمولاً زوج. فقط توان‌های فرد (مثل <span class="ltr">x, x³</span>) → معمولاً فرد. اگه هر دو نوع باهم اومدن، معمولاً نه زوجه نه فرد.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> آیا مجموعهٔ <span class="ltr">{(۱,۵), (۱,۷), (۲,۵)}</span> یک تابعه؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">x = ۱</span> دو بار با دو خروجی متفاوت (۵ و ۷) تکرار شده.</p>
+        <span class="answer-final">پاسخ نهایی: نه، این رابطه تابع نیست.</span>
+      </details>
+
+      <p><b>۲.</b> دامنهٔ <span class="ltr">f(x) = √(۴ − x)</span> رو پیدا کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>عبارت زیر رادیکال باید نامنفی باشه: <span class="ltr">۴ − x ≥ ۰ ⇒ x ≤ ۴</span></p>
+        <span class="answer-final">پاسخ نهایی: دامنه (−∞, ۴]</span>
+      </details>
+
+      <p><b>۳.</b> آیا <span class="ltr">f(x) = ۳x</span> زوجه، فرده یا هیچ‌کدام؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">f(−x) = ۳(−x) = −۳x = −f(x)</span></p>
+        <span class="answer-final">پاسخ نهایی: تابع فرده.</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش دوم -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec2">
+    <div class="sec-head">
+      <div class="sec-badge">۲</div>
+      <div><div class="sec-label">بخش دوم</div><h2>توابع پایه و آناتومی نماد لگاریتم</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — خانوادهٔ توابع پایه</div>
+      <p>این توابع، بلوک‌های ساختمانی همهٔ توابع پیچیده‌تری هستن که بعداً می‌بینی. فرمول، دامنه و برد هرکدوم رو با هم مرور می‌کنیم؛ نمایی و لگاریتمی رو اینجا فقط معرفی می‌کنیم و در بخش‌های ۳ و ۴ کامل و عمیق باهاشون کار می‌کنیم:</p>
+      <ol class="steps-list">
+        <li><b>خطی:</b> <span class="ltr">f(x) = mx + c</span> — خط راست با شیب <span class="ltr">m</span>. دامنه و برد: همهٔ اعداد حقیقی.</li>
+        <li><b>درجه دوم:</b> <span class="ltr">f(x) = ax² + bx + c</span> — سهمی. رأس، مینیمم (<span class="ltr">a>۰</span>) یا ماکزیمم (<span class="ltr">a<۰</span>) داره؛ برد به رأس بستگی داره.</li>
+        <li><b>قدرمطلق:</b> <span class="ltr">f(x) = |x|</span> — نموداری شبیه حرف <span class="ltr">V</span>. همیشه <span class="ltr">≥ ۰</span>. دامنه: همهٔ اعداد؛ برد: <span class="ltr">[۰, ∞)</span>.</li>
+        <li><b>وارون (Reciprocal):</b> <span class="ltr">f(x) = ۱/x</span> — دو شاخهٔ هذلولی‌مانند. دامنه و برد: همهٔ اعداد به‌جز صفر.</li>
+        <li><b>نمایی (Exponential):</b> <span class="ltr">f(x) = aˣ</span> (با <span class="ltr">a>۰, a≠۱</span>) — همیشه مثبت. دامنه: همهٔ اعداد؛ برد: <span class="ltr">(۰, ∞)</span>.</li>
+        <li><b>لگاریتمی (Logarithmic):</b> <span class="ltr">f(x) = log<sub>a</sub>x</span> — وارون تابع نمایی. دامنه: <span class="ltr">(۰, ∞)</span>؛ برد: همهٔ اعداد.</li>
+      </ol>
+      <div class="graph-row">
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="50" x2="112" y2="50" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/><path d="M15,80 L105,20" stroke="#2C6E8E" stroke-width="4" fill="none"/></svg>
+          <div class="cap">خطی</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="88" x2="112" y2="88" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/><path d="M15,85 Q60,5 105,85" stroke="#2E9B6F" stroke-width="4" fill="none"/></svg>
+          <div class="cap">درجه دوم</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="88" x2="112" y2="88" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/><path d="M15,15 L60,85 L105,15" stroke="#D2534A" stroke-width="4" fill="none"/></svg>
+          <div class="cap">قدرمطلق</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="50" x2="112" y2="50" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/>
+            <path d="M63,18 Q78,18 82,45 Q85,80 63,85" stroke="#7C4A99" stroke-width="4" fill="none"/>
+            <path d="M57,82 Q42,82 38,55 Q35,20 57,15" stroke="#7C4A99" stroke-width="4" fill="none"/>
+          </svg>
+          <div class="cap">وارون (هذلولی)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="80" x2="112" y2="80" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/><path d="M12,78 Q45,78 60,45 Q75,12 108,10" stroke="#D79E28" stroke-width="4" fill="none"/></svg>
+          <div class="cap">نمایی</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="80" x2="112" y2="80" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/><path d="M14,88 Q25,55 45,35 Q70,12 108,10" stroke="#1F3A52" stroke-width="4" fill="none"/></svg>
+          <div class="cap">لگاریتمی</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — بقیهٔ خانواده‌های پایه</div>
+      <ol class="steps-list">
+        <li><b>همانی (Identity):</b> <span class="ltr">f(x) = x</span> — خروجی همیشه دقیقاً برابر با ورودیه؛ نمودارش خط نیم‌سازِ ربع اول و سومه.</li>
+        <li><b>ثابت (Constant):</b> <span class="ltr">f(x) = k</span> — هرچی <span class="ltr">x</span> باشه، خروجی همیشه یک عدد ثابته؛ نمودارش یک خط افقیه.</li>
+        <li><b>چندجمله‌ای (Polynomial):</b> <span class="ltr">f(x) = axⁿ + bxⁿ⁻¹ + ...</span> — بر اساس بزرگ‌ترین توان درجه‌بندی می‌شه: درجهٔ ۱ (تابع خطی، <span class="ltr">ax+b</span>)، درجهٔ ۲ (<span class="ltr">ax²+bx+c</span>)، درجهٔ ۳ (<span class="ltr">ax³+bx²+cx+d</span>) و به همین ترتیب.</li>
+        <li><b>رادیکالی (Radical):</b> <span class="ltr">f(x) = √(عبارتی از x)</span> — رایج‌ترین نمونه‌اش <span class="ltr">√x</span> است؛ دامنه‌اش هر جاییه که زیر رادیکال نامنفی بمونه.</li>
+        <li><b>گویا (Rational):</b> <span class="ltr">f(x) = P(x)/Q(x)</span> — نسبت دو چندجمله‌ای؛ دامنه‌اش همه‌جا هست به‌جز نقاطی که مخرج <span class="ltr">Q(x)</span> رو صفر می‌کنن.</li>
+      </ol>
+      <div class="formula-box">تابع خطی (درجهٔ ۱): <span class="ltr">f(x) = ax + b</span> — دامنه و برد: R</div>
+      <p>اگه <span class="ltr">a > ۰</span> باشه خط صعودیه (از پایین‌چپ به بالا‌راست)؛ اگه <span class="ltr">a < ۰</span> باشه خط نزولیه (از بالا‌چپ به پایین‌راست).</p>
+      <div class="graph-row">
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="50" x2="112" y2="50" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/><path d="M15,85 L105,15" stroke="#2C6E8E" stroke-width="4" fill="none"/></svg>
+          <div class="cap">همانی — f(x)=x</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="80" x2="112" y2="80" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/><path d="M15,35 L105,35" stroke="#D79E28" stroke-width="4" fill="none"/></svg>
+          <div class="cap">ثابت — f(x)=k</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="50" x2="112" y2="50" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/><path d="M15,80 C40,80 45,50 60,50 C75,50 80,20 105,20" stroke="#2E9B6F" stroke-width="4" fill="none"/></svg>
+          <div class="cap">چندجمله‌ای (مثلاً درجه ۳)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="85" x2="112" y2="85" stroke="#ddd"/><line x1="20" y1="8" x2="20" y2="92" stroke="#ddd"/><path d="M20,85 Q55,85 105,15" stroke="#D2534A" stroke-width="4" fill="none"/></svg>
+          <div class="cap">رادیکالی — f(x)=√x</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="50" x2="112" y2="50" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="92" stroke="#ddd"/>
+            <path d="M63,18 Q78,18 82,45 Q85,80 63,85" stroke="#7C4A99" stroke-width="4" fill="none"/>
+            <path d="M57,82 Q42,82 38,55 Q35,20 57,15" stroke="#7C4A99" stroke-width="4" fill="none"/>
+          </svg>
+          <div class="cap">گویا — f(x)=P(x)/Q(x)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> آناتومی لگاریتم — از صفر شروع می‌کنیم</div>
+      <p>فرض کن تا حالا اسم «لگاریتم» رو نشنیدی. بیا با یک سؤال ساده شروع کنیم:</p>
+      <p style="font-weight:700;">«۲ رو به چه توانی برسونیم که بشه ۸؟»</p>
+      <p>جواب: به توان ۳، چون <span class="ltr">۲³ = ۸</span>. لگاریتم دقیقاً همین سؤال رو به‌شکل نمادین می‌نویسه:</p>
+      <div class="formula-box"><span class="ltr">log₂(۸) = ۳</span></div>
+      <p>یعنی: «لگاریتمِ ۸ در پایهٔ ۲ برابر است با ۳» — دقیقاً همون توانیه که باید ۲ رو بهش برسونیم تا ۸ بشه.</p>
+
+      <div class="anatomy-panel">
+        <div class="anatomy-head">Concept Panel — آناتومی نماد لگاریتم</div>
+        <div class="anatomy-body">
+          <div class="anatomy-expr">
+            log<sub class="part part-blue">a</sub>(<span class="part part-green">x</span>) = <span class="part part-gold">y</span>
+          </div>
+          <div class="anatomy-legend">
+            <div class="lbl"><span class="arrow" style="color:var(--blue)">↑</span><span class="fa" style="color:var(--blue)">پایه</span><span class="en">(Base)</span></div>
+            <div class="lbl"><span class="arrow" style="color:var(--green)">↑</span><span class="fa" style="color:var(--green)">درون‌لگاریتم / آرگومان</span><span class="en">(Argument)</span></div>
+            <div class="lbl"><span class="arrow" style="color:#8a6d1f">↑</span><span class="fa" style="color:#8a6d1f">توان / نتیجه</span><span class="en">(Exponent / Result)</span></div>
+          </div>
+          <div class="anatomy-note">هم‌ارزیِ کامل: &nbsp; <span class="ltr">log<sub>a</sub>(x) = y</span> &nbsp; ⇔ &nbsp; <span class="ltr">aʸ = x</span></div>
+        </div>
+      </div>
+
+      <p>به عبارت دیگه، لگاریتم و توان‌رسانی دو روی یک سکه‌ان — فقط سؤال رو برعکس می‌پرسن:</p>
+      <ol class="steps-list">
+        <li><b>توان‌رسانی</b> می‌گه: «پایه و توان رو می‌دونیم، نتیجه چیه؟» → <span class="ltr">aʸ = ?</span></li>
+        <li><b>لگاریتم</b> می‌گه: «پایه و نتیجه رو می‌دونیم، توان چیه؟» → <span class="ltr">log<sub>a</sub>(x) = ?</span></li>
+      </ol>
+      <p><b>شرط‌های لگاریتم (همیشه یادت باشه):</b> <span class="ltr">a > ۰</span> و <span class="ltr">a ≠ ۱</span> (پایه) و <span class="ltr">x > ۰</span> (چون توان‌رساندن یک عدد مثبت به هر توانی، هیچ‌وقت نتیجهٔ صفر یا منفی نمی‌ده).</p>
+      <p><b>لگاریتم‌های خاص:</b> <span class="ltr">ln x = log<sub>e</sub>x</span> (لگاریتم طبیعی) و وقتی پایه نوشته نشه معمولاً منظور <span class="ltr">log<sub>۱۰</sub>x</span> است (لگاریتم اعشاری).</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — تبدیل لگاریتم به توان</div>
+      <div class="steps">
+        <p><span class="ltr">log₂(۸) = ۳</span> رو به فرم توانی تبدیل کن.</p>
+        <p>پایه (۲) رو نگه دار، طرف راست (۳) می‌شه توان، و درون‌لگاریتم (۸) می‌شه نتیجه:</p>
+      </div>
+      <span class="result">۲³ = ۸</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — تبدیل توان به لگاریتم</div>
+      <div class="steps">
+        <p><span class="ltr">eˣ = ۵</span> رو به فرم لگاریتمی تبدیل کن (پایهٔ <span class="ltr">e</span>).</p>
+        <p>توان (<span class="ltr">x</span>) تنها می‌مونه، پایه (<span class="ltr">e</span>) میره پایین لگاریتم، نتیجه (۵) میره داخل لگاریتم:</p>
+      </div>
+      <span class="result">x = ln(۵)</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — دامنهٔ یک تابع لگاریتمی</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = log(x − ۱)</span></p>
+        <p>طبق شرط لگاریتم، درون‌لگاریتم باید مثبت باشه: <span class="ltr">x − ۱ > ۰ ⇒ x > ۱</span></p>
+      </div>
+      <span class="result">دامنه: (۱, ∞)</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> قاطی کردن پایه با آرگومان — یادت باشه پایه همیشه پایینِ «log» می‌شینه.</li>
+        <li><span class="bul">✗</span> فراموش کردن شرط <span class="ltr">x > ۰</span> و امتحان کردن لگاریتم عدد منفی یا صفر.</li>
+        <li><span class="bul">✗</span> فکر کردن <span class="ltr">log₂(۸)</span> یعنی «۲ به توان ۸» — برعکسه! خودِ عبارت دنبال «توان» می‌گرده.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> ترفند «پله‌ای»: برای تبدیل <span class="ltr">log<sub>a</sub>x = y</span> به توان، پایه رو زیر پا بذار، توان (سمت راست تساوی) رو ببر بالای پایه، و آرگومان (<span class="ltr">x</span>) رو تنها بذار تا نتیجه بشه: <span class="ltr">aʸ = x</span>.</li>
+      </ul>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال — بقیهٔ توابع پایه در یک نگاه</div>
+      <div class="steps">
+        <p><b>درجه دوم:</b> برای <span class="ltr">f(x) = x² − ۴</span>، رأس در <span class="ltr">(۰, −۴)</span> است و چون <span class="ltr">a=۱>۰</span>، رأس مینیممه.</p>
+        <p><b>قدرمطلق:</b> برای <span class="ltr">f(x) = |x − ۲|</span>، نوکِ <span class="ltr">V</span> در <span class="ltr">x = ۲</span> است.</p>
+        <p><b>وارون:</b> برای <span class="ltr">f(x) = ۱/x</span>، هرچی <span class="ltr">x</span> به صفر نزدیک بشه، <span class="ltr">y</span> خیلی بزرگ می‌شه؛ در <span class="ltr">x=۰</span> اصلاً تعریف نشده.</p>
+      </div>
+      <span class="result">هرکدوم از این‌ها یک «امضای بصری» خاص خودشون رو دارن که در بخش ۸ با هم مقایسه‌شون می‌کنیم.</span>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> <span class="ltr">log₅(۲۵)</span> رو به فرم توانی تبدیل و مقدارش رو پیدا کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>فرم توانی: <span class="ltr">۵ˣ = ۲۵</span></p>
+        <p>می‌دونیم <span class="ltr">۵² = ۲۵</span></p>
+        <span class="answer-final">پاسخ نهایی: log₅(۲۵) = ۲</span>
+      </details>
+
+      <p><b>۲.</b> دامنهٔ <span class="ltr">f(x) = log(۶ − x)</span> رو پیدا کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">۶ − x > ۰ ⇒ x < ۶</span></p>
+        <span class="answer-final">پاسخ نهایی: دامنه (−∞, ۶)</span>
+      </details>
+
+      <p><b>۳.</b> <span class="ltr">۴² = ۱۶</span> رو به فرم لگاریتمی بنویس.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>پایه (۴) میره پایین log، توان (۲) تنها می‌مونه، نتیجه (۱۶) میره داخل لگاریتم.</p>
+        <span class="answer-final">پاسخ نهایی: log₄(۱۶) = ۲</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+
+  <!-- ========================================================= -->
+  <!-- بخش جدید — معادلهٔ درجه دوم -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec3">
+    <div class="sec-head">
+      <div class="sec-badge">۳</div>
+      <div><div class="sec-label">بخش سوم</div><h2>معادلهٔ درجه دوم و نمودار سهمی</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — دلتا (Δ) و تعداد ریشه‌ها</div>
+      <p>قبل از اینکه بریم سراغ پیدا کردن ریشه‌های معادلهٔ درجه دوم <span class="ltr">ax² + bx + c = ۰</span>، اول باید ببینیم اصلاً ریشه‌ای وجود داره یا نه. این کار دقیقاً وظیفهٔ <b>دلتا</b>ست:</p>
+      <div class="formula-box"><span class="ltr">Δ = b² − ۴ac</span></div>
+      <ol class="steps-list">
+        <li><b>اگه Δ &gt; ۰:</b> معادله دو ریشهٔ حقیقی و متمایز داره.</li>
+        <li><b>اگه Δ = ۰:</b> معادله فقط یک ریشه داره (ریشهٔ مضاعف).</li>
+        <li><b>اگه Δ &lt; ۰:</b> معادله هیچ ریشهٔ حقیقی‌ای نداره.</li>
+      </ol>
+      <p><b>چرا این کار مهمه؟</b> چون اگه اول این چک رو نکنی، ممکنه وقت زیادی رو صرف دنبال‌کردن ریشه‌ای کنی که اصلاً وجود نداره!</p>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — دو روش برای پیدا کردن ریشه‌ها</div>
+      <ol class="steps-list">
+        <li><b>روش تجزیه (فاکتورگیری):</b> وقتی ضریب <span class="ltr">a=۱</span> باشه، دنبال دو عدد بگرد که حاصل‌ضربشون <span class="ltr">c</span> و حاصل‌جمعشون <span class="ltr">−b</span> باشه؛ بعد معادله رو به‌شکل <span class="ltr">(x − r۱)(x − r۲) = ۰</span> بنویس.</li>
+        <li><b>روش فرمول دلتا (وقتی تجزیه راحت جواب نمی‌ده):</b> از فرمول کلی زیر استفاده کن.</li>
+      </ol>
+      <div class="formula-box"><span class="ltr">x<sub>۱,۲</sub> = (−b ± √Δ) / (۲a)</span></div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — چک کردن دلتا قبل از حل</div>
+      <div class="steps">
+        <p><span class="ltr">x² + ۲x + ۵ = ۰</span> چند ریشهٔ حقیقی داره؟</p>
+        <p><span class="ltr">Δ = ۲² − ۴(۱)(۵) = ۴ − ۲۰ = −۱۶</span></p>
+      </div>
+      <span class="result">چون Δ منفیه، این معادله هیچ ریشهٔ حقیقی‌ای نداره.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — حل با روش تجزیه</div>
+      <div class="steps">
+        <p><span class="ltr">x² − ۵x + ۶ = ۰</span></p>
+        <p>دنبال دو عدد می‌گردیم که ضربشون ۶ و جمعشون ۵ باشه: اعداد ۲ و ۳.</p>
+        <p>پس: <span class="ltr">(x − ۲)(x − ۳) = ۰</span></p>
+      </div>
+      <span class="result">x = ۲ یا x = ۳</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — حل با فرمول دلتا</div>
+      <div class="steps">
+        <p><span class="ltr">۲x² − ۳x − ۲ = ۰</span></p>
+        <p><span class="ltr">Δ = (−۳)² − ۴(۲)(−۲) = ۹ + ۱۶ = ۲۵</span></p>
+        <p><span class="ltr">x = (۳ ± √۲۵) / ۴ = (۳ ± ۵) / ۴</span></p>
+      </div>
+      <span class="result">x = ۲ یا x = −۱/۲</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — حالت‌های خاص و میان‌برهای سریع</div>
+      <table class="law-table">
+        <tr><th>شرط ضرایب</th><th>معادله</th><th>ریشه‌ها</th></tr>
+        <tr><td><span class="ltr">b = c = ۰</span></td><td><span class="ltr">ax² = ۰</span></td><td><span class="ltr">x₁ = x₂ = ۰</span></td></tr>
+        <tr><td><span class="ltr">b = ۰</span></td><td><span class="ltr">ax² + c = ۰</span></td><td><span class="ltr">x = ±√(−c/a)</span></td></tr>
+        <tr><td><span class="ltr">c = ۰</span></td><td><span class="ltr">ax² + bx = ۰</span></td><td><span class="ltr">x₁ = ۰ , x₂ = −b/a</span></td></tr>
+      </table>
+      <p><b>دو میان‌بر طلایی برای امتحان:</b></p>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span>اگه <span class="ltr">a + c = b</span> باشه، یکی از ریشه‌ها حتماً <span class="ltr">−۱</span> است (و دیگری <span class="ltr">−c/a</span>).</li>
+        <li><span class="bul" style="color:var(--blue)">•</span>اگه <span class="ltr">a + b + c = ۰</span> باشه، یکی از ریشه‌ها حتماً <span class="ltr">۱</span> است (و دیگری <span class="ltr">c/a</span>).</li>
+      </ul>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — رابطهٔ ریشه‌ها با ضرایب و ساخت معادله</div>
+      <p>اگه <span class="ltr">α</span> و <span class="ltr">β</span> دو ریشهٔ معادلهٔ <span class="ltr">ax² + bx + c = ۰</span> باشن:</p>
+      <table class="law-table">
+        <tr><th>مقدار</th><th>فرمول</th></tr>
+        <tr><td>مجموع ریشه‌ها</td><td><span class="ltr">S = α + β = −b/a</span></td></tr>
+        <tr><td>حاصل‌ضرب ریشه‌ها</td><td><span class="ltr">P = α·β = c/a</span></td></tr>
+        <tr><td>قدرمطلق تفاضل ریشه‌ها</td><td><span class="ltr">D = |α − β| = √Δ / |a|</span></td></tr>
+      </table>
+      <p>و برعکس: اگه مجموع و حاصل‌ضرب ریشه‌ها رو بدونیم، می‌تونیم خودِ معادله رو بسازیم:</p>
+      <div class="formula-box"><span class="ltr">x² − Sx + P = ۰</span></div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۴ — ساخت معادله از روی ریشه‌ها</div>
+      <div class="steps">
+        <p>می‌خوایم معادله‌ای بسازیم که ریشه‌هاش <span class="ltr">−۲</span> و <span class="ltr">۵</span> باشن.</p>
+        <p><span class="ltr">S = −۲ + ۵ = ۳</span> و <span class="ltr">P = (−۲)(۵) = −۱۰</span></p>
+      </div>
+      <span class="result">معادله: x² − ۳x − ۱۰ = ۰</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — تحلیل نمودار سهمی <span class="ltr">y = ax² + bx + c</span></div>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span><b>دهانهٔ سهمی:</b> اگه <span class="ltr">a > ۰</span> رو به بالاست؛ اگه <span class="ltr">a < ۰</span> رو به پایینه.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>محل برخورد با محور y:</b> اگه <span class="ltr">c > ۰</span> بالای محور x است؛ اگه <span class="ltr">c < ۰</span> پایین محور x است.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>شیب خط مماس در نقطهٔ برخورد با محور y:</b> اگه <span class="ltr">b > ۰</span> مثبته؛ اگه <span class="ltr">b = ۰</span> صفره (مماس افقی)؛ اگه <span class="ltr">b < ۰</span> منفیه.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>مختصات رأس:</b> <span class="ltr">S = (−b/۲a , −Δ/۴a)</span> — اگه <span class="ltr">a>۰</span> این نقطه مینیمم تابعه، اگه <span class="ltr">a<۰</span> ماکزیمم تابعه.</li>
+      </ul>
+
+      <p><b>چطور از روی شکل، علامت b رو تشخیص بدیم؟</b> دو نشونهٔ بصری داریم که هر دو با هم هماهنگ‌ان (هر کدوم رو دیدی، همون کافیه):</p>
+      <ol class="steps-list">
+        <li><b>نشونهٔ اول — محل رأس نسبت به محور y:</b> فرض کن دهانهٔ سهمی رو (علامت <span class="ltr">a</span>) از قبل می‌دونی. اگه رأس <b>سمت چپِ</b> محور y باشه، <span class="ltr">b</span> <b>هم‌علامتِ</b> <span class="ltr">a</span> است. اگه رأس <b>سمت راستِ</b> محور y باشه، <span class="ltr">b</span> <b>مخالفِ</b> <span class="ltr">a</span> است. اگه رأس دقیقاً <b>روی</b> محور y باشه، <span class="ltr">b = ۰</span>.</li>
+        <li><b>نشونهٔ دوم — شیب خط مماس در نقطهٔ برخورد با محور y:</b> همون‌جایی که سهمی محور y رو قطع می‌کنه، اگه مماسِ منحنی «رو به بالا» کج باشه (شیب مثبت) → <span class="ltr">b > ۰</span>. اگه مماس افقی باشه → <span class="ltr">b = ۰</span> (این یعنی دقیقاً همون‌جا رأسه!). اگه مماس «رو به پایین» کج باشه (شیب منفی) → <span class="ltr">b < ۰</span>.</li>
+      </ol>
+
+      <div class="graph-row">
+        <div class="graph-box">
+          <svg viewBox="0 0 130 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="100" x2="120" y2="100" stroke="#ddd" stroke-width="1.3"/>
+            <line x1="65" y1="8" x2="65" y2="110" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <path d="M2,15 Q30,95 110,15" stroke="#2C6E8E" stroke-width="4" fill="none"/>
+            <circle cx="30" cy="93" r="4" fill="#D2534A"/>
+            <circle cx="65" cy="45" r="4" fill="#1F3A52"/>
+            <line x1="50" y1="60" x2="80" y2="30" stroke="#2E9B6F" stroke-width="2.5"/>
+          </svg>
+          <div class="cap">رأس چپِ محور y ⇐ b هم‌علامتِ a (اینجا b&gt;۰) — مماس رو به بالا</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 130 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="100" x2="120" y2="100" stroke="#ddd" stroke-width="1.3"/>
+            <line x1="65" y1="8" x2="65" y2="110" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <path d="M15,15 Q65,95 115,15" stroke="#D79E28" stroke-width="4" fill="none"/>
+            <circle cx="65" cy="93" r="4.5" fill="#1F3A52"/>
+            <line x1="45" y1="93" x2="85" y2="93" stroke="#2E9B6F" stroke-width="2.5"/>
+          </svg>
+          <div class="cap">رأس دقیقاً روی محور y ⇐ b = ۰ — مماس کاملاً افقی</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 130 120" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="100" x2="120" y2="100" stroke="#ddd" stroke-width="1.3"/>
+            <line x1="65" y1="8" x2="65" y2="110" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <path d="M20,15 Q100,95 128,15" stroke="#D2534A" stroke-width="4" fill="none"/>
+            <circle cx="100" cy="93" r="4" fill="#D2534A"/>
+            <circle cx="65" cy="45" r="4" fill="#1F3A52"/>
+            <line x1="50" y1="30" x2="80" y2="60" stroke="#2E9B6F" stroke-width="2.5"/>
+          </svg>
+          <div class="cap">رأس راستِ محور y ⇐ b مخالفِ a (اینجا b&lt;۰) — مماس رو به پایین</div>
+        </div>
+      </div>
+      <p style="font-size:.85rem; color:#555;">در هر سه شکل بالا، دهانهٔ سهمی رو به بالاست (یعنی <span class="ltr">a > ۰</span>)؛ دایرهٔ قرمز رأسه و دایرهٔ سرمه‌ای، نقطهٔ برخورد با محور y — خط سبز هم مماسِ همون نقطه‌ست.</p>
+
+      <div class="graph-row two">
+        <div class="graph-box">
+          <svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg">
+            <line x1="8" y1="130" x2="152" y2="130" stroke="#bbb" stroke-width="1.3"/>
+            <line x1="80" y1="10" x2="80" y2="140" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <path d="M20,20 Q80,145 140,20" stroke="#2E9B6F" stroke-width="4" fill="none"/>
+            <circle cx="80" cy="128" r="4" fill="#D2534A"/>
+            <text x="86" y="126" font-size="11" fill="#D2534A">رأس (مینیمم)</text>
+            <circle cx="35" cy="55" r="4" fill="#1F3A52"/>
+            <circle cx="125" cy="55" r="4" fill="#1F3A52"/>
+            <text x="20" y="45" font-size="10" fill="#1F3A52">ریشه</text>
+            <text x="115" y="45" font-size="10" fill="#1F3A52">ریشه</text>
+            <text x="84" y="24" font-size="10" fill="#777">محور تقارن</text>
+          </svg>
+          <div class="cap">دهانه رو به بالا — a &gt; ۰ (رأس = مینیمم)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 160 150" xmlns="http://www.w3.org/2000/svg">
+            <line x1="8" y1="80" x2="152" y2="80" stroke="#bbb" stroke-width="1.3"/>
+            <line x1="80" y1="10" x2="80" y2="140" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <path d="M20,130 Q80,5 140,130" stroke="#D2534A" stroke-width="4" fill="none"/>
+            <circle cx="80" cy="12" r="4" fill="#2E9B6F"/>
+            <text x="86" y="18" font-size="11" fill="#2E9B6F">رأس (ماکزیمم)</text>
+            <circle cx="45" cy="95" r="4" fill="#1F3A52"/>
+            <circle cx="115" cy="95" r="4" fill="#1F3A52"/>
+            <text x="30" y="110" font-size="10" fill="#1F3A52">ریشه</text>
+            <text x="105" y="110" font-size="10" fill="#1F3A52">ریشه</text>
+          </svg>
+          <div class="cap">دهانه رو به پایین — a &lt; ۰ (رأس = ماکزیمم)</div>
+        </div>
+      </div>
+
+      <table class="law-table">
+        <tr><th>دلتا</th><th>تعداد برخورد با محور x</th></tr>
+        <tr><td><span class="ltr">Δ > ۰</span></td><td>۲ نقطه (سهمی محور x رو قطع می‌کنه)</td></tr>
+        <tr><td><span class="ltr">Δ = ۰</span></td><td>۱ نقطه (سهمی فقط مماس بر محور x است)</td></tr>
+        <tr><td><span class="ltr">Δ < ۰</span></td><td>۰ نقطه — سهمی همیشه یک‌طرف محور x می‌مونه</td></tr>
+      </table>
+
+      <div class="graph-row">
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="85" x2="112" y2="85" stroke="#ddd"/><path d="M15,80 Q60,10 105,80" stroke="#2E9B6F" stroke-width="4" fill="none"/><circle cx="35" cy="50" r="3" fill="#1F3A52"/><circle cx="85" cy="50" r="3" fill="#1F3A52"/></svg>
+          <div class="cap">Δ &gt; ۰ — ۲ نقطهٔ برخورد</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="85" x2="112" y2="85" stroke="#ddd"/><path d="M15,80 Q60,20 105,80" stroke="#D79E28" stroke-width="4" fill="none"/><circle cx="60" cy="80" r="3.5" fill="#1F3A52"/></svg>
+          <div class="cap">Δ = ۰ — فقط مماس (۱ نقطه)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="85" x2="112" y2="85" stroke="#ddd"/><path d="M15,60 Q60,10 105,60" stroke="#D2534A" stroke-width="4" fill="none"/></svg>
+          <div class="cap">Δ &lt; ۰ — هیچ برخوردی نیست</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۵ — تحلیل کامل یک سهمی</div>
+      <div class="steps">
+        <p><span class="ltr">y = −x² + ۴x − ۳</span> را تحلیل کن.</p>
+        <p>چون <span class="ltr">a=−۱<۰</span>، دهانه رو به پایینه. چون <span class="ltr">c=−۳<۰</span>، سهمی زیر محور x، محور y رو قطع می‌کنه.</p>
+        <p>رأس: <span class="ltr">Δ = ۱۶−۱۲=۴</span>، پس <span class="ltr">S = (−۴/−۲ , −۴/−۴) = (۲, ۱)</span></p>
+      </div>
+      <span class="result">دهانه پایین، رأس (۲،۱) که چون a<۰ است، این نقطه ماکزیمم تابعه.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۶ — تشخیص علامت b فقط از روی شکل (بدون فرمول)</div>
+      <div class="steps">
+        <p><b>حالت الف:</b> یک سهمی داریم که دهانه‌اش رو به بالاست (<span class="ltr">a > ۰</span>) و رأسش سمت <b>چپِ</b> محور y قرار داره.</p>
+        <p>طبق قاعده: چون رأس سمت چپه، <span class="ltr">b</span> باید هم‌علامتِ <span class="ltr">a</span> باشه؛ و چون <span class="ltr">a>۰</span>...</p>
+      </div>
+      <span class="result">پس b > ۰</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۷ — تشخیص علامت b (حالت دوم)</div>
+      <div class="steps">
+        <p><b>حالت ب:</b> این‌بار دهانهٔ سهمی رو به پایینه (<span class="ltr">a < ۰</span>) و رأسش سمت <b>راستِ</b> محور y قرار داره.</p>
+        <p>طبق قاعده: چون رأس سمت راسته، <span class="ltr">b</span> باید مخالفِ <span class="ltr">a</span> باشه؛ و چون <span class="ltr">a<۰</span>...</p>
+      </div>
+      <span class="result">پس b > ۰ (مخالفِ a منفی، یعنی مثبت)</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۸ — تشخیص از روی مماس در نقطهٔ برخورد با محور y</div>
+      <div class="steps">
+        <p>در نمودار <span class="ltr">y = x² − ۴</span>، نقطهٔ برخورد با محور y کجاست و مماس اونجا چه شیبی داره؟</p>
+        <p>در <span class="ltr">x=۰</span>: <span class="ltr">y=−۴</span>. مشتق (شیب مماس) برابر <span class="ltr">۲x</span> است که در <span class="ltr">x=۰</span> می‌شه صفر — یعنی مماس افقیه.</p>
+        <p>این با فرمول هم می‌خونه: اینجا <span class="ltr">b=۰</span> است (چون معادله <span class="ltr">x²+۰x−۴</span> است).</p>
+      </div>
+      <span class="result">مماس افقی ⇐ b = ۰ — و دقیقاً همین‌جا (روی محور y) رأس سهمی هم هست.</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> رفتن مستقیم سراغ فرمول دلتا بدون چک کردن اینکه شاید تجزیه سریع‌تر جواب بده.</li>
+        <li><span class="bul">✗</span> فراموش کردن علامت منفی پشت <span class="ltr">b</span> در فرمول <span class="ltr">−b/۲a</span> برای رأس.</li>
+        <li><span class="bul">✗</span> قاطی کردن <span class="ltr">S = −b/a</span> (مجموع ریشه‌ها) با <span class="ltr">−b/۲a</span> (مختصهٔ x رأس).</li>
+        <li><span class="bul">✗</span> فراموش کردن اینکه در حالت <span class="ltr">b=۰</span>، اگه <span class="ltr">−c/a</span> منفی بشه، ریشهٔ حقیقی وجود نداره.</li>
+        <li><span class="bul">✗</span> فکر کردن اینکه رأس سمت چپ همیشه یعنی <span class="ltr">b>۰</span> — این فقط وقتیه که <span class="ltr">a>۰</span> باشه؛ اگه دهانه رو به پایین باشه، قاعده برعکس می‌شه.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> همیشه اول چک کن ببین <span class="ltr">a+b+c=۰</span> یا <span class="ltr">a+c=b</span> هست یا نه — اگه بود، یک ریشه رو فوری و بدون هیچ محاسبه‌ای داری.</li>
+        <li><span class="bul">★</span> اگه فقط دنبال «تعداد ریشه» هستی، نیازی نیست کل معادله رو حل کنی؛ فقط علامت دلتا رو حساب کن.</li>
+        <li><span class="bul">★</span> برای تشخیص سریع علامت b از روی شکل: اول دهانه (علامت a) رو ببین، بعد رأس رو نسبت به محور y چک کن — «چپ = هم‌علامت»، «راست = مخالف»، «روی محور = صفر».</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۰.</b> سهمی‌ای داریم با دهانهٔ رو به پایین (<span class="ltr">a<۰</span>) که رأسش دقیقاً روی محور y قرار داره. علامت b چیه؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>وقتی رأس دقیقاً روی محور y باشه، همیشه یعنی <span class="ltr">b=۰</span> — این قاعده به علامت a اصلاً کاری نداره.</p>
+        <span class="answer-final">پاسخ نهایی: b = ۰</span>
+      </details>
+
+      <p><b>۱.</b> معادلهٔ <span class="ltr">x² − ۷x + ۱۲ = ۰</span> را با روش تجزیه حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>دو عدد با ضرب ۱۲ و جمع ۷: اعداد ۳ و ۴.</p>
+        <span class="answer-final">پاسخ نهایی: x = ۳ یا x = ۴</span>
+      </details>
+
+      <p><b>۲.</b> بدون حل کامل، تعداد ریشه‌های <span class="ltr">۳x² − x + ۲ = ۰</span> را مشخص کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">Δ = ۱ − ۲۴ = −۲۳</span></p>
+        <span class="answer-final">پاسخ نهایی: هیچ ریشهٔ حقیقی‌ای ندارد (Δ منفی است).</span>
+      </details>
+
+      <p><b>۳.</b> معادله‌ای بساز که ریشه‌هاش <span class="ltr">۱</span> و <span class="ltr">−۶</span> باشن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">S = ۱ + (−۶) = −۵</span> و <span class="ltr">P = ۱×(−۶) = −۶</span></p>
+        <span class="answer-final">پاسخ نهایی: x² + ۵x − ۶ = ۰</span>
+      </details>
+
+      <p><b>۴.</b> در <span class="ltr">y = x² − ۴x + ۳</span>، رأس سهمی کجاست و چه نوع نقطه‌ایه؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">Δ = ۱۶ − ۱۲ = ۴</span>، پس <span class="ltr">S = (۴/۲ , −۴/۴) = (۲, −۱)</span></p>
+        <p>چون <span class="ltr">a=۱>۰</span>، این نقطه مینیممه.</p>
+        <span class="answer-final">پاسخ نهایی: رأس در (۲, −۱)، مینیمم تابع.</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش جدید — قدرمطلق -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec4">
+    <div class="sec-head">
+      <div class="sec-badge">۴</div>
+      <div><div class="sec-label">بخش چهارم</div><h2>قدرمطلق — معادله و نامعادله کامل</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — تعریف و ویژگی‌های قدرمطلق</div>
+      <div class="formula-box"><span class="ltr">|x| = x</span> &nbsp;اگر&nbsp; <span class="ltr">x ≥ ۰</span> &nbsp;،&nbsp; <span class="ltr">|x| = −x</span> &nbsp;اگر&nbsp; <span class="ltr">x < ۰</span></div>
+      <p><b>تعریف دیگر (هندسی):</b> <span class="ltr">|x|</span> یعنی فاصلهٔ نقطهٔ <span class="ltr">x</span> از مبدأ مختصات (صفر) روی محور اعداد — و فاصله همیشه نامنفیه.</p>
+      <p><b>ویژگی‌های مهم:</b></p>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">|−x| = |x|</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">|xy| = |x||y|</span> و <span class="ltr">|x/y| = |x|/|y|</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">|x| ≥ ۰</span> همیشه (هیچ‌وقت منفی نمی‌شه)</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">|xⁿ| = |x|ⁿ</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span>اگه <span class="ltr">n</span> زوج باشه: <span class="ltr">|x|ⁿ = |xⁿ| = xⁿ</span></li>
+      </ul>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — حل معادلهٔ قدرمطلق</div>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">|x| = a</span> (با <span class="ltr">a > ۰</span>) &nbsp;⇒&nbsp; <span class="ltr">x = ±a</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">|x| = |y|</span> &nbsp;⇔&nbsp; <span class="ltr">x² = y²</span> &nbsp;⇔&nbsp; <span class="ltr">x = ±y</span></li>
+      </ul>
+      <p><b>نکتهٔ حیاتی:</b> اگه <span class="ltr">|x| = a</span> با <span class="ltr">a</span> منفی داشته باشیم، این معادله هیچ جوابی نداره — چون قدرمطلق هیچ‌وقت منفی نمی‌شه.</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — معادلهٔ سادهٔ قدرمطلق</div>
+      <div class="steps">
+        <p><span class="ltr">|x − ۳| = ۲</span></p>
+        <p>طبق قاعده: <span class="ltr">x − ۳ = ۲</span> یا <span class="ltr">x − ۳ = −۲</span></p>
+      </div>
+      <span class="result">x = ۵ یا x = ۱</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — تساوی دو قدرمطلق</div>
+      <div class="steps">
+        <p><span class="ltr">|۲x + ۱| = |x − ۴|</span></p>
+        <p>طبق قاعده: <span class="ltr">۲x + ۱ = x − ۴</span> یا <span class="ltr">۲x + ۱ = −(x − ۴)</span></p>
+        <p>حالت اول: <span class="ltr">x = −۵</span>. حالت دوم: <span class="ltr">۳x = ۳ ⇒ x = ۱</span></p>
+      </div>
+      <span class="result">x = −۵ یا x = ۱</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — حل نامعادلهٔ قدرمطلق</div>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">|x| ≤ a</span> (با <span class="ltr">a>۰</span>) &nbsp;⇒&nbsp; <span class="ltr">−a ≤ x ≤ a</span> (یک بازهٔ بسته و پیوسته)</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">|x| ≥ a</span> (با <span class="ltr">a>۰</span>) &nbsp;⇒&nbsp; <span class="ltr">x ≥ a</span> یا <span class="ltr">x ≤ −a</span> (دو بازهٔ جدا از هم)</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">a < |x| < b</span> &nbsp;⇒&nbsp; <span class="ltr">a<x<b</span> یا <span class="ltr">−b<x<−a</span></li>
+      </ul>
+      <p><b>یادت باشه:</b> علامت «کوچک‌تر» همیشه یک بازهٔ پیوستهٔ «بین دو عدد» می‌سازه؛ علامت «بزرگ‌تر» همیشه دو بازهٔ جدا از هم می‌سازه.</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — نامعادلهٔ «کوچک‌تر»</div>
+      <div class="steps">
+        <p><span class="ltr">|x − ۱| < ۳</span></p>
+        <p>طبق قاعده: <span class="ltr">−۳ < x − ۱ < ۳</span></p>
+        <p>هر سه طرف <span class="ltr">+۱</span> می‌کنیم: <span class="ltr">−۲ < x < ۴</span></p>
+      </div>
+      <span class="result">جواب: −۲ < x < ۴</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۴ — نامعادلهٔ «بزرگ‌تر»</div>
+      <div class="steps">
+        <p><span class="ltr">|x| ≥ ۲</span></p>
+        <p>طبق قاعده، دو بازهٔ جدا داریم:</p>
+      </div>
+      <span class="result">جواب: x ≥ ۲ یا x ≤ −۲</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> فراموش کردن حالت دوم (علامت منفی) وقتی معادله یا نامعادله رو باز می‌کنیم.</li>
+        <li><span class="bul">✗</span> قاطی کردن جواب <span class="ltr">|x|<a</span> (یک بازهٔ پیوسته) با جواب <span class="ltr">|x|>a</span> (دو بازهٔ جدا).</li>
+        <li><span class="bul">✗</span> جواب دادن به <span class="ltr">|x| = −۵</span> بدون چک کردن اینکه اصلاً همچین معادله‌ای جواب نداره.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> همیشه اول ببین سمت راست تساوی یا نامساوی، منفیه یا مثبت — اگه منفی بود، فوری بگو «بدون جواب».</li>
+        <li><span class="bul">★</span> علامت «کوچک‌تر» (<span class="ltr"><</span>) بازهٔ بستهٔ بین دو عدد می‌سازه؛ علامت «بزرگ‌تر» (<span class="ltr">></span>) به دو طرف باز می‌شه.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> <span class="ltr">|x + ۴| = ۷</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">x+۴=۷</span> یا <span class="ltr">x+۴=−۷</span></p>
+        <span class="answer-final">پاسخ نهایی: x = ۳ یا x = −۱۱</span>
+      </details>
+
+      <p><b>۲.</b> <span class="ltr">|x − ۲| ≤ ۵</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">−۵ ≤ x−۲ ≤ ۵ ⇒ −۳ ≤ x ≤ ۷</span></p>
+        <span class="answer-final">پاسخ نهایی: −۳ ≤ x ≤ ۷</span>
+      </details>
+
+      <p><b>۳.</b> <span class="ltr">|۳x − ۱| > ۵</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">۳x−۱>۵</span> یا <span class="ltr">۳x−۱<−۵</span></p>
+        <p>حالت اول: <span class="ltr">x>۲</span>. حالت دوم: <span class="ltr">x<−۴/۳</span></p>
+        <span class="answer-final">پاسخ نهایی: x > ۲ یا x < −۴/۳</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش جدید — معادلات گویا و گنگ -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec5">
+    <div class="sec-head">
+      <div class="sec-badge">۵</div>
+      <div><div class="sec-label">بخش پنجم</div><h2>معادلات گویا و گنگ</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — معادلات گویا (کسری)</div>
+      <p>معادلهٔ گویا معادله‌ایه که مجهول (<span class="ltr">x</span>) در مخرج یک یا چند کسر ظاهر شده. اولین قدم همیشه پیدا کردن دامنه‌ست:</p>
+      <div class="formula-box"><span class="ltr">D = R − {ریشه‌های مخرج}</span></div>
+      <p>یعنی هر عددی که مخرج رو صفر کنه، باید از دامنه کنار گذاشته بشه.</p>
+      <p><b>دو روش برای حل:</b></p>
+      <ol class="steps-list">
+        <li><b>ضرب‌طرفین‌وسط (وقتی معادله به‌شکل یک نسبت سادهٔ <span class="ltr">a/b = c/d</span> است):</b> ضرب کن: <span class="ltr">a·d = b·c</span></li>
+        <li><b>ضرب در مخرج مشترک (وقتی بیش از دو کسر داریم):</b> هر دو طرف معادله رو در کوچک‌ترین مخرج مشترک ضرب کن تا کسرها از بین برن.</li>
+      </ol>
+      <p><b>نکتهٔ حیاتی:</b> در آخر کار، همیشه جواب‌ها رو با دامنه چک کن — اگه یک جواب دقیقاً همون نقطه‌ای بود که مخرج رو صفر می‌کنه، اون جواب باید کنار گذاشته بشه.</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — ضرب طرفین‌وسط</div>
+      <div class="steps">
+        <p><span class="ltr">(x² − ۴)/(x + ۳) = ۳(x + ۲)/(x − ۱)</span></p>
+        <p>دامنه: <span class="ltr">x ≠ −۳</span> و <span class="ltr">x ≠ ۱</span></p>
+        <p>ضرب طرفین‌وسط: <span class="ltr">(x²−۴)(x−۱) = ۳(x+۲)(x+۳)</span> — بعد از باز کردن و ساده‌سازی، معادله حل می‌شه.</p>
+      </div>
+      <span class="result">در پایان، هر ریشه‌ای که به‌دست اومد رو حتماً با دامنه (x≠−۳ و x≠۱) چک کن.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — ضرب در مخرج مشترک</div>
+      <div class="steps">
+        <p><span class="ltr">۲/(x − ۱) = ۱ + ۳/(x + ۱)</span></p>
+        <p>دامنه: <span class="ltr">x ≠ ۱</span> و <span class="ltr">x ≠ −۱</span></p>
+        <p>هر دو طرف رو در <span class="ltr">(x−۱)(x+۱)</span> ضرب می‌کنیم: <span class="ltr">۲(x+۱) = (x−۱)(x+۱) + ۳(x−۱)</span></p>
+      </div>
+      <span class="result">بعد از باز کردن پرانتزها به یک معادلهٔ درجه دوم می‌رسیم که با روش‌های بخش قبل حلش می‌کنیم.</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — معادلات گنگ (رادیکالی)</div>
+      <p>معادلهٔ گنگ معادله‌ایه که مجهول زیر یک رادیکال قرار گرفته. برای <span class="ltr">√f(x)</span>:</p>
+      <div class="formula-box">دامنه: <span class="ltr">f(x) ≥ ۰</span> &nbsp;|&nbsp; برد: <span class="ltr">[۰, +∞)</span></div>
+      <ol class="steps-list">
+        <li><b>روش اول — مجزا کردن و به توان دو رساندن:</b> اول رادیکال رو تنها کن، بعد از هر دو طرف به توان دو برسون: <span class="ltr">√f(x) = B(x) ⇒ f(x) = B(x)²</span> (به شرطی که <span class="ltr">B(x) ≥ ۰</span> باشه).</li>
+        <li><b>روش دوم — وقتی دو رادیکال داریم:</b> اول رادیکال‌ها رو در دو طرف معادله جدا کن، بعد دو بار پشت‌سرهم به توان دو برسون.</li>
+        <li><b>روش سوم — روش نموداری:</b> دو طرف معادله رو به‌عنوان دو تابع جدا رسم کن؛ نقطهٔ تلاقی‌شون جواب معادله‌ست.</li>
+      </ol>
+
+      <div class="graph-box" style="max-width:280px; margin:14px auto;">
+        <svg viewBox="0 0 180 140" xmlns="http://www.w3.org/2000/svg">
+          <line x1="10" y1="120" x2="170" y2="120" stroke="#bbb" stroke-width="1.3"/>
+          <line x1="10" y1="10" x2="10" y2="130" stroke="#bbb" stroke-width="1.3"/>
+          <path d="M12,118 Q60,118 100,60 Q130,20 160,15" stroke="#2C6E8E" stroke-width="4" fill="none"/>
+          <line x1="10" y1="30" x2="170" y2="30" stroke="#D79E28" stroke-width="3"/>
+          <circle cx="128" cy="30" r="5" fill="#D2534A"/>
+          <text x="100" y="45" font-size="11" fill="#D2534A">نقطهٔ تلاقی = جواب</text>
+          <text x="150" y="12" font-size="11" fill="#2C6E8E">y₁=√(x+۴)</text>
+          <text x="15" y="24" font-size="11" fill="#D79E28">y₂=۵</text>
+        </svg>
+        <div class="cap">مثال √(x+۴)=۵ &nbsp;→&nbsp; دو تابع y₁=√(x+۴) و y₂=۵ رو رسم می‌کنیم؛ x نقطهٔ تلاقی (اینجا x=۲۱) دقیقاً جواب معادله‌ست.</div>
+      </div>
+
+      <p><b>نکتهٔ حیاتی:</b> به توان دو رساندن می‌تونه جواب اضافی (Extraneous) تولید کنه؛ پس در پایان، هر جوابی که پیدا کردی رو حتماً در معادلهٔ اصلی جای‌گذاری و چک کن.</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — روش اول</div>
+      <div class="steps">
+        <p><span class="ltr">√(x + ۴) = ۵</span></p>
+        <p>رادیکال از قبل تنهاست؛ هر دو طرف رو به توان دو می‌رسونیم: <span class="ltr">x + ۴ = ۲۵</span></p>
+      </div>
+      <span class="result">x = ۲۱ — چک: √(۲۱+۴)=√۲۵=۵ ✓</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۴ — روش دوم (دو رادیکال)</div>
+      <div class="steps">
+        <p><span class="ltr">√(x + ۱) + √(x + ۵) = ۲</span></p>
+        <p>یکی از رادیکال‌ها رو تنها می‌کنیم: <span class="ltr">√(x+۱) = ۲ − √(x+۵)</span>، بعد هر دو طرف رو به توان دو می‌رسونیم و دوباره رادیکال باقیمانده رو تنها کرده و یک‌بار دیگه به توان دو می‌رسونیم.</p>
+      </div>
+      <span class="result">در پایان، جواب به‌دست‌اومده رو حتماً در معادلهٔ اصلی چک کن (این روش مستعد جواب اضافیه).</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> در معادلات گویا، فراموش کردن پیدا کردن دامنه قبل از حل و قبول‌کردن جوابی که مخرج رو صفر می‌کنه.</li>
+        <li><span class="bul">✗</span> در معادلات گنگ، فراموش کردن چک نهایی جواب‌ها در معادلهٔ اصلی و قبول کردن یک جواب اضافیِ ناشی از به‌توان‌دو‌رساندن.</li>
+        <li><span class="bul">✗</span> به توان دو رساندن قبل از تنها کردن کامل رادیکال.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> اگه یک طرفِ معادلهٔ گنگ (بعد از تنها کردن رادیکال) منفی بود، فوری بگو «بدون جواب» — چون رادیکال هیچ‌وقت منفی نمی‌شه.</li>
+        <li><span class="bul">★</span> برای معادلهٔ گویا، همیشه قبل از هر کاری دامنه رو بنویس؛ این کار از قبول کردن جواب غلط جلوگیری می‌کنه.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> دامنهٔ معادلهٔ <span class="ltr">۱/(x+۱) = ۲/(x−۳)</span> را پیدا کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>مخرج‌ها نباید صفر بشن.</p>
+        <span class="answer-final">پاسخ نهایی: x ≠ −۱ و x ≠ ۳</span>
+      </details>
+
+      <p><b>۲.</b> <span class="ltr">√(۲x − ۱) = ۳</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">۲x−۱=۹ ⇒ ۲x=۱۰</span></p>
+        <span class="answer-final">پاسخ نهایی: x = ۵</span>
+      </details>
+
+      <p><b>۳.</b> چرا معادلهٔ <span class="ltr">√(x−۲) = −۴</span> بدون جوابه؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>چون برد تابع رادیکال همیشه نامنفیه؛ رادیکال هیچ‌وقت نمی‌تونه برابر یک عدد منفی بشه.</p>
+        <span class="answer-final">پاسخ نهایی: بدون جواب.</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش سوم — تابع نمایی -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec6">
+    <div class="sec-head">
+      <div class="sec-badge">۶</div>
+      <div><div class="sec-label">بخش ششم</div><h2>تابع نمایی (Exponential)</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — ویژگی‌های نمودار تابع نمایی</div>
+      <div class="formula-box"><span class="ltr">f(x) = aˣ</span> &nbsp; (با شرط <span class="ltr">a > ۰</span> و <span class="ltr">a ≠ ۱</span>)</div>
+      <ol class="steps-list">
+        <li><b>همیشه مثبته:</b> مقدار <span class="ltr">aˣ</span> هیچ‌وقت صفر یا منفی نمی‌شه؛ نمودار هیچ‌وقت محور <span class="ltr">x</span> رو لمس نمی‌کنه.</li>
+        <li><b>همیشه از نقطهٔ <span class="ltr">(۰, ۱)</span> می‌گذره:</b> چون هر عددی به توان صفر برابر ۱ است.</li>
+        <li><b>اگه <span class="ltr">a > ۱</span>:</b> تابع صعودیه — به این حالت «رشد نمایی» (Growth) می‌گیم.</li>
+        <li><b>اگه <span class="ltr">۰ < a < ۱</span>:</b> تابع نزولیه — به این حالت «افت نمایی» (Decay) می‌گیم.</li>
+        <li><b>مجانب افقی:</b> خط <span class="ltr">y = ۰</span> است؛ نمودار هرچقدر جلو بره بهش نزدیک می‌شه ولی هیچ‌وقت بهش نمی‌رسه.</li>
+        <li><b>دامنه:</b> همهٔ اعداد حقیقی. <b>برد:</b> <span class="ltr">(۰, ∞)</span>.</li>
+      </ol>
+      <div class="graph-row two">
+        <div class="graph-box">
+          <svg viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg">
+            <line x1="8" y1="120" x2="152" y2="120" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <line x1="20" y1="10" x2="20" y2="130" stroke="#bbb" stroke-width="1.3"/>
+            <path d="M22,118 Q60,118 90,80 Q120,40 148,12" stroke="#D79E28" stroke-width="4" fill="none"/>
+            <circle cx="20" cy="95" r="4" fill="#1F3A52"/>
+            <text x="26" y="92" font-size="11" fill="#1F3A52">(۰, ۱)</text>
+            <text x="24" y="115" font-size="10" fill="#999">y = ۰ (مجانب)</text>
+          </svg>
+          <div class="cap">رشد نمایی — a &gt; ۱ (صعودی)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg">
+            <line x1="8" y1="120" x2="152" y2="120" stroke="#bbb" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <line x1="20" y1="10" x2="20" y2="130" stroke="#bbb" stroke-width="1.3"/>
+            <path d="M22,12 Q60,40 90,80 Q120,118 148,118" stroke="#D2534A" stroke-width="4" fill="none"/>
+            <circle cx="20" cy="95" r="4" fill="#1F3A52"/>
+            <text x="26" y="92" font-size="11" fill="#1F3A52">(۰, ۱)</text>
+            <text x="24" y="115" font-size="10" fill="#999">y = ۰ (مجانب)</text>
+          </svg>
+          <div class="cap">افت نمایی — ۰ &lt; a &lt; ۱ (نزولی)</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — تشخیص رشد یا افت</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = (۱/۳)ˣ</span> رشدی است یا افتی؟</p>
+        <p>پایه <span class="ltr">۱/۳</span> بین صفر و یک است (<span class="ltr">۰ < ۱/۳ < ۱</span>).</p>
+      </div>
+      <span class="result">این یک تابع افت نمایی (Decay) است.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — محاسبهٔ مقدار تابع نمایی</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = ۲ˣ</span>، مقدار <span class="ltr">f(۳)</span> رو پیدا کن.</p>
+        <p><span class="ltr">f(۳) = ۲³ = ۸</span></p>
+      </div>
+      <span class="result">f(۳) = ۸</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — حل معادلات نمایی (سه حالت)</div>
+      <ol class="steps-list">
+        <li><b>حالت اول — پایه‌های یکسان:</b> اگه دو طرف معادله رو بشه با یک پایهٔ مشترک نوشت، کافیه توان‌ها رو برابر بذاری.</li>
+        <li><b>حالت دوم — تبدیل به لگاریتم:</b> اگه نتونستی پایه‌ها رو یکسان کنی، از هر دو طرف لگاریتم بگیر (با هر پایه‌ای) و از توان لگاریتم استفاده کن تا مجهول از توان بیاد پایین.</li>
+        <li><b>حالت سوم — استفاده از لگاریتم طبیعی:</b> وقتی پایه <span class="ltr">e</span> است، از <span class="ltr">ln</span> استفاده کن؛ چون <span class="ltr">ln(eᵏ) = k</span>.</li>
+      </ol>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — حالت اول: پایه‌های یکسان</div>
+      <div class="steps">
+        <p><span class="ltr">۲⁽ˣ⁺¹⁾ = ۲⁵</span></p>
+        <p>چون پایه‌ها یکسانن (هر دو ۲)، کافیه توان‌ها رو برابر بذاریم: <span class="ltr">x + ۱ = ۵</span></p>
+      </div>
+      <span class="result">x = ۴</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۴ — حالت دوم: تبدیل به لگاریتم</div>
+      <div class="steps">
+        <p><span class="ltr">۳ˣ = ۲۰</span></p>
+        <p>پایه‌ها یکسان نیستن (۳ و ۲۰ به شکل توانی از هم نیستن)، پس دو طرف رو لگاریتم می‌گیریم و طبق تعریف لگاریتم می‌نویسیم:</p>
+      </div>
+      <span class="result">x = log₃(۲۰)</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۵ — حالت سوم: استفاده از لگاریتم طبیعی</div>
+      <div class="steps">
+        <p><span class="ltr">e²ˣ = ۷</span></p>
+        <p>از هر دو طرف <span class="ltr">ln</span> می‌گیریم: <span class="ltr">ln(e²ˣ) = ln(۷) ⇒ ۲x = ln(۷)</span></p>
+      </div>
+      <span class="result">x = ln(۷) / ۲</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — نامعادلات نمایی</div>
+      <p>وقتی طرفین یک نامعادله رو به‌شکل توانی با پایهٔ یکسان بنویسیم، جهت نامعادله به علامت پایه بستگی داره:</p>
+      <ol class="steps-list">
+        <li>اگه <span class="ltr">a > ۱</span> باشه: <span class="ltr">aˣ > aʸ ⇔ x > y</span> (جهت نامعادله عوض نمی‌شه).</li>
+        <li>اگه <span class="ltr">۰ < a < ۱</span> باشه: <span class="ltr">aˣ > aʸ ⇔ x < y</span> (جهت نامعادله برعکس می‌شه).</li>
+      </ol>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۶ — نامعادلهٔ نمایی</div>
+      <div class="steps">
+        <p><span class="ltr">۲ˣ > ۲⁵</span> را حل کن.</p>
+        <p>پایه (۲) بزرگ‌تر از یک است، پس جهت عوض نمی‌شه: <span class="ltr">x > ۵</span></p>
+      </div>
+      <span class="result">جواب: x > ۵</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> فکر کردن اینکه نمودار نمایی می‌تونه به صفر یا منفی برسه (فراموش کردن مجانب افقی).</li>
+        <li><span class="bul">✗</span> انتخاب پایهٔ ۱ یا پایهٔ منفی — شرط <span class="ltr">a>۰, a≠۱</span> همیشه باید برقرار باشه.</li>
+        <li><span class="bul">✗</span> در حالت نامعادله، فراموش کردن اینکه وقتی <span class="ltr">۰<a<۱</span> است، جهت نامعادله باید برعکس بشه.</li>
+        <li><span class="bul">✗</span> لگاریتم گرفتن از دو طرف ولی فراموش کردن قانون توان لگاریتم برای پایین آوردن مجهول از توان.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> همیشه اول امتحان کن ببین می‌شه دو طرف رو با یک پایهٔ مشترک نوشت (مثلاً <span class="ltr">۴ = ۲²</span>، <span class="ltr">۸ = ۲³</span>) — این سریع‌ترین راهه.</li>
+        <li><span class="bul">★</span> اگه پایهٔ معادله <span class="ltr">e</span> بود، همیشه اول سراغ <span class="ltr">ln</span> برو، نه لگاریتم معمولی.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> آیا <span class="ltr">f(x) = ۵ˣ</span> رشد نمایی است یا افت نمایی؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>پایه (۵) بزرگ‌تر از یک است.</p>
+        <span class="answer-final">پاسخ نهایی: رشد نمایی (Growth)</span>
+      </details>
+
+      <p><b>۲.</b> معادلهٔ <span class="ltr">۳^(۲x) = ۳⁶</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>پایه‌ها یکسانن، پس توان‌ها برابرن: <span class="ltr">۲x = ۶</span></p>
+        <span class="answer-final">پاسخ نهایی: x = ۳</span>
+      </details>
+
+      <p><b>۳.</b> معادلهٔ <span class="ltr">۵ˣ = ۳۰</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>پایه‌ها یکسان نیستن، پس طبق تعریف لگاریتم می‌نویسیم:</p>
+        <span class="answer-final">پاسخ نهایی: x = log₅(۳۰)</span>
+      </details>
+
+      <p><b>۴.</b> نامعادلهٔ <span class="ltr">(۱/۲)ˣ > (۱/۲)³</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>پایه بین صفر و یک است، پس جهت نامعادله برعکس می‌شه.</p>
+        <span class="answer-final">پاسخ نهایی: x < ۳</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش چهارم — تابع لگاریتمی -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec7">
+    <div class="sec-head">
+      <div class="sec-badge">۷</div>
+      <div><div class="sec-label">بخش هفتم</div><h2>تابع لگاریتمی (کامل)</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — مجانب چیست؟ (قبل از هر چیز)</div>
+      <p><b>مجانب (Asymptote)</b> یک خط فرضیه که نمودار تابع هرچقدر جلو بره بهش نزدیک و نزدیک‌تر می‌شه، ولی <b>هیچ‌وقت بهش نمی‌رسه و از روش رد نمی‌شه</b>. مثل یک دیوار نامرئی که منحنی می‌تونه تا ابد بهش نزدیک بشه ولی لمسش نکنه.</p>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span><b>مجانب افقی:</b> یک خط افقی که نمودار وقتی <span class="ltr">x</span> به سمت <span class="ltr">+∞</span> یا <span class="ltr">−∞</span> می‌ره، بهش نزدیک می‌شه.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>مجانب عمودی:</b> یک خط عمودی (یعنی به‌شکل <span class="ltr">x = عدد</span>) که نمودار نزدیکِ آن نقطه، به سمت <span class="ltr">+∞</span> یا <span class="ltr">−∞</span> پرت می‌شه.</li>
+      </ul>
+      <p>برای تابع لگاریتمی، دقیقاً یک مجانب <b>عمودی</b> داریم — و الان می‌بینیم دقیقاً کجاست.</p>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — ویژگی‌های نمودار تابع لگاریتمی</div>
+      <div class="formula-box"><span class="ltr">f(x) = log<sub>a</sub>x</span></div>
+      <ol class="steps-list">
+        <li><b>دامنه:</b> <span class="ltr">(۰, ∞)</span> — فقط برای <span class="ltr">x</span>‌های مثبت تعریف شده.</li>
+        <li><b>برد:</b> همهٔ اعداد حقیقی.</li>
+        <li><b>مجانب عمودی:</b> خط <span class="ltr">x = ۰</span> است — یعنی هرچی <span class="ltr">x</span> از سمت راست به صفر نزدیک بشه، <span class="ltr">log<sub>a</sub>x</span> به سمت <span class="ltr">−∞</span> می‌ره (اگه <span class="ltr">a>۱</span>)، ولی نمودار هیچ‌وقت خودِ محور <span class="ltr">y</span> (یعنی <span class="ltr">x=۰</span>) رو لمس نمی‌کنه — دقیقاً چون <span class="ltr">x=۰</span> اصلاً داخل دامنه نیست.</li>
+        <li><b>همیشه از نقطهٔ <span class="ltr">(۱, ۰)</span> می‌گذره:</b> چون <span class="ltr">log<sub>a</sub>(۱) = ۰</span> برای هر پایه‌ای.</li>
+        <li><b>رابطه با نمایی:</b> نمودار <span class="ltr">log<sub>a</sub>x</span> و نمودار <span class="ltr">aˣ</span> دقیقاً نسبت به خط <span class="ltr">y = x</span> قرینهٔ هم‌اند (چون این دو، وارونِ همدیگه‌ان).</li>
+      </ol>
+
+      <div class="graph-row two">
+        <div class="graph-box">
+          <svg viewBox="0 0 160 140" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="115" x2="150" y2="115" stroke="#bbb" stroke-width="1.3"/>
+            <line x1="35" y1="10" x2="35" y2="130" stroke="#D2534A" stroke-width="2" stroke-dasharray="4 3"/>
+            <path d="M37,10 Q45,80 70,100 Q100,118 145,124" stroke="#1F3A52" stroke-width="4" fill="none"/>
+            <circle cx="70" cy="115" r="4" fill="#D79E28"/>
+            <text x="76" y="112" font-size="12" fill="#8a6d1f">(۱, ۰)</text>
+            <text x="18" y="22" font-size="11" fill="#D2534A">مجانب عمودی</text>
+            <text x="14" y="34" font-size="11" fill="#D2534A">x = ۰</text>
+          </svg>
+          <div class="cap">نمودار log<sub>a</sub>x — به محور y نزدیک می‌شه ولی هرگز لمسش نمی‌کنه</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+            <line x1="8" y1="140" x2="152" y2="140" stroke="#bbb" stroke-width="1.3"/>
+            <line x1="20" y1="10" x2="20" y2="150" stroke="#bbb" stroke-width="1.3"/>
+            <line x1="15" y1="145" x2="150" y2="12" stroke="#999" stroke-width="1.3" stroke-dasharray="3 3"/>
+            <path d="M22,138 Q60,138 90,90 Q115,50 148,15" stroke="#D79E28" stroke-width="3.5" fill="none"/>
+            <path d="M37,12 Q55,60 80,90 Q110,120 148,138" stroke="#1F3A52" stroke-width="3.5" fill="none"/>
+            <text x="115" y="25" font-size="11" fill="#D79E28">aˣ</text>
+            <text x="120" y="130" font-size="11" fill="#1F3A52">log<tspan font-size="8" baseline-shift="sub">a</tspan>x</text>
+            <text x="55" y="30" font-size="10" fill="#777">y = x</text>
+          </svg>
+          <div class="cap">log<sub>a</sub>x و aˣ نسبت به خط y=x قرینهٔ هم‌اند</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — لگاریتم طبیعی چیست؟ (ln)</div>
+      <p><span class="ltr">ln x</span> فقط یک اسم مخصوص برای یک لگاریتمِ خیلی پرکاربرده — لگاریتمی که پایه‌ش عدد <span class="ltr">e</span> است (عددی تقریباً برابر <span class="ltr">۲٫۷۱۸</span>، مثل عدد <span class="ltr">π</span> یک عدد ثابت و مهم در ریاضیه):</p>
+      <div class="formula-box"><span class="ltr">ln x = log<sub>e</sub>x</span></div>
+      <p>یعنی <span class="ltr">ln x</span> جواب این سؤاله: «<span class="ltr">e</span> رو به چه توانی برسونیم که بشه <span class="ltr">x</span>؟» — دقیقاً همون منطق لگاریتم معمولی، فقط با پایهٔ <span class="ltr">e</span>.</p>
+      <p><b>چرا این لگاریتم رو «طبیعی» می‌نامیم؟</b> چون پایهٔ <span class="ltr">e</span> به‌طور طبیعی در پدیده‌های رشد و افت (مثل رشد جمعیت، بهرهٔ مرکب پیوسته، و افت رادیواکتیو) ظاهر می‌شه؛ به همین دلیل <span class="ltr">ln</span> پرکاربردترین لگاریتم در ریاضیات بالاتر و علومه.</p>
+      <p>همهٔ ویژگی‌ها و قوانینی که برای <span class="ltr">log<sub>a</sub>x</span> یاد گرفتیم، عیناً برای <span class="ltr">ln x</span> هم برقرارن — فقط کافیه همه‌جا <span class="ltr">a</span> رو با <span class="ltr">e</span> جایگزین کنی. مثلاً:</p>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">ln(۱) = ۰</span> و <span class="ltr">ln(e) = ۱</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span><span class="ltr">ln(e<sup>x</sup>) = x</span> و <span class="ltr">e<sup>ln x</sup> = x</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span>دامنه‌اش هم مثل هر لگاریتم دیگه‌ای <span class="ltr">(۰, ∞)</span> است.</li>
+      </ul>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — خواص پایهٔ لگاریتم</div>
+      <table class="law-table">
+        <tr><th>خاصیت</th><th>فرمول</th></tr>
+        <tr><td>لگاریتم عدد ۱</td><td><span class="ltr">log<sub>b</sub>(۱) = ۰</span></td></tr>
+        <tr><td>لگاریتم خودِ پایه</td><td><span class="ltr">log<sub>b</sub>(b) = ۱</span></td></tr>
+        <tr><td>لگاریتم توانِ پایه</td><td><span class="ltr">log<sub>b</sub>(bˣ) = x</span></td></tr>
+        <tr><td>قانون تساوی</td><td><span class="ltr">log<sub>b</sub>x = log<sub>b</sub>y ⇔ x = y</span></td></tr>
+      </table>
+      <p>این چهار خاصیت پایه‌ان و مستقیماً از تعریف لگاریتم میان — همیشه قبل از هر محاسبه، اول چک کن ببین مسئله یکی از همین حالت‌های ساده نیست.</p>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — قوانین لگاریتم (برای باز کردن یا جمع کردن عبارت‌ها)</div>
+      <table class="law-table">
+        <tr><th>قانون</th><th>فرمول</th></tr>
+        <tr><td>ضرب (Product Rule)</td><td><span class="ltr">log<sub>a</sub>(xy) = log<sub>a</sub>x + log<sub>a</sub>y</span></td></tr>
+        <tr><td>تقسیم (Quotient Rule)</td><td><span class="ltr">log<sub>a</sub>(x/y) = log<sub>a</sub>x − log<sub>a</sub>y</span></td></tr>
+        <tr><td>توان (Power Rule)</td><td><span class="ltr">log<sub>a</sub>(xᵖ) = p · log<sub>a</sub>x</span></td></tr>
+        <tr><td>تغییر پایه (Change of Base)</td><td><span class="ltr">log<sub>a</sub>x = log<sub>b</sub>x / log<sub>b</sub>a</span></td></tr>
+      </table>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — استفاده از قانون ضرب</div>
+      <div class="steps">
+        <p><span class="ltr">log₂(۴ × ۸)</span> رو با قانون ضرب باز کن.</p>
+        <p><span class="ltr">log₂(۴ × ۸) = log₂(۴) + log₂(۸) = ۲ + ۳</span></p>
+      </div>
+      <span class="result">= ۵</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — استفاده از قانون توان</div>
+      <div class="steps">
+        <p><span class="ltr">log₃(۹²)</span> رو ساده کن.</p>
+        <p>طبق قانون توان: <span class="ltr">log₃(۹²) = ۲ · log₃(۹) = ۲ · ۲</span></p>
+      </div>
+      <span class="result">= ۴</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — استفاده از تغییر پایه</div>
+      <div class="steps">
+        <p><span class="ltr">log₂(۵)</span> را با کمک لگاریتم طبیعی بنویس.</p>
+        <p>طبق قانون تغییر پایه: <span class="ltr">log₂(۵) = ln(۵) / ln(۲)</span></p>
+      </div>
+      <span class="result">log₂(۵) = ln(۵)/ln(۲)</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — حل معادلات لگاریتمی (سه حالت)</div>
+      <ol class="steps-list">
+        <li><b>حالت اول — معادلهٔ ساده:</b> اگه فقط یک لگاریتم داری، مستقیم به فرم توانی تبدیلش کن.</li>
+        <li><b>حالت دوم — استفاده از خواص لگاریتم:</b> اگه چند جمله لگاریتمی جمع یا تفریق شده، اول با قوانین ضرب/تقسیم اون‌ها رو یکی کن.</li>
+        <li><b>حالت سوم — فرم نمایی:</b> بعد از یکی کردن، معادله رو با تبدیل به فرم توانی حل کن.</li>
+      </ol>
+      <p><b>نکتهٔ حیاتی که هیچ‌وقت نباید فراموش کنی:</b> در آخرِ کار، همیشه جواب‌ها رو در دامنهٔ لگاریتم اصلی (آرگومان‌ها باید مثبت باشن) چک کن — گاهی یک جواب جبری درست از نظر ریاضی، از نظر لگاریتم غیرمجاز درمیاد (به آن جواب اضافی یا Extraneous می‌گیم).</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۴ — حالت اول: معادلهٔ ساده</div>
+      <div class="steps">
+        <p><span class="ltr">log₃(x − ۱) = ۲</span></p>
+        <p>به فرم توانی: <span class="ltr">x − ۱ = ۳² = ۹</span></p>
+      </div>
+      <span class="result">x = ۱۰</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۵ — حالت دوم: استفاده از خواص لگاریتم</div>
+      <div class="steps">
+        <p><span class="ltr">log(x) + log(x − ۱) = ۱</span></p>
+        <p>طبق قانون ضرب: <span class="ltr">log(x(x − ۱)) = ۱ ⇒ x(x − ۱) = ۱۰¹ = ۱۰</span></p>
+        <p>این یک معادلهٔ درجه دوم می‌شه: <span class="ltr">x² − x − ۱۰ = ۰</span>. با حل آن دو ریشه به‌دست میاد که باید هر دو رو در دامنهٔ اصلی (<span class="ltr">x>۰</span> و <span class="ltr">x−۱>۰</span>) چک کنی.</p>
+      </div>
+      <span class="result">فقط ریشه‌ای که هر دو شرط دامنه رو برآورده کنه، جواب نهاییه.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۶ — حالت سوم: فرم نمایی با پایهٔ طبیعی</div>
+      <div class="steps">
+        <p><span class="ltr">ln(۲x + ۱) = ۳</span></p>
+        <p>به فرم توانی (پایه <span class="ltr">e</span>): <span class="ltr">۲x + ۱ = e³</span></p>
+      </div>
+      <span class="result">x = (e³ − ۱) / ۲</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — نامعادلات لگاریتمی</div>
+      <p>وقتی پایهٔ <span class="ltr">a > ۱</span> باشه، لگاریتم یک تابع صعودیه، پس جهت نامعادله عوض نمی‌شه:</p>
+      <div class="formula-box"><span class="ltr">log<sub>a</sub>x > log<sub>a</sub>y ⇔ x > y</span> &nbsp; (با شرط <span class="ltr">a > ۱</span>)</div>
+      <p><b>همیشه قبل از هر چیز، دامنه رو چک کن:</b> باید هم <span class="ltr">x > ۰</span> باشه، هم <span class="ltr">y > ۰</span>.</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۷ — نامعادلهٔ لگاریتمی</div>
+      <div class="steps">
+        <p><span class="ltr">ln(x + ۲) > ۱</span></p>
+        <p>به فرم توانی تبدیل می‌کنیم: <span class="ltr">x + ۲ > e¹ ⇒ x > e − ۲</span></p>
+        <p>دامنه: <span class="ltr">x + ۲ > ۰ ⇒ x > −۲</span>؛ چون <span class="ltr">e−۲</span> بزرگ‌تر از <span class="ltr">−۲</span> است، این شرط خودکار برآورده می‌شه.</p>
+      </div>
+      <span class="result">جواب: x > e − ۲</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> فراموش کردن چک کردن دامنه در آخر و قبول کردن یک جوابِ اضافی (Extraneous) که آرگومان لگاریتم رو منفی می‌کنه.</li>
+        <li><span class="bul">✗</span> اشتباه گرفتن <span class="ltr">log(x + y)</span> با <span class="ltr">log(x) + log(y)</span> — این دو اصلاً برابر نیستن! قانون ضرب فقط برای <span class="ltr">log(xy)</span> کار می‌کنه.</li>
+        <li><span class="bul">✗</span> در نامعادلهٔ لگاریتمی با پایهٔ بین صفر و یک، فراموش کردن برعکس‌شدن جهت نامعادله.</li>
+        <li><span class="bul">✗</span> قاطی کردن قانون توان (<span class="ltr">log(xᵖ) = p·log(x)</span>) با توان‌رساندن به کل عبارت لگاریتم (<span class="ltr">(log x)ᵖ</span>) — این دو کاملاً چیزهای متفاوتی‌ان.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> هر بار که معادلهٔ لگاریتمی حل کردی، جواب رو حتماً برگردون توی عبارت‌های داخل لگاریتم اصلی و مطمئن شو مثبتن.</li>
+        <li><span class="bul">★</span> وقتی چند لگاریتم با هم جمع یا تفریق شدن، همیشه اول با قوانین ضرب/تقسیم، همه رو به یک لگاریتم تبدیل کن — این کار معادله رو خیلی ساده‌تر می‌کنه.</li>
+        <li><span class="bul">★</span> رابطهٔ <span class="ltr">log<sub>a</sub>(aˣ) = x</span> و <span class="ltr">a^(log_a x) = x</span> دو میان‌بر طلایی‌ان که خیلی وقت‌ها محاسبه رو فوری می‌کنن.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> <span class="ltr">log₄(۲ × ۳۲)</span> را با قانون ضرب محاسبه کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">log₄(۲×۳۲) = log₄(۶۴)</span>. چون <span class="ltr">۴³=۶۴</span></p>
+        <span class="answer-final">پاسخ نهایی: ۳</span>
+      </details>
+
+      <p><b>۲.</b> معادلهٔ <span class="ltr">log₂(x + ۳) = ۴</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>فرم توانی: <span class="ltr">x + ۳ = ۲⁴ = ۱۶</span></p>
+        <span class="answer-final">پاسخ نهایی: x = ۱۳</span>
+      </details>
+
+      <p><b>۳.</b> معادلهٔ <span class="ltr">log(x) + log(۵) = log(۳۰)</span> را حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>طبق قانون ضرب: <span class="ltr">log(۵x) = log(۳۰)</span>؛ طبق قانون تساوی: <span class="ltr">۵x = ۳۰</span></p>
+        <span class="answer-final">پاسخ نهایی: x = ۶</span>
+      </details>
+
+      <p><b>۴.</b> نامعادلهٔ <span class="ltr">log₃(x) > ۲</span> را حل کن (یادت باشه دامنه رو هم چک کنی).</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>پایه (۳) بزرگ‌تر از یک است، فرم توانی: <span class="ltr">x > ۳² = ۹</span></p>
+        <p>دامنهٔ لگاریتم (<span class="ltr">x>۰</span>) هم خودکار برآورده می‌شه چون <span class="ltr">۹>۰</span>.</p>
+        <span class="answer-final">پاسخ نهایی: x > ۹</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش پنجم — تبدیلات نمودار -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec8">
+    <div class="sec-head">
+      <div class="sec-badge">۸</div>
+      <div><div class="sec-label">بخش هشتم</div><h2>تبدیلات نمودار توابع</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — چهار تبدیل پایه روی <span class="ltr">y = f(x)</span></div>
+      <ol class="steps-list">
+        <li><b>انتقال عمودی:</b> <span class="ltr">f(x) + k</span> → نمودار به‌اندازهٔ <span class="ltr">k</span> واحد بالا می‌ره؛ <span class="ltr">f(x) − k</span> → پایین می‌ره.</li>
+        <li><b>انتقال افقی:</b> <span class="ltr">f(x − a)</span> → نمودار به‌اندازهٔ <span class="ltr">a</span> واحد به راست می‌ره؛ <span class="ltr">f(x + a)</span> → به چپ می‌ره.</li>
+        <li><b>بازتاب حول محور x:</b> <span class="ltr">−f(x)</span> → نمودار وارونه (بالا و پایین جابه‌جا) می‌شه.</li>
+        <li><b>بازتاب حول محور y:</b> <span class="ltr">f(−x)</span> → نمودار حول محور <span class="ltr">y</span> قرینه می‌شه.</li>
+      </ol>
+
+      <div class="graph-row">
+        <div class="graph-box">
+          <svg viewBox="0 0 120 110"><line x1="8" y1="90" x2="112" y2="90" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="100" stroke="#ddd"/>
+            <path d="M15,85 Q60,15 105,85" stroke="#bbb" stroke-width="3" fill="none" stroke-dasharray="3 3"/>
+            <path d="M15,55 Q60,-15 105,55" stroke="#2C6E8E" stroke-width="4" fill="none"/>
+          </svg>
+          <div class="cap">انتقال عمودی — f(x)+k (بالا)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 110"><line x1="8" y1="90" x2="112" y2="90" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="100" stroke="#ddd"/>
+            <path d="M15,85 Q60,15 105,85" stroke="#bbb" stroke-width="3" fill="none" stroke-dasharray="3 3"/>
+            <path d="M40,85 Q85,15 130,85" stroke="#2E9B6F" stroke-width="4" fill="none"/>
+          </svg>
+          <div class="cap">انتقال افقی — f(x−a) (راست)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 110"><line x1="8" y1="55" x2="112" y2="55" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="100" stroke="#ddd"/>
+            <path d="M15,50 Q60,-15 105,50" stroke="#bbb" stroke-width="3" fill="none" stroke-dasharray="3 3"/>
+            <path d="M15,60 Q60,125 105,60" stroke="#D2534A" stroke-width="4" fill="none"/>
+          </svg>
+          <div class="cap">بازتاب حول x — −f(x) (وارونه)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 110"><line x1="8" y1="90" x2="112" y2="90" stroke="#ddd"/><line x1="60" y1="8" x2="60" y2="100" stroke="#ddd"/>
+            <path d="M62,85 Q90,45 108,15" stroke="#bbb" stroke-width="3" fill="none" stroke-dasharray="3 3"/>
+            <path d="M58,85 Q30,45 12,15" stroke="#7C4A99" stroke-width="4" fill="none"/>
+          </svg>
+          <div class="cap">بازتاب حول y — f(−x) (قرینه)</div>
+        </div>
+      </div>
+      <p style="font-size:.85rem; color:#555;">در هر تصویر، منحنی خاکستری‌رنگ همون تابع اصلیه؛ منحنی رنگی، نسخهٔ تبدیل‌یافته‌شه.</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — انتقال عمودی</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = x²</span> را در نظر بگیر. نمودار <span class="ltr">g(x) = f(x) + ۳ = x² + ۳</span> چطور به‌دست میاد؟</p>
+      </div>
+      <span class="result">همون سهمی x²، فقط ۳ واحد رفته بالاتر (رأس از (۰،۰) به (۰،۳) منتقل شده).</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — انتقال افقی</div>
+      <div class="steps">
+        <p><span class="ltr">g(x) = f(x − ۲) = (x − ۲)²</span> نسبت به <span class="ltr">f(x)=x²</span> چطوره؟</p>
+        <p>چون به‌شکل <span class="ltr">x − a</span> است با <span class="ltr">a=۲</span>، حرکت به سمت راسته.</p>
+      </div>
+      <span class="result">سهمی ۲ واحد به راست منتقل شده (رأس در (۲، ۰)).</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — ترکیب دو تبدیل</div>
+      <div class="steps">
+        <p><span class="ltr">g(x) = −f(x) + ۱</span> با <span class="ltr">f(x) = x²</span> یعنی چی؟</p>
+        <p>اول <span class="ltr">−f(x) = −x²</span> (بازتاب حول <span class="ltr">x</span>: سهمی رو به پایین)، بعد <span class="ltr">+۱</span> (یک واحد بالا).</p>
+      </div>
+      <span class="result">سهمی رو به پایین با رأس در (۰، ۱)</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> فکر کردن <span class="ltr">f(x − a)</span> یعنی حرکت به چپ — برعکسه! داخل پرانتز، علامت «معکوس جهت واقعی» رو نشون می‌ده.</li>
+        <li><span class="bul">✗</span> قاطی کردن <span class="ltr">−f(x)</span> (بازتاب حول <span class="ltr">x</span>) با <span class="ltr">f(−x)</span> (بازتاب حول <span class="ltr">y</span>).</li>
+        <li><span class="bul">✗</span> رعایت نکردن ترتیب تبدیل‌ها وقتی چند تبدیل با هم میان.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> قانون طلایی: تبدیل‌های <b>داخل پرانتز</b> (روی <span class="ltr">x</span>) «برعکسِ» علامت عمل می‌کنن؛ تبدیل‌های <b>بیرون پرانتز</b> (روی کل تابع) «مثل» علامت عمل می‌کنن.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> نمودار <span class="ltr">f(x) = |x|</span> رو ۴ واحد به چپ منتقل کن. معادلهٔ جدید چیه؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>حرکت به چپ یعنی <span class="ltr">f(x + a)</span> با <span class="ltr">a=۴</span></p>
+        <span class="answer-final">پاسخ نهایی: g(x) = |x + ۴|</span>
+      </details>
+
+      <p><b>۲.</b> نمودار <span class="ltr">f(x)=√x</span> نسبت به محور <span class="ltr">x</span> بازتاب داده شده. معادلهٔ جدید؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>بازتاب حول <span class="ltr">x</span> یعنی منفی کل تابع.</p>
+        <span class="answer-final">پاسخ نهایی: g(x) = −√x</span>
+      </details>
+
+      <p><b>۳.</b> <span class="ltr">g(x) = f(x + ۱) − ۲</span> نسبت به <span class="ltr">f</span> چه تغییری کرده؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>داخل پرانتز <span class="ltr">+۱</span> یعنی یک واحد به چپ؛ بیرون پرانتز <span class="ltr">−۲</span> یعنی دو واحد پایین.</p>
+        <span class="answer-final">پاسخ نهایی: یک واحد به چپ و دو واحد به پایین منتقل شده.</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش ششم — ترکیب و وارون -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec9">
+    <div class="sec-head">
+      <div class="sec-badge">۹</div>
+      <div><div class="sec-label">بخش نهم</div><h2>ترکیب توابع و تابع وارون</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — ترکیب توابع</div>
+      <div class="formula-box"><span class="ltr">(f∘g)(x) = f(g(x))</span></div>
+      <p>قانون طلایی: اول تابع «داخلی» رو حساب کن، بعد نتیجه رو بذار داخل تابع «بیرونی».</p>
+      <ol class="steps-list">
+        <li><span class="ltr">g(x)</span> رو حساب کن.</li>
+        <li>نتیجه رو به‌جای <span class="ltr">x</span> در <span class="ltr">f</span> بذار.</li>
+        <li>ساده کن.</li>
+      </ol>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — ترکیب دو تابع</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = x + ۱</span> و <span class="ltr">g(x) = x²</span>. <span class="ltr">(f∘g)(۲)</span> رو پیدا کن.</p>
+        <p>اول داخلی: <span class="ltr">g(۲) = ۴</span></p>
+        <p>بعد بیرونی: <span class="ltr">f(۴) = ۴ + ۱ = ۵</span></p>
+      </div>
+      <span class="result">(f∘g)(۲) = ۵</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — ترتیب مهمه</div>
+      <div class="steps">
+        <p>با همون <span class="ltr">f, g</span> بالا، این‌بار <span class="ltr">(g∘f)(۲)</span> رو حساب کن.</p>
+        <p>اول داخلی: <span class="ltr">f(۲) = ۳</span></p>
+        <p>بعد بیرونی: <span class="ltr">g(۳) = ۹</span></p>
+      </div>
+      <span class="result">(g∘f)(۲) = ۹ — با مثال قبلی فرق داره!</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — ترکیب با تابع نمایی</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = ۲ˣ</span> و <span class="ltr">g(x) = x + ۳</span>. <span class="ltr">(f∘g)(۲)</span> و <span class="ltr">(g∘f)(۲)</span> را با هم مقایسه کن.</p>
+        <p><span class="ltr">(f∘g)(۲)</span>: اول <span class="ltr">g(۲) = ۵</span>، بعد <span class="ltr">f(۵) = ۲⁵ = ۳۲</span></p>
+        <p><span class="ltr">(g∘f)(۲)</span>: اول <span class="ltr">f(۲) = ۴</span>، بعد <span class="ltr">g(۴) = ۴ + ۳ = ۷</span></p>
+      </div>
+      <span class="result">۳۲ ≠ ۷ — باز هم ثابت شد که ترتیب ترکیب کاملاً نتیجه رو عوض می‌کنه.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۴ — ترکیب نمایی و لگاریتمی (وقتی همدیگه رو خنثی می‌کنن)</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = log(x)</span> و <span class="ltr">g(x) = ۱۰ˣ</span>. حالا <span class="ltr">(f∘g)(x)</span> رو حساب کن.</p>
+        <p><span class="ltr">(f∘g)(x) = f(g(x)) = log(۱۰ˣ)</span></p>
+        <p>طبق خاصیت پایهٔ لگاریتم (<span class="ltr">log<sub>b</sub>(bˣ)=x</span>)، این عبارت مستقیم ساده می‌شه:</p>
+      </div>
+      <span class="result">(f∘g)(x) = x — و اگه برعکس (g∘f)(x) رو هم حساب کنی، دوباره به x می‌رسی. این دقیقاً همون رفتاریه که از دو تابع وارون هم انتظار داریم.</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — تابع وارون</div>
+      <p>تابع وارون یعنی «باز کردنِ» کاری که تابع اصلی انجام داده — دقیقاً برعکس مسیر رفت.</p>
+      <ol class="steps-list">
+        <li><span class="ltr">f(x)</span> را با <span class="ltr">y</span> جایگزین کن.</li>
+        <li>جای <span class="ltr">x</span> و <span class="ltr">y</span> رو عوض کن.</li>
+        <li>معادله رو نسبت به <span class="ltr">y</span> حل کن.</li>
+      </ol>
+      <p><b>نکتهٔ مهم — «یک‌به‌یک» بودن یعنی چی؟</b> یک تابع «یک‌به‌یک» (One-to-One) است اگه هر خروجی، فقط از یک ورودی به‌دست بیاد — یعنی هیچ دو ورودیِ متفاوتی، به یک خروجی یکسان نرسن. تابع وارون <b>فقط</b> وقتی وجود داره که تابع اصلی یک‌به‌یک باشه؛ وگرنه نمی‌دونیم موقع «برگشت»، باید کدوم ورودی رو انتخاب کنیم.</p>
+      <p><b>روش تشخیص — تست خط افقی:</b> یک خط افقی فرضی رو روی نمودار از پایین به بالا حرکت بده:</p>
+      <ol class="steps-list">
+        <li>اگه این خط، همیشه نمودار رو حداکثر در <b>یک نقطه</b> قطع کنه → تابع یک‌به‌یکه و وارون داره.</li>
+        <li>اگه حتی یک‌بار این خط، نمودار رو در <b>دو نقطه یا بیشتر</b> قطع کنه → تابع یک‌به‌یک نیست و وارونِ معمولی نداره.</li>
+      </ol>
+
+      <div class="graph-row two">
+        <div class="graph-box">
+          <svg viewBox="0 0 150 130" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="110" x2="140" y2="110" stroke="#bbb" stroke-width="1.3"/>
+            <line x1="75" y1="10" x2="75" y2="120" stroke="#bbb" stroke-width="1.3"/>
+            <path d="M20,115 Q75,10 130,115" stroke="#D2534A" stroke-width="4" fill="none"/>
+            <line x1="15" y1="55" x2="135" y2="55" stroke="#1F3A52" stroke-width="2" stroke-dasharray="4 3"/>
+            <circle cx="40" cy="55" r="4" fill="#1F3A52"/>
+            <circle cx="110" cy="55" r="4" fill="#1F3A52"/>
+          </svg>
+          <div class="cap">رد نمی‌شه — خط افقی در ۲ نقطه برخورد می‌کنه (یک‌به‌یک نیست، مثل x²)</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 150 130" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="110" x2="140" y2="110" stroke="#bbb" stroke-width="1.3"/>
+            <line x1="75" y1="10" x2="75" y2="120" stroke="#bbb" stroke-width="1.3"/>
+            <path d="M20,115 L130,15" stroke="#2E9B6F" stroke-width="4" fill="none"/>
+            <line x1="15" y1="55" x2="135" y2="55" stroke="#1F3A52" stroke-width="2" stroke-dasharray="4 3"/>
+            <circle cx="87" cy="55" r="4" fill="#1F3A52"/>
+          </svg>
+          <div class="cap">رد می‌شه — خط افقی فقط در ۱ نقطه برخورد می‌کنه (یک‌به‌یک است، مثل خط راست)</div>
+        </div>
+      </div>
+
+      <p>به همین دلیله که تابع نمایی و تابع لگاریتمی — که هر دو یک‌به‌یک‌ان — دقیقاً وارون همدیگه‌ان (همون‌طور که در مثال بالا دیدی).</p>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۵ — پیدا کردن تابع وارون</div>
+      <div class="steps">
+        <p><span class="ltr">y = ۳x + ۲</span></p>
+        <p>جابه‌جایی: <span class="ltr">x = ۳y + ۲</span></p>
+        <p>حل برای <span class="ltr">y</span>: <span class="ltr">y = <span class="frac"><span class="num">x − ۲</span><span class="den">۳</span></span></span></p>
+      </div>
+      <span class="result">f⁻¹(x) = (x − ۲)/۳</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۶ — چک کردن درستی وارون</div>
+      <div class="steps">
+        <p>برای اطمینان، <span class="ltr">f(f⁻¹(x))</span> باید برابر <span class="ltr">x</span> بشه.</p>
+        <p><span class="ltr">f((x−۲)/۳) = ۳ × (x−۲)/۳ + ۲ = (x − ۲) + ۲ = x</span> ✓</p>
+      </div>
+      <span class="result">وارون درست پیدا شده.</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> فرض کردن <span class="ltr">(f∘g)(x)</span> همیشه برابر <span class="ltr">(g∘f)(x)</span> است — تقریباً هیچ‌وقت این‌طور نیست.</li>
+        <li><span class="bul">✗</span> رفتن سراغ پیدا کردن وارون بدون چک کردن یک‌به‌یک بودن تابع.</li>
+        <li><span class="bul">✗</span> اشتباه جبری در مرحلهٔ جابه‌جایی <span class="ltr">x</span> و <span class="ltr">y</span> یا حل معادله.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> بعد از پیدا کردن وارون، همیشه با جای‌گذاری یک عدد ساده چک کن که <span class="ltr">f(f⁻¹(x)) = x</span> باشه.</li>
+        <li><span class="bul">★</span> اگه دیدی ترکیب دو تابع مستقیم به <span class="ltr">x</span> ساده شد (مثل مثال ۴)، این نشونهٔ قطعیه که اون دو تابع وارون همدیگه‌ان.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> اگه <span class="ltr">f(x) = x + ۲</span> و <span class="ltr">g(x) = ۲x</span>، مقدار <span class="ltr">(f∘g)(۳)</span> چنده؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">g(۳) = ۶</span>، سپس <span class="ltr">f(۶) = ۸</span></p>
+        <span class="answer-final">پاسخ نهایی: ۸</span>
+      </details>
+
+      <p><b>۲.</b> تابع وارون <span class="ltr">f(x) = ۲x − ۴</span> رو پیدا کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">y=۲x−۴ ⇒ x=۲y−۴ ⇒ y=(x+۴)/۲</span></p>
+        <span class="answer-final">پاسخ نهایی: f⁻¹(x) = (x + ۴)/۲</span>
+      </details>
+
+      <p><b>۳.</b> اگه <span class="ltr">f(x) = eˣ</span> و <span class="ltr">g(x) = ln(x)</span>، مقدار <span class="ltr">(g∘f)(۴)</span> چنده؟ چرا؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p><span class="ltr">f(۴)=e⁴</span>، سپس <span class="ltr">g(e⁴)=ln(e⁴)=۴</span> (طبق خاصیت پایهٔ لگاریتم).</p>
+        <span class="answer-final">پاسخ نهایی: ۴ — چون f و g وارون همدیگه‌ان.</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش هفتم — تعیین علامت -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec10">
+    <div class="sec-head">
+      <div class="sec-badge">۱۰</div>
+      <div><div class="sec-label">بخش دهم</div><h2>حل معادله و نامعادله با نمودار — تعیین علامت کامل</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — خواص نامساوی‌ها (پایهٔ هر نامعادله)</div>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span>می‌تونی به هر دو طرف یک نامساوی، هر عددی رو اضافه یا از آن کم کنی، بدون اینکه جهت نامساوی عوض بشه: <span class="ltr">a < b ⇒ a ± c < b ± c</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span>اگه هر دو طرف رو در یک عدد <b>مثبت</b> ضرب یا تقسیم کنی، جهت نامساوی <b>عوض نمی‌شه</b>: <span class="ltr">c > ۰ ⇒ ac < bc</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span>اگه هر دو طرف رو در یک عدد <b>منفی</b> ضرب یا تقسیم کنی، جهت نامساوی <b>برعکس می‌شه</b>: <span class="ltr">c < ۰ ⇒ ac > bc</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span>اگه از هر دو طرف نامساوی (با شرط هم‌علامت بودن) معکوس بگیری، جهت نامساوی هم برعکس می‌شه: اگه <span class="ltr">a<b</span> و هر دو هم‌علامت باشن، آنگاه <span class="ltr">۱/a > ۱/b</span></li>
+      </ul>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال — حل نامعادلهٔ خطی ساده با این خواص</div>
+      <div class="steps">
+        <p><span class="ltr">۳x − ۴ > ۵x − ۸</span> — هر دو طرف <span class="ltr">+۴</span> و <span class="ltr">−۵x</span> می‌کنیم: <span class="ltr">−۲x > −۴</span></p>
+        <p>حالا هر دو طرف رو بر <span class="ltr">−۲</span> (عدد منفی) تقسیم می‌کنیم — پس جهت نامساوی برعکس می‌شه: <span class="ltr">x < ۲</span></p>
+        <p>مثال دیگه: <span class="ltr">۶x − ۳ < ۲</span> — راحت‌ترین راه اینه که اول <span class="ltr">x</span> رو تنها کنیم: <span class="ltr">۶x < ۵ ⇒ x < ۵/۶</span></p>
+      </div>
+      <span class="result">قانون طلایی: هر وقت در عدد منفی ضرب یا تقسیم کردی، جهت علامت رو برعکس کن — این رایج‌ترین جای اشتباهه.</span>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — تعیین علامت درجهٔ ۱ (ax + b)</div>
+      <p>ساده‌ترین جدول علامت مربوط به تابع خطیه. برای <span class="ltr">ax + b</span> با ریشهٔ <span class="ltr">x = −b/a</span>:</p>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span>سمت چپِ ریشه: علامت <b>مخالفِ</b> علامت <span class="ltr">a</span></li>
+        <li><span class="bul" style="color:var(--blue)">•</span>سمت راستِ ریشه: علامت <b>موافقِ</b> علامت <span class="ltr">a</span></li>
+      </ul>
+      <p>این قاعدهٔ ساده، پایهٔ ساخت جدول علامت برای هر چندجمله‌ای بزرگ‌تره — چون هر چندجمله‌ای رو می‌شه به ضرب چند جملهٔ درجهٔ ۱ (و درجهٔ ۲) تجزیه کرد.</p>
+
+      <div class="numberline-box">
+        <svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="45" x2="300" y2="45" stroke="#1F3A52" stroke-width="2"/>
+          <polygon points="300,45 292,40 292,50" fill="#1F3A52"/>
+          <circle cx="160" cy="45" r="6" fill="#fff" stroke="#1F3A52" stroke-width="2.5"/>
+          <text x="150" y="72" font-size="13" font-weight="700" fill="#1F3A52">x = −b/a</text>
+          <text x="75" y="35" font-size="16" font-weight="800" fill="#D2534A">مخالف a</text>
+          <text x="225" y="35" font-size="16" font-weight="800" fill="#2E9B6F">موافق a</text>
+        </svg>
+        <div class="cap">جدول علامت ax+b روی محور اعداد — فقط یک نقطهٔ بحرانی داره</div>
+      </div>
+
+      <div class="graph-box" style="max-width:260px; margin:10px auto 0;">
+        <svg viewBox="0 0 150 110" xmlns="http://www.w3.org/2000/svg">
+          <line x1="10" y1="55" x2="140" y2="55" stroke="#bbb" stroke-width="1.3"/>
+          <line x1="75" y1="10" x2="75" y2="100" stroke="#bbb" stroke-width="1.3"/>
+          <path d="M20,90 L130,20" stroke="#2C6E8E" stroke-width="4" fill="none"/>
+          <circle cx="75" cy="55" r="4" fill="#D2534A"/>
+        </svg>
+        <div class="cap">نمودار ax+b (با a&gt;۰) — چپ ریشه منفی، راست ریشه مثبت</div>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — حل با کمک نمودار</div>
+      <ol class="steps-list">
+        <li><b><span class="ltr">f(x) = ۰</span>:</b> دنبال نقاطیه که نمودار محور <span class="ltr">x</span> رو قطع می‌کنه (ریشه‌ها).</li>
+        <li><b><span class="ltr">f(x) = a</span>:</b> نقاط تلاقی نمودار با خط افقی <span class="ltr">y = a</span>.</li>
+        <li><b>دستگاه دو تابع:</b> نقاط تلاقی دو منحنی با هم.</li>
+      </ol>
+
+      <div class="graph-row">
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="70" x2="112" y2="70" stroke="#ddd"/><path d="M15,30 Q60,110 105,30" stroke="#2C6E8E" stroke-width="4" fill="none"/><circle cx="43" cy="70" r="3.5" fill="#D2534A"/><circle cx="77" cy="70" r="3.5" fill="#D2534A"/></svg>
+          <div class="cap">f(x)=۰ — محل برخورد با محور x</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="85" x2="112" y2="85" stroke="#ddd"/><path d="M15,80 Q60,10 105,80" stroke="#2E9B6F" stroke-width="4" fill="none"/><line x1="10" y1="45" x2="110" y2="45" stroke="#D79E28" stroke-width="2.5"/><circle cx="37" cy="45" r="3.5" fill="#D2534A"/><circle cx="83" cy="45" r="3.5" fill="#D2534A"/></svg>
+          <div class="cap">f(x)=a — تلاقی با خط افقی</div>
+        </div>
+        <div class="graph-box">
+          <svg viewBox="0 0 120 100"><line x1="8" y1="80" x2="112" y2="80" stroke="#ddd"/><path d="M15,15 L105,85" stroke="#7C4A99" stroke-width="4" fill="none"/><path d="M15,80 Q60,10 105,20" stroke="#D79E28" stroke-width="4" fill="none"/><circle cx="60" cy="50" r="4" fill="#D2534A"/></svg>
+          <div class="cap">دستگاه دو تابع — تلاقی دو منحنی</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — روش کامل «تعیین علامت» (جدول علامت)</div>
+      <p>تعیین علامت یعنی مشخص کنیم یک تابع در هر بازه از محور اعداد، مثبته، منفیه یا صفره. این ابزار، کلید حل هر نامعادله‌ست. مراحل رو دقیق و به‌ترتیب دنبال کن:</p>
+      <ol class="steps-list">
+        <li><b>دامنه رو پیدا کن:</b> نقاطی که تابع در اون‌ها تعریف نشده (مثلاً مخرج صفر می‌شه) رو مشخص کن.</li>
+        <li><b>ریشه‌ها رو پیدا کن:</b> معادلهٔ <span class="ltr">f(x) = ۰</span> رو حل کن.</li>
+        <li><b>نقاط بحرانی رو روی محور اعداد بذار:</b> هم ریشه‌ها، هم نقاط بی‌تعریف رو از کوچک به بزرگ مرتب کن.</li>
+        <li><b>هر بازه رو تست کن:</b> از هر بازهٔ بین دو نقطهٔ بحرانی، یک عدد نمونه انتخاب و علامت <span class="ltr">f</span> در اون نقطه رو حساب کن.</li>
+        <li><b>جدول علامت رو کامل کن:</b> نقاط بی‌تعریف همیشه با دایرهٔ توخالی (○) نشون داده می‌شن؛ ریشه‌ها بسته به نوع نامعادله می‌تونن پر (●) یا توخالی باشن.</li>
+        <li><b>بازهٔ جواب رو انتخاب کن:</b> بسته به علامت نامعادله (<span class="ltr">>, <, ≥, ≤</span>)، بازه‌هایی که علامت موردنظر رو دارن انتخاب کن.</li>
+      </ol>
+      <p><b>نکتهٔ تکنیکی مهم:</b> اگه یک ریشه از توان زوج (مثل <span class="ltr">(x−۲)²</span>) به‌دست بیاد، علامت تابع در اطراف اون ریشه <b>تغییر نمی‌کنه</b>. اگه از توان فرد به‌دست بیاد (یا ریشهٔ ساده باشه)، علامت <b>تغییر می‌کنه</b>.</p>
+
+      <div class="numberline-box">
+        <svg viewBox="0 0 340 100" xmlns="http://www.w3.org/2000/svg">
+          <line x1="15" y1="50" x2="325" y2="50" stroke="#1F3A52" stroke-width="2"/>
+          <polygon points="325,50 317,45 317,55" fill="#1F3A52"/>
+          <circle cx="120" cy="50" r="6" fill="#fff" stroke="#1F3A52" stroke-width="2.5"/>
+          <circle cx="230" cy="50" r="6" fill="#fff" stroke="#1F3A52" stroke-width="2.5"/>
+          <text x="105" y="80" font-size="12" font-weight="700" fill="#1F3A52">نقطهٔ بحرانی ۱</text>
+          <text x="215" y="80" font-size="12" font-weight="700" fill="#1F3A52">نقطهٔ بحرانی ۲</text>
+          <text x="55" y="38" font-size="18" font-weight="800" fill="#D2534A">−</text>
+          <text x="170" y="38" font-size="18" font-weight="800" fill="#2E9B6F">+</text>
+          <text x="275" y="38" font-size="18" font-weight="800" fill="#D2534A">−</text>
+        </svg>
+        <div class="cap">قالب کلی محور علامت — بین هر دو نقطهٔ بحرانی، یک ناحیهٔ ثابت‌العلامت داریم</div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — نامعادلهٔ خطی</div>
+      <div class="steps">
+        <p><span class="ltr">۲x − ۴ > ۰</span></p>
+        <p>ریشه: <span class="ltr">۲x = ۴ ⇒ x = ۲</span> (تنها نقطهٔ بحرانی، بدون نقطهٔ بی‌تعریف)</p>
+        <p>تست: در <span class="ltr">x=۰</span> (سمت چپ ۲): <span class="ltr">۲(۰)−۴ = −۴ < ۰</span> (منفی). در <span class="ltr">x=۳</span> (سمت راست ۲): <span class="ltr">۲(۳)−۴=۲ > ۰</span> (مثبت).</p>
+      </div>
+      <span class="result">چون دنبال «> ۰» هستیم، جواب: x > ۲</span>
+      <div class="numberline-box">
+        <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+          <line x1="15" y1="40" x2="285" y2="40" stroke="#1F3A52" stroke-width="2"/>
+          <polygon points="285,40 277,35 277,45" fill="#1F3A52"/>
+          <circle cx="150" cy="40" r="6" fill="#fff" stroke="#1F3A52" stroke-width="2.5"/>
+          <text x="143" y="65" font-size="13" font-weight="700" fill="#1F3A52">۲</text>
+          <text x="75" y="28" font-size="17" font-weight="800" fill="#D2534A">−</text>
+          <text x="210" y="28" font-size="17" font-weight="800" fill="#2E9B6F">+</text>
+        </svg>
+        <div class="cap">جواب روی محور: x &gt; ۲ (دایرهٔ توخالی چون نامساوی اکید است)</div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — نامعادلهٔ درجه دوم</div>
+      <div class="steps">
+        <p><span class="ltr">x² − ۵x + ۶ < ۰</span></p>
+        <p>ریشه‌ها: <span class="ltr">(x−۲)(x−۳)=۰ ⇒ x=۲, x=۳</span></p>
+        <p>چون ضریب <span class="ltr">x²</span> مثبته، علامتِ سهمی رو به بالا: <b>مثبت، منفی، مثبت</b> در سه بازهٔ متوالی (منفی فقط بین ریشه‌ها).</p>
+      </div>
+      <span class="result">چون دنبال «< ۰» هستیم، جواب: ۲ < x < ۳</span>
+      <div class="numberline-box">
+        <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+          <line x1="15" y1="40" x2="285" y2="40" stroke="#1F3A52" stroke-width="2"/>
+          <polygon points="285,40 277,35 277,45" fill="#1F3A52"/>
+          <circle cx="120" cy="40" r="6" fill="#fff" stroke="#1F3A52" stroke-width="2.5"/>
+          <circle cx="190" cy="40" r="6" fill="#fff" stroke="#1F3A52" stroke-width="2.5"/>
+          <text x="113" y="65" font-size="13" font-weight="700" fill="#1F3A52">۲</text>
+          <text x="183" y="65" font-size="13" font-weight="700" fill="#1F3A52">۳</text>
+          <text x="60" y="28" font-size="17" font-weight="800" fill="#2E9B6F">+</text>
+          <text x="150" y="28" font-size="17" font-weight="800" fill="#D2534A">−</text>
+          <text x="240" y="28" font-size="17" font-weight="800" fill="#2E9B6F">+</text>
+        </svg>
+        <div class="cap">جواب روی محور: ۲ &lt; x &lt; ۳ (هر دو دایره توخالی)</div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — نامعادلهٔ گویا (کسری)</div>
+      <div class="steps">
+        <p><span class="ltr">(x − ۱)/(x + ۲) ≥ ۰</span></p>
+        <p>نقطهٔ بی‌تعریف: <span class="ltr">x = −۲</span> (همیشه دایرهٔ توخالی، حتی با علامت ≥). ریشه: <span class="ltr">x = ۱</span> (چون علامت ≥ است، اینجا دایرهٔ پر می‌شه).</p>
+        <p>تست سه بازه: <span class="ltr">x=−۳</span> (چپِ −۲): مثبت. <span class="ltr">x=۰</span> (بین −۲ و ۱): منفی. <span class="ltr">x=۲</span> (راستِ ۱): مثبت.</p>
+      </div>
+      <span class="result">جواب: x < −۲ یا x ≥ ۱ &nbsp; (نقطهٔ −۲ همیشه از جواب حذف می‌شه)</span>
+      <div class="numberline-box">
+        <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+          <line x1="15" y1="40" x2="285" y2="40" stroke="#1F3A52" stroke-width="2"/>
+          <polygon points="285,40 277,35 277,45" fill="#1F3A52"/>
+          <circle cx="120" cy="40" r="6" fill="#fff" stroke="#D2534A" stroke-width="2.5"/>
+          <circle cx="190" cy="40" r="6" fill="#1F3A52" stroke="#1F3A52" stroke-width="2.5"/>
+          <text x="110" y="65" font-size="13" font-weight="700" fill="#D2534A">−۲ (بی‌تعریف)</text>
+          <text x="183" y="65" font-size="13" font-weight="700" fill="#1F3A52">۱</text>
+          <text x="60" y="28" font-size="17" font-weight="800" fill="#2E9B6F">+</text>
+          <text x="150" y="28" font-size="17" font-weight="800" fill="#D2534A">−</text>
+          <text x="240" y="28" font-size="17" font-weight="800" fill="#2E9B6F">+</text>
+        </svg>
+        <div class="cap">دایرهٔ قرمز = بی‌تعریف (همیشه توخالی) — دایرهٔ پر = ریشهٔ مجاز چون ≥</div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۴ — مقایسهٔ دو تابع با هم</div>
+      <div class="steps">
+        <p>می‌خوایم بازه‌ای رو پیدا کنیم که در آن <span class="ltr">x² > x + ۲</span> باشه (یعنی نمودار سهمی بالاتر از نمودار خط باشه).</p>
+        <p>همه‌چیز رو یک‌طرف ببر: <span class="ltr">x² − x − ۲ > ۰ ⇒ (x−۲)(x+۱) > ۰</span></p>
+        <p>ریشه‌ها: <span class="ltr">x = ۲, x = −۱</span>. چون ضریب مثبته: علامت مثبت، منفی، مثبت.</p>
+      </div>
+      <span class="result">جواب: x < −۱ یا x > ۲</span>
+      <div class="numberline-box">
+        <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+          <line x1="15" y1="40" x2="285" y2="40" stroke="#1F3A52" stroke-width="2"/>
+          <polygon points="285,40 277,35 277,45" fill="#1F3A52"/>
+          <circle cx="120" cy="40" r="6" fill="#fff" stroke="#1F3A52" stroke-width="2.5"/>
+          <circle cx="190" cy="40" r="6" fill="#fff" stroke="#1F3A52" stroke-width="2.5"/>
+          <text x="108" y="65" font-size="13" font-weight="700" fill="#1F3A52">−۱</text>
+          <text x="183" y="65" font-size="13" font-weight="700" fill="#1F3A52">۲</text>
+          <text x="60" y="28" font-size="17" font-weight="800" fill="#2E9B6F">+</text>
+          <text x="150" y="28" font-size="17" font-weight="800" fill="#D2534A">−</text>
+          <text x="240" y="28" font-size="17" font-weight="800" fill="#2E9B6F">+</text>
+        </svg>
+        <div class="cap">جواب روی محور: x &lt; −۱ یا x &gt; ۲</div>
+      </div>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> فراموش کردن اینکه نقاط بی‌تعریف (مثل مخرج صفر) <b>همیشه</b> باید دایرهٔ توخالی باشن، حتی اگه نامعادله ≥ یا ≤ باشه.</li>
+        <li><span class="bul">✗</span> ضرب یا تقسیم دو طرف نامعادله در یک عبارت شامل <span class="ltr">x</span> (مثل ضرب طرفین در مخرج) — این کار جهت نامعادله رو ممکنه بی‌دلیل تغییر بده؛ به‌جاش همه‌چیز رو یک‌طرف ببر و صفر رو طرف دیگه بذار.</li>
+        <li><span class="bul">✗</span> تست نکردن همهٔ بازه‌ها و فرض کردن الگوی علامت‌ها فقط از روی یک بازه.</li>
+        <li><span class="bul">✗</span> نادیده گرفتن قاعدهٔ توان زوج/فرد ریشه‌ها و اشتباه در تغییر یا عدم تغییر علامت.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> برای <span class="ltr">ax² + bx + c</span> با <span class="ltr">a > ۰</span>: علامت همیشه به‌شکل <b>مثبت، منفی، مثبت</b> بین دو ریشهٔ متمایزه (سهمی رو به بالا، بین دو ریشه پایین محوره). اگه <span class="ltr">a < ۰</span> باشه، برعکس می‌شه: <b>منفی، مثبت، منفی</b>.</li>
+        <li><span class="bul">★</span> همیشه قبل از شروع، همه‌چیز رو یک‌طرف نامعادله و صفر رو طرف دیگه ببر — این کار جدول علامت رو قابل‌اعتماد می‌کنه.</li>
+        <li><span class="bul">★</span> فقط کافیه علامت یک بازه رو با تست مستقیم پیدا کنی؛ بقیهٔ بازه‌ها رو می‌تونی با «قاعدهٔ تناوب علامت» (تغییر در ریشهٔ ساده، عدم تغییر در ریشهٔ توان زوج) به‌دست بیاری، بدون نیاز به تست دوباره.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> نامعادلهٔ <span class="ltr">x² − ۹ ≥ ۰</span> رو با جدول علامت حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>ریشه‌ها: <span class="ltr">(x−۳)(x+۳)=۰ ⇒ x=۳, x=−۳</span> (هر دو دایرهٔ پر، چون ≥)</p>
+        <p>ضریب مثبته → علامت: مثبت، منفی، مثبت</p>
+        <span class="answer-final">پاسخ نهایی: x ≤ −۳ یا x ≥ ۳</span>
+      </details>
+
+      <p><b>۲.</b> نامعادلهٔ <span class="ltr">۱/(x−۵) < ۰</span> رو حل کن.</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>نقطهٔ بی‌تعریف: <span class="ltr">x=۵</span> (دایرهٔ توخالی). صورت کسر هیچ‌وقت صفر نمی‌شه، پس ریشهٔ دیگه‌ای نداریم.</p>
+        <p>تست <span class="ltr">x=۰</span>: منفی. تست <span class="ltr">x=۶</span>: مثبت.</p>
+        <span class="answer-final">پاسخ نهایی: x < ۵</span>
+      </details>
+
+      <p><b>۳.</b> نامعادلهٔ <span class="ltr">(x−۱)² > ۰</span> رو حل کن (دقت کن ریشه توان زوج داره).</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>ریشه: <span class="ltr">x=۱</span> با توان زوج → علامت در اطراف این نقطه تغییر نمی‌کنه و همیشه مثبت یا صفره.</p>
+        <p>در <span class="ltr">x=۱</span> مقدار تابع دقیقاً صفره، پس شرط «> ۰» برقرار نیست.</p>
+        <span class="answer-final">پاسخ نهایی: همهٔ اعداد حقیقی به‌جز x = ۱</span>
+      </details>
+
+      <p><b>۴.</b> بازه‌ای رو پیدا کن که در آن <span class="ltr">(x+۱)/(x−۳) ≤ ۰</span></p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>نقطهٔ بی‌تعریف: <span class="ltr">x=۳</span> (توخالی، همیشه). ریشه: <span class="ltr">x=−۱</span> (چون ≤، اینجا پر می‌شه).</p>
+        <p>تست بازه‌ها: <span class="ltr">x=−۲</span>: مثبت. <span class="ltr">x=۰</span>: منفی. <span class="ltr">x=۴</span>: مثبت.</p>
+        <span class="answer-final">پاسخ نهایی: −۱ ≤ x < ۳</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- بخش هشتم — مقایسه -->
+  <!-- ========================================================= -->
+  <section class="chapter-section" id="sec11">
+    <div class="sec-head">
+      <div class="sec-badge">۱۱</div>
+      <div><div class="sec-label">بخش یازدهم</div><h2>مقایسه و تحلیل خانواده‌های تابع</h2></div>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> مفاهیم اصلی — چهار مقایسهٔ کلیدی</div>
+      <ul class="icon-list">
+        <li><span class="bul" style="color:var(--blue)">•</span><b>خطی در برابر درجه دوم:</b> شیب خط ثابته؛ شیب سهمی دائم در حال تغییره (به همین دلیل منحنی می‌شه، نه خط راست).</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>نمایی در برابر لگاریتمی:</b> این دو، وارون هم هستن. نمایی خیلی سریع‌تر از خطی رشد می‌کنه؛ لگاریتمی برعکس، خیلی آروم رشد می‌کنه.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>قدرمطلق در برابر خطی:</b> قدرمطلق یک «شکستگی» (نوک تیز) در یک نقطه داره؛ خط ساده صاف و بدون شکستگیه.</li>
+        <li><span class="bul" style="color:var(--blue)">•</span><b>تابع وارون (Reciprocal):</b> دو مجانب داره (یکی افقی، یکی عمودی) و رفتارش در دو طرف محورها کاملاً برعکس همه.</li>
+      </ul>
+    </div>
+
+    <div class="card concept">
+      <div class="card-title"><span class="ic">💠</span> خانوادهٔ توابع پایه — یک نگاه کلی</div>
+      <div class="family-grid">
+        <div class="family-card">
+          <svg viewBox="0 0 100 100"><polyline points="10,90 90,10" stroke="#2C6E8E" stroke-width="4" fill="none"/></svg>
+          <p>خطی</p>
+        </div>
+        <div class="family-card">
+          <svg viewBox="0 0 100 100"><path d="M10,90 Q50,-10 90,90" stroke="#2E9B6F" stroke-width="4" fill="none"/></svg>
+          <p>درجه دوم</p>
+        </div>
+        <div class="family-card">
+          <svg viewBox="0 0 100 100"><polyline points="10,10 50,90 90,10" stroke="#D2534A" stroke-width="4" fill="none"/></svg>
+          <p>قدرمطلق</p>
+        </div>
+        <div class="family-card">
+          <svg viewBox="0 0 100 100">
+            <path d="M10,20 Q30,20 40,50 Q45,90 10,90" stroke="#7C4A99" stroke-width="4" fill="none"/>
+            <path d="M90,80 Q70,80 60,50 Q55,10 90,10" stroke="#7C4A99" stroke-width="4" fill="none"/>
+          </svg>
+          <p>وارون (هذلولی)</p>
+        </div>
+        <div class="family-card">
+          <svg viewBox="0 0 100 100"><path d="M10,85 Q40,85 60,50 Q80,15 90,10" stroke="#D79E28" stroke-width="4" fill="none"/></svg>
+          <p>نمایی</p>
+        </div>
+        <div class="family-card">
+          <svg viewBox="0 0 100 100"><path d="M10,90 Q20,60 40,40 Q65,15 90,12" stroke="#1F3A52" stroke-width="4" fill="none"/></svg>
+          <p>لگاریتمی</p>
+        </div>
+        <div class="family-card">
+          <svg viewBox="0 0 100 100"><path d="M5,50 Q20,10 35,50 T65,50 T95,50" stroke="#bbb" stroke-width="3" fill="none" stroke-dasharray="4 3"/></svg>
+          <p>سینوس</p>
+          <span class="soon">به‌زودی در فصل مثلثات</span>
+        </div>
+        <div class="family-card">
+          <svg viewBox="0 0 100 100"><path d="M5,20 Q20,60 35,20 T65,20 T95,20" stroke="#bbb" stroke-width="3" fill="none" stroke-dasharray="4 3"/></svg>
+          <p>کسینوس</p>
+          <span class="soon">به‌زودی در فصل مثلثات</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۱ — سرعت رشد نمایی در برابر لگاریتمی</div>
+      <div class="steps">
+        <p>در <span class="ltr">x = ۸</span>: مقدار <span class="ltr">۲ˣ = ۲۵۶</span> در حالی‌که <span class="ltr">log₂(۸) = ۳</span></p>
+      </div>
+      <span class="result">با اینکه ورودی یکیه، نمایی خیلی سریع‌تر بالا می‌ره.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۲ — رفتار در مقادیر منفی</div>
+      <div class="steps">
+        <p><span class="ltr">f(x) = |x|</span> و <span class="ltr">g(x) = x</span> رو در <span class="ltr">x = −۵</span> مقایسه کن.</p>
+        <p><span class="ltr">f(−۵) = ۵</span> ولی <span class="ltr">g(−۵) = −۵</span></p>
+      </div>
+      <span class="result">قدرمطلق همیشه نتیجه رو «مثبت» می‌کنه؛ خط ساده همون علامت ورودی رو حفظ می‌کنه.</span>
+    </div>
+
+    <div class="card example">
+      <div class="card-title"><span class="ic">✅</span> مثال ۳ — رفتار تابع وارون نزدیک مجانب</div>
+      <div class="steps">
+        <p>برای <span class="ltr">f(x) = ۱/x</span>، وقتی <span class="ltr">x</span> از سمت مثبت به صفر نزدیک می‌شه (مثل <span class="ltr">x=۰٫۰۱</span>)، مقدار <span class="ltr">f(x)</span> خیلی بزرگ و مثبت می‌شه.</p>
+        <p>ولی وقتی <span class="ltr">x</span> از سمت منفی به صفر نزدیک می‌شه (مثل <span class="ltr">x=−۰٫۰۱</span>)، مقدار <span class="ltr">f(x)</span> خیلی بزرگ ولی منفی می‌شه.</p>
+      </div>
+      <span class="result">رفتار تابع در دو طرفِ مجانب عمودی کاملاً برعکس همه.</span>
+    </div>
+
+    <div class="card mistake">
+      <div class="card-title"><span class="ic">✗</span> اشتباهات پرتکرار</div>
+      <ul class="icon-list">
+        <li><span class="bul">✗</span> فکر کردن نمایی و لگاریتمی «شبیه هم» رشد می‌کنن، فقط چون هر دو صعودی‌ان.</li>
+        <li><span class="bul">✗</span> ندیدن نقطهٔ شکستگی تابع قدرمطلق و رفتار با آن مثل یک خط صاف.</li>
+        <li><span class="bul">✗</span> فرض کردن رفتار تابع وارون در هر دو طرف مجانب یکسانه.</li>
+      </ul>
+    </div>
+
+    <div class="card tip">
+      <div class="card-title"><span class="ic">★</span> نکات امتحانی</div>
+      <ul class="icon-list">
+        <li><span class="bul">★</span> اگه سؤال دربارهٔ «کدوم تابع سریع‌تر رشد می‌کنه» پرسید، نمایی همیشه در بلندمدت از همهٔ چندجمله‌ای‌ها جلو می‌زنه.</li>
+        <li><span class="bul">★</span> برای تشخیص سریع خانواده از روی شکل نمودار: شکستگی تیز → قدرمطلق؛ دو شاخهٔ جدا با مجانب → وارون؛ منحنی همیشه صعودی و بدون سقف → نمایی.</li>
+      </ul>
+    </div>
+
+    <div class="card exercise">
+      <div class="card-title"><span class="ic">📝</span> تمرین این بخش</div>
+
+      <p><b>۱.</b> کدوم تابع در بلندمدت سریع‌تر رشد می‌کنه: <span class="ltr">x²</span> یا <span class="ltr">۲ˣ</span>؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>در ابتدا ممکنه <span class="ltr">x²</span> بزرگ‌تر باشه، ولی توابع نمایی همیشه در نهایت از هر تابع چندجمله‌ای جلو می‌زنن.</p>
+        <span class="answer-final">پاسخ نهایی: ۲ˣ در بلندمدت سریع‌تر رشد می‌کنه.</span>
+      </details>
+
+      <p><b>۲.</b> نمودار <span class="ltr">f(x) = ۱/x</span> در ربع اول و سوم قرار داره یا در ربع دوم و چهارم؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>وقتی <span class="ltr">x</span> مثبته، <span class="ltr">y=۱/x</span> هم مثبته (ربع اول)؛ وقتی <span class="ltr">x</span> منفیه، <span class="ltr">y</span> هم منفیه (ربع سوم).</p>
+        <span class="answer-final">پاسخ نهایی: ربع اول و سوم.</span>
+      </details>
+
+      <p><b>۳.</b> چرا نمودارهای <span class="ltr">aˣ</span> و <span class="ltr">log<sub>a</sub>x</span> نسبت به خط <span class="ltr">y=x</span> قرینهٔ هم هستن؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <p>چون این دو تابع، وارون همدیگه‌ان؛ هر تابع و وارونش همیشه نسبت به خط <span class="ltr">y=x</span> قرینه‌ان.</p>
+        <span class="answer-final">پاسخ نهایی: چون لگاریتم، وارون تابع نمایی است.</span>
+      </details>
+    </div>
+  </section>
+
+  <!-- جمع‌بندی -->
+  <div class="summary-box" id="summary">
+    <h2>جمع‌بندی فصل توابع</h2>
+    <div class="pills">
+      <span>مفهوم تابع</span><span>دامنه و برد</span><span>زوج / فرد</span><span>توابع پایه</span>
+      <span>معادلهٔ درجه دوم</span><span>نمودار سهمی</span><span>قدرمطلق</span><span>معادلات گویا و گنگ</span>
+      <span>تابع نمایی</span><span>تابع لگاریتمی</span><span>تبدیلات نمودار</span><span>ترکیب و وارون</span>
+      <span>تعیین علامت</span><span>مقایسهٔ خانواده‌ها</span>
+    </div>
+    <p style="max-width:640px; margin:0 auto; font-size:.98rem;">
+      از تعریف سادهٔ «هر x یک y» شروع کردیم، دامنه و برد رو یاد گرفتیم، معادلهٔ درجه دوم و نمودار سهمی رو کامل تحلیل کردیم، با قدرمطلق و معادلات گویا و گنگ مسلط شدیم، با توابع نمایی و لگاریتمی — از پایه‌های خواص و قوانین تا حل کامل معادله و نامعادله‌شون — کامل کار کردیم، نمودارها رو جابه‌جا و بازتاب دادیم، توابع رو با هم ترکیب و وارون کردیم (و دیدیم چطور نمایی و لگاریتمی دقیقاً همدیگه رو خنثی می‌کنن)، و در آخر با تعیین علامت کامل، مسلط شدیم روی حل هر نامعادله‌ای. حالا زمینه برات آماده‌ست برای فصل بعد: مثلثات، جایی که با توابع تناوبی مثل سینوس و کسینوس آشنا می‌شی.
+    </p>
+    <div class="compass">
+      🧭 هر وقت جایی گیر کردی، برگرد به همون کارت آبی مفهوم و دوباره قدم‌به‌قدم بخونش — تسلط با تکرار میاد، نه با عجله.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,96 @@
+جزوه لاجیک CEnT — فصل ۱۱: مربع تعارض
+
+CENT LOGIC — PART A · CHAPTER 11 / 13
+فصل ۱۱: مربع تعارض — Square of Opposition
+حالا که با نقیضِ گزاره‌های قیاسی آشنا شدی، این فصل همه‌شون رو در یک دیاگرام واحد کنار هم می‌ذاره — و دو رابطه‌ی جدید (contrary و subcontrary) رو معرفی می‌کنه که با contradictory فرق دارن.
+Bاین مبحث چیست؟
+چهار گزاره‌ی پایه‌ی قیاسی — All A are B، No A are B، Some A are B، Some A are not B — رو می‌شه در چهار گوشه‌ی یک مربع فرضی چید. هر ضلع و هر قطر این مربع، یک رابطه‌ی منطقیِ متفاوت بین دو گوشه رو نشون می‌ده.
+بالا ↔ بالا: contrary • پایین ↔ پایین: subcontrary • قطرها (بالا-چپ ↔ پایین-راست، بالا-راست ↔ پایین-چپ): contradictory
+Cمفهوم اصلی
+قدم ۱ — روابط قطری (contradictory) را از فصل ۱۰ می‌شناسی.
+«All A are B» ↔ «Some A are not B» (نقیض هم هستن)
+«No A are B» ↔ «Some A are B» (نقیض هم هستن)
+یادت باشه از فصل ۵: رابطه‌ی contradictory یعنی دقیقاً یکی درست و یکی غلط — همیشه، بدون استثنا. این یعنی اگه ارزش درستیِ یکی رو بدونی، ارزش درستیِ اون یکیِ قطری رو قطعاً و کاملاً می‌دونی.
+قدم ۲ — رابطه‌ی contrary (ضلع بالا): «All A are B» و «No A are B» نمی‌تونن هم‌زمان هر دو درست باشن، ولی می‌تونن هم‌زمان هر دو غلط باشن.
+"All dogs are brown." (False) — "No dogs are brown." (also False, since SOME dogs are brown and some aren't)
+این دقیقاً همون تعریف contrary از فصل ۵ است، فقط اینجا روی دو گزاره‌ی قیاسیِ کلی (universal) اعمال شده.
+قدم ۳ — رابطه‌ی subcontrary (ضلع پایین): «Some A are B» و «Some A are not B» نمی‌تونن هم‌زمان هر دو غلط باشن، ولی می‌تونن هم‌زمان هر دو درست باشن. این دقیقاً برعکسِ contrary است.
+"Some dogs are brown." (True) — "Some dogs are not brown." (also True, if the group of dogs is mixed)
+اگه دسته‌ی A حداقل یک عضو داشته باشه، همیشه یا «Some A are B» یا «Some A are not B» (یا هر دو) درسته — نمی‌شه هر دو هم‌زمان غلط باشن.
+قدم ۴ — تفاوت کلیدی: contradictory جهت رو کاملاً مشخص می‌کنه، ولی contrary و subcontrary فقط یک جهت رو مشخص می‌کنن.
+اگه «All A are B» درست باشه (contrary)، مطمئنی «No A are B» غلطه — ولی اگه «All A are B» غلط باشه، از این تنها نمی‌تونی بگی «No A are B» چیه (می‌تونه درست یا غلط باشه).
+اگه «Some A are B» غلط باشه (subcontrary)، مطمئنی «Some A are not B» درسته — ولی اگه «Some A are B» درست باشه، از این تنها نمی‌تونی بگی «Some A are not B» چیه.
+Dقوانین و اصول مهم
+رابطه
+دو گوشه
+قانون
+Contradictory
+All↔Some-not ، No↔Some
+همیشه دقیقاً یکی درست، یکی غلط
+Contrary
+All ↔ No
+هر دو نمی‌تونن درست باشن؛ هر دو می‌تونن غلط باشن
+Subcontrary
+Some ↔ Some-not
+هر دو نمی‌تونن غلط باشن؛ هر دو می‌تونن درست باشن
+Eروش حل
+مشخص کن دو گزاره‌ی داده‌شده در کدوم گوشه‌های مربع قرار می‌گیرن.
+رابطه‌شون رو تشخیص بده: قطری (contradictory)، بالا (contrary)، یا پایین (subcontrary).
+اگه contradictory بود، ارزش درستیِ دومی رو کاملاً و مستقیم از اولی بگیر (برعکسش کن).
+اگه contrary یا subcontrary بود، فقط طبق قانون یک‌طرفه‌ی مربوطه نتیجه بگیر — در جهت دیگه، «cannot be determined» جواب درسته.
+→ جواب: طبق نوع رابطه.
+Fمثال آموزشی
+If "All students passed the exam" is FALSE, what can we conclude about "No students passed the exam"?
+پاسخ: نمی‌تونیم چیزی قطعی نتیجه بگیریم. این دو گزاره رابطه‌ی contrary دارن. طبق قدم ۴، وقتی یکی از دو contrary غلط باشه، اون یکی می‌تونه درست یا غلط باشه — مثلاً ممکنه بعضی دانش‌آموزها قبول شده باشن و بعضی نه (که هر دو گزاره غلط می‌شن)، یا ممکنه هیچ‌کس قبول نشده باشه (که «No students passed» درست می‌شه).
+Gمثال امتحانی
+We are told: "Some applicants were rejected" is FALSE. What must be true about "Some applicants were not rejected"?
+A) It must also be false.
+B) It must be true.
+C) It cannot be determined.
+D) It is true only if all applicants applied on the same day.
+🎯 EXAM TIP
+برای به‌خاطر سپردن جهت‌ها: Contrary «بالای مربع» (هر دو کلی/universal) — نمی‌تونن با هم درست باشن. Subcontrary «پایین مربع» (هر دو جزئی/particular) — نمی‌تونن با هم غلط باشن. این دو دقیقاً آینه‌ی هم هستن.
+⚡ QUICK METHOD
+اگه سؤال از رابطه‌ی قطری (contradictory) پرسید، جواب همیشه قطعی و مستقیمه (برعکس کردن ارزش درستی). اگه از رابطه‌ی بالا یا پایین (contrary/subcontrary) پرسید، اول چک کن کدوم جهت اطلاعات قطعی می‌ده — قانونش فقط یک‌طرفه‌ست، نه دوطرفه.
+⚠️ COMMON MISTAKES
+اشتباه: برخورد با رابطه‌ی contrary یا subcontrary مثل contradictory — یعنی فرض کردن که دونستنِ ارزش درستیِ یکی، همیشه ارزش درستیِ اون یکی رو هم قطعاً مشخص می‌کنه.
+چرا اتفاق می‌افته: هر سه رابطه (contradictory، contrary، subcontrary) شبیه به‌هم به‌نظر می‌رسن چون همه درباره‌ی جفت گزاره‌های مرتبطن، ولی فقط contradictory قدرتِ استنتاجِ کامل و دوطرفه داره.
+چطور جلوش رو بگیریم: همیشه اول نوع دقیق رابطه رو مشخص کن (با جدول قدم ۴)، و فقط طبق همون یک قانونِ خاص جلو برو — نه با قیاس با contradictory.
+🪤 QUESTION TRAP
+سؤال ممکنه یک گزاره‌ی contrary یا subcontrary رو غلط بده و از تو بخواد نتیجه بگیری اون یکی هم غلطه یا درسته، در جهتی که قانونش اجازه‌ی این استنتاج رو نمی‌ده. همیشه دقت کن که آیا سؤال داره از جهتِ «مجازِ» رابطه سؤال می‌کنه یا از جهتِ «نامشخص»ش — جواب درست در جهتِ نامشخص همیشه «cannot be determined» است.
+🧠 MUST REMEMBER
+Contrary (All ↔ No): نمی‌تونن با هم درست باشن؛ می‌تونن با هم غلط باشن. Subcontrary (Some ↔ Some-not): نمی‌تونن با هم غلط باشن؛ می‌تونن با هم درست باشن. Contradictory (قطرها): همیشه دقیقاً یکی درست، یکی غلط.
+📝تمرین
+"No committee members voted against the proposal" is TRUE. What follows about "Some committee members voted against the proposal"?
+A) It must be false (contradictory relation).
+B) It must be true.
+C) It cannot be determined.
+D) It is true only if the vote was unanimous.
+نمایش پاسخ و توضیح
+پاسخ درست: A. «No A are B» و «Some A are B» رابطه‌ی قطری (contradictory) دارن. چون یکی درسته، اون یکی قطعاً غلطه.
+"All flights were delayed" is TRUE. What follows about "No flights were delayed"?
+A) It must be true.
+B) It must be false.
+C) It cannot be determined.
+D) It is true only for international flights.
+نمایش پاسخ و توضیح
+پاسخ درست: B. «All A are B» و «No A are B» رابطه‌ی contrary دارن — نمی‌تونن هم‌زمان هر دو درست باشن. چون یکی («All flights were delayed») درسته، اون یکی («No flights were delayed») مجبوره غلط باشه. (این دقیقاً همون جهتِ قطعیِ contrary است — وقتی یکی درسته، اون یکی حتماً غلطه؛ برعکسش نامشخصه.)
+We only know: "Some reviewers approved the manuscript" is TRUE. Which of the following can we determine with certainty about "Some reviewers did not approve the manuscript"?
+A) It must be true, since they are subcontraries.
+B) It must be false.
+C) It cannot be determined from this information alone.
+D) It is automatically true if there are at least two reviewers.
+نمایش پاسخ و توضیح
+پاسخ درست: C. این دو گزاره رابطه‌ی subcontrary دارن. قانونِ subcontrary فقط جهت «هر دو نمی‌تونن غلط باشن» رو تضمین می‌کنه — یعنی اگه یکی غلط بود، اون یکی حتماً درسته. اما اینجا داریم گفته می‌شه یکی («Some…approved») درسته، نه غلط — و از درست بودنِ یکی از دو subcontrary، هیچ اطلاعاتِ قطعی‌ای درباره‌ی اون یکی به‌دست نمیاد (می‌تونه همه‌ی داوران تأیید کرده باشن، که در این صورت "Some did not approve" غلط می‌شه؛ یا بعضی تأیید نکرده باشن، که در این صورت درست می‌شه). گزینه‌ی A دقیقاً همون اشتباه رایج «اعمال قانون در جهتِ اشتباه» است.
+🚀مرور سریع — فصل ۱۱
+مفاهیم اصلی
+Contrary (All↔No): هر دو درست نمی‌شن؛ هر دو غلط می‌تونن بشن.
+Subcontrary (Some↔Some-not): هر دو غلط نمی‌شن؛ هر دو درست می‌تونن بشن.
+Contradictory (قطرها): همیشه دقیقاً یکی درست، یکی غلط.
+روش
+اول نوع رابطه رو مشخص کن.
+فقط قانونِ همون رابطه رو اعمال کن — نه قیاس با contradictory.
+اشتباهات رایج
+فرض کردن استنتاج دوطرفه در contrary/subcontrary.
+دام‌های تستی
+سؤال از جهتِ «نامشخص» یک رابطه‌ی یک‌طرفه.

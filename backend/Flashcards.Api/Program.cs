@@ -2,6 +2,7 @@ using Flashcards.Api.Endpoints;
 using Flashcards.Application;
 using Flashcards.Infrastructure;
 using System.Threading.RateLimiting;
+using Cent.Module;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,7 @@ builder.Services.AddOpenApi();
 builder.Services.AddValidation();
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
+builder.Services.AddCentModule(builder.Configuration);
 var concurrentRequests = builder.Configuration.GetValue("RateLimits:ConcurrentRequests", 64);
 if (concurrentRequests is < 1 or > 1024)
     throw new InvalidOperationException("RateLimits:ConcurrentRequests must be between 1 and 1024.");
@@ -71,8 +73,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "Flashcards API v1"));
 }
 
-app.UseCors(corsPolicy);
+var centEnabled = app.Configuration.GetValue<bool>("Cent:Enabled");
+app.UseWhen(context => !centEnabled || !context.Request.Path.StartsWithSegments("/api/cent/v1"),
+    branch => branch.UseCors(corsPolicy));
 app.UseRouting();
+app.UseCentModule();
 app.Use(async (context, next) =>
 {
     if (context.Request.Path == "/health")
@@ -96,6 +101,7 @@ app.UseRateLimiter();
 app.UseAuthorization();
 app.MapHealthChecks("/health");
 app.MapV1Endpoints();
+app.MapCentModule();
 
 app.Run();
 

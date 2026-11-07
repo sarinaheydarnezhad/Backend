@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فصل ۶ | ترکیبات و احتمال</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EC;
+    --dot:#E3DCC8;
+    --navy:#1F3A52;
+    --blue:#2C6E8E;   --blue-bg:#EAF4F8;
+    --green:#2E9B6F;  --green-bg:#EAF7F0;
+    --red:#D2534A;    --red-bg:#FBEAE8;
+    --gold:#D79E28;   --gold-bg:#FCF3DD;
+    --purple:#7C4A99; --purple-bg:#F4EDF8;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Vazirmatn',sans-serif;
+    background-color:var(--bg);
+    background-image:radial-gradient(var(--dot) 1.6px, transparent 1.6px);
+    background-size:22px 22px;
+    color:#26333F;
+    line-height:1.9;
+  }
+  .ltr{direction:ltr; unicode-bidi:isolate; font-family:'Vazirmatn',sans-serif;}
+
+  /* ---------- نوار ناوبری ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:rgba(250,246,236,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--dot);
+    padding:10px 18px;
+    display:flex; gap:6px; flex-wrap:wrap;
+    justify-content:center;
+  }
+  nav a{
+    text-decoration:none;
+    color:var(--navy);
+    font-size:13.5px;
+    font-weight:600;
+    padding:7px 13px;
+    border-radius:999px;
+    background:#fff;
+    border:1px solid var(--dot);
+    transition:background .2s, color .2s;
+    white-space:nowrap;
+  }
+  nav a:hover{background:var(--navy); color:#fff;}
+
+  .wrap{max-width:920px; margin:0 auto; padding:0 20px;}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    margin:36px auto 30px;
+    max-width:920px;
+    border-radius:22px;
+    padding:46px 34px;
+    background:linear-gradient(115deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    background-image:
+      radial-gradient(rgba(255,255,255,0.14) 1.5px, transparent 1.5px),
+      linear-gradient(115deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    background-size:20px 20px, cover;
+    color:#fff;
+    text-align:center;
+    box-shadow:0 14px 30px -14px rgba(31,58,82,0.55);
+  }
+  .eyebrow{
+    display:inline-block;
+    font-size:13px;
+    font-weight:600;
+    background:rgba(255,255,255,0.18);
+    padding:6px 16px;
+    border-radius:999px;
+    margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(26px,4vw,38px);
+    font-weight:800;
+    margin:0 0 14px;
+  }
+  .hero p{
+    font-size:16px;
+    font-weight:400;
+    opacity:0.92;
+    max-width:640px;
+    margin:0 auto;
+  }
+
+  /* ---------- بخش «چگونه استفاده کنیم» ---------- */
+  .howto{margin:44px auto;}
+  .howto h2{
+    text-align:center;
+    color:var(--navy);
+    font-size:24px;
+    font-weight:800;
+    margin-bottom:8px;
+  }
+  .howto > p.lead{
+    text-align:center;
+    color:#5b6a76;
+    max-width:600px;
+    margin:0 auto 28px;
+    font-size:15px;
+  }
+  .cycle{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:14px;
+  }
+  .cycle .step{
+    background:#fff;
+    border-radius:16px;
+    padding:18px 12px;
+    text-align:center;
+    border-top:4px solid var(--c);
+    box-shadow:0 6px 16px -10px rgba(31,58,82,0.25);
+  }
+  .cycle .step .num{
+    width:32px; height:32px;
+    border-radius:50%;
+    background:var(--c);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:700;
+    margin:0 auto 10px;
+  }
+  .cycle .step h4{margin:0 0 6px; font-size:14.5px; color:var(--navy);}
+  .cycle .step p{margin:0; font-size:12.5px; color:#66727c;}
+
+  @media(max-width:760px){
+    .cycle{grid-template-columns:repeat(2,1fr);}
+  }
+
+  /* ---------- بخش‌های آموزشی ---------- */
+  section.topic{margin:60px auto 46px; scroll-margin-top:70px;}
+  .topic-head{
+    display:flex; align-items:center; gap:14px;
+    margin-bottom:22px;
+  }
+  .topic-head .badge{
+    width:44px; height:44px;
+    border-radius:50%;
+    background:var(--navy);
+    color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:18px;
+    flex-shrink:0;
+  }
+  .topic-head .label{
+    font-size:12.5px;
+    color:#8a95a0;
+    font-weight:600;
+    display:block;
+  }
+  .topic-head h2{
+    margin:2px 0 0;
+    font-size:22px;
+    color:var(--navy);
+    font-weight:800;
+  }
+
+  .card{
+    border-radius:18px;
+    padding:24px 26px;
+    margin-bottom:18px;
+    border:1px solid rgba(0,0,0,0.04);
+  }
+  .card-title{
+    display:flex; align-items:center; gap:9px;
+    font-weight:700;
+    font-size:15.5px;
+    margin-bottom:14px;
+  }
+  .card-title .dot{width:10px; height:10px; border-radius:50%; flex-shrink:0;}
+
+  .card.blue{background:var(--blue-bg);}
+  .card.blue .card-title{color:var(--blue);}
+  .card.blue .dot{background:var(--blue);}
+
+  .card.green{background:var(--green-bg);}
+  .card.green .card-title{color:var(--green);}
+  .card.green .dot{background:var(--green);}
+
+  .card.red{background:var(--red-bg);}
+  .card.red .card-title{color:var(--red);}
+  .card.red .dot{background:var(--red);}
+
+  .card.gold{background:var(--gold-bg);}
+  .card.gold .card-title{color:#9c7415;}
+  .card.gold .dot{background:var(--gold);}
+
+  .card.purple{background:var(--purple-bg);}
+  .card.purple .card-title{color:var(--purple);}
+  .card.purple .dot{background:var(--purple);}
+
+  .formula-box{
+    background:var(--navy);
+    color:#fff;
+    border-radius:12px;
+    padding:16px 18px;
+    text-align:center;
+    font-size:18px;
+    margin:12px 0;
+    overflow-x:auto;
+  }
+  .frac{display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; line-height:1.15;}
+  .frac .num{border-bottom:1.6px solid currentColor; padding:0 5px 2px;}
+  .frac .den{padding:2px 5px 0;}
+
+  ol.steps-list{margin:10px 0 0; padding-inline-start:22px;}
+  ol.steps-list li{margin-bottom:8px;}
+
+  .example-block{margin-bottom:18px; padding-bottom:16px; border-bottom:1px dashed rgba(46,155,111,0.3);}
+  .example-block:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .example-block h4{margin:0 0 8px; font-size:14.5px; color:#1c6a4a;}
+  .steps{background:#fff; border-radius:10px; padding:12px 16px; margin:8px 0; font-size:14.5px;}
+  .steps div{margin-bottom:4px;}
+  .result{
+    background:#1c6a4a;
+    color:#fff;
+    border-radius:8px;
+    padding:8px 14px;
+    display:inline-block;
+    font-weight:700;
+    font-size:14px;
+    margin-top:6px;
+  }
+
+  ul.mistake-list, ul.tip-list{list-style:none; margin:0; padding:0;}
+  ul.mistake-list li, ul.tip-list li{
+    display:flex; gap:10px; margin-bottom:12px; font-size:14.5px;
+  }
+  ul.mistake-list li:last-child, ul.tip-list li:last-child{margin-bottom:0;}
+  ul.mistake-list li::before{content:"✗"; color:var(--red); font-weight:800; flex-shrink:0;}
+  ul.tip-list li::before{content:"★"; color:var(--gold); flex-shrink:0;}
+
+  .quiz{margin-bottom:16px;}
+  .quiz:last-child{margin-bottom:0;}
+  .quiz p.q{font-weight:600; margin:0 0 8px; font-size:14.5px;}
+  details{
+    background:#fff;
+    border-radius:10px;
+    padding:10px 16px;
+  }
+  details summary{
+    cursor:pointer;
+    font-weight:600;
+    color:var(--purple);
+    font-size:13.5px;
+    outline:none;
+  }
+  details .answer{margin-top:10px; font-size:14px;}
+  .final-answer{
+    font-weight:700;
+    color:var(--purple);
+    margin-top:8px;
+  }
+
+  /* ---------- جمع‌بندی ---------- */
+  .summary{
+    margin:60px auto 40px;
+    max-width:920px;
+    border-radius:22px;
+    padding:40px 30px;
+    background:linear-gradient(115deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    color:#fff;
+    text-align:center;
+  }
+  .summary h2{font-size:24px; font-weight:800; margin:0 0 18px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:22px;}
+  .pill-row span{
+    background:rgba(255,255,255,0.16);
+    padding:6px 14px;
+    border-radius:999px;
+    font-size:13px;
+  }
+  .summary p.review{max-width:640px; margin:0 auto 20px; opacity:0.92; font-size:15px;}
+  .compass{
+    background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.25);
+    border-radius:14px;
+    padding:16px 20px;
+    max-width:560px;
+    margin:0 auto;
+    font-size:14.5px;
+  }
+
+  /* ---------- مقایسه اصل ضرب / جایگشت / ترکیب ---------- */
+  .compare-section{margin:60px auto 46px;}
+  .compare-section .topic-head{margin-bottom:22px;}
+  .compare-intro{color:#5b6a76; font-size:14.5px; margin:0 0 22px; max-width:640px;}
+  .compare-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+  }
+  .compare-card{
+    background:#fff;
+    border-radius:16px;
+    padding:22px 20px;
+    border-top:5px solid var(--c);
+    box-shadow:0 8px 20px -14px rgba(31,58,82,0.3);
+  }
+  .compare-card h3{
+    margin:0 0 14px;
+    font-size:16.5px;
+    color:var(--navy);
+    display:flex; align-items:center; gap:8px;
+  }
+  .compare-card h3 .sw{width:11px; height:11px; border-radius:50%; background:var(--c); flex-shrink:0;}
+  .compare-row{
+    display:flex; justify-content:space-between; gap:10px;
+    padding:9px 0;
+    border-bottom:1px solid var(--dot);
+    font-size:13.5px;
+  }
+  .compare-row:last-of-type{border-bottom:none;}
+  .compare-row .k{color:#7c8891; flex-shrink:0;}
+  .compare-row .v{font-weight:600; color:#2a3742; text-align:left;}
+  .compare-card .cformula{
+    margin-top:14px;
+    background:var(--bg2, var(--blue-bg));
+    border-radius:10px;
+    padding:10px;
+    text-align:center;
+    font-size:15px;
+  }
+  @media(max-width:760px){
+    .compare-grid{grid-template-columns:1fr;}
+  }
+
+  /* ---------- جدول جمع‌بندی فرمول‌های احتمال ---------- */
+  .table-wrap{
+    overflow-x:auto;
+    border-radius:16px;
+    box-shadow:0 8px 20px -14px rgba(31,58,82,0.3);
+    margin-top:8px;
+  }
+  table.formula-table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+    font-size:14px;
+    min-width:560px;
+  }
+  table.formula-table thead th{
+    background:var(--navy);
+    color:#fff;
+    padding:13px 16px;
+    text-align:right;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  table.formula-table tbody td{
+    padding:13px 16px;
+    border-bottom:1px solid var(--dot);
+    vertical-align:top;
+  }
+  table.formula-table tbody tr:last-child td{border-bottom:none;}
+  table.formula-table tbody tr:nth-child(even){background:#FCFAF4;}
+  table.formula-table td.formula-cell{
+    font-weight:700;
+    color:var(--navy);
+    white-space:nowrap;
+  }
+  table.formula-table td.desc-cell{color:#4b565f;}
+
+  footer{text-align:center; padding:30px 0 50px; color:#9aa5ad; font-size:13px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#howto">راهنمای استفاده</a>
+  <a href="#s1">۱. اصل ضرب و اصل متمم</a>
+  <a href="#s2">۲. جایگشت</a>
+  <a href="#s3">۳. ترکیب</a>
+  <a href="#s4">۴. فضای نمونه و احتمال پایه</a>
+  <a href="#s5">۵. قوانین احتمال</a>
+  <a href="#s6">۶. احتمال شرطی</a>
+  <a href="#compare">مقایسه و جدول‌ها</a>
+  <a href="#summary">جمع‌بندی</a>
+</nav>
+
+<div class="hero">
+  <span class="eyebrow">فصل ۶ | جزوهٔ آموزشی گام‌به‌گام</span>
+  <h1>ترکیبات و احتمال</h1>
+  <p>از شمردن حالت‌ها با اصل ضرب تا محاسبهٔ احتمال شرطی — قدم‌به‌قدم، با مثال و تمرین برای هر بخش.</p>
+</div>
+
+<div class="wrap howto" id="howto">
+  <h2>چگونه از این جزوه استفاده کنیم؟</h2>
+  <p class="lead">هر بخش رو به همین ترتیب پیش برو تا هیچ‌جا گیر نکنی:</p>
+  <div class="cycle">
+    <div class="step" style="--c:var(--blue)">
+      <div class="num">۱</div>
+      <h4>فهم مفهوم</h4>
+      <p>تعریف و فرمول رو بخون</p>
+    </div>
+    <div class="step" style="--c:var(--green)">
+      <div class="num">۲</div>
+      <h4>دیدن مثال</h4>
+      <p>حل‌های قدم‌به‌قدم رو دنبال کن</p>
+    </div>
+    <div class="step" style="--c:var(--red)">
+      <div class="num">۳</div>
+      <h4>بررسی دام‌ها</h4>
+      <p>اشتباهای رایج رو بشناس</p>
+    </div>
+    <div class="step" style="--c:var(--gold)">
+      <div class="num">۴</div>
+      <h4>هایلایت امتحانی</h4>
+      <p>ترفندهای سرعت رو یاد بگیر</p>
+    </div>
+    <div class="step" style="--c:var(--purple)">
+      <div class="num">۵</div>
+      <h4>حل تمرین</h4>
+      <p>خودت امتحان کن و پاسخ رو چک کن</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== بخش ۱: اصل ضرب و اصل متمم ===================== -->
+<div class="wrap">
+<section class="topic" id="s1">
+  <div class="topic-head">
+    <div class="badge">۱</div>
+    <div><span class="label">بخش اول</span><h2>اصل ضرب و اصل متمم</h2></div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-title"><span class="dot"></span>مفاهیم اصلی</div>
+    <p>وقتی کاری در چند مرحلهٔ پشت‌سرهم انجام می‌شه، برای شمردن همهٔ حالت‌های ممکن این قدم‌ها رو بردار:</p>
+    <ol class="steps-list">
+      <li>کار رو به مرحله‌های جدا تقسیم کن.</li>
+      <li>تعداد حالت‌های هر مرحله رو جدا بشمار (مثلاً <span class="ltr">n<sub>1</sub></span>، <span class="ltr">n<sub>2</sub></span>، ...، <span class="ltr">n<sub>k</sub></span>).</li>
+      <li>همهٔ این عددها رو در هم ضرب کن تا تعداد کل حالت‌ها به دست بیاد.</li>
+    </ol>
+    <div class="formula-box"><span class="ltr">N = n<sub>1</sub> × n<sub>2</sub> × ... × n<sub>k</sub></span></div>
+    <p>اگه سؤال بگه «تکرار مجاز نیست»، باید دقت کنی که در هر مرحله، چون یک گزینه قبلاً مصرف شده، تعداد حالت‌های آن مرحله یکی کم می‌شه.</p>
+    <p><strong>اصل متمم</strong> هم وقتی به‌کارت میاد که شمردن مستقیمِ حالت‌های موردنظر سخته، اما شمردن حالت‌هایی که موردنظر <em>نیستن</em> راحت‌تره:</p>
+    <div class="formula-box">تعداد آن‌هایی که می‌خواهیم = تعداد کل حالت‌ها − تعداد مورد نظر</div>
+  </div>
+
+  <div class="card green">
+    <div class="card-title"><span class="dot"></span>مثال</div>
+    <div class="example-block">
+      <h4>مثال ۱ — نوشیدنی و غذا</h4>
+      <div class="steps">
+        <div>۴ نوع غذا و ۳ نوع نوشیدنی داریم و می‌خواهیم یک غذا و یک نوشیدنی انتخاب کنیم.</div>
+        <div>مرحلهٔ اول (غذا): ۴ حالت. مرحلهٔ دوم (نوشیدنی): ۳ حالت.</div>
+        <div><span class="ltr">۴ × ۳ = ۱۲</span></div>
+      </div>
+      <div class="result">جواب: ۱۲ حالت</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۲ — پلاک آیفون (سایز و رنگ)</h4>
+      <div class="steps">
+        <div>یک آیفون می‌تواند ۱۲۸، ۲۵۶ یا ۵۱۲ گیگابایتی باشد (۳ حالت)، ۴ رنگ و ۲ سایز مختلف دارد.</div>
+        <div><span class="ltr">۳ × ۴ × ۲ = ۲۴</span></div>
+      </div>
+      <div class="result">جواب: ۲۴ حالت</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۳ — تکرار نداشتن مهره‌ها</h4>
+      <div class="steps">
+        <div>با ارقام ۲و۳و۴و۷و۸، بدون تکرار، عددی ۳ رقمی بسازیم.</div>
+        <div>رقم اول: ۵ گزینه. رقم دوم (یکی مصرف شده): ۴ گزینه. رقم سوم: ۳ گزینه.</div>
+        <div><span class="ltr">۵ × ۴ × ۳ = ۶۰</span></div>
+      </div>
+      <div class="result">جواب: ۶۰ عدد</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="card-title"><span class="dot"></span>اشتباهات پرتکرار</div>
+    <ul class="mistake-list">
+      <li>فراموش کردن کم‌کردن یک گزینه از مرحله‌های بعدی وقتی سؤال «تکرار مجاز نیست» رو گفته.</li>
+      <li>جمع‌بستن حالت‌های مراحل به‌جای ضرب‌کردن‌شون — اصل ضرب همیشه ضربه، نه جمع.</li>
+      <li>در اصل متمم، اشتباه محاسبه‌کردن «تعداد کل» یا فراموشی این‌که متمم باید از همون فضای کلی حساب بشه، نه یک زیرمجموعهٔ اشتباه.</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="dot"></span>نکات امتحانی</div>
+    <ul class="tip-list">
+      <li>وقتی عبارت «حداقل یک» توی سؤال دیدی، معمولاً اصل متمم سریع‌ترین راهه.</li>
+      <li>قبل از ضرب‌کردن، هر مرحله رو با یک عبارت ساده جدا بنویس تا قاطی نشه.</li>
+      <li>در سؤال‌های پاسخنامه (چندگزینه‌ای)، تعداد حالت‌های هر سؤال رو در هم ضرب کن، نه جمع.</li>
+    </ul>
+  </div>
+
+  <div class="card purple">
+    <div class="card-title"><span class="dot"></span>تمرین این بخش</div>
+    <div class="quiz">
+      <p class="q">۱. یک رمز عبور از ۲ حرف و بعد ۳ رقم تشکیل شده. اگر تکرار مجاز باشد، چند رمز مختلف می‌توان ساخت؟ (۲۶ حرف و ۱۰ رقم داریم)</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>مرحلهٔ حروف: <span class="ltr">۲۶ × ۲۶ = ۲۶²</span></div>
+          <div>مرحلهٔ ارقام: <span class="ltr">۱۰ × ۱۰ × ۱۰ = ۱۰³</span></div>
+          <div class="final-answer">پاسخ نهایی: <span class="ltr">۲۶² × ۱۰³</span></div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۲. با ارقام ۱،۲،۳،۴،۵ (بدون تکرار) چند عدد سه‌رقمی زوج می‌توان ساخت؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>رقم آخر باید زوج باشد: فقط ۲ یا ۴ → ۲ گزینه.</div>
+          <div>رقم اول (یکی مصرف شده): ۴ گزینه. رقم وسط: ۳ گزینه.</div>
+          <div><span class="ltr">۴ × ۳ × ۲ = ۲۴</span></div>
+          <div class="final-answer">پاسخ نهایی: ۲۴ عدد</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۳. از بین ۵ کتاب ریاضی و ۳ کتاب فیزیک، حداقل چند حالت برای انتخاب یک کتاب (ریاضی یا فیزیک) داریم؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>این‌جا کار در یک مرحله انجام می‌شود، پس جمع می‌بندیم نه ضرب: <span class="ltr">۵ + ۳ = ۸</span></div>
+          <div class="final-answer">پاسخ نهایی: ۸ حالت</div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===================== بخش ۲: جایگشت ===================== -->
+<div class="wrap">
+<section class="topic" id="s2">
+  <div class="topic-head">
+    <div class="badge">۲</div>
+    <div><span class="label">بخش دوم</span><h2>جایگشت (Permutations)</h2></div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-title"><span class="dot"></span>مفاهیم اصلی</div>
+    <p>جایگشت یعنی چیدن اشیای <strong>متمایز</strong> کنار هم به ترتیب‌های مختلف، جایی که ترتیب مهمه.</p>
+    <ol class="steps-list">
+      <li>ببین همهٔ n شیء رو می‌چینی یا فقط r تا از آن‌ها را.</li>
+      <li>اگر همهٔ n شیء کنار هم قرار می‌گیرند: تعداد جایگشت‌ها برابر <span class="ltr">!n</span> است.</li>
+      <li>اگر فقط r تا از n شیء انتخاب و چیده می‌شوند: از فرمول جایگشت r تایی استفاده کن.</li>
+      <li>اگر بین اشیا، اشیای مشابه (تکراری) وجود دارد، باید تعداد تکراری‌ها را در مخرج تقسیم کنی.</li>
+      <li>اگر چیدن به‌صورت دایره‌ای (دوری) است، یک نفر را ثابت بگیر و بقیه را جایگشت بده.</li>
+    </ol>
+    <div class="formula-box"><span class="ltr">P(n) = n!</span></div>
+    <div class="formula-box"><span class="ltr">P(n, r) = <span class="frac"><span class="num">n!</span><span class="den">(n − r)!</span></span></span></div>
+    <p>برای جایگشت با اشیای تکراری (مثلاً <span class="ltr">n<sub>۱</sub></span> تای یک نوع، <span class="ltr">n<sub>۲</sub></span> تای نوع دیگر و...):</p>
+    <div class="formula-box"><span class="ltr">تعداد جایگشت‌ها = <span class="frac"><span class="num">n!</span><span class="den">n<sub>۱</sub>! × n<sub>۲</sub>! × ...</span></span></span></div>
+    <p>برای جایگشت دوری با n نفر دور یک میز:</p>
+    <div class="formula-box"><span class="ltr">(n − ۱)!</span></div>
+  </div>
+
+  <div class="card green">
+    <div class="card-title"><span class="dot"></span>مثال</div>
+    <div class="example-block">
+      <h4>مثال ۱ — چیدن ۶ کتاب متمایز کنار هم</h4>
+      <div class="steps">
+        <div>هر ۶ کتاب متمایزند و همه کنار هم چیده می‌شوند.</div>
+        <div><span class="ltr">P(۶) = ۶! = ۷۲۰</span></div>
+      </div>
+      <div class="result">جواب: ۷۲۰ حالت</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۲ — انتخاب و چیدن ۴ نفر از ۱۱ بازیکن (جایگشت r تایی)</h4>
+      <div class="steps">
+        <div>می‌خواهیم ۴ تا از ۱۱ بازیکن را برای ۴ پُست متفاوت انتخاب کنیم.</div>
+        <div><span class="ltr">P(۱۱, ۴) = <span class="frac"><span class="num">۱۱!</span><span class="den">۷!</span></span> = ۱۱ × ۱۰ × ۹ × ۸ = ۷۹۲۰</span></div>
+      </div>
+      <div class="result">جواب: ۷۹۲۰ حالت</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۳ — جایگشت با حروف تکراری</h4>
+      <div class="steps">
+        <div>حروف کلمهٔ «ADDER» را در نظر بگیر: ۵ حرف که حرف D دوبار تکرار شده.</div>
+        <div><span class="ltr">تعداد = <span class="frac"><span class="num">۵!</span><span class="den">۲!</span></span> = ۶۰</span></div>
+      </div>
+      <div class="result">جواب: ۶۰ حالت</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۴ — جایگشت دوری</h4>
+      <div class="steps">
+        <div>۵ نفر دور یک میز گرد می‌نشینند.</div>
+        <div><span class="ltr">(۵ − ۱)! = ۴! = ۲۴</span></div>
+      </div>
+      <div class="result">جواب: ۲۴ حالت</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="card-title"><span class="dot"></span>اشتباهات پرتکرار</div>
+    <ul class="mistake-list">
+      <li>استفاده از <span class="ltr">!n</span> در جایی که فقط r تای اشیا انتخاب می‌شن، نه همهٔ n شیء.</li>
+      <li>فراموش کردن تقسیم بر فاکتوریل تعداد اشیای تکراری وقتی حروف یا اعداد تکراری داریم.</li>
+      <li>در جایگشت دوری، استفاده از <span class="ltr">n!</span> به‌جای <span class="ltr">(n−۱)!</span> — یادت باشه چرخش کل دایره یک آرایش تکراری حساب می‌شه.</li>
+      <li>خلط‌کردن مسئلهٔ «کنار هم بودن دو نفر خاص» — باید آن دو نفر را یک بستهٔ واحد در نظر بگیری و در پایان جایگشت داخلی خودشان را هم ضرب کنی.</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="dot"></span>نکات امتحانی</div>
+    <ul class="tip-list">
+      <li>کلیدواژهٔ «ترتیب مهم است» یا «چیدن به دنبال هم» معمولاً یعنی جایگشت.</li>
+      <li>اگر سؤال گفت «دو نفر کنار هم نباشند»، از اصل متمم کمک بگیر: کل حالت‌ها منهای حالت‌هایی که آن‌ها کنار هم‌اند.</li>
+      <li>در جایگشت دوری، اگر میز آینه‌ای/قابل‌برگشت باشد (مثل دستبند)، باید علاوه بر <span class="ltr">(n−۱)!</span> یک تقسیم بر ۲ هم انجام بدی.</li>
+    </ul>
+  </div>
+
+  <div class="card purple">
+    <div class="card-title"><span class="dot"></span>تمرین این بخش</div>
+    <div class="quiz">
+      <p class="q">۱. با حروف کلمهٔ «computer» (۸ حرف متمایز) چند جایگشت متفاوت می‌توان ساخت؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">۸! = ۴۰۳۲۰</span></div>
+          <div class="final-answer">پاسخ نهایی: ۴۰۳۲۰</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۲. ۳ مرد و ۴ زن باید در یک ردیف بنشینند طوری که زن‌ها کنار هم باشند. چند حالت داریم؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>۴ زن را یک بستهٔ واحد در نظر بگیر → همراه با ۳ مرد، ۴ واحد داریم که کنار هم چیده می‌شوند: <span class="ltr">۴!</span></div>
+          <div>داخل بستهٔ زن‌ها هم جایگشت دارند: <span class="ltr">۴!</span></div>
+          <div><span class="ltr">۴! × ۴! = ۲۴ × ۲۴ = ۵۷۶</span></div>
+          <div class="final-answer">پاسخ نهایی: ۵۷۶</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۳. حروف کلمهٔ «۱،۴،۴،۵،۵،۶،۶» (۷ رقم) را در نظر بگیر. چند عدد ۷ رقمی متفاوت می‌توان از این ارقام ساخت؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>عدد ۴ دوبار، عدد ۵ دوبار، عدد ۶ دوبار تکرار شده‌اند.</div>
+          <div><span class="ltr">تعداد = <span class="frac"><span class="num">۷!</span><span class="den">۲! × ۲! × ۲!</span></span> = ۶۳۰</span></div>
+          <div class="final-answer">پاسخ نهایی: ۶۳۰</div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===================== بخش ۳: ترکیب ===================== -->
+<div class="wrap">
+<section class="topic" id="s3">
+  <div class="topic-head">
+    <div class="badge">۳</div>
+    <div><span class="label">بخش سوم</span><h2>ترکیب (Combinations)</h2></div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-title"><span class="dot"></span>مفاهیم اصلی</div>
+    <p>ترکیب یعنی انتخاب چند شیء از بین چند شیء، جایی که <strong>ترتیب انتخاب اهمیت ندارد</strong> — فقط این‌که «کدام‌ها انتخاب شدند» مهمه.</p>
+    <ol class="steps-list">
+      <li>مطمئن شو ترتیب مهم نیست (مثلاً انتخاب اعضای یک کمیته، نه چیدن آن‌ها در صف).</li>
+      <li>تعداد کل اشیا (n) و تعداد انتخابی‌ها (r) را مشخص کن.</li>
+      <li>در فرمول جایگذاری کن.</li>
+      <li>اگر سؤال شرط دارد (مثلاً «حداقل یک زن»)، مسئله را به حالت‌های جداگانه بشکن یا از اصل متمم استفاده کن.</li>
+    </ol>
+    <div class="formula-box"><span class="ltr">C(n, r) = <span class="frac"><span class="num">n!</span><span class="den">r! (n − r)!</span></span></span></div>
+    <p>تفاوت کلیدی با جایگشت: در ترکیب، چون ترتیب مهم نیست، فرمول جایگشت را بر <span class="ltr">!r</span> (تعداد ترتیب‌های داخلی انتخاب‌شده‌ها) تقسیم می‌کنیم.</p>
+  </div>
+
+  <div class="card green">
+    <div class="card-title"><span class="dot"></span>مثال</div>
+    <div class="example-block">
+      <h4>مثال ۱ — انتخاب ۳ دانش‌آموز از ۱۰ نفر</h4>
+      <div class="steps">
+        <div>ترتیب مهم نیست، پس ترکیب.</div>
+        <div><span class="ltr">C(۱۰, ۳) = <span class="frac"><span class="num">۱۰!</span><span class="den">۳! × ۷!</span></span> = ۱۲۰</span></div>
+      </div>
+      <div class="result">جواب: ۱۲۰ حالت</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۲ — کمیته با شرط «حداقل یک زن»</h4>
+      <div class="steps">
+        <div>کمیته‌ای ۳ نفره از ۶ مرد و ۴ زن، با حداقل یک زن.</div>
+        <div>راه ساده‌تر: کل حالت‌ها منهای حالتی که هیچ زنی نیست (اصل متمم).</div>
+        <div><span class="ltr">کل: C(۱۰, ۳) = ۱۲۰</span></div>
+        <div><span class="ltr">بدون هیچ زنی: C(۶, ۳) = ۲۰</span></div>
+        <div><span class="ltr">۱۲۰ − ۲۰ = ۱۰۰</span></div>
+      </div>
+      <div class="result">جواب: ۱۰۰ حالت</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۳ — ترکیب اعداد در یک مسئلهٔ آزمون</h4>
+      <div class="steps">
+        <div>از بین ۴ ببر و ۶ شیر و ۲ زرافه، ۲ تا زرافه و ۲ تا حیوان دیگر (از نوع‌های متفاوت) انتخاب می‌شود.</div>
+        <div>حالت‌ها را بر اساس این‌که آن ۲ حیوان دیگر از کدام دو گروه‌اند جدا می‌کنیم و با هم جمع می‌بندیم.</div>
+      </div>
+      <div class="result">روش: تفکیک به حالت‌های جدا و سپس جمع (نه ضرب مستقیم یک فرمول)</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="card-title"><span class="dot"></span>اشتباهات پرتکرار</div>
+    <ul class="mistake-list">
+      <li>استفاده از فرمول جایگشت به‌جای ترکیب وقتی ترتیب اهمیتی ندارد — جواب چند برابر بزرگ‌تر از واقع درمیاد.</li>
+      <li>در سؤال‌های «حداقل»، فراموش کردن حالت متمم و شمردن ناقص همهٔ زیرحالت‌ها.</li>
+      <li>قاطی‌کردن جمع و ضرب وقتی مسئله چند مرحلهٔ مستقل داره (باید مراحل مستقل رو ضرب و حالت‌های جدا از هم رو جمع کرد).</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="dot"></span>نکات امتحانی</div>
+    <ul class="tip-list">
+      <li>کلیدواژهٔ «انتخاب»، «کمیته»، «گروه‌بندی» (بدون توجه به ترتیب) نشونهٔ ترکیبه.</li>
+      <li>در سؤال‌های ترکیبی با شرط، همیشه اول ببین «شمردن مستقیم» ساده‌تره یا «شمردن متمم».</li>
+      <li>یادت باشه <span class="ltr">C(n, r) = C(n, n − r)</span> — گاهی این تقارن محاسبه رو خیلی سریع‌تر می‌کنه.</li>
+    </ul>
+  </div>
+
+  <div class="card purple">
+    <div class="card-title"><span class="dot"></span>تمرین این بخش</div>
+    <div class="quiz">
+      <p class="q">۱. از بین ۸ دانشجو، ۳ نفر برای یک کمیته انتخاب می‌شوند. چند حالت داریم؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">C(۸, ۳) = <span class="frac"><span class="num">۸!</span><span class="den">۳! × ۵!</span></span> = ۵۶</span></div>
+          <div class="final-answer">پاسخ نهایی: ۵۶</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۲. کمیتهٔ ۳ نفره‌ای از ۶ مرد و ۴ زن انتخاب می‌شود. چند حالت داریم که حداقل یک زن در آن باشد؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>کل حالت‌ها: <span class="ltr">C(۱۰, ۳) = ۱۲۰</span></div>
+          <div>بدون هیچ زنی: <span class="ltr">C(۶, ۳) = ۲۰</span></div>
+          <div><span class="ltr">۱۲۰ − ۲۰ = ۱۰۰</span></div>
+          <div class="final-answer">پاسخ نهایی: ۱۰۰</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۳. از ۵ کتاب ریاضی و ۳ کتاب فیزیک، ۲ کتاب ریاضی و ۱ کتاب فیزیک انتخاب می‌کنیم. چند حالت داریم؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>این دو انتخاب مستقل‌اند، پس در هم ضرب می‌شوند.</div>
+          <div><span class="ltr">C(۵, ۲) × C(۳, ۱) = ۱۰ × ۳ = ۳۰</span></div>
+          <div class="final-answer">پاسخ نهایی: ۳۰</div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===================== بخش ۴: فضای نمونه و احتمال پایه ===================== -->
+<div class="wrap">
+<section class="topic" id="s4">
+  <div class="topic-head">
+    <div class="badge">۴</div>
+    <div><span class="label">بخش چهارم</span><h2>فضای نمونه، پیشامد و احتمال پایه</h2></div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-title"><span class="dot"></span>مفاهیم اصلی</div>
+    <ol class="steps-list">
+      <li><strong>فضای نمونه (S):</strong> مجموعهٔ تمام نتیجه‌های ممکنِ یک آزمایش تصادفی است.</li>
+      <li><strong>پیشامد (A):</strong> هر زیرمجموعه‌ای از فضای نمونه است.</li>
+      <li>برای محاسبهٔ احتمال، اول <span class="ltr">n(S)</span> (تعداد کل حالت‌ها) و بعد <span class="ltr">n(A)</span> (تعداد حالت‌های موردنظر) را بشمار.</li>
+      <li>احتمال را از فرمول پایه به دست بیاور.</li>
+    </ol>
+    <div class="formula-box"><span class="ltr">P(A) = <span class="frac"><span class="num">n(A)</span><span class="den">n(S)</span></span></span></div>
+    <p>برای شمردن <span class="ltr">n(S)</span> و <span class="ltr">n(A)</span> از همان ابزارهایی که در بخش‌های قبل یاد گرفتیم (اصل ضرب، جایگشت، ترکیب) کمک می‌گیریم.</p>
+  </div>
+
+  <div class="card green">
+    <div class="card-title"><span class="dot"></span>مثال</div>
+    <div class="example-block">
+      <h4>مثال ۱ — پرتاب یک تاس</h4>
+      <div class="steps">
+        <div><span class="ltr">S = {۱,۲,۳,۴,۵,۶}</span>، پس <span class="ltr">n(S) = ۶</span></div>
+        <div>پیشامد A: عدد بزرگ‌تر از ۳ بیاید → <span class="ltr">A = {۴,۵,۶}</span>، <span class="ltr">n(A) = ۳</span></div>
+        <div><span class="ltr">P(A) = <span class="frac"><span class="num">۳</span><span class="den">۶</span></span> = <span class="frac"><span class="num">۱</span><span class="den">۲</span></span></span></div>
+      </div>
+      <div class="result">جواب: ۱/۲</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۲ — پرتاب دو سکه</h4>
+      <div class="steps">
+        <div><span class="ltr">n(S) = ۲² = ۴</span></div>
+        <div>پیشامد A: هر دو سکه رو بیاید → فقط ۱ حالت.</div>
+        <div><span class="ltr">P(A) = <span class="frac"><span class="num">۱</span><span class="den">۴</span></span></span></div>
+      </div>
+      <div class="result">جواب: ۱/۴</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۳ — انتخاب تصادفی کارت از ۵ کارت شماره‌دار</h4>
+      <div class="steps">
+        <div>کارت‌های ۱ تا ۵ داریم، یکی به‌تصادف انتخاب می‌شود. <span class="ltr">n(S) = ۵</span></div>
+        <div>پیشامد A: عدد زوج باشد → <span class="ltr">A = {۲,۴}</span>، <span class="ltr">n(A) = ۲</span></div>
+        <div><span class="ltr">P(A) = <span class="frac"><span class="num">۲</span><span class="den">۵</span></span></span></div>
+      </div>
+      <div class="result">جواب: ۲/۵</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="card-title"><span class="dot"></span>اشتباهات پرتکرار</div>
+    <ul class="mistake-list">
+      <li>اشتباه گرفتن فضای نمونهٔ همهٔ حالت‌های ممکن با فضای نمونهٔ فقط حالت‌های «هم‌شانس» — فرمول پایه فقط وقتی مستقیم کار می‌کنه که همهٔ نتیجه‌ها هم‌شانس باشن.</li>
+      <li>فراموش‌کردن این‌که پیشامد باید زیرمجموعه‌ای از همون فضای نمونه‌ای باشه که برای <span class="ltr">n(S)</span> استفاده شده، نه یک فضای دیگه.</li>
+      <li>در آزمایش‌های چندمرحله‌ای (مثل چند تاس)، اشتباه محاسبه‌کردن <span class="ltr">n(S)</span> با جمع به‌جای توان یا ضرب.</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="dot"></span>نکات امتحانی</div>
+    <ul class="tip-list">
+      <li>همیشه اول <span class="ltr">n(S)</span> رو با دقت بشمار — بیشتر اشتباه‌ها همین‌جا اتفاق می‌افتد، نه در محاسبهٔ <span class="ltr">n(A)</span>.</li>
+      <li><span class="ltr">P(∅) = ۰</span> و <span class="ltr">P(S) = ۱</span> — این دو رو برای چک‌کردن سریع جواب‌هات به‌کار ببر.</li>
+      <li>وقتی چند تاس یا چند سکه پشت‌سرهم پرتاب می‌شن، از توان استفاده کن: <span class="ltr">n(S) = ۶ᵏ</span> برای k تاس.</li>
+    </ul>
+  </div>
+
+  <div class="card purple">
+    <div class="card-title"><span class="dot"></span>تمرین این بخش</div>
+    <div class="quiz">
+      <p class="q">۱. یک تاس دوبار پرتاب می‌شود. احتمال این‌که مجموع دو عدد برابر ۷ شود چقدر است؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">n(S) = ۶² = ۳۶</span></div>
+          <div>حالت‌های مجموع ۷: <span class="ltr">(۱,۶),(۲,۵),(۳,۴),(۴,۳),(۵,۲),(۶,۱)</span> → ۶ حالت</div>
+          <div><span class="ltr">P = <span class="frac"><span class="num">۶</span><span class="den">۳۶</span></span> = <span class="frac"><span class="num">۱</span><span class="den">۶</span></span></span></div>
+          <div class="final-answer">پاسخ نهایی: ۱/۶</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۲. از بین ۵ توپ سفید و ۳ توپ قرمز در یک کیسه، یک توپ به‌تصادف برداشته می‌شود. احتمال قرمزبودن آن چقدر است؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">n(S) = ۸</span></div>
+          <div><span class="ltr">n(A) = ۳</span></div>
+          <div><span class="ltr">P(A) = <span class="frac"><span class="num">۳</span><span class="den">۸</span></span></span></div>
+          <div class="final-answer">پاسخ نهایی: ۳/۸</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۳. سه سکه با هم پرتاب می‌شوند. احتمال این‌که دقیقاً دو تا «رو» بیاید چقدر است؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">n(S) = ۲³ = ۸</span></div>
+          <div>حالت‌های دقیقاً دو «رو»: <span class="ltr">C(۳,۲) = ۳</span></div>
+          <div><span class="ltr">P = <span class="frac"><span class="num">۳</span><span class="den">۸</span></span></span></div>
+          <div class="final-answer">پاسخ نهایی: ۳/۸</div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===================== بخش ۵: قوانین احتمال ===================== -->
+<div class="wrap">
+<section class="topic" id="s5">
+  <div class="topic-head">
+    <div class="badge">۵</div>
+    <div><span class="label">بخش پنجم</span><h2>قوانین احتمال</h2></div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-title"><span class="dot"></span>مفاهیم اصلی</div>
+    <p>وقتی با دو پیشامد A و B سروکار داریم، این قوانین کمک می‌کنن احتمال ترکیب‌های مختلف‌شون رو حساب کنیم:</p>
+    <ol class="steps-list">
+      <li><strong>متمم:</strong> احتمال رخ‌ندادن A.</li>
+      <li><strong>اجتماع (یا):</strong> احتمال رخ‌دادن حداقل یکی از A یا B.</li>
+      <li><strong>اشتراک (و):</strong> احتمال رخ‌دادن هر دو با هم.</li>
+      <li><strong>تفاضل:</strong> احتمال رخ‌دادن فقط یکی از آن‌ها (نه هر دو).</li>
+    </ol>
+    <div class="formula-box"><span class="ltr">P(A′) = ۱ − P(A)</span></div>
+    <div class="formula-box"><span class="ltr">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</span></div>
+    <div class="formula-box"><span class="ltr">P(A − B) = P(A) − P(A ∩ B)</span></div>
+    <p>یک نکتهٔ مهم: اگر A و B نتوانند هم‌زمان رخ دهند (ناسازگار)، آنگاه <span class="ltr">P(A ∩ B) = ۰</span> و فرمول اجتماع ساده‌تر می‌شود.</p>
+  </div>
+
+  <div class="card green">
+    <div class="card-title"><span class="dot"></span>مثال</div>
+    <div class="example-block">
+      <h4>مثال ۱ — استفاده از متمم</h4>
+      <div class="steps">
+        <div>احتمال قبولی یک داوطلب <span class="ltr">۰٫۷</span> است. احتمال قبول‌نشدن او چقدر است؟</div>
+        <div><span class="ltr">P(A′) = ۱ − ۰٫۷ = ۰٫۳</span></div>
+      </div>
+      <div class="result">جواب: ۰٫۳</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۲ — اجتماع دو پیشامد (زبان‌ها)</h4>
+      <div class="steps">
+        <div>۴۰٪ دانش‌آموزان قوی در عربی، ۶۵٪ قوی در انگلیسی، و ۸۲٪ حداقل در یکی قوی‌اند.</div>
+        <div><span class="ltr">P(A ∪ B) = P(A) + P(B) − P(A ∩ B)</span></div>
+        <div><span class="ltr">۰٫۸۲ = ۰٫۴ + ۰٫۶۵ − P(A ∩ B) ⇒ P(A ∩ B) = ۰٫۲۳</span></div>
+      </div>
+      <div class="result">جواب: احتمال قوی‌بودن در هر دو = ۰٫۲۳</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۳ — تفاضل دو پیشامد</h4>
+      <div class="steps">
+        <div>با همان اطلاعات مثال ۲، احتمال قوی‌بودن فقط در انگلیسی (نه عربی) را می‌خواهیم.</div>
+        <div><span class="ltr">P(B − A) = P(B) − P(A ∩ B) = ۰٫۶۵ − ۰٫۲۳ = ۰٫۴۲</span></div>
+      </div>
+      <div class="result">جواب: ۰٫۴۲</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="card-title"><span class="dot"></span>اشتباهات پرتکرار</div>
+    <ul class="mistake-list">
+      <li>فراموش‌کردن کم‌کردن <span class="ltr">P(A ∩ B)</span> در فرمول اجتماع و دوبار حساب‌کردن اشتراک.</li>
+      <li>استفاده از فرمول اجتماعِ ساده (جمع مستقیم) برای پیشامدهایی که ناسازگار نیستند.</li>
+      <li>قاطی‌کردن <span class="ltr">P(A − B)</span> با <span class="ltr">P(A′ ∩ B′)</span> — این دو کاملاً متفاوت‌اند و باید با نمودار ون از هم تفکیک بشن.</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="dot"></span>نکات امتحانی</div>
+    <ul class="tip-list">
+      <li>در سؤال‌های ترکیبی، همیشه اول یک نمودار ون کوچک بکش — خیلی سریع‌تر از حفظ‌کردن فرمول جواب می‌ده.</li>
+      <li>وقتی «دقیقاً یکی از A یا B» رو دیدی، فرمول <span class="ltr">P(A) + P(B) − ۲P(A ∩ B)</span> رو به‌خاطر بسپار.</li>
+      <li>مقدار احتمال همیشه بین ۰ و ۱ است؛ اگر جوابت از این بازه بیرون زد، حتماً جایی اشتباه کردی.</li>
+    </ul>
+  </div>
+
+  <div class="card purple">
+    <div class="card-title"><span class="dot"></span>تمرین این بخش</div>
+    <div class="quiz">
+      <p class="q">۱. اگر <span class="ltr">P(A) = ۰٫۵</span>، <span class="ltr">P(B) = ۰٫۳</span> و <span class="ltr">P(A ∩ B) = ۰٫۱</span>، آنگاه <span class="ltr">P(A ∪ B)</span> چقدر است؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">P(A ∪ B) = ۰٫۵ + ۰٫۳ − ۰٫۱ = ۰٫۷</span></div>
+          <div class="final-answer">پاسخ نهایی: ۰٫۷</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۲. با همان اعداد سؤال قبل، احتمال این‌که هیچ‌کدام از A و B رخ ندهند چقدر است؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">P(A′ ∩ B′) = ۱ − P(A ∪ B) = ۱ − ۰٫۷ = ۰٫۳</span></div>
+          <div class="final-answer">پاسخ نهایی: ۰٫۳</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۳. اگر <span class="ltr">P(A) = ۰٫۴</span> و <span class="ltr">P(A ∩ B) = ۰٫۱۵</span> باشد، <span class="ltr">P(A − B)</span> چقدر است؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">P(A − B) = P(A) − P(A ∩ B) = ۰٫۴ − ۰٫۱۵ = ۰٫۲۵</span></div>
+          <div class="final-answer">پاسخ نهایی: ۰٫۲۵</div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===================== بخش ۶: احتمال شرطی ===================== -->
+<div class="wrap">
+<section class="topic" id="s6">
+  <div class="topic-head">
+    <div class="badge">۶</div>
+    <div><span class="label">بخش ششم</span><h2>احتمال شرطی</h2></div>
+  </div>
+
+  <div class="card blue">
+    <div class="card-title"><span class="dot"></span>مفاهیم اصلی</div>
+    <p>احتمال شرطی یعنی احتمال رخ‌دادن یک پیشامد، وقتی از قبل می‌دانیم پیشامد دیگری رخ داده است. این‌جا فضای نمونه کوچک‌تر می‌شود.</p>
+    <ol class="steps-list">
+      <li>مشخص کن چه چیزی از قبل داده شده (شرط) و چه چیزی می‌خواهیم (پیشامد هدف).</li>
+      <li>اگر مسئله چندمرحله‌ای است (مثل انتخاب گروه و بعد نتیجه)، یک نمودار درختی بکش.</li>
+      <li>احتمال هر مسیر روی درخت را در طول مسیر ضرب کن.</li>
+      <li>از فرمول احتمال شرطی برای رسیدن به جواب نهایی استفاده کن.</li>
+    </ol>
+    <div class="formula-box"><span class="ltr">P(A | B) = <span class="frac"><span class="num">P(A ∩ B)</span><span class="den">P(B)</span></span></span></div>
+    <p>در مسائل درختی، معمولاً باید اول <span class="ltr">P(B)</span> (احتمال کل رسیدن به شرط از همهٔ مسیرها) و بعد <span class="ltr">P(A ∩ B)</span> (احتمال مسیر خاصی که هم A و هم B رخ داده) را جداگانه حساب کنیم.</p>
+  </div>
+
+  <div class="card green">
+    <div class="card-title"><span class="dot"></span>مثال</div>
+    <div class="example-block">
+      <h4>مثال ۱ — قبولی در دو رشتهٔ تجربی و ریاضی</h4>
+      <div class="steps">
+        <div>احتمال انتخاب هرکدام از دو رشته: <span class="ltr">۱/۲</span>. احتمال قبولی تجربی: <span class="ltr">۳/۵</span>. احتمال قبولی ریاضی: <span class="ltr">۲/۵</span>.</div>
+        <div>می‌خواهیم: احتمال تجربی‌بودن، به‌شرط قبول‌شدن.</div>
+        <div><span class="ltr">P(قبول) = ۱/۲ × ۳/۵ + ۱/۲ × ۲/۵ = ۵/۱۰</span></div>
+        <div><span class="ltr">P(تجربی ∩ قبول) = ۱/۲ × ۳/۵ = ۳/۱۰</span></div>
+        <div><span class="ltr">P(تجربی | قبول) = <span class="frac"><span class="num">۳/۱۰</span><span class="den">۵/۱۰</span></span> = ۳/۵</span></div>
+      </div>
+      <div class="result">جواب: ۳/۵</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۲ — احتمال شرطی ساده با کارت‌ها</h4>
+      <div class="steps">
+        <div>یک تاس پرتاب می‌شود؛ می‌دانیم عدد آمده زوج است. احتمال این‌که آن عدد بزرگ‌تر از ۳ باشد چقدر است؟</div>
+        <div>فضای شرط: <span class="ltr">B = {۲,۴,۶}</span></div>
+        <div>پیشامد هدف در این فضا: <span class="ltr">A ∩ B = {۴,۶}</span></div>
+        <div><span class="ltr">P(A | B) = <span class="frac"><span class="num">۲</span><span class="den">۳</span></span></span></div>
+      </div>
+      <div class="result">جواب: ۲/۳</div>
+    </div>
+    <div class="example-block">
+      <h4>مثال ۳ — دو کارخانه و قطعهٔ معیوب</h4>
+      <div class="steps">
+        <div>کارخانهٔ A، ۶۰٪ کل تولید و ۲٪ آن معیوب است. کارخانهٔ B، ۴۰٪ کل تولید و ۵٪ آن معیوب است.</div>
+        <div>یک قطعهٔ معیوب پیدا شده؛ احتمال این‌که از کارخانهٔ A باشد؟</div>
+        <div><span class="ltr">P(معیوب) = ۰٫۶ × ۰٫۰۲ + ۰٫۴ × ۰٫۰۵ = ۰٫۰۱۲ + ۰٫۰۲ = ۰٫۰۳۲</span></div>
+        <div><span class="ltr">P(A | معیوب) = <span class="frac"><span class="num">۰٫۰۱۲</span><span class="den">۰٫۰۳۲</span></span> = ۰٫۳۷۵</span></div>
+      </div>
+      <div class="result">جواب: ۰٫۳۷۵</div>
+    </div>
+  </div>
+
+  <div class="card red">
+    <div class="card-title"><span class="dot"></span>اشتباهات پرتکرار</div>
+    <ul class="mistake-list">
+      <li>جابه‌جا استفاده‌کردن <span class="ltr">P(A|B)</span> به‌جای <span class="ltr">P(B|A)</span> — این دو معمولاً مقدار متفاوتی دارند.</li>
+      <li>در مخرج فرمول، استفاده از <span class="ltr">P(A)</span> به‌جای <span class="ltr">P(B)</span> (باید مخرج، احتمال همان چیزی باشد که به‌عنوان شرط داده شده).</li>
+      <li>در نمودار درختی، ضرب‌نکردن احتمال کل مسیر و فقط استفاده از یک شاخه.</li>
+      <li>فراموش‌کردن جمع‌بستن همهٔ مسیرهایی که به پیشامد شرط منتهی می‌شوند، وقتی چند مسیر مختلف وجود دارد.</li>
+    </ul>
+  </div>
+
+  <div class="card gold">
+    <div class="card-title"><span class="dot"></span>نکات امتحانی</div>
+    <ul class="tip-list">
+      <li>در مسائل احتمال شرطی چندمرحله‌ای، کشیدن نمودار درختی تقریباً همیشه از حفظ‌کردن فرمول سریع‌تر و مطمئن‌تره.</li>
+      <li>عبارت «به‌شرط این‌که» یا «می‌دانیم که...» معمولاً نشونهٔ احتمال شرطیه.</li>
+      <li>مخرج فرمول احتمال شرطی همیشه همون چیزیه که از قبل بهش یقین داریم (شرط)، نه پیشامد هدف.</li>
+    </ul>
+  </div>
+
+  <div class="card purple">
+    <div class="card-title"><span class="dot"></span>تمرین این بخش</div>
+    <div class="quiz">
+      <p class="q">۱. یک خانواده دو فرزند دارد. می‌دانیم حداقل یکی از آن‌ها پسر است. احتمال این‌که هر دو پسر باشند چقدر است؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>فضای نمونهٔ اولیه: <span class="ltr">{پسر‌پسر, پسر‌دختر, دختر‌پسر, دختر‌دختر}</span></div>
+          <div>فضای شرط (حداقل یک پسر): <span class="ltr">{پسر‌پسر, پسر‌دختر, دختر‌پسر}</span> → ۳ حالت</div>
+          <div>پیشامد هدف در این فضا: فقط <span class="ltr">پسر‌پسر</span> → ۱ حالت</div>
+          <div><span class="ltr">P = ۱/۳</span></div>
+          <div class="final-answer">پاسخ نهایی: ۱/۳</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۲. در یک کیسه ۵ توپ قرمز و ۳ توپ آبی داریم. دو توپ بدون جایگذاری برداشته می‌شود. احتمال این‌که توپ دوم قرمز باشد، به‌شرط این‌که توپ اول قرمز بوده؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div>بعد از برداشتن یک توپ قرمز، ۴ قرمز و ۳ آبی (جمعاً ۷ توپ) باقی می‌ماند.</div>
+          <div><span class="ltr">P = ۴/۷</span></div>
+          <div class="final-answer">پاسخ نهایی: ۴/۷</div>
+        </div>
+      </details>
+    </div>
+    <div class="quiz">
+      <p class="q">۳. با اطلاعات مثال ۳ کارت آموزشی (دو کارخانه)، احتمال این‌که یک قطعهٔ معیوب از کارخانهٔ B باشد چقدر است؟</p>
+      <details><summary>نمایش پاسخ</summary>
+        <div class="answer">
+          <div><span class="ltr">P(معیوب) = ۰٫۰۳۲</span> (از مثال قبل)</div>
+          <div><span class="ltr">P(B ∩ معیوب) = ۰٫۴ × ۰٫۰۵ = ۰٫۰۲</span></div>
+          <div><span class="ltr">P(B | معیوب) = <span class="frac"><span class="num">۰٫۰۲</span><span class="den">۰٫۰۳۲</span></span> = ۰٫۶۲۵</span></div>
+          <div class="final-answer">پاسخ نهایی: ۰٫۶۲۵</div>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===================== مقایسه و جدول‌ها ===================== -->
+<div class="wrap">
+<section class="compare-section" id="compare">
+  <div class="topic-head">
+    <div class="badge">★</div>
+    <div><span class="label">مرور بخش‌های شمارش</span><h2>اصل ضرب، جایگشت و ترکیب — کنار هم</h2></div>
+  </div>
+  <p class="compare-intro">این سه ابزار همیشه با هم قاطی می‌شن. قبل از حل هر سؤال شمارشی، از خودت این دو سؤال رو بپرس: «ترتیب مهمه؟» و «تکرار مجازه؟» — جواب همین دو سؤال مستقیم بهت می‌گه کدوم ستون این کارت مال توئه.</p>
+  <div class="compare-grid">
+    <div class="compare-card" style="--c:var(--blue)">
+      <h3><span class="sw"></span>اصل ضرب</h3>
+      <div class="compare-row"><span class="k">کاربرد</span><span class="v">شمردن حالت‌های چند مرحلهٔ مستقل</span></div>
+      <div class="compare-row"><span class="k">ترتیب مهمه؟</span><span class="v">بی‌ربط — مراحل جدان</span></div>
+      <div class="compare-row"><span class="k">تکرار</span><span class="v">هم مجاز، هم غیرمجاز ممکنه</span></div>
+      <div class="compare-row"><span class="k">کلیدواژه</span><span class="v">«برای هر ... و برای هر ...»</span></div>
+      <div class="cformula ltr">N = n<sub>۱</sub> × n<sub>۲</sub> × ...</div>
+    </div>
+    <div class="compare-card" style="--c:var(--green)">
+      <h3><span class="sw"></span>جایگشت</h3>
+      <div class="compare-row"><span class="k">کاربرد</span><span class="v">چیدن اشیای متمایز به ترتیب</span></div>
+      <div class="compare-row"><span class="k">ترتیب مهمه؟</span><span class="v">بله ✓</span></div>
+      <div class="compare-row"><span class="k">تکرار</span><span class="v">معمولاً بدون تکرار</span></div>
+      <div class="compare-row"><span class="k">کلیدواژه</span><span class="v">«چیدن»، «صف»، «رتبه»</span></div>
+      <div class="cformula ltr">P(n,r) = <span class="frac"><span class="num">n!</span><span class="den">(n−r)!</span></span></div>
+    </div>
+    <div class="compare-card" style="--c:var(--purple)">
+      <h3><span class="sw"></span>ترکیب</h3>
+      <div class="compare-row"><span class="k">کاربرد</span><span class="v">انتخاب گروه، بدون چیدن</span></div>
+      <div class="compare-row"><span class="k">ترتیب مهمه؟</span><span class="v">نه ✗</span></div>
+      <div class="compare-row"><span class="k">تکرار</span><span class="v">معمولاً بدون تکرار</span></div>
+      <div class="compare-row"><span class="k">کلیدواژه</span><span class="v">«انتخاب»، «کمیته»، «گروه»</span></div>
+      <div class="cformula ltr">C(n,r) = <span class="frac"><span class="num">n!</span><span class="den">r!(n−r)!</span></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="compare-section">
+  <div class="topic-head">
+    <div class="badge">★</div>
+    <div><span class="label">مرور بخش‌های احتمال</span><h2>جدول جمع‌بندی فرمول‌های احتمال</h2></div>
+  </div>
+  <p class="compare-intro">همهٔ فرمول‌هایی که در این فصل با احتمال کار کردیم، در یک جدول — برای مرور سریع قبل از امتحان.</p>
+  <div class="table-wrap">
+    <table class="formula-table">
+      <thead>
+        <tr>
+          <th>مفهوم</th>
+          <th>فرمول</th>
+          <th>بیان فارسی</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="desc-cell">احتمال پایه</td>
+          <td class="formula-cell ltr">P(A) = n(A) / n(S)</td>
+          <td class="desc-cell">نسبت حالت‌های موردنظر به کل حالت‌ها</td>
+        </tr>
+        <tr>
+          <td class="desc-cell">متمم</td>
+          <td class="formula-cell ltr">P(A′) = ۱ − P(A)</td>
+          <td class="desc-cell">احتمال رخ‌ندادن A</td>
+        </tr>
+        <tr>
+          <td class="desc-cell">اجتماع (یا)</td>
+          <td class="formula-cell ltr">P(A∪B) = P(A) + P(B) − P(A∩B)</td>
+          <td class="desc-cell">حداقل یکی از A یا B رخ دهد</td>
+        </tr>
+        <tr>
+          <td class="desc-cell">اجتماع پیشامدهای ناسازگار</td>
+          <td class="formula-cell ltr">P(A∪B) = P(A) + P(B)</td>
+          <td class="desc-cell">وقتی A و B هم‌زمان رخ نمی‌دهند</td>
+        </tr>
+        <tr>
+          <td class="desc-cell">تفاضل</td>
+          <td class="formula-cell ltr">P(A−B) = P(A) − P(A∩B)</td>
+          <td class="desc-cell">فقط A رخ دهد (نه B)</td>
+        </tr>
+        <tr>
+          <td class="desc-cell">هیچ‌کدام رخ ندهند</td>
+          <td class="formula-cell ltr">P(A′∩B′) = ۱ − P(A∪B)</td>
+          <td class="desc-cell">نه A و نه B رخ دهد</td>
+        </tr>
+        <tr>
+          <td class="desc-cell">دقیقاً یکی از دو</td>
+          <td class="formula-cell ltr">P(A)+P(B)−۲P(A∩B)</td>
+          <td class="desc-cell">فقط یکی رخ دهد، نه هر دو</td>
+        </tr>
+        <tr>
+          <td class="desc-cell">احتمال شرطی</td>
+          <td class="formula-cell ltr">P(A|B) = P(A∩B) / P(B)</td>
+          <td class="desc-cell">احتمال A، به‌شرط رخ‌دادن B</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+</div>
+
+<!-- ===================== جمع‌بندی ===================== -->
+<div class="wrap">
+<div class="summary" id="summary">
+  <h2>جمع‌بندی فصل ۶</h2>
+  <div class="pill-row">
+    <span>اصل ضرب</span><span>اصل متمم</span><span>جایگشت</span><span>ترکیب</span>
+    <span>فضای نمونه</span><span>احتمال پایه</span><span>قوانین احتمال</span><span>احتمال شرطی</span>
+  </div>
+  <p class="review">
+    این فصل با شمردن حالت‌ها شروع شد (اصل ضرب و متمم)، بعد یاد گرفتیم چطور اشیای متمایز رو بچینیم (جایگشت) یا از بینشون انتخاب کنیم بدون توجه به ترتیب (ترکیب).
+    سپس این ابزارهای شمارش رو وارد دنیای احتمال کردیم: از فضای نمونه و فرمول پایه، تا قوانین ترکیب پیشامدها، و در نهایت احتمال شرطی که یکی از پرکاربردترین مباحث امتحانیه.
+  </p>
+  <div class="compass">
+    اگه یک‌جا گیر کردی، برگرد به بخش اول: اکثر مسائل احتمال در واقع همون سؤال‌های شمارشِ اول فصل‌اند، فقط با یک فرمول احتمال روی‌شون.
+  </div>
+</div>
+</div>
+
+<footer>فصل ۶ | ترکیبات و احتمال</footer>
+
+</body>
+</html>

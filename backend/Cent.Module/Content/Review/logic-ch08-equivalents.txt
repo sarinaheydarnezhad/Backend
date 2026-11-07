@@ -1,0 +1,101 @@
+جزوه لاجیک CEnT — فصل ۸: معادل‌های شرطی
+
+CENT LOGIC — PART A · CHAPTER 8 / 13 · 🔴 CHALLENGE
+فصل ۸: معادل‌های شرطی — Equivalent Forms of "If A then B"
+آزمون به‌ندرت با فرم ساده‌ی «If A then B» سراغت میاد. به‌جاش کلمات دیگه‌ای مثل «only if»، «unless» یا «if and only if» به کار می‌بره — و هر کدوم قانون تبدیل خاص خودشون رو دارن. اشتباه گرفتن این قوانین با هم، رایج‌ترین منبع خطا در این بخشه.
+Bاین مبحث چیست؟
+هدف این فصل اینه که یاد بگیری چند جمله‌ی متفاوت انگلیسی رو به فرم استاندارد «If [مقدم] then [تالی]» برگردونی. نکته‌ی حیاتی: کلمه‌ی «if» و کلمه‌ی «only if» دقیقاً برعکس هم عمل می‌کنن — و آزمون دقیقاً از همین تضاد برای طراحی دام استفاده می‌کنه.
+Cمفهوم اصلی
+قدم ۱ — «[جمله‌ی ۱] if [جمله‌ی ۲]» = «If [جمله‌ی ۲] then [جمله‌ی ۱]». یعنی کلمه‌ی «if» جای مقدم و تالی رو نسبت به ترتیب نوشتاریِ جمله برعکس می‌کنه — چیزی که بعد از «if» میاد، همیشه مقدمه.
+"David will be late if he misses the bus."= "If he misses the bus, then David will be late."
+قدم ۲ — «[جمله‌ی ۱] only if [جمله‌ی ۲]» = «If [جمله‌ی ۱] then [جمله‌ی ۲]». برخلاف «if» ساده، اینجا ترتیب نوشتاری عوض نمی‌شه — جمله‌ی قبل از «only if» همچنان مقدمه.
+"The match is burning only if there's oxygen in the room."= "If the match is burning, then there's oxygen in the room."
+قاعده‌ی کمکی: «تالی if مقدم»، ولی «مقدم only if تالی».
+قدم ۳ — «A if and only if B» (به‌اختصار A iff B) یعنی رابطه در هر دو جهت برقراره. این یعنی هم «If A then B» و هم «If B then A» — به این می‌گن گزاره‌ی دوشرطی (biconditional).
+A = "Triangle ABC has two equal sides." B = "Triangle ABC has two equal angles."A iff B → If A then B, AND If B then A.
+⚠️ نکته‌ی مهم: اثبات اینکه A ⇒ B، هیچ تضمینی نمی‌ده که B ⇒ A هم برقراره. برای «iff» باید هر دو جهت رو جداگانه نشون بدی.
+قدم ۴ — «B unless A» = «If not-A then B». کلمه‌ی «unless» دقیقاً معادل «if not-» است.
+"Jennifer won't go to the party unless Lauren goes to the party."= "If Lauren does not go to the party, then Jennifer will go to the party."
+قدم ۵ — نقیضِ عکس (contrapositive): «If A then B» = «If not-B then not-A». این دو گزاره از نظر منطقی کاملاً هم‌ارزن — همیشه ارزش درستیِ یکسانی دارن.
+"If I live in Paris, then I live in France."= "If I don't live in France, then I don't live in Paris."
+⚠️ این با «inverse» («If not-A then not-B») که در فصل ۷ دیدیم فرق داره — inverse با گزاره‌ی اصلی هم‌ارز نیست، ولی contrapositive هست.
+قدم ۶ — «If A then B» = «(not-A) or B». جدول درستی این دو گزاره کاملاً یکسانه — این فرم دیگه‌ای از همون شرطیه که گاهی سؤال به این شکل مطرحش می‌کنه.
+Dقوانین و اصول مهم — جدول جامع معادل‌ها
+فرم
+معادل استاندارد
+B if A
+If A then B
+A only if B
+If A then B
+A iff B
+If A then B AND If B then A
+B unless A
+If not-A then B
+If A then B
+If not-B then not-A (contrapositive)
+If A then B
+(not-A) or B
+Eروش حل
+مشخص کن جمله از کدوم الگو استفاده کرده: if، only if، unless، یا iff.
+طبق جدول بالا، مقدم و تالیِ واقعی رو تشخیص بده (نه صرفاً بر اساس ترتیب نوشتاری کلمات).
+جمله رو به فرم استاندارد «If [مقدم] then [تالی]» بازنویسی کن.
+حالا با قوانین فصل‌های ۴ و ۷ (ارزیابی و نقیضِ شرطی) ادامه بده.
+→ جواب: طبق فرم استاندارد بازنویسی‌شده.
+Fمثال آموزشی
+Rewrite in standard "If...then" form: "You'll gain weight if you don't exercise."
+پاسخ: "If you don't exercise, then you'll gain weight." طبق قدم ۱، چیزی که بعد از «if» اومده («you don't exercise») مقدمه، فارغ از اینکه در جمله‌ی اصلی جلوتر یا عقب‌تر نوشته شده باشه.
+Gمثال امتحانی
+"A candidate is eligible for the scholarship only if their GPA is above 3.5." Which of the following correctly restates this claim?
+A) "If a candidate's GPA is above 3.5, then they are eligible for the scholarship."
+B) "If a candidate is eligible for the scholarship, then their GPA is above 3.5."
+C) "A candidate's GPA is above 3.5 if and only if they are eligible for the scholarship."
+D) "Unless a candidate's GPA is above 3.5, they are eligible for the scholarship."
+🎯 EXAM TIP
+هر وقت به «if» تنها رسیدی، جهت رو برعکس کن (چیزی که بعدشه، مقدمه). هر وقت به «only if» رسیدی، جهت رو عوض نکن (چیزی که قبلشه، مقدمه). این دو قانون دقیقاً برعکس همن — و دقیقاً همینه که آزمون امتحان می‌کنه.
+⚡ QUICK METHOD
+برای «unless»، فوراً جایگزینش کن با «if not-». «B unless A» بشه «if not-A then B». دیگه نیازی نیست دنبال معنی ضمنی‌اش بگردی — این جایگزینی همیشه و بدون استثنا کار می‌کنه.
+⚠️ COMMON MISTAKES
+اشتباه: برخورد با «only if» دقیقاً مثل «if» ساده — یعنی برعکس کردن جهت مقدم/تالی.
+چرا اتفاق می‌افته: چون هر دو عبارت شامل کلمه‌ی «if» هستن، ذهن به‌طور خودکار فکر می‌کنه قانون یکسانیه، بدون توجه به اینکه کلمه‌ی «only» کاملاً معنی رو تغییر می‌ده.
+چطور جلوش رو بگیریم: این قاعده رو حفظ کن: «تالی if مقدم» ولی «مقدم only if تالی». اگه هر بار قبل از حل، این جمله رو مرور کنی، این اشتباه دیگه تکرار نمی‌شه.
+🪤 QUESTION TRAP
+وقتی سؤال یک رابطه‌ی یک‌طرفه («only if» یا «if» ساده) بهت می‌ده، آزمون گاهی گزینه‌ای می‌ذاره که اون رو به یک biconditional («if and only if») تبدیل کرده — یعنی ادعای بیشتری از چیزی که واقعاً گفته شده می‌کنه. همیشه چک کن آیا سؤال واقعاً هر دو جهت رو تضمین کرده یا فقط یکی.
+🧠 MUST REMEMBER
+B if A = If A then B (جهت برعکس می‌شه) | A only if B = If A then B (جهت ثابت می‌مونه) | B unless A = If not-A then B | contrapositive (If not-B then not-A) هم‌ارزه، ولی inverse (If not-A then not-B) هم‌ارز نیست.
+📝تمرین
+"The alarm sounds if the temperature exceeds 50°C." Which is the correct standard form?
+A) "If the temperature exceeds 50°C, then the alarm sounds."
+B) "If the alarm sounds, then the temperature exceeds 50°C."
+C) "The alarm sounds only if the temperature exceeds 50°C."
+D) "Unless the temperature exceeds 50°C, the alarm sounds."
+نمایش پاسخ و توضیح
+پاسخ درست: A. طبق قدم ۱، «[جمله ۱] if [جمله ۲]» = «If [جمله ۲] then [جمله ۱]». چیزی که بعد از «if» اومده («temperature exceeds 50°C») مقدمه.
+"You may enter the lab unless you are not wearing safety goggles." Which is the correct standard form?
+A) "If you are wearing safety goggles, then you may not enter the lab."
+B) "If you are wearing safety goggles, then you may enter the lab."
+C) "If you may enter the lab, then you are wearing safety goggles."
+D) "You may enter the lab if and only if you are wearing safety goggles."
+نمایش پاسخ و توضیح
+پاسخ درست: B. فرم اصلی: «B unless A» = «If not-A then B». اینجا B = "you may enter the lab"، A = "you are not wearing safety goggles". پس: "If not-(you are not wearing safety goggles) then you may enter the lab" = "If you ARE wearing safety goggles, then you may enter the lab" (با استفاده از نقیض مضاعف فصل ۷). گزینه‌ی D ادعای اضافه‌ای (biconditional) می‌کنه که در جمله‌ی اصلی نیومده.
+"A shape is a square if and only if it has four equal sides and four right angles." A shape has four equal sides and four right angles, but we have NOT yet confirmed it is a square. Based only on this biconditional claim, can we conclude the shape is a square?
+A) Yes — the "only if" direction guarantees that having these properties is enough to conclude it's a square.
+B) No — a biconditional only works in one direction.
+C) Cannot be determined — biconditionals never allow drawing conclusions.
+D) Yes, but only if we also confirm the shape has four sides total.
+نمایش پاسخ و توضیح
+پاسخ درست: A. «A iff B» یعنی هم «If A then B» و هم «If B then A» — یعنی هر دو جهت هم‌زمان تضمین شدن. اینجا B (چهار ضلع مساوی + چهار زاویه‌ی قائمه) درسته، و چون رابطه‌ی «If B then A» هم بخشی از «iff» است، می‌تونیم نتیجه بگیریم A (شکل مربعه) هم درسته. گزینه‌ی B اشتباهه چون دقیقاً برعکسِ تعریفِ «iff» رو گفته — «iff» هر دو جهت رو هم‌زمان می‌ده، نه فقط یکی.
+🚀مرور سریع — فصل ۸
+جدول معادل‌ها
+B if A = If A then B (جهت برعکس)
+A only if B = If A then B (جهت ثابت)
+B unless A = If not-A then B
+contrapositive هم‌ارزه؛ inverse نیست
+روش
+الگو رو تشخیص بده: if / only if / unless / iff.
+به فرم استاندارد «If…then» برگردون.
+اشتباهات رایج
+برخورد با «only if» مثل «if» ساده.
+قاطی کردن inverse و contrapositive.
+دام‌های تستی
+تبدیل یک رابطه‌ی یک‌طرفه به biconditional بدون دلیل.
+قاطی کردن «unless» با «if».

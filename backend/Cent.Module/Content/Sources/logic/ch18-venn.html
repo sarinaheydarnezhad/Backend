@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۸: نمودار ون</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+
+  .venn-wrap{ margin:20px 0; text-align:center; }
+  .venn-svg{ max-width:320px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART B · CHAPTER 18 / 19</p>
+  <h1>فصل ۱۸: حل مسئله با نمودار ون — Venn Diagram Word Problems</h1>
+  <p class="lede">این فصل یکی از پرتکرارترین الگوهای مسئله‌ی کلامیِ آزمونه: دو گروه که با هم هم‌پوشانی دارن، به‌همراه یک «کل» و یک تعداد «هیچ‌کدام». یک فرمولِ ثابت، همیشه این نوع مسئله رو حل می‌کنه.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>وقتی مسئله دو ویژگی (مثلِ «ماشین دارد» و «گوشیِ هوشمند دارد») رو در یک جمعیت توصیف می‌کنه، جمعیت به چهار بخش تقسیم می‌شه: فقط A، فقط B، هر دو، و هیچ‌کدام. نمودار ون <span class="term">(Venn diagram)</span> این چهار بخش رو به‌صورت بصری نشون می‌ده.</p>
+
+  <div class="venn-wrap">
+    <svg class="venn-svg" viewBox="0 0 300 200">
+      <rect x="5" y="5" width="290" height="190" fill="none" stroke="#D8D4C8" stroke-width="1.5"/>
+      <circle cx="115" cy="100" r="70" fill="#1F3A5F" fill-opacity="0.12" stroke="#1F3A5F" stroke-width="1.5"/>
+      <circle cx="185" cy="100" r="70" fill="#9C6B12" fill-opacity="0.12" stroke="#9C6B12" stroke-width="1.5"/>
+      <text x="80" y="60" font-size="12" fill="#1F3A5F" font-family="IBM Plex Sans">A</text>
+      <text x="205" y="60" font-size="12" fill="#9C6B12" font-family="IBM Plex Sans">B</text>
+      <text x="85" y="105" font-size="12" fill="#1C2321" font-family="IBM Plex Sans">Only A</text>
+      <text x="185" y="105" font-size="12" fill="#1C2321" font-family="IBM Plex Sans">Only B</text>
+      <text x="130" y="105" font-size="11" fill="#1C2321" font-family="IBM Plex Sans">Both</text>
+      <text x="20" y="185" font-size="11" fill="#4A5250" font-family="IBM Plex Sans">Neither (outside both circles)</text>
+    </svg>
+  </div>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — فرمول پایه: کل = (فقط A) + (فقط B) + (هر دو) + (هیچ‌کدام).</strong> یا به‌شکلِ مفیدتر برای حل مسئله: <code>|A| + |B| − (هر دو) = کل − (هیچ‌کدام)</code>.</p>
+
+  <p><strong>قدم ۲ — مثالِ کامل، قدم‌به‌قدم.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p class="q">In a residential complex, 100 families live. 60 families have a car. 80 families have a smartphone. 10 families have neither a car nor a smartphone. How many families have both?</p>
+    </div>
+    <ol style="margin-top:10px;">
+      <li>تعدادِ خانواده‌هایی که حداقل یکی از این دو رو دارن: ۱۰۰ − ۱۰ = ۹۰.</li>
+      <li>فرض کن تعدادِ خانواده‌هایی که هر دو رو دارن، x باشه.</li>
+      <li>طبقِ فرمول: ۶۰ + ۸۰ − x = ۹۰</li>
+      <li>حل: ۱۴۰ − x = ۹۰ ⟹ x = ۵۰</li>
+    </ol>
+    <p style="margin-top:8px;"><strong>پاسخ: ۵۰ خانواده هم ماشین دارن، هم گوشیِ هوشمند.</strong></p>
+  </div>
+
+  <p><strong>قدم ۳ — همون الگو، برای موقعیتِ متفاوت.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p class="q">In a class of 40 students, 25 like football, 20 like volleyball, and 10 like neither. How many students like both sports?</p>
+    </div>
+    <p style="margin-top:10px;">حداقل یکی: ۴۰−۱۰=۳۰. معادله: ۲۵+۲۰−y=۳۰ ⟹ ۴۵−y=۳۰ ⟹ y=۱۵. <strong>پاسخ: ۱۵ نفر به هر دو ورزش علاقه دارن.</strong></p>
+  </div>
+
+  <p><strong>قدم ۴ — اگه «هر دو» رو بدن و «هیچ‌کدام» رو بخوان (جهتِ برعکس)، همون فرمول رو فقط برعکس حل کن.</strong></p>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم — جعبه‌ابزارِ فرمول</h2>
+  <table>
+    <tr><th>می‌دونیم</th><th>می‌خوایم</th><th>فرمول</th></tr>
+    <tr><td>Total, |A|, |B|, Neither</td><td>Both</td><td>Both = |A|+|B|−(Total−Neither)</td></tr>
+    <tr><td>Total, |A|, |B|, Both</td><td>Neither</td><td>Neither = Total−(|A|+|B|−Both)</td></tr>
+    <tr><td>|A|, Both</td><td>Only A</td><td>Only A = |A| − Both</td></tr>
+  </table>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>چهار مقدارِ کلیدی رو مشخص کن: کل، |A|، |B|، و هیچ‌کدام — ببین کدوم‌یکی مجهوله.</li>
+    <li>«حداقل یکی» رو با <code>کل − هیچ‌کدام</code> حساب کن (اگه از قبل داده نشده).</li>
+    <li>معادله‌ی اصلی رو بساز: <code>|A| + |B| − هر دو = حداقل یکی</code>.</li>
+    <li>مجهول رو حل کن.</li>
+    <li>اگه سؤال «فقط A» یا «فقط B» خواست، از «هر دو» که پیدا کردی، اون‌ها رو هم استخراج کن.</li>
+    <li class="arrow-final">→ جواب: مقدارِ خواسته‌شده.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">A gym has 80 members. 50 attend yoga classes, 35 attend spin classes, and 15 attend both. How many members attend NEITHER class?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>حل:</strong> حداقل یکی = ۵۰+۳۵−۱۵ = ۷۰. هیچ‌کدام = ۸۰−۷۰ = <strong>۱۰ نفر</strong>. اینجا برعکسِ نمونه‌های قبلی، «هر دو» رو داشتیم و «هیچ‌کدام» رو پیدا کردیم.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">A survey of 150 tourists found that 90 visited the museum, 70 visited the beach, and 40 visited both. How many tourists visited NEITHER the museum nor the beach?</p>
+      <ul class="options">
+        <li>A) 20</li>
+        <li class="correct">B) 30</li>
+        <li>C) 40</li>
+        <li>D) 50</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>مشخص کن چی داریم: Total=150, |Museum|=90, |Beach|=70, Both=40. مجهول: Neither.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>اول «حداقل یکی» رو با فرمولِ شمول-عدم‌شمول حساب کن: ۹۰+۷۰−۴۰ = ۱۲۰. بعد: هیچ‌کدام = ۱۵۰−۱۲۰ = ۳۰.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی C دقیقاً برابرِ عددِ «Both» است — یک عددِ دیگرِ صورتِ سؤال که ممکنه با هیچ‌کدام قاطی بشه. گزینه‌ی D هم از فراموش کردنِ کم کردنِ «Both» به‌دست میاد (۹۰+۷۰=۱۶۰، ۱۵۰−۱۶۰ منفی می‌شه که غیرممکنه، ولی اگه کسی اشتباهاً ۱۶۰−۱۵۰=۱۰ رو با یک محاسبه‌ی دیگه قاطی کنه به ۵۰ می‌رسه).</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای حدس زدن، مستقیم از جعبه‌ابزارِ فرمولِ قدم ۴ (ردیفِ دوم جدول) استفاده کردیم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>همیشه یک نمودارِ ونِ ساده (دو دایره‌ی هم‌پوشان داخلِ یک مستطیل) روی کاغذ بکش و بلافاصله هر عددی که می‌دونی رو داخلش بنویس. حتی اگه مجبور باشی مجهول رو با یک حرف (مثلِ x) نشون بدی، دیدنِ بصریِ مسئله از اشتباهاتِ محاسباتی جلوگیری می‌کنه.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>فرمولِ فشرده رو حفظ کن: <code>کل − هیچ‌کدام = |A| + |B| − هر دو</code>. هر سه مقدارِ دیگه رو که داشته باشی، مجهولِ چهارم رو مستقیم از همین یک معادله به‌دست میاری — نیازی به نوشتنِ مراحلِ جدا نیست.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> جمع زدنِ مستقیمِ |A| و |B| بدون کم کردنِ «هر دو» — یعنی فرض کردنِ اینکه این دو گروه هیچ هم‌پوشانی‌ای ندارن.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> وقتی دو عددِ جدا (مثلِ «۶۰ ماشین‌دار» و «۸۰ گوشی‌دار») می‌بینیم، ذهن به‌طور طبیعی سعی می‌کنه فقط جمعشون بزنه، بدون توجه به این‌که بعضی خانواده‌ها ممکنه در هر دو گروه باشن (پس دوبار شمرده می‌شن).</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه فرمولِ کاملِ شمول-عدم‌شمول رو به‌کار ببر: <code>|A|+|B|−هر دو</code>، نه فقط <code>|A|+|B|</code>.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>گاهی سؤال به‌جای |A| و |B| کامل، مستقیماً «فقط A» و «فقط B» رو می‌ده (بدون احتسابِ هم‌پوشانی). اگه این رو با |A| و |B| کامل اشتباه بگیری و مستقیم در فرمولِ شمول-عدم‌شمول جایگذاری کنی، هم‌پوشانی رو دوبار کم می‌کنی. همیشه دقت کن آیا عددی که دادن شاملِ هم‌پوشانی هست یا نه.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p><code>کل = فقط A + فقط B + هر دو + هیچ‌کدام</code>. <code>کل − هیچ‌کدام = |A| + |B| − هر دو</code>. همیشه اول یک نمودارِ ون بکش و اعدادِ داده‌شده رو داخلش بنویس.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">In a group of 60 people, 35 speak English, 30 speak French, and 10 speak neither. How many speak both languages?</p>
+      <ul class="options">
+        <li>A) 5</li>
+        <li class="correct">B) 15</li>
+        <li>C) 20</li>
+        <li>D) 25</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> حداقل یکی = ۶۰−۱۰=۵۰. معادله: ۳۵+۳۰−x=۵۰ ⟹ ۶۵−x=۵۰ ⟹ x=۱۵.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">A company has 120 employees. 70 work remotely at least one day a week, 55 use a company car, and 25 do both. How many employees do NEITHER (never work remotely AND never use a company car)?</p>
+      <ul class="options">
+        <li>A) 5</li>
+        <li>B) 10</li>
+        <li class="correct">C) 20</li>
+        <li>D) 30</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> حداقل یکی = ۷۰+۵۵−۲۵=۱۰۰. هیچ‌کدام = ۱۲۰−۱۰۰=۲۰.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">In a survey of 200 people, 45 like ONLY tea (not coffee), 60 like ONLY coffee (not tea), and 35 like neither. How many people like BOTH tea and coffee?</p>
+      <ul class="options">
+        <li>A) 45</li>
+        <li>B) 55</li>
+        <li class="correct">C) 60</li>
+        <li>D) 95</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> اینجا اعدادِ داده‌شده «فقط تی» و «فقط قهوه» هستن، نه |A| و |B| کامل — دقیقاً همون دامِ این فصل. باید از فرمولِ اصلی استفاده کنیم: کل = فقط تی + فقط قهوه + هر دو + هیچ‌کدام. پس: ۲۰۰ = ۴۵ + ۶۰ + هر دو + ۳۵ ⟹ هر دو = ۲۰۰−۱۴۰ = ۶۰.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۸</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>کل = فقط A + فقط B + هر دو + هیچ‌کدام.</li>
+          <li>کل − هیچ‌کدام = |A| + |B| − هر دو.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>چهار مقدارِ کلیدی رو مشخص کن، مجهول رو پیدا کن.</li>
+          <li>یک نمودارِ ون بکش.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>جمع زدنِ |A|+|B| بدون کم کردنِ هم‌پوشانی.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>دادنِ «فقط A»/«فقط B» به‌جای |A|/|B| کامل.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

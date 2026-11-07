@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۲: قیاس فرضی و Modus Ponens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 13 / 13 · 🔴 CHALLENGE</p>
+  <h1>فصل ۱۳: نقیض گزاره‌های کمّی — Negating Universal &amp; Existential Statements</h1>
+  <p class="lede">این آخرین فصل بخش A است و مستقیماً روی فصل ۱۰ بنا می‌شه — همون قوانین «All / Some / No»، ولی این‌بار به زبان نمادین کمّی‌سنج‌ها <span class="term">(quantifiers)</span> و با جمله‌های انگلیسیِ پیچیده‌تر و گول‌زننده‌تر.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>خیلی از جمله‌های انگلیسی، بدون استفاده از کلمات صریح «all» یا «some»، در واقع یک ادعای کمّی رو پنهان می‌کنن — مثل «each time…»، «anyone who…»، یا «no one has…». این فصل کمکت می‌کنه این کمّی‌سنج‌های پنهان رو پیدا کنی و درست نقیضشون کنی.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — نمادهای کمّی‌سنج:</strong> <code>∀x</code> یعنی «برای همه‌ی x» (all/every/each)، <code>∃x</code> یعنی «حداقل یک x وجود داره» (some/there exists/a…that)، و <code>∄x</code> یعنی «هیچ x ای وجود نداره» (no/none).</p>
+
+  <p><strong>قدم ۲ — سه قانون نقیضِ کمّی‌سنج (دقیقاً معادلِ همون قوانین فصل ۱۰، فقط با نماد):</strong></p>
+  <table>
+    <tr><th>گزاره</th><th>نقیضش</th></tr>
+    <tr><td><code>∀x; p(x)</code></td><td><code>∃x; ~p(x)</code></td></tr>
+    <tr><td><code>∃x; p(x)</code></td><td><code>∀x; ~p(x)</code> (= <code>∄x; p(x)</code>)</td></tr>
+    <tr><td><code>∄x; p(x)</code></td><td><code>∃x; p(x)</code></td></tr>
+  </table>
+
+  <div class="ex-block">
+    <div class="ex-tag">نمونه ۱ — نقیضِ ∀</div>
+    <div class="en-block"><p>"All doctors have illegible handwriting." (همه‌ی دکترها خط ناخوانا دارن)</p></div>
+    <p style="margin-top:10px;"><strong>نقیض:</strong> "There exists a doctor who has legible handwriting." (دکتری وجود داره که خط خوانا داره) — طبق قدم ۲، فقط یک استثنا کافیه.</p>
+  </div>
+
+  <div class="ex-block">
+    <div class="ex-tag">نمونه ۲ — نقیضِ ∃</div>
+    <div class="en-block"><p>"There exists a bear that is white." (خرسی وجود داره که سفیده)</p></div>
+    <p style="margin-top:10px;"><strong>نقیض:</strong> "No bear is white." (هیچ خرسی سفید نیست) — طبق قدم ۲، باید نشون بدی هیچ نمونه‌ای وجود نداره.</p>
+  </div>
+
+  <div class="ex-block">
+    <div class="ex-tag">نمونه ۳ — نقیضِ ∄</div>
+    <div class="en-block"><p>"No child lies." (هیچ کودکی دروغ نمی‌گه)</p></div>
+    <p style="margin-top:10px;"><strong>نقیض:</strong> "There exists a child who lies." (کودکی وجود داره که دروغ می‌گه)</p>
+  </div>
+
+  <p><strong>قدم ۳ — کمّی‌سنج‌های پنهان: عبارت‌هایی مثل «each time…»، «whenever…»، «anyone who…» در واقع یک شرطیِ زیرِ یک ∀ پنهان هستن.</strong> «Each time X, Y» یعنی «برای هر لحظه‌ای، اگه X پیش بیاد، Y هم پیش میاد» — یک ترکیب از ∀ (فصل ۱۳) و شرطی (فصل ۴).</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block"><p>"Each time I took my umbrella, it did not rain."</p></div>
+    <p style="margin-top:10px;">این معادلِ «∀t: If (I took my umbrella at time t) then (it did not rain at time t)» است. برای نقیض کردنش، باید هم قانونِ نقیضِ ∀ (قدم ۲) رو اعمال کنیم، هم قانونِ نقیضِ شرطی (فصل ۷): <code>not-(if A then B) = A and not-B</code>. نتیجه: <strong>"There is at least one time I took my umbrella AND it rained."</strong></p>
+  </div>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>All ⟷ نقیض: Some…not (فقط یک استثنا کافیه).</li>
+    <li>Some ⟷ نقیض: No (باید نشون بدی هیچ نمونه‌ای نیست).</li>
+    <li>No ⟷ نقیض: Some (فقط یک نمونه کافیه).</li>
+    <li>عبارت‌های «each time / whenever / anyone who» یک ∀ پنهان دارن که معمولاً با یک شرطی ترکیب شده — برای نقیضشون، هم قانون کمّی‌سنج و هم قانون نقیضِ شرطی (فصل ۷) رو با هم لازم داری.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>کمّی‌سنجِ پنهان یا صریحِ جمله رو پیدا کن (all/each/every = ∀، some/a…that = ∃، no/none = ∄).</li>
+    <li>اگه جمله شاملِ یک شرطیِ داخلی هم بود (مثل «each time X, Y»)، اول اون رو به فرم «If X then Y» بازنویسی کن.</li>
+    <li>قانونِ نقیضِ کمّی‌سنج رو از جدول قدم ۲ اعمال کن (∀⇄∃).</li>
+    <li>اگه شرطیِ داخلی هم داشت، طبق فصل ۷ نقیضش کن (not-(if X then Y) = X and not-Y).</li>
+    <li class="arrow-final">→ جواب: گزاره‌ی نقیض‌شده به زبان طبیعی.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">Write the negation of: "Not all donuts come out with a hole."</p>
+    </div>
+    <p style="margin-top:10px;">این جمله خودش از قبل یک نقیض داره (not-All). طبق قدم ۲، «not-(All A are B)» = «Some A are not-B». پس معادلش می‌شه: <strong>"Some donuts do not come out with a hole."</strong> — نه یک ادعای جدید و شدیدتر مثل «هیچ دونات‌ای سوراخ نداره».</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">The statement "Each student who studies passes the exam" is FALSE. What does this tell us?</p>
+      <ul class="options">
+        <li>A) Whoever does not study will fail.</li>
+        <li>B) There are students who pass the exam without having studied.</li>
+        <li class="correct">C) Some students who studied did not pass the exam.</li>
+        <li>D) All those who study pass the exam.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>اول جمله رو به فرم منطقی برگردون: "∀x: If (x studies) then (x passes)."</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>نقیضش طبق قدم ۲ و فصل ۷ می‌شه: "∃x: (x studies) AND not-(x passes)" = "Some students who studied did not pass the exam." — دقیقاً گزینه‌ی C.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A و D اصلاً به موضوع نقیض ربطی ندارن — این‌ها ادعاهای کاملاً متفاوتی هستن که هیچ‌کدوم از نقیضِ اصلی نتیجه نمی‌شن. گزینه‌ی B هم دقیقاً برعکسِ نتیجه‌ی درسته (این جمله درباره‌ی کسانی که <em>درس خوندن ولی قبول نشدن</em> است، نه کسانی که <em>درس نخوندن ولی قبول شدن</em>).</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای حدس زدن معنیِ کلی جمله، مستقیماً از ترکیبِ دو قانونِ دقیق (نقیضِ ∀ + نقیضِ شرطی) استفاده کردیم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>هر وقت کلمات <span class="term">each, every, whenever, anyone who, no one</span> رو دیدی، فوراً تشخیص بده که یک کمّی‌سنج (∀ یا ∄) پنهانه. اگه بعدش یک رابطه‌ی «اگه…پس» هم بود، هر دو قانون (نقیضِ کمّی‌سنج از این فصل + نقیضِ شرطی از فصل ۷) رو با هم لازم داری.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>سه قانون این فصل، دقیقاً همون سه قانونِ فصل ۱۰ هستن با نماد جدید: <code>∀↔∃not</code>، <code>∃↔∀not</code> (یا <code>∄</code>)، <code>∄↔∃</code>. اگه فصل ۱۰ رو خوب یاد گرفتی، فقط کافیه علائم رو بشناسی — هیچ قانونِ جدیدی یاد نگرفتی.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> نقیض کردن فقط جمله‌ی داخلی (predicate) بدون تغییر کمّی‌سنج — مثلاً نقیضِ «Each time I took my umbrella, it did not rain» رو اشتباهاً «Each time I took my umbrella, it rained» نوشتن.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> ذهن معمولاً روی نقیضِ فعلِ اصلی (rained/did not rain) تمرکز می‌کنه و فراموش می‌کنه که خودِ کمّی‌سنجِ «each» هم باید به «حداقل یک مورد» (∃) تبدیل بشه.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه هر دو مرحله رو جداگانه چک کن: (۱) کمّی‌سنج عوض شد؟ (۲) شرطیِ داخلی هم طبق فصل ۷ درست نقیض شد؟</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>در سؤالاتی مثل «No man has one name only»، گزینه‌ی نادرست معمولاً یک ادعای مثبتِ نامرتبط می‌ذاره (مثل «همه‌ی مردها اسم دارن» یا «مردی به نام Mario وجود داره») به‌جای نقیضِ دقیقِ گزاره. همیشه فقط دنبال نقیضِ مستقیمِ همون کمّی‌سنجِ اصلی باش، نه یک ادعای جدید و نامرتبط.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p><code>not-(∀x; p(x)) = ∃x; not-p(x)</code> &nbsp;|&nbsp; <code>not-(∃x; p(x)) = ∀x; not-p(x)</code> &nbsp;|&nbsp; <code>not-(∄x; p(x)) = ∃x; p(x)</code>. عبارت‌های «each/whenever/anyone who» یک ∀+شرطیِ پنهان دارن — برای نقیضشون هر دو قانون (این فصل + فصل ۷) لازمه.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">Consider the statement "No dog has three paws." Saying that it is false means that:</p>
+      <ul class="options">
+        <li>A) All dogs have four paws.</li>
+        <li class="correct">B) At least one dog has three paws.</li>
+        <li>C) At least one dog has a number of paws different from three.</li>
+        <li>D) All dogs have three paws.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> طبق قدم ۲، نقیضِ «∄x; p(x)» می‌شه «∃x; p(x)». نقیضِ «هیچ سگی سه‌پا نداره» یعنی «حداقل یک سگ سه‌پا داره» — نه ادعای بی‌ربطی درباره‌ی چهارپا بودن یا تعداد پاهای متفاوت.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">Saying that it's false that "no man has one name only" is equivalent to saying that:</p>
+      <ul class="options">
+        <li>A) At least one man has two names.</li>
+        <li>B) There exists a man named Mario.</li>
+        <li class="correct">C) There exists at least one man with one name only.</li>
+        <li>D) There exists a man without a name.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> "No man has one name only" یک گزاره‌ی ∄ است. طبق قدم ۲، نقیضش «∃x; p(x)» می‌شه — یعنی مستقیماً «حداقل یک مرد با فقط یک اسم وجود داره». گزینه‌های A، B و D همه ادعاهای اضافه یا نامرتبطی هستن که هیچ‌کدوم دقیقاً نقیضِ گزاره‌ی اصلی نیستن.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">The statement "It's not true that it is rainy and windy" means that:</p>
+      <ul class="options">
+        <li class="correct">A) It is not rainy, or it is not windy.</li>
+        <li>B) It is rainy and it is not windy.</li>
+        <li>C) It is not rainy and it is not windy.</li>
+        <li>D) It is not rainy and it is windy.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> این یک نقیضِ عطف ساده‌ست (فصل ۷)، نه یک گزاره‌ی کمّی، ولی دقیقاً همون منطقِ «and⇄or» رو نشون می‌ده که در کل این بخش دیدیم: <code>not-(P and Q) = (not-P) or (not-Q)</code>. گزینه‌ی C دقیقاً همون اشتباه رایج هست — عملگر رو عوض نکرده و «and» رو نگه داشته.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۳ (پایان بخش A)</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>∀x;p(x) ↔ نقیض: ∃x;~p(x)</li>
+          <li>∃x;p(x) ↔ نقیض: ∀x;~p(x) (=∄x;p(x))</li>
+          <li>∄x;p(x) ↔ نقیض: ∃x;p(x)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>کمّی‌سنجِ پنهان (each/whenever/no one) رو پیدا کن.</li>
+          <li>اگه شرطیِ داخلی داشت، فصل ۷ رو هم اعمال کن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>فراموش کردنِ تغییرِ خودِ کمّی‌سنج، فقط نقیضِ فعل.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>گزینه‌های نامرتبط به‌جای نقیضِ دقیق.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

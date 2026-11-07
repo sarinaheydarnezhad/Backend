@@ -1,0 +1,98 @@
+جزوه لاجیک CEnT — فصل ۱۰: گزاره‌های قیاسی
+
+CENT LOGIC — PART A · CHAPTER 10 / 13
+فصل ۱۰: گزاره‌های قیاسی — Categorical Claims (All / Some / No / Only A are B)
+تا اینجا با گزاره‌هایی سروکار داشتیم که کل جمله رو یک واحد در نظر می‌گرفتن. حالا وارد منطق قیاسی (categorical logic) می‌شیم — جایی که گزاره‌ها درباره‌ی رابطه‌ی بین دو دسته یا گروه صحبت می‌کنن.
+Bاین مبحث چیست؟
+یک گزاره‌ی قیاسی، رابطه‌ی بین دو دسته (مثل «انسان‌ها» و «فانی‌ها») رو توصیف می‌کنه. این‌جور استدلال‌ها پایه‌ی سؤالات کلاسیک منطقی هستن:
+1. All humans are mortal.2. Simon is human.Therefore, Simon is mortal.
+Form: 1. All H are M. 2. x is an H. Therefore, x is an M.
+در این فصل روی سه فرم پایه‌ی «All»، «Some» و «Only» و نقیض هرکدوم تمرکز می‌کنیم — این‌ها ۶ نوع گزاره‌ی قیاسی رو می‌سازن (All A are B، Some A are B، No A are B، و نسخه‌های not-B اون‌ها).
+Cمفهوم اصلی
+قدم ۱ — «All A are B»: هر عضو دسته‌ی A، عضو دسته‌ی B هم هست.
+"All humans are mortal." "All whales are mammals."
+برای غلط کردن یک ادعای «All»، کافیه یک استثنا پیدا کنی. برای همین: not-(All A are B) = Some A are not-B.
+"All humans are mortal." → "Some humans are not mortal.""All dogs bark." → "Some dogs don't bark."
+قدم ۲ — «Some A are B»: حداقل یک عضو از A هست که عضو B هم هست. «Some» یعنی «at least one» — نه لزوماً «بعضی ولی نه همه» (این معنی فقط گاهی از زمینه‌ی جمله برداشت می‌شه، نه از خودِ کلمه).
+"Some dogs have long hair." "There is a bird in that tree." (= "Some birds are in that tree")
+برای غلط کردن یک ادعای «Some»، باید نشون بدی هیچ عضوی این ویژگی رو نداره. برای همین: not-(Some A are B) = No A are B.
+"Some dogs have long hair." → "No dogs have long hair.""Some dogs don't have long hair." → "No dogs don't have long hair." (= "All dogs have long hair.")
+قدم ۳ — «Only A are B»: این فرمِ گول‌زننه‌ست — جهتش برعکسِ چیزیه که در نگاه اول به‌نظر میاد! «Only A are B» در واقع یعنی All B are A — یعنی هر عضو B، عضو A هم هست (نه برعکس).
+"Only dogs make good pets." = "All good pets are dogs.""Only Great White sharks are dangerous." = "All dangerous sharks are Great Whites."
+این دقیقاً همون منطقیه که در فصل ۸ با «A only if B = B if A» دیدیم — کلمه‌ی «only» جهت رو برعکس می‌کنه.
+چون «Only A are B» = «All B are A»، نقیضش هم از همون قانون قدم ۱ پیروی می‌کنه، فقط با جای A و B عوض‌شده: not-(Only A are B) = Some B are not-A.
+"Only dogs make good pets." → "Some good pets are not dogs.""Only Starbucks makes good coffee." → "Some good coffee is not made by Starbucks."
+Dقوانین و اصول مهم — جدول جامع
+گزاره
+نقیضش
+All A are B
+Some A are not-B
+Some A are B
+No A are B
+Only A are B (= All B are A)
+Some B are not-A
+نقیضِ «All» همیشه یک «Some…not» است — فقط یک استثنا کافیه.
+نقیضِ «Some» همیشه یک «No» است — باید نشون بدی هیچ عضوی وجود نداره.
+«Only A are B» را همیشه اول به «All B are A» تبدیل کن، بعد قوانین «All» رو روش اعمال کن.
+Eروش حل
+مشخص کن گزاره از کدوم فرم استفاده کرده: All، Some، یا Only.
+اگه «Only» بود، اول جای دو دسته رو عوض کن و به فرم «All B are A» برگردون.
+طبق جدول بالا، قانون نقیضِ مناسب رو اعمال کن.
+با یک مثال ذهنی (یک عضو فرضی از دسته) جواب رو چک کن.
+→ جواب: نقیضِ درستِ گزاره‌ی قیاسی.
+Fمثال آموزشی
+Write the contradictory of: "All Michael Moore films are not good."
+پاسخ: "Some Michael Moore films are good." این گزاره از فرم «All A are not-B» است (A = فیلم‌های مایکل مور، not-B = خوب نبودن)؛ طبق قدم ۱، نقیضش «Some A are B» می‌شه — یعنی نقیضِ «not-B» که خودش «B» است.
+Gمثال امتحانی
+"Only certified electricians are permitted to install this equipment." Which of the following is logically equivalent to this claim?
+A) "All certified electricians are permitted to install this equipment."
+B) "All people permitted to install this equipment are certified electricians."
+C) "Some certified electricians are not permitted to install this equipment."
+D) "No certified electricians are permitted to install this equipment."
+🎯 EXAM TIP
+هر وقت به «Only A are B» رسیدی، فوراً در ذهنت بازنویسیش کن به «All B are A» — یعنی دسته‌ای که بعد از «are» اومده، دسته‌ی محدودکننده‌ست و همه‌ی اعضای دسته‌ی اول باید داخلش باشن.
+⚡ QUICK METHOD
+برای چک کردن سریعِ نقیضِ «All»، فقط دنبال یک استثنای فرضی بگرد: «آیا می‌تونم یک عضو از A تصور کنم که عضو B نباشه؟» اگه بله، همون یک استثنا نقیض «All A are B» رو می‌سازه: «Some A are not-B».
+⚠️ COMMON MISTAKES
+اشتباه: خوندن «Only A are B» انگار همون «All A are B» است.
+چرا اتفاق می‌افته: هر دو جمله ظاهراً شبیه هم شروع می‌شن و ترتیب کلماتِ A و B هم یکسانه، پس ذهن به‌راحتی فکر می‌کنه معنیشون هم یکیه — در حالی که جهت رابطه‌شون کاملاً برعکسه.
+چطور جلوش رو بگیریم: همیشه قبل از هر تحلیلی، «Only A are B» رو دستی به «All B are A» تبدیل کن؛ این یک قدم اجباریه، نه اختیاری.
+🪤 QUESTION TRAP
+دقت کن «No A are B» با «All A are not-B» یکی هستن (هر دو می‌گن هیچ عضو مشترکی بین A و B نیست)، ولی «All A are not-B» با «not-(All A are B)» کاملاً فرق دارن — دومی یعنی «Some A are B» (طبق قدم ۱)! این شباهت ظاهریِ کلمات، یکی از رایج‌ترین دام‌های طراحی‌شده در گزینه‌های امتحانه.
+🧠 MUST REMEMBER
+not-(All A are B) = Some A are not-B | not-(Some A are B) = No A are B | Only A are B = All B are A (جهت برعکس!) | نقیضِ «Only A are B» = Some B are not-A.
+📝تمرین
+What is the contradictory of "Some employees received a bonus this year"?
+A) "All employees received a bonus this year."
+B) "No employees received a bonus this year."
+C) "Some employees did not receive a bonus this year."
+D) "All employees did not receive a bonus this year."
+نمایش پاسخ و توضیح
+پاسخ درست: B. طبق قدم ۲، نقیضِ «Some A are B» همیشه «No A are B» است.
+"Only members with a gold pass can access the VIP lounge." Which is logically equivalent?
+A) "All members with a gold pass can access the VIP lounge."
+B) "Everyone who can access the VIP lounge has a gold pass."
+C) "Some members with a gold pass cannot access the VIP lounge."
+D) "No members with a gold pass can access the VIP lounge."
+نمایش پاسخ و توضیح
+پاسخ درست: B. «Only A are B» = «All B are A». اینجا A = "members with a gold pass"، B = "people who can access the VIP lounge". پس: "All (people who can access the VIP lounge) are (members with a gold pass)" = گزینه‌ی B.
+A company policy states: "Only senior engineers are authorized to approve deployments." An audit reveals: "Some deployments were approved by non-senior engineers." Does this audit finding contradict the policy statement?
+A) Yes — the policy is logically equivalent to "All deployment-approvers are senior engineers," and the audit finding is exactly its contradictory.
+B) No — the policy only restricts senior engineers, not deployments themselves.
+C) Cannot be determined without knowing how many deployments were approved.
+D) No — "only" statements cannot be contradicted by audit findings.
+نمایش پاسخ و توضیح
+پاسخ درست: A. "Only senior engineers are authorized to approve deployments" = "All (people who approve deployments) are (senior engineers)". طبق قدم ۱، نقیضِ این «All» گزاره، دقیقاً «Some (people who approve deployments) are not (senior engineers)» است — که همون چیزیه که یافته‌ی حسابرسی می‌گه. پس بله، این یافته مستقیماً سیاست رو نقض می‌کنه. گزینه‌ی B دقیقاً همون اشتباه رایج «Only ≠ All» است که در این فصل دیدیم.
+🚀مرور سریع — فصل ۱۰
+مفاهیم اصلی
+All A are B ↔ نقیض: Some A are not-B
+Some A are B ↔ نقیض: No A are B
+Only A are B = All B are A (جهت برعکس)
+روش
+«Only» رو همیشه اول به «All B are A» تبدیل کن.
+برای نقیضِ «All»، دنبال یک استثنا بگرد.
+اشتباهات رایج
+خوندن «Only A are B» مثل «All A are B».
+قاطی کردن «All A are not-B» با «not-(All A are B)».
+دام‌های تستی
+شباهت ظاهریِ «No A are B» و نقیض‌های نزدیک به هم.

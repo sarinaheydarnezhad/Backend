@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۰: گزاره‌های قیاسی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 10 / 13</p>
+  <h1>فصل ۱۰: گزاره‌های قیاسی — Categorical Claims (All / Some / No / Only A are B)</h1>
+  <p class="lede">تا اینجا با گزاره‌هایی سروکار داشتیم که کل جمله رو یک واحد در نظر می‌گرفتن. حالا وارد منطق قیاسی <span class="term">(categorical logic)</span> می‌شیم — جایی که گزاره‌ها درباره‌ی رابطه‌ی بین دو <strong>دسته</strong> یا <strong>گروه</strong> صحبت می‌کنن.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>یک گزاره‌ی قیاسی، رابطه‌ی بین دو دسته (مثل «انسان‌ها» و «فانی‌ها») رو توصیف می‌کنه. این‌جور استدلال‌ها پایه‌ی سؤالات کلاسیک منطقی هستن:</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه‌ی استدلال</div>
+    <div class="en-block">
+      <p>1. All humans are mortal.<br>2. Simon is human.<br>Therefore, Simon is mortal.</p>
+      <p style="margin-top:8px; font-size:14px; color:var(--ink-soft);">Form: 1. All H are M. 2. x is an H. Therefore, x is an M.</p>
+    </div>
+  </div>
+  <p>در این فصل روی سه فرم پایه‌ی «All»، «Some» و «Only» و نقیض هرکدوم تمرکز می‌کنیم — این‌ها ۶ نوع گزاره‌ی قیاسی رو می‌سازن (All A are B، Some A are B، No A are B، و نسخه‌های not-B اون‌ها).</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — «All A are B»: هر عضو دسته‌ی A، عضو دسته‌ی B هم هست.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"All humans are mortal." "All whales are mammals."</p>
+    </div>
+  </div>
+  <p>برای غلط کردن یک ادعای «All»، کافیه <strong>یک استثنا</strong> پیدا کنی. برای همین: <code>not-(All A are B) = Some A are not-B</code>.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه‌های نقیض</div>
+    <div class="en-block">
+      <p>"All humans are mortal." → "Some humans are not mortal."<br>"All dogs bark." → "Some dogs don't bark."</p>
+    </div>
+  </div>
+
+  <p><strong>قدم ۲ — «Some A are B»: حداقل یک عضو از A هست که عضو B هم هست.</strong> «Some» یعنی «at least one» — نه لزوماً «بعضی ولی نه همه» (این معنی فقط گاهی از زمینه‌ی جمله برداشت می‌شه، نه از خودِ کلمه).</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"Some dogs have long hair." "There is a bird in that tree." (= "Some birds are in that tree")</p>
+    </div>
+  </div>
+  <p>برای غلط کردن یک ادعای «Some»، باید نشون بدی <strong>هیچ</strong> عضوی این ویژگی رو نداره. برای همین: <code>not-(Some A are B) = No A are B</code>.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه‌های نقیض</div>
+    <div class="en-block">
+      <p>"Some dogs have long hair." → "No dogs have long hair."<br>"Some dogs don't have long hair." → "No dogs don't have long hair." (= "All dogs have long hair.")</p>
+    </div>
+  </div>
+
+  <p><strong>قدم ۳ — «Only A are B»: این فرمِ گول‌زننه‌ست — جهتش برعکسِ چیزیه که در نگاه اول به‌نظر میاد!</strong> «Only A are B» در واقع یعنی <code>All B are A</code> — یعنی هر عضو B، عضو A هم هست (نه برعکس).</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"Only dogs make good pets." = "All good pets are dogs."<br>"Only Great White sharks are dangerous." = "All dangerous sharks are Great Whites."</p>
+    </div>
+    <p style="margin-top:10px;">این دقیقاً همون منطقیه که در فصل ۸ با «A only if B = B if A» دیدیم — کلمه‌ی «only» جهت رو برعکس می‌کنه.</p>
+  </div>
+  <p>چون «Only A are B» = «All B are A»، نقیضش هم از همون قانون قدم ۱ پیروی می‌کنه، فقط با جای A و B عوض‌شده: <code>not-(Only A are B) = Some B are not-A</code>.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه‌های نقیض</div>
+    <div class="en-block">
+      <p>"Only dogs make good pets." → "Some good pets are not dogs."<br>"Only Starbucks makes good coffee." → "Some good coffee is not made by Starbucks."</p>
+    </div>
+  </div>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم — جدول جامع</h2>
+  <table>
+    <tr><th>گزاره</th><th>نقیضش</th></tr>
+    <tr><td><code>All A are B</code></td><td><code>Some A are not-B</code></td></tr>
+    <tr><td><code>Some A are B</code></td><td><code>No A are B</code></td></tr>
+    <tr><td><code>Only A are B</code> (= <code>All B are A</code>)</td><td><code>Some B are not-A</code></td></tr>
+  </table>
+  <ul>
+    <li>نقیضِ «All» همیشه یک «Some…not» است — فقط یک استثنا کافیه.</li>
+    <li>نقیضِ «Some» همیشه یک «No» است — باید نشون بدی هیچ عضوی وجود نداره.</li>
+    <li>«Only A are B» را همیشه اول به «All B are A» تبدیل کن، بعد قوانین «All» رو روش اعمال کن.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>مشخص کن گزاره از کدوم فرم استفاده کرده: All، Some، یا Only.</li>
+    <li>اگه «Only» بود، اول جای دو دسته رو عوض کن و به فرم «All B are A» برگردون.</li>
+    <li>طبق جدول بالا، قانون نقیضِ مناسب رو اعمال کن.</li>
+    <li>با یک مثال ذهنی (یک عضو فرضی از دسته) جواب رو چک کن.</li>
+    <li class="arrow-final">→ جواب: نقیضِ درستِ گزاره‌ی قیاسی.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">Write the contradictory of: "All Michael Moore films are not good."</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ:</strong> "Some Michael Moore films are good." این گزاره از فرم «All A are not-B» است (A = فیلم‌های مایکل مور، not-B = خوب نبودن)؛ طبق قدم ۱، نقیضش «Some A are B» می‌شه — یعنی نقیضِ «not-B» که خودش «B» است.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">"Only certified electricians are permitted to install this equipment." Which of the following is logically equivalent to this claim?</p>
+      <ul class="options">
+        <li>A) "All certified electricians are permitted to install this equipment."</li>
+        <li class="correct">B) "All people permitted to install this equipment are certified electricians."</li>
+        <li>C) "Some certified electricians are not permitted to install this equipment."</li>
+        <li>D) "No certified electricians are permitted to install this equipment."</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>یادت باشه «Only A are B» = «All B are A» — جهت برعکس می‌شه. اینجا A = "certified electricians"، B = "people permitted to install this equipment".</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>پس معادلش می‌شه: "All (people permitted to install this equipment) are (certified electricians)" — دقیقاً گزینه‌ی B.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A دقیقاً همون دام رایجیه که این فصل هشدارش رو می‌ده — جهت رو برعکس نکرده و A و B رو دست‌نخورده به فرم «All» چسبونده. گزینه‌های C و D هم اصلاً نقیضِ اصل ادعا هستن، نه معادلش.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای شهود، مستقیماً از فرمول «Only A are B = All B are A» استفاده کردیم که در فصل ۸ هم ریشه‌ی منطقی مشابهی داشت.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>هر وقت به «Only A are B» رسیدی، فوراً در ذهنت بازنویسیش کن به «All B are A» — یعنی دسته‌ای که بعد از «are» اومده، دسته‌ی محدودکننده‌ست و همه‌ی اعضای دسته‌ی اول باید داخلش باشن.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>برای چک کردن سریعِ نقیضِ «All»، فقط دنبال یک استثنای فرضی بگرد: «آیا می‌تونم یک عضو از A تصور کنم که عضو B نباشه؟» اگه بله، همون یک استثنا نقیض «All A are B» رو می‌سازه: «Some A are not-B».</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> خوندن «Only A are B» انگار همون «All A are B» است.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> هر دو جمله ظاهراً شبیه هم شروع می‌شن و ترتیب کلماتِ A و B هم یکسانه، پس ذهن به‌راحتی فکر می‌کنه معنیشون هم یکیه — در حالی که جهت رابطه‌شون کاملاً برعکسه.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه قبل از هر تحلیلی، «Only A are B» رو دستی به «All B are A» تبدیل کن؛ این یک قدم اجباریه، نه اختیاری.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>دقت کن «No A are B» با «All A are not-B» یکی هستن (هر دو می‌گن هیچ عضو مشترکی بین A و B نیست)، ولی «All A are not-B» با «not-(All A are B)» کاملاً فرق دارن — دومی یعنی «Some A are B» (طبق قدم ۱)! این شباهت ظاهریِ کلمات، یکی از رایج‌ترین دام‌های طراحی‌شده در گزینه‌های امتحانه.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p><code>not-(All A are B) = Some A are not-B</code> &nbsp;|&nbsp; <code>not-(Some A are B) = No A are B</code> &nbsp;|&nbsp; <code>Only A are B = All B are A</code> (جهت برعکس!) &nbsp;|&nbsp; نقیضِ «Only A are B» = <code>Some B are not-A</code>.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">What is the contradictory of "Some employees received a bonus this year"?</p>
+      <ul class="options">
+        <li>A) "All employees received a bonus this year."</li>
+        <li class="correct">B) "No employees received a bonus this year."</li>
+        <li>C) "Some employees did not receive a bonus this year."</li>
+        <li>D) "All employees did not receive a bonus this year."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> طبق قدم ۲، نقیضِ «Some A are B» همیشه «No A are B» است.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">"Only members with a gold pass can access the VIP lounge." Which is logically equivalent?</p>
+      <ul class="options">
+        <li>A) "All members with a gold pass can access the VIP lounge."</li>
+        <li class="correct">B) "Everyone who can access the VIP lounge has a gold pass."</li>
+        <li>C) "Some members with a gold pass cannot access the VIP lounge."</li>
+        <li>D) "No members with a gold pass can access the VIP lounge."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> «Only A are B» = «All B are A». اینجا A = "members with a gold pass"، B = "people who can access the VIP lounge". پس: "All (people who can access the VIP lounge) are (members with a gold pass)" = گزینه‌ی B.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">A company policy states: "Only senior engineers are authorized to approve deployments." An audit reveals: "Some deployments were approved by non-senior engineers." Does this audit finding contradict the policy statement?</p>
+      <ul class="options">
+        <li class="correct">A) Yes — the policy is logically equivalent to "All deployment-approvers are senior engineers," and the audit finding is exactly its contradictory.</li>
+        <li>B) No — the policy only restricts senior engineers, not deployments themselves.</li>
+        <li>C) Cannot be determined without knowing how many deployments were approved.</li>
+        <li>D) No — "only" statements cannot be contradicted by audit findings.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> "Only senior engineers are authorized to approve deployments" = "All (people who approve deployments) are (senior engineers)". طبق قدم ۱، نقیضِ این «All» گزاره، دقیقاً «Some (people who approve deployments) are not (senior engineers)» است — که همون چیزیه که یافته‌ی حسابرسی می‌گه. پس بله، این یافته مستقیماً سیاست رو نقض می‌کنه. گزینه‌ی B دقیقاً همون اشتباه رایج «Only ≠ All» است که در این فصل دیدیم.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۰</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>All A are B ↔ نقیض: Some A are not-B</li>
+          <li>Some A are B ↔ نقیض: No A are B</li>
+          <li>Only A are B = All B are A (جهت برعکس)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>«Only» رو همیشه اول به «All B are A» تبدیل کن.</li>
+          <li>برای نقیضِ «All»، دنبال یک استثنا بگرد.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>خوندن «Only A are B» مثل «All A are B».</li>
+          <li>قاطی کردن «All A are not-B» با «not-(All A are B)».</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>شباهت ظاهریِ «No A are B» و نقیض‌های نزدیک به هم.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

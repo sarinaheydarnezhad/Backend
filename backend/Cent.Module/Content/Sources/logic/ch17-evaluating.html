@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۷: نتیجه‌گیری و ارزیابی ادعاها</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART B · CHAPTER 17 / 19</p>
+  <h1>فصل ۱۷: نتیجه‌گیری و ارزیابیِ ادعاها — Drawing Conclusions &amp; Evaluating Claims</h1>
+  <p class="lede">در این فصل یک ادعای کلامی («بیشترِ کارمندها راضی‌ان»، «فروش در همه‌ی مناطق رشد کرد») رو در برابرِ داده‌های واقعی می‌ذاریم. هدف اینه که دقیقاً مشخص کنی این ادعا با داده‌ها <strong>تأیید می‌شه</strong>، <strong>رد می‌شه</strong>، یا اصلاً از این داده‌ها <strong>قابلِ تعیین نیست</strong>.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>این نوع سؤالات دو تکه دارن: یک ادعای کلامی و یک مجموعه داده. کارِ تو اینه که ادعا رو دقیق ترجمه کنی به یک شرطِ قابلِ محاسبه، و بعد فقط همون محاسبه‌ی لازم رو انجام بدی — نه بیشتر، نه کمتر.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — قبل از هر محاسبه‌ای، مشخص کن «کل» چیه.</strong> ادعاهای درصدی و کلی همیشه نسبت به یک مبنای مشخص سنجیده می‌شن.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه ۱ — ادعای «بیشتر (most)»</div>
+    <div class="en-block">
+      <p class="q">Claim: "Most of the company's employees are satisfied with the work environment."</p>
+      <p>Data (survey of 200 employees): Very Satisfied 60, Satisfied 70, Neutral 40, Dissatisfied 20, Very Dissatisfied 10.</p>
+    </div>
+    <p style="margin-top:10px;">مجموعِ راضی‌ها = ۶۰+۷۰=۱۳۰. درصد = ۱۳۰/۲۰۰ × ۱۰۰٪ = ۶۵٪. طبق تعریفِ استاندارد، «most» یعنی بیش از ۵۰٪. چون ۶۵٪ > ۵۰٪، <strong>ادعا توسط داده‌ها پشتیبانی می‌شه (True)</strong>.</p>
+  </div>
+
+  <p><strong>قدم ۲ — ادعاهای «همه (all)» فقط با یک استثنا رد می‌شن — دقیقاً مثلِ فصل ۱۰.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه ۲ — ادعای «همه (all)»</div>
+    <div class="en-block">
+      <p class="q">Claim: "Sales of our new product have grown in all regions."</p>
+      <p>Data (% change vs previous quarter): North +10%, South +5%, East −2%, West +8%.</p>
+    </div>
+    <p style="margin-top:10px;">منطقه‌ی شرق (East) کاهش (−۲٪) داشته. چون ادعا از «همه‌ی مناطق» صحبت کرده، همینِ یک استثنا کافیه: <strong>ادعا غلطه (False)</strong> — حتی اگه سه منطقه‌ی دیگه رشدِ خوبی داشته باشن.</p>
+  </div>
+
+  <p><strong>قدم ۳ — «باید حتماً درست باشه (must be true)» با «به‌نظر منطقی میاد» فرق داره.</strong> این مهم‌ترین و ظریف‌ترین نکته‌ی این فصله. یک گزینه فقط وقتی «must be true» است که داده‌های داده‌شده، بدون هیچ فرضِ اضافه، اون رو تضمین کنن.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>Data: 120 applicants studied Biology, 90 studied Chemistry, 70 studied Physics (out of an unknown total, with unknown overlaps).</p>
+    </div>
+    <p style="margin-top:10px;">آیا می‌تونیم بگیم «حداقل ۲۰ نفر هم زیست هم شیمی خوندن»؟ <strong>نه</strong> — چون هیچ اطلاعاتی درباره‌ی هم‌پوشانیِ این دو گروه نداریم؛ ممکنه هیچ‌کس هر دو رو هم‌زمان نخونده باشه. اما آیا می‌تونیم بگیم «تعداد کسانی که زیست خوندن از تعداد کسانی که شیمی خوندن بیشتره»؟ <strong>بله</strong> — چون ۱۲۰ > ۹۰، این مستقیماً از خودِ اعداد نتیجه می‌شه، بدون هیچ فرضِ اضافه‌ای.</p>
+  </div>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>قبل از محاسبه، «کل» یا مبنای ادعا رو دقیق مشخص کن.</li>
+    <li>«Most» یعنی بیش از ۵۰٪ از کل.</li>
+    <li>ادعای «All» با یک استثنای تنها، کاملاً رد می‌شه — نیازی به بررسیِ همه‌ی موارد نیست.</li>
+    <li>«Must be true» فقط شاملِ چیزهاییه که مستقیماً و بدون فرضِ اضافه از داده‌ها نتیجه می‌شن؛ هم‌پوشانی/تقاطعِ گروه‌ها هرگز فرض نمی‌شه مگر صریحاً داده شده باشه.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>ادعا رو دقیق بازنویسی کن: آیا یک ادعای «همه»، «بیشتر»، یا یک مقایسه‌ی مستقیمه؟</li>
+    <li>مشخص کن دقیقاً چه داده‌ای برای تستِ این ادعا لازمه.</li>
+    <li>فقط همون محاسبه‌ی لازم رو انجام بده.</li>
+    <li>برای ادعاهای «همه»، فعالانه دنبالِ یک استثنا بگرد.</li>
+    <li>نتیجه رو با آستانه یا منطقِ ادعا مقایسه کن.</li>
+    <li class="arrow-final">→ جواب: تأیید (True) / رد (False) / غیرقابلِ تعیین (Cannot be determined).</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">Claim: "The majority of survey respondents prefer working from home." Data: 45 out of 100 respondents said they prefer working from home. Is the claim supported?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: نه، ادعا رد می‌شه.</strong> ۴۵/۱۰۰ = ۴۵٪، که کمتر از ۵۰٪ است. «majority» به‌معنیِ بیش از نیمی‌ست، پس این داده‌ها ادعا رو تأیید نمی‌کنن.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p><strong>A survey of medical applicants found that:</strong> 120 applicants studied Biology, 90 studied Chemistry, 70 studied Physics.</p>
+      <p class="q" style="margin-top:8px;">Which statement MUST be true?</p>
+      <ul class="options">
+        <li>A) At least 20 applicants studied both Biology and Chemistry.</li>
+        <li>B) Exactly 280 applicants were surveyed.</li>
+        <li class="correct">C) More applicants studied Biology than Chemistry.</li>
+        <li>D) No applicant studied all three subjects.</li>
+        <li>E) Every Physics student also studied Biology.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>یادت باشه هیچ اطلاعاتی درباره‌ی هم‌پوشانیِ این سه گروه یا تعدادِ کلِ داوطلبان نداریم — فقط سه عددِ مجزا داریم.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>گزینه‌ی C یک مقایسه‌ی مستقیمِ بینِ دو عددِ داده‌شده‌ست: ۱۲۰ > ۹۰. این بدونِ هیچ فرضِ اضافه‌ای، مستقیماً از خودِ داده‌ها نتیجه می‌شه.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A فرضِ هم‌پوشانی می‌کنه که هیچ‌جا داده نشده. گزینه‌ی B فرض می‌کنه سه گروه کاملاً مجزا و بدونِ هم‌پوشانی‌ان و هیچ داوطلبِ دیگه‌ای هم نیست — که هر دو فرضِ اضافه‌ست. گزینه‌های D و E هم ادعاهایی درباره‌ی هم‌پوشانی می‌کنن که هیچ داده‌ای براشون نداریم — ممکنه درست باشن، ممکنه غلط، ولی «must be true» نیستن.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای پذیرفتنِ گزینه‌های «منطقاً به‌نظر درست»، فقط گزینه‌ای رو انتخاب کردیم که مستقیماً و بدونِ هیچ فرضِ اضافه‌ای از اعدادِ داده‌شده نتیجه می‌شه.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>برای سؤالاتِ «must be true»، هر گزینه رو با این سؤال تست کن: «آیا این گزینه، بدون هیچ فرضِ اضافه‌ای، مستقیماً از دقیقاً همین اعدادی که دادن نتیجه می‌شه؟» اگه برای درست بودنش به یک فرضِ نانوشته نیاز داری (مثلِ هم‌پوشانی یا نبودِ افرادِ دیگه)، اون گزینه رد می‌شه.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>برای ادعاهای «all/every»، به‌جای بررسیِ همه‌ی موارد، مستقیم دنبالِ یک استثنا بگرد. همین که یکی پیدا کردی، بدونِ محاسبه‌ی بیشتر می‌تونی نتیجه بگیری ادعا غلطه.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> فرض کردنِ هم‌پوشانی یا رابطه‌ی بینِ دو گروهِ جدا، وقتی فقط تعدادِ هرکدوم به‌طور مجزا داده شده.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> وقتی چند عددِ مرتبط با هم می‌بینیم (مثلِ تعدادِ دانش‌آموزانِ هر درس)، ذهن به‌طور طبیعی سعی می‌کنه بینشون رابطه بسازه (مثلاً جمع بزنه یا هم‌پوشانی فرض کنه)، حتی وقتی داده‌ها همچین اطلاعاتی نمی‌دن.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه از خودت بپرس: «آیا این عدد یا رابطه مستقیماً در متن سؤال گفته شده، یا من دارم فرضش می‌کنم؟» اگه فرضشه، اون گزینه نمی‌تونه «must be true» باشه.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>سؤال معمولاً بینِ گزینه‌ها، ادعایی می‌ذاره که در دنیای واقعی «به‌نظر منطقی» یا «معمولاً درسته» میاد (مثلِ «همه‌ی داوطلبانِ فیزیک، زیست هم خوندن») ولی از خودِ داده‌های داده‌شده تضمین نمی‌شه. همیشه بینِ «ممکنه درست باشه» و «حتماً درسته» فرق بذار.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>Most = بیش از ۵۰٪. All فقط با یک استثنا رد می‌شه. Must be true = فقط چیزی که بدونِ فرضِ اضافه از داده‌ها نتیجه می‌شه — هم‌پوشانیِ گروه‌ها هرگز فرض نمی‌شه مگر صریحاً داده شده باشه.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">Claim: "Most customers rated the service as excellent." Data: 55 out of 100 customers rated it "excellent." Is the claim supported?</p>
+      <ul class="options">
+        <li class="correct">A) Yes, since 55% is more than half.</li>
+        <li>B) No, since 55% is not a large enough majority.</li>
+        <li>C) Cannot be determined.</li>
+        <li>D) Yes, but only if the other 45% rated it "poor."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> ۵۵٪ بیشتر از ۵۰٪ است، پس طبق تعریفِ «most»، ادعا تأیید می‌شه. گزینه‌ی D هم شرطِ اضافه‌ای گذاشته که در ادعا نیومده.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">Claim: "Every department reduced its budget this year." Data: Marketing −5%, Sales −3%, IT +2%, HR −8%. Is the claim supported?</p>
+      <ul class="options">
+        <li>A) Yes, because most departments show a decrease.</li>
+        <li class="correct">B) No, because IT's budget increased.</li>
+        <li>C) Cannot be determined without more data.</li>
+        <li>D) Yes, since the average change across departments is still negative.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> ادعا از «every department» صحبت کرده — یک ادعای «all». همینِ یک استثنا (IT با +۲٪) کافیه که کل ادعا رد بشه، فارغ از اینکه میانگین یا اکثریت چی نشون بده.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">Data: In a survey of 500 people, 150 people own a car and 80 people own a bicycle. Which statement MUST be true?</p>
+      <ul class="options">
+        <li>A) At least 30 people own both a car and a bicycle.</li>
+        <li class="correct">B) More people own a car than own a bicycle.</li>
+        <li>C) Exactly 270 people own neither a car nor a bicycle.</li>
+        <li>D) No one owns both a car and a bicycle.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> ۱۵۰ > ۸۰ مستقیماً و بدونِ هیچ فرضِ اضافه‌ای از خودِ اعداد نتیجه می‌شه. گزینه‌های A و D هر دو درباره‌ی هم‌پوشانیِ این دو گروه فرض می‌کنن — که هیچ‌جا داده نشده؛ چون ۱۵۰+۸۰=۲۳۰ کمتر از کلِ ۵۰۰ نفره، اصلاً هم‌پوشانی <em>اجباری</em> نیست (می‌تونه صفر باشه، یا هر عددی تا ۸۰). گزینه‌ی C هم دقیقاً همون فرضِ «هیچ هم‌پوشانی‌ای نیست» رو داره که تضمین‌شده نیست.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۷</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>Most = بیش از ۵۰٪.</li>
+          <li>All فقط با یک استثنا رد می‌شه.</li>
+          <li>Must be true ≠ به‌نظر منطقی میاد.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>اول «کل» رو مشخص کن.</li>
+          <li>برای «all»، دنبالِ یک استثنا بگرد.</li>
+          <li>برای «must be true»، هر گزینه رو با اعدادِ خام تست کن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>فرضِ هم‌پوشانی بینِ گروه‌های مجزا.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>ادعاهای «منطقاً محتمل» به‌جای «تضمین‌شده».</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

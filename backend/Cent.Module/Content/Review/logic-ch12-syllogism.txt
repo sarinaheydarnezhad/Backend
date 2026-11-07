@@ -1,0 +1,84 @@
+جزوه لاجیک CEnT — فصل ۱۲: قیاس فرضی و Modus Ponens
+
+CENT LOGIC — PART A · CHAPTER 12 / 13
+فصل ۱۲: قیاس فرضی و Modus Ponens — استنتاج معتبر و نامعتبر
+تا اینجا یاد گرفتی چطور یک گزاره رو ارزیابی یا نقیض کنی. این فصل یک مهارت جدید بهت می‌ده: چطور از چند گزاره‌ی شرطیِ داده‌شده، یک نتیجه‌ی جدید و تضمین‌شده بسازی — و مهم‌تر، چطور تشخیص بدی کِی این کار غیرمجازه.
+Bاین مبحث چیست؟
+وقتی چند گزاره‌ی شرطی به‌هم زنجیر می‌شن (تالیِ یکی، مقدمِ اون یکی می‌شه)، می‌شه ازشون نتیجه‌ی جدیدی گرفت. دو تا از معتبرترین الگوهای این کار Modus Ponens و Hypothetical Syllogism هستن — ولی یک الگوی خیلی وسوسه‌انگیزِ دیگه هم هست که نامعتبره، و آزمون دقیقاً همون رو تست می‌کنه.
+Cمفهوم اصلی
+قدم ۱ — Modus Ponens: اگه «If A then B» درست باشه و A هم درست باشه، پس B قطعاً درسته. این ساده‌ترین و پایه‌ای‌ترین قانون استنتاجه.
+1. If it rains, the ground gets wet.2. It is raining.Therefore, the ground is wet.
+قدم ۲ — Hypothetical Syllogism: از «If A then B» و «If B then C»، نتیجه می‌گیریم «If A then C». دو شرطی که تالیِ اولی با مقدمِ دومی یکیه، به هم زنجیر می‌شن.
+1. If the cue ball hits the red ball, then the red ball will hit the blue ball.2. If the red ball hits the blue ball, then the blue ball will go into the pocket.Therefore, if the cue ball hits the red ball, then the blue ball will go into the pocket.
+قدم ۳ — ترکیب هر دو قانون: اگه علاوه‌بر دو شرطیِ زنجیره‌ای، مقدمِ اولین شرطی هم به‌عنوان یک واقعیت داده بشه، می‌تونی مستقیم به نتیجه‌ی نهایی برسی.
+1. If A then B2. If B then C3. ATherefore, C.
+این استنتاج در واقع دو مرحله‌ست: اول با Hypothetical Syllogism روی گزاره‌های ۱ و ۲، به «If A then C» می‌رسیم؛ بعد با Modus Ponens روی این نتیجه و گزاره‌ی ۳، به C می‌رسیم.
+قدم ۴ — هشدار: از «If A then B» و «If B then C»، نمی‌شه نتیجه گرفت «If C then A». این یک استنتاج نامعتبره.
+1. If John studies hard, then he'll pass the test.2. If he passes the test, then he'll pass the class.❌ Invalid conclusion: "If John passes the class, then he studied hard."
+آیا قبول شدن در کلاس تضمین می‌کنه که جان حتماً درس خونده؟ نه — شاید معلم بهش نمره‌ی اضافه داده، یا امتحان جبرانی گرفته. زنجیره‌ی «A→B→C» هیچ اطلاعاتی درباره‌ی این‌که «C چطور ممکنه از راه‌های دیگه‌ای غیر از A اتفاق بیفته» بهمون نمی‌ده.
+Dقوانین و اصول مهم
+Modus Ponens (معتبر): If A then B, و A ⟹ B.
+Hypothetical Syllogism (معتبر): If A then B, و If B then C ⟹ If A then C.
+ترکیبِ هر دو (معتبر): If A then B, If B then C, و A ⟹ C.
+برعکس کردن زنجیره (نامعتبر): از If A then B و If B then C، هرگز نمی‌شه If C then A نتیجه گرفت.
+Eروش حل
+همه‌ی گزاره‌های شرطی و هر واقعیتِ جداگانه‌ی داده‌شده رو فهرست کن.
+دنبال شرطی‌هایی بگرد که تالیِ یکی، دقیقاً مقدمِ یکیِ دیگه‌ست — این‌ها رو زنجیر کن (Hypothetical Syllogism).
+اگه اولین مقدمِ زنجیره هم به‌عنوان یک واقعیت داده شده، Modus Ponens رو روی نتیجه‌ی زنجیره اعمال کن.
+هیچ‌وقت جهت زنجیره رو برعکس نکن — نتیجه‌ی معتبر همیشه هم‌جهت با فلش‌های اصلیه.
+→ جواب: نتیجه‌ی زنجیره‌شده، در همون جهتِ اصلی.
+Fمثال آموزشی
+1. If the power goes out, the backup generator starts. 2. If the backup generator starts, the alarm system stays active. What can we conclude?
+پاسخ: "If the power goes out, the alarm system stays active." طبق Hypothetical Syllogism، تالیِ گزاره‌ی ۱ («the backup generator starts») دقیقاً مقدمِ گزاره‌ی ۲ است، پس می‌تونیم زنجیرشون کنیم.
+Gمثال امتحانی
+1. If a project is approved, the budget is released. 2. If the budget is released, the team starts hiring. 3. The project was approved. Which conclusion is VALID?
+A) "If the team starts hiring, the project was approved."
+B) "The team starts hiring."
+C) "If the budget is released, the project was approved."
+D) "The project was not approved."
+🎯 EXAM TIP
+وقتی چند شرطی زنجیره‌ای دیدی، روی کاغذ (یا در ذهنت) فلش بکش: A → B → C. فقط گزینه‌هایی که هم‌جهت با این فلش‌ها هستن (از A به سمت C) می‌تونن معتبر باشن. هر گزینه‌ای که فلش رو برعکس کنه (C → A)، بدون بررسی بیشتر، رد کن.
+⚡ QUICK METHOD
+برای چک کردن سریع اینکه یک نتیجه‌گیریِ زنجیره‌ای معتبره یا نه، ببین آیا تالیِ آخرین گزاره‌ی زنجیره، با مقدمِ نتیجه‌ی پیشنهادی یکیه (جهتِ درست) یا برعکس (جهتِ غلط). اگه برعکسه، بدون تحلیل بیشتر مطمئن باش که نامعتبره.
+⚠️ COMMON MISTAKES
+اشتباه: فکر کردن که یک زنجیره‌ی شرطیِ «A → B → C» رو می‌شه برعکس هم خوند، یعنی «C → B → A».
+چرا اتفاق می‌افته: وقتی یک زنجیره‌ی علّی یا مرحله‌ای رو می‌بینیم، ذهن به‌طور طبیعی فکر می‌کنه رابطه‌ی «اگر-پس» یک رابطه‌ی دوطرفه و متقارنه — در حالی که (طبق فصل ۴) شرطی اصلاً چنین تقارنی نداره.
+چطور جلوش رو بگیریم: همیشه به یاد داشته باش که جهت فلش‌ها مقدس‌ان. نتیجه‌ی معتبر همیشه باید دقیقاً هم‌جهت با فلش‌های داده‌شده باشه، نه برعکسشون.
+🪤 QUESTION TRAP
+آزمون معمولاً بین گزینه‌ها هم نتیجه‌ی درستِ زنجیره‌ای رو می‌ذاره، هم نسخه‌ی برعکس‌شده‌ی همون رو (که خیلی شبیه به‌نظر می‌رسه ولی نامعتبره). این دو گزینه معمولاً از نظر ظاهری فقط در ترتیب A و C فرق دارن — دقت کن کدوم‌طرف مقدمه و کدوم‌طرف تالیه.
+🧠 MUST REMEMBER
+Modus Ponens: If A then B, A ⟹ B. Hypothetical Syllogism: If A then B, If B then C ⟹ If A then C. هرگز جهت زنجیره رو برعکس نکن — «If A then B, If B then C» هرگز «If C then A» نمی‌ده.
+📝تمرین
+1. If the server crashes, users lose their session. 2. The server crashed. What follows?
+A) Users lost their session.
+B) The server did not crash.
+C) If users lose their session, the server crashes.
+D) Nothing can be concluded.
+نمایش پاسخ و توضیح
+پاسخ درست: A. این یک Modus Ponens ساده‌ست: مقدم («server crashes») درسته، پس تالی («users lose their session») هم قطعاً درسته.
+1. If a candidate passes the interview, they receive an offer. 2. If a candidate receives an offer, they are added to payroll. Which conclusion is VALID?
+A) "If a candidate is added to payroll, they passed the interview."
+B) "If a candidate passes the interview, they are added to payroll."
+C) "All candidates pass the interview."
+D) "If a candidate does not pass the interview, they are not added to payroll."
+نمایش پاسخ و توضیح
+پاسخ درست: B. این دقیقاً Hypothetical Syllogism است — تالیِ گزاره‌ی ۱ («receive an offer») با مقدمِ گزاره‌ی ۲ یکیه، پس زنجیر می‌شن. گزینه‌ی A جهت رو برعکس کرده (دام رایج). گزینه‌ی D هم یک ادعای اضافه‌ست که مستقیماً از این دو گزاره نتیجه نمی‌شه (این در واقع همون inverse فصل ۷ است، نه چیزی که این دو گزاره تضمین کنن).
+1. If a shipment clears customs, it is loaded onto the truck. 2. If a shipment is loaded onto the truck, it arrives within 3 days. 3. This shipment cleared customs. Which of the following can we conclude with certainty?
+A) "This shipment did not arrive within 3 days."
+B) "If this shipment arrives within 3 days, it cleared customs."
+C) "This shipment arrives within 3 days."
+D) "This shipment was loaded onto the truck, but will not arrive within 3 days."
+نمایش پاسخ و توضیح
+پاسخ درست: C. اول با Hypothetical Syllogism، گزاره‌های ۱ و ۲ رو زنجیر می‌کنیم: "If a shipment clears customs, it arrives within 3 days." بعد چون گزاره‌ی ۳ می‌گه این محموله واقعاً گمرک رو رد کرده (مقدم درسته)، طبق Modus Ponens نتیجه می‌گیریم تالی («arrives within 3 days») هم قطعاً درسته. گزینه‌ی B جهت رو برعکس کرده — دقیقاً همون استنتاج نامعتبرِ این فصل. گزینه‌ی D هم خودش با نتیجه‌ی درستِ ما (C) در تناقضه.
+🚀مرور سریع — فصل ۱۲
+مفاهیم اصلی
+Modus Ponens: If A then B, A ⟹ B
+Hypothetical Syllogism: If A then B, If B then C ⟹ If A then C
+برعکس کردن زنجیره (C→A) همیشه نامعتبره
+روش
+شرطی‌های هم‌زنجیر رو پیدا و وصل کن.
+اگه مقدمِ اول واقعیت بود، Modus Ponens رو هم اعمال کن.
+اشتباهات رایج
+خوندن زنجیره به‌صورت دوطرفه/متقارن.
+دام‌های تستی
+گزینه‌ی برعکس‌شده‌ی زنجیره، در کنار گزینه‌ی درست.

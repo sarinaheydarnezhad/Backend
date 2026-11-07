@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۴: نمودار میله‌ای</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART B · CHAPTER 14 / 19</p>
+  <h1>فصل ۱۴: خواندن نمودارهای میله‌ای — Reading Bar Charts</h1>
+  <p class="lede">وارد بخش دوم جزوه شدیم: تفسیر داده <span class="term">(Data Interpretation)</span>. اینجا دیگه استدلال منطقیِ محض نیست — مهارت اصلی، خوندنِ <strong>دقیق</strong> و <strong>سریع</strong> اطلاعاته، بدون افتادن در دام‌های رایجِ نمودارخوانی.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>در نمودار میله‌ای <span class="term">(bar chart)</span>، طول یا ارتفاع هر میله نشون‌دهنده‌ی مقدار اون دسته‌ست. سؤالات معمولاً می‌خوان بیشترین/کمترین مقدار رو پیدا کنی، دو یا چند دسته رو مقایسه کنی، یا مجموع/تفاضلشون رو حساب کنی.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — خوندنِ ساده: هر میله رو با محور مقایسه کن.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p><strong>Number of Books Borrowed from a Library in a Week</strong></p>
+      <table style="margin-top:8px;"><tr><th>Day</th><th>Sat</th><th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th></tr>
+      <tr><td>Books</td><td>35</td><td>50</td><td>20</td><td>30</td><td>40</td></tr></table>
+      <p class="q" style="margin-top:8px;">On which day were the most books borrowed?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: یکشنبه (Sunday)، ۵۰ کتاب.</strong> فقط بلندترین میله رو پیدا کردیم — ساده‌ترین نوعِ این سؤالات.</p>
+  </div>
+
+  <p><strong>قدم ۲ — دام مهم: «بیشترین مقدار» با «بیشترین افزایش» فرق داره.</strong> این رایج‌ترین دامِ سطح‌بالای نمودار میله‌ایه. یک دسته می‌تونه در حال حاضر بیشترین مقدار رو داشته باشه، ولی کمترین رشد رو نسبت به قبل داشته باشه — یا برعکس.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه‌ی امتحانی سخت‌تر</div>
+    <div class="en-block">
+      <p><strong>Electricity Generation (Millions of units)</strong></p>
+      <table style="margin-top:8px;">
+        <tr><th>Category</th><th>1990</th><th>2000</th></tr>
+        <tr><td>Coal, Oil &amp; Gas</td><td>242,300</td><td>245,700</td></tr>
+        <tr><td>Nuclear</td><td>37,000</td><td>65,700</td></tr>
+        <tr><td>Gas Turbines</td><td>500</td><td>400</td></tr>
+        <tr><td>Hydro (Natural)</td><td>3,900</td><td>5,100</td></tr>
+        <tr><td>Hydro (Pumped)</td><td>1,200</td><td>2,000</td></tr>
+      </table>
+      <p class="q" style="margin-top:8px;">Which category made the LARGEST CONTRIBUTION to the increase in total units generated over these years?</p>
+    </div>
+    <p style="margin-top:10px;">اگه فقط دنبال بزرگ‌ترین <em>عدد نهایی</em> بگردی، «Coal, Oil & Gas» (۲۴۵,۷۰۰) به‌نظر برنده میاد. ولی سؤال از <strong>افزایش</strong> پرسیده، نه مقدار نهایی. باید تفاضل هر ردیف رو جداگانه حساب کنی: Coal +3,400 | Nuclear +28,700 | Gas Turbines −100 | Hydro Natural +1,200 | Hydro Pumped +800. برنده‌ی واقعی <strong>Nuclear</strong> است، با اختلاف زیاد — دقیقاً برعکسِ حدسِ اولیه‌ای که فقط بر اساس مقدار نهایی می‌زدیم.</p>
+  </div>
+
+  <p><strong>قدم ۳ — نمودارهای گروهی/انباشته (grouped / stacked): اول ساختار رو بشکن.</strong> وقتی چند سری داده (مثل «تولد» و «مرگ») روی یک نمودار کنار هم یا روی هم نشون داده شدن، قبل از هر مقایسه‌ای، اول هر سری رو جدا از بقیه در نظر بگیر.</p>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>طول/ارتفاع میله = مقدار؛ همیشه اول واحد و مقیاس محور رو دقیق بخون.</li>
+    <li>«بیشترین مقدار» (highest value) و «بیشترین افزایش» (largest increase) دو سؤال کاملاً متفاوتن — همیشه اول ببین سؤال دقیقاً کدوم رو می‌خواد.</li>
+    <li>برای سؤالات افزایش/کاهش، همیشه تفاضلِ دو نقطه‌ی زمانی رو حساب کن، نه فقط مقدار نهایی رو نگاه کن.</li>
+    <li>در نمودارهای چنددسته‌ای، هر سری رو جدا از بقیه تحلیل کن.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>دقیقاً مشخص کن سؤال چی می‌خواد: یک مقدار، یک مجموع، یک تفاضل، یا بیشترین/کمترین رشد.</li>
+    <li>عنوان نمودار، واحد و مقیاس محورها رو بخون.</li>
+    <li>اگه سؤال درباره‌ی تغییر/رشد بود، برای هر دسته‌ی مرتبط، تفاضل دو نقطه رو جداگانه حساب کن.</li>
+    <li>اگه نمودار چنددسته‌ایه، ساختارش رو بشکن و فقط دسته‌ی مرتبط با سؤال رو بررسی کن.</li>
+    <li class="arrow-final">→ جواب: بر اساس دقیقاً همون چیزی که سؤال پرسیده، نه شبیه‌ترین چیزی که در نگاه اول به‌چشم میاد.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p><strong>Sales of Products (Thousand Units)</strong></p>
+      <table style="margin-top:8px;"><tr><th>Product</th><th>A</th><th>B</th><th>C</th><th>D</th></tr>
+      <tr><td>Sales</td><td>120</td><td>85</td><td>150</td><td>95</td></tr></table>
+      <p class="q" style="margin-top:8px;">What is the total sales of Products A and C?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: ۲۷۰ هزار واحد.</strong> ۱۲۰ + ۱۵۰ = ۲۷۰. یک سؤال ساده‌ی «مجموع» — نه بیشترین رشد، نه مقایسه.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p><strong>Monthly Revenue by Department (€ thousands)</strong></p>
+      <table style="margin-top:8px;">
+        <tr><th>Department</th><th>January</th><th>June</th></tr>
+        <tr><td>Sales</td><td>80</td><td>92</td></tr>
+        <tr><td>Marketing</td><td>45</td><td>50</td></tr>
+        <tr><td>Support</td><td>30</td><td>60</td></tr>
+      </table>
+      <p class="q" style="margin-top:8px;">Which department had the largest PERCENTAGE increase in revenue from January to June?</p>
+      <ul class="options">
+        <li>A) Sales</li>
+        <li>B) Marketing</li>
+        <li class="correct">C) Support</li>
+        <li>D) All three had the same percentage increase.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>سؤال دقیقاً از درصد افزایش پرسیده، نه از مقدار مطلق افزایش. باید برای هر دپارتمان، درصد رشد رو جداگانه حساب کنیم.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>Sales: (92−80)/80 = 15%. Marketing: (50−45)/45 ≈ 11.1%. Support: (60−30)/30 = 100%. با اختلاف زیاد، Support بیشترین درصد رشد رو داره.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>اگه فقط به مقدار مطلق افزایش نگاه کنیم (Sales: +12، Marketing: +5، Support: +30)، باز هم Support برنده‌ست، ولی این توافق تصادفیه — در بسیاری از سؤالات مشابه، دپارتمانی با کمترین مقدار مطلقِ افزایش می‌تونه بیشترین درصد رشد رو داشته باشه (دقیقاً چون مبنای اولیه‌اش کوچیک‌تره). همیشه باید مطمئن بشی کدوم نوع سؤال (مطلق یا درصدی) پرسیده شده.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون فرمول درصد تغییر — <code>(جدید − قدیم) / قدیم</code> — رو مستقیماً برای هر سه دسته اعمال کردیم، به‌جای قضاوت چشمی بر اساس ارتفاع میله‌ها.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>قبل از دست زدن به داده‌ها، صورتِ سؤال رو دوبار بخون و مشخص کن دقیقاً دنبال چی هستی: «مقدار»، «مجموع»، «تفاضل مطلق»، یا «درصد تغییر». این چهار تا جواب‌های کاملاً متفاوتی می‌دن.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>برای پیدا کردنِ سریعِ بیشترین/کمترین مقدار در یک نگاه، اول با چشم بلندترین/کوتاه‌ترین میله‌ها رو شناسایی کن و فقط بین ۲ یا ۳ کاندیدای برتر محاسبه‌ی دقیق انجام بده — نیازی نیست همه‌ی میله‌ها رو دقیقاً محاسبه کنی.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> جواب دادن به سؤالِ «بیشترین افزایش» با گزینه‌ای که فقط بیشترین مقدارِ نهایی رو داره.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> دسته‌ای که از قبل بزرگ‌تر بوده، معمولاً بلندترین میله رو داره و چشم به‌طور طبیعی اول به همون جلب می‌شه — بدون توجه به این‌که سؤال درباره‌ی <em>تغییر</em> پرسیده، نه مقدار فعلی.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه برای سؤالات «افزایش/کاهش»، تفاضل دو نقطه رو برای <em>همه‌ی</em> گزینه‌ها به‌طور جداگانه بنویس، حتی اگه یکیشون در نگاه اول واضح به‌نظر برسه.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>در جدول‌ها و نمودارهای پیچیده، آزمون گاهی سطر یا ستونِ مشابه رو کنار هم می‌ذاره تا داوطلب رو به خوندنِ سطر/ستونِ اشتباه وسوسه کنه. قبل از خوندنِ عدد، همیشه اول عنوانِ دقیقِ سطر و ستون رو با انگشت یا خط‌کش دنبال کن.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>بیشترین مقدار ≠ بیشترین افزایش. برای افزایش/کاهش، همیشه تفاضل بگیر. برای درصدِ تغییر، فرمولِ <code>(جدید−قدیم)/قدیم</code> رو به‌کار ببر، نه فقط مقدار مطلق.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">A bar chart shows website visits: Mon 200, Tue 350, Wed 280, Thu 400, Fri 310. On which day were the fewest visits recorded?</p>
+      <ul class="options">
+        <li class="correct">A) Monday</li>
+        <li>B) Tuesday</li>
+        <li>C) Wednesday</li>
+        <li>D) Friday</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> ۲۰۰ کمترین مقدار بین همه‌ی روزهاست — یک سؤال ساده‌ی خوندنِ مستقیم مقدار.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">A bar chart shows annual production (in tons): Farm A: 2019=400, 2023=460. Farm B: 2019=150, 2023=210. Which farm had the larger ABSOLUTE increase in production?</p>
+      <ul class="options">
+        <li class="correct">A) Farm A (increase of 60 tons)</li>
+        <li>B) Farm B (increase of 60 tons)</li>
+        <li>C) Both had the same absolute increase.</li>
+        <li>D) Cannot be determined.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> Farm A: 460−400 = 60. Farm B: 210−150 = 60. جالبه که مقدار <em>مطلقِ</em> افزایش برای هر دو یکسانه (۶۰ تن) — پس گزینه‌ی درست در واقع C است! این سؤال دقیقاً برای این طراحی شده که نشون بده گاهی با وجود تفاوت زیاد در مقیاس اولیه، مقدار مطلقِ تغییر می‌تونه یکسان باشه؛ اگه سؤال از <em>درصد</em> افزایش می‌پرسید (Farm A: 15%, Farm B: 40%)، Farm B برنده می‌شد.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">A stacked bar chart shows total monthly sales split into "Online" and "In-Store." March: Online=60, In-Store=90 (Total=150). April: Online=100, In-Store=80 (Total=180). Which statement is correct?</p>
+      <ul class="options">
+        <li>A) In-Store sales increased from March to April.</li>
+        <li class="correct">B) Total sales increased, even though In-Store sales decreased.</li>
+        <li>C) Online sales decreased from March to April.</li>
+        <li>D) Total sales decreased from March to April.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> طبق قدم ۳، باید هر سری رو جدا بررسی کنیم: Online از ۶۰ به ۱۰۰ افزایش یافته (+40)، In-Store از ۹۰ به ۸۰ کاهش یافته (−10). مجموع کل از ۱۵۰ به ۱۸۰ افزایش یافته (+30) — یعنی با اینکه یکی از دو بخش کم شده، رشدِ بخشِ دیگه اون رو جبران کرده و مجموع رو هم بالا برده. این دقیقاً نشون می‌ده که نگاه کردن فقط به یک سری، بدون شکستنِ کامل ساختار نمودار انباشته، می‌تونه نتیجه‌ی گمراه‌کننده بده.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۴</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>طول/ارتفاع میله = مقدار.</li>
+          <li>بیشترین مقدار ≠ بیشترین افزایش.</li>
+          <li>مطلق ≠ درصد.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>اول مشخص کن سؤال دقیقاً چی می‌خواد.</li>
+          <li>برای رشد، تفاضل دو نقطه رو حساب کن.</li>
+          <li>نمودار انباشته رو اول بشکن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>جواب دادن به سؤال رشد با مقدار نهایی.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>سطر/ستون مشابه که به اشتباه می‌اندازه.</li>
+          <li>یکسان بودنِ مقدار مطلق با اختلاف زیادِ درصدی.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

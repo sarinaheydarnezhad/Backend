@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۱: مربع تعارض</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 11 / 13</p>
+  <h1>فصل ۱۱: مربع تعارض — Square of Opposition</h1>
+  <p class="lede">حالا که با نقیضِ گزاره‌های قیاسی آشنا شدی، این فصل همه‌شون رو در یک دیاگرام واحد کنار هم می‌ذاره — و دو رابطه‌ی جدید (contrary و subcontrary) رو معرفی می‌کنه که با contradictory فرق دارن.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>چهار گزاره‌ی پایه‌ی قیاسی — All A are B، No A are B، Some A are B، Some A are not B — رو می‌شه در چهار گوشه‌ی یک مربع فرضی چید. هر ضلع و هر قطر این مربع، یک رابطه‌ی منطقیِ متفاوت بین دو گوشه رو نشون می‌ده.</p>
+
+  <div class="square-wrap">
+    <div class="square-grid">
+      <div class="square-corner"><span class="label">UNIVERSAL AFFIRMATIVE</span><span class="form">All A are B</span></div>
+      <div class="square-corner"><span class="label">UNIVERSAL NEGATIVE</span><span class="form">No A are B</span></div>
+      <div class="square-corner"><span class="label">PARTICULAR AFFIRMATIVE</span><span class="form">Some A are B</span></div>
+      <div class="square-corner"><span class="label">PARTICULAR NEGATIVE</span><span class="form">Some A are not B</span></div>
+    </div>
+    <p style="text-align:center; margin-top:10px; font-size:13px; color:var(--ink-soft);">
+      بالا ↔ بالا: <strong style="color:var(--navy);">contrary</strong> &nbsp;•&nbsp;
+      پایین ↔ پایین: <strong style="color:var(--navy);">subcontrary</strong> &nbsp;•&nbsp;
+      قطرها (بالا-چپ ↔ پایین-راست، بالا-راست ↔ پایین-چپ): <strong style="color:var(--rust);">contradictory</strong>
+    </p>
+  </div>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — روابط قطری (contradictory) را از فصل ۱۰ می‌شناسی.</strong></p>
+  <ul>
+    <li>«All A are B» ↔ «Some A are not B» (نقیض هم هستن)</li>
+    <li>«No A are B» ↔ «Some A are B» (نقیض هم هستن)</li>
+  </ul>
+  <p>یادت باشه از فصل ۵: رابطه‌ی contradictory یعنی دقیقاً یکی درست و یکی غلط — همیشه، بدون استثنا. این یعنی اگه ارزش درستیِ یکی رو بدونی، ارزش درستیِ اون یکیِ قطری رو <strong>قطعاً و کاملاً</strong> می‌دونی.</p>
+
+  <p><strong>قدم ۲ — رابطه‌ی contrary (ضلع بالا): «All A are B» و «No A are B» نمی‌تونن هم‌زمان هر دو درست باشن، ولی می‌تونن هم‌زمان هر دو غلط باشن.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"All dogs are brown." (False) — "No dogs are brown." (also False, since SOME dogs are brown and some aren't)</p>
+    </div>
+    <p style="margin-top:10px;">این دقیقاً همون تعریف contrary از فصل ۵ است، فقط اینجا روی دو گزاره‌ی قیاسیِ کلی (universal) اعمال شده.</p>
+  </div>
+
+  <p><strong>قدم ۳ — رابطه‌ی subcontrary (ضلع پایین): «Some A are B» و «Some A are not B» نمی‌تونن هم‌زمان هر دو غلط باشن، ولی می‌تونن هم‌زمان هر دو درست باشن.</strong> این دقیقاً برعکسِ contrary است.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"Some dogs are brown." (True) — "Some dogs are not brown." (also True, if the group of dogs is mixed)</p>
+    </div>
+    <p style="margin-top:10px;">اگه دسته‌ی A حداقل یک عضو داشته باشه، همیشه یا «Some A are B» یا «Some A are not B» (یا هر دو) درسته — نمی‌شه هر دو هم‌زمان غلط باشن.</p>
+  </div>
+
+  <p><strong>قدم ۴ — تفاوت کلیدی: contradictory جهت رو کاملاً مشخص می‌کنه، ولی contrary و subcontrary فقط یک جهت رو مشخص می‌کنن.</strong></p>
+  <ul>
+    <li>اگه «All A are B» درست باشه (contrary)، مطمئنی «No A are B» غلطه — ولی اگه «All A are B» غلط باشه، از این تنها نمی‌تونی بگی «No A are B» چیه (می‌تونه درست یا غلط باشه).</li>
+    <li>اگه «Some A are B» غلط باشه (subcontrary)، مطمئنی «Some A are not B» درسته — ولی اگه «Some A are B» درست باشه، از این تنها نمی‌تونی بگی «Some A are not B» چیه.</li>
+  </ul>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <table>
+    <tr><th>رابطه</th><th>دو گوشه</th><th>قانون</th></tr>
+    <tr><td>Contradictory</td><td>All↔Some-not ، No↔Some</td><td>همیشه دقیقاً یکی درست، یکی غلط</td></tr>
+    <tr><td>Contrary</td><td>All ↔ No</td><td>هر دو نمی‌تونن درست باشن؛ هر دو می‌تونن غلط باشن</td></tr>
+    <tr><td>Subcontrary</td><td>Some ↔ Some-not</td><td>هر دو نمی‌تونن غلط باشن؛ هر دو می‌تونن درست باشن</td></tr>
+  </table>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>مشخص کن دو گزاره‌ی داده‌شده در کدوم گوشه‌های مربع قرار می‌گیرن.</li>
+    <li>رابطه‌شون رو تشخیص بده: قطری (contradictory)، بالا (contrary)، یا پایین (subcontrary).</li>
+    <li>اگه contradictory بود، ارزش درستیِ دومی رو کاملاً و مستقیم از اولی بگیر (برعکسش کن).</li>
+    <li>اگه contrary یا subcontrary بود، فقط طبق قانون یک‌طرفه‌ی مربوطه نتیجه بگیر — در جهت دیگه، «cannot be determined» جواب درسته.</li>
+    <li class="arrow-final">→ جواب: طبق نوع رابطه.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">If "All students passed the exam" is FALSE, what can we conclude about "No students passed the exam"?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: نمی‌تونیم چیزی قطعی نتیجه بگیریم.</strong> این دو گزاره رابطه‌ی contrary دارن. طبق قدم ۴، وقتی یکی از دو contrary غلط باشه، اون یکی می‌تونه درست یا غلط باشه — مثلاً ممکنه بعضی دانش‌آموزها قبول شده باشن و بعضی نه (که هر دو گزاره غلط می‌شن)، یا ممکنه هیچ‌کس قبول نشده باشه (که «No students passed» درست می‌شه).</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">We are told: "Some applicants were rejected" is FALSE. What must be true about "Some applicants were not rejected"?</p>
+      <ul class="options">
+        <li>A) It must also be false.</li>
+        <li class="correct">B) It must be true.</li>
+        <li>C) It cannot be determined.</li>
+        <li>D) It is true only if all applicants applied on the same day.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>این دو گزاره — «Some applicants were rejected» و «Some applicants were not rejected» — رابطه‌ی subcontrary دارن (هر دو از فرم «Some»، یکی مثبت یکی منفی).</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>طبق قانون subcontrary در قدم ۴، این دو نمی‌تونن هم‌زمان هر دو غلط باشن. چون یکیشون («Some…rejected») غلطه، اون یکی («Some…not rejected») مجبوره درست باشه.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A دقیقاً برعکسِ قانون subcontrary است — انگار فکر کرده رابطه‌شون contrary یا contradictory با همون جهته. گزینه‌ی D هم اطلاعات کاملاً بی‌ربطی اضافه می‌کنه.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای حدس زدن، مستقیماً نوع رابطه (subcontrary) رو تشخیص دادیم و قانون یک‌طرفه‌ی دقیقش رو اعمال کردیم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>برای به‌خاطر سپردن جهت‌ها: <strong>Contrary «بالای مربع» (هر دو کلی/universal) — نمی‌تونن با هم درست باشن.</strong> <strong>Subcontrary «پایین مربع» (هر دو جزئی/particular) — نمی‌تونن با هم غلط باشن.</strong> این دو دقیقاً آینه‌ی هم هستن.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>اگه سؤال از رابطه‌ی قطری (contradictory) پرسید، جواب همیشه قطعی و مستقیمه (برعکس کردن ارزش درستی). اگه از رابطه‌ی بالا یا پایین (contrary/subcontrary) پرسید، اول چک کن کدوم جهت اطلاعات قطعی می‌ده — قانونش فقط یک‌طرفه‌ست، نه دوطرفه.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> برخورد با رابطه‌ی contrary یا subcontrary مثل contradictory — یعنی فرض کردن که دونستنِ ارزش درستیِ یکی، همیشه ارزش درستیِ اون یکی رو هم قطعاً مشخص می‌کنه.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> هر سه رابطه (contradictory، contrary، subcontrary) شبیه به‌هم به‌نظر می‌رسن چون همه درباره‌ی جفت گزاره‌های مرتبطن، ولی فقط contradictory قدرتِ استنتاجِ کامل و دوطرفه داره.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه اول نوع دقیق رابطه رو مشخص کن (با جدول قدم ۴)، و فقط طبق همون یک قانونِ خاص جلو برو — نه با قیاس با contradictory.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>سؤال ممکنه یک گزاره‌ی contrary یا subcontrary رو غلط بده و از تو بخواد نتیجه بگیری اون یکی هم غلطه یا درسته، در جهتی که قانونش اجازه‌ی این استنتاج رو نمی‌ده. همیشه دقت کن که آیا سؤال داره از جهتِ «مجازِ» رابطه سؤال می‌کنه یا از جهتِ «نامشخص»ش — جواب درست در جهتِ نامشخص همیشه «cannot be determined» است.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p><strong>Contrary</strong> (All ↔ No): نمی‌تونن با هم درست باشن؛ می‌تونن با هم غلط باشن. <strong>Subcontrary</strong> (Some ↔ Some-not): نمی‌تونن با هم غلط باشن؛ می‌تونن با هم درست باشن. <strong>Contradictory</strong> (قطرها): همیشه دقیقاً یکی درست، یکی غلط.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">"No committee members voted against the proposal" is TRUE. What follows about "Some committee members voted against the proposal"?</p>
+      <ul class="options">
+        <li class="correct">A) It must be false (contradictory relation).</li>
+        <li>B) It must be true.</li>
+        <li>C) It cannot be determined.</li>
+        <li>D) It is true only if the vote was unanimous.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> «No A are B» و «Some A are B» رابطه‌ی قطری (contradictory) دارن. چون یکی درسته، اون یکی قطعاً غلطه.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">"All flights were delayed" is TRUE. What follows about "No flights were delayed"?</p>
+      <ul class="options">
+        <li>A) It must be true.</li>
+        <li class="correct">B) It must be false.</li>
+        <li>C) It cannot be determined.</li>
+        <li>D) It is true only for international flights.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> «All A are B» و «No A are B» رابطه‌ی contrary دارن — نمی‌تونن هم‌زمان هر دو درست باشن. چون یکی («All flights were delayed») درسته، اون یکی («No flights were delayed») مجبوره غلط باشه. (این دقیقاً همون جهتِ قطعیِ contrary است — وقتی یکی درسته، اون یکی حتماً غلطه؛ برعکسش نامشخصه.)</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">We only know: "Some reviewers approved the manuscript" is TRUE. Which of the following can we determine with certainty about "Some reviewers did not approve the manuscript"?</p>
+      <ul class="options">
+        <li>A) It must be true, since they are subcontraries.</li>
+        <li>B) It must be false.</li>
+        <li class="correct">C) It cannot be determined from this information alone.</li>
+        <li>D) It is automatically true if there are at least two reviewers.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> این دو گزاره رابطه‌ی subcontrary دارن. قانونِ subcontrary فقط جهت «هر دو نمی‌تونن غلط باشن» رو تضمین می‌کنه — یعنی اگه یکی غلط بود، اون یکی حتماً درسته. اما اینجا داریم گفته می‌شه یکی («Some…approved») <strong>درسته</strong>، نه غلط — و از درست بودنِ یکی از دو subcontrary، هیچ اطلاعاتِ قطعی‌ای درباره‌ی اون یکی به‌دست نمیاد (می‌تونه همه‌ی داوران تأیید کرده باشن، که در این صورت "Some did not approve" غلط می‌شه؛ یا بعضی تأیید نکرده باشن، که در این صورت درست می‌شه). گزینه‌ی A دقیقاً همون اشتباه رایج «اعمال قانون در جهتِ اشتباه» است.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۱</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>Contrary (All↔No): هر دو درست نمی‌شن؛ هر دو غلط می‌تونن بشن.</li>
+          <li>Subcontrary (Some↔Some-not): هر دو غلط نمی‌شن؛ هر دو درست می‌تونن بشن.</li>
+          <li>Contradictory (قطرها): همیشه دقیقاً یکی درست، یکی غلط.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>اول نوع رابطه رو مشخص کن.</li>
+          <li>فقط قانونِ همون رابطه رو اعمال کن — نه قیاس با contradictory.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>فرض کردن استنتاج دوطرفه در contrary/subcontrary.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>سؤال از جهتِ «نامشخص» یک رابطه‌ی یک‌طرفه.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

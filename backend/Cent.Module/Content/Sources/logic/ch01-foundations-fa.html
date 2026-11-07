@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱: مبانی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 1 / 13</p>
+  <h1>فصل ۱: مبانی — گزاره چیست؟ گزاره‌های ترکیبی چه هستند؟</h1>
+  <p class="lede">قبل از اینکه بتونی هر سوال Logic آزمون CEnT رو حل کنی، باید بدونی دقیقاً با چه چیزی روبرو هستی: یک <span class="term">statement</span> (گزاره) ساده، یا گزاره‌ای که از چند گزاره‌ی ساده‌تر ساخته شده. این فصل، پایه‌ی همه‌ی فصل‌های بعدیه.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>منطق گزاره‌ای <span class="term">(propositional logic)</span> — که بهش <span class="term">sentential logic</span> یا <span class="term">statement logic</span> هم می‌گن — رابطه‌ی بین گزاره‌ها رو بررسی می‌کنه؛ یعنی جمله‌هایی که یا درستن یا غلط. سوالات Logic آزمون CEnT تقریباً هیچ‌وقت ازت نمی‌خوان بگی یک گزاره در دنیای واقعی درسته یا نه. در عوض، درستی یا غلطی چند گزاره‌ی ساده رو بهت می‌دن و ازت می‌خوان درستی یا غلطی گزاره‌ای که <strong>از اون‌ها ساخته شده</strong> رو پیدا کنی.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+  <p><strong>قدم ۱ — یک گزاره <span class="term">(statement)</span> جمله‌ایه که ارزش درستی داره.</strong> یعنی یا درسته یا غلط — هیچ‌وقت هر دو، هیچ‌وقت هیچ‌کدوم.</p>
+  <div class="ex-block">
+    <div class="ex-tag">مثال گزاره</div>
+    <div class="en-block">
+      <p><code>J</code> = "John is wearing a red coat."</p>
+    </div>
+    <p style="margin-top:10px;">این یک گزاره‌ست: هر روز، یا درسته یا غلط.</p>
+  </div>
+
+  <p><strong>قدم ۲ — یک گزاره‌ی ترکیبی <span class="term">(compound claim)</span> از چند گزاره‌ی ساده‌تر که با یک عملگر منطقی <span class="term">(logical connective)</span> به هم وصل شدن ساخته می‌شه.</strong> آزمون، گزاره‌های پیچیده رو از چهار عملگر پایه می‌سازه:</p>
+  <ul>
+    <li><span class="term">A and B</span> — عطف (conjunction)</li>
+    <li><span class="term">A or B</span> — فصل (disjunction)</li>
+    <li><span class="term">If A then B</span> — شرطی (conditional)</li>
+    <li><span class="term">not-A</span> — نقیض (negation)</li>
+  </ul>
+  <p>هر سوال Logic که در بخش A این جزوه می‌بینی، در نهایت فقط ترکیب و تودرتوی همین چهار عملگره.</p>
+
+  <p><strong>قدم ۳ — درستی یک گزاره‌ی ترکیبی فقط به درستی اجزاش بستگی داره.</strong> هیچ‌وقت به دانش بیرونی درباره‌ی جان، کت قرمز، یا ماشین دزدی نیاز نداری. فقط به ارزش‌های درستی‌ای که بهت دادن (یا ازت خواستن فرض کنی) و قوانین ترکیب اون‌ها نیاز داری.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"John is wearing a red coat <strong>and</strong> he's stolen a jeep."</p>
+    </div>
+    <p style="margin-top:10px;">کل این جمله فقط وقتی درسته که <em>هر دو</em> گزاره‌ی کوچک‌تر — «جان کت قرمز پوشیده» و «جان ماشین دزدیده» — درست باشن. فصل ۲ قانون دقیقش رو بهت می‌ده.</p>
+  </div>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>یک گزاره در هر لحظه دقیقاً یک ارزش درستی داره: <span class="term">True (T)</span> یا <span class="term">False (F)</span>.</li>
+    <li>ارزش درستی یک گزاره‌ی ترکیبی، وقتی ارزش درستی اجزا و عملگر بین‌شون رو بدونی، کاملاً مشخص می‌شه.</li>
+    <li>گزاره‌های تودرتو هم دقیقاً به همون شکل، از داخل به بیرون، ارزیابی می‌شن. گزاره‌ای مثل <code>If (A or B) then (C and not-D)</code> در واقع فقط یک شرطیه که مقدمش (antecedent) یک گزاره‌ی «or» و نتیجه‌اش (consequent) یک گزاره‌ی «and» هست.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل هر گزاره‌ی ترکیبی</h2>
+  <ol class="steps">
+    <li>کوچک‌ترین گزاره‌های داخل جمله رو پیدا کن و بهشون حرف بده (A، B، C…).</li>
+    <li>مشخص کن چه عملگر(هایی) اون‌ها رو به هم وصل کرده و تودرتوشون چطوریه (چی داخل چیه).</li>
+    <li>گزاره رو به‌صورت نمادین بنویس؛ از داخلی‌ترین بخش به سمت بیرون.</li>
+    <li>وقتی ارزش درستی اجزای پایه رو داری، اول داخلی‌ترین عملگر رو ارزیابی کن، بعد به سمت بیرون برو.</li>
+    <li class="arrow-final">→ جواب: ارزش درستی کل گزاره.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">Break the following claim into its parts: "If John studies hard, then he will pass the test and make his parents proud."</p>
+    </div>
+    <p style="margin-top:10px;"><strong>A</strong> = "John studies hard" &nbsp; <strong>B</strong> = "He will pass the test" &nbsp; <strong>C</strong> = "He will make his parents proud"</p>
+    <p>فرم نمادین: <code>If A then (B and C)</code> — یک شرطی که نتیجه‌اش خودش یک عطفه.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">Consider the claim: "If (A or B) then (C and not-D)." Which of the following correctly identifies its structure?</p>
+      <ul class="options">
+        <li>A) A conjunction whose parts are two conditionals</li>
+        <li class="correct">B) A conditional whose antecedent is a disjunction and whose consequent is a conjunction</li>
+        <li>C) A disjunction whose parts are two conjunctions</li>
+        <li>D) A negation of a conditional</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>اول عملگری رو پیدا کن که کل جمله رو کنترل می‌کنه — کلمه‌ای که سرتاسر جمله زیر پوشش اونه. اینجا «If … then …» هست، پس کل گزاره یک شرطیه.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>مقدم (قبل از «then») «(A or B)» است — یک فصل. نتیجه (بعد از «then») «(C and not-D)» است — یک عطف.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌های A و C هر دو عملگر بیرونی رو اشتباه می‌فهمن — به‌جای اینکه به کلمه‌ی «If…then» که کل جمله رو نگه داشته توجه کنن، فقط پرانتزهای داخلی رو خوندن. گزینه D هم به‌غلط فرض می‌کنه کل جمله نقیض شده، در حالی که فقط D (داخل نتیجه) نقیض شده.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>حرکت از بیرون به داخل تضمین می‌کنه که اول عملگری که کل گزاره رو کنترل می‌کنه پیدا کنی، قبل از اینکه ساختار داخلی حواست رو پرت کنه — این رایج‌ترین منبع اشتباه در خوندن ساختار سوالاته.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>قبل از خوندن یک گزاره‌ی ترکیبی برای فهمیدن معنیش، یک بار فقط دنبال کلمات عملگر بگرد: <span class="en">and, or, if…then, not, unless, only if</span>. زیرشون خط بکش. این کار پنج ثانیه طول می‌کشه ولی بزرگ‌ترین منبع اشتباه — یعنی اشتباه گرفتن عملگری که واقعاً کل جمله رو کنترل می‌کنه — رو از بین می‌بره.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> عملگری که از نظر ظاهری وسط جمله قرار داره رو «عملگر اصلی» در نظر گرفتن، به‌جای عملگری که واقعاً کل گزاره رو کنترل می‌کنه.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> تحت فشار زمانی، داوطلب از چپ به راست می‌خونه و روی اولین کلمه‌ی عملگری که می‌بینه قفل می‌کنه، به‌جای اینکه چک کنه کدوم عملگر بیرون همه‌ی پرانتزها و بندهای جمله قرار داره.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه از خودت بپرس: «اگه همه‌ی جزئیات داخلی رو کنار بذارم، کدوم یک کلمه دو تکه‌ی بزرگ این جمله رو به هم وصل می‌کنه؟» اون کلمه، عملگر بیرونیه — بقیه همه داخل اون قرار دارن.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>هر گزاره‌ی ترکیبی در این آزمون به چهار عملگر پایه ختم می‌شه: <span class="en">and, or, if…then, not</span>. اول عملگر بیرونی رو پیدا کن — همون که ساختار کلی گزاره رو تعیین می‌کنه.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">"John is at the movies or he is at the library." What kind of compound claim is this?</p>
+      <ul class="options">
+        <li>A) Conjunction</li>
+        <li class="correct">B) Disjunction</li>
+        <li>C) Conditional</li>
+        <li>D) Negation</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> کلمه‌ی «or» دو گزاره‌ی کامل («John is at the movies» و «he is at the library») رو به هم وصل کرده — این دقیقاً الگوی مشخص‌کننده‌ی یک disjunction است. نه عطفه (چون «and» نداره)، نه شرطیه (چون «if…then» نداره)، و چیزی هم نقیض نشده.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">"If it is not the case that Sara is late, then the meeting will start on time." Identify A (the antecedent) in symbolic terms.</p>
+      <ul class="options">
+        <li>A) "Sara is late"</li>
+        <li class="correct">B) "not-(Sara is late)"</li>
+        <li>C) "The meeting will start on time"</li>
+        <li>D) "not-(the meeting will start on time)"</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> مقدم (antecedent) هر چیزیه که بین «If» و «then» قرار داره. اینجا «it is not the case that Sara is late» است — یعنی نقیضِ گزاره‌ی «Sara is late». گزینه‌ی A نقیض رو حذف می‌کنه؛ C و D هر دو نتیجه (consequent) رو با مقدم اشتباه می‌گیرن.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">"Dan will go to law school and become a priest, or he will travel the world." What is the outermost connective?</p>
+      <ul class="options">
+        <li>A) and</li>
+        <li class="correct">B) or</li>
+        <li>C) if…then</li>
+        <li>D) not</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> جمله رو به‌صورت دو تکه‌ی بزرگ بخون: «[Dan will go to law school and become a priest]» <strong>or</strong> «[he will travel the world]». «and» واقعیه، ولی <em>داخل</em> تکه‌ی اول قرار داره — فقط «go to law school» و «become a priest» رو به هم وصل می‌کنه. ویرگول قبل از «or» یک نشونه‌ی قویه که «or» همون عملگریه که کل جمله رو در بر می‌گیره. این دقیقاً همون نوع ساختار تودرتوییه که آزمون برای تست پیدا کردن عملگر واقعیِ بیرونی استفاده می‌کنه — طبق همون Exam Tip بالا.</p>
+    </details>
+  </div>
+
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>هر گزاره یک ارزش درستی داره: T یا F.</li>
+          <li>گزاره‌های ترکیبی از ۴ عملگر ساخته می‌شن: and, or, if…then, not.</li>
+          <li>درستی کل گزاره فقط به درستی اجزا + قوانین عملگرها بستگی داره.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>اول کوچک‌ترین گزاره‌ها رو حرف‌گذاری کن.</li>
+          <li>عملگری که <em>کل</em> جمله رو کنترل می‌کنه پیدا کن، نه فقط وسط جمله.</li>
+          <li>از داخلی‌ترین بخش به بیرون حرکت کن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>چسبیدن به اولین عملگری که دیده می‌شه، نه عملگر بیرونی.</li>
+          <li>ندیدن ویرگولی که محل تقسیم واقعی جمله رو نشون می‌ده.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>نکات امتحانی</h3>
+        <ul>
+          <li>قبل از خوندن برای معنی، زیر کلمات عملگر خط بکش.</li>
+          <li>بپرس: «کدوم یک کلمه دو تکه‌ی بزرگ رو به هم وصل می‌کنه؟»</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

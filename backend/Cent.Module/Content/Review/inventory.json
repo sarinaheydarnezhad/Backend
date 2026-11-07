@@ -1,0 +1,5683 @@
+[
+  {
+    "course": "biology",
+    "file": "biology/chapter1-chemical-foundation-fa.html",
+    "title": "آمادگی زیست‌شناسی CEnT · فصل ۱ · بنیان شیمیایی",
+    "characters": 100622,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "بنیان شیمیاییThe Chemical Foundation"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "؟راهنمای استفاده از جزوه"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "★اهداف یادگیری"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDDFAنقشهٔ سرفصل‌ها: چه چیزی پوشش داده شده؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDDFAنقشهٔ مفهومی: ایده‌ها چطور به هم وصل‌اند"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۱ماده و انرژی: اتم، ایزوتوپ، الکترون ظرفیت و پیوندها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) درون اتم چیست؟"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) ایزوتوپ‌ها (isotopes)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) الکترون‌های ظرفیت (valence electrons)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) سه نوع پیوند ➕ پشتیبانی اضافه (برای تمرین‌های آزمون لازم است)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) انرژی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۲آب و pH: ماتریس زندگی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) آب یک مولکول قطبی است (polar molecule)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) شبکهٔ پیوند هیدروژنی (hydrogen-bond network)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) خواصی که از این شبکه می‌آید"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) اسید، باز و pH"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) بافرها (buffers)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۳سینتیک آنزیم‌ها: کاتالیزورهای زندگی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) واکنش شیمیایی چیست؟"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) انرژی فعال‌سازی (activation energy, EA): تپه‌ای پیش از دره"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) کاتالیزور و آنزیم (catalyst and enzyme)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) جایگاه فعال و تناسب القایی (active site and induced fit)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) مهار آنزیم (inhibition): وقتی آنزیم کند می‌شود"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۶) چه چیز دیگری سرعت آنزیم را عوض می‌کند؟ ➕ پشتیبانی اضافه"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۴جزئیات درشت‌مولکول‌ها: پروتئین، اسید نوکلئیک، لیپید و بیشتر"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) مونومر و پلیمر (monomer and polymer)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) ساختن و شکستن: دو واکنش مخالف"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) گروه‌های عاملی (functional groups) ➕ پشتیبانی اضافه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) لیپیدها و اسیدهای چرب (lipids and fatty acids) ➕ پشتیبانی اضافه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) پروتئین‌ها: مسئلهٔ پیچ‌خوردن (the folding problem)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۶) اسیدهای نوکلئیک (nucleic acids)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۵آب‌دوستی و آب‌گریزی، کربوهیدرات‌ها و لیپیدها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) آب‌دوست و آب‌گریز (hydrophilic and hydrophobic)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) کربوهیدرات‌ها (carbohydrates)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) لیپیدها (lipids)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۶پروتئین‌ها و اسیدهای نوکلئیک در عمق"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) پروتئین‌ها چه کارهایی می‌کنند؟"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) آمینواسیدها و R-group"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) پیوند پپتیدی و جهت زنجیر"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) پیچ‌خوردن: ترتیب آمینواسیدها همه‌چیز را تعیین می‌کند"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) اسیدهای نوکلئیک در عمق"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۶) DNA و RNA: مقایسه و محل در سلول"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDآزمون نهایی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "⚠️چک‌لیست نهایی اشتباهات"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ƒبرگهٔ فرمول‌ها"
+      }
+    ],
+    "detailsCount": 60,
+    "detailParents": [
+      {
+        "parent": "DIV.q",
+        "count": 60
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "1\uD83D\uDFE2 EASYWhich number defines the identity of an element?ANumber of neutronsBNumber of protonsCNumber of valence electronsDMass numberنمایش پاسخ و راه‌حل✅ پاسخ نهایی: B — Number of "
+      },
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "2\uD83D\uDFE1 MEDIUMCarbon-12 and carbon-14 differ in their number of:AProtonsBElectrons in a neutral atomCNeutronsDValence electronsنمایش پاسخ و راه‌حل✅ پاسخ نهایی: C — Neutronsاستدلال زیست"
+      }
+    ]
+  },
+  {
+    "course": "biology",
+    "file": "biology/chapter2-cell-bioenergetics-fa.html",
+    "title": "آمادگی زیست‌شناسی CEnT · فصل ۲ · سلول و انرژی‌شناسی زیستی",
+    "characters": 81745,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "سلول و انرژی‌شناسی زیستیThe Cell and Bioenergetics"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "★اهداف یادگیری"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDDFAنقشهٔ مفهومی: ایده‌ها چطور به هم وصل‌اند"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۱انواع سلول: پروکاریوت، یوکاریوت، گیاهی و جانوری"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) دو نوع بزرگ سلول"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) چرا سلول‌ها کوچک‌اند؟ نسبت سطح به حجم (surface-area-to-volume ratio)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) سلول جانوری و گیاهی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۲غشای سلولی و انتقال مواد"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) مدل موزاییکی سیال (fluid mosaic model)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) تراوایی انتخابی (selective permeability)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) انتقال بی‌انرژی (passive transport): پایین‌رو"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) انتقال فعال (active transport): بالا‌رو"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) انتقال تودهٔ مواد (bulk transport)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۶) اسمز و تونیسیته (tonicity)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۳هسته، ریبوزوم، سامانهٔ اندوممبران و اسکلت سلولی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) هسته (nucleus): مرکز فرماندهی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) ریبوزوم (ribosome): کارخانهٔ پروتئین"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) سامانهٔ اندوممبران (endomembrane system)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) مسیر یک پروتئین ترشحی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) اسکلت سلولی (cytoskeleton)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۴میتوکندری، کلروپلاست، واکوئل و دیوارهٔ سلولی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) میتوکندری (mitochondrion): نیروگاه سلول"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) کلروپلاست و پلاستیدهای دیگر (chloroplast and plastids)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) واکوئل مرکزی (central vacuole)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) دیوارهٔ سلولی گیاه (cell wall)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۵انرژی‌شناسی زیستی: متابولیسم و ATP"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) متابولیسم (metabolism)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) واکنش‌های اگزرگونیک و آندرگونیک (exergonic and endergonic)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) ATP (آدنوزین تری‌فسفات): ارز انرژی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) جفت شدن انرژی (energy coupling)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۶تنفس سلولی: از گلوکز به ATP"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) دو کلمه که باید بدانی (➕)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) مرحلهٔ ۱: گلیکولیز (glycolysis): شکافتن قند"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) مرحلهٔ ۲: اکسایش پیروات و چرخهٔ کربس (pyruvate oxidation and the Krebs cycle)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) مرحلهٔ ۳: فسفریلاسیون اکسایشی (oxidative phosphorylation): پاداش اصلی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) بدون اکسیژن: تخمیر (fermentation) ➕"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۶) حساب ATP (➕)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۷فتوسنتز: مبدل انرژی خورشید"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) واکنش‌های نوری (light reactions): در تیلاکوئیدها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) چرخهٔ کالوین (Calvin cycle): در استروما"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۸ارتباط سلولی و آپوپتوز"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "گیرندهٔ سطحی یا داخلی؟ (➕ ارتباط با فصل ۱)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "آپوپتوز (apoptosis): مرگ برنامه‌ریزی‌شدهٔ سلول"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDآزمون نهایی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "⚠️چک‌لیست نهایی اشتباهات"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ƒبرگهٔ فرمول‌ها"
+      }
+    ],
+    "detailsCount": 60,
+    "detailParents": [
+      {
+        "parent": "DIV.q",
+        "count": 60
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "1\uD83D\uDFE2 EASYWhich structure is present in prokaryotic cells?AMembrane-bound nucleusBMitochondriaCRibosomesDEndoplasmic reticulumنمایش پاسخ و راه‌حل✅ پاسخ نهایی: C — Ribosomesاستدلال زی"
+      },
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "2\uD83D\uDFE1 MEDIUMAs a spherical cell grows larger, its surface-area-to-volume ratio:AIncreasesBDecreasesCStays constantDBecomes zeroنمایش پاسخ و راه‌حل✅ پاسخ نهایی: B — Decreasesاستدلال ز"
+      }
+    ]
+  },
+  {
+    "course": "biology",
+    "file": "biology/chapter3-genetics-fa.html",
+    "title": "آمادگی زیست‌شناسی CEnT · فصل ۳ · ژنتیک مولکولی، چرخهٔ سلولی و وراثت",
+    "characters": 81254,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "ژنتیک مولکولی، چرخهٔ سلولی و وراثتMolecular Genetics, the Cell Cycle and Heredity"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "★اهداف یادگیری"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDDFAنقشهٔ مفهومی: ایده‌ها چطور به هم وصل‌اند"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۱ژنوم و سازمان کروموزوم‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) ژنوم پروکاریوت‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) ژنوم یوکاریوت‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) بسته‌بندی DNA در یوکاریوت‌ها: از رشته تا کروموزوم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) کروموزوم، کروماتید، همولوگ"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۲همانندسازی DNA"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "بازیگران و کارشان (هر کدام را با یک جمله یاد بگیر)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "چرا رشتهٔ پیشرو و رشتهٔ پیرو؟ (ارتباط با فصل ۱: پادموازی!)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۳رونویسی و پردازش RNA"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "رونویسی: سه مرحله (از منبع تو)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "پردازش RNA (فقط یوکاریوت‌ها)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۴ترجمه، کد ژنتیکی و جهش‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) کد ژنتیکی (genetic code)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) tRNA"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) ترجمه: سه مرحله (از منبع تو)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) جهش‌ها (mutations) ➕ برای تمرین‌های آزمون لازم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۵تنظیم بیان ژن"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) پروکاریوت‌ها: مدل اپرون (operon model)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) یوکاریوت‌ها: تنظیم برای تخصصی شدن سلول"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۶زیست‌فناوری: PCR، ژل و CRISPR"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) PCR (واکنش زنجیره‌ای پلیمراز)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) ژل الکتروفورز (gel electrophoresis)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) آنزیم‌های برشی (restriction enzymes) ➕"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) CRISPR-Cas9"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۷چرخهٔ سلولی و میتوز"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) فازهای چرخهٔ سلولی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) میتوز: ساخت دو سلول یکسان"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) پروکاریوت‌ها: شکافت دوتایی (binary fission)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۸میوز و تنوع ژنتیکی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "ساختار: یک همانندسازی، دو تقسیم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "سه منبع تنوع ژنتیکی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۹وراثت مندلی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) واژه‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) قانون جدا شدن (law of segregation)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) قانون جور شدن مستقل (law of independent assortment)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) تلاقی آزمون (test cross)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) احتمال"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۶) فراتر از مندل ➕"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDآزمون نهایی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "⚠️چک‌لیست نهایی اشتباهات"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ƒبرگهٔ فرمول‌ها"
+      }
+    ],
+    "detailsCount": 70,
+    "detailParents": [
+      {
+        "parent": "DIV.q",
+        "count": 70
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "1\uD83D\uDFE2 EASYWhich feature is characteristic of eukaryotic genomes but not typical of prokaryotic genomes?AA circular chromosomeBDNA wrapped around histonesCPlasmidsDA single origin of "
+      },
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "2\uD83D\uDFE1 MEDIUMA human cell in G2 contains how many chromosomes and chromatids?A46 chromosomes, 46 chromatidsB46 chromosomes, 92 chromatidsC92 chromosomes, 92 chromatidsD23 chromosomes,"
+      }
+    ]
+  },
+  {
+    "course": "biology",
+    "file": "biology/chapter4-plants-ecology-fa.html",
+    "title": "آمادگی زیست‌شناسی CEnT · فصل ۴ · گیاه‌شناسی، بوم‌شناسی و تکامل",
+    "characters": 76090,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "گیاه‌شناسی، بوم‌شناسی و تکاملPlant Biology, Ecology and Evolution"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "★اهداف یادگیری"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDDFAنقشهٔ مفهومی: ایده‌ها چطور به هم وصل‌اند"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۱اندام‌ها و بافت‌های گیاه: ریشه، ساقه، برگ"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) گزیلم و فلوئم: دو جادهٔ گیاه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) ریشه (root)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) ساقه (stem)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) برگ (leaf): کارخانهٔ فتوسنتز"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۲گل، میوه و دانه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) اجزای گل"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) از گرده‌افشانی تا لقاح"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) از گل به میوه و دانه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) جوانه‌زنی (germination)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۳انتقال در گیاه: آب، قند و مواد معدنی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) نظریهٔ تعرق–هم‌چسبی–کشش (transpiration–cohesion–tension)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) روزنه‌ها: موازنهٔ سخت"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) فلوئم: انتقال قند (➕ مدل جریان فشار)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) مواد معدنی و میکوریزا"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۴هورمون‌ها و پاسخ‌های گیاهی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) اکسین (auxin) و فتوتروپیسم (phototropism)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) اتیلن (ethylene)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) هورمون‌های دیگر ➕"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) تروپیسم‌ها ➕"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۵اکوسیستم، زنجیرهٔ غذایی و جریان انرژی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) نقش‌ها در اکوسیستم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) زنجیرهٔ غذایی و شبکهٔ غذایی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) جریان انرژی: یک‌طرفه و رو به کاهش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۶چرخهٔ مواد: کربن و نیتروژن"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) چرخهٔ کربن (carbon cycle)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) چرخهٔ نیتروژن (nitrogen cycle)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۷بوم‌شناسی جمعیت"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) رشد نمایی (exponential growth): منحنی J"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) رشد لجستیک (logistic growth): منحنی S"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) راهبردهای زندگی: انتخاب r و انتخاب K (life history)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۸برهم‌کنش‌های زیستی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۹تکامل: سازوکارها و شواهد"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) انتخاب طبیعی (natural selection)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) رانش ژنی (genetic drift)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) شارش ژن (gene flow)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) جهش (mutation) ➕"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "شواهد تکامل ➕"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مدل هاردی–واینبرگ (Hardy–Weinberg) ➕"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDآزمون نهایی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "⚠️چک‌لیست نهایی اشتباهات"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ƒبرگهٔ فرمول‌ها"
+      }
+    ],
+    "detailsCount": 70,
+    "detailParents": [
+      {
+        "parent": "DIV.q",
+        "count": 70
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "1\uD83D\uDFE2 EASYWhich tissue transports water and minerals upward from the roots?APhloemBXylemCEpidermisDCortexنمایش پاسخ و راه‌حل✅ پاسخ نهایی: B — Xylemاستدلال زیستی. گزیلم آب و مواد معدن"
+      },
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "2\uD83D\uDFE1 MEDIUMIn a leaf, the cells packed with chloroplasts just beneath the upper epidermis form the:ASpongy mesophyllBPalisade mesophyllCGuard cellsDCuticleنمایش پاسخ و راه‌حل✅ پاسخ "
+      }
+    ]
+  },
+  {
+    "course": "biology",
+    "file": "biology/chapter5-animal-physiology-fa.html",
+    "title": "آمادگی زیست‌شناسی CEnT · فصل ۵ · آناتومی و فیزیولوژی جانوران",
+    "characters": 81766,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "آناتومی و فیزیولوژی جانورانAnimal Anatomy, Physiology and Homeostasis"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "★اهداف یادگیری"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDDFAنقشهٔ مفهومی: ایده‌ها چطور به هم وصل‌اند"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۱بافت‌ها و هومئوستاز"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) چهار بافت اصلی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) هومئوستاز (homeostasis): نگه داشتن محیط درونی ثابت"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۲دستگاه اسکلتی–ماهیچه‌ای و انقباض"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) اسکلت (skeleton)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) ماهیچه‌های اسکلتی و حرکت"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) ساختار ماهیچه تا سارکومر"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) نظریهٔ لغزش رشته‌ها (sliding filament theory)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۳دستگاه عصبی: پتانسیل عمل و سیناپس"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) پتانسیل عمل (action potential): چطور نورون «شلیک» می‌کند (از منبع تو)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) میلین و سرعت هدایت ➕"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) سیناپس (synapse): انتقال پیام بین سلول‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) ساختار کلی دستگاه عصبی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۴دستگاه درون‌ریز و تنظیم قند خون"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) غدد اصلی و هورمون‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) دو نوع هورمون و دو راه اثر (از منبع تو)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) تنظیم قند خون: بازخورد منفی (از منبع تو)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) دیابت (diabetes)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۵دستگاه گردش خون"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) خون (blood): بافت پیوندی مایع"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) قلب (heart)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) گردش مضاعف (double circulation)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) رگ‌ها"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۶دستگاه تنفس و تبادل گاز"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) مسیر هوا"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) حبابچه‌ها: محل تبادل گاز"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) تهویه: دم و بازدم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) کنترل تنفس و حمل گازها"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۷دستگاه گوارش"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مسیر غذا، قدم‌به‌قدم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۸دستگاه دفع و تنظیم آب"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مسیر ادرار"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "نفرون (nephron): واحد کار کلیه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "تنظیم آب: هورمون ضدادراری (ADH)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "۹دستگاه ایمنی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱) ایمنی ذاتی (innate immunity): سریع و غیراختصاصی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲) ایمنی اکتسابی (adaptive immunity): اختصاصی و دارای حافظه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳) پادتن: ساختار ← عملکرد"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴) واکسن (vaccine)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵) وقتی ایمنی خطا می‌کند ➕"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDآزمون نهایی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "⚠️چک‌لیست نهایی اشتباهات"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ƒبرگهٔ فرمول‌ها"
+      }
+    ],
+    "detailsCount": 75,
+    "detailParents": [
+      {
+        "parent": "DIV.q",
+        "count": 75
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "1\uD83D\uDFE2 EASYWhich tissue type has abundant extracellular matrix and includes bone, cartilage and blood?AEpithelialBConnectiveCMuscleDNervousنمایش پاسخ و راه‌حل✅ پاسخ نهایی: B — Connect"
+      },
+      {
+        "parent": "DIV.q",
+        "grandparent": "bb",
+        "preview": "2\uD83D\uDFE1 MEDIUMCardiac muscle differs from skeletal muscle in that cardiac muscle:AIs voluntaryBIs involuntary and has intercalated discsCIs non-striatedDAttaches to bonesنمایش پاسخ و ر"
+      }
+    ]
+  },
+  {
+    "course": "chemistry",
+    "file": "chemistry/cent-chemistry-ch1-5-deep-1.html",
+    "title": "CEnT Chemistry Preparation | فصل‌های ۱ تا ۵",
+    "characters": 20725,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "پنج فصل مستقل: از ذره تا قانون"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "مدل ذره‌ای ماده، حالت‌های ماده و تغییرات فیزیکی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83C\uDFAF اهداف یادگیری"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال‌های حل‌شده — قدم‌به‌قدم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "\uD83D\uDCDD تمرین اختصاصی فصل ۱"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "تبدیلات شیمیایی: تغییر فیزیکی در برابر شیمیایی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال‌های حل‌شده — قدم‌به‌قدم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "\uD83D\uDCDD تمرین اختصاصی فصل ۲"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "خواص ماکروسکوپیک گازها، مایعات و جامدات"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال حل‌شده — قدم‌به‌قدم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "\uD83D\uDCDD تمرین اختصاصی فصل ۳"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "مخلوط‌های همگن و ناهمگن؛ روش‌های جداسازی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال حل‌شده — قدم‌به‌قدم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "\uD83D\uDCDD تمرین اختصاصی فصل ۴"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "قوانین بنیادی شیمی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال‌های حل‌شده — قدم‌به‌قدم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "\uD83D\uDCDD تمرین اختصاصی فصل ۵"
+      },
+      {
+        "level": "H3",
+        "id": "summary",
+        "title": "\uD83D\uDE80 جمع‌بندی کلی پنج فصل"
+      },
+      {
+        "level": "H3",
+        "id": "cheatsheet",
+        "title": "\uD83D\uDCCB چیت‌شیت فرمول‌ها"
+      }
+    ],
+    "detailsCount": 16,
+    "detailParents": [
+      {
+        "parent": "DIV.q",
+        "count": 16
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q",
+        "grandparent": "content",
+        "preview": "\uD83D\uDFE2 EASYQ1 Temperature is best described as a measure of: The total energy of a substanceThe average kinetic energy of a substance's particlesThe mass of a substance's particlesThe "
+      },
+      {
+        "parent": "DIV.q",
+        "grandparent": "content",
+        "preview": "\uD83D\uDFE1 MEDIUMQ2 How much heat is needed to vaporize 15 g of water already at 100°C? (Lv = 2260 J/g) 150.7 J1507 J15,070 J33,900 J مشاهده‌ی پاسخ قدم ۱دما ثابت روی ۱۰۰ درجه‌ست، پس تغییر "
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/20-final-review.html",
+    "title": "جزوه لاجیک CEnT — جمع‌بندی نهایی",
+    "characters": 5762,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "\uD83E\uDDE0 Logic Cheat Sheet — چکیده‌ی فشرده‌ی کل جزوه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "KEY CONCEPTS"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "RULES (جدول‌های درستی و نقیض)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "PATTERNS (معادل‌ها)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "SHORTCUTS"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "COMMON MISTAKES"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "EXAM TRAPS"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "TIME-SAVING STRATEGIES"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "✅Final Mistakes Checklist"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83C\uDFAFFinal Exam Strategy"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۱. ترتیبِ حمله"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۲. وقتی گیر کردی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۳. قبل از انتخابِ نهایی هر گزینه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۴. چک‌لیستِ نهایی، هر بار"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "۵. آرامش در برابرِ دام‌ها"
+      }
+    ],
+    "detailsCount": 0,
+    "detailParents": [],
+    "sampleDetails": []
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch01-foundations-fa.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱: مبانی",
+    "characters": 6233,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱: مبانی — گزاره چیست؟ گزاره‌های ترکیبی چه هستند؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل هر گزاره‌ی ترکیبی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "نکات امتحانی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان \"John is at the movies or he is at the library.\" What kind of compound claim is this? A) Conjunction B) Disjunction C) Conditional D) Negation نمایش پاسخ و توضیح پاسخ درست: B."
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط \"If it is not the case that Sara is late, then the meeting will start on time.\" Identify A (the antecedent) in symbolic terms. A) \"Sara is late\" B) \"not-(Sara is late)\" C) \"T"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch02-conjunction.html",
+    "title": "جزوه لاجیک CEnT — فصل ۲: عطف",
+    "characters": 7122,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۲: عطف — «A and B» (Conjunction)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان \"Ana plays the violin and the piano.\" Ana plays the violin (True). Ana does NOT play the piano (False). What is the truth value of the whole claim? A) True B) False C) Cannot "
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط \"The flight departed on time, but it landed late.\" Which pair of truth values for the two parts makes this whole claim TRUE? A) Departed on time = False, Landed late = True B"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch03-disjunction.html",
+    "title": "جزوه لاجیک CEnT — فصل ۳: فصل",
+    "characters": 7328,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۳: فصل — «A or B» (Disjunction)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۳"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان \"You can pay by credit card or by bank transfer.\" A customer pays by credit card AND by bank transfer (splitting the amount). Assuming this is an inclusive or, is the original"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط \"The number is either even or odd.\" We are told this exclusive-or claim is TRUE, and that \"the number is even\" is FALSE. What must be true about \"the number is odd\"? A) It mu"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch04-conditional.html",
+    "title": "جزوه لاجیک CEnT — فصل ۴: شرطی",
+    "characters": 7025,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۴: شرطی — «If A then B» (Conditional)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۴"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان \"If the light is red, then cars must stop.\" A car sees a red light and stops. Is the conditional true or false in this case? A) True B) False C) Cannot be determined D) Neithe"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط \"If a metal is heated, then it expands.\" A piece of metal was NOT heated, and it did NOT expand. What is the truth value of the conditional in this case? A) True B) False C) "
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch05-negation.html",
+    "title": "جزوه لاجیک CEnT — فصل ۵: نقیض و تضاد",
+    "characters": 6983,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۵: نقیض و تضاد — «not-A» (Negation, Contradictories & Contraries)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۵"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان A = \"The door is open.\" What is the correct contradictory of A? A) \"The door is broken.\" B) \"The door is not open.\" C) \"The window is open.\" D) \"The door will open soon.\" نمای"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط A = \"The company's profit increased this quarter.\" Which statement is a CONTRARY of A, but NOT its contradictory? A) \"The company's profit decreased this quarter.\" B) \"The co"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch06-consistency.html",
+    "title": "جزوه لاجیک CEnT — فصل ۶: سازگاری و ناسازگاری",
+    "characters": 8029,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۶: سازگاری و ناسازگاری — Consistency vs Inconsistency"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۶"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان Is the set consistent or inconsistent? \"1. No birds can swim underwater for more than an hour. 2. Penguins can swim underwater for more than an hour.\" A) Inconsistent, if peng"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط Is the set consistent or inconsistent? \"1. Every student in the class passed the exam. 2. Tom is in the class. 3. Tom did not take the exam.\" A) Consistent — statement 3 does"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch07-negating-compounds.html",
+    "title": "جزوه لاجیک CEnT — فصل ۷: نقیض گزاره‌های ترکیبی",
+    "characters": 7174,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۷: نقیض گزاره‌های ترکیبی (De Morgan's Rules)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم — جدول تبدیل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۷"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی (جدول تبدیل)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان What is the contradictory of \"The package arrived on time and undamaged\"? A) \"The package didn't arrive on time and it was damaged.\" B) \"The package didn't arrive on time, or "
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط What is the contradictory of \"Either the printer is out of paper, or it is out of toner\"? A) \"The printer is out of paper or out of toner.\" B) \"The printer is not out of pape"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch08-equivalents.html",
+    "title": "جزوه لاجیک CEnT — فصل ۸: معادل‌های شرطی",
+    "characters": 7753,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۸: معادل‌های شرطی — Equivalent Forms of \"If A then B\""
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم — جدول جامع معادل‌ها"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۸"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "جدول معادل‌ها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان \"The alarm sounds if the temperature exceeds 50°C.\" Which is the correct standard form? A) \"If the temperature exceeds 50°C, then the alarm sounds.\" B) \"If the alarm sounds, t"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط \"You may enter the lab unless you are not wearing safety goggles.\" Which is the correct standard form? A) \"If you are wearing safety goggles, then you may not enter the lab.\""
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch09-necessary-sufficient.html",
+    "title": "جزوه لاجیک CEnT — فصل ۹: شرط لازم و کافی",
+    "characters": 7098,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۹: شرط لازم و کافی — Necessary and Sufficient Conditions"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۹"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان \"Having a pulse is necessary for being alive.\" Which is the correct standard form? A) \"If a person has a pulse, then they are alive.\" B) \"If a person is alive, then they have "
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط \"Scoring above 90% is sufficient to receive an A grade.\" A student scored 95% but did NOT receive an A (due to an unrelated academic misconduct penalty). Does this contradict"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch10-categorical.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۰: گزاره‌های قیاسی",
+    "characters": 7346,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۰: گزاره‌های قیاسی — Categorical Claims (All / Some / No / Only A are B)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم — جدول جامع"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۰"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان What is the contradictory of \"Some employees received a bonus this year\"? A) \"All employees received a bonus this year.\" B) \"No employees received a bonus this year.\" C) \"Some"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط \"Only members with a gold pass can access the VIP lounge.\" Which is logically equivalent? A) \"All members with a gold pass can access the VIP lounge.\" B) \"Everyone who can ac"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch11-square.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۱: مربع تعارض",
+    "characters": 7292,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۱: مربع تعارض — Square of Opposition"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۱"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان \"No committee members voted against the proposal\" is TRUE. What follows about \"Some committee members voted against the proposal\"? A) It must be false (contradictory relation)"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط \"All flights were delayed\" is TRUE. What follows about \"No flights were delayed\"? A) It must be true. B) It must be false. C) It cannot be determined. D) It is true only for "
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch12-syllogism.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۲: قیاس فرضی و Modus Ponens",
+    "characters": 7276,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۲: قیاس فرضی و Modus Ponens — استنتاج معتبر و نامعتبر"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان 1. If the server crashes, users lose their session. 2. The server crashed. What follows? A) Users lost their session. B) The server did not crash. C) If users lose their sessi"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط 1. If a candidate passes the interview, they receive an offer. 2. If a candidate receives an offer, they are added to payroll. Which conclusion is VALID? A) \"If a candidate i"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch13-quantifiers.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۲: قیاس فرضی و Modus Ponens",
+    "characters": 6497,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۳: نقیض گزاره‌های کمّی — Negating Universal & Existential Statements"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۳ (پایان بخش A)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان Consider the statement \"No dog has three paws.\" Saying that it is false means that: A) All dogs have four paws. B) At least one dog has three paws. C) At least one dog has a n"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط Saying that it's false that \"no man has one name only\" is equivalent to saying that: A) At least one man has two names. B) There exists a man named Mario. C) There exists at "
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch14-barcharts.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۴: نمودار میله‌ای",
+    "characters": 6561,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۴: خواندن نمودارهای میله‌ای — Reading Bar Charts"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۴"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان A bar chart shows website visits: Mon 200, Tue 350, Wed 280, Thu 400, Fri 310. On which day were the fewest visits recorded? A) Monday B) Tuesday C) Wednesday D) Friday نمایش "
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط A bar chart shows annual production (in tons): Farm A: 2019=400, 2023=460. Farm B: 2019=150, 2023=210. Which farm had the larger ABSOLUTE increase in production? A) Farm A (i"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch15-piecharts.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۵: نمودار دایره‌ای",
+    "characters": 5989,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۵: خواندن نمودارهای دایره‌ای — Reading Pie Charts"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۵"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان A pie chart shows a class's favorite subjects: Math 30%, Science 25%, Art 20%, History 15%, Other 10%. If there are 40 students, how many chose Science? A) 8 B) 10 C) 12 D) 15"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط A pie chart shows a store's inventory by category. \"Electronics\" makes up 35% of inventory, and there are 210 electronic items. How many total items are in the inventory? A) "
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch16-linegraphs.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۶: نمودار خطی و روند",
+    "characters": 6505,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۶: نمودارهای خطی و تحلیل روند — Line Graphs & Trend Analysis"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۶"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان A line graph shows monthly rainfall (mm): Jan 40, Feb 55, Mar 30, Apr 60. Between which two consecutive months was the increase the largest? A) Jan to Feb B) Feb to Mar C) Mar"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط A line graph tracks a stock price over 5 days: Day1=€50, Day2=€65, Day3=€40, Day4=€55, Day5=€45. What is the overall change from Day 1 to Day 5? A) An increase of €15 (using "
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch17-evaluating.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۷: نتیجه‌گیری و ارزیابی ادعاها",
+    "characters": 6891,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۷: نتیجه‌گیری و ارزیابیِ ادعاها — Drawing Conclusions & Evaluating Claims"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۷"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان Claim: \"Most customers rated the service as excellent.\" Data: 55 out of 100 customers rated it \"excellent.\" Is the claim supported? A) Yes, since 55% is more than half. B) No,"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط Claim: \"Every department reduced its budget this year.\" Data: Marketing −5%, Sales −3%, IT +2%, HR −8%. Is the claim supported? A) Yes, because most departments show a decrea"
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch18-venn.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۸: نمودار ون",
+    "characters": 5077,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۸: حل مسئله با نمودار ون — Venn Diagram Word Problems"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم — جعبه‌ابزارِ فرمول"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۸"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان In a group of 60 people, 35 speak English, 30 speak French, and 10 speak neither. How many speak both languages? A) 5 B) 15 C) 20 D) 25 نمایش پاسخ و توضیح پاسخ درست: B. حداقل "
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط A company has 120 employees. 70 work remotely at least one day a week, 55 use a company car, and 25 do both. How many employees do NEITHER (never work remotely AND never use "
+      }
+    ]
+  },
+  {
+    "course": "logic",
+    "file": "logic/ch19-tables.html",
+    "title": "جزوه لاجیک CEnT — فصل ۱۹: جدول و معادلات همزمان",
+    "characters": 5916,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فصل ۱۹: حل مسئله با جدول و معادلات همزمان — Tables & Simultaneous Equations"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Bاین مبحث چیست؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Cمفهوم اصلی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Dقوانین و اصول مهم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Eروش حل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Fمثال آموزشی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "Gمثال امتحانی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "\uD83D\uDE80مرور سریع — فصل ۱۹ (پایانِ فصل‌های اصلی)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "روش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اشتباهات رایج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "دام‌های تستی"
+      }
+    ],
+    "detailsCount": 3,
+    "detailParents": [
+      {
+        "parent": "DIV.practice-item",
+        "count": 3
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "آسان The sum of two numbers is 60. The first number is 12 more than the second. What is the second number? A) 20 B) 24 C) 30 D) 36 نمایش پاسخ و توضیح پاسخ درست: B. فرض کن دومی=N، ا"
+      },
+      {
+        "parent": "DIV.practice-item",
+        "grandparent": "page",
+        "preview": "متوسط Three siblings have a combined age of 54. Emma is twice as old as Liam. Liam is 3 years younger than Noah. If Liam's age is L, which equation correctly represents the total? "
+      }
+    ]
+  },
+  {
+    "course": "math",
+    "file": "math/chapter2.html",
+    "title": "ریاضی - فصل ۲: معادلات، نامعادلات و هندسهٔ مختصات",
+    "characters": 26882,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "معادلات، نامعادلات و هندسهٔ مختصات"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "چگونه از این جزوه استفاده کنیم؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "معادلات درجهٔ یک (Linear Equations)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "نامعادلات درجهٔ یک (Linear Inequalities)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "معادلات درجهٔ دو (Quadratic Equations)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "آشنایی با تعیین علامت (Sign Analysis)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "نامعادلات درجهٔ دو (Quadratic Inequalities)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "دستگاه معادلات دو مجهولی (System of Equations)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "دستگاه مختصات (Coordinate System) و معادلهٔ خط (Equation of a Line)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "وضعیت دو خط نسبت به هم (Position of Two Lines)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "فاصلهٔ دو نقطه (Distance Between Two Points) و میانهٔ پاره‌خط (Midpoint)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "فاصلهٔ نقطه از خط (Distance from a Point to a Line) و دو خط موازی (Parallel Lines)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "مرکز ثقل مثلث (Centroid of a Triangle) و متوازی‌الاضلاع (Parallelogram)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "معادلهٔ دایره (Equation of a Circle)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "از معادلهٔ خطی تا معادلهٔ دایره"
+      }
+    ],
+    "detailsCount": 35,
+    "detailParents": [
+      {
+        "parent": "DIV.q-block",
+        "count": 35
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q-block",
+        "grandparent": "card exercise",
+        "preview": "۱) −۵x + ۱ = ۵x + ۸ نمایش پاسخ −۵x − ۵x = ۸ − ۱ −۱۰x = ۷ x = −۷/۱۰ پاسخ نهایی: x = −۷/۱۰"
+      },
+      {
+        "parent": "DIV.q-block",
+        "grandparent": "card exercise",
+        "preview": "۲) ۴x + ۲/۷ = ۳/۲ x نمایش پاسخ ۴x − ۳/۲ x = −۲/۷ ۵/۲ x = −۲/۷ x = −۲/۷ × ۲/۵ = −۴/۳۵ پاسخ نهایی: x = −۴/۳۵"
+      }
+    ]
+  },
+  {
+    "course": "math",
+    "file": "math/chapter6-combinatorics-probability.html",
+    "title": "فصل ۶ | ترکیبات و احتمال",
+    "characters": 11140,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "ترکیبات و احتمال"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "چگونه از این جزوه استفاده کنیم؟"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "فهم مفهوم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "دیدن مثال"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "بررسی دام‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "هایلایت امتحانی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "حل تمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "اصل ضرب و اصل متمم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۱ — نوشیدنی و غذا"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۲ — پلاک آیفون (سایز و رنگ)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۳ — تکرار نداشتن مهره‌ها"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جایگشت (Permutations)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۱ — چیدن ۶ کتاب متمایز کنار هم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۲ — انتخاب و چیدن ۴ نفر از ۱۱ بازیکن (جایگشت r تایی)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۳ — جایگشت با حروف تکراری"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۴ — جایگشت دوری"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ترکیب (Combinations)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۱ — انتخاب ۳ دانش‌آموز از ۱۰ نفر"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۲ — کمیته با شرط «حداقل یک زن»"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۳ — ترکیب اعداد در یک مسئلهٔ آزمون"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "فضای نمونه، پیشامد و احتمال پایه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۱ — پرتاب یک تاس"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۲ — پرتاب دو سکه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۳ — انتخاب تصادفی کارت از ۵ کارت شماره‌دار"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "قوانین احتمال"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۱ — استفاده از متمم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۲ — اجتماع دو پیشامد (زبان‌ها)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۳ — تفاضل دو پیشامد"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "احتمال شرطی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۱ — قبولی در دو رشتهٔ تجربی و ریاضی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۲ — احتمال شرطی ساده با کارت‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثال ۳ — دو کارخانه و قطعهٔ معیوب"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "اصل ضرب، جایگشت و ترکیب — کنار هم"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اصل ضرب"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "جایگشت"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ترکیب"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جدول جمع‌بندی فرمول‌های احتمال"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جمع‌بندی فصل ۶"
+      }
+    ],
+    "detailsCount": 18,
+    "detailParents": [
+      {
+        "parent": "DIV.quiz",
+        "count": 18
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.quiz",
+        "grandparent": "card purple",
+        "preview": "۱. یک رمز عبور از ۲ حرف و بعد ۳ رقم تشکیل شده. اگر تکرار مجاز باشد، چند رمز مختلف می‌توان ساخت؟ (۲۶ حرف و ۱۰ رقم داریم) نمایش پاسخ مرحلهٔ حروف: ۲۶ × ۲۶ = ۲۶² مرحلهٔ ارقام: ۱۰ × ۱۰ "
+      },
+      {
+        "parent": "DIV.quiz",
+        "grandparent": "card purple",
+        "preview": "۲. با ارقام ۱،۲،۳،۴،۵ (بدون تکرار) چند عدد سه‌رقمی زوج می‌توان ساخت؟ نمایش پاسخ رقم آخر باید زوج باشد: فقط ۲ یا ۴ → ۲ گزینه. رقم اول (یکی مصرف شده): ۴ گزینه. رقم وسط: ۳ گزینه. ۴ × "
+      }
+    ]
+  },
+  {
+    "course": "math",
+    "file": "math/chapter7-statistics.html",
+    "title": "فصل ۷ | آمار",
+    "characters": 11153,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "آمار (Statistics)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "چگونه از این جزوه استفاده کنیم؟"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "فهم مفهوم"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "دیدن مثال"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "بررسی دام‌ها"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "هایلایت امتحانی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "حل تمرین"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جامعه و نمونه، انواع متغیرها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⭐ نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جدول‌های فراوانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⭐ نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "نمودارها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⭐ نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "شاخص‌های مرکزی: میانگین، میانه و مد"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⭐ نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "شاخص‌های پراکندگی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⭐ نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جمع‌بندی فصل ۷"
+      }
+    ],
+    "detailsCount": 15,
+    "detailParents": [
+      {
+        "parent": "DIV.q-block",
+        "count": 15
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q-block",
+        "grandparent": "card purple",
+        "preview": "۱. «تعداد اشتباهات یک دانش‌آموز در امتحان» چه نوع متغیریه؟ نمایش پاسخ قابل شمارش است و فقط عدد صحیح می‌گیرد (نمی‌شه ۲٫۵ اشتباه داشت). پاسخ نهایی: کمّی گسسته"
+      },
+      {
+        "parent": "DIV.q-block",
+        "grandparent": "card purple",
+        "preview": "۲. اگر بخوایم نظر همهٔ اهالی یک شهر رو دربارهٔ یک طرح بدونیم ولی فقط با ۲۰۰ نفر مصاحبه کنیم، این ۲۰۰ نفر چی نامیده می‌شن؟ نمایش پاسخ چون بخشی از کل جامعه (اهالی شهر) هستن که برای ب"
+      }
+    ]
+  },
+  {
+    "course": "math",
+    "file": "math/geometry-chapter.html",
+    "title": "جزوهٔ آموزشی هندسه — فصل مقدماتی: اشکال هندسی، محیط و مساحت، حجم و تشابه",
+    "characters": 9356,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "هندسه از صفر تا تشابه و مختصات"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "چگونه از این جزوه استفاده کنیم؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "مفاهیم پایهٔ هندسه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال‌ها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE1 نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "مثلث و چندضلعی‌ها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مقدمه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مثلث Triangle"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مربع Square"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مستطیل Rectangle"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "متوازی‌الاضلاع Parallelogram"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "لوزی Rhombus"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "ذوزنقه Trapezoid"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "چندضلعی منتظم Regular Polygon"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال‌ها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE1 نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "دایره"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مفاهیم اصلی"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "نیم‌دایره Semicircle"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال‌ها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE1 نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "اشکال فضایی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مقدمه"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مکعب Cube"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مکعب مستطیل Cuboid (Rectangular Prism)"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "منشور Prism"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "هرم Pyramid"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "استوانه Cylinder"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "مخروط Cone"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "کره Sphere"
+      },
+      {
+        "level": "H4",
+        "id": "",
+        "title": "نیم‌کره Hemisphere"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال‌ها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE1 نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "تشابه اشکال و مختصات دکارتی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD35 مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE2 مثال‌ها"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDD34 اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE1 نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDFE3 تمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جمع‌بندی فصل"
+      }
+    ],
+    "detailsCount": 15,
+    "detailParents": [
+      {
+        "parent": "DIV.question",
+        "count": 15
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.question",
+        "grandparent": "card purple",
+        "preview": "۱. زاویهٔ ۹۰° دقیقاً چه نوعیه؟ نمایش پاسخ این زاویه دقیقاً ۹۰°ه، پس جزو دستهٔ خاصیه که بین تیز و منفرجه قرار می‌گیره. پاسخ نهایی: زاویهٔ قائمه"
+      },
+      {
+        "parent": "DIV.question",
+        "grandparent": "card purple",
+        "preview": "۲. لبهٔ یک خط‌کش نمونهٔ کدوم مفهومه: خط، پاره‌خط یا شعاع؟ نمایش پاسخ لبهٔ خط‌کش طول مشخص و دو سر معین داره؛ نه مثل خط بی‌نهایته و نه مثل شعاع فقط یک سر داره. پاسخ نهایی: پاره‌خط"
+      }
+    ]
+  },
+  {
+    "course": "math",
+    "file": "math/mastercalss-riazi-fasl1-3.html",
+    "title": "مسترکلاس ریاضی: پایه‌های محاسباتی",
+    "characters": 19175,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "مسترکلاس ریاضی: پایه‌های محاسباتی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "چگونه از این جزوه استفاده کنیم؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "معماری اعداد: مجموعه‌های تو در تو"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مجموعه‌های عددی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "گنگ یا گویا؟ عدد π"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "گنگ یا گویا؟ عدد ۰٫۳۳۳..."
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "گنگ یا گویا؟ √۱۶ در مقابل √۷"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "اعداد اعشاری و نمایش علمی (Scientific Notation)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "سه نوع عدد اعشاری (Decimal Number)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۳۲۰"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۲۹"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۷۸"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "نمایش علمی اعداد (Scientific Notation)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۵۰۰"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۰٫۰۰۰۲۵"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۳۵۶۷۸۹۳"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۳٫۴ × ۱۰−۴"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۳٫۴ × ۱۰+۴"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "مقایسه اعداد، تخمین و تلهٔ اعداد منفی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "محور اعداد و مقایسهٔ عادی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "همین منطق روی توان و رادیکال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "a = ۳"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "a = ۱۴"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "a = −۱۸"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "a = −۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مقایسهٔ کسرهای گویا (Rational Fractions)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مخرج مشترک"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مخرج مشترک"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "میان‌بر ضرب کشته‌ای"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "تخمین (Estimation): کجا و چرا به کارمان می‌آید؟"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "مقایسهٔ √۷۰ و ۸٫۵"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۱۹۸ × ۵۱"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "عوامل، مضرب‌ها، اعداد اول و تجزیه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "Factor در مقابل Multiple"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "عوامل ۱۸"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "اول یا مرکب؟ عدد ۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "تجزیه به عوامل اول (Prime Factorisation)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "تجزیهٔ ۹۰"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "سادهٔ زیر رادیکال با کمک تجزیه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "تجزیه برای ساده‌سازی توان"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "HCF/GCD و LCM — به چه دردمان می‌خورند؟"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "HCF و LCM اعداد ۲۴ و ۳۶"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "چه‌زمانی از LCM استفاده کنیم؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "بخش‌پذیری اعداد (Divisibility Rules)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "واژگان تقسیم"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "جدول کامل قواعد بخش‌پذیری (۱ تا ۱۰)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۴۸"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۴۵۶"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۳۱۱۶"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۲۳۵"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۱۳۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۲۵۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۵۴۲۴"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۷۲۹"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "درصدها: زبان تغییرات"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "درصد یعنی «از ۱۰۰»"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "قیمت از ۸۰۰ به ۹۲۰ تومان رسیده"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "قیمت از ۲۵۰ به ۲۰۰ هزار تومان رسیده"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "یک کالای ۴۰۰ هزار تومانی، ٪۱۲ تخفیف خورده؛ قیمت جدید چند است؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "قوانین پایهٔ توان‌ها (۷ قانون طلایی)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ضرب توان‌های هم‌پایه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "تقسیم توان‌های هم‌پایه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "توان صفر"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "توان یک"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "توانِ توان"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "توزیع توان در ضرب و تقسیم"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "توان منفی (معکوس‌کننده)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ریشه‌ها و رادیکال‌ها: ضرب، تقسیم و ساده‌سازی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ضرب و تقسیم رادیکال‌های هم‌فرجه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ضرب رادیکال‌های هم‌فرجه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "تقسیم رادیکال‌های هم‌فرجه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ضرب رادیکال‌های ناهم‌فرجه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "سادهٔ توان و فرجه (وقتی هر دو مضرب مشترک دارند)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "سادهٔ فرجه و توان"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "سادهٔ فرجه و توان (عدد بزرگ‌تر)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "بردن عدد به زیر رادیکال / خارج‌کردن از زیر رادیکال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "بردن عدد مثبت زیر رادیکال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "بردن عدد منفی زیر رادیکال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "قدر مطلق در خروج متغیر از رادیکال زوج (یکی از مهم‌ترین دام‌های امتحانی)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "سادهٔ √(x۲) برای x = −۵"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "شرط دامنه (Domain) در رادیکال‌های زوج"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "خارج‌کردن عدد کامل از زیر رادیکال"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "فرجه‌های متوالی (رادیکال توی رادیکال)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ساده‌سازی فرجهٔ متوالی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "فرجهٔ متوالی سه‌لایه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "توان‌های گویا (رابطهٔ توان و ریشه)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "تبدیل رادیکال به توان کسری"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "تبدیل توان کسری به رادیکال"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ترتیب عملیات (BODMAS/PEMDAS)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ترتیب اجرای عملیات"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ترکیب ضرب و جمع"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "پرانتز تو در تو"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ترکیب توان، پرانتز و ضرب"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ترکیب جملات هم‌نوع (Like Terms)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "چه جملاتی هم‌نوع‌اند؟"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "جملات هم‌نوع"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "ترکیب چند جملهٔ هم‌نوع"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "جملات ناهم‌نوع (نمی‌شود ساده کرد)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "اتحادهای جبری و فاکتورگیری"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "جدول اتحادهای پرکاربرد"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "راهبردهای فاکتورگیری (تجزیه)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "فاکتورگیری با شکستن جمله"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "فاکتورگیری تفاضل مربعات"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "فاکتورگیری مجموع مکعبات"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "شرط دامنه: مخرج هرگز نباید صفر شود"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "۵x−۳"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "گویا کردن مخرج کسر"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "گویاسازی مخرج ساده"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "گویاسازی مخرج با مزدوج"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "پایان فصل ۱: جعبه‌ابزار شما اکنون کامل است \uD83E\uDDF0"
+      }
+    ],
+    "detailsCount": 47,
+    "detailParents": [
+      {
+        "parent": "DIV.qitem",
+        "count": 35
+      },
+      {
+        "parent": "DIV.quick-check",
+        "count": 12
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.qitem",
+        "grandparent": "card practice",
+        "preview": "۱اعداد ۰٫۱۲۵، √۹، −۳/۷، و π را از نظر گویا/گنگ دسته‌بندی کن. نمایش پاسخ ۰٫۱۲۵ → اعشار پایان‌پذیر → گویا √۹ = ۳ → قابل نوشتن به‌صورت ۳/۱ → گویا −۳/۷ → از قبل به‌شکل کسر است → گویا π"
+      },
+      {
+        "parent": "DIV.qitem",
+        "grandparent": "card practice",
+        "preview": "۲معکوس عدد ۵/۸- را بنویس و آن را در عدد اصلی ضرب کن. نمایش پاسخ معکوس ۵/۸- برابر است با ۸/۵- (فقط صورت و مخرج جابه‌جا می‌شوند، علامت تغییری نمی‌کند) حاصل‌ضرب: (۵/۸-) × (۸/۵-) = ۴۰/"
+      }
+    ]
+  },
+  {
+    "course": "math",
+    "file": "math/trig_chapter.html",
+    "title": "فصل مثلثات | جزوهٔ آموزشی گام‌به‌گام",
+    "characters": 15187,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "مثلثات؛ از رادیان تا حل معادله"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "چگونه از این جزوه استفاده کنیم؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "رادیان، درجه، طول کمان و مساحت مطاع"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCA1مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۱ — تبدیل درجه به رادیان"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۲ — طول کمان"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۳ — مساحت مطاع"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⚠اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "★نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "نسبت‌های مثلثاتی در مثلث قائم‌الزاویه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCA1مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۱"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۳"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⚠اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "★نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "دایرهٔ مثلثاتی، علامت نسبت‌ها و زوایای ویژه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCA1مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۱ — تعیین علامت"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۲ — محاسبهٔ مقدار ویژه"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۳ — زاویهٔ منفی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⚠اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "★نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "فرمول‌های تبدیل زاویه (زوایای وتری)"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCA1مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۱"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۳"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⚠اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "★نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "فرمول‌های مجموع، تفاضل و زاویهٔ دوبرابر"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCA1مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۱"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۲"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۳ — زاویهٔ دوبرابر"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⚠اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "★نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "معادلات مثلثاتی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCA1مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۱ — معادلهٔ ساده"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۲ — معادلهٔ کسینوسی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۳ — فاکتورگیری به‌جای خط‌زدن"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⚠اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "★نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین این بخش"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCDAجمع‌بندی: همهٔ فرمول‌های معادلات مثلثاتی در یک نگاه"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "توابع مثلثاتی: نمودار، دامنه و برد"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCA1مفاهیم اصلی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۱ — دامنهٔ تابع مثلثاتی-کسری"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۲ — دامنهٔ تابع مثلثاتی-رادیکالی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "✎مثال ۳ — دامنهٔ ترکیبی جبری و مثلثاتی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "⚠اشتباهات پرتکرار"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "★نکات امتحانی"
+      },
+      {
+        "level": "H3",
+        "id": "",
+        "title": "\uD83D\uDCDDتمرین این بخش"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جمع‌بندی فصل"
+      }
+    ],
+    "detailsCount": 21,
+    "detailParents": [
+      {
+        "parent": "DIV.q",
+        "count": 21
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.q",
+        "grandparent": "card practice",
+        "preview": "۱) ۱۲۰° را به رادیان تبدیل کنید. نمایش پاسخ ۱۲۰ × π/۱۸۰ = ۲π/۳ پاسخ نهایی: ۲π/۳ رادیان"
+      },
+      {
+        "parent": "DIV.q",
+        "grandparent": "card practice",
+        "preview": "۲) شعاع دایره‌ای ۵ و زاویهٔ مرکزی آن π/۵ رادیان است. طول کمان را بیابید. نمایش پاسخ L = r × θ = ۵ × π/۵ = π پاسخ نهایی: L = π"
+      }
+    ]
+  },
+  {
+    "course": "math",
+    "file": "math/فصل۳-توابع.html",
+    "title": "فصل ۳ | توابع (Functions)",
+    "characters": 38810,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "توابع (Functions)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "چگونه از این جزوه استفاده کنیم؟"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "مفهوم تابع، دامنه، برد و ویژگی‌های پایه"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "توابع پایه و آناتومی نماد لگاریتم"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "معادلهٔ درجه دوم و نمودار سهمی"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "قدرمطلق — معادله و نامعادله کامل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "معادلات گویا و گنگ"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "تابع نمایی (Exponential)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "تابع لگاریتمی (کامل)"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "تبدیلات نمودار توابع"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "ترکیب توابع و تابع وارون"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "حل معادله و نامعادله با نمودار — تعیین علامت کامل"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "مقایسه و تحلیل خانواده‌های تابع"
+      },
+      {
+        "level": "H2",
+        "id": "",
+        "title": "جمع‌بندی فصل توابع"
+      }
+    ],
+    "detailsCount": 38,
+    "detailParents": [
+      {
+        "parent": "DIV.card exercise",
+        "count": 38
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.card exercise",
+        "grandparent": "chapter-section",
+        "preview": "\uD83D\uDCDD تمرین این بخش ۱. آیا مجموعهٔ {(۱,۵), (۱,۷), (۲,۵)} یک تابعه؟ نمایش پاسخ x = ۱ دو بار با دو خروجی متفاوت (۵ و ۷) تکرار شده. پاسخ نهایی: نه، این رابطه تابع نیست. ۲. دامنهٔ f(x) = "
+      },
+      {
+        "parent": "DIV.card exercise",
+        "grandparent": "chapter-section",
+        "preview": "\uD83D\uDCDD تمرین این بخش ۱. آیا مجموعهٔ {(۱,۵), (۱,۷), (۲,۵)} یک تابعه؟ نمایش پاسخ x = ۱ دو بار با دو خروجی متفاوت (۵ و ۷) تکرار شده. پاسخ نهایی: نه، این رابطه تابع نیست. ۲. دامنهٔ f(x) = "
+      }
+    ]
+  },
+  {
+    "course": "physics",
+    "file": "physics/chapter1-physical-quantities.html",
+    "title": "کمیت‌های فیزیکی",
+    "characters": 12524,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "کمیت‌های فیزیکیPhysical Quantities"
+      },
+      {
+        "level": "H2",
+        "id": "s1",
+        "title": "1کمیت فیزیکی چیست؟ (Physical Quantity)"
+      },
+      {
+        "level": "H2",
+        "id": "s2",
+        "title": "2یکاهای پایه و مشتق SI (SI Units)"
+      },
+      {
+        "level": "H2",
+        "id": "s3",
+        "title": "3همگنی معادلات فیزیکی (Homogeneity)"
+      },
+      {
+        "level": "H2",
+        "id": "s4",
+        "title": "4کمیت‌های نرده‌ای و برداری (Scalars & Vectors)"
+      },
+      {
+        "level": "H2",
+        "id": "s5",
+        "title": "5توان‌های ده، نماد علمی و مرتبهٔ بزرگی (Powers of Ten)"
+      },
+      {
+        "level": "H2",
+        "id": "s6",
+        "title": "6نمودارها و مدل‌های تابعی (Graphs & Functional Models)"
+      },
+      {
+        "level": "H2",
+        "id": "s7",
+        "title": "7عملیات برداری (Vector Operations)"
+      },
+      {
+        "level": "H2",
+        "id": "s8",
+        "title": "8ابزارهای اندازه‌گیری و رزولوشن (Measuring Instruments)"
+      },
+      {
+        "level": "H2",
+        "id": "s9",
+        "title": "9خطاهای تصادفی و سیستماتیک (Random & Systematic Errors)"
+      },
+      {
+        "level": "H2",
+        "id": "review",
+        "title": "\uD83D\uDE80جمع‌بندی فصل (Quick Review)"
+      },
+      {
+        "level": "H2",
+        "id": "cheat",
+        "title": "\uD83E\uDDFEجدول فرمول‌ها (Cheat Sheet)"
+      },
+      {
+        "level": "H2",
+        "id": "final",
+        "title": "\uD83D\uDCDDتمرین نهایی فصل (Final Practice Set)"
+      }
+    ],
+    "detailsCount": 14,
+    "detailParents": [
+      {
+        "parent": "DIV.wrap",
+        "count": 14
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۱ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTکمیت‌های فیزیکیPhysical Quantitiesاز تعریف کمیت فیزیکی تا یکاهای SI، بردارها، توان‌های ده و خطاهای اندازه‌گیری — با شکل و حل گام‌به‌گام."
+      },
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۱ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTکمیت‌های فیزیکیPhysical Quantitiesاز تعریف کمیت فیزیکی تا یکاهای SI، بردارها، توان‌های ده و خطاهای اندازه‌گیری — با شکل و حل گام‌به‌گام."
+      }
+    ]
+  },
+  {
+    "course": "physics",
+    "file": "physics/chapter2-kinematics.html",
+    "title": "جنبش‌شناسی ذره",
+    "characters": 14011,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "جنبش‌شناسی ذرهPoint-Particle Kinematics"
+      },
+      {
+        "level": "H2",
+        "id": "s1",
+        "title": "1مکان، جابه‌جایی و مسافت (Position, Displacement & Distance)"
+      },
+      {
+        "level": "H2",
+        "id": "s2",
+        "title": "2سرعت متوسط و تندی متوسط (Average Velocity & Speed)"
+      },
+      {
+        "level": "H2",
+        "id": "s3",
+        "title": "3حرکت یکنواخت روی خط راست (Uniform Motion)"
+      },
+      {
+        "level": "H2",
+        "id": "s4",
+        "title": "4علامت مکان و علامت سرعت (Sign Convention)"
+      },
+      {
+        "level": "H2",
+        "id": "s5",
+        "title": "5تعداد تغییر جهت حرکت (Direction Changes)"
+      },
+      {
+        "level": "H2",
+        "id": "s6",
+        "title": "6شتاب و انواع حرکت (Acceleration)"
+      },
+      {
+        "level": "H2",
+        "id": "s7",
+        "title": "7نمودار مکان–زمان (Position–Time Graph)"
+      },
+      {
+        "level": "H2",
+        "id": "s8",
+        "title": "8نمودار سرعت–زمان (Velocity–Time Graph)"
+      },
+      {
+        "level": "H2",
+        "id": "s9",
+        "title": "9نمودار شتاب–زمان (Acceleration–Time Graph)"
+      },
+      {
+        "level": "H2",
+        "id": "s10",
+        "title": "10معادلات حرکت با شتاب ثابت (Constant-Acceleration Equations)"
+      },
+      {
+        "level": "H2",
+        "id": "s11",
+        "title": "11سقوط آزاد (Free Fall)"
+      },
+      {
+        "level": "H2",
+        "id": "s12",
+        "title": "12حرکت دایره‌ای یکنواخت (Uniform Circular Motion)"
+      },
+      {
+        "level": "H2",
+        "id": "s13",
+        "title": "13حرکت نسبی و تبدیل گالیله (Relative Motion & Galilean Transformation)"
+      },
+      {
+        "level": "H2",
+        "id": "review",
+        "title": "\uD83D\uDE80جمع‌بندی فصل (Quick Review)"
+      },
+      {
+        "level": "H2",
+        "id": "cheat",
+        "title": "\uD83E\uDDFEجدول فرمول‌ها (Cheat Sheet)"
+      },
+      {
+        "level": "H2",
+        "id": "final",
+        "title": "\uD83D\uDCDDتمرین نهایی فصل (Final Practice Set)"
+      }
+    ],
+    "detailsCount": 14,
+    "detailParents": [
+      {
+        "parent": "DIV.wrap",
+        "count": 14
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۲ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTجنبش‌شناسی ذرهPoint-Particle Kinematicsاز مکان و جابه‌جایی تا شتاب، نمودارهای حرکت، معادلات شتاب ثابت، سقوط آزاد، حرکت دایره‌ای و تبدیل "
+      },
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۲ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTجنبش‌شناسی ذرهPoint-Particle Kinematicsاز مکان و جابه‌جایی تا شتاب، نمودارهای حرکت، معادلات شتاب ثابت، سقوط آزاد، حرکت دایره‌ای و تبدیل "
+      }
+    ]
+  },
+  {
+    "course": "physics",
+    "file": "physics/chapter3-dynamics-work-energy.html",
+    "title": "دینامیک ذره، کار و انرژی",
+    "characters": 14339,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "دینامیک ذره، کار و انرژیDynamics, Work & Energy"
+      },
+      {
+        "level": "H2",
+        "id": "s1",
+        "title": "1کار (Work)"
+      },
+      {
+        "level": "H2",
+        "id": "s2",
+        "title": "2کار نیروی وزن و اصطکاک (Work of Weight & Friction)"
+      },
+      {
+        "level": "H2",
+        "id": "s3",
+        "title": "3کار کل و قضیهٔ کار–انرژی جنبشی (Work–Energy Theorem)"
+      },
+      {
+        "level": "H2",
+        "id": "s4",
+        "title": "4توان (Power)"
+      },
+      {
+        "level": "H2",
+        "id": "s5",
+        "title": "5انرژی جنبشی و پتانسیل گرانشی (Kinetic & Gravitational Potential Energy)"
+      },
+      {
+        "level": "H2",
+        "id": "s6",
+        "title": "6پایستگی انرژی مکانیکی (Conservation of Mechanical Energy)"
+      },
+      {
+        "level": "H2",
+        "id": "s7",
+        "title": "7بازده (Efficiency)"
+      },
+      {
+        "level": "H2",
+        "id": "s8",
+        "title": "8قوانین سه‌گانهٔ نیوتن (Newton's Laws)"
+      },
+      {
+        "level": "H2",
+        "id": "s9",
+        "title": "9نیروی اصطکاک (Friction)"
+      },
+      {
+        "level": "H2",
+        "id": "s10",
+        "title": "10نیروی سطح و نیروی فنر (Normal Force & Spring Force)"
+      },
+      {
+        "level": "H2",
+        "id": "s11",
+        "title": "11نیروی کشش نخ (Tension)"
+      },
+      {
+        "level": "H2",
+        "id": "s12",
+        "title": "12تکانه و ضربه (Momentum & Impulse)"
+      },
+      {
+        "level": "H2",
+        "id": "s13",
+        "title": "13نیروی گرانشی و شتاب گرانشی (Gravitation)"
+      },
+      {
+        "level": "H2",
+        "id": "s14",
+        "title": "14نیروی مرکزگرا (Centripetal Force)"
+      },
+      {
+        "level": "H2",
+        "id": "review",
+        "title": "\uD83D\uDE80جمع‌بندی فصل (Quick Review)"
+      },
+      {
+        "level": "H2",
+        "id": "cheat",
+        "title": "\uD83E\uDDFEجدول فرمول‌ها (Cheat Sheet)"
+      },
+      {
+        "level": "H2",
+        "id": "final",
+        "title": "\uD83D\uDCDDتمرین نهایی فصل (Final Practice Set)"
+      }
+    ],
+    "detailsCount": 14,
+    "detailParents": [
+      {
+        "parent": "DIV.wrap",
+        "count": 14
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۳ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTدینامیک ذره، کار و انرژیDynamics, Work & Energyاز کار و توان تا پایستگی انرژی، قوانین نیوتن، اصطکاک، فنر، کشش، تکانه، گرانش و نیروی مرکز"
+      },
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۳ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTدینامیک ذره، کار و انرژیDynamics, Work & Energyاز کار و توان تا پایستگی انرژی، قوانین نیوتن، اصطکاک، فنر، کشش، تکانه، گرانش و نیروی مرکز"
+      }
+    ]
+  },
+  {
+    "course": "physics",
+    "file": "physics/chapter4-pressure.html",
+    "title": "فشار",
+    "characters": 10536,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "فشارPressure"
+      },
+      {
+        "level": "H2",
+        "id": "s1",
+        "title": "1حالت‌های ماده (States of Matter)"
+      },
+      {
+        "level": "H2",
+        "id": "s2",
+        "title": "2فشار چیست؟ (Pressure)"
+      },
+      {
+        "level": "H2",
+        "id": "s3",
+        "title": "3چگالی (Density)"
+      },
+      {
+        "level": "H2",
+        "id": "s4",
+        "title": "4فشار ناشی از وزن اجسام جامد (Pressure from Solid Weight)"
+      },
+      {
+        "level": "H2",
+        "id": "s5",
+        "title": "5فشار مایع (Fluid Pressure)"
+      },
+      {
+        "level": "H2",
+        "id": "s6",
+        "title": "6سانتی‌متر جیوه: یکای خاص فشار (cmHg)"
+      },
+      {
+        "level": "H2",
+        "id": "s7",
+        "title": "7نیروی وارد از مایع به کف ظرف (Force on Container Base)"
+      },
+      {
+        "level": "H2",
+        "id": "s8",
+        "title": "8اصل پاسکال (Pascal's Principle)"
+      },
+      {
+        "level": "H2",
+        "id": "s9",
+        "title": "9فشار جو زمین با ارتفاع (Atmospheric Pressure vs. Altitude)"
+      },
+      {
+        "level": "H2",
+        "id": "s10",
+        "title": "10مانومتر: فشارسنج گازها (Manometer)"
+      },
+      {
+        "level": "H2",
+        "id": "s11",
+        "title": "11بارومتر: فشارسنج هوا (Barometer)"
+      },
+      {
+        "level": "H2",
+        "id": "s12",
+        "title": "12فشار پیمانه‌ای (Gauge Pressure)"
+      },
+      {
+        "level": "H2",
+        "id": "s13",
+        "title": "13نیروی شناوری (Buoyancy)"
+      },
+      {
+        "level": "H2",
+        "id": "s14",
+        "title": "14آهنگ شارش حجمی، پیوستگی و برنولی (Continuity & Bernoulli)"
+      },
+      {
+        "level": "H2",
+        "id": "review",
+        "title": "\uD83D\uDE80جمع‌بندی فصل (Quick Review)"
+      },
+      {
+        "level": "H2",
+        "id": "cheat",
+        "title": "\uD83E\uDDFEجدول فرمول‌ها (Cheat Sheet)"
+      },
+      {
+        "level": "H2",
+        "id": "final",
+        "title": "\uD83D\uDCDDتمرین نهایی فصل (Final Practice Set)"
+      }
+    ],
+    "detailsCount": 11,
+    "detailParents": [
+      {
+        "parent": "DIV.wrap",
+        "count": 11
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۴ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTفشارPressureاز حالت‌های ماده و چگالی تا فشار مایع و جامد، اصل پاسکال، مانومتر، بارومتر، شناوری و معادلهٔ پیوستگی — با شکل و حل گام‌به‌گا"
+      },
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۴ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTفشارPressureاز حالت‌های ماده و چگالی تا فشار مایع و جامد، اصل پاسکال، مانومتر، بارومتر، شناوری و معادلهٔ پیوستگی — با شکل و حل گام‌به‌گا"
+      }
+    ]
+  },
+  {
+    "course": "physics",
+    "file": "physics/chapter5-thermodynamics.html",
+    "title": "ترمودینامیک",
+    "characters": 8855,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "ترمودینامیکThermodynamics"
+      },
+      {
+        "level": "H2",
+        "id": "s1",
+        "title": "1متغیرهای حالت و معادلهٔ گاز کامل (State Variables & Ideal Gas Law)"
+      },
+      {
+        "level": "H2",
+        "id": "s2",
+        "title": "2قانون اول ترمودینامیک: گرما، کار و انرژی درونی (First Law)"
+      },
+      {
+        "level": "H2",
+        "id": "s3",
+        "title": "3فرایند هم‌حجم (Isochoric Process)"
+      },
+      {
+        "level": "H2",
+        "id": "s4",
+        "title": "4فرایند هم‌دما (Isothermal Process)"
+      },
+      {
+        "level": "H2",
+        "id": "s5",
+        "title": "5فرایند هم‌فشار (Isobaric Process)"
+      },
+      {
+        "level": "H2",
+        "id": "s6",
+        "title": "6فرایند بی‌دررو (آدیاباتیک) (Adiabatic Process)"
+      },
+      {
+        "level": "H2",
+        "id": "s7",
+        "title": "7مقایسهٔ فرایندهای ترمودینامیکی خاص (Comparing the Four Processes)"
+      },
+      {
+        "level": "H2",
+        "id": "s8",
+        "title": "8ماشین‌های گرمایی: توان و بازده (Heat Engines)"
+      },
+      {
+        "level": "H2",
+        "id": "s9",
+        "title": "9یخچال‌ها (Refrigerators)"
+      },
+      {
+        "level": "H2",
+        "id": "s10",
+        "title": "10گرما، گرمای ویژه و تغییر فاز (Heat, Specific Heat & Phase Change)"
+      },
+      {
+        "level": "H2",
+        "id": "review",
+        "title": "\uD83D\uDE80جمع‌بندی فصل (Quick Review)"
+      },
+      {
+        "level": "H2",
+        "id": "cheat",
+        "title": "\uD83E\uDDFEجدول فرمول‌ها (Cheat Sheet)"
+      },
+      {
+        "level": "H2",
+        "id": "final",
+        "title": "\uD83D\uDCDDتمرین نهایی فصل (Final Practice Set)"
+      }
+    ],
+    "detailsCount": 14,
+    "detailParents": [
+      {
+        "parent": "DIV.wrap",
+        "count": 14
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۵ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTترمودینامیکThermodynamicsاز معادلهٔ گاز کامل و قانون اول تا فرایندهای هم‌حجم/هم‌دما/هم‌فشار/بی‌دررو، ماشین‌های گرمایی، یخچال و گرمای نها"
+      },
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۵ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTترمودینامیکThermodynamicsاز معادلهٔ گاز کامل و قانون اول تا فرایندهای هم‌حجم/هم‌دما/هم‌فشار/بی‌دررو، ماشین‌های گرمایی، یخچال و گرمای نها"
+      }
+    ]
+  },
+  {
+    "course": "physics",
+    "file": "physics/chapter6-electromagnetism-waves.html",
+    "title": "الکترومغناطیس و امواج",
+    "characters": 8751,
+    "headings": [
+      {
+        "level": "H1",
+        "id": "",
+        "title": "الکترومغناطیس و امواجElectromagnetism & Waves"
+      },
+      {
+        "level": "H2",
+        "id": "s1",
+        "title": "1بار الکتریکی، رسانا و عایق (Charge, Conductors & Insulators)"
+      },
+      {
+        "level": "H2",
+        "id": "s2",
+        "title": "2قانون کولن (Coulomb's Law)"
+      },
+      {
+        "level": "H2",
+        "id": "s3",
+        "title": "3میدان الکتریکی (Electric Field)"
+      },
+      {
+        "level": "H2",
+        "id": "s4",
+        "title": "4جریان الکتریکی (Electric Current)"
+      },
+      {
+        "level": "H2",
+        "id": "s5",
+        "title": "5مقاومت و قانون اهم (Resistance & Ohm's Law)"
+      },
+      {
+        "level": "H2",
+        "id": "s6",
+        "title": "6آهنرباها و میدان مغناطیسی (Magnets & Magnetic Field)"
+      },
+      {
+        "level": "H2",
+        "id": "s7",
+        "title": "7امواج: نور و صدا (Waves: Light & Sound)"
+      },
+      {
+        "level": "H2",
+        "id": "s8",
+        "title": "8طیف الکترومغناطیسی (Electromagnetic Spectrum)"
+      },
+      {
+        "level": "H2",
+        "id": "review",
+        "title": "\uD83D\uDE80جمع‌بندی فصل (Quick Review)"
+      },
+      {
+        "level": "H2",
+        "id": "cheat",
+        "title": "\uD83E\uDDFEجدول فرمول‌ها (Cheat Sheet)"
+      },
+      {
+        "level": "H2",
+        "id": "final",
+        "title": "\uD83D\uDCDDتمرین نهایی فصل (Final Practice Set)"
+      }
+    ],
+    "detailsCount": 14,
+    "detailParents": [
+      {
+        "parent": "DIV.wrap",
+        "count": 14
+      }
+    ],
+    "sampleDetails": [
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۶ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTالکترومغناطیس و امواجElectromagnetism & Wavesاز بار الکتریکی و قانون کولن تا جریان، اهم، مغناطیس، امواج نور و صدا و طیف الکترومغناطیسی —"
+      },
+      {
+        "parent": "DIV.wrap",
+        "grandparent": "",
+        "preview": "فصل ۶ | جزوهٔ آموزشی گام‌به‌گام — فیزیک CEnTالکترومغناطیس و امواجElectromagnetism & Wavesاز بار الکتریکی و قانون کولن تا جریان، اهم، مغناطیس، امواج نور و صدا و طیف الکترومغناطیسی —"
+      }
+    ]
+  }
+]

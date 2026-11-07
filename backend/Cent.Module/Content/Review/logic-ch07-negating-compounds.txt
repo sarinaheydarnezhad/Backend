@@ -1,0 +1,97 @@
+جزوه لاجیک CEnT — فصل ۷: نقیض گزاره‌های ترکیبی
+
+CENT LOGIC — PART A · CHAPTER 7 / 13 · 🔴 CHALLENGE
+فصل ۷: نقیض گزاره‌های ترکیبی (De Morgan's Rules)
+تا اینجا یاد گرفتی چطور نقیضِ یک گزاره‌ی ساده رو بسازی. اما وقتی گزاره ترکیبیه (and, or, if…then)، نقیض گرفتن یک قانون خاص و بسیار پرکاربرد داره: عملگر عوض می‌شه. این یکی از باارزش‌ترین قوانینیه که در کل بخش Logic حفظ می‌کنی.
+Bاین مبحث چیست؟
+سؤالات «نقیض این گزاره چیه؟» (Write the contradictory of...) در آزمون CEnT خیلی رایجن. وقتی گزاره‌ی اصلی یک عطف، فصل، یا شرطیه، نقیضش با گذاشتن ساده‌ی «not» جلوی کل جمله ساخته نمی‌شه — باید طبق قوانین De Morgan's Rules بازنویسیش کنی.
+Cمفهوم اصلی
+قدم ۱ — نقیض مضاعف: not-(not-A) = A. دو تا «not» پشت سر هم، همدیگه رو خنثی می‌کنن.
+A = "Sarah makes good coffee."not-A = "Sarah does not make good coffee."not-(not-A) = "Sarah makes good coffee." (= A)
+⚠️ هشدار: این قانون فقط وقتی درست کار می‌کنه که واقعاً یک نقیضِ درست ساخته باشی، نه یک contrary (طبق فصل ۵). مثال: "It's false that Sarah and Tom didn't go bike riding." = "Both Sarah and Tom went bike riding."
+قدم ۲ — نقیض عطف: not-(A and B) = (not-A) or (not-B). برای غلط کردن یک ادعای «هر دو درست»، کافیه حداقل یکی غلط باشه — برای همین نتیجه یک فصل می‌شه.
+A = "Dan got an A in physics and a B in history."Contradictory = "Either Dan didn't get an A in physics or he didn't get a B in history."
+قدم ۳ — نقیض فصل: not-(A or B) = (not-A) and (not-B). برای غلط کردن یک ادعای «حداقل یکی درست»، باید هر دو غلط باشن — برای همین نتیجه یک عطف می‌شه. به این دو قانون (قدم ۲ و ۳) با هم De Morgan's Rules می‌گن.
+A = "Dan will either go to law school or become a priest."Contradictory = "Dan will not go to law school and he will not become a priest." (= "Dan will neither go to law school nor become a priest.")
+قدم ۴ — نقیض شرطی: not-(if A then B) = A and not-B. یادت باشه از فصل ۴: شرطی فقط در یک حالت غلطه — مقدم درست و تالی غلط. پس نقیضِ شرطی دقیقاً همون یک حالتِ خاصه، به‌فرم یک عطف.
+A = "If I pay for dinner, then you'll pay for drinks."Contradictory = "I pay for dinner, but you don't pay for drinks."
+این تطابق با جدول درستی فصل ۴ کاملاً هم‌خونیه: تنها ردیفی که شرطی رو غلط می‌کنه، دقیقاً همینه.
+Dقوانین و اصول مهم — جدول تبدیل
+گزاره‌ی اصلی
+نقیضش
+not-(not-A)
+A
+not-(A and B)
+(not-A) or (not-B)
+not-(A or B)
+(not-A) and (not-B)
+not-(if A then B)
+A and (not-B)
+نقیض یک عطف، همیشه یک فصله (و برعکس) — عملگر «عوض» می‌شه.
+نقیض یک شرطی، همیشه یک عطفه — و مقدم دست‌نخورده می‌مونه، فقط تالی نقیض می‌شه.
+در همه‌ی این قوانین، «not» به‌جای اینکه جلوی کل جمله بمونه، به داخل جمله پخش می‌شه و در همین حین عملگر رو عوض می‌کنه.
+Eروش حل
+مشخص کن گزاره‌ی اصلی چه ساختاری داره: عطف، فصل، یا شرطی.
+طبق جدول بالا، قانون تبدیلِ مناسب رو انتخاب کن.
+اجزای داخلی رو هم — طبق قانونِ همون قانون — نقیض کن (فقط برای عطف/فصل هر دو جزء نقیض می‌شن؛ برای شرطی، فقط تالی نقیض می‌شه و مقدم دست‌نخورده می‌مونه).
+نتیجه رو با یک مثال عددی/واقعی چک کن تا مطمئن بشی درسته.
+→ جواب: نقیضِ درستِ گزاره‌ی ترکیبی.
+Fمثال آموزشی
+Write the contradictory of: "John and Mary went to the zoo."
+پاسخ: "Either John didn't go to the zoo or Mary didn't go to the zoo." این یک عطفه («John went» and «Mary went»)، پس طبق قدم ۲، نقیضش یک فصل از نقیض هر دو جزء می‌شه.
+Gمثال امتحانی
+"Sam loves hotdogs, but he doesn't like relish." What is the correct contradictory of this claim?
+A) "Sam doesn't love hotdogs and he likes relish."
+B) "Either Sam doesn't love hotdogs, or he likes relish."
+C) "Sam doesn't love hotdogs or he doesn't like relish."
+D) "Sam loves hotdogs and he likes relish."
+🎯 EXAM TIP
+یک قانون حفظی ساده برای همه‌ی این فصل: «not» که وارد پرانتز می‌شه، عملگر رو برعکس می‌کنه.» and ⇄ or، و if…then تبدیل به and می‌شه (با فقط تالی نقیض‌شده). این یک قانون مکانیکیه — نیازی به فکر کردن دوباره از صفر نیست، فقط کافیه ساختار رو تشخیص بدی و قانون رو اعمال کنی.
+⚡ QUICK METHOD
+برای چک کردن سریع جوابت، یک مثال عددی/واقعی با یک ترکیب خاص از T/F امتحان کن. مثلاً برای «not-(A and B)»، فرض کن A=True, B=False. گزاره‌ی اصلی «A and B» می‌شه False، پس نقیضش باید True باشه. حالا «(not-A) or (not-B)» = «False or True» = True. ✓ جواب تأیید شد.
+⚠️ COMMON MISTAKES
+اشتباه: نقیض کردن هر دو جزء ولی عملگر رو بدون تغییر نگه داشتن — یعنی نوشتن «not-(A and B) = (not-A) and (not-B)» به‌جای «or».
+چرا اتفاق می‌افته: ذهن به‌طور شهودی فکر می‌کنه چون «not» داخل پرانتز پخش شده، فقط باید اجزا عوض بشن، بدون توجه به اینکه خودِ رابط بین اجزا هم باید عوض بشه.
+چطور جلوش رو بگیریم: همیشه جدول قدم ۴ رو مرور کن: and⇄or. این تبدیل، جدا از نقیض کردنِ اجزا، یک مرحله‌ی اضافه‌ست که هیچ‌وقت نباید فراموشش کنی.
+🪤 QUESTION TRAP
+برای نقیض شرطی، آزمون گاهی گزینه‌ای می‌ذاره به‌فرم «If not-A then not-B» — این اشتباهه و اصلاً نقیضِ شرطی نیست (این تبدیل، که بهش inverse می‌گن، موضوع فصل ۸ است و رابطه‌ی دیگه‌ای با گزاره‌ی اصلی داره). نقیضِ درستِ «If A then B» همیشه یک عطفه: «A and not-B» — نه یک شرطیِ دیگه.
+🧠 MUST REMEMBER
+not-(A and B) = (not-A) or (not-B) | not-(A or B) = (not-A) and (not-B) | not-(if A then B) = A and not-B. عملگر همیشه عوض می‌شه؛ نقیضِ شرطی همیشه یک عطفه با مقدم دست‌نخورده.
+📝تمرین
+What is the contradictory of "The package arrived on time and undamaged"?
+A) "The package didn't arrive on time and it was damaged."
+B) "The package didn't arrive on time, or it was damaged."
+C) "The package arrived on time or undamaged."
+D) "The package arrived late and undamaged."
+نمایش پاسخ و توضیح
+پاسخ درست: B. این یک عطفه؛ طبق قانون، نقیضش یک فصله از نقیضِ هر جزء. گزینه‌ی A دقیقاً همون اشتباه رایجه (عملگر رو عوض نکرده).
+What is the contradictory of "Either the printer is out of paper, or it is out of toner"?
+A) "The printer is out of paper or out of toner."
+B) "The printer is not out of paper, or it is not out of toner."
+C) "The printer is not out of paper, and it is not out of toner."
+D) "The printer is out of both paper and toner."
+نمایش پاسخ و توضیح
+پاسخ درست: C. این یک فصله؛ طبق De Morgan's Rules، نقیضِ فصل، یک عطفه از نقیضِ هر جزء. گزینه‌ی B عملگر رو عوض نکرده (هنوز «or» مونده). گزینه‌ی D اصلاً نقیض نیست، بلکه خودِ حالت مثبتِ هر دو جزئه.
+What is the contradictory of "If the invoice is approved, then payment is processed within 48 hours"?
+A) "If the invoice is not approved, then payment is not processed within 48 hours."
+B) "The invoice is not approved, and payment is not processed within 48 hours."
+C) "The invoice is approved, and payment is not processed within 48 hours."
+D) "If payment is not processed within 48 hours, then the invoice was not approved."
+نمایش پاسخ و توضیح
+پاسخ درست: C. طبق قدم ۴، نقیضِ «If A then B» همیشه «A and not-B» است — مقدم (تأیید فاکتور) دست‌نخورده می‌مونه و فقط تالی نقیض می‌شه. گزینه‌ی A دقیقاً همون دام «Question Trap» است — یک شرطیِ دیگه (inverse) که اصلاً نقیض نیست. گزینه‌ی D هم یک شرطیِ دیگه‌ست (contrapositive که در فصل ۸ می‌بینیم و در واقع با گزاره‌ی اصلی هم‌ارزه، نه نقیضش). گزینه‌ی B مقدم رو هم اشتباهاً نقیض کرده.
+🚀مرور سریع — فصل ۷
+مفاهیم اصلی (جدول تبدیل)
+not-(not-A) = A
+not-(A and B) = (not-A) or (not-B)
+not-(A or B) = (not-A) and (not-B)
+not-(if A then B) = A and not-B
+روش
+ساختار رو تشخیص بده (and/or/if…then).
+قانون تبدیل مناسب رو اعمال کن.
+با یک مثال T/F جواب رو چک کن.
+اشتباهات رایج
+نقیض کردن اجزا بدون عوض کردن عملگر.
+ساختن «If not-A then not-B» به‌جای «A and not-B».
+دام‌های تستی
+گزینه‌های inverse یا contrapositive به‌جای نقیضِ واقعی.
+عوض نشدنِ and⇄or در گزینه‌های نادرست.

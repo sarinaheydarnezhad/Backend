@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>جزوهٔ آموزشی هندسه — فصل مقدماتی: اشکال هندسی، محیط و مساحت، حجم و تشابه</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EC; --dot:#E3DCC8; --navy:#1F3A52;
+    --blue:#2C6E8E;   --blue-bg:#EAF4F8;
+    --green:#2E9B6F;  --green-bg:#EAF7F0;
+    --red:#D2534A;    --red-bg:#FBEAE8;
+    --gold:#D79E28;   --gold-bg:#FCF3DD;
+    --purple:#7C4A99; --purple-bg:#F4EDF8;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{font-family:'Vazirmatn',sans-serif; background-color:var(--bg);
+    background-image:radial-gradient(var(--dot) 1.6px, transparent 1.6px); background-size:22px 22px;
+    color:#2A2A2A; line-height:1.9;}
+  .ltr{direction:ltr; unicode-bidi:isolate; display:inline-block;}
+  .en{font-size:0.88em; color:#5b6b76; font-weight:500;}
+  a{color:inherit;}
+  .container{max-width:980px; margin:0 auto; padding:0 18px;}
+
+  nav{position:sticky; top:0; z-index:50; background:rgba(250,246,236,0.92); backdrop-filter:blur(6px); border-bottom:2px solid var(--dot);}
+  nav .container{display:flex; flex-wrap:wrap; gap:6px 4px; padding:10px 18px; justify-content:center;}
+  nav a{font-size:13px; font-weight:600; text-decoration:none; color:var(--navy); background:#fff; border:1.5px solid var(--dot); padding:6px 12px; border-radius:20px; white-space:nowrap; transition:.15s;}
+  nav a:hover{background:var(--navy); color:#fff; border-color:var(--navy);}
+
+  .hero{margin:30px auto; border-radius:24px; padding:44px 32px;
+    background-image:radial-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px), linear-gradient(120deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    background-size:20px 20px, cover; color:#fff; text-align:center; box-shadow:0 10px 30px rgba(31,58,82,0.25);}
+  .hero .eyebrow{display:inline-block; font-size:13px; font-weight:700; background:rgba(255,255,255,0.18); padding:6px 16px; border-radius:20px; margin-bottom:16px; letter-spacing:.5px;}
+  .hero h1{font-size:clamp(24px,4vw,38px); margin:0 0 12px; font-weight:800;}
+  .hero p{font-size:16px; opacity:.95; max-width:640px; margin:0 auto;}
+
+  .sec-head{display:flex; align-items:center; gap:14px; margin:52px 0 22px;}
+  .sec-badge{width:44px; height:44px; border-radius:50%; flex:none; display:flex; align-items:center; justify-content:center; font-weight:800; font-size:19px; color:#fff; background:var(--navy);}
+  .sec-head .label{font-size:12.5px; font-weight:700; color:var(--blue); display:block;}
+  .sec-head h2{margin:2px 0 0; font-size:22px; color:var(--navy);}
+
+  .card{border-radius:18px; padding:22px 24px; margin-bottom:18px; border:1.5px solid transparent;}
+  .card h3{margin:0 0 12px; font-size:16.5px; display:flex; align-items:center; gap:8px;}
+  .blue{background:var(--blue-bg); border-color:#cfe4ec;} .blue h3{color:var(--blue);}
+  .green{background:var(--green-bg); border-color:#cdeadb;} .green h3{color:var(--green);}
+  .red{background:var(--red-bg); border-color:#f4d3cf;} .red h3{color:var(--red);}
+  .gold{background:var(--gold-bg); border-color:#f2ddab;} .gold h3{color:var(--gold);}
+  .purple{background:var(--purple-bg); border-color:#e2d0ec;} .purple h3{color:var(--purple);}
+
+  .formula-box{background:var(--navy); color:#fff; border-radius:12px; padding:14px 18px; margin:10px 0; font-size:17px; text-align:center; overflow-x:auto;}
+  .formula-box .en{color:#cfe0ea;}
+  ol.steps-main{margin:10px 0 0; padding-inline-start:22px;}
+  ol.steps-main li{margin-bottom:6px;}
+
+  .example{background:#fff; border-radius:12px; padding:16px 18px; margin-bottom:14px; border:1px solid #d9efe2;}
+  .example .ex-title{font-weight:700; color:var(--green); margin-bottom:8px;}
+  .steps{margin:8px 0; padding-inline-start:20px;}
+  .steps li{margin-bottom:5px;}
+  .result{margin-top:10px; background:var(--green-bg); border-inline-start:4px solid var(--green); padding:8px 14px; border-radius:8px; font-weight:700;}
+
+  ul.mistakes, ul.tips{list-style:none; margin:0; padding:0;}
+  ul.mistakes li{padding-inline-start:26px; position:relative; margin-bottom:10px;}
+  ul.mistakes li::before{content:"✗"; position:absolute; right:0; color:var(--red); font-weight:800;}
+  ul.tips li{padding-inline-start:26px; position:relative; margin-bottom:10px;}
+  ul.tips li::before{content:"★"; position:absolute; right:0; color:var(--gold); font-weight:800;}
+
+  .question{background:#fff; border-radius:12px; padding:14px 18px; margin-bottom:12px; border:1px solid #e6d7ee;}
+  .question p{margin:0 0 8px; font-weight:600;}
+  details{margin-top:6px;}
+  summary{cursor:pointer; font-weight:700; color:var(--purple); background:var(--purple-bg); display:inline-block; padding:6px 14px; border-radius:20px; font-size:13.5px;}
+  .answer{margin-top:10px; padding-inline-start:4px;}
+  .final-answer{font-weight:800; color:var(--purple); margin-top:8px;}
+
+  .frac{display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; font-size:15px; line-height:1.15;}
+  .frac .num{padding:0 4px 2px; border-bottom:2px solid currentColor;}
+  .frac .den{padding:2px 4px 0;}
+  sup{font-size:65%;}
+
+  .cycle{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin:24px 0;}
+  .cycle .step{flex:1 1 160px; max-width:190px; text-align:center; border-radius:16px; padding:18px 12px; color:#fff; font-weight:700; font-size:14px;}
+  .cycle .step .num-badge{width:34px; height:34px; border-radius:50%; background:rgba(255,255,255,0.25); display:flex; align-items:center; justify-content:center; margin:0 auto 8px; font-size:16px;}
+  .cycle .c1{background:var(--blue);} .cycle .c2{background:var(--green);} .cycle .c3{background:var(--red);} .cycle .c4{background:var(--gold);} .cycle .c5{background:var(--purple);}
+
+  .concept-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(150px,1fr)); gap:14px; margin:14px 0 6px;}
+  .concept-item{background:#fff; border:1px solid #cfe4ec; border-radius:14px; padding:12px 8px; text-align:center;}
+  .concept-item svg{max-width:100%; height:auto;}
+  .concept-item .cap{margin-top:8px; font-size:12.5px; font-weight:700; color:var(--navy);}
+  .concept-item .cap .en{display:block; font-size:11px; font-weight:500; color:#6b7c86;}
+
+  .angle-row{display:flex; flex-wrap:wrap; gap:12px; justify-content:center; margin:12px 0;}
+  .angle-row .concept-item{flex:1 1 100px; max-width:120px;}
+
+  .shape-sub{background:#fff; border:1.5px solid #cfe4ec; border-radius:16px; padding:18px 20px; margin-bottom:16px;}
+  .shape-sub .shape-head{display:flex; align-items:center; gap:14px; margin-bottom:8px;}
+  .shape-sub .shape-head h4{margin:0; font-size:16px; color:var(--blue);}
+  .shape-icon{flex:none;}
+
+  .why-box{background:#FEFCF3; border:1.5px dashed var(--gold); border-radius:12px; padding:12px 16px; margin-top:10px; font-size:14px;}
+  .why-box b{color:#b5810f;}
+
+  .summary-box{margin:60px 0 30px; border-radius:24px; padding:38px 30px; background:linear-gradient(120deg, var(--purple) 0%, var(--navy) 60%, var(--blue) 100%); color:#fff; text-align:center;}
+  .summary-box h2{margin-top:0; font-size:24px;}
+  .pill-row{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:18px 0;}
+  .pill{background:rgba(255,255,255,0.16); padding:6px 16px; border-radius:20px; font-size:13px; font-weight:600;}
+  .compass{margin-top:20px; background:rgba(255,255,255,0.12); border-radius:14px; padding:16px 20px; font-size:15px; display:inline-block; max-width:600px;}
+  footer{text-align:center; font-size:12.5px; color:#8a8471; margin:30px 0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <a href="#usage">راهنمای استفاده</a>
+    <a href="#s1">۱. مفاهیم پایهٔ هندسه</a>
+    <a href="#s2">۲. مثلث و چندضلعی‌ها</a>
+    <a href="#s3">۳. دایره</a>
+    <a href="#s4">۴. اشکال فضایی</a>
+    <a href="#s5">۵. تشابه و مختصات دکارتی</a>
+    <a href="#summary">جمع‌بندی</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <div class="hero">
+    <span class="eyebrow">فصل ۱ و ۲ | جزوهٔ آموزشی گام‌به‌گام</span>
+    <h1>هندسه از صفر تا تشابه و مختصات</h1>
+    <p>از نقطه و خط ساده شروع می‌کنیم، می‌رسیم به مثلث و چندضلعی‌ها و اشکال فضایی، و در آخر با تشابه اشکال و مختصات دکارتی جزوه رو تموم می‌کنیم.</p>
+  </div>
+
+  <section id="usage">
+    <div class="sec-head">
+      <div class="sec-badge">؟</div>
+      <div><span class="label">راهنما</span><h2>چگونه از این جزوه استفاده کنیم؟</h2></div>
+    </div>
+    <div class="cycle">
+      <div class="step c1"><div class="num-badge">۱</div>فهم مفهوم</div>
+      <div class="step c2"><div class="num-badge">۲</div>دیدن مثال</div>
+      <div class="step c3"><div class="num-badge">۳</div>بررسی دام‌ها</div>
+      <div class="step c4"><div class="num-badge">۴</div>هایلایت امتحانی</div>
+      <div class="step c5"><div class="num-badge">۵</div>حل تمرین</div>
+    </div>
+  </section>
+
+  <!-- SECTION 1 -->
+  <section id="s1">
+    <div class="sec-head">
+      <div class="sec-badge">۱</div>
+      <div><span class="label">بخش اول</span><h2>مفاهیم پایهٔ هندسه</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مفاهیم اصلی</h3>
+      <p><b>نقطه <span class="en">(Point)</span>:</b> فقط یک مکان رو نشون می‌ده، نه طول داره نه عرض. با حرف بزرگ مثل <span class="ltr">A</span> نشون داده می‌شه.</p>
+      <p><b>خط <span class="en">(Line)</span>:</b> بی‌نهایت نقطه که در دو جهت تا بی‌نهایت ادامه داره. نماد: <span class="ltr">↔AB</span></p>
+      <p><b>پاره‌خط <span class="en">(Line Segment)</span>:</b> بخشی از خط با دو سر مشخص و طول معین. نماد: <span class="ltr">AB̅</span></p>
+      <p><b>شعاع / نیم‌خط <span class="en">(Ray)</span>:</b> از یک نقطه شروع می‌شه و فقط در یک جهت تا بی‌نهایت می‌ره. نماد: <span class="ltr">→AB</span> (از <span class="ltr">A</span> شروع و از <span class="ltr">B</span> رد می‌شه)</p>
+      <p><b>صفحه <span class="en">(Plane)</span>:</b> یک سطح تخت که در همهٔ جهت‌ها بی‌نهایت گسترش پیدا می‌کنه؛ طول و عرض داره ولی ضخامت نه.</p>
+      <p><b>زاویه <span class="en">(Angle)</span>:</b> وقتی دو شعاع یک نقطهٔ مشترک (رأس / <span class="en">vertex</span>) دارن، فضای بینشون رو زاویه می‌گیم. واحدش درجه‌ست.</p>
+
+      <div class="concept-grid">
+        <div class="concept-item">
+          <svg viewBox="0 0 100 60" width="100" height="60"><circle cx="50" cy="32" r="4.5" fill="#1F3A52"/><text x="50" y="18" text-anchor="middle" font-size="13" fill="#1F3A52">A</text></svg>
+          <div class="cap">نقطه<span class="en">Point</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 140 50" width="140" height="50">
+            <line x1="20" y1="25" x2="120" y2="25" stroke="#2C6E8E" stroke-width="2.5"/>
+            <polygon points="20,25 28,20 28,30" fill="#2C6E8E"/>
+            <polygon points="120,25 112,20 112,30" fill="#2C6E8E"/>
+            <circle cx="45" cy="25" r="3" fill="#1F3A52"/><circle cx="95" cy="25" r="3" fill="#1F3A52"/>
+            <text x="45" y="16" text-anchor="middle" font-size="12">A</text><text x="95" y="16" text-anchor="middle" font-size="12">B</text>
+          </svg>
+          <div class="cap">خط <span class="ltr" style="font-size:11px;">↔AB</span><span class="en">Line</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 140 50" width="140" height="50">
+            <line x1="30" y1="25" x2="110" y2="25" stroke="#2E9B6F" stroke-width="2.5"/>
+            <circle cx="30" cy="25" r="4" fill="#1F3A52"/><circle cx="110" cy="25" r="4" fill="#1F3A52"/>
+            <text x="30" y="16" text-anchor="middle" font-size="12">A</text><text x="110" y="16" text-anchor="middle" font-size="12">B</text>
+          </svg>
+          <div class="cap">پاره‌خط<span class="en">Line Segment</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 140 50" width="140" height="50">
+            <line x1="30" y1="25" x2="115" y2="25" stroke="#D79E28" stroke-width="2.5"/>
+            <circle cx="30" cy="25" r="4" fill="#1F3A52"/>
+            <polygon points="115,25 107,20 107,30" fill="#D79E28"/>
+            <text x="30" y="16" text-anchor="middle" font-size="12">A</text><text x="90" y="16" text-anchor="middle" font-size="12">B</text>
+          </svg>
+          <div class="cap">شعاع<span class="en">Ray</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 140 70" width="140" height="70"><polygon points="15,55 45,15 130,15 100,55" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/></svg>
+          <div class="cap">صفحه<span class="en">Plane</span></div>
+        </div>
+      </div>
+
+      <p style="margin-top:16px;"><b>انواع زاویه <span class="en">(Types of Angles)</span>:</b></p>
+      <div class="angle-row">
+        <div class="concept-item">
+          <svg viewBox="0 0 100 80" width="90" height="72">
+            <line x1="15" y1="65" x2="85" y2="65" stroke="#1F3A52" stroke-width="2"/>
+            <line x1="15" y1="65" x2="60" y2="20" stroke="#1F3A52" stroke-width="2"/>
+            <path d="M 35 65 A 20 20 0 0 0 27 49" fill="none" stroke="#D2534A" stroke-width="2"/>
+          </svg>
+          <div class="cap">تیز (کمتر از ۹۰°)<span class="en">Acute</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 80" width="90" height="72">
+            <line x1="15" y1="65" x2="85" y2="65" stroke="#1F3A52" stroke-width="2"/>
+            <line x1="15" y1="65" x2="15" y2="15" stroke="#1F3A52" stroke-width="2"/>
+            <rect x="15" y="53" width="12" height="12" fill="none" stroke="#D2534A" stroke-width="2"/>
+          </svg>
+          <div class="cap">قائمه (۹۰°)<span class="en">Right</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 80" width="90" height="72">
+            <line x1="15" y1="65" x2="85" y2="65" stroke="#1F3A52" stroke-width="2"/>
+            <line x1="15" y1="65" x2="80" y2="20" stroke="#1F3A52" stroke-width="2"/>
+            <path d="M 45 65 A 30 30 0 0 0 30 40" fill="none" stroke="#D2534A" stroke-width="2"/>
+          </svg>
+          <div class="cap">منفرجه (۹۰° تا ۱۸۰°)<span class="en">Obtuse</span></div>
+        </div>
+      </div>
+
+      <p style="margin-top:16px;"><b>خطوط موازی <span class="en">(Parallel Lines)</span>:</b> هیچ‌وقت به هم نمی‌رسن (نماد <span class="ltr">AB ∥ CD</span>). <b>خطوط عمود <span class="en">(Perpendicular Lines)</span>:</b> با زاویهٔ ۹۰° همدیگه رو قطع می‌کنن (نماد <span class="ltr">AB ⊥ CD</span>). <b>خطوط متقاطع <span class="en">(Intersecting Lines)</span>:</b> در یک نقطه از هم عبور می‌کنن.</p>
+
+      <div class="concept-grid">
+        <div class="concept-item">
+          <svg viewBox="0 0 140 60" width="140" height="60"><line x1="15" y1="20" x2="125" y2="20" stroke="#2C6E8E" stroke-width="2.5"/><line x1="15" y1="45" x2="125" y2="45" stroke="#2C6E8E" stroke-width="2.5"/></svg>
+          <div class="cap">خطوط موازی<span class="en">Parallel Lines</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 100" width="90" height="90">
+            <line x1="50" y1="10" x2="50" y2="90" stroke="#D2534A" stroke-width="2.5"/>
+            <line x1="10" y1="50" x2="90" y2="50" stroke="#D2534A" stroke-width="2.5"/>
+            <rect x="50" y="40" width="10" height="10" fill="none" stroke="#1F3A52" stroke-width="1.5"/>
+          </svg>
+          <div class="cap">خطوط عمود<span class="en">Perpendicular Lines</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 100" width="90" height="90">
+            <line x1="15" y1="20" x2="85" y2="80" stroke="#7C4A99" stroke-width="2.5"/>
+            <line x1="85" y1="20" x2="15" y2="80" stroke="#7C4A99" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="3.5" fill="#1F3A52"/>
+          </svg>
+          <div class="cap">خطوط متقاطع<span class="en">Intersecting Lines</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 140 60" width="140" height="60">
+            <path d="M 15 45 Q 50 5 80 40" fill="none" stroke="#2E9B6F" stroke-width="2.5"/>
+            <circle cx="115" cy="30" r="18" fill="none" stroke="#D79E28" stroke-width="2.5"/>
+          </svg>
+          <div class="cap">منحنی باز و بسته<span class="en">Open &amp; Closed Curve</span></div>
+        </div>
+      </div>
+      <p style="margin-top:10px;"><b>منحنی <span class="en">(Curve)</span>:</b> خطی که مستقیم نیست. باز <span class="en">(Open)</span> یعنی شروع و پایانش یکی نیست؛ بسته <span class="en">(Closed)</span> یعنی به نقطهٔ شروع خودش برمی‌گرده (مثل دایره).</p>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال‌ها</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — تشخیص نوع زاویه</div>
+        <ol class="steps">
+          <li>زاویهٔ ۱۱۰° رو در نظر بگیر.</li>
+          <li>چون بین ۹۰° و ۱۸۰°ه، پس منفرجه‌ست <span class="en">(Obtuse)</span>.</li>
+        </ol>
+        <div class="result">نتیجه: زاویهٔ ۱۱۰° منفرجه است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — خط، پاره‌خط یا شعاع؟</div>
+        <ol class="steps">
+          <li>نوری که از خورشید تابیده می‌شه، از یک نقطه (خورشید) شروع می‌شه.</li>
+          <li>فقط در یک جهت ادامه پیدا می‌کنه و پایان مشخصی نداره.</li>
+        </ol>
+        <div class="result">نتیجه: این یک شعاع <span class="en">(Ray)</span> است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — موازی یا عمود؟</div>
+        <ol class="steps">
+          <li>ریل‌های راه‌آهن رو در نظر بگیر: هیچ‌وقت به هم نمی‌رسن.</li>
+          <li>پس فاصلهٔ بینشون همیشه ثابته.</li>
+        </ol>
+        <div class="result">نتیجه: ریل‌های راه‌آهن نمونهٔ خطوط موازی است.</div>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>فکر کردن به این‌که «خط» و «پاره‌خط» یک چیزن — خط بی‌نهایته، پاره‌خط طول مشخص داره.</li>
+        <li>قاطی کردن نماد شعاع <span class="ltr">→AB</span> با پاره‌خط <span class="ltr">AB̅</span> — جهت پیکان مهمه.</li>
+        <li>گمان این‌که خطوط متقاطع حتماً عمودن — فقط اگه زاویه‌شون ۹۰° باشه عمودن.</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>🟡 نکات امتحانی</h3>
+      <ul class="tips">
+        <li>وقتی تست دربارهٔ نوع زاویه می‌پرسه، فقط بازهٔ درجه رو با جدول بالا مقایسه کن، سریع‌ترین راهه.</li>
+        <li>نماد کوچیک پیکان بالای حروف (مثل <span class="ltr">→</span> یا <span class="ltr">↔</span>) معمولاً کلید تشخیص نوع شکله.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="question">
+        <p>۱. زاویهٔ ۹۰° دقیقاً چه نوعیه؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">این زاویه دقیقاً ۹۰°ه، پس جزو دستهٔ خاصیه که بین تیز و منفرجه قرار می‌گیره.</div>
+          <div class="final-answer">پاسخ نهایی: زاویهٔ قائمه</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۲. لبهٔ یک خط‌کش نمونهٔ کدوم مفهومه: خط، پاره‌خط یا شعاع؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">لبهٔ خط‌کش طول مشخص و دو سر معین داره؛ نه مثل خط بی‌نهایته و نه مثل شعاع فقط یک سر داره.</div>
+          <div class="final-answer">پاسخ نهایی: پاره‌خط</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۳. اگه دو خط با زاویهٔ ۹۰° همدیگه رو قطع کنن، چه رابطه‌ای دارن؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">تعریف خطوط عمود دقیقاً همینه: برخورد با زاویهٔ ۹۰°.</div>
+          <div class="final-answer">پاسخ نهایی: عمود بر هم <span class="ltr">⊥</span></div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="s2">
+    <div class="sec-head">
+      <div class="sec-badge">۲</div>
+      <div><span class="label">بخش دوم</span><h2>مثلث و چندضلعی‌ها</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مقدمه</h3>
+      <p>در ادامه هر شکل مسطح رو جدا و مستقل بررسی می‌کنیم؛ یادت باشه مجموع زوایای داخلی هر چهارضلعی همیشه ۳۶۰° است.</p>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 90" width="70" height="63"><polygon points="50,10 90,80 10,80" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/></svg>
+        </div>
+        <div><h4>مثلث <span class="en">Triangle</span></h4></div>
+      </div>
+      <p>چندضلعی سه‌ضلعی. از نظر ضلع به سه دسته تقسیم می‌شه: متساوی‌الاضلاع <span class="en">(Equilateral)</span>، متساوی‌الساقین <span class="en">(Isosceles)</span> و مختلف‌الاضلاع <span class="en">(Scalene)</span>. از نظر زاویه هم: تیزاویه <span class="en">(Acute)</span>، قائم‌الزاویه <span class="en">(Right)</span> و منفرجه‌الزاویه <span class="en">(Obtuse)</span>.</p>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <svg viewBox="0 0 100 90" width="80" height="72">
+            <polygon points="50,10 90,80 10,80" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="66" y1="47" x2="74" y2="43" stroke="#D2534A" stroke-width="2"/>
+            <line x1="30" y1="45" x2="38" y2="49" stroke="#D2534A" stroke-width="2"/>
+            <line x1="46" y1="80" x2="46" y2="72" stroke="#D2534A" stroke-width="2"/>
+            <line x1="54" y1="80" x2="54" y2="72" stroke="#D2534A" stroke-width="2"/>
+          </svg>
+          <div class="cap">متساوی‌الاضلاع<span class="en">Equilateral</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 90" width="80" height="72">
+            <polygon points="50,10 85,80 15,80" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="63" y1="52" x2="71" y2="48" stroke="#D2534A" stroke-width="2"/>
+            <line x1="37" y1="52" x2="29" y2="48" stroke="#D2534A" stroke-width="2"/>
+          </svg>
+          <div class="cap">متساوی‌الساقین<span class="en">Isosceles</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 90" width="80" height="72"><polygon points="60,12 92,75 8,85" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/></svg>
+          <div class="cap">مختلف‌الاضلاع<span class="en">Scalene</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 90" width="80" height="72">
+            <polygon points="15,80 85,80 15,15" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <rect x="15" y="68" width="12" height="12" fill="none" stroke="#D2534A" stroke-width="2"/>
+          </svg>
+          <div class="cap">قائم‌الزاویه<span class="en">Right Triangle</span></div>
+        </div>
+      </div>
+      <div class="formula-box">محیط <span class="en">Perimeter</span>: P = a + b + c &nbsp;|&nbsp; مساحت <span class="en">Area</span>: A = <span class="frac"><span class="num">۱</span><span class="den">۲</span></span> × قاعده × ارتفاع &nbsp;|&nbsp; فیثاغورس <span class="en">Pythagorean Theorem</span>: c<sup>۲</sup> = a<sup>۲</sup> + b<sup>۲</sup></div>
+      <div class="why-box">💡 چرا مساحت مثلث نصف قاعده‌ضربدر‌ارتفاعه؟ چون هر مثلث دقیقاً نصف یک متوازی‌الاضلاع هم‌قاعده و هم‌ارتفاعشه — اگه یک کپی از مثلث رو بچرخونی و بچسبونی به مثلث اصلی، یک متوازی‌الاضلاع کامل می‌سازی.</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon"><svg viewBox="0 0 100 100" width="60" height="60"><rect x="20" y="20" width="60" height="60" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/></svg></div>
+        <div><h4>مربع <span class="en">Square</span></h4></div>
+      </div>
+      <p>چهارضلعی‌ای که هر چهار ضلعش برابر و هر چهار زاویه‌اش ۹۰° است.</p>
+      <div class="formula-box">محیط: ۴a &nbsp;|&nbsp; مساحت: a<sup>۲</sup></div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon"><svg viewBox="0 0 100 70" width="80" height="56"><rect x="10" y="10" width="80" height="50" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/></svg></div>
+        <div><h4>مستطیل <span class="en">Rectangle</span></h4></div>
+      </div>
+      <p>چهارضلعی‌ای که ضلع‌های روبه‌رو برابرند و هر چهار زاویه‌اش ۹۰° است.</p>
+      <div class="formula-box">محیط: ۲(a+b) &nbsp;|&nbsp; مساحت: a×b</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon"><svg viewBox="0 0 100 80" width="80" height="64"><polygon points="20,65 85,65 65,15 0,15" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/></svg></div>
+        <div><h4>متوازی‌الاضلاع <span class="en">Parallelogram</span></h4></div>
+      </div>
+      <p>چهارضلعی‌ای که ضلع‌های روبه‌رو با هم موازی و برابرند و زاویه‌های روبه‌رو هم برابرند.</p>
+      <div class="formula-box">محیط: ۲(a+b) &nbsp;|&nbsp; مساحت: قاعده × ارتفاع</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 100" width="70" height="70">
+            <polygon points="50,10 90,50 50,90 10,50" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="50" y1="10" x2="50" y2="90" stroke="#7C4A99" stroke-width="1.5" stroke-dasharray="3,3"/>
+            <line x1="10" y1="50" x2="90" y2="50" stroke="#7C4A99" stroke-width="1.5" stroke-dasharray="3,3"/>
+          </svg>
+        </div>
+        <div><h4>لوزی <span class="en">Rhombus</span></h4></div>
+      </div>
+      <p>چهارضلعی‌ای که همهٔ اضلاعش برابرند و قطرهاش (خط‌چین‌های بنفش) بر هم عمودند.</p>
+      <div class="formula-box">محیط: ۴a &nbsp;|&nbsp; مساحت: <span class="frac"><span class="num">d<sub>۱</sub>×d<sub>۲</sub></span><span class="den">۲</span></span></div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon"><svg viewBox="0 0 100 80" width="80" height="64"><polygon points="15,65 85,65 65,15 35,15" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/></svg></div>
+        <div><h4>ذوزنقه <span class="en">Trapezoid</span></h4></div>
+      </div>
+      <p>چهارضلعی‌ای که فقط یک جفت از ضلع‌هاش با هم موازی‌اند.</p>
+      <div class="formula-box">محیط: a+b+c+d &nbsp;|&nbsp; مساحت: <span class="frac"><span class="num">(a+b)×h</span><span class="den">۲</span></span></div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon"><svg viewBox="0 0 100 100" width="70" height="70"><polygon points="50,10 85,30 85,70 50,90 15,70 15,30" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/></svg></div>
+        <div><h4>چندضلعی منتظم <span class="en">Regular Polygon</span></h4></div>
+      </div>
+      <p>چندضلعی‌ای که همهٔ ضلع‌ها و همهٔ زاویه‌هاش با هم برابرند (مثلاً پنج‌ضلعی یا شش‌ضلعی منتظم).</p>
+      <div class="formula-box">مجموع زوایای داخلی: (n−۲)×۱۸۰° &nbsp;|&nbsp; هر زاویهٔ داخلی: <span class="frac"><span class="num">(n−۲)×۱۸۰°</span><span class="den">n</span></span> &nbsp;|&nbsp; محیط: n × ضلع</div>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال‌ها</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — مساحت و محیط مستطیل</div>
+        <ol class="steps">
+          <li>مستطیلی با a=۸ و b=۵ داریم.</li>
+          <li>مساحت: A = ۸×۵ = ۴۰</li>
+          <li>محیط: P = ۲(۸+۵) = ۲۶</li>
+        </ol>
+        <div class="result">نتیجه: مساحت ۴۰ و محیط ۲۶ واحد است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — قضیهٔ فیثاغورس</div>
+        <ol class="steps">
+          <li>در مثلث قائم‌الزاویه a=۳ و b=۴ داریم.</li>
+          <li>c<sup>۲</sup> = ۳<sup>۲</sup> + ۴<sup>۲</sup> = ۹+۱۶ = ۲۵</li>
+          <li>c = √۲۵ = ۵</li>
+        </ol>
+        <div class="result">نتیجه: وتر برابر ۵ واحد است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — زاویهٔ داخلی شش‌ضلعی منتظم</div>
+        <ol class="steps">
+          <li>n = ۶ → مجموع زوایا = (۶−۲)×۱۸۰° = ۷۲۰°</li>
+          <li>هر زاویهٔ داخلی = <span class="frac"><span class="num">۷۲۰°</span><span class="den">۶</span></span> = ۱۲۰°</li>
+        </ol>
+        <div class="result">نتیجه: هر زاویهٔ داخلی شش‌ضلعی منتظم ۱۲۰° است.</div>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>قاطی کردن فرمول محیط و مساحت مستطیل — یکی جمع دو ضلع ضربدر دو‌ست، دیگری حاصل‌ضرب دو ضلع.</li>
+        <li>فراموش کردن ضریب <span class="ltr">½</span> در مساحت مثلث.</li>
+        <li>استفاده از فرمول مساحت لوزی به‌جای متوازی‌الاضلاع (لوزی با قطرها، متوازی‌الاضلاع با قاعده و ارتفاع محاسبه می‌شه).</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>🟡 نکات امتحانی</h3>
+      <ul class="tips">
+        <li>اگه سه ضلع مثلث داده شده و می‌خوای بفهمی قائم‌الزاویه‌ست یا نه، فیثاغورس رو با بزرگ‌ترین ضلع به‌عنوان وتر چک کن.</li>
+        <li>برای چندضلعی منتظم، همیشه اول مجموع زوایا رو با (n−۲)×۱۸۰° بگیر، بعد تقسیم بر n کن — این ترتیب اشتباه رو کم می‌کنه.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="question">
+        <p>۱. مساحت مثلثی با قاعدهٔ ۱۰ و ارتفاع ۶ را حساب کن.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">A = ½ × ۱۰ × ۶ = ۳۰</div>
+          <div class="final-answer">پاسخ نهایی: ۳۰ واحد مربع</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۲. محیط لوزی با ضلع ۷ چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">در لوزی همهٔ اضلاع برابرند، پس P = ۴×۷ = ۲۸</div>
+          <div class="final-answer">پاسخ نهایی: ۲۸ واحد</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۳. مجموع زوایای داخلی پنج‌ضلعی منتظم چند درجه است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">n=۵ → (۵−۲)×۱۸۰° = ۳×۱۸۰° = ۵۴۰°</div>
+          <div class="final-answer">پاسخ نهایی: ۵۴۰°</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section id="s3">
+    <div class="sec-head">
+      <div class="sec-badge">۳</div>
+      <div><span class="label">بخش سوم</span><h2>دایره</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مفاهیم اصلی</h3>
+      <p>دایره <span class="en">(Circle)</span> مجموعهٔ نقاطیه که فاصلهٔ ثابتی (شعاع r) از یک مرکز (O) دارن.</p>
+      <div class="concept-grid">
+        <div class="concept-item">
+          <svg viewBox="0 0 100 100" width="85" height="85">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#2C6E8E" stroke-width="2"/>
+            <circle cx="50" cy="50" r="3" fill="#1F3A52"/>
+            <line x1="50" y1="50" x2="85" y2="50" stroke="#D2534A" stroke-width="2.5"/>
+          </svg>
+          <div class="cap">شعاع (r)<span class="en">Radius</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 100" width="85" height="85">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="15" y1="50" x2="85" y2="50" stroke="#D79E28" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="2.5" fill="#1F3A52"/>
+          </svg>
+          <div class="cap">قطر (d=۲r)<span class="en">Diameter</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 100" width="85" height="85">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="22" y1="26" x2="78" y2="55" stroke="#2E9B6F" stroke-width="2.5"/>
+          </svg>
+          <div class="cap">وتر<span class="en">Chord</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 100" width="85" height="85">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#ddd" stroke-width="2"/>
+            <path d="M 85 50 A 35 35 0 0 1 50 85" fill="none" stroke="#7C4A99" stroke-width="4"/>
+          </svg>
+          <div class="cap">کمان<span class="en">Arc</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 100" width="85" height="85">
+            <path d="M 50 50 L 85 50 A 35 35 0 0 1 50 85 Z" fill="#FCF3DD" stroke="#D79E28" stroke-width="2"/>
+          </svg>
+          <div class="cap">قطاع<span class="en">Sector</span></div>
+        </div>
+        <div class="concept-item">
+          <svg viewBox="0 0 100 100" width="85" height="85">
+            <circle cx="50" cy="50" r="35" fill="none" stroke="#ddd" stroke-width="2"/>
+            <path d="M 85 50 A 35 35 0 0 1 50 85 L 85 50 Z" fill="#FBEAE8" stroke="#D2534A" stroke-width="2"/>
+          </svg>
+          <div class="cap">پاره<span class="en">Segment</span></div>
+        </div>
+      </div>
+      <div class="formula-box">محیط <span class="en">Circumference</span>: C = ۲πr &nbsp;|&nbsp; مساحت <span class="en">Area</span>: A = πr<sup>۲</sup></div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 65" width="80" height="52">
+            <path d="M 15 55 A 35 35 0 0 1 85 55" fill="none" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="15" y1="55" x2="85" y2="55" stroke="#2C6E8E" stroke-width="2"/>
+          </svg>
+        </div>
+        <div><h4>نیم‌دایره <span class="en">Semicircle</span></h4></div>
+      </div>
+      <p>نصف یک دایره است — از بریدن دایره از روی قطرش به‌دست میاد.</p>
+      <div class="formula-box">مساحت: <span class="frac"><span class="num">πr<sup>۲</sup></span><span class="den">۲</span></span> &nbsp;|&nbsp; محیط کل (کمان + قطر): πr + ۲r</div>
+      <div class="why-box">💡 چون نیم‌دایره دقیقاً نصف دایره‌ست، مساحتش هم نصف πr² میشه؛ ولی محیطش فقط نصف ۲πr نیست — باید طول قطر (۲r) رو هم که یک ضلع صافه، بهش اضافه کنیم.</div>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال‌ها</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — مساحت دایره</div>
+        <ol class="steps">
+          <li>شعاع r=۷ داده شده.</li>
+          <li>A = π×۷<sup>۲</sup> = ۴۹π</li>
+        </ol>
+        <div class="result">نتیجه: مساحت تقریباً ۴۹π ≈ ۱۵۳٫۹ واحد مربع است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — محیط از روی قطر</div>
+        <ol class="steps">
+          <li>قطر d=۱۰ داده شده، پس r=۵.</li>
+          <li>C = ۲π×۵ = ۱۰π</li>
+        </ol>
+        <div class="result">نتیجه: محیط برابر ۱۰π واحد است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — مساحت نیم‌دایره</div>
+        <ol class="steps">
+          <li>شعاع r=۶ داده شده.</li>
+          <li>مساحت کامل دایره = π×۶<sup>۲</sup> = ۳۶π</li>
+          <li>مساحت نیم‌دایره = ۳۶π ÷ ۲ = ۱۸π</li>
+        </ol>
+        <div class="result">نتیجه: مساحت نیم‌دایره ۱۸π واحد مربع است.</div>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>قاطی کردن قطر و شعاع در فرمول — همیشه فرمول‌ها بر پایهٔ r نوشته می‌شن، نه d.</li>
+        <li>فراموش کردن توان ۲ روی r در فرمول مساحت.</li>
+        <li>در محیط نیم‌دایره، فراموش کردن اضافه کردن طول قطر به نصف محیط دایره.</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>🟡 نکات امتحانی</h3>
+      <ul class="tips">
+        <li>اگه در تست فقط قطر داده شده، همیشه اول تقسیم بر ۲ کن و بعد وارد فرمول شو.</li>
+        <li>جواب رو معمولاً به‌صورت ضریبی از π نگه دار، مگر تست عدد اعشاری بخواد (π≈۳٫۱۴).</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="question">
+        <p>۱. مساحت دایره‌ای با شعاع ۷ سانتی‌متر چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">A = π×۷<sup>۲</sup> = ۴۹π</div>
+          <div class="final-answer">پاسخ نهایی: گزینهٔ ۴۹π</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۲. محیط دایره‌ای با شعاع ۳ چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">C = ۲π×۳ = ۶π</div>
+          <div class="final-answer">پاسخ نهایی: ۶π</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۳. مساحت نیم‌دایره‌ای با شعاع ۴ چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">مساحت کامل = π×۴<sup>۲</sup> = ۱۶π → مساحت نیم‌دایره = ۱۶π÷۲ = ۸π</div>
+          <div class="final-answer">پاسخ نهایی: ۸π</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="s4">
+    <div class="sec-head">
+      <div class="sec-badge">۴</div>
+      <div><span class="label">بخش چهارم</span><h2>اشکال فضایی</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مقدمه</h3>
+      <p>برخلاف اشکال دوبعدی که فقط طول و عرض دارن، اشکال فضایی <span class="en">(Solid / 3D Shapes)</span> طول، عرض و ارتفاع دارن. هر جسم فضایی از وجه <span class="en">Face</span> (سطح تخت)، یال <span class="en">Edge</span> (خط برخورد دو وجه) و رأس <span class="en">Vertex</span> (نقطهٔ برخورد یال‌ها) تشکیل شده. در ادامه هر شکل رو جدا بررسی می‌کنیم و برای هر فرمول، یک توضیح مفهومی (💡 چرا؟) هم آوردیم تا به‌جای حفظ کردن، فرمول رو واقعاً بفهمی.</p>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 100" width="70" height="70">
+            <polygon points="20,30 60,30 60,70 20,70" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <polygon points="35,15 75,15 75,55 35,55" fill="#FAF6EC" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="20" y1="30" x2="35" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="60" y1="30" x2="75" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="60" y1="70" x2="75" y2="55" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="20" y1="70" x2="35" y2="55" stroke="#2C6E8E" stroke-width="2"/>
+          </svg>
+        </div>
+        <div><h4>مکعب <span class="en">Cube</span></h4></div>
+      </div>
+      <p>۶ وجه مربعی برابر، ۱۲ یال و ۸ رأس دارد؛ همهٔ اضلاع برابر و همهٔ زاویه‌ها ۹۰° هستند.</p>
+      <div class="formula-box">حجم <span class="en">Volume</span>: a<sup>۳</sup> &nbsp;|&nbsp; مساحت کل <span class="en">Total Surface Area</span>: ۶a<sup>۲</sup></div>
+      <div class="why-box"><b>💡 چرا حجمش a³؟</b> یک مربع a×a رو تصور کن که به ضخامت a "دسته" شده — یعنی مساحت قاعده (a²) رو در ارتفاع (a) ضرب می‌کنیم. برای مساحت کل هم چون ۶ وجه مربعی داریم، مساحت یک وجه (a²) رو در ۶ ضرب می‌کنیم.</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 110 90" width="80" height="65">
+            <polygon points="15,30 70,30 70,65 15,65" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <polygon points="30,15 85,15 85,50 30,50" fill="#FAF6EC" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="15" y1="30" x2="30" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="70" y1="30" x2="85" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="70" y1="65" x2="85" y2="50" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="15" y1="65" x2="30" y2="50" stroke="#2C6E8E" stroke-width="2"/>
+          </svg>
+        </div>
+        <div><h4>مکعب مستطیل <span class="en">Cuboid (Rectangular Prism)</span></h4></div>
+      </div>
+      <p>مثل یک جعبه‌ست — ۶ وجه مستطیلی، ۱۲ یال و ۸ رأس دارد.</p>
+      <div class="formula-box">حجم <span class="en">Volume</span>: a×b×c &nbsp;|&nbsp; مساحت کل <span class="en">Total Surface Area</span>: ۲(ab+ac+bc)</div>
+      <div class="why-box"><b>💡 چرا حجمش a×b×c؟</b> این تعمیم همون منطق مکعبه: به‌جای یک قاعدهٔ مربعی، یک قاعدهٔ مستطیلی a×b داریم که به ضخامت c دسته می‌شه؛ پس حجم = مساحت قاعده (a×b) × ارتفاع (c).</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 100" width="75" height="75">
+            <polygon points="20,70 55,70 40,40" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <polygon points="35,55 70,55 55,25" fill="#FAF6EC" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="20" y1="70" x2="35" y2="55" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="55" y1="70" x2="70" y2="55" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="40" y1="40" x2="55" y2="25" stroke="#2C6E8E" stroke-width="2"/>
+          </svg>
+        </div>
+        <div><h4>منشور <span class="en">Prism</span></h4></div>
+      </div>
+      <p>دو قاعدهٔ چندضلعی برابر و موازی دارد که با وجه‌های مستطیلی به هم وصل شده‌اند (مثلاً منشور مثلثی).</p>
+      <div class="formula-box">حجم <span class="en">Volume</span>: مساحت‌قاعده×h &nbsp;|&nbsp; مساحت کل <span class="en">Total Surface Area</span>: ۲×مساحت‌قاعده + محیط‌قاعده×h</div>
+      <div class="why-box"><b>💡 چرا این‌جوریه؟</b> منشور دقیقاً همون فرمول مکعب/مکعب‌مستطیله، ولی به‌جای این‌که قاعده حتماً مربع یا مستطیل باشه، هر چندضلعی‌ای می‌تونه قاعده باشه. یعنی مکعب و مکعب‌مستطیل در واقع نوع خاصی از منشورن.</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 100" width="75" height="75">
+            <polygon points="20,75 80,75 60,60 40,60" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="20" y1="75" x2="50" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="80" y1="75" x2="50" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="60" y1="60" x2="50" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="40" y1="60" x2="50" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+          </svg>
+        </div>
+        <div><h4>هرم <span class="en">Pyramid</span></h4></div>
+      </div>
+      <p>یک قاعدهٔ چندضلعی دارد و بقیهٔ وجه‌ها مثلث‌هایی هستند که در یک نقطه (رأس) به هم می‌رسند.</p>
+      <div class="formula-box">حجم <span class="en">Volume</span>: <span class="frac"><span class="num">۱</span><span class="den">۳</span></span>×مساحت‌قاعده×h &nbsp;|&nbsp; مساحت کل <span class="en">Total Surface Area</span>: مساحت‌قاعده + <span class="frac"><span class="num">۱</span><span class="den">۲</span></span>×محیط‌قاعده×s</div>
+      <div class="why-box"><b>💡 چرا ضریب یک‌سوم؟</b> اگه یک منشور (یا مکعب) با همون قاعده و همون ارتفاع داشته باشیم، دقیقاً ۳ تا هرم مساوی داخلش جا می‌شه — می‌شه یک مکعب رو با برش، به ۳ هرم مساوی تقسیم کرد. برای همینه که حجم هرم همیشه یک‌سوم منشور هم‌قاعده و هم‌ارتفاعشه.</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 100" width="70" height="80">
+            <ellipse cx="50" cy="25" rx="30" ry="10" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="20" y1="25" x2="20" y2="75" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="80" y1="25" x2="80" y2="75" stroke="#2C6E8E" stroke-width="2"/>
+            <ellipse cx="50" cy="75" rx="30" ry="10" fill="none" stroke="#2C6E8E" stroke-width="2"/>
+          </svg>
+        </div>
+        <div><h4>استوانه <span class="en">Cylinder</span></h4></div>
+      </div>
+      <p>دو قاعدهٔ دایره‌ای برابر دارد که با یک سطح خمیده به هم وصل شده‌اند.</p>
+      <div class="formula-box">حجم <span class="en">Volume</span>: πr<sup>۲</sup>h &nbsp;|&nbsp; مساحت جانبی <span class="en">Lateral Surface Area</span>: ۲πrh &nbsp;|&nbsp; مساحت کل <span class="en">Total Surface Area</span>: ۲πr(h+r)</div>
+      <div class="why-box"><b>💡 چرا این‌جوریه؟</b> استوانه در واقع یک منشوره که قاعده‌اش به‌جای چندضلعی، دایره‌ست؛ پس حجمش هم مثل منشور، مساحت‌قاعده (πr²) ضربدر ارتفاع (h) می‌شه. برای مساحت جانبی هم، اگه سطح خمیدهٔ استوانه رو باز کنی، یک مستطیل به عرض h و طول برابر محیط دایرهٔ قاعده (۲πr) به‌دست میاد؛ مساحت این مستطیل می‌شه ۲πrh.</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 100" width="70" height="80">
+            <ellipse cx="50" cy="80" rx="30" ry="10" fill="none" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="20" y1="80" x2="50" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+            <line x1="80" y1="80" x2="50" y2="15" stroke="#2C6E8E" stroke-width="2"/>
+          </svg>
+        </div>
+        <div><h4>مخروط <span class="en">Cone</span></h4></div>
+      </div>
+      <p>یک قاعدهٔ دایره‌ای و یک رأس دارد (شبیه بستنی قیفی).</p>
+      <div class="formula-box">حجم <span class="en">Volume</span>: <span class="frac"><span class="num">۱</span><span class="den">۳</span></span>πr<sup>۲</sup>h &nbsp;|&nbsp; ارتفاع مایل <span class="en">Slant Height</span>: s=√(r<sup>۲</sup>+h<sup>۲</sup>) &nbsp;|&nbsp; مساحت جانبی <span class="en">Lateral Surface Area</span>: πrs &nbsp;|&nbsp; مساحت کل <span class="en">Total Surface Area</span>: πr(r+s)</div>
+      <div class="why-box"><b>💡 چرا مخروط یک‌سوم استوانه‌ست؟</b> مخروط دقیقاً مثل هرمه، فقط قاعده‌اش دایره‌ست به‌جای چندضلعی. همون‌طور که هرم یک‌سوم منشور هم‌قاعده و هم‌ارتفاعشه، مخروط هم همیشه یک‌سوم استوانه‌ای‌ست که قاعده و ارتفاعش با اون یکیه. می‌تونی خودت امتحان کنی: اگه یک مخروط رو با آب پر کنی و سه بار خالیش کنی توی یک استوانهٔ هم‌قاعده و هم‌ارتفاع، دقیقاً پر می‌شه.</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 100" width="70" height="80">
+            <circle cx="50" cy="50" r="35" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <ellipse cx="50" cy="50" rx="35" ry="12" fill="none" stroke="#2C6E8E" stroke-width="1.5" stroke-dasharray="3,3"/>
+          </svg>
+        </div>
+        <div><h4>کره <span class="en">Sphere</span></h4></div>
+      </div>
+      <p>یک جسم فضایی کاملاً گرد است؛ همهٔ نقاط سطح آن به یک اندازه از مرکز فاصله دارند (مثل توپ).</p>
+      <div class="formula-box">حجم <span class="en">Volume</span>: <span class="frac"><span class="num">۴</span><span class="den">۳</span></span>πr<sup>۳</sup> &nbsp;|&nbsp; مساحت کل <span class="en">Total Surface Area</span>: ۴πr<sup>۲</sup></div>
+      <div class="why-box"><b>💡 یک راه یادآوری:</b> ارشمیدس نشون داد که حجم کره دقیقاً دوسوم حجم استوانه‌ایه که کره داخلش جا می‌شه (استوانه‌ای با شعاع r و ارتفاع ۲r). یعنی <span class="ltr">⅔ × πr² × 2r = 4/3 πr³</span> — همون فرمول حجم کره.</div>
+    </div>
+
+    <div class="shape-sub">
+      <div class="shape-head">
+        <div class="shape-icon">
+          <svg viewBox="0 0 100 70" width="70" height="50">
+            <path d="M 15 50 A 35 35 0 0 1 85 50" fill="#EAF4F8" stroke="#2C6E8E" stroke-width="2"/>
+            <ellipse cx="50" cy="50" rx="35" ry="10" fill="none" stroke="#2C6E8E" stroke-width="2"/>
+          </svg>
+        </div>
+        <div><h4>نیم‌کره <span class="en">Hemisphere</span></h4></div>
+      </div>
+      <p>نصف یک کره است.</p>
+      <div class="formula-box">حجم <span class="en">Volume</span>: <span class="frac"><span class="num">۲</span><span class="den">۳</span></span>πr<sup>۳</sup> &nbsp;|&nbsp; مساحت جانبی <span class="en">Curved Surface Area</span>: ۲πr<sup>۲</sup> &nbsp;|&nbsp; مساحت کل <span class="en">Total Surface Area</span>: ۳πr<sup>۲</sup></div>
+      <div class="why-box"><b>💡 چرا این‌جوریه؟</b> چون نیم‌کره دقیقاً نصف کره‌ست، حجمش هم دقیقاً نصف فرمول حجم کره می‌شه (۲/۳ به‌جای ۴/۳). برای مساحت هم، نصف سطح خمیدهٔ کره (نصف ۴πr² که می‌شه ۲πr²) رو داریم؛ ولی چون نیم‌کره یک قاعدهٔ دایره‌ای مسطح (πr²) هم داره، برای مساحت کل باید اون رو هم اضافه کنیم: ۲πr² + πr² = ۳πr².</div>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال‌ها</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — حجم مکعب مستطیل</div>
+        <ol class="steps">
+          <li>a=۵، b=۴، c=۳ داده شده.</li>
+          <li>حجم = ۵×۴×۳ = ۶۰</li>
+        </ol>
+        <div class="result">نتیجه: حجم برابر ۶۰ سانتی‌متر مکعب است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — حجم استوانه</div>
+        <ol class="steps">
+          <li>r=۷، h=۱۰ داده شده.</li>
+          <li>حجم = π×۷<sup>۲</sup>×۱۰ = ۴۹۰π</li>
+        </ol>
+        <div class="result">نتیجه: حجم استوانه ۴۹۰π سانتی‌متر مکعب است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — حجم مخروط</div>
+        <ol class="steps">
+          <li>r=۳، h=۴ داده شده.</li>
+          <li>حجم = <span class="frac"><span class="num">۱</span><span class="den">۳</span></span>×π×۳<sup>۲</sup>×۴ = ۱۲π</li>
+        </ol>
+        <div class="result">نتیجه: حجم مخروط ۱۲π سانتی‌متر مکعب است.</div>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>فراموش کردن ضریب <span class="ltr">⅓</span> در فرمول حجم هرم و مخروط.</li>
+        <li>قاطی کردن مساحت جانبی و مساحت کل استوانه/مخروط — مساحت کل شامل قاعده‌ها هم می‌شه.</li>
+        <li>استفاده از فرمول کره برای نیم‌کره بدون تقسیم بر ۲ (برای حجم) یا بدون افزودن قاعده (برای مساحت کل).</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>🟡 نکات امتحانی</h3>
+      <ul class="tips">
+        <li>جدول فرمول‌های هر شکل رو جدا حفظ کن؛ اکثر تست‌ها فقط جای‌گذاری عدد در فرمولن.</li>
+        <li>وقتی مخروط داده شده و ارتفاع مایل (s) خواسته شده، از قضیهٔ فیثاغورس s=√(r<sup>۲</sup>+h<sup>۲</sup>) استفاده کن.</li>
+        <li>به‌جای حفظ کورکورانهٔ فرمول‌ها، رابطهٔ «هرم = یک‌سوم منشور» و «مخروط = یک‌سوم استوانه» رو به خاطر بسپار؛ خیلی از فرمول‌ها از همین یک ایده میان.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="question">
+        <p>۱. حجم مکعبی با ضلع ۴ چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">حجم = ۴<sup>۳</sup> = ۶۴</div>
+          <div class="final-answer">پاسخ نهایی: ۶۴ سانتی‌متر مکعب</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۲. مخروطی با شعاع ۳ و ارتفاع ۴ دارد. حجم آن چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">A) ۱۲π &nbsp; B) ۲۴π &nbsp; C) ۳۶π &nbsp; D) ۴۸π<br>حجم = ⅓×π×۳<sup>۲</sup>×۴ = ۱۲π</div>
+          <div class="final-answer">پاسخ نهایی: گزینهٔ A) ۱۲π</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۳. مساحت کل کره‌ای با شعاع ۵ چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">مساحت = ۴π×۵<sup>۲</sup> = ۱۰۰π</div>
+          <div class="final-answer">پاسخ نهایی: ۱۰۰π</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section id="s5">
+    <div class="sec-head">
+      <div class="sec-badge">۵</div>
+      <div><span class="label">بخش پنجم</span><h2>تشابه اشکال و مختصات دکارتی</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مفاهیم اصلی</h3>
+      <p><b>تشابه <span class="en">(Similarity)</span>:</b> دو شکل وقتی مشابه‌ان که زاویه‌های متناظرشون برابر و ضلع‌های متناظرشون متناسب باشن.</p>
+      <div class="formula-box">نسبت مساحت‌ها = (نسبت اضلاع)<sup>۲</sup> &nbsp;|&nbsp; نسبت حجم‌ها = (نسبت اضلاع)<sup>۳</sup></div>
+      <ol class="steps-main">
+        <li>نسبت دو ضلع متناظر رو پیدا کن.</li>
+        <li>برای نسبت مساحت، اون نسبت رو به توان ۲ برسون.</li>
+        <li>برای نسبت حجم، همون نسبت رو به توان ۳ برسون.</li>
+      </ol>
+      <p><b>مختصات دکارتی <span class="en">(Cartesian Coordinates)</span>:</b> هر نقطه در صفحه با یک جفت مختصات (x, y) نشون داده می‌شه.</p>
+      <div class="formula-box">فاصلهٔ دو نقطه <span class="en">(Distance Between Two Points)</span> A(x<sub>۱</sub>,y<sub>۱</sub>) و B(x<sub>۲</sub>,y<sub>۲</sub>): d = √((x<sub>۲</sub>−x<sub>۱</sub>)<sup>۲</sup> + (y<sub>۲</sub>−y<sub>۱</sub>)<sup>۲</sup>)</div>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال‌ها</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — نسبت حجم دو مکعب مشابه</div>
+        <ol class="steps">
+          <li>اضلاع دو مکعب ۲ و ۶ است، پس نسبت اضلاع = ۲:۶ = ۱:۳</li>
+          <li>نسبت حجم‌ها = (۱:۳)<sup>۳</sup> = ۱:۲۷</li>
+        </ol>
+        <div class="result">نتیجه: نسبت حجم‌ها برابر ۱:۲۷ است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — نسبت مساحت دو مثلث مشابه</div>
+        <ol class="steps">
+          <li>نسبت اضلاع دو مثلث ۲:۵ است.</li>
+          <li>نسبت مساحت‌ها = (۲:۵)<sup>۲</sup> = ۴:۲۵</li>
+        </ol>
+        <div class="result">نتیجه: نسبت مساحت‌ها برابر ۴:۲۵ است.</div>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — فاصلهٔ دو نقطه</div>
+        <ol class="steps">
+          <li>A(۳,۴) و B(۷,۱) داده شده.</li>
+          <li>d = √((۷−۳)<sup>۲</sup> + (۱−۴)<sup>۲</sup>) = √(۱۶+۹) = √۲۵ = ۵</li>
+        </ol>
+        <div class="result">نتیجه: فاصلهٔ دو نقطه برابر ۵ واحد است.</div>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>استفاده از نسبت اضلاع به‌جای توان‌دار کردنش برای مساحت یا حجم.</li>
+        <li>فراموش کردن به توان دو رساندن هر دو جمله در فرمول فاصله، قبل از جمع کردن.</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>🟡 نکات امتحانی</h3>
+      <ul class="tips">
+        <li>اگه در تست کلمهٔ «مشابه» یا «نسبت طول» دیدی، بلافاصله به فکر توان ۲ (مساحت) یا توان ۳ (حجم) باش.</li>
+        <li>در فرمول فاصله، ترتیب تفریق مهم نیست چون نتیجه به توان دو می‌رسه.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="question">
+        <p>۱. دو مکعب مشابه با اضلاع ۲ و ۶ سانتی‌متر داریم. نسبت حجم آن‌ها کدام است؟ الف) ۱:۳ ب) ۱:۶ ج) ۱:۹ د) ۱:۲۷</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">نسبت اضلاع = ۱:۳ → نسبت حجم = (۱:۳)<sup>۳</sup> = ۱:۲۷</div>
+          <div class="final-answer">پاسخ نهایی: گزینهٔ د) ۱:۲۷</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۲. فاصلهٔ نقاط A(۰,۰) و B(۶,۸) چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">d = √(۶<sup>۲</sup>+۸<sup>۲</sup>) = √(۳۶+۶۴) = √۱۰۰ = ۱۰</div>
+          <div class="final-answer">پاسخ نهایی: ۱۰</div>
+        </details>
+      </div>
+      <div class="question">
+        <p>۳. اگر نسبت اضلاع دو چندضلعی مشابه ۳:۴ باشد، نسبت مساحت آن‌ها چقدر است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">نسبت مساحت = (۳:۴)<sup>۲</sup> = ۹:۱۶</div>
+          <div class="final-answer">پاسخ نهایی: ۹:۱۶</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUMMARY -->
+  <div class="summary-box" id="summary">
+    <h2>جمع‌بندی فصل</h2>
+    <div class="pill-row">
+      <span class="pill">مفاهیم پایه</span>
+      <span class="pill">مثلث و چندضلعی</span>
+      <span class="pill">دایره</span>
+      <span class="pill">اشکال فضایی</span>
+      <span class="pill">تشابه و مختصات</span>
+    </div>
+    <p>از نقطه و خط شروع کردیم، رسیدیم به مثلث و چندضلعی‌های مسطح و دایره، بعد وارد دنیای اشکال فضایی و حجم شدیم، و در آخر با تشابه و مختصات دکارتی، پل بین هندسه و جبر رو زدیم.</p>
+    <div class="compass">🧭 هر مبحث پایهٔ مبحث بعدیه؛ اگه جایی گیر کردی، برگرد به کارت آبی همون بخش و تعریف رو یه‌بار دیگه بخون — قدم‌به‌قدم جلو رفتن همیشه از حفظ کردن سریع‌تر جواب می‌ده.</div>
+  </div>
+
+</div>
+
+<footer>جزوهٔ آموزشی هندسه — ساخته‌شده برای مطالعهٔ خودآموز</footer>
+
+</body>
+</html>

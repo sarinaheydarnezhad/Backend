@@ -1,0 +1,94 @@
+جزوه لاجیک CEnT — فصل ۹: شرط لازم و کافی
+
+CENT LOGIC — PART A · CHAPTER 9 / 13 · 🔴 CHALLENGE
+فصل ۹: شرط لازم و کافی — Necessary and Sufficient Conditions
+کلمات «necessary» و «sufficient» فقط یک زبان دیگه برای گفتن همون «If A then B» هستن — ولی هر کدوم از یک زاویه‌ی متفاوت به رابطه نگاه می‌کنن. این فصل مستقیماً روی چیزی که در فصل ۸ یاد گرفتی بنا می‌شه.
+Bاین مبحث چیست؟
+وقتی سؤال می‌گه «X برای Y لازمه (necessary)» یا «X برای Y کافیه (sufficient)»، در واقع داره یک گزاره‌ی شرطی رو توصیف می‌کنه — فقط باید بدونی هر کلمه به کدوم جهت اشاره می‌کنه.
+Cمفهوم اصلی
+قدم ۱ — «A sufficient for B» (A برای B کافیه) = «If A then B». یعنی وجود A به‌تنهایی برای تضمین B کافیه — هرچند ممکنه B از راه‌های دیگه هم اتفاق بیفته.
+"If I become rich, then I'll be happy."→ "Becoming rich" is sufficient for "being happy."
+پولدار شدن به‌تنهایی کافیه تا خوشحال بشم — ولی شاید از راه‌های دیگه‌ای هم (بدون پولدار شدن) بشه خوشحال بود.
+قدم ۲ — «A necessary for B» (A برای B لازمه) = «If B then A» (که هم‌ارزه با «If not-A then not-B»). یعنی بدون A، رسیدن به B غیرممکنه — A یک پیش‌نیازه.
+"Oxygen is necessary for combustion."= "If there's combustion, then there's oxygen."= "If there's no oxygen, then there's no combustion."
+قدم ۳ — نکته‌ی کلیدی: یک شرطیِ واحد، هم‌زمان می‌تونه هم «sufficient» و هم «necessary» توصیف بشه — فقط بستگی داره از کدوم طرف نگاهش کنی.
+"If I have a driver's license, then I passed a driver's test."
+این یک گزاره‌ی شرطیه، ولی دو تا توصیف داره:
+"Passing a driver's test" is necessary for "having a driver's license." (چون بدون قبولی در آزمون، نمی‌شه گواهینامه داشت)
+"Having a driver's license" is sufficient for "passing a driver's test." (چون داشتن گواهینامه به‌تنهایی تضمین می‌کنه که آزمون رو قبول شدی)
+هر دو جمله دقیقاً همون یک شرطی رو توصیف می‌کنن — فقط از دو زاویه.
+قدم ۴ — «A necessary AND sufficient for B» = «A if and only if B». یعنی هر دو جهت («If A then B» و «If B then A») هم‌زمان برقرارن — همون بایکاندیشنالِ فصل ۸.
+Dقوانین و اصول مهم
+توصیف
+معادل شرطی
+A necessary for B
+If B then A
+A sufficient for B
+If A then B
+A necessary and sufficient for B
+If A then B and If B then A
+«Sufficient» همیشه با مقدم (بخش if) یک شرطی مچ می‌شه.
+«Necessary» همیشه با تالی (بخش then) یک شرطی مچ می‌شه.
+یک شرطیِ واحد، هم‌زمان از دو زاویه قابل توصیفه: «مقدم برای تالی کافیه» و «تالی برای مقدم لازمه».
+Eروش حل
+مشخص کن کلمه‌ی «necessary» به‌کار رفته یا «sufficient».
+اگه «sufficient»، همون چیزیه که مقدمِ شرطیه (If X then Y). اگه «necessary»، همون چیزیه که تالیه (If Y then X).
+جمله رو به فرم استاندارد «If…then» بازنویسی کن.
+اگه لازم شد، از هم‌ارزیِ contrapositive (فصل ۸) هم برای بیان دیگه‌ای از همون رابطه استفاده کن.
+→ جواب: گزاره‌ی شرطیِ استاندارد.
+Fمثال آموزشی
+"Having a valid ticket is necessary for boarding the train." Rewrite this in standard "If...then" form.
+پاسخ: "If a person boards the train, then they have a valid ticket." طبق قدم ۲، «necessary» همیشه تالیِ شرطیه — یعنی «boarding the train» مقدمه و «having a valid ticket» تالی.
+Gمثال امتحانی
+"Being a licensed pharmacist is sufficient to dispense prescription medication." Which of the following must be true, based only on this claim?
+A) If a person is a licensed pharmacist, they can dispense prescription medication.
+B) Only licensed pharmacists can dispense prescription medication.
+C) If a person can dispense prescription medication, they are a licensed pharmacist.
+D) Being a licensed pharmacist is also necessary to dispense prescription medication.
+🎯 EXAM TIP
+یک ترفند حفظی: Sufficient = Enough (به‌تنهایی کافیه، پس مقدمه) و Necessary = Needed (بدونش نمی‌شه، پس تالیه که باید همراه باشه). هر بار قبل از حل، این دو کلمه رو با معادل فارسیشون («کافی» و «لازم») تطبیق بده تا جهت رو گم نکنی.
+⚡ QUICK METHOD
+یادت باشه از فصل ۸: «X only if Y» = «X is sufficient for Y» (چون هر دو یعنی «If X then Y»)، و «X if Y» = «X is necessary for Y» (چون هر دو یعنی «If Y then X»). اگه جمله‌ی «only if» یا «if» رو راحت‌تر می‌فهمی، همیشه می‌تونی بین این دو زبان جابه‌جا بشی.
+⚠️ COMMON MISTAKES
+اشتباه: جابه‌جا کردن جهت «necessary» و «sufficient» — مثلاً فکر کردن «A sufficient for B» یعنی «If B then A».
+چرا اتفاق می‌افته: این دو کلمه از نظر شهودی خیلی به هم شبیهن و بدون یک قاعده‌ی ثابت، ذهن به‌راحتی جهتشون رو با هم قاطی می‌کنه.
+چطور جلوش رو بگیریم: همیشه اول جمله رو به فرم «If…then» ساده برگردون (طبق جدول قدم ۴)، و فقط بعد از اون با فرم استانداردی که بلدی (فصل ۴ و ۷) کار کن — به‌جای اینکه مستقیم با کلمات «necessary/sufficient» استدلال کنی.
+🪤 QUESTION TRAP
+وقتی سؤال فقط ادعای «necessary» (یا فقط «sufficient») می‌کنه، آزمون گزینه‌ای می‌ذاره که انگار رابطه دوطرفه‌ست (یعنی هم لازمه هم کافیه). همیشه چک کن که آیا متن سؤال واقعاً هر دو جهت رو گفته یا فقط یکی — دقیقاً مثل مثال امتحانی بالا.
+🧠 MUST REMEMBER
+A necessary for B = If B then A | A sufficient for B = If A then B | هر دو با هم = بایکاندیشنال (iff). Sufficient ↔ مقدم، Necessary ↔ تالی.
+📝تمرین
+"Having a pulse is necessary for being alive." Which is the correct standard form?
+A) "If a person has a pulse, then they are alive."
+B) "If a person is alive, then they have a pulse."
+C) "A person is alive if and only if they have a pulse."
+D) "Having a pulse guarantees being alive."
+نمایش پاسخ و توضیح
+پاسخ درست: B. «necessary» یعنی تالیِ شرطیه. اینجا "having a pulse" برای "being alive" لازمه، پس: "If (alive) then (has a pulse)".
+"Scoring above 90% is sufficient to receive an A grade." A student scored 95% but did NOT receive an A (due to an unrelated academic misconduct penalty). Does this contradict the original claim?
+A) Yes — the claim guarantees an A for any score above 90%, with no stated exceptions.
+B) No — "sufficient" only means it's possible to get an A, not guaranteed.
+C) No — academic misconduct is a necessary condition, so it overrides sufficiency.
+D) Cannot be determined without knowing the full grading policy.
+نمایش پاسخ و توضیح
+پاسخ درست: A. «Sufficient» طبق تعریف یعنی «If A then B» بدون قید و شرط اضافه — یعنی نمره‌ی بالای ۹۰٪ به‌تنهایی باید A رو تضمین کنه. وقتی این اتفاق نمی‌افته، طبق جدول درستی فصل ۴ (مقدم درست، تالی غلط)، خودِ گزاره‌ی اصلی نقض شده. گزینه‌ی B معنای «sufficient» رو اشتباه، به‌عنوان «ممکنه» به‌جای «تضمین‌شده» تفسیر کرده.
+"Being a mammal is necessary for being a dog, but it is not sufficient." Which of the following best captures what this claim tells us?
+A) Every mammal is a dog.
+B) Every dog is a mammal, but not every mammal is a dog.
+C) No mammal can be a dog.
+D) Being a mammal and being a dog are logically equivalent.
+نمایش پاسخ و توضیح
+پاسخ درست: B. «Being a mammal is necessary for being a dog» = «If (is a dog) then (is a mammal)» — یعنی هر سگی پستاندار است. «but not sufficient» یعنی «If (is a mammal) then (is a dog)» برقرار نیست — یعنی هر پستانداری لزوماً سگ نیست (مثل گربه یا فیل). گزینه‌ی D اشتباهه چون دقیقاً می‌گه رابطه یک‌طرفه‌ست، نه دوطرفه (iff)؛ اگه دوطرفه بود، «sufficient» هم برقرار می‌بود.
+🚀مرور سریع — فصل ۹
+مفاهیم اصلی
+A necessary for B = If B then A
+A sufficient for B = If A then B
+هر دو با هم = بایکاندیشنال (iff)
+روش
+Sufficient ↔ مقدم، Necessary ↔ تالی.
+اول به فرم «If…then» ساده برگردون.
+اشتباهات رایج
+جابه‌جا کردن جهت necessary/sufficient.
+استدلال مستقیم با کلمات، بدون بازنویسیِ شرطی.
+دام‌های تستی
+فرض کردن رابطه‌ی دوطرفه وقتی فقط یک جهت گفته شده.

@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فصل ۷ | آمار</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EC;
+    --dot:#E3DCC8;
+    --navy:#1F3A52;
+    --blue:#2C6E8E;   --blue-bg:#EAF4F8;
+    --green:#2E9B6F;  --green-bg:#EAF7F0;
+    --red:#D2534A;    --red-bg:#FBEAE8;
+    --gold:#D79E28;   --gold-bg:#FCF3DD;
+    --purple:#7C4A99; --purple-bg:#F4EDF8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Vazirmatn', sans-serif;
+    background-color:var(--bg);
+    background-image:radial-gradient(var(--dot) 1.6px, transparent 1.6px);
+    background-size:22px 22px;
+    color:#2A2A2A;
+    line-height:1.9;
+  }
+  .ltr{ direction:ltr; unicode-bidi:isolate; display:inline-block; }
+  .frac{ display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; line-height:1.1; direction:ltr; unicode-bidi:isolate; }
+  .frac .num{ border-bottom:2px solid currentColor; padding:0 4px 2px 4px; }
+  .frac .den{ padding:2px 4px 0 4px; }
+
+  nav{
+    position:sticky; top:0; z-index:50;
+    background:var(--navy);
+    padding:14px 24px;
+    display:flex; flex-wrap:wrap; gap:6px 18px;
+    justify-content:center;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+  }
+  nav a{
+    color:#EAF4F8; text-decoration:none; font-size:.85rem; font-weight:500;
+    padding:6px 10px; border-radius:8px; transition:.2s;
+    white-space:nowrap;
+  }
+  nav a:hover{ background:rgba(255,255,255,.12); }
+
+  .wrap{ max-width:900px; margin:0 auto; padding:28px 18px 80px; }
+
+  .hero{
+    background:linear-gradient(135deg, var(--navy), var(--blue), var(--green));
+    background-image:linear-gradient(135deg, var(--navy), var(--blue), var(--green)),
+      radial-gradient(rgba(255,255,255,.18) 1.5px, transparent 1.5px);
+    background-size:auto, 20px 20px;
+    color:#fff; border-radius:22px; padding:40px 30px; margin-bottom:34px;
+    text-align:center; box-shadow:0 10px 25px rgba(31,58,82,.25);
+  }
+  .eyebrow{
+    display:inline-block; background:rgba(255,255,255,.18); padding:5px 16px;
+    border-radius:999px; font-size:.8rem; margin-bottom:14px; letter-spacing:.5px;
+  }
+  .hero h1{ font-size:2.1rem; margin:0 0 10px; font-weight:800; }
+  .hero p{ font-size:1.02rem; opacity:.92; margin:0; }
+
+  .how-cycle{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin:24px 0 10px; }
+  .how-step{
+    flex:1 1 160px; min-width:150px; background:#fff; border-radius:16px; padding:18px 14px;
+    text-align:center; box-shadow:0 3px 10px rgba(0,0,0,.06); border-top:5px solid;
+  }
+  .how-step .num{
+    width:34px;height:34px;border-radius:50%; color:#fff; display:flex;
+    align-items:center;justify-content:center; margin:0 auto 10px; font-weight:700;
+  }
+  .how-step.s1{ border-color:var(--blue); } .how-step.s1 .num{ background:var(--blue); }
+  .how-step.s2{ border-color:var(--green); } .how-step.s2 .num{ background:var(--green); }
+  .how-step.s3{ border-color:var(--red); } .how-step.s3 .num{ background:var(--red); }
+  .how-step.s4{ border-color:var(--gold); } .how-step.s4 .num{ background:var(--gold); }
+  .how-step.s5{ border-color:var(--purple); } .how-step.s5 .num{ background:var(--purple); }
+  .how-step h4{ margin:0 0 6px; font-size:.95rem; }
+  .how-step p{ margin:0; font-size:.82rem; color:#555; }
+
+  section.topic{ margin:56px 0; scroll-margin-top:80px; }
+  .section-head{ display:flex; align-items:center; gap:14px; margin-bottom:22px; }
+  .badge{
+    width:44px; height:44px; border-radius:50%; background:var(--navy); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:1.15rem;
+    flex-shrink:0;
+  }
+  .section-head .tag{ font-size:.78rem; color:var(--blue); font-weight:600; display:block; margin-bottom:2px;}
+  .section-head h2{ margin:0; font-size:1.35rem; color:var(--navy); }
+
+  .card{ border-radius:18px; padding:22px 24px; margin-bottom:18px; box-shadow:0 3px 12px rgba(0,0,0,.05); }
+  .card h3{ margin:0 0 12px; font-size:1.05rem; display:flex; align-items:center; gap:8px; }
+  .card.blue{ background:var(--blue-bg); border:1px solid #cfe4ec; } .card.blue h3{ color:var(--blue); }
+  .card.green{ background:var(--green-bg); border:1px solid #cdeadb; } .card.green h3{ color:var(--green); }
+  .card.red{ background:var(--red-bg); border:1px solid #f2d3d0; } .card.red h3{ color:var(--red); }
+  .card.gold{ background:var(--gold-bg); border:1px solid #f3e2b3; } .card.gold h3{ color:var(--gold); }
+  .card.purple{ background:var(--purple-bg); border:1px solid #e2d0ec; } .card.purple h3{ color:var(--purple); }
+
+  .formula-box{
+    background:var(--navy); color:#fff; border-radius:12px; padding:16px 20px;
+    margin:14px 0; text-align:center; font-size:1.05rem; overflow-x:auto;
+  }
+  ol.steps-list{ margin:10px 0 0; padding-inline-start:22px; }
+  ol.steps-list li{ margin-bottom:6px; }
+
+  .example{ margin-bottom:14px; }
+  .example:last-child{ margin-bottom:0; }
+  .example .ex-title{ font-weight:700; color:var(--green); margin-bottom:6px; }
+  .steps{ background:#fff; border-radius:10px; padding:12px 16px; margin:8px 0; border:1px dashed #bfe3cf; }
+  .steps p{ margin:4px 0; }
+  .result{ background:var(--green); color:#fff; border-radius:8px; padding:8px 14px; display:inline-block; font-weight:700; margin-top:6px; }
+
+  ul.mistakes{ list-style:none; margin:0; padding:0; }
+  ul.mistakes li{ margin-bottom:10px; padding-inline-start:26px; position:relative; }
+  ul.mistakes li::before{ content:"✗"; position:absolute; inset-inline-start:0; color:var(--red); font-weight:800; }
+
+  ul.tips{ list-style:none; margin:0; padding:0; }
+  ul.tips li{ margin-bottom:10px; padding-inline-start:26px; position:relative; }
+  ul.tips li::before{ content:"★"; position:absolute; inset-inline-start:0; color:var(--gold); }
+
+  .q-block{ margin-bottom:16px; background:#fff; border-radius:12px; padding:14px 18px; border:1px solid #e2d0ec; }
+  .q-block:last-child{ margin-bottom:0; }
+  details summary{ cursor:pointer; color:var(--purple); font-weight:700; margin-top:8px; }
+  details .answer{ margin-top:10px; padding-top:10px; border-top:1px dashed #d8c3e6; }
+  .final-ans{ font-weight:800; color:var(--purple); }
+
+  .summary-box{
+    background:linear-gradient(135deg, var(--navy), var(--blue), var(--green));
+    color:#fff; border-radius:22px; padding:38px 28px; text-align:center; margin-top:60px;
+  }
+  .pills{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:16px 0; }
+  .pill{ background:rgba(255,255,255,.18); padding:6px 16px; border-radius:999px; font-size:.85rem; }
+  .compass{ background:rgba(255,255,255,.14); border-radius:14px; padding:16px 20px; margin-top:18px; font-size:.95rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#howto">راهنمای استفاده</a>
+  <a href="#s1">جامعه و نمونه</a>
+  <a href="#s2">جدول فراوانی</a>
+  <a href="#s3">نمودارها</a>
+  <a href="#s4">شاخص‌های مرکزی</a>
+  <a href="#s5">شاخص‌های پراکندگی</a>
+  <a href="#end">جمع‌بندی</a>
+</nav>
+
+<div class="wrap">
+
+  <div class="hero">
+    <span class="eyebrow">فصل ۷ | جزوهٔ آموزشی گام‌به‌گام</span>
+    <h1>آمار (Statistics)</h1>
+    <p>از جامعه و نمونه تا جدول‌ها، نمودارها، شاخص‌های مرکزی و پراکندگی — قدم‌به‌قدم و بدون پرش مفهومی</p>
+  </div>
+
+  <section id="howto" class="topic">
+    <div class="section-head">
+      <span class="badge">؟</span>
+      <div><span class="tag">مقدمه</span><h2>چگونه از این جزوه استفاده کنیم؟</h2></div>
+    </div>
+    <div class="how-cycle">
+      <div class="how-step s1"><div class="num">۱</div><h4>فهم مفهوم</h4><p>کارت آبی رو بخون تا تعریف و فرمول دستت بیاد.</p></div>
+      <div class="how-step s2"><div class="num">۲</div><h4>دیدن مثال</h4><p>مثال‌های سبز رو خط‌به‌خط دنبال کن.</p></div>
+      <div class="how-step s3"><div class="num">۳</div><h4>بررسی دام‌ها</h4><p>اشتباهات رایج قرمز رو بشناس تا توشون نیفتی.</p></div>
+      <div class="how-step s4"><div class="num">۴</div><h4>هایلایت امتحانی</h4><p>نکات طلایی برای سرعت تست‌زنی.</p></div>
+      <div class="how-step s5"><div class="num">۵</div><h4>حل تمرین</h4><p>تمرین بنفش رو خودت حل کن، بعد جواب رو ببین.</p></div>
+    </div>
+  </section>
+
+  <!-- SECTION 1 -->
+  <section id="s1" class="topic">
+    <div class="section-head">
+      <span class="badge">۱</span>
+      <div><span class="tag">بخش اول</span><h2>جامعه و نمونه، انواع متغیرها</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مفاهیم اصلی</h3>
+      <p>آمار یعنی تبدیل داده‌های خام به اطلاعات معنی‌دار. برای شروع، باید دو مفهوم پایه رو بشناسی:</p>
+      <ol class="steps-list">
+        <li><b>جامعه (Population):</b> کل مجموعه‌ای که ویژگی موردنظرمون رو داریم بررسی می‌کنیم. مثال: تمام دانش‌آموزان ایران.</li>
+        <li><b>نمونه (Sample):</b> بخشی از جامعه که انتخاب می‌کنیم تا با بررسی اون، دربارهٔ کل جامعه نتیجه‌گیری کنیم. مثال: دانش‌آموزان یک استان.</li>
+      </ol>
+      <p>بعد از این، باید نوع متغیر رو تشخیص بدی — چون نوع نمودار و شاخص‌هایی که بعداً استفاده می‌کنی به همین بستگی داره:</p>
+      <ol class="steps-list">
+        <li><b>متغیر کمّی:</b> قابل شمارش یا اندازه‌گیریه. دو زیرنوع داره: <b>گسسته</b> (فقط عدد صحیح، مثل تعداد افراد) و <b>پیوسته</b> (عدد اعشاری هم می‌گیره، مثل قد و وزن).</li>
+        <li><b>متغیر کیفی:</b> قابل شمارش یا اندازه‌گیری نیست. دو زیرنوع داره: <b>ترتیبی</b> (رتبه‌بندی طبیعی داره، مثل سطح تحصیلات) و <b>اسمی</b> (فقط نوع و وضعیت داره، بدون ترتیب، مثل گروه خونی).</li>
+      </ol>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — تشخیص جامعه و نمونه</div>
+        <div class="steps">
+          <p>می‌خوایم میانگین قد دانش‌آموزان یک شهر رو پیدا کنیم، ولی به‌جای بررسی همه، قد ۱۰۰ دانش‌آموز رو اندازه می‌گیریم.</p>
+        </div>
+        <span class="result">جامعه: همهٔ دانش‌آموزان شهر | نمونه: همان ۱۰۰ نفر</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — کمّی گسسته یا پیوسته؟</div>
+        <div class="steps">
+          <p>«تعداد اعضای خانواده» فقط عدد صحیح می‌گیره (نمی‌شه گفت ۳٫۵ نفر).</p>
+        </div>
+        <span class="result">گسسته</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — کیفی ترتیبی یا اسمی؟</div>
+        <div class="steps">
+          <p>«سطح تحصیلات» یک ترتیب طبیعی داره: دیپلم &lt; فوق‌دیپلم &lt; کارشناسی &lt; ارشد &lt; دکترا.</p>
+        </div>
+        <span class="result">ترتیبی</span>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>جامعه و نمونه رو جابه‌جا گرفتن — یادت باشه نمونه همیشه <b>زیرمجموعهٔ</b> جامعه‌ست، نه برعکس.</li>
+        <li>«وزن» یا «قد» رو گسسته در نظر گرفتن، درحالی‌که چون عدد اعشاری هم می‌گیرن، پیوسته هستن.</li>
+        <li>گروه خونی رو ترتیبی فرض کردن؛ گروه خونی فقط نوع داره و ترتیبی بین A و B وجود نداره، پس اسمیه.</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>⭐ نکات امتحانی</h3>
+      <ul class="tips">
+        <li>سؤال تشخیص نوع متغیر معمولاً با یک کلمهٔ کلیدی حل می‌شه: اگه «می‌شه شمرد» بگو کمّی گسسته، اگه «می‌شه اندازه گرفت» بگو کمّی پیوسته.</li>
+        <li>اگه بین گزینه‌ها رتبه یا ترتیب معنی‌داری دیدی (کم، متوسط، زیاد)، بی‌درنگ بگو ترتیبیه.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="q-block">
+        <p><b>۱.</b> «تعداد اشتباهات یک دانش‌آموز در امتحان» چه نوع متغیریه؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>قابل شمارش است و فقط عدد صحیح می‌گیرد (نمی‌شه ۲٫۵ اشتباه داشت).</p>
+            <p class="final-ans">پاسخ نهایی: کمّی گسسته</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۲.</b> اگر بخوایم نظر همهٔ اهالی یک شهر رو دربارهٔ یک طرح بدونیم ولی فقط با ۲۰۰ نفر مصاحبه کنیم، این ۲۰۰ نفر چی نامیده می‌شن؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>چون بخشی از کل جامعه (اهالی شهر) هستن که برای بررسی انتخاب شدن.</p>
+            <p class="final-ans">پاسخ نهایی: نمونه</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۳.</b> «رنگ چشم» چه نوع متغیریه؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>نه قابل شمارشه نه قابل اندازه‌گیری، و بین رنگ‌ها هم ترتیب طبیعی وجود نداره.</p>
+            <p class="final-ans">پاسخ نهایی: کیفی اسمی</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="s2" class="topic">
+    <div class="section-head">
+      <span class="badge">۲</span>
+      <div><span class="tag">بخش دوم</span><h2>جدول‌های فراوانی</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مفاهیم اصلی</h3>
+      <p>جدول فراوانی یک جدول ساختاریافته‌ست که نشون می‌ده هر مقدار چند بار تکرار شده. اجزای اصلی آن:</p>
+      <ol class="steps-list">
+        <li><b>فراوانی (f):</b> تعداد تکرار هر دادهٔ.</li>
+        <li><b>فراوانی نسبی:</b> نسبت فراوانی هر داده به کل تعداد داده‌ها.</li>
+        <li><b>درصد فراوانی:</b> فراوانی نسبی ضرب‌در ۱۰۰.</li>
+        <li><b>فراوانی تجمعی (CF):</b> مجموع فراوانی‌ها تا اون رده، به‌ترتیب صعودی.</li>
+      </ol>
+      <div class="formula-box">
+        فراوانی نسبی = <span class="frac"><span class="num">f<sub>i</sub></span><span class="den">n</span></span>
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        درصد فراوانی = <span class="frac"><span class="num">f<sub>i</sub></span><span class="den">n</span></span> × ۱۰۰
+      </div>
+      <p>قاعدهٔ طلایی: <b>مجموع فراوانی‌های همهٔ ردیف‌ها = تعداد کل داده‌ها (n)</b>، و مجموع درصدهای فراوانی همیشه باید ۱۰۰٪ بشه — این یک راه عالی برای چک کردن جوابته.</p>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — محاسبهٔ فراوانی نسبی</div>
+        <div class="steps">
+          <p>در یک کلاس ۲۰ نفره، ۵ نفر نمرهٔ ۱۸ گرفته‌اند.</p>
+          <p>فراوانی نسبی = <span class="ltr">5/20 = 0.25</span></p>
+        </div>
+        <span class="result">فراوانی نسبی = ۰٫۲۵ ، درصد فراوانی = ۲۵٪</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — فراوانی تجمعی</div>
+        <div class="steps">
+          <p>فراوانی رده‌ها به‌ترتیب: ۳، ۵، ۴، ۸.</p>
+          <p>فراوانی تجمعی رده‌ها به‌ترتیب جمع می‌شه: ۳ ، ۳+۵=۸ ، ۸+۴=۱۲ ، ۱۲+۸=۲۰.</p>
+        </div>
+        <span class="result">فراوانی تجمعی نهایی = ۲۰ (برابر با تعداد کل داده‌ها)</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — چک صحت با درصدها</div>
+        <div class="steps">
+          <p>اگر درصد فراوانی چهار رده به‌ترتیب ۲۰٪، ۳۰٪، ۲۵٪ و ۲۵٪ باشه...</p>
+          <p>مجموع: ۲۰+۳۰+۲۵+۲۵ = ۱۰۰</p>
+        </div>
+        <span class="result">درست است، چون مجموع دقیقاً ۱۰۰٪ شد</span>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>فراوانی نسبی رو با درصد فراوانی اشتباه گرفتن — فراوانی نسبی همیشه بین ۰ و ۱ است، درصد فراوانی بین ۰ و ۱۰۰.</li>
+        <li>فراوانی تجمعی رو برای هر رده جدا محاسبه کردن، در حالی‌که باید تجمعی (جمع‌شونده) باشه.</li>
+        <li>فراموش کردن اینکه مخرج فراوانی نسبی همیشه n (تعداد کل داده‌ها)ست، نه تعداد رده‌ها.</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>⭐ نکات امتحانی</h3>
+      <ul class="tips">
+        <li>اگه فراوانی یک رده رو ندادن ولی فراوانی تجمعی‌های اطرافش رو دادن، با تفریق دو فراوانی تجمعی متوالی به‌راحتی پیداش کن.</li>
+        <li>همیشه بعد از پر کردن جدول، جمع ستون فراوانی رو با n چک کن — سریع‌ترین راه پیدا کردن اشتباه محاسباتیه.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="q-block">
+        <p><b>۱.</b> در یک نمونهٔ ۴۰ نفره، ۱۰ نفر گروه خونی O دارند. فراوانی نسبی و درصد فراوانی چقدره؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>فراوانی نسبی = <span class="ltr">10/40 = 0.25</span></p>
+            <p>درصد فراوانی = <span class="ltr">0.25 × 100</span></p>
+            <p class="final-ans">پاسخ نهایی: فراوانی نسبی = ۰٫۲۵ و درصد فراوانی = ۲۵٪</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۲.</b> فراوانی چهار رده به‌ترتیب ۶، ۹، ۱۲ و ۳ است. فراوانی تجمعی ردهٔ سوم چند است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>فراوانی تجمعی ردهٔ سوم برابر مجموع فراوانی سه ردهٔ اول است: ۶+۹+۱۲</p>
+            <p class="final-ans">پاسخ نهایی: ۲۷</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۳.</b> اگر فراوانی تجمعی نهایی یک جدول ۵۰ باشه ولی جمع ستون فراوانی ۴۸ دربیاد، مشکل کجاست؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>چون فراوانی تجمعی نهایی همیشه باید با n (تعداد کل داده‌ها) برابر باشه، این دو عدد باید یکی باشن.</p>
+            <p class="final-ans">پاسخ نهایی: در محاسبهٔ فراوانی یکی از رده‌ها اشتباهی رخ داده و باید جدول را بازبینی کرد</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section id="s3" class="topic">
+    <div class="section-head">
+      <span class="badge">۳</span>
+      <div><span class="tag">بخش سوم</span><h2>نمودارها</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مفاهیم اصلی</h3>
+      <p>هر نمودار برای یک نوع متغیر خاص مناسبه؛ اشتباه انتخاب نمودار یعنی از دست دادن نمرهٔ کامل سؤال:</p>
+      <ol class="steps-list">
+        <li><b>نمودار میله‌ای:</b> برای داده‌های کیفی یا کمّی گسسته؛ فراوانی هر داده با یک میلهٔ عمودی جدا (بدون تماس با میلهٔ بعدی) نشون داده می‌شه.</li>
+        <li><b>هیستوگرام:</b> برای داده‌های کمّی پیوستهٔ گروه‌بندی‌شده؛ برخلاف میله‌ای، میله‌ها به هم می‌چسبن.</li>
+        <li><b>نمودار دایره‌ای:</b> نسبت هر دسته از کل رو با زاویهٔ مرکزی نشون می‌ده.</li>
+        <li><b>نمودار بافت‌نگاشت (هیستوگرام نسبی):</b> فراوانی نسبی هر دسته با یک مستطیل نشون داده می‌شه.</li>
+        <li><b>نمودار چندبر فراوانی:</b> از وسط بالای مستطیل‌های بافت‌نگاشت خط می‌کشیم و دو سرش رو با فراوانی صفر به محور وصل می‌کنیم.</li>
+      </ol>
+      <div class="formula-box">
+        زاویهٔ مرکزی هر بخش دایره = <span class="frac"><span class="num">f<sub>i</sub></span><span class="den">n</span></span> × ۳۶۰°
+      </div>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — زاویهٔ نمودار دایره‌ای</div>
+        <div class="steps">
+          <p>از ۴۰ نفر، ۱۰ نفر ورزش فوتبال رو انتخاب کردن.</p>
+          <p>زاویه = <span class="ltr">(10/40) × 360</span></p>
+        </div>
+        <span class="result">زاویه = ۹۰ درجه</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — انتخاب نوع نمودار</div>
+        <div class="steps">
+          <p>برای نشون دادن توزیع قد ۱۰۰ دانش‌آموز که به بازه‌های ۵ سانتی‌متری گروه‌بندی شدن...</p>
+          <p>چون متغیر کمّی پیوسته و گروه‌بندی‌شده‌ست، میله‌ها باید به هم بچسبن.</p>
+        </div>
+        <span class="result">نمودار مناسب: هیستوگرام</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — تشخیص جدول متغیر مناسب نمودارها</div>
+        <div class="steps">
+          <p>نمودار میله‌ای و دایره‌ای: کیفی یا کمّی گسسته.</p>
+          <p>نمودار بافت‌نگاشت و چندبر: کمّی پیوسته.</p>
+        </div>
+        <span class="result">برای «گروه خونی افراد» فقط نمودار میله‌ای یا دایره‌ای مناسبه</span>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>برای داده‌های گسسته از هیستوگرام استفاده کردن — یادت باشه فقط دادهٔ پیوسته میله‌های چسبیده می‌خواد.</li>
+        <li>در محاسبهٔ زاویهٔ دایره‌ای، فراموش کردن ضرب در ۳۶۰ و فقط نسبت رو گزارش دادن.</li>
+        <li>در نمودار چندبر فراوانی، دو سر نمودار رو به محور طول‌ها وصل نکردن (باید با فراوانی صفر بسته بشه).</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>⭐ نکات امتحانی</h3>
+      <ul class="tips">
+        <li>جمع همهٔ زاویه‌های نمودار دایره‌ای باید ۳۶۰ درجه بشه — راه سریع چک جواب.</li>
+        <li>اگه سؤال گفت «بازه‌ها به هم می‌چسبن»، بی‌معطلی بگو هیستوگرامه.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="q-block">
+        <p><b>۱.</b> از ۶۰ نفر، ۱۵ نفر رشتهٔ ریاضی رو انتخاب کردن. زاویهٔ این بخش در نمودار دایره‌ای چقدره؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>زاویه = <span class="ltr">(15/60) × 360</span></p>
+            <p class="final-ans">پاسخ نهایی: ۹۰ درجه</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۲.</b> برای نشون دادن «تعداد فرزندان خانواده‌ها» کدوم نمودار مناسب‌تره: میله‌ای یا هیستوگرام؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>تعداد فرزندان یک متغیر کمّی گسسته‌ست (فقط عدد صحیح می‌گیره)، پس میله‌های جدا از هم لازمه.</p>
+            <p class="final-ans">پاسخ نهایی: نمودار میله‌ای</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۳.</b> نمودار چندبر فراوانی از روی کدوم نمودار رسم می‌شه؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>نقاط وسط بالای مستطیل‌های همان نمودار به هم وصل می‌شن.</p>
+            <p class="final-ans">پاسخ نهایی: نمودار بافت‌نگاشت</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="s4" class="topic">
+    <div class="section-head">
+      <span class="badge">۴</span>
+      <div><span class="tag">بخش چهارم</span><h2>شاخص‌های مرکزی: میانگین، میانه و مد</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مفاهیم اصلی</h3>
+      <p><b>میانگین (Mean):</b> مجموع همهٔ داده‌ها تقسیم‌بر تعداد اون‌ها.</p>
+      <div class="formula-box">
+        <span class="ltr">x̄</span> = <span class="frac"><span class="num">Σx<sub>i</sub></span><span class="den">n</span></span> = <span class="frac"><span class="num">مجموع داده‌ها</span><span class="den">تعداد داده‌ها</span></span>
+      </div>
+      <p><b>میانه (Median):</b> عددیه که داده‌های مرتب‌شده رو به دو نیمهٔ مساوی تقسیم می‌کنه.</p>
+      <ol class="steps-list">
+        <li>داده‌ها رو به‌ترتیب صعودی مرتب کن.</li>
+        <li>اگر تعداد داده‌ها (n) فرد باشه، میانه دقیقاً وسط‌ترین عدد است.</li>
+        <li>اگر n زوج باشه، میانه میانگین دو عدد وسطه.</li>
+      </ol>
+      <div class="formula-box">
+        n فرد: میانه = <span class="ltr">(n+1)/2</span>‌اُمین داده
+        &nbsp;&nbsp;|&nbsp;&nbsp;
+        n زوج: میانه = <span class="frac"><span class="num">داده <span class="ltr">n/2</span> + داده <span class="ltr">(n/2)+1</span></span><span class="den">۲</span></span>
+      </div>
+      <p><b>مد (Mode):</b> داده‌ای که بیشترین تکرار (فراوانی) رو داره.</p>
+      <ol class="steps-list">
+        <li><b>یک‌مدی (Unimodal):</b> یک داده با بیشترین فراوانی وجود داره.</li>
+        <li><b>دومدی (Bimodal):</b> دو داده فراوانی برابر و بیشینه دارن.</li>
+        <li><b>چندمدی (Multimodal):</b> سه یا بیشتر داده فراوانی بیشینهٔ برابر دارن.</li>
+      </ol>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — محاسبهٔ میانگین</div>
+        <div class="steps">
+          <p>نمرات پنج دانش‌آموز: ۸، ۱۰، ۱۲، ۱۴، ۱۶</p>
+          <p>مجموع = <span class="ltr">8+10+12+14+16 = 60</span></p>
+          <p>میانگین = <span class="ltr">60/5</span></p>
+        </div>
+        <span class="result">میانگین = ۱۲</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — میانهٔ داده‌های فرد</div>
+        <div class="steps">
+          <p>داده‌های مرتب‌شده: ۵، ۷، ۸، ۱۰، ۱۲، ۱۴، ۱۶ (تعداد = ۷، فرد)</p>
+          <p>میانه = <span class="ltr">(7+1)/2 = 4</span>اُمین داده</p>
+        </div>
+        <span class="result">میانه = ۱۰</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — مد</div>
+        <div class="steps">
+          <p>داده‌ها: ۲، ۳، ۳، ۵، ۵، ۵، ۶، ۷</p>
+          <p>عدد ۵ سه‌بار تکرار شده که بیشترین فراوانیه.</p>
+        </div>
+        <span class="result">مد = ۵</span>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>مرتب نکردن داده‌ها قبل از پیدا کردن میانه — بدون مرتب‌سازی، میانه غلط درمیاد.</li>
+        <li>در n زوج، فقط یکی از دو دادهٔ وسط رو به‌عنوان میانه گرفتن، درحالی‌که باید میانگین اون دو تا رو حساب کرد.</li>
+        <li>وقتی همهٔ داده‌ها فراوانی یکسان دارن (مثلاً ۱، ۲، ۳)، تصور کردن که مد وجود داره — در این حالت اصلاً مدی نداریم.</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>⭐ نکات امتحانی</h3>
+      <ul class="tips">
+        <li>اگه یک دادهٔ جدید (M) به n دادهٔ قبلی با میانگین x̄ اضافه بشه، میانگین جدید از این فرمول به‌دست میاد: میانگین جدید = <span class="ltr">(n×x̄ + M) / (n+1)</span> — این تیپ سؤال خیلی تو امتحانا میاد.</li>
+        <li>میانگین به مقادیر پرت (داده‌های خیلی بزرگ یا کوچک) حساسه، ولی میانه حساس نیست — اگه سؤال دربارهٔ داده‌های پرت بود، سراغ میانه برو.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="q-block">
+        <p><b>۱.</b> نمرات پنج دانش‌آموز: ۸، ۱۰، ۱۲، ۱۴، ۱۶. میانگین چقدره؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>میانگین = <span class="ltr">(8+10+12+14+16)/5 = 60/5</span></p>
+            <p class="final-ans">پاسخ نهایی: ۱۲</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۲.</b> میانهٔ داده‌های ۱۲، ۸، ۱۶، ۱۴، ۱۰ رو پیدا کن.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>مرتب‌شده: ۸، ۱۰، ۱۲، ۱۴، ۱۶ — تعداد ۵ (فرد)، پس داده وسط (سومین) میانه است.</p>
+            <p class="final-ans">پاسخ نهایی: ۱۲</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۳.</b> اگر ۵ دانش‌آموز میانگین ۳۲ داشته باشن و ۳ دانش‌آموز دیگه به داده‌های ۱۵، ۲۰، ۲۵ اضافه بشن، میانگین جدید چقدره؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>مجموع قبلی = <span class="ltr">5 × 32 = 160</span></p>
+            <p>مجموع دادهٔ جدید = <span class="ltr">15+20+25 = 60</span></p>
+            <p>میانگین جدید = <span class="ltr">(160+60)/(5+3) = 220/8</span></p>
+            <p class="final-ans">پاسخ نهایی: ۲۷٫۵</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section id="s5" class="topic">
+    <div class="section-head">
+      <span class="badge">۵</span>
+      <div><span class="tag">بخش پنجم</span><h2>شاخص‌های پراکندگی</h2></div>
+    </div>
+
+    <div class="card blue">
+      <h3>🔵 مفاهیم اصلی</h3>
+      <p>شاخص‌های مرکزی به‌تنهایی کافی نیستن؛ شاخص‌های پراکندگی نشون می‌دن داده‌ها چقدر دور از میانگین پخش شدن.</p>
+      <ol class="steps-list">
+        <li><b>دامنه (Range):</b> ساده‌ترین شاخص. <span class="ltr">Range = Maximum − Minimum</span></li>
+        <li><b>میانگین انحرافات (Mean Deviation):</b> میانگین فاصلهٔ (قدر مطلق) هر داده از میانگین اصلی.
+          <div class="formula-box">MD = <span class="frac"><span class="num">Σ|x<sub>i</sub> − x̄|</span><span class="den">n</span></span></div>
+        </li>
+        <li><b>واریانس (Variance):</b> میانگین مجذور انحرافات از میانگین. چهار مرحله داره: (۱) محاسبهٔ میانگین (۲) اختلاف هر داده از میانگین به‌توان ۲ (۳) جمع این مجذورها (۴) تقسیم بر تعداد کل داده‌ها.
+          <div class="formula-box">σ<sup>۲</sup> = <span class="frac"><span class="num">Σ(x<sub>i</sub> − x̄)<sup>۲</sup></span><span class="den">n</span></span></div>
+        </li>
+        <li><b>انحراف معیار (Standard Deviation):</b> جذر واریانس؛ چون واریانس واحدش مربع شده بود، با این کار واحد به حالت اول برمی‌گرده.
+          <div class="formula-box">σ = √σ<sup>۲</sup></div>
+        </li>
+        <li><b>ضریب تغییرات (Coefficient of Variation - CV):</b> نسبت انحراف معیار به میانگین؛ برای مقایسهٔ پراکندگی دو مجموعهٔ داده با واحد یا مقیاس متفاوت استفاده می‌شه.
+          <div class="formula-box">CV = <span class="frac"><span class="num">انحراف معیار</span><span class="den">میانگین</span></span> = <span class="frac"><span class="num">σ</span><span class="den">x̄</span></span></div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card green">
+      <h3>🟢 مثال</h3>
+      <div class="example">
+        <div class="ex-title">مثال ۱ — دامنه</div>
+        <div class="steps">
+          <p>داده‌ها: ۱۴، ۱۲، ۱۰، ۳۳، ۳</p>
+          <p>Range = <span class="ltr">33 − 3</span></p>
+        </div>
+        <span class="result">دامنه = ۳۰</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۲ — واریانس (جمعیتی)</div>
+        <div class="steps">
+          <p>داده‌ها: ۲، ۴، ۶، ۸</p>
+          <p>میانگین = <span class="ltr">(2+4+6+8)/4 = 5</span></p>
+          <p>مجذور انحرافات: <span class="ltr">(2−5)² + (4−5)² + (6−5)² + (8−5)² = 9+1+1+9 = 20</span></p>
+          <p>واریانس = <span class="ltr">20/4</span></p>
+        </div>
+        <span class="result">واریانس = ۵</span>
+      </div>
+      <div class="example">
+        <div class="ex-title">مثال ۳ — انحراف معیار</div>
+        <div class="steps">
+          <p>قد چهار گیاه (سانتی‌متر): ۴۰، ۴۲، ۴۴، ۴۶ — میانگین = ۴۳</p>
+          <p>مجذور انحرافات: <span class="ltr">9+1+1+9 = 20</span>، واریانس = <span class="ltr">20/4 = 5</span></p>
+          <p>انحراف معیار = <span class="ltr">√5</span></p>
+        </div>
+        <span class="result">انحراف معیار = √۵</span>
+      </div>
+    </div>
+
+    <div class="card red">
+      <h3>🔴 اشتباهات پرتکرار</h3>
+      <ul class="mistakes">
+        <li>در محاسبهٔ میانگین انحرافات، از قدر مطلق استفاده نکردن — بدون قدر مطلق، جمع انحرافات همیشه صفر می‌شه چون مثبت و منفی‌ها همدیگه رو خنثی می‌کنن.</li>
+        <li>واریانس رو با انحراف معیار قاطی کردن — واریانس همیشه یک مرحله جلوتره و باید ازش جذر گرفت تا انحراف معیار بشه.</li>
+        <li>فراموش کردن اینکه CV یک نسبته و واحد نداره، پس نباید یکاهاشو در جواب نگه داشت.</li>
+      </ul>
+    </div>
+
+    <div class="card gold">
+      <h3>⭐ نکات امتحانی</h3>
+      <ul class="tips">
+        <li>ترتیب محاسبه رو هیچ‌وقت عوض نکن: اول میانگین، بعد انحراف از میانگین، بعد به‌توان‌رسانی، بعد جمع، بعد تقسیم (واریانس)، و در آخر جذر (انحراف معیار).</li>
+        <li>وقتی سؤال گفت «کدوم دیتاست پراکندگی نسبی بیشتری داره؟» و واحدها یا مقیاس‌ها فرق داشتن، حتماً باید سراغ CV بری نه انحراف معیار.</li>
+      </ul>
+    </div>
+
+    <div class="card purple">
+      <h3>🟣 تمرین این بخش</h3>
+      <div class="q-block">
+        <p><b>۱.</b> برای داده‌های ۲، ۴، ۶، ۸ واریانس (جمعیتی) چقدره؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>میانگین = <span class="ltr">5</span>، مجذور انحرافات = <span class="ltr">9+1+1+9=20</span>، واریانس = <span class="ltr">20/4</span></p>
+            <p class="final-ans">پاسخ نهایی: ۵</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۲.</b> وزن پنج دانش‌آموز (کیلوگرم): ۵۰، ۵۲، ۴۸، ۵۰، ۵۰. ضریب تغییرات (CV) این مجموعه چقدره؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>میانگین = <span class="ltr">(50+52+48+50+50)/5 = 250/5 = 50</span></p>
+            <p>مجذور انحرافات = <span class="ltr">0+4+4+0+0 = 8</span>، واریانس = <span class="ltr">8/5 = 1.6</span></p>
+            <p>انحراف معیار = <span class="ltr">√1.6 ≈ 1.265</span></p>
+            <p>CV = <span class="ltr">(1.265/50) × 100 ≈ 2.5%</span></p>
+            <p class="final-ans">پاسخ نهایی: تقریباً ۲٫۵٪</p>
+          </div>
+        </details>
+      </div>
+      <div class="q-block">
+        <p><b>۳.</b> قد چهار گیاه ۴۰، ۴۲، ۴۴، ۴۶ سانتی‌متر است و میانگین ۴۳ است. انحراف معیار چقدره؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="answer">
+            <p>مجذور انحرافات = <span class="ltr">9+1+1+9 = 20</span>، واریانس = <span class="ltr">20/4 = 5</span></p>
+            <p class="final-ans">پاسخ نهایی: √۵</p>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <div id="end" class="summary-box">
+    <h2 style="margin-top:0;">جمع‌بندی فصل ۷</h2>
+    <div class="pills">
+      <span class="pill">جامعه و نمونه</span>
+      <span class="pill">انواع متغیر</span>
+      <span class="pill">جدول فراوانی</span>
+      <span class="pill">نمودارها</span>
+      <span class="pill">میانگین، میانه، مد</span>
+      <span class="pill">دامنه و انحراف معیار</span>
+      <span class="pill">ضریب تغییرات</span>
+    </div>
+    <p>مسیرمون از تشخیص جامعه و نمونه شروع شد، به جدول‌ها و نمودارها رسید، بعد وارد شاخص‌های مرکزی شدیم تا بفهمیم داده‌ها حول چه عددی متمرکزن، و در آخر با شاخص‌های پراکندگی یاد گرفتیم داده‌ها چقدر پخش شدن.</p>
+    <div class="compass">
+      🧭 آمار فقط عدد و فرمول نیست — یه زبونه برای فهمیدن دنیای اطراف با داده. هر بار که یه شاخص جدید یاد می‌گیری، یه عینک تازه به چشمت میاد که با اون دقیق‌تر می‌بینی.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

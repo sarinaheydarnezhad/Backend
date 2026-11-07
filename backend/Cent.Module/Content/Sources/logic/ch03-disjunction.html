@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۳: فصل</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 3 / 13</p>
+  <h1>فصل ۳: فصل — «A or B» (Disjunction)</h1>
+  <p class="lede">کلمه‌ی «or» توی زبان روزمره و توی منطق دو معنی متفاوت داره. تشخیص اینکه کدوم معنی مدنظر سؤاله — <span class="term">inclusive</span> یا <span class="term">exclusive</span> — دقیقاً همون چیزیه که این فصل یادت می‌ده.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>هر وقت سؤال با کلمه‌ی «or» دو (یا چند) گزاره رو به هم وصل کنه، با یک فصل <span class="term">(disjunction)</span> روبرویی. اجزای تشکیل‌دهنده‌اش رو <span class="term">disjuncts</span> می‌گن. نکته‌ی کلیدی اینه که «or» می‌تونه دو جور معنی بده و باید از روی زمینه‌ی جمله تشخیص بدی کدومه.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — فصل شمولی (inclusive or):</strong> «A or B» درسته اگه <em>حداقل یکی</em> از A یا B درست باشه — حتی اگه هر دو درست باشن.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"A triangle can be defined as a polygon with three sides or as a polygon with three vertices."</p>
+    </div>
+    <p style="margin-top:10px;">اینجا هر دو تعریف هم‌زمان درستن و هیچ تضادی ندارن — این نشونه‌ی یک <span class="term">inclusive or</span> است.</p>
+  </div>
+
+  <table>
+    <tr><th>A</th><th>B</th><th>A or B (inclusive)</th></tr>
+    <tr><td>T</td><td>T</td><td>T</td></tr>
+    <tr><td>T</td><td>F</td><td>T</td></tr>
+    <tr><td>F</td><td>T</td><td>T</td></tr>
+    <tr><td>F</td><td>F</td><td>F</td></tr>
+  </table>
+  <p style="font-size:14px; color:var(--ink-soft);">فقط یک حالت وجود داره که کل گزاره غلط می‌شه: وقتی <strong>هر دو</strong> طرف غلط باشن. (نسخه‌ی اسکن‌شده‌ی منبع در این جدول دچار جابه‌جایی ستون‌ها بود؛ جدول بالا نسخه‌ی استاندارد و درست منطق گزاره‌ایه.)</p>
+
+  <p><strong>قدم ۲ — فصل استثنایی (exclusive or):</strong> «A or B» فقط وقتی درسته که <em>دقیقاً یکی</em> از A یا B درست باشه، نه هر دو.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"The coin landed either heads or tails."</p>
+    </div>
+    <p style="margin-top:10px;">اینجا نمی‌شه سکه هم‌زمان هم شیر بیفته هم خط — دقیقاً یکی از این دو ممکنه اتفاق بیفته. این نشونه‌ی یک <span class="term">exclusive or</span> است.</p>
+  </div>
+
+  <table>
+    <tr><th>A</th><th>B</th><th>A or B (exclusive)</th></tr>
+    <tr><td>T</td><td>T</td><td>F</td></tr>
+    <tr><td>T</td><td>F</td><td>T</td></tr>
+    <tr><td>F</td><td>T</td><td>T</td></tr>
+    <tr><td>F</td><td>F</td><td>F</td></tr>
+  </table>
+  <p style="font-size:14px; color:var(--ink-soft);">تنها تفاوتش با نوع شمولی، ردیف اوله: وقتی هر دو درستن، فصل استثنایی <strong>غلط</strong> می‌شه، ولی فصل شمولی <strong>درست</strong> می‌مونه.</p>
+
+  <p><strong>قدم ۳ — چطور تشخیص بدیم کدوم نوعه؟</strong> خود کلمه‌ی «or» فرقی نمی‌کنه؛ باید به <em>واقعیت پشت جمله</em> نگاه کنی. اگه دو حالت می‌تونن هم‌زمان با هم درست باشن (مثل دو تعریف هم‌ارز از یک شکل هندسی)، شمولیه. اگه دو حالت به‌طور طبیعی نمی‌تونن هم‌زمان اتفاق بیفتن (مثل شیر/خط سکه، یا زنده/مرده بودن)، استثناییه.</p>
+
+  <p><strong>قدم ۴ — فصل زنجیره‌ای: «A or B or C or D or E».</strong> از همون قانون فصل شمولی پیروی می‌کنه: کل زنجیره فقط وقتی غلطه که <strong>همه‌ی</strong> حلقه‌ها غلط باشن. کافیه یکی درست باشه تا کل زنجیره درست بشه.</p>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>پیش‌فرض در بیشتر سؤالات منطق، فصل <strong>شمولی</strong> است — مگر زمینه‌ی جمله صراحتاً یا ضمناً بگه دو حالت نمی‌تونن هم‌زمان اتفاق بیفتن.</li>
+    <li>فصل شمولی فقط در یک حالت غلطه: هر دو طرف غلط باشن.</li>
+    <li>فصل استثنایی وقتی غلطه که هر دو طرف یک ارزش یکسان داشته باشن (هر دو درست یا هر دو غلط).</li>
+    <li>فصل زنجیره‌ای («A or B or C…») هم مثل نوع شمولی رفتار می‌کنه — کافیه یکی درست باشه.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>دیسجانکت‌ها (disjuncts) رو پیدا کن — گزاره‌های ساده‌ای که با «or» وصل شدن.</li>
+    <li>از روی زمینه‌ی جمله (نه فقط کلمه‌ی «or») تشخیص بده شمولیه یا استثنایی.</li>
+    <li>اگه شمولیه: دنبال حداقل یک حلقه‌ی درست بگرد — همون کافیه.</li>
+    <li>اگه استثناییه: چک کن که دقیقاً یکی درست و بقیه غلط باشن.</li>
+    <li class="arrow-final">→ جواب: طبق جدول درستیِ مربوط به همون نوع فصل.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">"Sara is at the movies or Sara is at the library." Sara is at the movies (True). Sara is at the library (False). What is the truth value of the whole claim, and which type of "or" is this?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: درسته.</strong> این یک فصل شمولیه (سارا می‌تونه هم‌زمان جای دیگه‌ای هم باشه؛ هیچ تناقضی در بودن هر دو گزاره وجود نداره، حتی اگه اینجا فقط یکی درسته). طبق جدول شمولی، کافیه یکی از دو طرف درست باشه.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">"A student's final grade is either Pass or Fail." If we are told the claim "A student's final grade is either Pass or Fail" is TRUE, and we also learn the student's grade is Pass, what can we conclude about "the student's grade is Fail"?</p>
+      <ul class="options">
+        <li>A) It must also be true, since the whole claim is true.</li>
+        <li class="correct">B) It must be false.</li>
+        <li>C) It cannot be determined.</li>
+        <li>D) It is true only if the student also passed a retake.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>اول تشخیص بده این فصل، شمولیه یا استثنایی. «Pass» و «Fail» دو حالت هستن که از نظر واقعیت نمی‌تونن هم‌زمان درست باشن — پس این یک <span class="term">exclusive or</span> است.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>طبق جدول درستی فصل استثنایی، وقتی یک طرف (Pass) درسته، طرف دیگه (Fail) باید غلط باشه — چون اگه هر دو درست بودن، کل گزاره طبق جدول exclusive غلط می‌شد، در حالی که فرض کردیم کل گزاره درسته.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A دقیقاً همون اشتباه رایجیه که فصل شمولی و استثنایی رو قاطی می‌کنه — انگار فکر کرده چون کل گزاره درسته، همه‌ی حلقه‌هاش هم باید درست باشن. گزینه‌ی D هم اطلاعات بی‌ربطی اضافه می‌کنه که در گزاره‌ی اصلی نیومده.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون اول نوع فصل رو مشخص کردیم (استثنایی)، دیگه لازم نبود حدس بزنیم — مستقیم از جدول درستی درست می‌تونیم نتیجه بگیریم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>وقتی به یک «or» رسیدی، از خودت بپرس: «آیا دو طرف این جمله می‌تونن هم‌زمان با هم درست باشن؟» اگه جواب بله‌ست (یا شکی نداری)، شمولی در نظر بگیر. اگه دو طرف از نظر واقعیت متقابلاً منتفی هستن (مثل شیر/خط، Pass/Fail، زنده/مرده)، استثنایی در نظر بگیر.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>برای فصل شمولی: به‌محض پیدا کردن <strong>یک</strong> حلقه‌ی درست، بلافاصله نتیجه بگیر کل گزاره درسته — نیازی به چک کردن بقیه‌ی حلقه‌ها نیست. این برعکسِ روش «and» است، جایی که دنبال یک حلقه‌ی غلط می‌گشتیم.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> فرض کردن اینکه «or» همیشه به معنی exclusive است (یعنی فقط یکی از دو حالت می‌تونه درست باشه).</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> در زبان روزمره، وقتی می‌گیم «چای می‌خوای یا قهوه؟» معمولاً منظورمون اینه که فقط یکی رو انتخاب کن — همین عادت ذهنی باعث می‌شه داوطلب فکر کنه هر «or» یعنی انتخاب انحصاری.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه اول واقعیتِ پشت دو گزاره رو بررسی کن، نه فقط کلمه‌ی «or» رو. اگه سؤال صراحتاً نگفته دو حالت متقابلاً منتفی هستن و هیچ نشونه‌ی واقعی‌ای هم برای این تضاد وجود نداره، فرض رو بذار روی شمولی — که پیش‌فرض استاندارد منطقه.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>در فصل زنجیره‌ای (سه یا چند حلقه با «or»)، آزمون گاهی می‌پرسه «کل گزاره کِی غلطه؟» به‌جای «کِی درسته؟». خیلی‌ها هنوز عادت ذهنیِ فصل رو دارن (دنبال یک درست بگردن) و جواب رو اشتباه می‌دن. یادت باشه: فصل شمولی <strong>فقط یک حالت</strong> غلط داره — وقتی <em>همه‌ی</em> حلقه‌ها غلط باشن.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>فصل شمولی: درست اگه <strong>حداقل یکی</strong> درست باشه؛ غلط فقط اگه هر دو غلط باشن. فصل استثنایی: درست اگه <strong>دقیقاً یکی</strong> درست باشه. پیش‌فرض منطق گزاره‌ای، شمولیه — مگر واقعیت پشت جمله چیز دیگه‌ای بگه.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">"You can pay by credit card or by bank transfer." A customer pays by credit card AND by bank transfer (splitting the amount). Assuming this is an inclusive or, is the original claim true or false?</p>
+      <ul class="options">
+        <li class="correct">A) True</li>
+        <li>B) False</li>
+        <li>C) Cannot be determined</li>
+        <li>D) The claim becomes meaningless</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> در فصل شمولی، وقتی هر دو طرف درست باشن (هم پرداخت با کارت، هم با انتقال بانکی)، طبق جدول درستی، کل گزاره همچنان True است. این دقیقاً ردیف اول جدول inclusive or است.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">"The number is either even or odd." We are told this exclusive-or claim is TRUE, and that "the number is even" is FALSE. What must be true about "the number is odd"?</p>
+      <ul class="options">
+        <li>A) It must also be false.</li>
+        <li class="correct">B) It must be true.</li>
+        <li>C) It cannot be determined from this information.</li>
+        <li>D) It depends on whether the number is positive.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> طبق جدول درستی فصل استثنایی، تنها ردیف‌هایی که کل گزاره True می‌دن اونایی هستن که دقیقاً یکی از دو طرف درسته. چون "even" را False داریم و گزاره کلاً True است، طبق جدول تنها گزینه‌ی سازگار اینه که "odd" باید True باشه.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">"The delivery will arrive on Monday, Tuesday, or Wednesday." This is an inclusive-style chain disjunction (the delivery could theoretically satisfy more than one description in a stretched sense, but here it refers to a single arrival day). We are told the whole claim is FALSE. What can we conclude?</p>
+      <ul class="options">
+        <li>A) The delivery arrived on at least one of the three days.</li>
+        <li class="correct">B) The delivery did not arrive on Monday, Tuesday, or Wednesday.</li>
+        <li>C) The delivery arrived on exactly one of the three days.</li>
+        <li>D) The claim cannot be false under any circumstances.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> برای اینکه یک فصل زنجیره‌ای غلط باشه، طبق قانون قدم ۴، <strong>همه‌ی</strong> حلقه‌ها باید غلط باشن — یعنی نه دوشنبه، نه سه‌شنبه، نه چهارشنبه. گزینه‌ی A دقیقاً برعکس تعریف «غلط بودن فصل» است. گزینه‌ی C به فصل استثنایی مربوطه، نه به این مورد که یک روز تحویل واحده. این دقیقاً همون دام «Question Trap» بالاست: پرسیدن از حالت غلط، به‌جای حالت درست.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۳</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>فصل شمولی: درست اگه حداقل یکی درست باشه.</li>
+          <li>فصل استثنایی: درست فقط اگه دقیقاً یکی درست باشه.</li>
+          <li>پیش‌فرض منطق گزاره‌ای، شمولیه.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>از روی واقعیت پشت جمله، نوع فصل رو تشخیص بده.</li>
+          <li>شمولی: دنبال یک حلقه‌ی درست بگرد.</li>
+          <li>استثنایی: چک کن دقیقاً یکی درست باشه.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>فرض کردن هر «or» به‌عنوان استثنایی، مثل زبان روزمره.</li>
+          <li>قاطی کردن قانون «and» و «or» برای پیدا کردن حلقه‌ی تعیین‌کننده.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>پرسیدن از حالت «غلط بودن» فصل زنجیره‌ای.</li>
+          <li>سناریوهای واقعی که نوع or رو مبهم نشون می‌دن.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — جمع‌بندی نهایی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+
+  .venn-wrap{ margin:20px 0; text-align:center; }
+  .venn-svg{ max-width:320px; }
+
+  .cheat-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin:20px 0;
+  }
+  .cheat-card{
+    border:1px solid var(--rule);
+    background:#fff;
+    padding:14px 16px;
+    border-top:3px solid var(--navy);
+  }
+  .cheat-card h3{
+    font-size:13px;
+    margin:0 0 8px;
+    color:var(--navy);
+  }
+  .cheat-card ul{ font-size:13px; line-height:1.7; padding-right:16px; margin:0; }
+  .cheat-card li{ margin-bottom:5px; }
+  @media (max-width:600px){ .cheat-grid{ grid-template-columns:1fr; } }
+
+  .checklist{ list-style:none; padding:0; margin:16px 0; max-width:68ch; }
+  .checklist li{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    padding:8px 0;
+    border-bottom:1px solid var(--rule);
+    font-size:14.5px;
+    line-height:1.6;
+  }
+  .checklist li::before{
+    content:"☐";
+    font-size:17px;
+    color:var(--navy);
+    flex-shrink:0;
+    line-height:1.3;
+  }
+  .checklist .ch-tag{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr;
+    font-size:10.5px;
+    color:var(--ink-soft);
+    display:block;
+    margin-top:2px;
+  }
+
+  .strategy-block{
+    border-right:3px solid var(--gold);
+    background:var(--gold-tint);
+    padding:16px 20px;
+    margin:16px 0;
+    max-width:68ch;
+  }
+  .strategy-block h4{ margin:0 0 8px; font-size:14.5px; color:var(--gold); }
+  .strategy-block p, .strategy-block ul{ margin:0; font-size:14.5px; line-height:1.75; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — جمع‌بندیِ نهایی</p>
+  <h1>🧠 Logic Cheat Sheet — چکیده‌ی فشرده‌ی کل جزوه</h1>
+  <p class="lede">این صفحات برای مرورِ چند دقیقه‌ای، درست قبل از جلسه‌ی آزمون طراحی شدن. هر ۱۹ فصل به هفت دسته‌ی فشرده تقسیم شدن. اگه وقتِ کافی برای مرورِ کاملِ جزوه نداری، همین چند صفحه رو بخون.</p>
+
+  <div class="cheat-grid">
+    <div class="cheat-card">
+      <h3>KEY CONCEPTS</h3>
+      <ul>
+        <li>گزاره = جمله‌ای با ارزشِ درستیِ T یا F.</li>
+        <li>۴ رابطِ پایه: and, or, if…then, not.</li>
+        <li>گزاره‌ی قیاسی: رابطه‌ی بینِ دو دسته (All/Some/No/Only).</li>
+        <li>Contradictory = دقیقاً یکی T، یکی F. Contrary = نمی‌تونن هر دو T باشن، می‌تونن هر دو F. Subcontrary = برعکسِ contrary.</li>
+        <li>Sufficient ↔ مقدمِ شرطی. Necessary ↔ تالیِ شرطی.</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>RULES (جدول‌های درستی و نقیض)</h3>
+      <ul>
+        <li>AND: فقط T اگه هر دو T. OR (شمولی): فقط F اگه هر دو F.</li>
+        <li>If A then B: فقط F اگه A=T و B=F.</li>
+        <li>not(A and B) = not-A or not-B. &nbsp; not(A or B) = not-A and not-B.</li>
+        <li>not(If A then B) = A and not-B.</li>
+        <li>not(All A are B) = Some A are not-B. &nbsp; not(Some A are B) = No A are B.</li>
+        <li>Only A are B = All B are A (جهت برعکس).</li>
+        <li>∀↔∃not &nbsp; ∃↔∀not(=∄) &nbsp; ∄↔∃</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>PATTERNS (معادل‌ها)</h3>
+      <ul>
+        <li>B if A = If A then B (جهت برعکس می‌شه).</li>
+        <li>A only if B = If A then B (جهت ثابت می‌مونه).</li>
+        <li>B unless A = If not-A then B.</li>
+        <li>Contrapositive (If not-B then not-A) = هم‌ارز. Inverse (If not-A then not-B) ≠ هم‌ارز.</li>
+        <li>Modus Ponens: If A then B, A ⟹ B.</li>
+        <li>Hypothetical Syllogism: If A then B, If B then C ⟹ If A then C (هرگز برعکس نکن).</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>SHORTCUTS</h3>
+      <ul>
+        <li>AND: دنبالِ یک حلقه‌ی F بگرد؛ همون کافیه.</li>
+        <li>OR (شمولی): دنبالِ یک حلقه‌ی T بگرد؛ همون کافیه.</li>
+        <li>If…then: فقط دنبالِ ترکیبِ (A=T, B=F) بگرد؛ بقیه T هستن.</li>
+        <li>All-claims: با یک استثنا رد می‌شن — کاملِ مجموعه رو چک نکن.</li>
+        <li>Bar/Line charts: تفاضلِ پیاپی رو یک‌جا حساب کن، نه یکی‌یکی موقعِ هر گزینه.</li>
+        <li>Venn: کل − هیچ‌کدام = |A|+|B|−هر دو.</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>COMMON MISTAKES</h3>
+      <ul>
+        <li>نقیض کردنِ اجزا بدونِ عوض کردنِ عملگر (and⇄or).</li>
+        <li>فکر کردن به «only if» مثلِ «if» ساده.</li>
+        <li>خوندنِ «Only A are B» مثلِ «All A are B».</li>
+        <li>جایگزین کردنِ نقیض با یک کلمه‌ی «مخالف» (hot/cold) به‌جایِ «not».</li>
+        <li>فرضِ هم‌پوشانیِ بینِ دو گروهِ مجزا وقتی فقط تعدادِ هرکدوم جدا داده شده.</li>
+        <li>گرفتنِ بالاترین مقدار به‌جایِ بیشترین افزایش.</li>
+      </ul>
+    </div>
+    <div class="cheat-card">
+      <h3>EXAM TRAPS</h3>
+      <ul>
+        <li>گزینه‌ی inverse یا converse به‌جایِ contrapositive یا نقیضِ واقعی.</li>
+        <li>ادعای «رابطه‌ی دوطرفه» وقتی فقط necessary یا فقط sufficient گفته شده.</li>
+        <li>گزینه‌های «به‌نظر منطقی میاد» به‌جایِ «حتماً درسته» (must be true).</li>
+        <li>مجموعِ برابر در چند گزینه، ولی روابطِ نسبیِ متفاوت (نمودارِ دایره‌ای).</li>
+        <li>سؤال از حالتِ «غلط بودن» یک زنجیره، به‌جایِ حالتِ «درست بودن».</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="cheat-card" style="max-width:none; margin-bottom:20px;">
+    <h3>TIME-SAVING STRATEGIES</h3>
+    <ul>
+      <li>اول رابطِ بیرونی/اصلیِ هر گزاره رو مشخص کن، قبل از تحلیلِ جزئیات.</li>
+      <li>برای and/or/all-claims، به‌محضِ پیدا کردنِ یک حلقه‌ی تعیین‌کننده، بدونِ چک کردنِ بقیه نتیجه بگیر.</li>
+      <li>هر رابطه‌ی «کمتر/بیشتر» رو جدا و آهسته ترجمه کن؛ هیچ‌وقت دو رابطه رو هم‌زمان در ذهن حل نکن.</li>
+      <li>در پایانِ هر مسئله‌ی چندمرحله‌ای، جواب رو در شرایطِ اصلیِ سؤال چک کن.</li>
+    </ul>
+  </div>
+  <h2 style="margin-top:60px;"><span class="num">✅</span>Final Mistakes Checklist</h2>
+  <p>قبل از تحویلِ برگه، این چک‌لیست رو مرور کن — هرکدوم رو که واقعاً چک کردی، تیک بزن.</p>
+
+  <ul class="checklist">
+    <li>آیا رابطِ بیرونی/اصلیِ هر گزاره‌ی ترکیبی رو درست تشخیص دادم، نه رابطِ وسطِ جمله؟ <span class="ch-tag">Ch. 1</span></li>
+    <li>آیا کلماتِ but/however/although/yet رو منطقاً «and» در نظر گرفتم؟ <span class="ch-tag">Ch. 2</span></li>
+    <li>آیا فرض کردم «or» شمولیه، مگه واقعیتِ پشتِ جمله چیزِ دیگه‌ای بگه؟ <span class="ch-tag">Ch. 3</span></li>
+    <li>آیا یادم نرفته که مقدمِ غلط، شرطی رو خودکار درست می‌کنه؟ <span class="ch-tag">Ch. 4</span></li>
+    <li>آیا نقیض رو با «not» + کل گزاره ساختم، نه با یک کلمه‌ی «مخالف»؟ <span class="ch-tag">Ch. 5</span></li>
+    <li>آیا برای سازگاری، فقط جفت‌ها رو چک نکردم و ترکیبِ کاملِ گزاره‌ها رو هم بررسی کردم؟ <span class="ch-tag">Ch. 6</span></li>
+    <li>آیا موقعِ نقیض کردنِ and/or، عملگر رو هم عوض کردم (and⇄or)؟ <span class="ch-tag">Ch. 7</span></li>
+    <li>آیا «only if» رو با «if» ساده قاطی نکردم (جهتِ مقدم/تالی)؟ <span class="ch-tag">Ch. 8</span></li>
+    <li>آیا necessary و sufficient رو با جهتِ درست (مقدم/تالی) تشخیص دادم؟ <span class="ch-tag">Ch. 9</span></li>
+    <li>آیا «Only A are B» رو به «All B are A» تبدیل کردم قبل از تحلیل؟ <span class="ch-tag">Ch. 10</span></li>
+    <li>آیا رابطه‌ی contrary/subcontrary رو با contradictory قاطی نکردم (استنتاجِ یک‌طرفه در مقابلِ دوطرفه)؟ <span class="ch-tag">Ch. 11</span></li>
+    <li>آیا در زنجیره‌ی شرطی‌ها، جهتِ فلش‌ها رو برعکس نکردم؟ <span class="ch-tag">Ch. 12</span></li>
+    <li>آیا کمّی‌سنجِ پنهانِ عباراتی مثلِ each/whenever/no one رو تشخیص دادم؟ <span class="ch-tag">Ch. 13</span></li>
+    <li>آیا برای «بیشترین افزایش»، تفاضل حساب کردم، نه فقط بالاترین مقدار؟ <span class="ch-tag">Ch. 14</span></li>
+    <li>آیا در نمودارِ دایره‌ای، هم مجموع و هم روابطِ نسبی رو چک کردم؟ <span class="ch-tag">Ch. 15</span></li>
+    <li>آیا «بالاترین نقطه»، «تیزترین تغییر» و «روندِ کلی» رو با هم قاطی نکردم؟ <span class="ch-tag">Ch. 16</span></li>
+    <li>آیا برای «must be true»، فقط چیزی رو انتخاب کردم که بدونِ فرضِ اضافه از داده‌ها نتیجه می‌شه؟ <span class="ch-tag">Ch. 17</span></li>
+    <li>آیا در مسئله‌ی ون، هم‌پوشانی رو درست کم کردم (|A|+|B|−هر دو)؟ <span class="ch-tag">Ch. 18</span></li>
+    <li>آیا در پایانِ مسئله‌ی چندمجهولی، جواب‌ها رو در معادله‌های اصلی چک کردم؟ <span class="ch-tag">Ch. 19</span></li>
+  </ul>
+  <h2 style="margin-top:60px;"><span class="num">🎯</span>Final Exam Strategy</h2>
+  <p>این بخش درباره‌ی مفاهیم نیست — درباره‌ی چطور مدیریت کردنِ خودِ جلسه‌ی آزمونه.</p>
+
+  <div class="strategy-block">
+    <h4>۱. ترتیبِ حمله</h4>
+    <p>اول یک دورِ سریع بزن و سؤالاتِ Part A (منطقِ محض) رو که فقط به یک قانونِ مشخص نیاز دارن (مثلِ نقیضِ ساده یا یک شرطیِ تنها) زودتر جواب بده. سؤالاتِ چندمرحله‌ای Part B (نمودار، Venn، معادلاتِ همزمان) رو برای دورِ دوم بذار — این‌ها زمانِ بیشتری می‌برن ولی ارزشِ امتیازیِ یکسانی دارن.</p>
+  </div>
+
+  <div class="strategy-block">
+    <h4>۲. وقتی گیر کردی</h4>
+    <p>اگه بعد از ۹۰-۶۰ ثانیه به جوابِ قطعی نرسیدی، گزینه‌ای که از قوانینِ این جزوه به‌وضوح رد می‌شه (inverse به‌جایِ contrapositive، «Only» بدونِ برعکس شدن، مقدارِ نهایی به‌جایِ افزایش) رو حذف کن، یک حدسِ آگاهانه بزن، سؤال رو علامت بزن، و برو سؤالِ بعد. برگشتن به یک سؤالِ گیرکرده با ذهنی تازه‌تر، همیشه بهتر از موندن روی همون سؤاله.</p>
+  </div>
+
+  <div class="strategy-block">
+    <h4>۳. قبل از انتخابِ نهایی هر گزینه</h4>
+    <p>یک لحظه از خودت بپرس: «این گزینه رو با کدوم قانونِ دقیقِ این جزوه رد یا تأیید کردم؟» اگه جواب «فقط به‌نظرم درست اومد» بود، دوباره برگرد و رابطِ اصلیِ گزاره (and/or/if…then/all/some/only) رو از اول تشخیص بده.</p>
+  </div>
+
+  <div class="strategy-block">
+    <h4>۴. چک‌لیستِ نهایی، هر بار</h4>
+    <p>برای هر گزاره‌ی ترکیبی: رابطِ بیرونی رو پیدا کن. برای هر نقیض: عملگر رو عوض کن. برای هر «only/necessary/only if»: جهت رو دوباره چک کن. برای هر مسئله‌ی چندمرحله‌ای: جواب‌ها رو در پایان با شرایطِ اصلیِ سؤال تطبیق بده. این چهار عادت، بیشترِ نمره‌های ازدست‌رفته در بخشِ Logic رو نجات می‌دن.</p>
+  </div>
+
+  <div class="strategy-block">
+    <h4>۵. آرامش در برابرِ دام‌ها</h4>
+    <p>آزمون CEnT عمداً گزینه‌هایی طراحی می‌کنه که «به‌نظر درست میان» ولی یکی از قوانینِ دقیقِ این جزوه رو نقض می‌کنن (inverse، Only بدونِ برعکس، necessary/sufficient برعکس‌شده). وقتی یک گزینه خیلی «واضح و راحت» به‌نظر می‌رسه، یک بارِ دیگه طبقِ قانونِ دقیقش تستش کن — نه طبقِ شهودِ اولیه.</p>
+  </div>
+</div>
+</body>
+</html>

@@ -14,7 +14,7 @@ $keyRingPath = '/data/backup-keys'
 if ($LASTEXITCODE -ne 0) { throw 'Publication failed. No deployment was performed.' }
 
 New-Item -ItemType Directory -Path $stage | Out-Null
-foreach ($projectName in @('Flashcards.Api', 'Flashcards.Application', 'Flashcards.Domain', 'Flashcards.Infrastructure')) {
+foreach ($projectName in @('Flashcards.Api', 'Flashcards.Application', 'Flashcards.Domain', 'Flashcards.Infrastructure', 'Cent.Module')) {
     $projectRoot = Join-Path $repository ('backend/' + $projectName)
     foreach ($file in Get-ChildItem -LiteralPath $projectRoot -Recurse -File) {
         $relative = $file.FullName.Substring($projectRoot.Length).TrimStart([char[]]'\/')

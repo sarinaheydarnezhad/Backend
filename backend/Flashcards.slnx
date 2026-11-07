@@ -1,4 +1,7 @@
 <Solution>
+  <Project Path="Cent.Module/Cent.Module.csproj" />
+  <Project Path="Cent.Preview/Cent.Preview.csproj" />
+  <Project Path="Cent.Tests/Cent.Tests.csproj" />
   <Project Path="Flashcards.Api/Flashcards.Api.csproj" />
   <Project Path="Flashcards.Application/Flashcards.Application.csproj" />
   <Project Path="Flashcards.Domain/Flashcards.Domain.csproj" />

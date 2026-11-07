@@ -1,5 +1,6 @@
 **/bin/
 **/obj/
+backend/Cent.Preview/App_Data/
 .dotnet/
 .nuget/
 .vs/
