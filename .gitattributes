@@ -1,0 +1,5 @@
+# Curriculum checksums cover the original HTML bytes. Never change them on checkout.
+/backend/Cent.Module/Content/Sources/** -text
+
+# Keep the package hash stable across Windows, Linux and macOS.
+/backend/Cent.Module/Content/curriculum.json text eol=lf

@@ -39,3 +39,7 @@ dotnet run --project backend/Cent.Preview/Cent.Preview.csproj -- --upgrade-curri
 ```
 
 The explicit development upgrade backs up SQLite to a timestamped `.bak`, adds curriculum tables and columns, and preserves existing users, purchases, notes and results. Import verifies bundled source checksums and is idempotent. Omit both flags on subsequent starts. These preview operations do not apply SQL Server migrations or touch a deployed database.
+
+For `Source checksum mismatch` or a missing source file, see
+[`Cent.Curriculum/README.md`](../Cent.Curriculum/README.md) for UTF-8-aware
+verification, Windows Git checkout repair, and the source-generation commands.
