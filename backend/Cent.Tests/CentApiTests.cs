@@ -236,11 +236,12 @@ public sealed class CentFactory : WebApplicationFactory<Program>
 {
     private readonly bool enabled;
     private readonly bool production;
+    private readonly ICentGoogleClient? googleClient;
     private readonly Dictionary<string, string?> previous = new();
     private readonly SqliteConnection connection = new("Data Source=:memory:");
-    public CentFactory(bool enabled = true, bool production = false)
+    public CentFactory(bool enabled = true, bool production = false, ICentGoogleClient? googleClient = null)
     {
-        this.enabled = enabled; this.production = production;
+        this.enabled = enabled; this.production = production; this.googleClient = googleClient;
         // Minimal hosting reads these before WebApplicationFactory applies ConfigureAppConfiguration.
         var values = new Dictionary<string, string?> {
             ["Auth__Issuer"] = "Flashcards.Api", ["Auth__Audience"] = "Flashcards.Mobile",
@@ -263,6 +264,9 @@ public sealed class CentFactory : WebApplicationFactory<Program>
         }));
         builder.ConfigureTestServices(services => {
             if (!enabled) return;
+            if (googleClient is not null) {
+                services.RemoveAll<ICentGoogleClient>(); services.AddSingleton(googleClient);
+            }
             connection.Open();
             services.RemoveAll<CentDbContext>(); services.RemoveAll<DbContextOptions<CentDbContext>>();
             services.AddScoped<CentDbContext>(_ => new SqliteCentContext(new DbContextOptionsBuilder<CentDbContext>().UseSqlite(connection).Options));

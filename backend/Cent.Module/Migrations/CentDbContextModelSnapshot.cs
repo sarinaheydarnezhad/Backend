@@ -17,7 +17,7 @@ namespace Cent.Module.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.13")
+                .HasAnnotation("ProductVersion", "10.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -348,6 +348,35 @@ namespace Cent.Module.Migrations
                     b.HasIndex("UserId", "Kind", "TrainingId");
 
                     b.ToTable("cent_entitlements", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentGoogleAttempt", b =>
+                {
+                    b.Property<string>("StateHash")
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<DateTimeOffset>("ExpiresAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("NonceHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<string>("VerifierHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.HasKey("StateHash");
+
+                    b.HasIndex("ExpiresAt");
+
+                    b.ToTable("cent_google_attempts", (string)null);
                 });
 
             modelBuilder.Entity("Cent.Module.CentNote", b =>
@@ -952,6 +981,12 @@ namespace Cent.Module.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<string>("GoogleSubject")
+                        .HasMaxLength(255)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(255)")
+                        .UseCollation("Latin1_General_100_BIN2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(120)
@@ -976,6 +1011,10 @@ namespace Cent.Module.Migrations
                         .HasColumnType("nvarchar(16)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GoogleSubject")
+                        .IsUnique()
+                        .HasFilter("[GoogleSubject] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .IsUnique();

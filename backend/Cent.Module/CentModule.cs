@@ -34,11 +34,16 @@ public static class CentModule
         services.AddScoped<CentPayments>();
         services.AddScoped<CentPractice>();
         services.AddScoped<CentLearning>();
+        services.AddScoped<CentGoogleAuth>();
+        services.AddHttpClient<ICentGoogleClient, CentGoogleClient>(c => c.Timeout = TimeSpan.FromSeconds(15))
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false });
         services.AddHttpClient<CentGateway>(c => c.Timeout = TimeSpan.FromSeconds(15))
             .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false });
         services.AddSingleton(new CentAdmission());
+        var origins = config.GetSection("Cent:AllowedOrigins").Get<string[]>() ?? [];
+        foreach (var origin in origins) CentGoogleSettings.ValidateOrigin(origin);
         services.AddCors(options => options.AddPolicy("CentOrigins", policy => policy
-            .WithOrigins(config.GetSection("Cent:AllowedOrigins").Get<string[]>() ?? [])
+            .WithOrigins(origins)
             .AllowAnyHeader().AllowAnyMethod().WithExposedHeaders("Retry-After")));
         services.AddAuthentication().AddScheme<AuthenticationSchemeOptions, CentSessionHandler>(Scheme, _ => { });
         services.AddAuthorization(options => {
@@ -149,6 +154,7 @@ public static class CentAuthEndpoints
     public static void MapCentAuth(this RouteGroupBuilder group)
     {
         var auth = group.MapGroup("/auth").RequireRateLimiting("cent-auth");
+        auth.MapCentGoogleAuth();
         auth.MapPost("/register", async (Credentials input, CentDbContext db, IPasswordHasher<CentUser> hasher, CancellationToken ct) => {
             Validate(input, true);
             var email = input.Email.Trim();
@@ -163,8 +169,10 @@ public static class CentAuthEndpoints
             var user = await db.Users.SingleOrDefaultAsync(u => u.NormalizedEmail == input.Email.Trim().ToUpperInvariant(), ct);
             // Run a hash check even for unknown accounts to reduce account discovery through response timing.
             var candidate = user ?? new CentUser();
-            var storedHash = user?.PasswordHash ?? hasher.HashPassword(candidate, "Cent-unknown-account-dummy");
+            var storedHash = string.IsNullOrEmpty(user?.PasswordHash)
+                ? hasher.HashPassword(candidate, "Cent-unknown-account-dummy") : user.PasswordHash;
             var verified = hasher.VerifyHashedPassword(candidate, storedHash, input.Password);
+            if (string.IsNullOrEmpty(user?.PasswordHash)) verified = PasswordVerificationResult.Failed;
             CentModule.Check(user is not null && verified != PasswordVerificationResult.Failed, "ایمیل یا رمز عبور صحیح نیست.", 401);
             if (verified == PasswordVerificationResult.SuccessRehashNeeded) user!.PasswordHash = hasher.HashPassword(user, input.Password);
             return Results.Ok(await StartSession(user!, db, ct));
@@ -204,7 +212,7 @@ public static class CentAuthEndpoints
         if (registration) CentModule.Check(!string.IsNullOrWhiteSpace(c.Name) && c.Name.Trim().Length <= 120, "نام را وارد کنید (حداکثر ۱۲۰ نویسه).");
     }
 
-    private static async Task<object> StartSession(CentUser user, CentDbContext db, CancellationToken ct)
+    internal static async Task<object> StartSession(CentUser user, CentDbContext db, CancellationToken ct)
     {
         var token = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
         var session = new CentSession { UserId = user.Id, TokenHash = CentModule.Hash(token), ExpiresAt = DateTimeOffset.UtcNow.AddDays(7) };

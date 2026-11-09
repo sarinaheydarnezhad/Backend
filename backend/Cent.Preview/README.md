@@ -14,6 +14,14 @@ dotnet run --project backend/Cent.Preview/Cent.Preview.csproj
 
 The launch profile sets Development. The host refuses to start in other environments. Use `Flashcards.Api` for the shared production backend.
 
+After updating to Google authentication, existing preview databases require the explicit, backed-up upgrade:
+
+```powershell
+dotnet run --project backend/Cent.Preview/Cent.Preview.csproj -- --upgrade-google-auth true
+```
+
+Fresh previews create the current schema automatically. See [Cent Google authentication](../../docs/CENT-GOOGLE-AUTHENTICATION.md) for the environment variables, Google Cloud setup and frontend callback contract.
+
 In the frontend repository, run:
 
 ```powershell

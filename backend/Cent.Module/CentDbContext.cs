@@ -7,6 +7,7 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
 {
     public DbSet<CentUser> Users => Set<CentUser>();
     public DbSet<CentSession> Sessions => Set<CentSession>();
+    public DbSet<CentGoogleAttempt> GoogleAttempts => Set<CentGoogleAttempt>();
     public DbSet<CentTraining> Trainings => Set<CentTraining>();
     public DbSet<CentDocument> Documents => Set<CentDocument>();
     public DbSet<CentDocumentPage> Pages => Set<CentDocumentPage>();
@@ -38,6 +39,16 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
             e.Property(x => x.Name).HasMaxLength(120); e.Property(x => x.Email).HasMaxLength(256);
             e.Property(x => x.NormalizedEmail).HasMaxLength(256); e.Property(x => x.PasswordHash).HasMaxLength(512);
             e.Property(x => x.Role).HasMaxLength(16); e.HasIndex(x => x.NormalizedEmail).IsUnique();
+            e.Property(x => x.GoogleSubject).HasMaxLength(255).IsUnicode(false);
+            if (Database.IsSqlServer()) e.Property(x => x.GoogleSubject).UseCollation("Latin1_General_100_BIN2");
+            e.HasIndex(x => x.GoogleSubject).IsUnique().HasFilter("[GoogleSubject] IS NOT NULL");
+        });
+        b.Entity<CentGoogleAttempt>(e => {
+            e.ToTable("cent_google_attempts"); e.HasKey(x => x.StateHash);
+            e.Property(x => x.StateHash).HasMaxLength(64).IsUnicode(false);
+            e.Property(x => x.VerifierHash).HasMaxLength(64).IsUnicode(false);
+            e.Property(x => x.NonceHash).HasMaxLength(64).IsUnicode(false);
+            e.HasIndex(x => x.ExpiresAt);
         });
         b.Entity<CentSession>(e => {
             e.ToTable("cent_sessions"); e.HasKey(x => x.Id); e.Property(x => x.TokenHash).HasMaxLength(64).IsUnicode(false);

@@ -7,9 +7,19 @@ public sealed class CentUser
     public string Email { get; set; } = "";
     public string NormalizedEmail { get; set; } = "";
     public string PasswordHash { get; set; } = "";
+    public string? GoogleSubject { get; set; }
     public string Role { get; set; } = "STUDENT";
     public long PurchaseVersion { get; set; }
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
+}
+
+// No raw state, nonce or PKCE verifier is persisted.
+public sealed class CentGoogleAttempt
+{
+    public string StateHash { get; set; } = "";
+    public string VerifierHash { get; set; } = "";
+    public string NonceHash { get; set; } = "";
+    public DateTimeOffset ExpiresAt { get; set; }
 }
 
 public sealed class CentSession

@@ -86,6 +86,8 @@ app.UseSwaggerUI(options => options.SwaggerEndpoint("/openapi/v1.json", "Cent AP
 using (var scope = app.Services.CreateScope()) {
     var db = scope.ServiceProvider.GetRequiredService<CentDbContext>();
     await db.Database.EnsureCreatedAsync();
+    if (builder.Configuration.GetValue<bool>("upgrade-google-auth"))
+        await GoogleAuthUpgrade.Apply((PreviewDb)db, databasePath);
     if (builder.Configuration.GetValue<bool>("upgrade-curriculum"))
         await CurriculumUpgrade.Apply((PreviewDb)db, databasePath);
     if (!await db.Users.AnyAsync()) {

@@ -50,6 +50,8 @@ This implementation has not applied migrations to a live database or deployed th
 
 ## Server configuration
 
+Google sign-in configuration, the additive migration, Google Cloud setup, callback URLs and frontend contract are documented in [Cent Google authentication](docs/CENT-GOOGLE-AUTHENTICATION.md).
+
 Preserve every existing Lerona environment variable and backup disk binding. Add only the Cent values:
 
 ```text
