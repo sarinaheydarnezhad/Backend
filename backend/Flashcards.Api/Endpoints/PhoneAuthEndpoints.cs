@@ -13,6 +13,8 @@ public static class PhoneAuthEndpoints
             try { return await next(context); }
             catch (PhoneAuthException exception)
             {
+                if (exception.RetryAfterSeconds is { } seconds)
+                    context.HttpContext.Response.Headers.RetryAfter = seconds.ToString(System.Globalization.CultureInfo.InvariantCulture);
                 return Results.Json(new { error = exception.Message, code = exception.Code }, statusCode: exception.StatusCode);
             }
         });
@@ -20,28 +22,17 @@ public static class PhoneAuthEndpoints
             service.RequestAsync(request.PhoneNumber, request.Purpose, cancellationToken));
         phone.MapPost("/otp/verify", (VerifyOtpRequest request, PhoneAuthService service, CancellationToken cancellationToken) =>
             service.VerifyAsync(request.ChallengeId, request.Code, cancellationToken));
-        phone.MapPost("/register", (PhoneRegisterRequest request, PhoneAuthService service, CancellationToken cancellationToken) =>
-            service.RegisterAsync(request.PhoneNumber, request.RegistrationToken, request.Password,
-                request.ConfirmPassword, request.Username, cancellationToken));
-        phone.MapPost("/register-password", (PhonePasswordRegisterRequest request, PhoneAuthService service, CancellationToken cancellationToken) =>
-            service.RegisterWithPasswordAsync(request.PhoneNumber, request.Password, request.ConfirmPassword, cancellationToken));
-        phone.MapPost("/login", (PhoneLoginRequest request, PhoneAuthService service, CancellationToken cancellationToken) =>
-            service.LoginAsync(request.PhoneNumber, request.Password, cancellationToken));
+        foreach (var path in new[] { "/activation/request", "/register", "/register-password", "/login" })
+            phone.MapPost(path, Disabled);
         return auth;
+    }
+
+    public static IResult Disabled(HttpContext context)
+    {
+        context.Response.Headers.CacheControl = "no-store";
+        return Results.Json(new { code = "sms_otp_only", error = "ورود و ثبت‌نام فقط با کد پیامکی امکان‌پذیر است." }, statusCode: 410);
     }
 }
 
-public sealed record RequestOtpRequest([property: Required, StringLength(32)] string PhoneNumber, [property: Required, StringLength(12)] string Purpose);
-public sealed record VerifyOtpRequest(Guid ChallengeId, [property: Required, StringLength(32)] string Code);
-public sealed record PhoneRegisterRequest(
-    [property: Required, StringLength(32)] string PhoneNumber,
-    [property: Required, StringLength(128)] string RegistrationToken,
-    [property: Required, StringLength(128, MinimumLength = 12)] string Password,
-    [property: Required, StringLength(128)] string ConfirmPassword,
-    [property: Required, StringLength(120)] string Username);
-public sealed record PhonePasswordRegisterRequest(
-    [property: Required, StringLength(32)] string PhoneNumber,
-    [property: Required, StringLength(128, MinimumLength = 8)] string Password,
-    [property: Required, StringLength(128)] string ConfirmPassword);
-public sealed record PhoneLoginRequest([property: Required, StringLength(32)] string PhoneNumber,
-    [property: Required, StringLength(128)] string Password);
+public sealed record RequestOtpRequest([property: Required, StringLength(32)] string PhoneNumber, [property: StringLength(12)] string Purpose = "authenticate");
+public sealed record VerifyOtpRequest(Guid ChallengeId, [property: Required, StringLength(6, MinimumLength = 6)] string Code);

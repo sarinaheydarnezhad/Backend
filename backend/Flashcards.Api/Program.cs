@@ -3,8 +3,10 @@ using Flashcards.Application;
 using Flashcards.Infrastructure;
 using System.Threading.RateLimiting;
 using Cent.Module;
+using Flashcards.Infrastructure.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddLeronaSmsEnvironment(builder.Environment.ContentRootPath);
 
 builder.Logging.ClearProviders();
 builder.Logging.AddJsonConsole(options => options.IncludeScopes = true);

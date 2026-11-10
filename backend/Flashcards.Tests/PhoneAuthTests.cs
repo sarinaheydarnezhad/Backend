@@ -16,7 +16,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace Flashcards.Tests;
 
-public sealed class PhoneAuthTests : IAsyncLifetime
+public sealed partial class PhoneAuthTests : IAsyncLifetime
 {
     private const string Phone = "+989121234567";
     private const string Password = "Private passphrase 2026!";
@@ -47,389 +47,126 @@ public sealed class PhoneAuthTests : IAsyncLifetime
         await _connection.DisposeAsync();
     }
 
-    [Theory]
-    [InlineData("Maple7xy")]
-    [InlineData("Private passphrase 2026!")]
-    [InlineData("درختسبز۷")]
-    public async Task Password_registration_needs_no_sms_and_supports_login_refresh_and_logout(string password)
+    [Fact]
+    public async Task New_user_is_created_only_after_sms_and_without_password_email_or_google()
     {
-        _sms.Configured = false;
-        var response = await RegisterWithPasswordAsync("+۹۸۹۱۲۱۲۳۴۵۶۷", password, password);
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("no-store", response.Headers.CacheControl?.ToString());
-        var original = (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", original.AccessToken);
-        var me = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
-        Assert.Equal(Phone, me.GetProperty("phoneNumber").GetString());
-        Assert.Equal("", me.GetProperty("displayName").GetString());
-        Assert.False(me.TryGetProperty("passwordHash", out _));
+        var challenge = await RequestAsync(Phone);
         using (var scope = _factory.Services.CreateScope())
         {
-            var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-            var user = await database.Users.SingleAsync();
-            Assert.NotEqual(password, user.PasswordHash);
-            Assert.Equal(PasswordVerificationResult.Success,
-                scope.ServiceProvider.GetRequiredService<IPasswordHasher<User>>().VerifyHashedPassword(user, user.PasswordHash!, password));
-            Assert.Single(await database.SyncHeads.ToListAsync());
-            Assert.Single(await database.AuthSessions.ToListAsync());
-            Assert.Empty(await database.OtpChallenges.ToListAsync());
-            Assert.NotEqual(original.RefreshToken, (await database.RefreshTokens.SingleAsync()).TokenHash);
+            var db = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+            Assert.Empty(await db.Users.ToListAsync()); Assert.Empty(await db.AuthSessions.ToListAsync());
+            Assert.Empty(await db.RefreshTokens.ToListAsync());
+            Assert.NotEqual(_sms.Code, (await db.OtpChallenges.SingleAsync()).CodeHash);
         }
-        Assert.Equal(0, _sms.Sends);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/phone/login",
-            new { phoneNumber = Phone, password = "wrong-password" })).StatusCode);
-        Assert.Equal(HttpStatusCode.OK, (await _client.PostAsJsonAsync("/api/v1/auth/phone/login",
-            new { phoneNumber = Phone, password })).StatusCode);
-        var refresh = await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { original.RefreshToken });
-        Assert.Equal(HttpStatusCode.OK, refresh.StatusCode);
-        var rotated = (await refresh.Content.ReadFromJsonAsync<AuthTokens>())!;
-        Assert.NotEqual(original.RefreshToken, rotated.RefreshToken);
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", rotated.AccessToken);
-        Assert.Equal(HttpStatusCode.NoContent, (await _client.PostAsync("/api/v1/auth/logout", null)).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { rotated.RefreshToken })).StatusCode);
-    }
-
-    [Fact]
-    public async Task First_login_name_is_saved_on_the_account_and_returned_on_later_logins()
-    {
-        var registration = await RegisterWithPasswordAsync(Phone, Password, Password);
-        var tokens = (await registration.Content.ReadFromJsonAsync<AuthTokens>())!;
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
-        var initial = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
-        Assert.Equal("", initial.GetProperty("displayName").GetString());
-        var saved = await _client.PutAsJsonAsync("/api/v1/me/profile", new { displayName = "  سارا  " });
-        Assert.Equal(HttpStatusCode.OK, saved.StatusCode);
-        Assert.Equal("no-store", saved.Headers.CacheControl?.ToString());
-        Assert.Equal("سارا", (await saved.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("displayName").GetString());
-        Assert.Equal(HttpStatusCode.NoContent, (await _client.PostAsync("/api/v1/auth/logout", null)).StatusCode);
-        var login = await _client.PostAsJsonAsync("/api/v1/auth/phone/login", new { phoneNumber = Phone, password = Password });
-        var returning = (await login.Content.ReadFromJsonAsync<AuthTokens>())!;
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", returning.AccessToken);
-        var profile = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
-        Assert.Equal("سارا", profile.GetProperty("displayName").GetString());
-        Assert.Equal(initial.GetProperty("id").GetString(), profile.GetProperty("id").GetString());
-    }
-
-    [Theory]
-    [InlineData("")]
-    [InlineData("Maple7x")]
-    [InlineData("12345678")]
-    [InlineData("onlyletters")]
-    [InlineData("........")]
-    [InlineData("Password123!")]
-    [InlineData("pAsSw0Rd!")]
-    [InlineData("Qwerty123")]
-    public async Task Weak_password_registration_is_rejected_without_creating_any_account_state(string password)
-    {
-        Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(Phone, password, password)).StatusCode);
-        using var scope = _factory.Services.CreateScope();
-        var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-        Assert.Empty(await database.Users.ToListAsync());
-        Assert.Empty(await database.SyncHeads.ToListAsync());
-        Assert.Empty(await database.AuthSessions.ToListAsync());
-        Assert.Empty(await database.RefreshTokens.ToListAsync());
-        Assert.Empty(await database.OtpChallenges.ToListAsync());
-        Assert.Equal(0, _sms.Sends);
-    }
-
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData("Different7xy")]
-    public async Task Password_registration_requires_matching_confirmation(string? confirmation)
-    {
-        Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(Phone, Password, confirmation)).StatusCode);
-        using var scope = _factory.Services.CreateScope();
-        Assert.Empty(await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Users.ToListAsync());
-    }
-
-    [Fact]
-    public async Task Password_registration_enforces_both_password_length_boundaries()
-    {
-        var longest = new string('a', 127) + "1";
-        Assert.True(PhonePasswordPolicy.IsValid(longest));
-        Assert.False(PhonePasswordPolicy.IsValid(longest + "1"));
-        Assert.False(PhonePasswordPolicy.IsValid(null));
-        Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(Phone, longest + "1", longest + "1")).StatusCode);
-        Assert.Equal(HttpStatusCode.OK, (await RegisterWithPasswordAsync(Phone, longest, longest)).StatusCode);
-    }
-
-    [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
-    public async Task Password_registration_cannot_replace_existing_or_archived_phone_accounts(bool archived)
-    {
-        Assert.Equal(HttpStatusCode.OK, (await RegisterWithPasswordAsync(Phone, Password, Password)).StatusCode);
-        string? originalHash;
-        using (var scope = _factory.Services.CreateScope())
-        {
-            var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-            var user = await database.Users.SingleAsync();
-            originalHash = user.PasswordHash;
-            if (archived)
-            {
-                user.ArchivedAtUtc = DateTimeOffset.UtcNow;
-                await database.SaveChangesAsync();
-            }
-        }
-        var duplicate = await RegisterWithPasswordAsync(Phone, "Different7xy", "Different7xy");
-        Assert.Equal(HttpStatusCode.Conflict, duplicate.StatusCode);
-        Assert.Equal("duplicate_phone", (await duplicate.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
-        using (var scope = _factory.Services.CreateScope())
-        {
-            var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-            Assert.Equal(originalHash, (await database.Users.SingleAsync()).PasswordHash);
-            Assert.Single(await database.AuthSessions.ToListAsync());
-        }
-        var login = await _client.PostAsJsonAsync("/api/v1/auth/phone/login", new { phoneNumber = Phone, password = Password });
-        Assert.Equal(archived ? HttpStatusCode.Unauthorized : HttpStatusCode.OK, login.StatusCode);
-    }
-
-    [Theory]
-    [InlineData("09121234567")]
-    [InlineData("+0000000000")]
-    [InlineData("+98abc1234567")]
-    public async Task Password_registration_rejects_invalid_phone_numbers(string phoneNumber)
-    {
-        Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(phoneNumber, Password, Password)).StatusCode);
-        Assert.Equal(0, _sms.Sends);
-    }
-
-    [Fact]
-    public async Task Password_registration_inherits_the_per_ip_authentication_limit()
-    {
-        for (var attempt = 0; attempt < 10; attempt++)
-            Assert.Equal(HttpStatusCode.BadRequest, (await RegisterWithPasswordAsync(Phone, "onlyletters", "onlyletters")).StatusCode);
-        Assert.Equal(HttpStatusCode.TooManyRequests, (await RegisterWithPasswordAsync(Phone, Password, Password)).StatusCode);
-    }
-
-    private Task<HttpResponseMessage> RegisterWithPasswordAsync(string phoneNumber, string password, string? confirmPassword) =>
-        _client.PostAsJsonAsync("/api/v1/auth/phone/register-password", new { phoneNumber, password, confirmPassword });
-
-    [Fact]
-    public async Task Verified_registration_hashes_password_and_creates_existing_jwt_session()
-    {
-        var tokens = await RegisterAsync(Phone, "Student");
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
-        var me = await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/");
-        Assert.Equal(Phone, me.GetProperty("phoneNumber").GetString());
-        Assert.Equal("Student", me.GetProperty("displayName").GetString());
-        Assert.False(me.TryGetProperty("passwordHash", out _));
-        using var scope = _factory.Services.CreateScope();
-        var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-        var user = await database.Users.SingleAsync();
-        Assert.NotEqual(Password, user.PasswordHash);
-        Assert.Single(await database.AuthSessions.ToListAsync());
-        Assert.Single(await database.SyncHeads.ToListAsync());
-        Assert.NotEqual(tokens.RefreshToken, (await database.RefreshTokens.SingleAsync()).TokenHash);
-        var challenge = await database.OtpChallenges.SingleAsync();
-        Assert.NotNull(challenge.ConsumedAtUtc);
-        Assert.NotEqual(_sms.Code, challenge.CodeHash);
-        Assert.Equal(64, challenge.CodeHash.Length);
-    }
-
-    [Fact]
-    public async Task Password_login_uses_phone_and_rejects_invalid_credentials()
-    {
-        await RegisterAsync(Phone, "Student");
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/phone/login",
-            new { phoneNumber = Phone, password = "wrong" })).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/phone/login",
-            new { phoneNumber = "+989121234568", password = Password })).StatusCode);
-        var response = await _client.PostAsJsonAsync("/api/v1/auth/phone/login", new { phoneNumber = Phone, password = Password });
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var tokens = (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
+        var tokens = await AuthenticateAsync(challenge);
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
         Assert.Equal(HttpStatusCode.OK, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        using var final = _factory.Services.CreateScope(); var database = final.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        var user = await database.Users.SingleAsync();
+        Assert.Equal(Phone, user.PhoneNumber); Assert.Equal(Phone, user.VerifiedPhoneNumber);
+        Assert.NotNull(user.PhoneVerifiedAtUtc); Assert.Null(user.PasswordHash); Assert.Null(user.Email); Assert.Null(user.GoogleSubject);
+        Assert.Single(await database.SyncHeads.ToListAsync()); Assert.True((await database.AuthSessions.SingleAsync()).OtpAuthenticated);
+        Assert.NotEqual(tokens.RefreshToken, (await database.RefreshTokens.SingleAsync()).TokenHash);
+        Assert.NotNull((await database.OtpChallenges.SingleAsync()).ConsumedAtUtc);
     }
-
     [Fact]
-    public async Task Otp_login_needs_no_password_and_logout_revokes_the_session()
+    public async Task Existing_verified_user_logs_into_original_account_without_changing_relationships()
     {
-        await RegisterAsync(Phone, "Student");
-        _clock.Advance(TimeSpan.FromSeconds(61));
-        var challenge = await RequestAsync(Phone, "login");
-        var response = await VerifyAsync(challenge.ChallengeId, _sms.Code);
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var result = (await response.Content.ReadFromJsonAsync<OtpVerificationResponse>())!;
-        Assert.Null(result.RegistrationToken);
-        Assert.NotNull(result.Tokens);
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", result.Tokens.AccessToken);
-        Assert.Equal(HttpStatusCode.NoContent, (await _client.PostAsync("/api/v1/auth/logout", null)).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh",
-            new { refreshToken = result.Tokens.RefreshToken })).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await VerifyAsync(challenge.ChallengeId, _sms.Code)).StatusCode);
+        var user = await SeedLegacyAsync(verified: true);
+        using (var scope = _factory.Services.CreateScope()) { var db=scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>(); db.Decks.Add(new Deck { UserId=user.Id, Name="Preserved" }); await db.SaveChangesAsync(); }
+        var tokens = await AuthenticateAsync(await RequestAsync(Phone));
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
+        Assert.Equal(user.Id, (await _client.GetFromJsonAsync<JsonElement>("/api/v1/me/" )).GetProperty("id").GetGuid());
+        using var final = _factory.Services.CreateScope(); var database=final.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        var saved=await database.Users.SingleAsync(); Assert.Equal(user.PasswordHash,saved.PasswordHash); Assert.Equal(user.DisplayName,saved.DisplayName);
+        Assert.Equal(user.Id,(await database.Decks.SingleAsync()).UserId);
     }
-
-    [Fact]
-    public async Task Phone_sessions_preserve_refresh_rotation_and_reuse_detection()
-    {
-        var original = await RegisterAsync(Phone, "Student");
-        var response = await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { refreshToken = original.RefreshToken });
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var rotated = (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
-        Assert.NotEqual(original.RefreshToken, rotated.RefreshToken);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh",
-            new { refreshToken = original.RefreshToken })).StatusCode);
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", rotated.AccessToken);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
-    }
-
-    [Fact]
-    public async Task Registration_proof_is_required_bound_to_phone_and_single_use()
-    {
-        var proof = await RegistrationProofAsync(Phone);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await CompleteAsync("+989121234568", proof)).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await CompleteAsync(Phone, "forged-proof")).StatusCode);
-        Assert.Equal(HttpStatusCode.BadRequest, (await _client.PostAsJsonAsync("/api/v1/auth/phone/register", new
-        {
-            phoneNumber = Phone, registrationToken = proof, password = Password, confirmPassword = "different", username = "Student"
-        })).StatusCode);
-        Assert.Equal(HttpStatusCode.OK, (await CompleteAsync(Phone, proof)).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await CompleteAsync(Phone, proof)).StatusCode);
-    }
-
-    [Fact]
-    public async Task Duplicate_phone_is_rejected_but_usernames_need_not_be_unique()
-    {
-        await RegisterAsync(Phone, "Same name");
-        await RegisterAsync("+989121234568", "Same name");
-        _clock.Advance(TimeSpan.FromSeconds(61));
-        var proof = await RegistrationProofAsync(Phone);
-        var duplicate = await CompleteAsync(Phone, proof);
-        Assert.Equal(HttpStatusCode.Conflict, duplicate.StatusCode);
-        using var scope = _factory.Services.CreateScope();
-        var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-        Assert.Equal(2, await database.Users.CountAsync());
-        Assert.Equal(2, await database.Users.CountAsync(item => item.DisplayName == "Same name"));
-    }
-
-    [Fact]
-    public async Task Invalid_and_expired_codes_and_expired_registration_proofs_are_rejected()
-    {
-        var challenge = await RequestAsync(Phone, "register");
-        Assert.Equal(HttpStatusCode.Unauthorized, (await VerifyAsync(challenge.ChallengeId, "not-six")).StatusCode);
-        _clock.Advance(TimeSpan.FromMinutes(6));
-        Assert.Equal(HttpStatusCode.Unauthorized, (await VerifyAsync(challenge.ChallengeId, _sms.Code)).StatusCode);
-        var proof = await RegistrationProofAsync(Phone);
-        _clock.Advance(TimeSpan.FromMinutes(11));
-        Assert.Equal(HttpStatusCode.Unauthorized, (await CompleteAsync(Phone, proof)).StatusCode);
-        using var scope = _factory.Services.CreateScope();
-        Assert.Empty(await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Users.ToListAsync());
-    }
-
-    [Fact]
-    public async Task Verification_attempts_are_persisted_and_limited_to_five()
-    {
-        var challenge = await RequestAsync(Phone, "register");
-        var wrong = _sms.Code == "000000" ? "111111" : "000000";
-        for (var attempt = 0; attempt < 5; attempt++)
-            Assert.Equal(HttpStatusCode.Unauthorized, (await VerifyAsync(challenge.ChallengeId, wrong)).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await VerifyAsync(challenge.ChallengeId, _sms.Code)).StatusCode);
-        using var scope = _factory.Services.CreateScope();
-        Assert.Equal(5, (await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().OtpChallenges.SingleAsync()).Attempts);
-    }
-
-    [Fact]
-    public async Task Requests_have_a_phone_cooldown_and_hourly_limit_and_resend_invalidates_old_code()
-    {
-        var first = await RequestAsync(Phone, "register");
-        var firstCode = _sms.Code;
-        Assert.Equal(HttpStatusCode.TooManyRequests, (await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",
-            new { phoneNumber = Phone, purpose = "register" })).StatusCode);
-        for (var request = 1; request < 5; request++)
-        {
-            _clock.Advance(TimeSpan.FromSeconds(61));
-            await RequestAsync(Phone, "register");
-        }
-        Assert.Equal(HttpStatusCode.Unauthorized, (await VerifyAsync(first.ChallengeId, firstCode)).StatusCode);
-        _clock.Advance(TimeSpan.FromSeconds(61));
-        Assert.Equal(HttpStatusCode.TooManyRequests, (await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",
-            new { phoneNumber = Phone, purpose = "login" })).StatusCode);
-        Assert.Equal(5, _sms.Sends);
-    }
-
-    [Fact]
-    public async Task Phone_endpoints_keep_the_existing_per_ip_rate_limit()
-    {
-        for (var attempt = 0; attempt < 10; attempt++)
-            Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/phone/login",
-                new { phoneNumber = Phone, password = Password })).StatusCode);
-        Assert.Equal(HttpStatusCode.TooManyRequests, (await _client.PostAsJsonAsync("/api/v1/auth/phone/login",
-            new { phoneNumber = Phone, password = Password })).StatusCode);
-    }
-
     [Theory]
-    [InlineData("09121234567")]
-    [InlineData("+0000000000")]
-    [InlineData("+98abc1234567")]
-    public async Task Invalid_phone_numbers_are_rejected_without_sms(string phoneNumber)
+    [InlineData("/api/v1/auth/register")]
+    [InlineData("/api/v1/auth/login")]
+    [InlineData("/api/v1/auth/google")]
+    [InlineData("/api/v1/auth/google/login")]
+    [InlineData("/api/v1/auth/google/register")]
+    [InlineData("/api/v1/auth/phone/register")]
+    [InlineData("/api/v1/auth/phone/register-password")]
+    [InlineData("/api/v1/auth/phone/login")]
+    [InlineData("/api/v1/auth/phone/activation/request")]
+    public async Task All_legacy_paths_are_disabled_even_with_valid_credentials_and_client_flags(string path)
     {
-        Assert.Equal(HttpStatusCode.BadRequest, (await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",
-            new { phoneNumber, purpose = "register" })).StatusCode);
-        Assert.Equal(0, _sms.Sends);
+        await SeedLegacyAsync(verified:true);
+        var response = await _client.PostAsJsonAsync(path,new { phoneNumber=Phone,password=Password,confirmPassword=Password,email="legacy@example.com",displayName="Learner",username="Learner",idToken="token",registrationToken="proof",phoneVerified=true,verifiedPhoneNumber=Phone,phoneVerifiedAtUtc=DateTimeOffset.UtcNow });
+        Assert.Equal(HttpStatusCode.Gone,response.StatusCode); Assert.Equal("sms_otp_only",(await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
+        using var scope=_factory.Services.CreateScope();var db=scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        Assert.Empty(await db.AuthSessions.ToListAsync());Assert.Empty(await db.RefreshTokens.ToListAsync());Assert.Equal(0,_sms.Sends);
     }
-
     [Fact]
-    public async Task Persian_digits_are_normalized_to_the_same_phone_identity()
+    public async Task Invalid_expired_and_reused_codes_cannot_issue_tokens()
     {
-        await RequestAsync("+۹۸۹۱۲۱۲۳۴۵۶۷", "register");
-        Assert.Equal(Phone, _sms.PhoneNumber);
+        var challenge=await RequestAsync(Phone);var wrong=_sms.Code=="000000"?"111111":"000000";
+        Assert.Equal(HttpStatusCode.Unauthorized,(await VerifyAsync(challenge.ChallengeId,wrong)).StatusCode);
+        _clock.Advance(TimeSpan.FromSeconds(120));Assert.Equal(HttpStatusCode.Unauthorized,(await VerifyAsync(challenge.ChallengeId,_sms.Code)).StatusCode);
+        challenge=await RequestAsync(Phone);await AuthenticateAsync(challenge);
+        Assert.Equal(HttpStatusCode.Unauthorized,(await VerifyAsync(challenge.ChallengeId,_sms.Code)).StatusCode);
+        using var scope=_factory.Services.CreateScope();Assert.Single(await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().AuthSessions.ToListAsync());
     }
-
     [Fact]
-    public async Task Missing_or_failed_sms_delivery_never_produces_usable_verification()
+    public async Task Five_failed_attempts_are_durable_and_exhaust_the_challenge()
     {
-        _sms.Configured = false;
-        var missing = await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request", new { phoneNumber = Phone, purpose = "register" });
-        Assert.Equal(HttpStatusCode.ServiceUnavailable, missing.StatusCode);
-        _sms.Configured = true;
-        _sms.Fail = true;
-        var failed = await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request", new { phoneNumber = Phone, purpose = "register" });
-        Assert.Equal(HttpStatusCode.ServiceUnavailable, failed.StatusCode);
-        using var scope = _factory.Services.CreateScope();
-        var challenge = await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().OtpChallenges.SingleAsync();
-        Assert.False(challenge.Delivered);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await VerifyAsync(challenge.Id, _sms.Code)).StatusCode);
+        var challenge=await RequestAsync(Phone);var wrong=_sms.Code=="000000"?"111111":"000000";
+        for(var i=0;i<5;i++)Assert.Equal(HttpStatusCode.Unauthorized,(await VerifyAsync(challenge.ChallengeId,wrong)).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized,(await VerifyAsync(challenge.ChallengeId,_sms.Code)).StatusCode);
+        using var scope=_factory.Services.CreateScope();var db=scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();Assert.Equal(5,(await db.OtpChallenges.SingleAsync()).Attempts);Assert.Empty(await db.AuthSessions.ToListAsync());
     }
-
-    private async Task<OtpRequestResponse> RequestAsync(string phoneNumber, string purpose)
+    [Fact]
+    public async Task Resend_cooldown_hourly_limit_and_old_code_invalidation_are_enforced()
     {
-        var response = await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request", new { phoneNumber, purpose });
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        Assert.Equal("no-store", response.Headers.CacheControl?.ToString());
-        return (await response.Content.ReadFromJsonAsync<OtpRequestResponse>())!;
+        var first=await RequestAsync(Phone);var code=_sms.Code;
+        var limited=await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",new {phoneNumber="09121234567"});Assert.Equal(HttpStatusCode.TooManyRequests,limited.StatusCode);Assert.Equal(TimeSpan.FromSeconds(60),limited.Headers.RetryAfter!.Delta);
+        for(var i=1;i<5;i++){_clock.Advance(TimeSpan.FromSeconds(61));await RequestAsync(Phone);}
+        Assert.Equal(HttpStatusCode.Unauthorized,(await VerifyAsync(first.ChallengeId,code)).StatusCode);
+        _clock.Advance(TimeSpan.FromSeconds(61));Assert.Equal(HttpStatusCode.TooManyRequests,(await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",new {phoneNumber=Phone})).StatusCode);Assert.Equal(5,_sms.Sends);
     }
-
-    private Task<HttpResponseMessage> VerifyAsync(Guid challengeId, string code) =>
-        _client.PostAsJsonAsync("/api/v1/auth/phone/otp/verify", new { challengeId, code });
-
-    private async Task<string> RegistrationProofAsync(string phoneNumber)
+    [Fact]
+    public async Task Refresh_rotation_replay_and_logout_preserve_security()
     {
-        var challenge = await RequestAsync(phoneNumber, "register");
-        var response = await VerifyAsync(challenge.ChallengeId, _sms.Code);
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        var verified = (await response.Content.ReadFromJsonAsync<OtpVerificationResponse>())!;
-        Assert.Null(verified.Tokens);
-        Assert.NotNull(verified.RegistrationToken);
-        return verified.RegistrationToken;
+        var original=await AuthenticateAsync(await RequestAsync(Phone));
+        var rotatedResponse=await _client.PostAsJsonAsync("/api/v1/auth/refresh",new {refreshToken=original.RefreshToken});Assert.Equal(HttpStatusCode.OK,rotatedResponse.StatusCode);
+        var rotated=(await rotatedResponse.Content.ReadFromJsonAsync<AuthTokens>())!;Assert.NotEqual(original.RefreshToken,rotated.RefreshToken);
+        Assert.Equal(HttpStatusCode.Unauthorized,(await _client.PostAsJsonAsync("/api/v1/auth/refresh",new {refreshToken=original.RefreshToken})).StatusCode);
+        _client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("Bearer",rotated.AccessToken);Assert.Equal(HttpStatusCode.Unauthorized,(await _client.GetAsync("/api/v1/me/")).StatusCode);
+        _clock.Advance(TimeSpan.FromSeconds(61));var next=await AuthenticateAsync(await RequestAsync(Phone));_client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("Bearer",next.AccessToken);
+        Assert.Equal(HttpStatusCode.NoContent,(await _client.PostAsync("/api/v1/auth/logout",null)).StatusCode);Assert.Equal(HttpStatusCode.Unauthorized,(await _client.GetAsync("/api/v1/me/")).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized,(await _client.PostAsJsonAsync("/api/v1/auth/refresh",new {refreshToken=next.RefreshToken})).StatusCode);
     }
-
-    private Task<HttpResponseMessage> CompleteAsync(string phoneNumber, string registrationToken, string username = "Student") =>
-        _client.PostAsJsonAsync("/api/v1/auth/phone/register", new
-        {
-            phoneNumber, registrationToken, password = Password, confirmPassword = Password, username
-        });
-
-    private async Task<AuthTokens> RegisterAsync(string phoneNumber, string username)
+    [Theory]
+    [InlineData("register")][InlineData("login")][InlineData("activate")][InlineData("recover")]
+    public async Task Old_and_recovery_operations_cannot_be_requested_by_clients(string purpose)
+    { Assert.Equal(HttpStatusCode.BadRequest,(await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",new {phoneNumber=Phone,purpose,phoneVerified=true,activationUserId=Guid.NewGuid()})).StatusCode);Assert.Equal(0,_sms.Sends); }
+    [Theory]
+    [InlineData("02121234567")][InlineData("+14155552671")][InlineData("+98abc1234567")]
+    public async Task Invalid_numbers_are_rejected_without_sms(string phoneNumber)
+    { Assert.Equal(HttpStatusCode.BadRequest,(await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",new {phoneNumber})).StatusCode);Assert.Equal(0,_sms.Sends); }
+    [Fact]
+    public async Task Persian_phone_digits_are_normalized_and_code_is_six_digits()
+    { var c=await RequestAsync("۰۹۱۲۱۲۳۴۵۶۷");Assert.Equal(Phone,_sms.PhoneNumber);Assert.Matches("^[0-9]{6}$",_sms.Code);Assert.Equal(6,c.CodeLength);Assert.Equal(TimeSpan.FromSeconds(120),c.ExpiresAtUtc-_clock.GetUtcNow()); }
+    [Fact]
+    public async Task Phone_and_operation_are_bound_to_the_hash()
     {
-        var proof = await RegistrationProofAsync(phoneNumber);
-        var response = await CompleteAsync(phoneNumber, proof, username);
-        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-        return (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
+        var c=await RequestAsync(Phone);using(var scope=_factory.Services.CreateScope())await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().OtpChallenges.Where(x=>x.Id==c.ChallengeId).ExecuteUpdateAsync(u=>u.SetProperty(x=>x.PhoneNumber,"+989121234568"));
+        Assert.Equal(HttpStatusCode.Unauthorized,(await VerifyAsync(c.ChallengeId,_sms.Code)).StatusCode);
     }
+    [Fact]
+    public async Task Failed_delivery_is_not_verifiable_and_returns_no_tokens()
+    {
+        _sms.Configured=false;Assert.Equal(HttpStatusCode.ServiceUnavailable,(await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",new {phoneNumber=Phone})).StatusCode);
+        _sms.Configured=true;_sms.Fail=true;Assert.Equal(HttpStatusCode.ServiceUnavailable,(await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",new {phoneNumber=Phone})).StatusCode);
+        using var scope=_factory.Services.CreateScope();var db=scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();var c=await db.OtpChallenges.SingleAsync();Assert.False(c.Delivered);Assert.Equal(HttpStatusCode.Unauthorized,(await VerifyAsync(c.Id,_sms.Code)).StatusCode);Assert.Empty(await db.AuthSessions.ToListAsync());
+    }
+    private async Task<OtpRequestResponse> RequestAsync(string phoneNumber)
+    { var response=await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request",new {phoneNumber});Assert.Equal(HttpStatusCode.OK,response.StatusCode);Assert.Equal("no-store",response.Headers.CacheControl?.ToString());return (await response.Content.ReadFromJsonAsync<OtpRequestResponse>())!; }
+    private Task<HttpResponseMessage> VerifyAsync(Guid challengeId,string code)=>_client.PostAsJsonAsync("/api/v1/auth/phone/otp/verify",new {challengeId,code});
+    private async Task<AuthTokens> AuthenticateAsync(OtpRequestResponse challenge)
+    { var response=await VerifyAsync(challenge.ChallengeId,_sms.Code);Assert.Equal(HttpStatusCode.OK,response.StatusCode);var result=(await response.Content.ReadFromJsonAsync<OtpVerificationResponse>())!;Assert.Null(result.RegistrationToken);Assert.NotNull(result.Tokens);return result.Tokens; }
 
     private sealed class TestClock : TimeProvider
     {
@@ -456,7 +193,7 @@ public sealed class PhoneAuthTests : IAsyncLifetime
         }
     }
 
-    private sealed class PhoneApiFactory(SqliteConnection connection, ISmsOtpSender sender, TimeProvider clock) : TestApiFactory
+    private sealed class PhoneApiFactory(SqliteConnection connection, ISmsOtpSender sender, TimeProvider clock, OtpSettings? otp = null) : TestApiFactory
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)
         {
@@ -470,6 +207,11 @@ public sealed class PhoneAuthTests : IAsyncLifetime
                 services.AddSingleton(sender);
                 services.RemoveAll<TimeProvider>();
                 services.AddSingleton(clock);
+                if (otp is not null)
+                {
+                    services.RemoveAll<OtpSettings>();
+                    services.AddSingleton(otp);
+                }
             });
         }
     }

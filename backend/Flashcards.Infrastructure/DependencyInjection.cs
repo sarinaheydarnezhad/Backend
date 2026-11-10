@@ -46,7 +46,8 @@ public static class DependencyInjection
                 {
                     var subject = context.Principal?.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
                     var session = context.Principal?.FindFirst("sid")?.Value;
-                    if (!Guid.TryParse(subject, out var userId) || !Guid.TryParse(session, out var sessionId) ||
+                    if (context.Principal?.FindFirst("phone_verified")?.Value != "true" || context.Principal?.FindFirst("amr")?.Value != "sms_otp" ||
+                        !Guid.TryParse(subject, out var userId) || !Guid.TryParse(session, out var sessionId) ||
                         !await context.HttpContext.RequestServices.GetRequiredService<TokenService>()
                             .IsSessionActiveAsync(userId, sessionId, context.HttpContext.RequestAborted))
                         context.Fail("Session is no longer active.");
@@ -67,8 +68,18 @@ public static class DependencyInjection
                 new HttpDocumentRetriever(new HttpClient { Timeout = TimeSpan.FromSeconds(10) }) { RequireHttps = true }));
         services.AddSingleton<IGoogleTokenVerifier, GoogleTokenVerifier>();
         services.AddSingleton(TimeProvider.System);
-        var smsProvider = configuration["Sms:Provider"] ?? "Webhook";
-        if (string.Equals(smsProvider, "SmsIr", StringComparison.OrdinalIgnoreCase))
+        // Lerona-only settings are resolved when its phone service is used; Cent does not consume them.
+        services.AddSingleton(provider => OtpSettings.FromConfiguration(provider.GetRequiredService<IConfiguration>()));
+        var smsProvider = configuration["Sms:Provider"] ?? "Kavenegar";
+        if (string.Equals(smsProvider, "Kavenegar", StringComparison.OrdinalIgnoreCase))
+            services.AddHttpClient<ISmsOtpSender, KavenegarOtpSender>(client =>
+                {
+                    var timeout = configuration.GetValue("Kavenegar:TimeoutSeconds", 10);
+                    client.Timeout = TimeSpan.FromSeconds(Math.Clamp(timeout, 1, 30));
+                })
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false })
+                .RemoveAllLoggers(); // Kavenegar embeds its secret in the URL path.
+        else if (string.Equals(smsProvider, "SmsIr", StringComparison.OrdinalIgnoreCase))
             services.AddHttpClient<ISmsOtpSender, SmsIrOtpSender>(client => client.Timeout = TimeSpan.FromSeconds(10))
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false })
                 .RedactLoggedHeaders(["x-api-key", "Authorization"]);
@@ -76,7 +87,7 @@ public static class DependencyInjection
             services.AddHttpClient<ISmsOtpSender, WebhookSmsOtpSender>(client => client.Timeout = TimeSpan.FromSeconds(10))
                 .RedactLoggedHeaders(["Authorization"]);
         else
-            throw new InvalidOperationException("Sms:Provider must be SmsIr or Webhook.");
+            throw new InvalidOperationException("Sms:Provider must be SmsIr, Webhook or Kavenegar.");
         services.AddScoped<SyncService>();
         services.AddSingleton<PlanCatalog>();
         services.AddSingleton(MyketSettings.FromConfiguration(configuration));

@@ -3,6 +3,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Flashcards.Application.Abstractions;
 using Flashcards.Infrastructure;
+using Flashcards.Infrastructure.Auth;
 using Flashcards.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
@@ -137,6 +138,11 @@ public class TestApiFactory : WebApplicationFactory<Program>
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        builder.ConfigureTestServices(services =>
+        {
+            services.RemoveAll<ISmsOtpSender>();
+            services.AddSingleton<ISmsOtpSender, TestSmsOutbox>();
+        });
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?>
         {
             ["Auth:Issuer"] = "Flashcards.Api",

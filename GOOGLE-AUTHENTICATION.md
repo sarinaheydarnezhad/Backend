@@ -1,3 +1,5 @@
+> Historical document. Superseded by [the SMS OTP-only policy](docs/SMS_OTP_ONLY_REPORT.md). Lerona password/Google/activation routes now return 410; Cent is unchanged.
+
 # Google sign-in
 
 The mobile app's **Continue with Google** option is temporarily hidden. Its adapter and `POST /api/v1/auth/google` endpoint are retained for later re-enablement and older clients. The endpoint takes `{ "idToken": "<Google ID token>" }`. First use creates an account; later sign-ins use the same verified Google subject. Responses use the existing application access/refresh token contract and session revocation behavior.

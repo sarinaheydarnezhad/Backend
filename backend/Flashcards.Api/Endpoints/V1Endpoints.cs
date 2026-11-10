@@ -24,6 +24,11 @@ public static class V1Endpoints
             if (context.HttpContext.User.Identity?.IsAuthenticated == true)
                 context.HttpContext.Response.Headers.CacheControl = "no-store";
             try { return await next(context); }
+            catch (PhoneAuthException exception)
+            {
+                context.HttpContext.Response.Headers.CacheControl = "no-store";
+                return Results.Json(new { error = exception.Message, code = exception.Code }, statusCode: exception.StatusCode);
+            }
             catch (FreeTierLimitException exception)
             {
                 context.HttpContext.Response.Headers.CacheControl = "no-store";
@@ -68,21 +73,8 @@ public static class V1Endpoints
 
         var auth = v1.MapGroup("/auth").WithTags("auth").RequireRateLimiting("auth");
         auth.MapPhoneAuth();
-        auth.MapGoogleAuth();
-        auth.MapPost("/register", async (RegisterRequest request, AuthService service, HttpContext context, CancellationToken cancellationToken) =>
-        {
-            var tokens = await service.RegisterAsync(request.Email, request.Password, request.DisplayName, cancellationToken);
-            if (tokens is null) return Results.Conflict(new { error = "Email is already registered." });
-            context.Response.Headers.CacheControl = "no-store";
-            return Results.Ok(tokens);
-        });
-        auth.MapPost("/login", async (LoginRequest request, AuthService service, HttpContext context, CancellationToken cancellationToken) =>
-        {
-            var tokens = await service.LoginAsync(request.Email, request.Password, cancellationToken);
-            if (tokens is null) return Results.Unauthorized();
-            context.Response.Headers.CacheControl = "no-store";
-            return Results.Ok(tokens);
-        });
+        foreach (var path in new[] { "/register", "/login", "/google", "/google/register", "/google/login" })
+            auth.MapPost(path, PhoneAuthEndpoints.Disabled);
         auth.MapPost("/refresh", async (RefreshRequest request, AuthService service, HttpContext context, CancellationToken cancellationToken) =>
         {
             var tokens = await service.RefreshAsync(request.RefreshToken, cancellationToken);
@@ -205,7 +197,9 @@ public sealed record UpdateProfileRequest(
 public sealed record RegisterRequest(
     [property: Required, EmailAddress, StringLength(256)] string Email,
     [property: Required, StringLength(128, MinimumLength = 12)] string Password,
-    [property: Required, StringLength(120, MinimumLength = 1)] string DisplayName);
+    [property: Required, StringLength(120, MinimumLength = 1)] string DisplayName,
+    [property: StringLength(32)] string? PhoneNumber = null,
+    [property: StringLength(128)] string? RegistrationToken = null);
 
 public sealed record LoginRequest(
     [property: Required, EmailAddress] string Email,

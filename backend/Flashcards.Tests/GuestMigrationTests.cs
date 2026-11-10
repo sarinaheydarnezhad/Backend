@@ -213,10 +213,7 @@ public sealed partial class SyncTests
             using var client = factory.CreateClient();
             using (var scope = factory.Services.CreateScope())
                 await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Database.EnsureCreatedAsync();
-            var registered = await client.PostAsJsonAsync("/api/v1/auth/register", new
-            {
-                email = "concurrent-guest@example.com", password = "Synthetic private test passphrase", displayName = "Learner"
-            });
+            var registered = await client.RegisterOtpFixtureAsync("concurrent-guest@example.com", "Synthetic private test passphrase", "Learner", services: factory.Services);
             Assert.Equal(HttpStatusCode.OK, registered.StatusCode);
             var tokens = (await registered.Content.ReadFromJsonAsync<AuthTokens>())!;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);

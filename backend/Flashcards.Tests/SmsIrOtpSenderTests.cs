@@ -128,6 +128,7 @@ public sealed class SmsIrOtpSenderTests
     [Theory]
     [InlineData("SmsIr", typeof(SmsIrOtpSender))]
     [InlineData("Webhook", typeof(WebhookSmsOtpSender))]
+    [InlineData("Kavenegar", typeof(KavenegarOtpSender))]
     public void Selected_provider_reuses_the_existing_sender_boundary(string provider, Type expected)
     {
         var settings = new Dictionary<string, string?>

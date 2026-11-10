@@ -34,6 +34,9 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                     b.Property<DateTimeOffset>("ExpiresAtUtc")
                         .HasColumnType("datetimeoffset(7)");
 
+                    b.Property<bool>("OtpAuthenticated")
+                        .HasColumnType("bit");
+
                     b.Property<DateTimeOffset?>("RevokedAtUtc")
                         .HasColumnType("datetimeoffset");
 
@@ -294,6 +297,9 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                         .HasMaxLength(16)
                         .IsUnicode(false)
                         .HasColumnType("varchar(16)");
+
+                    b.Property<Guid?>("ActivationUserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Attempts")
                         .HasColumnType("int");
@@ -623,8 +629,16 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(16)");
 
+                    b.Property<DateTimeOffset?>("PhoneVerifiedAtUtc")
+                        .HasColumnType("datetimeoffset(7)");
+
                     b.Property<DateTimeOffset>("UpdatedAtUtc")
                         .HasColumnType("datetimeoffset(7)");
+
+                    b.Property<string>("VerifiedPhoneNumber")
+                        .HasMaxLength(16)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(16)");
 
                     b.HasKey("Id");
 

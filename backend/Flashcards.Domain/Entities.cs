@@ -8,6 +8,8 @@ public sealed class User
     public string? NormalizedEmail { get; set; }
     public string? PasswordHash { get; set; }
     public string? PhoneNumber { get; set; }
+    public string? VerifiedPhoneNumber { get; set; }
+    public DateTimeOffset? PhoneVerifiedAtUtc { get; set; }
     public string? GoogleSubject { get; set; }
     public DateTimeOffset CreatedAtUtc { get; set; }
     public DateTimeOffset UpdatedAtUtc { get; set; }
@@ -19,6 +21,7 @@ public sealed class User
 
 public sealed class AuthSession
 {
+    public bool OtpAuthenticated { get; set; }
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;
@@ -33,6 +36,7 @@ public sealed class OtpChallenge
     public string PhoneNumber { get; set; } = string.Empty;
     public Guid Id { get; set; }
     public string Purpose { get; set; } = string.Empty;
+    public Guid? ActivationUserId { get; set; }
     public string CodeHash { get; set; } = string.Empty;
     public DateTimeOffset RequestedAtUtc { get; set; }
     public DateTimeOffset WindowStartedAtUtc { get; set; }

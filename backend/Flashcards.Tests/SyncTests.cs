@@ -398,10 +398,7 @@ public sealed partial class SyncTests : IAsyncLifetime
 
     private async Task LoginAsync(string email)
     {
-        var response = await _client.PostAsJsonAsync("/api/v1/auth/register", new
-        {
-            email, password = "My long private passphrase 2026!", displayName = "Student"
-        });
+        var response = await _client.RegisterOtpFixtureAsync(email, "My long private passphrase 2026!", services: _factory.Services);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var tokens = (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);

@@ -1,49 +1,46 @@
 using System.Data;
 using System.Security.Cryptography;
 using System.Text;
-using System.Text.RegularExpressions;
 using Flashcards.Domain;
 using Flashcards.Infrastructure.Persistence;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Flashcards.Infrastructure.Auth;
 
 public sealed class PhoneAuthService(FlashcardsDbContext database, TokenService tokens,
-    IPasswordHasher<User> passwordHasher, AuthSettings settings, ISmsOtpSender sender, TimeProvider clock)
+    AuthSettings settings, ISmsOtpSender sender, TimeProvider clock, OtpSettings otp)
 {
-    public async Task<OtpRequestResponse> RequestAsync(string phoneNumber, string purpose, CancellationToken cancellationToken = default)
+    public async Task<OtpRequestResponse> RequestAsync(string phoneNumber, string purpose = "authenticate", CancellationToken cancellationToken = default)
     {
-        var phone = PhoneNumber.Normalize(phoneNumber);
-        if (purpose is not ("register" or "login"))
-            throw new PhoneAuthException(400, "invalid_purpose", "Select registration or login.");
-        if (!sender.IsConfigured)
-            throw new PhoneAuthException(503, "sms_unavailable", "SMS authentication is not configured.");
+        if (purpose != "authenticate")
+            throw new PhoneAuthException(400, "invalid_purpose", "درخواست ورود معتبر نیست.");
+        if (otp.Length != 6) throw new InvalidOperationException("Lerona OTP length must be six.");
+        var phone = PhoneNumber.NormalizeIranian(phoneNumber);
+        if (!sender.IsConfigured) throw new PhoneAuthException(503, "sms_unavailable", "سرویس پیامک در دسترس نیست.");
         var now = clock.GetUtcNow();
-        var code = RandomNumberGenerator.GetInt32(1_000_000).ToString("D6");
+        var code = RandomNumberGenerator.GetInt32(1_000_000).ToString("D6", System.Globalization.CultureInfo.InvariantCulture);
         OtpChallenge challenge;
         await using (var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken))
         {
+            // This update lock serializes requests with requests and verification for this phone.
             await database.OtpChallenges.Where(item => item.PhoneNumber == phone)
                 .ExecuteUpdateAsync(update => update.SetProperty(item => item.Attempts, item => item.Attempts), cancellationToken);
             challenge = await database.OtpChallenges.SingleOrDefaultAsync(item => item.PhoneNumber == phone, cancellationToken)
                 ?? new OtpChallenge { PhoneNumber = phone, WindowStartedAtUtc = now };
-            if (challenge.RequestedAtUtc > now.AddSeconds(-60) ||
-                (challenge.WindowStartedAtUtc > now.AddHours(-1) && challenge.RequestsInWindow >= 5))
-                throw new PhoneAuthException(429, "otp_rate_limit", "Wait before requesting another code.");
-            if (challenge.WindowStartedAtUtc <= now.AddHours(-1))
-            {
-                challenge.WindowStartedAtUtc = now;
-                challenge.RequestsInWindow = 0;
-            }
+            var retryAt = challenge.RequestedAtUtc.AddSeconds(otp.ResendCooldownSeconds);
+            if (challenge.WindowStartedAtUtc > now.AddHours(-1) && challenge.RequestsInWindow >= otp.MaxRequestsPerHour)
+                retryAt = new[] { retryAt, challenge.WindowStartedAtUtc.AddHours(1) }.Max();
+            if (retryAt > now)
+                throw new PhoneAuthException(429, "otp_rate_limit", "برای دریافت کد جدید کمی صبر کنید.", (int)Math.Ceiling((retryAt - now).TotalSeconds));
+            if (challenge.WindowStartedAtUtc <= now.AddHours(-1)) { challenge.WindowStartedAtUtc = now; challenge.RequestsInWindow = 0; }
             if (database.Entry(challenge).State == EntityState.Detached) database.OtpChallenges.Add(challenge);
             challenge.Id = Guid.NewGuid();
-            challenge.Purpose = purpose;
-            challenge.CodeHash = HashCode(challenge.Id, code);
+            challenge.Purpose = "authenticate";
+            challenge.ActivationUserId = null;
+            challenge.CodeHash = HashCode(challenge.Id, phone, code);
             challenge.RequestedAtUtc = now;
             challenge.RequestsInWindow++;
-            challenge.ExpiresAtUtc = now.AddMinutes(5);
+            challenge.ExpiresAtUtc = now.AddSeconds(otp.ExpirationSeconds);
             challenge.Attempts = 0;
             challenge.Delivered = false;
             challenge.VerifiedAtUtc = null;
@@ -51,139 +48,70 @@ public sealed class PhoneAuthService(FlashcardsDbContext database, TokenService 
             challenge.ProofExpiresAtUtc = null;
             challenge.ConsumedAtUtc = null;
             try { await database.SaveChangesAsync(cancellationToken); }
-            catch (DbUpdateException)
-            {
-                throw new PhoneAuthException(429, "otp_rate_limit", "Wait before requesting another code.");
-            }
+            catch (DbUpdateException) { throw new PhoneAuthException(429, "otp_rate_limit", "برای دریافت کد جدید کمی صبر کنید.", otp.ResendCooldownSeconds); }
             await transaction.CommitAsync(cancellationToken);
         }
+        var id = challenge.Id;
         await sender.SendAsync(phone, code, cancellationToken);
-        await database.OtpChallenges.Where(item => item.PhoneNumber == phone && item.Id == challenge.Id)
+        await database.OtpChallenges.Where(item => item.PhoneNumber == phone && item.Id == id)
             .ExecuteUpdateAsync(update => update.SetProperty(item => item.Delivered, true), cancellationToken);
-        return new OtpRequestResponse(challenge.Id, challenge.ExpiresAtUtc, now.AddSeconds(60));
+        return new OtpRequestResponse(id, challenge.ExpiresAtUtc, now.AddSeconds(otp.ResendCooldownSeconds), 6);
     }
 
     public async Task<OtpVerificationResponse> VerifyAsync(Guid challengeId, string code, CancellationToken cancellationToken = default)
     {
-        var now = clock.GetUtcNow();
+        // The first write locks the challenge before reading; only one verifier can consume it.
         await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
-        var claimed = await database.OtpChallenges.Where(item => item.Id == challengeId && item.Delivered &&
-                item.ConsumedAtUtc == null && item.VerifiedAtUtc == null && item.Attempts < 5)
+        var claimed = await database.OtpChallenges.Where(item => item.Id == challengeId && item.Purpose == "authenticate" && item.Delivered &&
+                item.ConsumedAtUtc == null && item.VerifiedAtUtc == null && item.Attempts < otp.MaxAttempts)
             .ExecuteUpdateAsync(update => update.SetProperty(item => item.Attempts, item => item.Attempts + 1), cancellationToken);
         if (claimed != 1) throw InvalidOtp();
         var challenge = await database.OtpChallenges.AsNoTracking().SingleAsync(item => item.Id == challengeId, cancellationToken);
-        if (challenge.ExpiresAtUtc <= clock.GetUtcNow() || code is null || !Regex.IsMatch(code, "^[0-9]{6}$", RegexOptions.CultureInvariant) ||
-            !CryptographicOperations.FixedTimeEquals(Convert.FromHexString(challenge.CodeHash), Convert.FromHexString(HashCode(challengeId, code))))
+        var now = clock.GetUtcNow();
+        if (challenge.ExpiresAtUtc <= now || code is null || code.Length != 6 || code.Any(c => !char.IsAsciiDigit(c)) ||
+            !CryptographicOperations.FixedTimeEquals(Convert.FromHexString(challenge.CodeHash), Convert.FromHexString(HashCode(challengeId, challenge.PhoneNumber, code))))
         {
             await transaction.CommitAsync(cancellationToken);
             throw InvalidOtp();
         }
-        if (challenge.Purpose == "login")
+        await database.OtpChallenges.Where(item => item.Id == challengeId).ExecuteUpdateAsync(update => update
+            .SetProperty(item => item.VerifiedAtUtc, now).SetProperty(item => item.ConsumedAtUtc, now), cancellationToken);
+        var matches = await database.Users.Where(item => item.PhoneNumber == challenge.PhoneNumber ||
+            item.PhoneNumber == "0" + challenge.PhoneNumber.Substring(3) || item.VerifiedPhoneNumber == challenge.PhoneNumber).ToListAsync(cancellationToken);
+        User user;
+        if (matches.Count != 0)
         {
-            var user = await database.Users.SingleOrDefaultAsync(item => item.PhoneNumber == challenge.PhoneNumber && item.ArchivedAtUtc == null, cancellationToken);
-            await database.OtpChallenges.Where(item => item.Id == challengeId)
-                .ExecuteUpdateAsync(update => update.SetProperty(item => item.ConsumedAtUtc, now), cancellationToken);
-            if (user is null)
+            if (matches.Count != 1 || matches[0].ArchivedAtUtc != null || !PhoneVerification.IsVerified(matches[0]) || matches[0].PhoneNumber != challenge.PhoneNumber)
             {
                 await transaction.CommitAsync(cancellationToken);
-                throw new PhoneAuthException(401, "invalid_credentials", "Unable to sign in. Check your mobile number.");
+                throw RecoveryRequired();
             }
-            var session = await tokens.StartSessionAsync(user, cancellationToken);
-            await transaction.CommitAsync(cancellationToken);
-            return new OtpVerificationResponse(null, null, session);
+            user = matches[0];
         }
-        var proof = Base64UrlEncoder.Encode(RandomNumberGenerator.GetBytes(32));
-        var expires = now.AddMinutes(10);
-        await database.OtpChallenges.Where(item => item.Id == challengeId)
-            .ExecuteUpdateAsync(update => update.SetProperty(item => item.VerifiedAtUtc, now)
-                .SetProperty(item => item.ProofHash, HashProof(proof)).SetProperty(item => item.ProofExpiresAtUtc, expires), cancellationToken);
-        await transaction.CommitAsync(cancellationToken);
-        return new OtpVerificationResponse(proof, expires, null);
-    }
-
-    public async Task<AuthTokens> RegisterAsync(string phoneNumber, string registrationToken, string password,
-        string confirmPassword, string username, CancellationToken cancellationToken = default)
-    {
-        var phone = PhoneNumber.Normalize(phoneNumber);
-        if (password is null || password.Length is < 12 or > 128 || password != confirmPassword ||
-            string.IsNullOrWhiteSpace(username) || username.Trim().Length > 120)
-            throw new PhoneAuthException(400, "invalid_registration", "Use a 12–128 character password, matching confirmation, and a username.");
-        if (string.IsNullOrEmpty(registrationToken) || registrationToken.Length > 128) throw InvalidOtp();
-        var now = clock.GetUtcNow();
-        var proofHash = HashProof(registrationToken);
-        await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
-        var claimed = await database.OtpChallenges.Where(item => item.PhoneNumber == phone && item.Purpose == "register" &&
-                item.ProofHash == proofHash && item.VerifiedAtUtc != null && item.ConsumedAtUtc == null)
-            .ExecuteUpdateAsync(update => update.SetProperty(item => item.ConsumedAtUtc, now), cancellationToken);
-        if (claimed != 1) throw InvalidOtp();
-        var proofExpiry = await database.OtpChallenges.AsNoTracking().Where(item => item.PhoneNumber == phone)
-            .Select(item => item.ProofExpiresAtUtc).SingleAsync(cancellationToken);
-        if (proofExpiry is null || proofExpiry <= clock.GetUtcNow()) throw InvalidOtp();
-        if (await database.Users.AnyAsync(item => item.PhoneNumber == phone, cancellationToken)) throw DuplicatePhone();
-        var user = new User { PhoneNumber = phone, DisplayName = username.Trim() };
-        user.PasswordHash = passwordHasher.HashPassword(user, password);
-        database.Users.Add(user);
-        database.SyncHeads.Add(new SyncHead { UserId = user.Id });
-        try { await database.SaveChangesAsync(cancellationToken); }
-        catch (DbUpdateException)
+        else
         {
-            await transaction.RollbackAsync(cancellationToken);
-            database.ChangeTracker.Clear();
-            if (await database.Users.AnyAsync(item => item.PhoneNumber == phone, cancellationToken)) throw DuplicatePhone();
-            throw;
-        }
-        var session = await tokens.StartSessionAsync(user, cancellationToken);
-        await transaction.CommitAsync(cancellationToken);
-        return session;
-    }
-
-    public async Task<AuthTokens> RegisterWithPasswordAsync(string phoneNumber, string password,
-        string confirmPassword, CancellationToken cancellationToken = default)
-    {
-        var phone = PhoneNumber.Normalize(phoneNumber);
-        if (!PhonePasswordPolicy.IsValid(password))
-            throw new PhoneAuthException(400, "invalid_password", "Use 8–128 characters with letters and numbers, and avoid common passwords.");
-        if (password != confirmPassword)
-            throw new PhoneAuthException(400, "password_mismatch", "The passwords do not match.");
-        await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
-        if (await database.Users.AnyAsync(item => item.PhoneNumber == phone, cancellationToken)) throw DuplicatePhone();
-        var user = new User { PhoneNumber = phone, DisplayName = "" };
-        user.PasswordHash = passwordHasher.HashPassword(user, password);
-        database.Users.Add(user);
-        database.SyncHeads.Add(new SyncHead { UserId = user.Id });
-        try { await database.SaveChangesAsync(cancellationToken); }
-        catch (DbUpdateException)
-        {
-            await transaction.RollbackAsync(cancellationToken);
-            database.ChangeTracker.Clear();
-            if (await database.Users.AnyAsync(item => item.PhoneNumber == phone, cancellationToken)) throw DuplicatePhone();
-            throw;
-        }
-        var session = await tokens.StartSessionAsync(user, cancellationToken);
-        await transaction.CommitAsync(cancellationToken);
-        return session;
-    }
-
-    public async Task<AuthTokens> LoginAsync(string phoneNumber, string password, CancellationToken cancellationToken = default)
-    {
-        var phone = PhoneNumber.Normalize(phoneNumber);
-        var user = await database.Users.SingleOrDefaultAsync(item => item.PhoneNumber == phone && item.ArchivedAtUtc == null, cancellationToken);
-        if (user?.PasswordHash is null || string.IsNullOrEmpty(password) || password.Length > 128)
-            throw new PhoneAuthException(401, "invalid_credentials", "Invalid mobile number or password.");
-        var result = passwordHasher.VerifyHashedPassword(user, user.PasswordHash, password);
-        if (result == PasswordVerificationResult.Failed)
-            throw new PhoneAuthException(401, "invalid_credentials", "Invalid mobile number or password.");
-        if (result == PasswordVerificationResult.SuccessRehashNeeded)
-        {
-            user.PasswordHash = passwordHasher.HashPassword(user, password);
+            // An unknown phone cannot distinguish a new user from a legacy email/Google user.
+            // Close signup until staff resolve the legacy ownership inventory.
+            if (await database.Users.AnyAsync(item => item.ArchivedAtUtc == null &&
+                (item.PhoneNumber == null || item.PhoneNumber.Length != 13 || !item.PhoneNumber.StartsWith("+989") ||
+                 item.PhoneVerifiedAtUtc == null || item.VerifiedPhoneNumber == null || item.VerifiedPhoneNumber != item.PhoneNumber), cancellationToken))
+            {
+                await transaction.CommitAsync(cancellationToken);
+                throw RecoveryRequired();
+            }
+            user = new User { PhoneNumber = challenge.PhoneNumber, VerifiedPhoneNumber = challenge.PhoneNumber,
+                PhoneVerifiedAtUtc = now, DisplayName = "کاربر لرونا" };
+            database.Users.Add(user);
+            database.SyncHeads.Add(new SyncHead { UserId = user.Id });
             await database.SaveChangesAsync(cancellationToken);
         }
-        return await tokens.StartSessionAsync(user, cancellationToken);
+        var session = await tokens.StartOtpSessionAsync(user, challengeId, cancellationToken);
+        await transaction.CommitAsync(cancellationToken);
+        return new OtpVerificationResponse(null, null, session);
     }
 
-    private string HashCode(Guid challengeId, string code) => Convert.ToHexString(
-        HMACSHA256.HashData(settings.SigningKey, Encoding.UTF8.GetBytes($"phone-otp:{challengeId:D}:{code}")));
-    private static string HashProof(string proof) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(proof)));
-    private static PhoneAuthException InvalidOtp() => new(401, "invalid_otp", "Code or registration verification is invalid, expired, used, or has too many attempts.");
-    private static PhoneAuthException DuplicatePhone() => new(409, "duplicate_phone", "This mobile number already has an account. Please sign in.");
+    private string HashCode(Guid id, string phone, string code) => Convert.ToHexString(HMACSHA256.HashData(settings.SigningKey,
+        Encoding.UTF8.GetBytes($"lerona:authenticate:{id:D}:{phone}:{code}")));
+    private static PhoneAuthException InvalidOtp() => new(401, "invalid_otp", "کد تأیید نامعتبر، منقضی یا قبلاً استفاده شده است.");
+    private static PhoneAuthException RecoveryRequired() => new(409, "account_recovery_required", "برای حفظ اطلاعات حساب قبلی، بازیابی امن از طریق پشتیبانی لازم است.");
 }

@@ -48,56 +48,26 @@ public sealed partial class AuthTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task Registration_saves_only_a_password_hash_and_prevents_duplicate_email()
+    public async Task Otp_registration_creates_no_password_and_tokens_are_bound_before_use()
     {
-        var tokens = await RegisterAsync("One@Example.com");
-        Assert.NotEmpty(tokens.AccessToken);
-        Assert.NotEmpty(tokens.RefreshToken);
-
-        var duplicate = await _client.PostAsJsonAsync("/api/v1/auth/register", new { email = "ONE@example.com", password = Password, displayName = "Duplicate" });
-        Assert.Equal(HttpStatusCode.Conflict, duplicate.StatusCode);
-
-        using var scope = _factory.Services.CreateScope();
-        var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-        var user = await database.Users.SingleAsync();
-        Assert.Equal("ONE@EXAMPLE.COM", user.NormalizedEmail);
-        Assert.NotEqual(Password, user.PasswordHash);
-        Assert.DoesNotContain(Password, user.PasswordHash!);
-        Assert.DoesNotContain(tokens.RefreshToken, (await database.RefreshTokens.SingleAsync()).TokenHash);
-        var hasher = scope.ServiceProvider.GetRequiredService<Microsoft.AspNetCore.Identity.IPasswordHasher<User>>();
-        Assert.NotEqual(Microsoft.AspNetCore.Identity.PasswordVerificationResult.Failed,
-            hasher.VerifyHashedPassword(user, user.PasswordHash!, Password));
+        var tokens=await RegisterAsync("One@Example.com");
+        using var scope=_factory.Services.CreateScope();var db=scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        Assert.Null((await db.Users.SingleAsync()).PasswordHash);Assert.NotEmpty(tokens.AccessToken);Assert.NotEmpty(tokens.RefreshToken);
+        Assert.DoesNotContain(tokens.RefreshToken,(await db.RefreshTokens.SingleAsync()).TokenHash);
         Assert.Null(typeof(UserChange).GetProperty(nameof(User.PasswordHash)));
     }
-
     [Fact]
-    public async Task Login_and_access_token_validation_reject_bad_credentials_and_tampering()
+    public async Task Signed_otp_access_tokens_reject_tampering_and_password_login_is_disabled()
     {
-        await RegisterAsync("one@example.com");
-        var wrong = await _client.PostAsJsonAsync("/api/v1/auth/login", new { email = "one@example.com", password = "incorrect" });
-        var unknown = await _client.PostAsJsonAsync("/api/v1/auth/login", new { email = "missing@example.com", password = Password });
-        Assert.Equal(HttpStatusCode.Unauthorized, wrong.StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, unknown.StatusCode);
-
-        var login = await _client.PostAsJsonAsync("/api/v1/auth/login", new { email = "ONE@EXAMPLE.COM", password = Password });
-        Assert.Equal(HttpStatusCode.OK, login.StatusCode);
-        var tokens = (await login.Content.ReadFromJsonAsync<AuthTokens>())!;
-        Assert.Equal("no-store", login.Headers.CacheControl?.ToString());
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
-        var account = await _client.GetAsync("/api/v1/me/");
-        Assert.Equal(HttpStatusCode.OK, account.StatusCode);
-        Assert.Equal("no-store", account.Headers.CacheControl?.ToString());
-        var accountJson = await account.Content.ReadFromJsonAsync<JsonElement>();
-        Assert.Equal("one@example.com", accountJson.GetProperty("email").GetString());
-        Assert.False(accountJson.TryGetProperty("passwordHash", out _));
-
-        var dot = tokens.AccessToken.LastIndexOf('.');
-        var signature = tokens.AccessToken[(dot + 1)..];
-        var invalidSignature = signature[0] == 'a' ? "b" + signature[1..] : "a" + signature[1..];
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken[..(dot + 1)] + invalidSignature);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        var tokens=await RegisterAsync("one@example.com");
+        Assert.Equal(HttpStatusCode.Gone,(await _client.PostAsJsonAsync("/api/v1/auth/login",new { email="one@example.com",password=Password })).StatusCode);
+        _client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("Bearer",tokens.AccessToken);
+        Assert.Equal(HttpStatusCode.OK,(await _client.GetAsync("/api/v1/me/")).StatusCode);
+        var dot=tokens.AccessToken.LastIndexOf('.');var signature=tokens.AccessToken[(dot+1)..];
+        var altered=(signature[0]=='a'?"b":"a")+signature[1..];
+        _client.DefaultRequestHeaders.Authorization=new AuthenticationHeaderValue("Bearer",tokens.AccessToken[..(dot+1)]+altered);
+        Assert.Equal(HttpStatusCode.Unauthorized,(await _client.GetAsync("/api/v1/me/")).StatusCode);
     }
-
     [Fact]
     public async Task Refresh_rotates_token_and_reuse_revokes_the_whole_session()
     {
@@ -164,8 +134,17 @@ public sealed partial class AuthTests : IAsyncLifetime
         using var anonymous = _factory.CreateClient();
         Assert.Equal(HttpStatusCode.Unauthorized, (await anonymous.PostAsync($"/api/v1/auth/logout/{original.SessionId}", null)).StatusCode);
         _client.DefaultRequestHeaders.Authorization = null;
-        var login = await _client.PostAsJsonAsync("/api/v1/auth/login", new { email = "original@example.com", password = Password });
-        var current = (await login.Content.ReadFromJsonAsync<AuthTokens>())!;
+        AuthTokens current;
+        using (var scope = _factory.Services.CreateScope())
+        {
+            var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+            var phone = await database.Users.Where(x => x.Email == "original@example.com").Select(x => x.PhoneNumber).SingleAsync();
+            await database.OtpChallenges.Where(x => x.PhoneNumber == phone).ExecuteUpdateAsync(u => u.SetProperty(x => x.RequestedAtUtc, DateTimeOffset.UtcNow.AddMinutes(-2)));
+            var service = scope.ServiceProvider.GetRequiredService<PhoneAuthService>();
+            var challenge = await service.RequestAsync(phone!);
+            Assert.True(TestSmsOutbox.Codes.TryRemove(phone!, out var code));
+            current = (await service.VerifyAsync(challenge.ChallengeId, code!)).Tokens!;
+        }
         Assert.NotEqual(original.SessionId, current.SessionId);
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", current.AccessToken);
         for (var attempt = 0; attempt < 2; attempt++)
@@ -236,7 +215,7 @@ public sealed partial class AuthTests : IAsyncLifetime
     public async Task Auth_endpoints_limit_abusive_requests()
     {
         for (var attempt = 0; attempt < 10; attempt++)
-            Assert.Equal(HttpStatusCode.Unauthorized,
+            Assert.Equal(HttpStatusCode.Gone,
                 (await _client.PostAsJsonAsync("/api/v1/auth/login", new { email = "none@example.com", password = Password })).StatusCode);
         Assert.Equal(HttpStatusCode.TooManyRequests,
             (await _client.PostAsJsonAsync("/api/v1/auth/login", new { email = "none@example.com", password = Password })).StatusCode);
@@ -277,7 +256,7 @@ public sealed partial class AuthTests : IAsyncLifetime
 
     private async Task<AuthTokens> RegisterAsync(string email)
     {
-        var response = await _client.PostAsJsonAsync("/api/v1/auth/register", new { email, password = Password, displayName = "Student" });
+        var response = await _client.RegisterOtpFixtureAsync(email, Password, services: _factory.Services);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         return (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
     }

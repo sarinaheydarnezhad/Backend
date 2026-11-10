@@ -14,6 +14,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Flashcards.Infrastructure.Auth;
+using System.Net.Http.Json;
 
 namespace Flashcards.Tests;
 
@@ -134,6 +136,18 @@ public sealed class MobileCloudFlowTests
         {
             app.Use(async (context, following) =>
             {
+                if (context.Request.Path == "/__test/otp" && HttpMethods.IsPost(context.Request.Method))
+                {
+                    // Test-assembly-only outbox access; this middleware is never in the API.
+                    var phone = PhoneNumber.NormalizeIranian(context.Request.Query["phone"].ToString());
+                    var db = context.RequestServices.GetRequiredService<FlashcardsDbContext>();
+                    await db.OtpChallenges.Where(x => x.PhoneNumber == phone).ExecuteUpdateAsync(u => u
+                        .SetProperty(x => x.RequestedAtUtc, DateTimeOffset.UtcNow.AddMinutes(-2)));
+                    var challenge = await context.RequestServices.GetRequiredService<PhoneAuthService>().RequestAsync(phone);
+                    if (!TestSmsOutbox.Codes.TryRemove(phone, out var code)) throw new InvalidOperationException("Missing test SMS.");
+                    await context.Response.WriteAsJsonAsync(new { challenge.ChallengeId, code });
+                    return;
+                }
                 if (context.Request.Path == "/__test/backup-failure" && HttpMethods.IsPost(context.Request.Method))
                 {
                     failure.Fail = context.Request.Query["enabled"] == "true";

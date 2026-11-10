@@ -2,7 +2,7 @@
 
 Current backup/sync/atomic guest-copy fixes, API integration requirements and actual test results are in `SYNC-RECOVERY-FIX.md`. Existing clients remain compatible; atomic whole-transfer migration requires the additive authenticated `/api/v1/sync/guest-migration` route. For production deployment, run `powershell -NoProfile -ExecutionPolicy Bypass -File deploy/Deploy-Backend.ps1`. It stages current source, explicitly attaches the existing `backup-keys` disk and verifies the live mount. Publishing binaries alone does not preserve a release disk binding. See [backup recovery](deploy/CLOUD-BACKUP-RECOVERY.md).
 
-The backend is a .NET 10 ASP.NET Core API in [`backend/`](backend/) with EF Core 10 SQL Server persistence, email/password accounts, and sync-aware deck creation.
+The backend is a .NET 10 ASP.NET Core API in [`backend/`](backend/) with EF Core 10 SQL Server persistence, SMS OTP-only Lerona accounts, and sync-aware deck creation.
 
 ## Projects
 
@@ -33,7 +33,7 @@ The launch profile sets `ASPNETCORE_ENVIRONMENT=Development` and listens at `htt
 - `GET /health`: liveness only, without a database dependency.
 - `GET /api/v1/status`: a small response DTO to verify API startup.
 - `POST /api/v1/decks`: requires a bearer token and `{ "name": "Vocabulary" }`; returns 201 with `{ "id", "name", "syncVersion" }` and a Location header pointing to `/api/v1/me/decks`. Ownership comes exclusively from the authenticated identity. The server generates the deck, device and change UUIDs, applies the default deck settings, and commits the deck, per-user version and sync-feed entry in the existing sync transaction. The owner's next pull includes the deck as an `upsert`; other users cannot see it. This endpoint creates a new deck on each successful call; it does not provide retry idempotency. Use sync push with client-generated IDs for idempotent offline creation.
-- `POST /api/v1/auth/register`, `/login`, `/refresh`: issue access and refresh tokens; duplicate email is 409, invalid credentials/tokens are 401.
+- Lerona registration/login use `/api/v1/auth/phone/otp/request` and `/otp/verify`; only verified OTPs issue tokens. `/api/v1/auth/refresh` rotates OTP-origin sessions. Password/email/Google paths return 410.
 - `POST /api/v1/auth/logout`: authenticated; revokes the current session and returns 204.
 - `POST /api/v1/auth/logout/{sessionId}`: authenticated; idempotently revokes only a session owned by the JWT's user. Used after a fresh login to retry offline logout using non-secret IDs; IDs alone never authorize revocation.
 
@@ -44,33 +44,23 @@ Token responses additionally expose `sessionId` and `sessionExpiresAtUtc`. Refre
 
 ## Phone authentication
 
-Phone authentication uses the existing User, password hasher, JWT, AuthSession and refresh-token services. Existing email endpoints remain compatible. A username maps to `User.DisplayName` and is not unique. Phone numbers use international E.164-style format (`+` followed by 8–15 digits); Persian/Arabic digits are normalized. National numbers without a country code are rejected. SMS verification establishes possession, not whether a number is a mobile line in every country.
+Lerona uses Kavenegar SMS OTP exclusively for registration and login. Request a
+six-digit code with an Iranian mobile number, then verify it to open the original
+verified-phone account or create an account. No password, email, Google identity
+or registration proof is required. All legacy Lerona password/Google/activation
+routes return HTTP 410. Cent authentication, users, configuration and sessions
+remain unchanged.
 
-The mobile UI temporarily hides Google, email and OTP controls. Its current registration flow uses `POST /api/v1/auth/phone/register-password` with only `{ phoneNumber, password, confirmPassword }`, with no SMS/provider dependency. Both passwords must match; registration requires 8–128 characters including letters and numbers and rejects a small common-password list (case/punctuation insensitive). Unicode letters and decimal digits are accepted. This is not a full breached-password check. New accounts default to display name `Learner`. Login remains `/phone/login` and does not apply new registration rules to existing passwords. No database migration is added; deploy the updated API before the updated mobile client.
+Actual SMS credentials belong in ignored Backend/.env; the API loads only Lerona
+SMS/OTP settings from that file. The example file contains placeholders. Host
+configuration takes precedence. Apply the Lerona-only verified-phone and OTP-only
+session migrations before the updated API is used. Old Lerona sessions must
+reauthenticate with OTP. Unresolved legacy ownership requires staff recovery;
+new signup is blocked until the unresolved inventory is cleared.
 
-**The temporary registration flow does not verify phone ownership.** An unused number can be claimed by anyone entering it; do not rely on it as verified identity or for recovery/linking. Existing or archived numbers cannot be registered again or have credentials replaced. Account creation, sync head and token/session issuance are transactional. The separate legacy `/register` endpoint still requires OTP proof, a username and its existing password policy. Legacy Google/email/OTP APIs remain compatible; email-only and Google-only accounts are not automatically migrated to phone accounts.
-
-All routes below are under `/api/v1/auth/phone`, inherit the existing 10-per-minute per-IP limit, and return `Cache-Control: no-store`:
-
-| Route | Request | Successful response |
-| --- | --- | --- |
-| `POST /otp/request` | `{ phoneNumber, purpose: "register" or "login" }` | `{ challengeId, expiresAtUtc, resendAtUtc }` |
-| `POST /otp/verify` | `{ challengeId, code }` | Registration: `{ registrationToken, expiresAtUtc, tokens: null }`; login: `{ registrationToken: null, expiresAtUtc: null, tokens: { accessToken, refreshToken, accessExpiresAtUtc } }` |
-| `POST /register` | `{ phoneNumber, registrationToken, password, confirmPassword, username }` | Existing access/refresh token response |
-| `POST /register-password` | `{ phoneNumber, password, confirmPassword }` (no OTP) | Existing access/refresh token response |
-| `POST /login` | `{ phoneNumber, password }` | Existing access/refresh token response |
-
-Use the existing `/api/v1/auth/refresh`, `/logout`, and `/api/v1/me/` endpoints after either login method. Known phone-auth errors return `{ error, code }` with 400 for invalid inputs, 401 for invalid/expired/used verification or credentials, 409 for an existing phone, 429 for limits, or 503 for unavailable SMS. Framework request validation still returns validation ProblemDetails.
-
-Codes expire after five minutes and permit five verification attempts. The database persists attempts and phone limits (60-second cooldown, five requests per one-hour window across registration/login). A resend invalidates the previous challenge and registration proof. Registration proofs expire ten minutes after verification, are bound to the phone, and are single-use. OTP codes use a keyed HMAC with domain separation; proofs and refresh tokens are hashed. Neither codes nor proofs are returned in request responses or logged. Registration proof consumption, account creation, initial sync head and session creation share one transaction. A unique nullable phone index prevents duplicate phone accounts while preserving legacy email users.
-
-### Required SMS configuration
-
-The default configured provider type is now `SmsIr`, implemented through the existing `ISmsOtpSender` boundary. Supply `Sms__ApiKey` through deployment secrets and `Sms__TemplateId` with your approved verification template ID. The template must have a `Code` parameter and accept the existing six-digit OTP. The adapter sends the SMS.ir verification POST contract, converts canonical `+989...` phones into ten-digit `9...` mobiles, and requires both successful HTTP status and provider `status: 1` with a positive `messageId`. Iranian mobile numbers are required for this adapter. No actual key is committed, no fixed/test OTP is introduced, and missing configuration returns 503 without creating a challenge. See `SMSIR.md` for configuration and verification limits.
-
-The original HTTPS webhook remains available with `Sms__Provider=Webhook`, `Sms__Endpoint` and `Sms__ApiKey`. That gateway receives `{ phoneNumber, code }` with bearer authentication; SMS.ir uses `x-api-key` instead. Do not expose provider keys to mobile clients or put them in Expo public variables. Provider acceptance is not proof of SMS delivery; real SMS delivery remains unverified. Failed/uncertain sends leave challenges unusable and retain the phone cooldown.
-
-The `AddPhoneAuthentication` migration adds the nullable phone column/index and durable OTP challenge table; apply it with the existing migration deployment process before enabling phone auth. Existing accounts are not assigned guessed phone numbers. SQL Server deployment, real SMS delivery and concurrent multi-instance execution must be verified with the deployment infrastructure. Keep `Auth__SigningKey` stable across replicas; it also protects OTP hashes. Restrict database access, avoid logging request bodies, and configure trusted proxy/shared edge rate limits as described above.
+See [setup and account recovery](docs/KAVENEGAR_OTP_SETUP.md) and the
+[implementation/test report](docs/SMS_OTP_ONLY_REPORT.md). No real SMS or production
+deployment has been performed; both require explicit user approval.
 
 ## Account display names
 
@@ -112,7 +102,7 @@ $env:Cors__AllowedOrigins__0 = 'https://app.example.com'
 
 Development defaults to Windows SQL Server LocalDB (`FlashcardsDev`); override `ConnectionStrings__FlashcardsDb` for another server. Production has no connection string in source control: supply it via environment configuration or a secret store. EF Core registers the context and scoped query service only when a connection string is configured. `Cors:AllowedOrigins` defaults to an empty list in production. Set explicit origins for deployed clients. Swagger UI and the OpenAPI route are enabled in Development only.
 
-`Auth:Issuer` and `Auth:Audience` are configured in `appsettings.json`. `Auth__SigningKey` is **required at startup** and must be a base64-encoded random value of at least 32 bytes. Persist the key securely across restarts and replicas; changing it invalidates outstanding access tokens. Send access tokens via `Authorization: Bearer <token>` over HTTPS. Store refresh tokens in the mobile device's secure credential storage and never log them. Passwords are salted and hashed by ASP.NET Core's password hasher; only SHA-256 hashes of random refresh tokens are stored in SQL Server. Access tokens expire after 15 minutes; refresh sessions have a 30-day absolute lifetime. Refresh rotates the token; reuse of a consumed token revokes its session and invalidates its access tokens. Logout revokes the current session immediately. Existing users without an email and password stay in the database but cannot sign in until account migration is planned.
+`Auth:Issuer` and `Auth:Audience` are configured in `appsettings.json`. `Auth__SigningKey` is **required at startup** and must be a base64-encoded random value of at least 32 bytes. Persist the key securely across restarts and replicas; changing it invalidates outstanding access tokens. Send access tokens via `Authorization: Bearer <token>` over HTTPS. Store refresh tokens in the mobile device's secure credential storage and never log them. Historical password hashes are retained for data preservation and cannot authenticate. Only SHA-256 hashes of random refresh tokens are stored in SQL Server. Access tokens expire after 15 minutes; refresh sessions have a 30-day absolute lifetime. Refresh rotates the token; reuse of a consumed token revokes its session and invalidates its access tokens. Logout revokes the current session immediately. Existing verified Iranian mobile users sign in through OTP; unresolved legacy ownership requires staff-assisted recovery.
 
 Authentication endpoints use a per-IP fixed-window limit of 10 requests per minute per API instance, returning 429 when exceeded. Behind a reverse proxy, configure trusted forwarded headers or enforce a shared limit at the edge. Do not forward untrusted client-supplied IP headers as the rate-limit identity.
 
@@ -120,7 +110,7 @@ Authentication endpoints use a per-IP fixed-window limit of 10 requests per minu
 
 ### Login fails with `Invalid column name 'GoogleSubject'`
 
-The deployed database is behind the API model. Phone/password login also reads the `User` entity, including `GoogleSubject`; hiding the Google button does not remove the column requirement. Apply the existing `20261022100000_AddGoogleAuthentication` migration to the **same database used by the deployed API**, not just your local development database. No new migration, account reset or database recreation is needed.
+The deployed database is behind the API model. SMS OTP authentication still reads preserved legacy metadata in the `User` entity, including `GoogleSubject`; removal of Google authentication does not remove this historical column requirement. Apply the existing `20261022100000_AddGoogleAuthentication` migration to the **same database used by the deployed API**, not just your local development database. Retain this historical migration and apply the later Lerona verification/session migrations in order. No account reset or database recreation is needed.
 
 Back up the database and use your normal controlled migration deployment process. If every earlier migration is already applied, the EF-generated idempotent script `deploy/20261022100000_AddGoogleAuthentication.sql` can be reviewed and run against that database in SQL Server Management Studio. It adds the nullable column, filtered unique index and migration-history entry without changing existing account data. It assumes a normal EF-managed schema; if the migration is already recorded but the column is absent, investigate schema drift instead of deleting history or running a blind repair.
 

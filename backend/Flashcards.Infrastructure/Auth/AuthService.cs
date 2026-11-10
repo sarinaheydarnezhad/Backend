@@ -2,18 +2,17 @@ using System.Security.Claims;
 
 namespace Flashcards.Infrastructure.Auth;
 
-public sealed class AuthService(UserService users, TokenService tokens)
+public sealed class AuthService(TokenService tokens)
 {
-    public async Task<AuthTokens?> RegisterAsync(string email, string password, string displayName, CancellationToken cancellationToken = default)
+    public Task<AuthTokens?> RegisterAsync(string email, string password, string displayName, CancellationToken cancellationToken = default,
+        string? phoneNumber = null, string? registrationToken = null)
     {
-        var user = await users.RegisterAsync(email, password, displayName, cancellationToken);
-        return user is null ? null : await tokens.StartSessionAsync(user, cancellationToken);
+        throw PhoneVerification.Disabled();
     }
 
-    public async Task<AuthTokens?> LoginAsync(string email, string password, CancellationToken cancellationToken = default)
+    public Task<AuthTokens?> LoginAsync(string email, string password, CancellationToken cancellationToken = default)
     {
-        var user = await users.ValidateCredentialsAsync(email, password, cancellationToken);
-        return user is null ? null : await tokens.StartSessionAsync(user, cancellationToken);
+        throw PhoneVerification.Disabled();
     }
 
     public Task<AuthTokens?> RefreshAsync(string refreshToken, CancellationToken cancellationToken = default) =>

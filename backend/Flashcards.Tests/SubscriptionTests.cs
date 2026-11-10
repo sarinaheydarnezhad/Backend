@@ -470,7 +470,7 @@ public sealed class SubscriptionTests : IAsyncLifetime
 
     private async Task<Guid> LoginAsync(string email)
     {
-        var response = await _client.PostAsJsonAsync("/api/v1/auth/register", new { email, password = "A private password for tests!", displayName = "Student" });
+        var response = await _client.RegisterOtpFixtureAsync(email, "A private password for tests!", services: _factory.Services);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var tokens = (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
