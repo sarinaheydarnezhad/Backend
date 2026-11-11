@@ -1,3 +1,5 @@
+> Historical report. Superseded by [password login with SMS-verified signup/recovery](PHONE_PASSWORD_OTP_REPORT.md). Do not deploy the old SMS-only/session-revocation policy.
+
 > Historical document. Superseded by [the SMS OTP-only policy](SMS_OTP_ONLY_REPORT.md). Lerona password/Google/activation routes now return 410; Cent is unchanged.
 
 # Lerona mandatory SMS verification and Kavenegar activation report

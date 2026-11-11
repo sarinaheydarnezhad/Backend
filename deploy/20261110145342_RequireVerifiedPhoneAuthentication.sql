@@ -23,16 +23,6 @@ BEGIN
     ALTER TABLE [OtpChallenges] ADD [ActivationUserId] uniqueidentifier NULL;
 END;
 
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20261110145342_RequireVerifiedPhoneAuthentication'
-)
-BEGIN
-    UPDATE s SET [RevokedAtUtc] = SYSUTCDATETIME()
-    FROM [AuthSessions] AS s
-    INNER JOIN [Users] AS u ON u.[Id] = s.[UserId]
-    WHERE s.[RevokedAtUtc] IS NULL AND u.[PhoneVerifiedAtUtc] IS NULL;
-END;
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]

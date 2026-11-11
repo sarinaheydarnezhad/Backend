@@ -1,4 +1,4 @@
-> Historical document. Superseded by [the SMS OTP-only policy](docs/SMS_OTP_ONLY_REPORT.md). Lerona password/Google/activation routes now return 410; Cent is unchanged.
+> Historical Lerona Google document. Google belongs to Cent; see [Cent Google authentication](docs/CENT-GOOGLE-AUTHENTICATION.md). Lerona uses [password login with SMS-verified signup/recovery](docs/PHONE_PASSWORD_OTP_REPORT.md).
 
 # Google sign-in
 

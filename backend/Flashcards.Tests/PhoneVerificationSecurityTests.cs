@@ -1,7 +1,6 @@
 using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text.Json;
 using Flashcards.Domain;
 using Flashcards.Infrastructure.Auth;
 using Flashcards.Infrastructure.Persistence;
@@ -14,99 +13,132 @@ namespace Flashcards.Tests;
 public sealed partial class PhoneAuthTests
 {
     [Theory]
-    [InlineData("+14155552671")]
-    [InlineData("09121234567")]
-    [InlineData("+982112345678")]
-    public async Task Legacy_foreign_local_or_landline_bindings_cannot_open_signup_for_duplicate_accounts(string oldPhone)
+    [InlineData("+989121234567")] [InlineData("09121234567")]
+    public async Task Existing_password_users_keep_original_ids_content_and_sessions_without_new_sms(string storedPhone)
     {
-        var original = await SeedLegacyAsync(verified: true);
-        using (var scope = _factory.Services.CreateScope())
-            await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Users.Where(x => x.Id == original.Id)
-                .ExecuteUpdateAsync(u => u.SetProperty(x => x.PhoneNumber, oldPhone).SetProperty(x => x.VerifiedPhoneNumber, oldPhone));
-        var challenge = await RequestAsync("+989121234568");
-        Assert.Equal(HttpStatusCode.Conflict, (await VerifyAsync(challenge.ChallengeId, _sms.Code)).StatusCode);
-        using var inspect = _factory.Services.CreateScope();
-        var db = inspect.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-        var saved = await db.Users.SingleAsync();
-        Assert.Equal(original.Id, saved.Id); Assert.Equal(oldPhone, saved.PhoneNumber);
-        Assert.Empty(await db.AuthSessions.ToListAsync()); Assert.Empty(await db.RefreshTokens.ToListAsync());
+        var original = await SeedLegacy(storedPhone);
+        _sms.Configured = false;
+        var response = await Login(); Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+        var tokens = (await response.Content.ReadFromJsonAsync<AuthTokens>())!;
+        Assert.False(tokens.PhoneVerified); Assert.Equal(0, _sms.Sends);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
+        Assert.Equal(HttpStatusCode.OK, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { tokens.RefreshToken })).StatusCode);
+        using var scope = _factory.Services.CreateScope(); var db = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        var saved = await db.Users.SingleAsync(); Assert.Equal(original.Id, saved.Id); Assert.Equal(original.PasswordHash, saved.PasswordHash);
+        Assert.Equal("Preserved learning", (await db.Decks.SingleAsync()).Name);
     }
 
-    [Theory]
-    [InlineData(false)]
-    [InlineData(true)]
-    public async Task Unverified_legacy_accounts_require_recovery_without_creating_or_modifying_accounts(bool emailOnly)
+    [Fact]
+    public async Task Unrelated_unverified_legacy_users_do_not_block_new_verified_signup()
     {
-        var original = await SeedLegacyAsync(emailOnly: emailOnly);
-        var challenge = await RequestAsync(Phone);
-        var response = await VerifyAsync(challenge.ChallengeId, _sms.Code);
-        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
-        Assert.Equal("account_recovery_required", (await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
+        var legacy = await SeedLegacy(null);
+        var proof = await VerifyProof(await RequestAsync(Phone));
+        await Register(proof.RegistrationToken!);
+        using var scope = _factory.Services.CreateScope(); var db = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        Assert.Equal(2, await db.Users.CountAsync());
+        Assert.Equal(legacy.PasswordHash, (await db.Users.SingleAsync(x => x.Id == legacy.Id)).PasswordHash);
+    }
+
+    [Fact]
+    public async Task Password_reset_requires_otp_proof_preserves_account_and_revokes_all_old_sessions()
+    {
+        var original = await SeedLegacy();
+        var login = await Login(); var old = (await login.Content.ReadFromJsonAsync<AuthTokens>())!;
+        var proof = await VerifyProof(await RequestAsync(Phone, "reset"));
+        Assert.Null(proof.Tokens); Assert.Null(proof.RegistrationToken); Assert.NotNull(proof.ResetPasswordToken);
+        var reset = await Reset(proof.ResetPasswordToken!); Assert.Equal(HttpStatusCode.OK, reset.StatusCode);
+        var current = (await reset.Content.ReadFromJsonAsync<AuthTokens>())!; Assert.True(current.PhoneVerified);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", old.AccessToken);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { old.RefreshToken })).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await Login()).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await Login(password: "New private password2026!")).StatusCode);
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", current.AccessToken);
+        Assert.Equal(HttpStatusCode.OK, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        using var scope = _factory.Services.CreateScope(); var db = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        Assert.Equal(original.Id, (await db.Users.SingleAsync()).Id); Assert.Equal("Existing learner", (await db.Users.SingleAsync()).DisplayName);
+        Assert.Equal("Preserved learning", (await db.Decks.SingleAsync()).Name);
+    }
+
+    [Fact]
+    public async Task Recovery_proof_is_bound_to_phone_and_operation_and_can_only_be_used_once()
+    {
+        await SeedLegacy();
+        var proof = await VerifyProof(await RequestAsync(Phone, "reset"));
+        Assert.Equal(HttpStatusCode.Unauthorized, (await RegisterResponse(proof.ResetPasswordToken!)).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await Reset(proof.ResetPasswordToken!, phone: "+989121234568")).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await Reset(proof.ResetPasswordToken!)).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await Reset(proof.ResetPasswordToken!)).StatusCode);
+    }
+
+    [Fact]
+    public async Task Reset_failure_rolls_back_password_revocation_and_consumed_proof()
+    {
+        await SeedLegacy();
+        var login = await Login(); var old = (await login.Content.ReadFromJsonAsync<AuthTokens>())!;
+        var proof = await VerifyProof(await RequestAsync(Phone, "reset"));
+        _failure.Enabled = true;
+        Assert.Equal(HttpStatusCode.ServiceUnavailable, (await Reset(proof.ResetPasswordToken!)).StatusCode);
+        _failure.Enabled = false;
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", old.AccessToken);
+        Assert.Equal(HttpStatusCode.OK, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await Login()).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await Reset(proof.ResetPasswordToken!)).StatusCode);
+    }
+
+    [Fact]
+    public async Task Reset_proof_expires_without_changing_existing_password()
+    {
+        await SeedLegacy();
+        var proof = await VerifyProof(await RequestAsync(Phone, "reset"));
+        _clock.Advance(TimeSpan.FromMinutes(11));
+        Assert.Equal(HttpStatusCode.Unauthorized, (await Reset(proof.ResetPasswordToken!)).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await Login()).StatusCode);
+    }
+
+    [Fact]
+    public async Task Changing_reset_user_binding_invalidates_the_code_hash()
+    {
+        await SeedLegacy();
+        var challenge = await RequestAsync(Phone, "reset");
+        using (var scope = _factory.Services.CreateScope())
+            await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().OtpChallenges
+                .ExecuteUpdateAsync(u => u.SetProperty(x => x.ActivationUserId, Guid.NewGuid()));
         Assert.Equal(HttpStatusCode.Unauthorized, (await VerifyAsync(challenge.ChallengeId, _sms.Code)).StatusCode);
-        using var scope = _factory.Services.CreateScope();
-        var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-        var saved = await database.Users.SingleAsync();
-        Assert.Equal(original.Id, saved.Id); Assert.Equal(original.PhoneNumber, saved.PhoneNumber);
-        Assert.Equal(original.PasswordHash, saved.PasswordHash); Assert.Equal(original.Email, saved.Email);
-        Assert.Null(saved.PhoneVerifiedAtUtc); Assert.Empty(await database.AuthSessions.ToListAsync()); Assert.Empty(await database.RefreshTokens.ToListAsync());
+        Assert.Equal(HttpStatusCode.OK, (await Login()).StatusCode);
     }
 
     [Fact]
-    public async Task Unknown_phone_cannot_duplicate_a_legacy_account_with_an_unresolved_phone()
+    public async Task Unknown_wrong_password_and_archived_accounts_cannot_create_sessions()
     {
-        await SeedLegacyAsync();
-        var challenge = await RequestAsync("+989121234568");
-        Assert.Equal(HttpStatusCode.Conflict, (await VerifyAsync(challenge.ChallengeId, _sms.Code)).StatusCode);
-        using var scope = _factory.Services.CreateScope();
-        Assert.Single(await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Users.ToListAsync());
-    }
-
-    [Fact]
-    public async Task Archived_account_phone_is_reserved_without_creating_a_replacement()
-    {
-        var user = await SeedLegacyAsync(verified: true);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await Login()).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request", new { phoneNumber = Phone, purpose = "reset" })).StatusCode);
+        await SeedLegacy();
+        Assert.Equal(HttpStatusCode.Unauthorized, (await Login(password: "Wrong private password2026!")).StatusCode);
         using (var scope = _factory.Services.CreateScope())
-            await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Users.Where(x => x.Id == user.Id)
-                .ExecuteUpdateAsync(u => u.SetProperty(x => x.ArchivedAtUtc, DateTimeOffset.UtcNow));
-        Assert.Equal(HttpStatusCode.Conflict, (await VerifyAsync((await RequestAsync(Phone)).ChallengeId, _sms.Code)).StatusCode);
+            await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Users.ExecuteUpdateAsync(u => u.SetProperty(x => x.ArchivedAtUtc, DateTimeOffset.UtcNow));
+        Assert.Equal(HttpStatusCode.Unauthorized, (await Login()).StatusCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/phone/otp/request", new { phoneNumber = Phone, purpose = "reset" })).StatusCode);
+        Assert.Equal(0, _sms.Sends);
     }
 
     [Fact]
-    public async Task Legacy_refresh_and_access_sessions_are_rejected_even_for_verified_users()
+    public async Task Signup_code_or_proof_cannot_reset_an_existing_password()
     {
-        var user = await SeedLegacyAsync(verified: true);
-        var tokens = await AuthenticateAsync(await RequestAsync(Phone));
-        using (var scope = _factory.Services.CreateScope())
-            await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().AuthSessions.Where(x => x.Id == tokens.SessionId)
-                .ExecuteUpdateAsync(u => u.SetProperty(x => x.OtpAuthenticated, false));
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { tokens.RefreshToken })).StatusCode);
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
-        _clock.Advance(TimeSpan.FromSeconds(61));
-        await AuthenticateAsync(await RequestAsync(Phone));
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
+        await SeedLegacy("+989121234568");
+        var proof = await VerifyProof(await RequestAsync(Phone));
+        Assert.Equal(HttpStatusCode.Unauthorized, (await Reset(proof.RegistrationToken!, phone: "+989121234568")).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await Login("+989121234568")).StatusCode);
     }
 
-    [Fact]
-    public async Task Revoked_phone_verification_blocks_refresh_and_access_despite_signed_client_claims()
+    private async Task<User> SeedLegacy(string? phone = Phone)
     {
-        var tokens = await AuthenticateAsync(await RequestAsync(Phone));
-        using (var scope = _factory.Services.CreateScope())
-            await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Users.ExecuteUpdateAsync(u => u.SetProperty(x => x.PhoneVerifiedAtUtc, (DateTimeOffset?)null));
-        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", tokens.AccessToken);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.GetAsync("/api/v1/me/")).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await _client.PostAsJsonAsync("/api/v1/auth/refresh", new { tokens.RefreshToken })).StatusCode);
-    }
-
-    private async Task<User> SeedLegacyAsync(bool verified = false, bool emailOnly = false)
-    {
-        using var scope = _factory.Services.CreateScope();
-        var database = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-        var user = new User { DisplayName = "Existing learner", PhoneNumber = emailOnly ? null : Phone,
-            Email = emailOnly ? "legacy@example.com" : null, NormalizedEmail = emailOnly ? "LEGACY@EXAMPLE.COM" : null,
-            VerifiedPhoneNumber = verified ? Phone : null, PhoneVerifiedAtUtc = verified ? DateTimeOffset.UtcNow : null };
+        using var scope = _factory.Services.CreateScope(); var db = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
+        var user = new User { PhoneNumber = phone, DisplayName = "Existing learner" };
         user.PasswordHash = scope.ServiceProvider.GetRequiredService<IPasswordHasher<User>>().HashPassword(user, Password);
-        database.Users.Add(user); database.SyncHeads.Add(new SyncHead { UserId = user.Id });
-        await database.SaveChangesAsync(); return user;
+        db.Users.Add(user); db.SyncHeads.Add(new SyncHead { UserId = user.Id });
+        db.Decks.Add(new Deck { UserId = user.Id, Name = "Preserved learning" });
+        await db.SaveChangesAsync(); return user;
     }
 }

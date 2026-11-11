@@ -16,23 +16,19 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
     private static readonly TimeSpan AccessLifetime = TimeSpan.FromMinutes(15);
     private static readonly TimeSpan RefreshLifetime = TimeSpan.FromDays(30);
 
-    internal async Task<AuthTokens> StartOtpSessionAsync(User user, Guid challengeId, CancellationToken cancellationToken = default)
+    internal async Task<AuthTokens> StartPasswordSessionAsync(User user, CancellationToken cancellationToken = default)
     {
-        if (database.Database.CurrentTransaction is null || !await database.OtpChallenges.AnyAsync(item =>
-            item.Id == challengeId && item.Purpose == "authenticate" && item.PhoneNumber == user.PhoneNumber &&
-            item.VerifiedAtUtc != null && item.ConsumedAtUtc != null && item.Delivered, cancellationToken))
-            throw PhoneVerification.Required();
         await using var transaction = database.Database.CurrentTransaction is null
             ? await database.Database.BeginTransactionAsync(cancellationToken) : null;
-        // Lock the durable user row; never trust a detached/client-supplied verification flag.
-        if (!await LockVerifiedUserAsync(user.Id, cancellationToken)) throw PhoneVerification.Required();
+        if (!await LockPasswordUserAsync(user.Id, cancellationToken)) throw PhoneVerification.Disabled();
+        var persisted = await database.Users.AsNoTracking().SingleAsync(x => x.Id == user.Id, cancellationToken);
         var now = DateTimeOffset.UtcNow;
-        var session = new AuthSession { UserId = user.Id, ExpiresAtUtc = now.Add(RefreshLifetime), OtpAuthenticated = true };
+        var session = new AuthSession { UserId = user.Id, ExpiresAtUtc = now.Add(RefreshLifetime) };
         var rawRefreshToken = CreateRefreshToken(session, now);
         database.AuthSessions.Add(session);
         await database.SaveChangesAsync(cancellationToken);
         if (transaction is not null) await transaction.CommitAsync(cancellationToken);
-        return CreateTokens(user.Id, session.Id, rawRefreshToken, now, session.ExpiresAtUtc);
+        return CreateTokens(user.Id, session.Id, rawRefreshToken, now, session.ExpiresAtUtc, PhoneVerification.IsVerified(persisted));
     }
 
     public async Task<AuthTokens?> RotateAsync(string rawRefreshToken, CancellationToken cancellationToken = default)
@@ -57,9 +53,9 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
                 await transaction.CommitAsync(cancellationToken);
                 return null;
             }
-            if (!session.OtpAuthenticated || session.RevokedAtUtc is not null || session.ExpiresAtUtc <= now || token.ExpiresAtUtc <= now || session.User.ArchivedAtUtc is not null)
+            if (session.RevokedAtUtc is not null || session.ExpiresAtUtc <= now || token.ExpiresAtUtc <= now || session.User.ArchivedAtUtc is not null)
                 return null;
-            if (!await LockVerifiedUserAsync(session.UserId, cancellationToken)) return null;
+            if (!await LockPasswordUserAsync(session.UserId, cancellationToken)) return null;
 
             var claimed = await database.RefreshTokens
                 .Where(item => item.Id == token.Id && item.ConsumedAtUtc == null)
@@ -76,7 +72,7 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
             if (!await IsSessionActiveAsync(session.UserId, session.Id, cancellationToken))
                 return null;
             await transaction.CommitAsync(cancellationToken);
-            return CreateTokens(session.UserId, session.Id, newRefreshToken, now, session.ExpiresAtUtc);
+            return CreateTokens(session.UserId, session.Id, newRefreshToken, now, session.ExpiresAtUtc, PhoneVerification.IsVerified(session.User));
         }
         catch
         {
@@ -92,17 +88,17 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
     public async Task<bool> IsSessionActiveAsync(Guid userId, Guid sessionId, CancellationToken cancellationToken = default)
     {
         var session = await database.AuthSessions.AsNoTracking()
-            .Where(item => item.OtpAuthenticated && item.Id == sessionId && item.UserId == userId && item.RevokedAtUtc == null && item.User.ArchivedAtUtc == null &&
-                item.User.PhoneVerifiedAtUtc != null && item.User.PhoneNumber != null && item.User.VerifiedPhoneNumber == item.User.PhoneNumber)
+            .Where(item => item.Id == sessionId && item.UserId == userId && item.RevokedAtUtc == null &&
+                item.User.ArchivedAtUtc == null && item.User.PasswordHash != null)
             .Select(item => new { item.ExpiresAtUtc })
             .SingleOrDefaultAsync(cancellationToken);
         return session is not null && session.ExpiresAtUtc > DateTimeOffset.UtcNow;
     }
 
-    private async Task<bool> LockVerifiedUserAsync(Guid userId, CancellationToken cancellationToken) =>
+    private async Task<bool> LockPasswordUserAsync(Guid userId, CancellationToken cancellationToken) =>
         await database.Users.Where(user => user.Id == userId && user.ArchivedAtUtc == null &&
-            user.PhoneNumber != null && user.PhoneVerifiedAtUtc != null && user.VerifiedPhoneNumber == user.PhoneNumber)
-            .ExecuteUpdateAsync(update => update.SetProperty(user => user.PhoneVerifiedAtUtc, user => user.PhoneVerifiedAtUtc), cancellationToken) == 1;
+            user.PasswordHash != null)
+            .ExecuteUpdateAsync(update => update.SetProperty(user => user.PasswordHash, user => user.PasswordHash), cancellationToken) == 1;
 
     private string CreateRefreshToken(AuthSession session, DateTimeOffset now)
     {
@@ -115,7 +111,7 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
         return raw;
     }
 
-    private AuthTokens CreateTokens(Guid userId, Guid sessionId, string refreshToken, DateTimeOffset now, DateTimeOffset sessionExpiresAtUtc)
+    private AuthTokens CreateTokens(Guid userId, Guid sessionId, string refreshToken, DateTimeOffset now, DateTimeOffset sessionExpiresAtUtc, bool phoneVerified)
     {
         var expires = now.Add(AccessLifetime);
         var jwt = new JwtSecurityToken(
@@ -124,13 +120,13 @@ public sealed class TokenService(FlashcardsDbContext database, AuthSettings sett
             [
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString("D")),
                 new Claim("sid", sessionId.ToString("D")),
-                new Claim("phone_verified", "true"),
-                new Claim("amr", "sms_otp"),
+                new Claim("phone_verified", phoneVerified ? "true" : "false"),
+                new Claim("amr", "pwd"),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString("D"))
             ],
             notBefore: now.UtcDateTime, expires: expires.UtcDateTime,
             signingCredentials: new SigningCredentials(new SymmetricSecurityKey(settings.SigningKey), SecurityAlgorithms.HmacSha256));
-        return new AuthTokens(new JwtSecurityTokenHandler().WriteToken(jwt), refreshToken, expires, sessionId, sessionExpiresAtUtc);
+        return new AuthTokens(new JwtSecurityTokenHandler().WriteToken(jwt), refreshToken, expires, sessionId, sessionExpiresAtUtc, phoneVerified);
     }
 
     private static string HashToken(string rawToken) =>

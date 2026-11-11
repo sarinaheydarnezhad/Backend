@@ -48,16 +48,16 @@ public sealed partial class AuthTests : IAsyncLifetime
     }
 
     [Fact]
-    public async Task Otp_registration_creates_no_password_and_tokens_are_bound_before_use()
+    public async Task Verified_registration_hashes_password_and_tokens_are_bound_before_use()
     {
         var tokens=await RegisterAsync("One@Example.com");
         using var scope=_factory.Services.CreateScope();var db=scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
-        Assert.Null((await db.Users.SingleAsync()).PasswordHash);Assert.NotEmpty(tokens.AccessToken);Assert.NotEmpty(tokens.RefreshToken);
+        Assert.NotNull((await db.Users.SingleAsync()).PasswordHash);Assert.NotEmpty(tokens.AccessToken);Assert.NotEmpty(tokens.RefreshToken);
         Assert.DoesNotContain(tokens.RefreshToken,(await db.RefreshTokens.SingleAsync()).TokenHash);
         Assert.Null(typeof(UserChange).GetProperty(nameof(User.PasswordHash)));
     }
     [Fact]
-    public async Task Signed_otp_access_tokens_reject_tampering_and_password_login_is_disabled()
+    public async Task Signed_access_tokens_reject_tampering_and_email_login_is_disabled()
     {
         var tokens=await RegisterAsync("one@example.com");
         Assert.Equal(HttpStatusCode.Gone,(await _client.PostAsJsonAsync("/api/v1/auth/login",new { email="one@example.com",password=Password })).StatusCode);
@@ -141,9 +141,7 @@ public sealed partial class AuthTests : IAsyncLifetime
             var phone = await database.Users.Where(x => x.Email == "original@example.com").Select(x => x.PhoneNumber).SingleAsync();
             await database.OtpChallenges.Where(x => x.PhoneNumber == phone).ExecuteUpdateAsync(u => u.SetProperty(x => x.RequestedAtUtc, DateTimeOffset.UtcNow.AddMinutes(-2)));
             var service = scope.ServiceProvider.GetRequiredService<PhoneAuthService>();
-            var challenge = await service.RequestAsync(phone!);
-            Assert.True(TestSmsOutbox.Codes.TryRemove(phone!, out var code));
-            current = (await service.VerifyAsync(challenge.ChallengeId, code!)).Tokens!;
+            current = await service.LoginAsync(phone!, Password);
         }
         Assert.NotEqual(original.SessionId, current.SessionId);
         _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", current.AccessToken);

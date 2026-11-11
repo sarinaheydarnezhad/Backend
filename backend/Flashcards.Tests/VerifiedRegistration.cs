@@ -27,14 +27,17 @@ internal static class VerifiedRegistration
         Assert.NotNull(services);
         using var scope = services.CreateScope();
         var service = scope.ServiceProvider.GetRequiredService<PhoneAuthService>();
-        var challenge = await service.RequestAsync(phone);
+        var challenge = await service.RequestAsync(phone, "register");
         Assert.True(TestSmsOutbox.Codes.TryRemove(phone, out var code));
         var verified = await service.VerifyAsync(challenge.ChallengeId, code!);
-        Assert.NotNull(verified.Tokens);
-        // Legacy profile metadata is seeded only by test code, after real OTP authentication.
+        Assert.Null(verified.Tokens);
+        var password = PhonePasswordPolicy.IsValid(unusedLegacyPassword) ? unusedLegacyPassword : "Verified account2026!";
+        var tokens = await service.RegisterAsync(phone, verified.RegistrationToken!, password, password,
+            string.IsNullOrWhiteSpace(displayName) ? "Student" : displayName);
+        // Test-only profile metadata is seeded after real SMS verification and password signup.
         var db = scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>();
         await db.Users.Where(x => x.PhoneNumber == phone).ExecuteUpdateAsync(u => u
             .SetProperty(x => x.Email, email).SetProperty(x => x.NormalizedEmail, email.ToUpperInvariant()).SetProperty(x => x.DisplayName, displayName));
-        return new HttpResponseMessage(HttpStatusCode.OK) { Content = JsonContent.Create(verified.Tokens) };
+        return new HttpResponseMessage(HttpStatusCode.OK) { Content = JsonContent.Create(tokens) };
     }
 }

@@ -7,21 +7,7 @@ BEGIN
     ALTER TABLE [AuthSessions] ADD [OtpAuthenticated] bit NOT NULL DEFAULT CAST(0 AS bit);
 END;
 
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20261110182603_SmsOtpOnlySessions'
-)
-BEGIN
-    UPDATE [AuthSessions] SET [RevokedAtUtc] = SYSUTCDATETIME() WHERE [OtpAuthenticated] = 0 AND [RevokedAtUtc] IS NULL;
-END;
 
-IF NOT EXISTS (
-    SELECT * FROM [__EFMigrationsHistory]
-    WHERE [MigrationId] = N'20261110182603_SmsOtpOnlySessions'
-)
-BEGIN
-    UPDATE [OtpChallenges] SET [ConsumedAtUtc] = SYSUTCDATETIME() WHERE [Purpose] <> 'authenticate' AND [ConsumedAtUtc] IS NULL;
-END;
 
 IF NOT EXISTS (
     SELECT * FROM [__EFMigrationsHistory]

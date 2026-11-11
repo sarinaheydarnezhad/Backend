@@ -1,3 +1,5 @@
+> Historical report. Superseded by [password login with SMS-verified signup/recovery](PHONE_PASSWORD_OTP_REPORT.md). Do not deploy the old SMS-only/session-revocation policy.
+
 # Lerona final authentication policy — implementation report
 
 Date: 2026-11-10. Existing uncommitted changes were preserved and extended.

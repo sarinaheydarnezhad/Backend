@@ -2,7 +2,7 @@
 
 Current backup/sync/atomic guest-copy fixes, API integration requirements and actual test results are in `SYNC-RECOVERY-FIX.md`. Existing clients remain compatible; atomic whole-transfer migration requires the additive authenticated `/api/v1/sync/guest-migration` route. For production deployment, run `powershell -NoProfile -ExecutionPolicy Bypass -File deploy/Deploy-Backend.ps1`. It stages current source, explicitly attaches the existing `backup-keys` disk and verifies the live mount. Publishing binaries alone does not preserve a release disk binding. See [backup recovery](deploy/CLOUD-BACKUP-RECOVERY.md).
 
-The backend is a .NET 10 ASP.NET Core API in [`backend/`](backend/) with EF Core 10 SQL Server persistence, SMS OTP-only Lerona accounts, and sync-aware deck creation.
+The backend is a .NET 10 ASP.NET Core API in [`backend/`](backend/) with EF Core 10 SQL Server persistence, Lerona password login with SMS-verified signup/recovery, and sync-aware deck creation.
 
 ## Projects
 
@@ -33,7 +33,7 @@ The launch profile sets `ASPNETCORE_ENVIRONMENT=Development` and listens at `htt
 - `GET /health`: liveness only, without a database dependency.
 - `GET /api/v1/status`: a small response DTO to verify API startup.
 - `POST /api/v1/decks`: requires a bearer token and `{ "name": "Vocabulary" }`; returns 201 with `{ "id", "name", "syncVersion" }` and a Location header pointing to `/api/v1/me/decks`. Ownership comes exclusively from the authenticated identity. The server generates the deck, device and change UUIDs, applies the default deck settings, and commits the deck, per-user version and sync-feed entry in the existing sync transaction. The owner's next pull includes the deck as an `upsert`; other users cannot see it. This endpoint creates a new deck on each successful call; it does not provide retry idempotency. Use sync push with client-generated IDs for idempotent offline creation.
-- Lerona registration/login use `/api/v1/auth/phone/otp/request` and `/otp/verify`; only verified OTPs issue tokens. `/api/v1/auth/refresh` rotates OTP-origin sessions. Password/email/Google paths return 410.
+- Lerona login uses `/api/v1/auth/phone/login` with phone/password. Signup and forgotten-password recovery first use `/phone/otp/request` and `/otp/verify` for purpose-bound proofs, then `/phone/register` or `/phone/password/reset`. OTP verification alone never issues tokens. Email/Google adapters remain disabled; normal password sessions rotate through `/auth/refresh`.
 - `POST /api/v1/auth/logout`: authenticated; revokes the current session and returns 204.
 - `POST /api/v1/auth/logout/{sessionId}`: authenticated; idempotently revokes only a session owned by the JWT's user. Used after a fresh login to retry offline logout using non-secret IDs; IDs alone never authorize revocation.
 
@@ -44,22 +44,21 @@ Token responses additionally expose `sessionId` and `sessionExpiresAtUtc`. Refre
 
 ## Phone authentication
 
-Lerona uses Kavenegar SMS OTP exclusively for registration and login. Request a
-six-digit code with an Iranian mobile number, then verify it to open the original
-verified-phone account or create an account. No password, email, Google identity
-or registration proof is required. All legacy Lerona password/Google/activation
-routes return HTTP 410. Cent authentication, users, configuration and sessions
-remain unchanged.
+Returning users sign in with mobile number and password. New users verify an SMS,
+create a password, then enter a name. Forgotten passwords use a separate recovery
+SMS proof before setting a new password. Reset preserves the account ID and all
+learning/purchase data and revokes previous sessions. Google remains Cent-only.
+Cent authentication, users, configuration and sessions are independent.
 
 Actual SMS credentials belong in ignored Backend/.env; the API loads only Lerona
 SMS/OTP settings from that file. The example file contains placeholders. Host
-configuration takes precedence. Apply the Lerona-only verified-phone and OTP-only
-session migrations before the updated API is used. Old Lerona sessions must
-reauthenticate with OTP. Unresolved legacy ownership requires staff recovery;
-new signup is blocked until the unresolved inventory is cleared.
+configuration takes precedence. The pending additive Lerona migrations retain
+their committed names but no longer revoke existing password sessions. Existing
+password users do not need SMS to sign in, and unrelated legacy records do not
+block new verified signup. No migration runs automatically at API startup.
 
-See [setup and account recovery](docs/KAVENEGAR_OTP_SETUP.md) and the
-[implementation/test report](docs/SMS_OTP_ONLY_REPORT.md). No real SMS or production
+See [setup](docs/KAVENEGAR_OTP_SETUP.md) and the current
+[authentication report](docs/PHONE_PASSWORD_OTP_REPORT.md). No real SMS or production
 deployment has been performed; both require explicit user approval.
 
 ## Account display names
@@ -102,7 +101,7 @@ $env:Cors__AllowedOrigins__0 = 'https://app.example.com'
 
 Development defaults to Windows SQL Server LocalDB (`FlashcardsDev`); override `ConnectionStrings__FlashcardsDb` for another server. Production has no connection string in source control: supply it via environment configuration or a secret store. EF Core registers the context and scoped query service only when a connection string is configured. `Cors:AllowedOrigins` defaults to an empty list in production. Set explicit origins for deployed clients. Swagger UI and the OpenAPI route are enabled in Development only.
 
-`Auth:Issuer` and `Auth:Audience` are configured in `appsettings.json`. `Auth__SigningKey` is **required at startup** and must be a base64-encoded random value of at least 32 bytes. Persist the key securely across restarts and replicas; changing it invalidates outstanding access tokens. Send access tokens via `Authorization: Bearer <token>` over HTTPS. Store refresh tokens in the mobile device's secure credential storage and never log them. Historical password hashes are retained for data preservation and cannot authenticate. Only SHA-256 hashes of random refresh tokens are stored in SQL Server. Access tokens expire after 15 minutes; refresh sessions have a 30-day absolute lifetime. Refresh rotates the token; reuse of a consumed token revokes its session and invalidates its access tokens. Logout revokes the current session immediately. Existing verified Iranian mobile users sign in through OTP; unresolved legacy ownership requires staff-assisted recovery.
+`Auth:Issuer` and `Auth:Audience` are configured in `appsettings.json`. `Auth__SigningKey` is **required at startup** and must be a base64-encoded random value of at least 32 bytes. Persist the key securely across restarts and replicas; changing it invalidates outstanding access tokens. Send access tokens via `Authorization: Bearer <token>` over HTTPS. Store refresh tokens in the mobile device's secure credential storage and never log them. Existing password hashes continue to authenticate; new and reset passwords use the existing Identity hasher. Only SHA-256 hashes of random refresh tokens are stored in SQL Server. Access tokens expire after 15 minutes; refresh sessions have a 30-day absolute lifetime. Refresh rotates the token; reuse of a consumed token revokes its session and invalidates its access tokens. Logout revokes the current session immediately. Existing mobile/password users can sign in without OTP. SMS is used only for new signup and password recovery.
 
 Authentication endpoints use a per-IP fixed-window limit of 10 requests per minute per API instance, returning 429 when exceeded. Behind a reverse proxy, configure trusted forwarded headers or enforce a shared limit at the edge. Do not forward untrusted client-supplied IP headers as the rate-limit identity.
 

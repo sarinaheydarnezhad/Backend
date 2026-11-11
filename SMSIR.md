@@ -1,5 +1,7 @@
 # SMS.ir OTP integration
 
+For the current user flow and endpoint purposes, see [password login with SMS-verified signup/recovery](docs/PHONE_PASSWORD_OTP_REPORT.md). Normal password login does not send SMS.
+
 The adapter extends the existing `ISmsOtpSender`; registration/login, OTP storage/expiry/rate limits and JWT/refresh handling are unchanged. No mobile API or navigation change is required.
 
 ## Server configuration

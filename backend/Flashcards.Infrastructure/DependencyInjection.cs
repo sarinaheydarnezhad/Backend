@@ -46,8 +46,7 @@ public static class DependencyInjection
                 {
                     var subject = context.Principal?.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
                     var session = context.Principal?.FindFirst("sid")?.Value;
-                    if (context.Principal?.FindFirst("phone_verified")?.Value != "true" || context.Principal?.FindFirst("amr")?.Value != "sms_otp" ||
-                        !Guid.TryParse(subject, out var userId) || !Guid.TryParse(session, out var sessionId) ||
+                    if (!Guid.TryParse(subject, out var userId) || !Guid.TryParse(session, out var sessionId) ||
                         !await context.HttpContext.RequestServices.GetRequiredService<TokenService>()
                             .IsSessionActiveAsync(userId, sessionId, context.HttpContext.RequestAborted))
                         context.Fail("Session is no longer active.");

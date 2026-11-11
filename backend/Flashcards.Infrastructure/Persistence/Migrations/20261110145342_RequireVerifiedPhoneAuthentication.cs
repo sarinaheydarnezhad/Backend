@@ -31,14 +31,8 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                 type: "uniqueidentifier",
                 nullable: true);
 
-            // Historical phone/email/Google sessions are not evidence of SMS ownership.
-            // Do not guess verification or alter user IDs/content. Revoke legacy access.
-            migrationBuilder.Sql("""
-                UPDATE s SET [RevokedAtUtc] = SYSUTCDATETIME()
-                FROM [AuthSessions] AS s
-                INNER JOIN [Users] AS u ON u.[Id] = s.[UserId]
-                WHERE s.[RevokedAtUtc] IS NULL AND u.[PhoneVerifiedAtUtc] IS NULL;
-                """);
+            // SMS is required for new signup and password recovery. Existing password
+            // accounts and sessions keep working; do not guess historical phone verification.
         }
 
         /// <inheritdoc />

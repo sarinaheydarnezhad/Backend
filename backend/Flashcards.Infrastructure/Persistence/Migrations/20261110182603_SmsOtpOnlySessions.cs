@@ -17,9 +17,8 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                 nullable: false,
                 defaultValue: false);
 
-            // No historical password/Google session is evidence of OTP authentication.
-            migrationBuilder.Sql("UPDATE [AuthSessions] SET [RevokedAtUtc] = SYSUTCDATETIME() WHERE [OtpAuthenticated] = 0 AND [RevokedAtUtc] IS NULL;");
-            migrationBuilder.Sql("UPDATE [OtpChallenges] SET [ConsumedAtUtc] = SYSUTCDATETIME() WHERE [Purpose] <> 'authenticate' AND [ConsumedAtUtc] IS NULL;");
+            // Retain this additive compatibility column, but do not require it for
+            // password sessions or revoke existing users during the planned upgrade.
         }
 
         /// <inheritdoc />

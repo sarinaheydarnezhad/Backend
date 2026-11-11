@@ -38,4 +38,4 @@ public sealed class PhoneAuthException(int statusCode, string code, string messa
 }
 
 public sealed record OtpRequestResponse(Guid ChallengeId, DateTimeOffset ExpiresAtUtc, DateTimeOffset ResendAtUtc, int CodeLength = 6);
-public sealed record OtpVerificationResponse(string? RegistrationToken, DateTimeOffset? ExpiresAtUtc, AuthTokens? Tokens);
+public sealed record OtpVerificationResponse(string? RegistrationToken, DateTimeOffset? ExpiresAtUtc, AuthTokens? Tokens, string? ResetPasswordToken = null);
