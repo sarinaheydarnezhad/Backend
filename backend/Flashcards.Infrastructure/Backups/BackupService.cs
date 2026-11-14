@@ -36,8 +36,14 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
             }
             else
             {
+                var reclaimed = await ReclaimExpiredFailuresAsync(userId, cancellationToken);
                 if (await database.UserBackups.CountAsync(item => item.UserId == userId, cancellationToken) >= settings.MaxStoredBackupsPerUser)
-                    throw new BackupException(409, "backup_capacity_reached", "Stored backup capacity is reached. Contact support for expired-artifact cleanup.");
+                {
+                    // Large legacy backlogs progress by one bounded batch per new request, even
+                    // when that batch cannot yet free a reservation. No valid backup is evicted.
+                    if (reclaimed > 0) await transaction.CommitAsync(cancellationToken);
+                    throw new BackupException(409, "backup_capacity_reached", "Stored backup capacity is reached. Existing completed backups are preserved. Contact support if capacity remains unavailable.");
+                }
                 backup = new UserBackup
                 {
                     UserId = userId, RequestId = request.RequestId, FormatVersion = request.FormatVersion,
@@ -177,6 +183,10 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
         using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(5));
         try
         {
+            // Failure recording is another reservation writer: use the same owner lock so it
+            // cannot resurrect a reclaimed row or exceed capacity after another creator commits.
+            await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.Serializable, timeout.Token);
+            await SyncBootstrap.LockHeadAsync(database, attempted.UserId, timeout.Token);
             var existing = await database.UserBackups.AsNoTracking().SingleOrDefaultAsync(item => item.UserId == attempted.UserId &&
                 item.RequestId == attempted.RequestId, timeout.Token);
             if (existing is not null && (existing.RequestedSyncVersion != attempted.RequestedSyncVersion || existing.FormatVersion != attempted.FormatVersion))
@@ -184,6 +194,11 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
             if (existing?.Status == "Completed") return ToMetadata(existing);
             if (existing is null)
             {
+                if (await database.UserBackups.CountAsync(item => item.UserId == attempted.UserId, timeout.Token) >= settings.MaxStoredBackupsPerUser)
+                {
+                    logger.LogWarning("Backup {BackupId} failure metadata not stored because backup capacity is reached", attempted.Id);
+                    return null;
+                }
                 attempted.Status = "Failed";
                 attempted.Payload = null;
                 attempted.SizeBytes = null;
@@ -199,6 +214,7 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
                     .ExecuteUpdateAsync(update => update.SetProperty(item => item.Status, "Failed").SetProperty(item => item.FailureCode, code)
                         .SetProperty(item => item.Payload, (byte[]?)null).SetProperty(item => item.SizeBytes, (long?)null)
                         .SetProperty(item => item.CompletedAtUtc, (DateTimeOffset?)null).SetProperty(item => item.SyncVersion, (long?)null), timeout.Token);
+            await transaction.CommitAsync(timeout.Token);
         }
         catch (Exception exception)
         {
@@ -207,6 +223,24 @@ public sealed class BackupService(FlashcardsDbContext database, BackupSettings s
         }
         finally { database.ChangeTracker.Clear(); }
         return null;
+    }
+
+    private async Task<int> ReclaimExpiredFailuresAsync(Guid userId, CancellationToken cancellationToken)
+    {
+        // Caller holds the existing owner head lock in a serializable transaction.
+        // Pending is never proof of abandonment. Completed rows, even expired ones, are retained.
+        const int batchSize = 128;
+        var now = clock.GetUtcNow();
+        var eligible = await database.UserBackups.AsNoTracking()
+            .Where(item => item.UserId == userId && item.Status == "Failed" && item.ExpiresAtUtc <= now)
+            .OrderBy(item => item.ExpiresAtUtc).ThenBy(item => item.Id).Select(item => item.Id)
+            .Take(batchSize).ToArrayAsync(cancellationToken);
+        if (eligible.Length == 0) return 0;
+        var removed = await database.UserBackups
+            .Where(item => item.UserId == userId && eligible.Contains(item.Id) && item.Status == "Failed" && item.ExpiresAtUtc <= now)
+            .ExecuteDeleteAsync(cancellationToken);
+        logger.LogInformation("Staged reclamation of {BackupCount} expired failed backup rows in the current transaction", removed);
+        return removed;
     }
 
     private BackupMetadata ToMetadata(UserBackup row)
