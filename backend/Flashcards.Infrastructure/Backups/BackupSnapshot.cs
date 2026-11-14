@@ -46,13 +46,12 @@ public static class BackupSnapshot
             }), cancellationToken);
         await WriteRowsAsync(writer, "reviewEvents", database.ReviewEvents.AsNoTracking()
             .Where(item => item.UserId == userId && item.Deck.UserId == userId && item.Card.Deck.UserId == userId)
-            .OrderBy(item => item.Id).Select(item => new
-            {
+            .OrderBy(item => item.Id).Select(item => new BackupReviewEvent(
                 item.Id, item.DeckId, item.CardId, item.PreviousBox, item.NewBox, item.Result, item.ReviewedAtUtc,
-                item.StudySessionId, item.CreatedAtUtc, item.SchedulerJson,
-                ServerVersion = database.SyncChanges.Where(change => change.UserId == userId && change.EntityType == "reviewEvent" &&
-                    change.EntityId == item.Id).Select(change => (long?)change.Version).Min()
-            }), cancellationToken);
+                item.StudySessionId, item.CreatedAtUtc,
+                database.SyncChanges.Where(change => change.UserId == userId && change.EntityType == "reviewEvent" &&
+                    change.EntityId == item.Id).Select(change => (long?)change.Version).Min(),
+                item.SchedulerJson, item.ReviewCalendarJson)), cancellationToken);
         await WriteRowsAsync(writer, "settings", database.UserSettings.AsNoTracking().Where(item => item.UserId == userId)
             .Select(item => new
             {

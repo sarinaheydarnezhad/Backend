@@ -12,6 +12,20 @@ namespace Flashcards.Tests;
 public sealed class PersistenceTests
 {
     [Fact]
+    public void Scheduling_migration_is_additive_and_downgrade_refuses_to_erase_calendar_evidence()
+    {
+        using var database=SqlServerContext();
+        var migrator=database.GetService<IMigrator>();
+        var up=migrator.GenerateScript("20261110182603_SmsOtpOnlySessions","20261113183050_PreserveReviewCalendar");
+        Assert.Contains("ADD [ReviewCalendarJson] nvarchar(max) NULL",up);
+        Assert.DoesNotContain("UPDATE [ReviewEvents]",up);
+        Assert.DoesNotContain("DELETE FROM [ReviewEvents]",up);
+        var down=migrator.GenerateScript("20261113183050_PreserveReviewCalendar","20261110182603_SmsOtpOnlySessions");
+        Assert.Contains("THROW 51000",down);
+        Assert.Contains("TABLOCKX, HOLDLOCK",down);
+        Assert.True(down.IndexOf("THROW 51000",StringComparison.Ordinal)<down.IndexOf("DROP COLUMN [ReviewCalendarJson]",StringComparison.Ordinal));
+    }
+    [Fact]
     public void Sql_server_model_maps_keys_constraints_and_restricts_history_deletion()
     {
         using var database = SqlServerContext();
@@ -53,7 +67,7 @@ public sealed class PersistenceTests
     {
         using var database = SqlServerContext();
         Assert.False(database.Database.HasPendingModelChanges());
-        Assert.Equal(12, database.Database.GetMigrations().Count());
+        Assert.Equal(13, database.Database.GetMigrations().Count());
         var script = database.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         Assert.Contains("CREATE TABLE [ReviewEvents]", script);
         Assert.Contains("EXEC(N'CREATE TRIGGER [TR_ReviewEvents_Immutable]", script);

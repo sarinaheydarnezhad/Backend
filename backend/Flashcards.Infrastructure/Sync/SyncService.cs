@@ -58,7 +58,7 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                 cancellationToken);
             if (receipt is not null)
             {
-                if (receipt.Fingerprint != validated.Fingerprint)
+                if (receipt.Fingerprint != validated.Fingerprint && !IsLegacyLeitnerRetry(receipt, validated))
                     throw await ConflictAsync(userId, change, receipt.Version, receipt.PayloadJson, cancellationToken);
                 acknowledgements.Add(new SyncPushAcknowledgement(change.ClientChangeId, "duplicate", receipt.Version));
                 continue;
@@ -117,6 +117,9 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
     private async Task<SyncPullResponse> PullCoreAsync(Guid userId, long cursor, int limit, CancellationToken cancellationToken)
     {
         if (cursor < 0 || limit is < 1 or > 100) throw new SyncException("Invalid cursor or page size.");
+        // A mutable projection is a checkpoint ONLY with a watermark captured under this same lock.
+        await using var readTransaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
+        await SyncBootstrap.LockHeadAsync(database, userId, cancellationToken);
         var head = await database.SyncHeads.AsNoTracking().Where(item => item.UserId == userId).Select(item => new
         {
             item.Version,
@@ -126,13 +129,14 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
         var latest = head?.Version ?? 0;
         if (head is null || head.HasLegacyData)
         {
-            await using var transaction = await database.Database.BeginTransactionAsync(IsolationLevel.ReadCommitted, cancellationToken);
-            await SyncBootstrap.LockHeadAsync(database, userId, cancellationToken);
             latest = await SyncBootstrap.InitializeAsync(database, userId, cancellationToken);
-            await transaction.CommitAsync(cancellationToken);
         }
         if (cursor > latest) throw new SyncException("Cursor is ahead of the server version.");
-        if (cursor == latest) return new SyncPullResponse(cursor, latest, false, []);
+        if (cursor == latest)
+        {
+            await readTransaction.CommitAsync(cancellationToken);
+            return new SyncPullResponse(cursor, latest, false, [], []);
+        }
 
         var page = await database.SyncChanges.AsNoTracking()
             .Where(item => item.UserId == userId && item.Version > cursor && item.Version <= latest)
@@ -145,7 +149,15 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
         var changes = page.Select(item => new SyncPullChange(
             item.EntityType, item.EntityId, item.Operation, item.DeviceId, item.ClientChangeId,
             item.ClientChangedAtUtc, item.ServerChangedAtUtc, item.ExpectedVersion, item.Version, ParseJson(item.PayloadJson))).ToList();
-        return new SyncPullResponse(nextCursor, latest, nextCursor < latest, changes);
+        var cardIds = changes.Where(item => item.EntityType is "card" or "reviewState" or "reviewEvent")
+            .Select(item => item.EntityType == "reviewEvent" ? item.Payload.GetProperty("cardId").GetGuid() : item.EntityId).Distinct().ToArray();
+        var states = await database.CardReviewStates.AsNoTracking()
+            .Where(item => cardIds.Contains(item.CardId) && item.Card.Deck.UserId == userId).ToListAsync(cancellationToken);
+        var checkpoints = states.Select(item => new ReviewCheckpoint(item.CardId, latest, new ReviewStatePayload(
+            item.Box, item.DueDate, item.LastReviewedAtUtc, item.ConsecutiveSuccesses, item.TotalReviews, item.TotalSuccesses,
+            SchedulerSync.Read<SchedulerStatePayload>(item.SchedulerStateJson)))).ToList();
+        await readTransaction.CommitAsync(cancellationToken);
+        return new SyncPullResponse(nextCursor, latest, nextCursor < latest, changes, checkpoints);
     }
 
     private async Task<string> ApplyAsync(Guid userId, ValidatedSyncChange validated, long version, CancellationToken cancellationToken)
@@ -174,13 +186,15 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                 else
                 {
                     var payload = (DeckPayload)validated.Payload!;
+                    if (payload.ReviewSystem is not null && deck.ReviewSystem != payload.ReviewSystem &&
+                        (await database.Cards.AnyAsync(item => item.DeckId == deck.Id, cancellationToken) ||
+                         await database.ReviewEvents.AnyAsync(item => item.DeckId == deck.Id, cancellationToken)))
+                        throw await ConflictAsync(userId, change, deck.SyncVersion, DeckSnapshot(deck), cancellationToken);
                     deck.Name = payload.Name.Trim();
                     deck.Description = payload.Description.Trim();
                     deck.Language = payload.Language;
                     deck.TextAlignment = payload.TextAlignment;
                     deck.TypographySize = payload.TypographySize;
-                    if (payload.ReviewSystem is not null && deck.SyncVersion > 0 && deck.ReviewSystem != payload.ReviewSystem)
-                        throw new SyncException("A saved deck cannot change review systems.");
                     deck.ReviewSystem = payload.ReviewSystem ?? deck.ReviewSystem;
                 }
                 deck.SyncVersion = version;
@@ -242,6 +256,11 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                     throw await ConflictAsync(userId, change, state.SyncVersion, StateSnapshot(state), cancellationToken);
 
                 var payload = (ReviewStatePayload)validated.Payload!;
+                if (state.TotalReviews > 0 && payload != new ReviewStatePayload(state.Box, state.DueDate,
+                    state.LastReviewedAtUtc, state.ConsecutiveSuccesses, state.TotalReviews, state.TotalSuccesses,
+                    SchedulerSync.Read<SchedulerStatePayload>(state.SchedulerStateJson)))
+                    throw await ConflictAsync(userId, change, state.SyncVersion, StateSnapshot(state), cancellationToken);
+                SchedulerSync.ValidateNewTime(payload.LastReviewedAtUtc, DateTimeOffset.UtcNow);
                 var reviewSystem = await database.Cards.Where(item => item.Id == change.EntityId)
                     .Select(item => item.Deck.ReviewSystem).SingleAsync(cancellationToken);
                 if ((payload.SchedulerState?.SchedulerId ?? "leitner") != reviewSystem)
@@ -285,6 +304,7 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                 if (await database.ReviewEvents.AnyAsync(item => item.Id == change.EntityId, cancellationToken))
                     throw await ConflictAsync(userId, change, 0, null, cancellationToken);
                 var payload = (ReviewEventPayload)validated.Payload!;
+                SchedulerSync.ValidateNewTime(payload.ReviewedAtUtc, DateTimeOffset.UtcNow);
                 if (!await database.Cards.AnyAsync(item => item.Id == payload.CardId && item.DeckId == payload.DeckId &&
                                                      item.Deck.UserId == userId && item.ArchivedAtUtc == null && item.Deck.ArchivedAtUtc == null, cancellationToken))
                     throw new SyncException("Review event card and deck are unavailable.");
@@ -298,6 +318,7 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                     Id = change.EntityId, UserId = userId, DeckId = payload.DeckId, CardId = payload.CardId,
                     PreviousBox = payload.PreviousBox, NewBox = payload.NewBox, Result = payload.Result,
                     SchedulerJson = SchedulerSync.Json(payload.Scheduler),
+                    ReviewCalendarJson = SchedulerSync.Json(payload.ReviewCalendar),
                     ReviewedAtUtc = payload.ReviewedAtUtc, StudySessionId = payload.StudySessionId
                 });
                 var state = await database.CardReviewStates.SingleOrDefaultAsync(item => item.CardId == payload.CardId, cancellationToken);
@@ -306,7 +327,7 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                     state = new CardReviewState { CardId = payload.CardId };
                     database.CardReviewStates.Add(state);
                 }
-                SchedulerSync.Apply(state, payload.Result, payload.ReviewedAtUtc, reviewSystem);
+                SchedulerSync.Apply(state, payload.Result, payload.ReviewedAtUtc, reviewSystem, payload.ReviewCalendar);
                 return JsonSerializer.Serialize(payload, SyncValidator.JsonOptions);
             }
             default:
@@ -329,6 +350,24 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
 
     private static JsonElement? ClientPayload(SyncPushChange change) =>
         change.Payload.ValueKind == JsonValueKind.Object ? change.Payload.Clone() : null;
+
+    private static bool IsLegacyLeitnerRetry(SyncChange receipt, ValidatedSyncChange validated)
+    {
+        if (validated.Payload is not DeckPayload { ReviewSystem: "leitner" } payload ||
+            validated.Change.Operation != "upsert" || receipt.EntityType != "deck" || receipt.Operation != "upsert" ||
+            receipt.EntityId != validated.Change.EntityId) return false;
+        // Old CloudClient omitted explicit Leitner. Reconstruct that exact request fingerprint;
+        // no other payload/header differences are permitted and no receipt is rewritten.
+        var legacy = validated.Change with
+        {
+            Payload = JsonSerializer.SerializeToElement(payload with { ReviewSystem = null }, SyncValidator.JsonOptions)
+        };
+        if (SyncValidator.Validate(new SyncPushRequest([legacy]))[0].Fingerprint != receipt.Fingerprint) return false;
+        using var snapshot = JsonDocument.Parse(receipt.PayloadJson);
+        // Omission on an SM-2 deck meant "keep SM-2", so it is NOT equivalent to selecting Leitner.
+        return snapshot.RootElement.TryGetProperty("reviewSystem", out var system) &&
+            system.ValueKind == JsonValueKind.String && system.GetString() == "leitner";
+    }
 
     private static JsonElement ParseJson(string json) => JsonSerializer.Deserialize<JsonElement>(json);
 

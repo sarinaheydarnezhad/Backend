@@ -112,11 +112,13 @@ public sealed class BackupRestoreService(FlashcardsDbContext database, BackupSer
                 {
                     Id = saved.Id, UserId = userId, DeckId = saved.DeckId, CardId = saved.CardId,
                     PreviousBox = saved.PreviousBox, NewBox = saved.NewBox, Result = saved.Result, SchedulerJson = saved.SchedulerJson,
+                    ReviewCalendarJson = saved.ReviewCalendarJson,
                     ReviewedAtUtc = saved.ReviewedAtUtc, StudySessionId = saved.StudySessionId, CreatedAtUtc = saved.CreatedAtUtc
                 };
                 Record("reviewEvent", review.Id, "create", JsonSerializer.Serialize(new ReviewEventPayload(review.DeckId,
                     review.CardId, review.PreviousBox, review.NewBox, review.Result, review.ReviewedAtUtc, review.StudySessionId,
-                    SchedulerSync.Read<SchedulerEventPayload>(review.SchedulerJson)),
+                    SchedulerSync.Read<SchedulerEventPayload>(review.SchedulerJson),
+                    SchedulerSync.Read<ReviewCalendarPayload>(review.ReviewCalendarJson)),
                     SyncValidator.JsonOptions), saved.ReviewedAtUtc);
                 database.ReviewEvents.Add(review);
             }

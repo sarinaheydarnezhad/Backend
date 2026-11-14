@@ -64,6 +64,7 @@ internal sealed record BackupDocument(int FormatVersion, Guid BackupId, Guid Use
             }
             foreach (var review in document.ReviewEvents)
             {
+                Require(SchedulerSync.ValidCalendar(SchedulerSync.Read<ReviewCalendarPayload>(review.ReviewCalendarJson), review.ReviewedAtUtc));
                 var scheduler = SchedulerSync.Read<SchedulerEventPayload>(review.SchedulerJson);
                 Require(SchedulerSync.ValidEvent(scheduler) && decks.TryGetValue(review.DeckId, out var parent) &&
                     (scheduler?.SchedulerId ?? "leitner") == parent.ReviewSystem);
@@ -127,7 +128,8 @@ internal sealed record BackupCard(Guid Id, Guid DeckId, string FrontText, string
 internal sealed record BackupReviewState(Guid CardId, int Box, DateOnly DueDate, DateTimeOffset? LastReviewedAtUtc,
     int ConsecutiveSuccesses, int TotalReviews, int TotalSuccesses, DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, long SyncVersion, string? SchedulerStateJson = null);
 internal sealed record BackupReviewEvent(Guid Id, Guid DeckId, Guid CardId, int PreviousBox, int NewBox, string Result,
-    DateTimeOffset ReviewedAtUtc, Guid? StudySessionId, DateTimeOffset CreatedAtUtc, long? ServerVersion = null, string? SchedulerJson = null);
+    DateTimeOffset ReviewedAtUtc, Guid? StudySessionId, DateTimeOffset CreatedAtUtc, long? ServerVersion = null, string? SchedulerJson = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] string? ReviewCalendarJson = null);
 internal sealed record BackupUserSettings(string Theme, bool HapticsEnabled, string Language, bool DailyReminderEnabled,
     TimeOnly? DailyReminderTime, string PreferredSpeechLanguage, string? PreferredSpeechAccent,
     DateTimeOffset CreatedAtUtc, DateTimeOffset UpdatedAtUtc, long SyncVersion);

@@ -40,13 +40,32 @@ internal static class SyncBootstrap
         foreach (var history in reviews.GroupBy(item => item.CardId))
         {
             var saved = stateByCard[history.Key];
+            var reviewSystem = decks.Single(item => item.Id == history.First().DeckId).ReviewSystem;
+            SchedulerStatePayload? savedScheduler;
+            try { savedScheduler = SchedulerSync.Read<SchedulerStatePayload>(saved.SchedulerStateJson); }
+            catch (JsonException) { throw Inconsistent(); }
+            if (!SchedulerSync.ValidState(savedScheduler) || (savedScheduler?.SchedulerId ?? "leitner") != reviewSystem)
+                throw Inconsistent();
             var projected = new CardReviewState();
-            foreach (var review in history.OrderBy(item => item.ReviewedAtUtc).ThenBy(item => item.Id))
+            var orderedHistory = history.OrderBy(item => item.ReviewedAtUtc).ThenBy(item => item.Id).ToArray();
+            foreach (var review in orderedHistory)
             {
-                SchedulerSync.Apply(projected, review.Result, review.ReviewedAtUtc,
-                    decks.Single(item => item.Id == review.DeckId).ReviewSystem);
+                SchedulerSync.Apply(projected, review.Result, review.ReviewedAtUtc, reviewSystem,
+                    SchedulerSync.Read<ReviewCalendarPayload>(review.ReviewCalendarJson));
             }
-            if (saved.Box != projected.Box || saved.DueDate != projected.DueDate || saved.LastReviewedAtUtc != projected.LastReviewedAtUtc ||
+            // A valid legacy projection may include a historical baseline whose events were never stored.
+            // It is captured with a watermark by PullAsync, never reset to the available partial history.
+            if (saved.TotalReviews > projected.TotalReviews && saved.TotalSuccesses >= projected.TotalSuccesses) continue;
+            // Legacy receipt order was not recorded. A known future-clock outlier makes timestamp
+            // sorting unable to verify its accepted projection. Preserve it only when event/result
+            // counts agree, then let a real new review recover the schedule; never rewrite evidence.
+            if (saved.TotalReviews == projected.TotalReviews && saved.TotalSuccesses == projected.TotalSuccesses &&
+                history.Any(item => item.ReviewedAtUtc > DateTimeOffset.UtcNow.Add(SchedulerSync.FutureClockTolerance))) continue;
+            // An omitted historical offset can change the calendar day by at most one day.
+            // Preserve this date-only ambiguity when all other reconstructed state agrees.
+            var legacyCalendarDay = orderedHistory[^1].ReviewCalendarJson is null &&
+                Math.Abs(saved.DueDate.DayNumber - projected.DueDate.DayNumber) <= 1;
+            if (saved.Box != projected.Box || (saved.DueDate != projected.DueDate && !legacyCalendarDay) || saved.LastReviewedAtUtc != projected.LastReviewedAtUtc ||
                 saved.TotalReviews != projected.TotalReviews || saved.TotalSuccesses != projected.TotalSuccesses ||
                 saved.ConsecutiveSuccesses != projected.ConsecutiveSuccesses || saved.SchedulerStateJson != projected.SchedulerStateJson) throw Inconsistent();
         }
@@ -78,7 +97,8 @@ internal static class SyncBootstrap
         foreach (var review in reviews.OrderBy(item => item.ReviewedAtUtc).ThenBy(item => item.Id))
             Record("reviewEvent", review.Id, "create", JsonSerializer.Serialize(new ReviewEventPayload(review.DeckId,
                 review.CardId, review.PreviousBox, review.NewBox, review.Result, review.ReviewedAtUtc, review.StudySessionId,
-                SchedulerSync.Read<SchedulerEventPayload>(review.SchedulerJson)),
+                SchedulerSync.Read<SchedulerEventPayload>(review.SchedulerJson),
+                SchedulerSync.Read<ReviewCalendarPayload>(review.ReviewCalendarJson)),
                 SyncValidator.JsonOptions), review.ReviewedAtUtc);
         foreach (var state in states)
         {

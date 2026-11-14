@@ -138,6 +138,7 @@ public static class V1Endpoints
         });
 
         var sync = v1.MapGroup("/sync").WithTags("sync").RequireAuthorization();
+        sync.MapGet("/capabilities", () => Results.Ok(new { version = 2, futureClockToleranceSeconds = 300 }));
         sync.MapPost("/push", (HttpContext context, ClaimsPrincipal principal, SyncService service, CancellationToken cancellationToken) =>
             PushAsync(context, principal, service, false, cancellationToken));
         sync.MapPost("/guest-migration", (HttpContext context, ClaimsPrincipal principal, SyncService service, CancellationToken cancellationToken) =>

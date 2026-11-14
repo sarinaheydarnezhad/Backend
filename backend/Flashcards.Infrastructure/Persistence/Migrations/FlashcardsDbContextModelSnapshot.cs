@@ -417,6 +417,9 @@ namespace Flashcards.Infrastructure.Persistence.Migrations
                         .IsUnicode(false)
                         .HasColumnType("varchar(7)");
 
+                    b.Property<string>("ReviewCalendarJson")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTimeOffset>("ReviewedAtUtc")
                         .HasColumnType("datetimeoffset(7)");
 

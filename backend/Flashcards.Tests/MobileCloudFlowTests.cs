@@ -31,7 +31,18 @@ public sealed class MobileCloudFlowFactAttribute : FactAttribute
 public sealed class MobileCloudFlowTests
 {
     [MobileCloudFlowFact]
-    public async Task Mobile_backup_logout_and_fresh_install_use_the_real_api_and_stored_snapshot()
+    public Task Mobile_backup_logout_and_fresh_install_use_the_real_api_and_stored_snapshot() =>
+        RunFlowAsync("^(?!scheduling )");
+
+    [MobileCloudFlowFact]
+    public Task Mobile_scheduling_leitner_survives_offline_edit_and_fresh_install() => RunFlowAsync("^scheduling leitner:");
+
+    [MobileCloudFlowFact]
+    public Task Mobile_scheduling_sm2_survives_offline_edit_and_fresh_install() => RunFlowAsync("^scheduling sm2:");
+
+    // Each flow owns a fresh host/database and the real auth rate limiter. Expanded scenarios must
+    // not consume another scenario's ten-per-minute IP bucket or weaken production rate limits.
+    private async Task RunFlowAsync(string testNamePattern)
     {
         var frontend = Path.GetFullPath(Environment.GetEnvironmentVariable("LERONA_FRONTEND_DIR")!);
         // Keep the isolated database alive, while each HTTP request gets its own connection.
@@ -49,7 +60,7 @@ public sealed class MobileCloudFlowTests
             RedirectStandardOutput = true, RedirectStandardError = true, CreateNoWindow = true
         };
         foreach (var argument in new[] { "node_modules/jest/bin/jest.js", "--runInBand", "--runTestsByPath",
-                     "test/cloud-account-flows.e2e.ts", "--testMatch", "**/cloud-account-flows.e2e.ts" })
+                     "test/cloud-account-flows.e2e.ts", "--testMatch", "**/cloud-account-flows.e2e.ts", "--testNamePattern", testNamePattern })
             start.ArgumentList.Add(argument);
         start.Environment["LERONA_FLOW_API_URL"] = client.BaseAddress!.GetLeftPart(UriPartial.Authority);
         using var process = Process.Start(start)!;
@@ -61,6 +72,8 @@ public sealed class MobileCloudFlowTests
         var diagnostics = (await stdout) + (await stderr);
         var evidence = Directory.CreateDirectory(Path.Combine(frontend, ".tools"));
         await File.WriteAllTextAsync(Path.Combine(evidence.FullName, "cloud-account-flows.http.log"), diagnostics);
+        var flowName = testNamePattern.Contains("leitner") ? "leitner" : testNamePattern.Contains("sm2") ? "sm2" : "accounts";
+        await File.WriteAllTextAsync(Path.Combine(evidence.FullName, $"cloud-account-flows.{flowName}.http.log"), diagnostics);
         Assert.True(process.ExitCode == 0, diagnostics);
         using var inspect = factory.Services.CreateScope();
         var stored = inspect.ServiceProvider.GetRequiredService<FlashcardsDbContext>();

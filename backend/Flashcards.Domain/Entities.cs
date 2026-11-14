@@ -114,6 +114,7 @@ public sealed class CardReviewState
 
 public sealed class ReviewEvent
 {
+    public string? ReviewCalendarJson { get; set; }
     public Guid Id { get; set; } = Guid.NewGuid();
     public Guid UserId { get; set; }
     public User User { get; set; } = null!;

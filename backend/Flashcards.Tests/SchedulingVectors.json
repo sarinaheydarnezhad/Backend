@@ -1,0 +1,13 @@
+[
+  {"instant":"2026-11-12T21:30:00.000Z","zone":"Asia/Tehran","offset":210,"day":"2026-11-13","leitner":"2026-11-15","sm2":"2026-11-14"},
+  {"instant":"2026-11-13T00:00:00.000Z","zone":"UTC","offset":0,"day":"2026-11-13","leitner":"2026-11-15","sm2":"2026-11-14"},
+  {"instant":"2026-11-13T00:30:00.000Z","zone":"America/Los_Angeles","offset":-480,"day":"2026-11-12","leitner":"2026-11-14","sm2":"2026-11-13"},
+  {"instant":"2026-12-31T12:15:00.000Z","zone":"Pacific/Kiritimati","offset":840,"day":"2027-01-01","leitner":"2027-01-03","sm2":"2027-01-02"},
+  {"instant":"2027-01-01T01:00:00.000Z","zone":"Etc/GMT+12","offset":-720,"day":"2026-12-31","leitner":"2027-01-02","sm2":"2027-01-01"},
+  {"instant":"2028-02-29T23:30:00.000Z","zone":"Europe/Paris","offset":60,"day":"2028-03-01","leitner":"2028-03-03","sm2":"2028-03-02"},
+  {"instant":"2026-03-08T06:59:00.000Z","zone":"America/New_York","offset":-300,"day":"2026-03-08","leitner":"2026-03-10","sm2":"2026-03-09"},
+  {"instant":"2026-03-08T07:01:00.000Z","zone":"America/New_York","offset":-240,"day":"2026-03-08","leitner":"2026-03-10","sm2":"2026-03-09"},
+  {"instant":"2026-11-01T05:30:00.000Z","zone":"America/New_York","offset":-240,"day":"2026-11-01","leitner":"2026-11-03","sm2":"2026-11-02"},
+  {"instant":"2026-11-01T06:30:00.000Z","zone":"America/New_York","offset":-300,"day":"2026-11-01","leitner":"2026-11-03","sm2":"2026-11-02"},
+  {"instant":"2026-11-12T18:30:00.000Z","zone":"Asia/Kathmandu","offset":345,"day":"2026-11-13","leitner":"2026-11-15","sm2":"2026-11-14"}
+]

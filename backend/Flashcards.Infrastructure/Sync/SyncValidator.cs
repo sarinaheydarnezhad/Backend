@@ -118,7 +118,8 @@ internal static class SyncValidator
                 if (review.DeckId == Guid.Empty || review.CardId == Guid.Empty ||
                     review.PreviousBox is < 1 or > 5 || review.NewBox is < 1 or > 5 ||
                     review.Result is not ("success" or "failure") || review.ReviewedAtUtc == default ||
-                    review.StudySessionId == Guid.Empty || !SchedulerSync.ValidEvent(review.Scheduler))
+                    review.StudySessionId == Guid.Empty || !SchedulerSync.ValidEvent(review.Scheduler) ||
+                    !SchedulerSync.ValidCalendar(review.ReviewCalendar, review.ReviewedAtUtc))
                     throw new SyncException("Invalid review event payload.");
                 break;
             case SettingsPayload settings:

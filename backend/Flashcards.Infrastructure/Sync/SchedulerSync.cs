@@ -9,6 +9,22 @@ public sealed record SchedulerEventPayload(string SchedulerId, string PreviousSt
 
 internal static class SchedulerSync
 {
+    internal static readonly TimeSpan FutureClockTolerance = TimeSpan.FromMinutes(5);
+
+    internal static bool ValidCalendar(ReviewCalendarPayload? calendar, DateTimeOffset reviewedAt)
+    {
+        if (calendar is null) return true;
+        if (calendar.UtcOffsetMinutes is < -840 or > 840 || calendar.ReviewDate == default) return false;
+        try { return DateOnly.FromDateTime(reviewedAt.UtcDateTime.AddMinutes(calendar.UtcOffsetMinutes)) == calendar.ReviewDate; }
+        catch (ArgumentOutOfRangeException) { return false; }
+    }
+
+    internal static void ValidateNewTime(DateTimeOffset? reviewedAt, DateTimeOffset receiptTime)
+    {
+        if (reviewedAt > receiptTime.Add(FutureClockTolerance))
+            throw new SyncException("The review clock is more than five minutes ahead. Correct the clock; retain the original local history for a controlled time correction.",
+                code: "review_clock_ahead", statusCode: 422);
+    }
     internal static T? Read<T>(string? json) where T : class =>
         json is null ? null : JsonSerializer.Deserialize<T>(json, SyncValidator.JsonOptions);
 
@@ -25,10 +41,11 @@ internal static class SchedulerSync
 
     private static bool Key(string key) => key is "new" or "learning" or "review";
 
-    // Replay in server receipt order on every device. Device timestamps cannot move time backwards.
-    internal static void Apply(CardReviewState state, string result, DateTimeOffset reviewedAt, string reviewSystem)
+    // Replay transitions in server receipt order; use the immutable calendar date for scheduling.
+    internal static void Apply(CardReviewState state, string result, DateTimeOffset reviewedAt, string reviewSystem,
+        ReviewCalendarPayload? calendar = null)
     {
-        var effective = state.LastReviewedAtUtc > reviewedAt ? state.LastReviewedAtUtc.Value : reviewedAt;
+        // Receipt order determines transitions. An old/corrected clock must not pin subsequent calendar days.
         int interval;
         if (reviewSystem == "sm2")
         {
@@ -48,8 +65,8 @@ internal static class SchedulerSync
             state.Box = result == "success" ? Math.Min(state.Box + 1, 5) : 1;
             interval = result == "success" ? 1 << (state.Box - 1) : 0;
         }
-        state.DueDate = DateOnly.FromDateTime(effective.UtcDateTime).AddDays(interval);
-        state.LastReviewedAtUtc = effective;
+        state.DueDate = (calendar?.ReviewDate ?? DateOnly.FromDateTime(reviewedAt.UtcDateTime)).AddDays(interval);
+        state.LastReviewedAtUtc = reviewedAt;
         state.TotalReviews++;
         if (result == "success") { state.TotalSuccesses++; state.ConsecutiveSuccesses++; }
         else state.ConsecutiveSuccesses = 0;

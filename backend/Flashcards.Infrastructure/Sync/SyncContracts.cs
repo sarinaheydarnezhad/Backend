@@ -31,7 +31,12 @@ public sealed record SyncPullChange(
     long ServerVersion,
     JsonElement Payload);
 
-public sealed record SyncPullResponse(long Cursor, long LatestVersion, bool HasMore, IReadOnlyList<SyncPullChange> Changes);
+public sealed record SyncPullResponse(long Cursor, long LatestVersion, bool HasMore, IReadOnlyList<SyncPullChange> Changes,
+    IReadOnlyList<ReviewCheckpoint>? ReviewCheckpoints = null, int SchedulingContractVersion = 2);
+
+// Captured under the same per-user head lock as ThroughVersion; it covers every earlier server event.
+public sealed record ReviewCheckpoint(Guid CardId, long ThroughVersion, ReviewStatePayload State);
+public sealed record ReviewCalendarPayload(DateOnly ReviewDate, int UtcOffsetMinutes);
 
 public sealed record SyncConflict(
     string EntityType, Guid EntityId, long ExpectedVersion, long ActualVersion,
@@ -56,7 +61,8 @@ public sealed record ReviewStatePayload(int Box, DateOnly DueDate, DateTimeOffse
 
 public sealed record ReviewEventPayload(Guid DeckId, Guid CardId, int PreviousBox, int NewBox,
     string Result, DateTimeOffset ReviewedAtUtc, Guid? StudySessionId,
-    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SchedulerEventPayload? Scheduler = null);
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] SchedulerEventPayload? Scheduler = null,
+    [property: JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)] ReviewCalendarPayload? ReviewCalendar = null);
 
 public sealed record SettingsPayload(string Theme, bool HapticsEnabled, string Language,
     bool DailyReminderEnabled, TimeOnly? DailyReminderTime, string PreferredSpeechLanguage, string? PreferredSpeechAccent);

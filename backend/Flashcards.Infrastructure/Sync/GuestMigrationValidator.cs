@@ -33,8 +33,7 @@ internal static class GuestMigrationValidator
                 case ReviewEventPayload review when cards.TryGetValue(review.CardId, out var deckId) && deckId == review.DeckId:
                     var previous = progress.GetValueOrDefault(review.CardId, (Box: 1, ReviewedAt: DateTimeOffset.MinValue));
                     var nextBox = review.Result == "success" ? Math.Min(previous.Box + 1, 5) : 1;
-                    if (states.Contains(review.CardId) || review.PreviousBox != previous.Box || review.NewBox != nextBox ||
-                        review.ReviewedAtUtc < previous.ReviewedAt)
+                    if (states.Contains(review.CardId) || review.PreviousBox != previous.Box || review.NewBox != nextBox)
                         throw Invalid();
                     progress[review.CardId] = (nextBox, review.ReviewedAtUtc);
                     break;
