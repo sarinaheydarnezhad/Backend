@@ -49,7 +49,9 @@ internal static class SyncValidator
             }
             else
             {
-                if (change.Payload.ValueKind != JsonValueKind.Object || change.Payload.GetRawText().Length > 16_384)
+                if (type == "card") CardContentContract.ValidatePayload(change.Payload);
+                if (change.Payload.ValueKind != JsonValueKind.Object ||
+                    (type != "card" && change.Payload.GetRawText().Length > 16_384))
                     throw new SyncException("Change payload must be a bounded JSON object.");
 
                 try
@@ -64,7 +66,15 @@ internal static class SyncValidator
                         _ => null
                     };
                 }
-                catch (JsonException) { throw new SyncException("Invalid change payload."); }
+                catch (JsonException exception)
+                {
+                    var path = exception.Path is "$.frontText" or "$.meaning" or "$.phonetic" or "$.category" or "$.examples" ? exception.Path : "$";
+                    throw new SyncException($"Invalid change payload at {path}.", code: type == "card" ? "card_content_invalid" : null);
+                }
+                catch (InvalidOperationException) when (type == "card")
+                {
+                    throw new SyncException("Invalid Unicode text in card payload.", code: "card_content_invalid");
+                }
                 if (payload is null) throw new SyncException("Invalid change payload.");
                 ValidatePayload(payload);
             }
@@ -94,18 +104,7 @@ internal static class SyncValidator
                     throw new SyncException("Invalid deck payload.");
                 break;
             case CardPayload card:
-                if (card.DeckId == Guid.Empty || string.IsNullOrWhiteSpace(card.FrontText) || card.FrontText.Length > 4000 ||
-                    string.IsNullOrWhiteSpace(card.Meaning) || card.Meaning.Length > 4000 ||
-                    card.Phonetic?.Length > 500 || card.Category?.Length > 120 ||
-                    card.Examples.ValueKind != JsonValueKind.Array || card.Examples.GetArrayLength() > 20)
-                    throw new SyncException("Invalid card payload.");
-                foreach (var example in card.Examples.EnumerateArray())
-                {
-                    if (example.ValueKind != JsonValueKind.Object || !example.TryGetProperty("sentence", out var sentence) ||
-                        sentence.ValueKind != JsonValueKind.String || string.IsNullOrWhiteSpace(sentence.GetString()) ||
-                        sentence.GetString()!.Length > 4000)
-                        throw new SyncException("Invalid card example.");
-                }
+                CardContentContract.Validate(card);
                 break;
             case ReviewStatePayload state:
                 if (state.Box is < 1 or > 5 || state.DueDate == default || state.ConsecutiveSuccesses < 0 ||

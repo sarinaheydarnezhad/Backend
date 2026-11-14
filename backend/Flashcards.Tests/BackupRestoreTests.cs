@@ -358,7 +358,9 @@ public sealed partial class BackupTests
         await EraseLearningAsync(fixture);
         Assert.Equal(HttpStatusCode.OK, (await RestoreAsync(fixture.BackupId)).StatusCode);
         using var inspect = _factory.Services.CreateScope();
-        Assert.Equal("[\"legacy example\"]", (await inspect.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Cards.SingleAsync()).ExamplesJson);
+        Assert.Equal("[{\"sentence\":\"legacy example\"}]", (await inspect.ServiceProvider.GetRequiredService<FlashcardsDbContext>().Cards.SingleAsync()).ExamplesJson);
+        var retained = JsonNode.Parse(await _client.GetStringAsync($"/api/v1/backups/{fixture.BackupId}/download"))!;
+        Assert.Equal("[\"legacy example\"]", retained["cards"]![0]!["examplesJson"]!.GetValue<string>());
     }
 
     [Fact]

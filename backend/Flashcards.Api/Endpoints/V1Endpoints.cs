@@ -138,7 +138,8 @@ public static class V1Endpoints
         });
 
         var sync = v1.MapGroup("/sync").WithTags("sync").RequireAuthorization();
-        sync.MapGet("/capabilities", () => Results.Ok(new { version = 2, futureClockToleranceSeconds = 300 }));
+        sync.MapGet("/capabilities", () => Results.Ok(new { version = 2, futureClockToleranceSeconds = 300,
+            cardContentContractVersion = 1, maxCardPayloadBytes = CardContentContract.MaximumPayloadBytes, maxPushBytes = CardContentContract.PushBytes }));
         sync.MapPost("/push", (HttpContext context, ClaimsPrincipal principal, SyncService service, CancellationToken cancellationToken) =>
             PushAsync(context, principal, service, false, cancellationToken));
         sync.MapPost("/guest-migration", (HttpContext context, ClaimsPrincipal principal, SyncService service, CancellationToken cancellationToken) =>
@@ -152,7 +153,7 @@ public static class V1Endpoints
     private static async Task<IResult> PushAsync(HttpContext context, ClaimsPrincipal principal, SyncService service,
         bool guestMigration, CancellationToken cancellationToken)
     {
-        var maxBytes = guestMigration ? 10_485_760 : 131_072;
+        var maxBytes = guestMigration ? CardContentContract.GuestBytes : CardContentContract.PushBytes;
         if (context.Request.ContentLength > maxBytes) return Results.StatusCode(StatusCodes.Status413PayloadTooLarge);
         if (!context.Request.HasJsonContentType()) return Results.StatusCode(StatusCodes.Status415UnsupportedMediaType);
         using var buffer = new MemoryStream();
@@ -168,9 +169,9 @@ public static class V1Endpoints
         try
         {
             request = JsonSerializer.Deserialize<SyncPushRequest>(buffer.ToArray(),
-                new JsonSerializerOptions(JsonSerializerDefaults.Web) { UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow });
+                new JsonSerializerOptions(JsonSerializerDefaults.Web) { UnmappedMemberHandling = JsonUnmappedMemberHandling.Disallow, MaxDepth = 16 });
         }
-        catch (JsonException) { return Results.BadRequest(new { error = "Invalid sync JSON." }); }
+        catch (Exception error) when (error is JsonException or InvalidOperationException) { return Results.BadRequest(new { error = "Invalid sync JSON." }); }
 
         var userId = AuthenticatedIdentity.FromClaims(principal).UserId;
         var response = guestMigration

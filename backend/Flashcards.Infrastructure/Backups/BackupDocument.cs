@@ -43,13 +43,29 @@ internal sealed record BackupDocument(int FormatVersion, Guid BackupId, Guid Use
                     deck.TextAlignment is "ltr" or "rtl" or "center" && deck.TypographySize is "small" or "medium" or "large" && deck.ReviewSystem is "leitner" or "sm2");
                 document.ValidateDates(deck.CreatedAtUtc, deck.UpdatedAtUtc, deck.ArchivedAtUtc, deck.SyncVersion);
             }
-            foreach (var card in document.Cards)
+            for (var cardIndex = 0; cardIndex < document.Cards.Count; cardIndex++)
             {
-                Require(decks.ContainsKey(card.DeckId) && Text(card.FrontText, 4000, true) && Text(card.Meaning, 4000, true) &&
-                    (card.Phonetic is null || Text(card.Phonetic, 500)) && (card.Category is null || Text(card.Category, 120)) &&
-                    card.ExamplesJson is not null);
+                var card = document.Cards[cardIndex];
+                Require(decks.ContainsKey(card.DeckId) && card.ExamplesJson is not null);
                 using var examples = JsonDocument.Parse(card.ExamplesJson!);
-                Require(examples.RootElement.ValueKind is JsonValueKind.Array or JsonValueKind.Object);
+                var canonicalExamples = examples.RootElement;
+                // Explicit format-1 legacy representation. This is a lossless string-to-sentence
+                // adapter, never coercion of arbitrary nested values. The encrypted original remains intact.
+                if (canonicalExamples.ValueKind == JsonValueKind.Array && canonicalExamples.GetArrayLength() > 0 &&
+                    canonicalExamples.EnumerateArray().All(item => item.ValueKind == JsonValueKind.String))
+                {
+                    Require(canonicalExamples.GetArrayLength() <= CardContentContract.MaximumExamples &&
+                        canonicalExamples.EnumerateArray().All(item => CardContentContract.ExampleText(item, true)));
+                    canonicalExamples = JsonSerializer.SerializeToElement(canonicalExamples.EnumerateArray()
+                        .Select(item => new { sentence = item.GetString() }), JsonOptions);
+                    document.Cards[cardIndex] = card with { ExamplesJson = canonicalExamples.GetRawText() };
+                }
+                try
+                {
+                    CardContentContract.Validate(new CardPayload(card.DeckId, card.FrontText, card.Meaning,
+                        card.Phonetic, card.Category, canonicalExamples));
+                }
+                catch (SyncException) { throw Invalid(); }
                 document.ValidateDates(card.CreatedAtUtc, card.UpdatedAtUtc, card.ArchivedAtUtc, card.SyncVersion);
             }
             foreach (var state in document.ReviewStates)
@@ -83,7 +99,7 @@ internal sealed record BackupDocument(int FormatVersion, Guid BackupId, Guid Use
             }
             return document;
         }
-        catch (JsonException) { throw Invalid(); }
+        catch (Exception error) when (error is JsonException or InvalidOperationException) { throw Invalid(); }
     }
 
     private void ValidateDates(DateTimeOffset created, DateTimeOffset updated, DateTimeOffset? archived, long version) =>

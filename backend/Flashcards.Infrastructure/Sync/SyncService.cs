@@ -1,5 +1,6 @@
 using System.Data;
 using System.Text.Json;
+using System.Text;
 using Flashcards.Domain;
 using Flashcards.Infrastructure.Persistence;
 using Flashcards.Infrastructure.Subscriptions;
@@ -138,9 +139,21 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
             return new SyncPullResponse(cursor, latest, false, [], []);
         }
 
-        var page = await database.SyncChanges.AsNoTracking()
+        var page = new List<SyncChange>();
+        long pageBytes = 1024;
+        await foreach (var item in database.SyncChanges.AsNoTracking()
             .Where(item => item.UserId == userId && item.Version > cursor && item.Version <= latest)
-            .OrderBy(item => item.Version).Take(limit).ToListAsync(cancellationToken);
+            .OrderBy(item => item.Version).Take(limit).AsAsyncEnumerable().WithCancellation(cancellationToken))
+        {
+            // Reserve envelope + checkpoint space per entry. Stream rather than materializing 100 maximum cards.
+            var bytes = Encoding.UTF8.GetByteCount(item.PayloadJson) + 2048L;
+            if (page.Count > 0 && pageBytes + bytes > CardContentContract.PushBytes) break;
+            if (pageBytes + bytes > CardContentContract.PushBytes)
+                throw new SyncException($"Synchronized record {item.Version} exceeds the transport contract. Original data was retained for controlled recovery.",
+                    code: "sync_payload_recovery_required", statusCode: 409);
+            page.Add(item);
+            pageBytes += bytes;
+        }
         if (page.Count == 0 || page[0].Version != cursor + 1 ||
             page.Where((item, index) => item.Version != cursor + index + 1).Any())
             throw new SyncException("The synchronized history is incomplete. Contact support; local data must be retained.",
@@ -228,8 +241,8 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
                     var payload = (CardPayload)validated.Payload!;
                     if (card.DeckId != payload.DeckId)
                         throw await ConflictAsync(userId, change, card.SyncVersion, CardSnapshot(card), cancellationToken);
-                    card.FrontText = payload.FrontText.Trim();
-                    card.Meaning = payload.Meaning.Trim();
+                    card.FrontText = CardContentContract.Trim(payload.FrontText);
+                    card.Meaning = CardContentContract.Trim(payload.Meaning);
                     card.Phonetic = payload.Phonetic;
                     card.Category = payload.Category;
                     card.ExamplesJson = payload.Examples.GetRawText();
@@ -377,11 +390,24 @@ public sealed class SyncService(FlashcardsDbContext database, EntitlementService
         deck.ArchivedAtUtc
     }, SyncValidator.JsonOptions);
 
-    internal static string CardSnapshot(Card card) => JsonSerializer.Serialize(new
+    internal static string CardSnapshot(Card card)
     {
-        card.DeckId, card.FrontText, card.Meaning, card.Phonetic, card.Category,
-        Examples = ParseJson(card.ExamplesJson), card.ArchivedAtUtc
-    }, SyncValidator.JsonOptions);
+        JsonElement examples;
+        try
+        {
+            examples = ParseJson(card.ExamplesJson);
+            CardContentContract.Validate(new CardPayload(card.DeckId, card.FrontText, card.Meaning, card.Phonetic, card.Category, examples));
+        }
+        catch (Exception error) when (error is JsonException or SyncException)
+        {
+            throw new SyncException($"Card integrity error for {card.Id}. Original content and learning history require controlled recovery.", code: "card_integrity_error", statusCode: 409);
+        }
+        return JsonSerializer.Serialize(new
+        {
+            card.DeckId, card.FrontText, card.Meaning, card.Phonetic, card.Category,
+            Examples = examples, card.ArchivedAtUtc
+        }, SyncValidator.JsonOptions);
+    }
 
     internal static string StateSnapshot(CardReviewState state) => JsonSerializer.Serialize(new
     {

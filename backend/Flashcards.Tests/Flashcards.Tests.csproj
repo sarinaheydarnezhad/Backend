@@ -23,6 +23,7 @@
   <ItemGroup>
     <Using Include="Xunit" />
     <None Update="SchedulingVectors.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="CardContentVectors.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

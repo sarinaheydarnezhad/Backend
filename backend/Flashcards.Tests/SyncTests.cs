@@ -161,7 +161,7 @@ public sealed partial class SyncTests : IAsyncLifetime
         Assert.Equal(HttpStatusCode.BadRequest, (await Push(deck, deck)).StatusCode);
         Assert.Equal(HttpStatusCode.BadRequest, (await _client.PostAsJsonAsync("/api/v1/sync/push",
             new { changes = new[] { new { entityType = "deck", userId = Guid.NewGuid() } } })).StatusCode);
-        using var large = new StringContent(new string('a', 131_073), System.Text.Encoding.UTF8, "application/json");
+        using var large = new StringContent(new string('a', CardContentContract.PushBytes + 1), System.Text.Encoding.UTF8, "application/json");
         Assert.Equal(HttpStatusCode.RequestEntityTooLarge, (await _client.PostAsync("/api/v1/sync/push", large)).StatusCode);
         using var scope = _factory.Services.CreateScope();
         Assert.Empty(await scope.ServiceProvider.GetRequiredService<FlashcardsDbContext>().SyncChanges.ToListAsync());

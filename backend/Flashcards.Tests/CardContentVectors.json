@@ -1,0 +1,22 @@
+[
+  {"name":"mixed Persian English emoji", "valid":true,"examples":[{"sentence":"Hello سلام 😀","translation":"معنی meaning","notes":"line 1\nline 2 \\\""}]},
+  {"name":"optional fields absent", "valid":true,"examples":[{"sentence":"valid"}]},
+  {"name":"optional fields empty", "valid":true,"examples":[{"sentence":"valid","translation":"","notes":"  "}]},
+  {"name":"empty array", "valid":true,"examples":[]},
+  {"name":"audit malformed example", "valid":false,"examples":[{"sentence":"valid","translation":42,"notes":["array"]}]},
+  {"name":"numeric translation", "valid":false,"examples":[{"sentence":"valid","translation":42}]},
+  {"name":"array notes", "valid":false,"examples":[{"sentence":"valid","notes":["array"]}]},
+  {"name":"boolean notes", "valid":false,"examples":[{"sentence":"valid","notes":false}]},
+  {"name":"object translation", "valid":false,"examples":[{"sentence":"valid","translation":{}}]},
+  {"name":"null optional", "valid":false,"examples":[{"sentence":"valid","translation":null}]},
+  {"name":"missing sentence", "valid":false,"examples":[{}]},
+  {"name":"null sentence", "valid":false,"examples":[{"sentence":null}]},
+  {"name":"empty sentence", "valid":false,"examples":[{"sentence":""}]},
+  {"name":"whitespace sentence", "valid":false,"examples":[{"sentence":" \t\n﻿"}]},
+  {"name":"ECMAScript accepts NEL as text", "valid":true,"examples":[{"sentence":"\u0085"}]},
+  {"name":"null entry", "valid":false,"examples":[null]},
+  {"name":"array entry", "valid":false,"examples":[[]]},
+  {"name":"null examples", "valid":false,"examples":null},
+  {"name":"object examples", "valid":false,"examples":{}},
+  {"name":"unknown example member", "valid":false,"examples":[{"sentence":"valid","other":"data"}]}
+]
