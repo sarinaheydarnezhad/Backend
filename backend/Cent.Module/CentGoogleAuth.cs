@@ -18,7 +18,7 @@ public sealed record CentGoogleSettings(string ClientId, string ClientSecret, st
     public override string ToString() => "Cent Google OAuth settings (credentials redacted)";
     public static CentGoogleSettings Read(IConfiguration config, IHostEnvironment environment)
     {
-        if (!config.GetValue<bool>("Cent:Google:Enabled")) throw Unavailable();
+        if (!config.GetValue<bool>("Cent:Google:Enabled") || CentGoogleMode.Read(config) != CentGoogleMode.AuthorizationCode) throw Unavailable();
         var id = config["Cent:Google:ClientId"]?.Trim();
         var secret = config["Cent:Google:ClientSecret"];
         var redirect = config["Cent:Google:RedirectUri"];
@@ -151,6 +151,12 @@ public sealed class CentGoogleAuth(CentDbContext db, IConfiguration config, IHos
             throw new CentException(400, input.Error == "access_denied" ? "google_cancelled" : "google_authorization_failed", "Google sign-in did not complete. Start again.");
         if (string.IsNullOrWhiteSpace(input.Code)) throw CentGoogleSettings.Invalid();
         var identity = await google.ExchangeAndValidate(settings, input.Code, input.CodeVerifier, attempt.NonceHash, ct);
+        return await AuthenticateIdentity(identity, ct);
+    }
+
+    // Both Google flows use the same subject mapping, conflict rules and Cent session issuer.
+    internal async Task<object> AuthenticateIdentity(CentGoogleIdentity identity, CancellationToken ct)
+    {
         var user = await db.Users.SingleOrDefaultAsync(u => u.GoogleSubject == identity.Subject, ct);
         if (user is null) {
             var normalizedEmail = identity.Email.ToUpperInvariant();
@@ -180,6 +186,7 @@ public static class CentGoogleEndpoints
 {
     public static void MapCentGoogleAuth(this RouteGroupBuilder auth)
     {
+        auth.MapCentGoogleGis();
         auth.MapPost("/google/start", async (CentGoogleAuth service, CancellationToken ct) => Results.Ok(await service.Start(ct)));
         auth.MapPost("/google/complete", async (CentGoogleComplete input, CentGoogleAuth service, CancellationToken ct) => Results.Ok(await service.Complete(input, ct)));
     }

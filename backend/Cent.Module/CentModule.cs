@@ -35,6 +35,11 @@ public static class CentModule
         services.AddScoped<CentPractice>();
         services.AddScoped<CentLearning>();
         services.AddScoped<CentGoogleAuth>();
+        services.AddScoped<CentGoogleGisAuth>();
+        services.AddSingleton<CentGooglePublicKeys>();
+        services.AddSingleton<ICentGoogleIdTokenValidator, CentGoogleIdTokenValidator>();
+        services.AddHttpClient(CentGooglePublicKeys.HttpClientName, c => c.Timeout = TimeSpan.FromSeconds(10))
+            .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false });
         services.AddHttpClient<ICentGoogleClient, CentGoogleClient>(c => c.Timeout = TimeSpan.FromSeconds(15))
             .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false });
         services.AddHttpClient<CentGateway>(c => c.Timeout = TimeSpan.FromSeconds(15))

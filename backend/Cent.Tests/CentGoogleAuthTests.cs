@@ -17,6 +17,67 @@ namespace Cent.Tests;
 
 public sealed class CentGoogleAuthTests
 {
+    [Theory]
+    [InlineData(true, "https://itatest.ir", "https://itatest.ir/auth/google/callback")]
+    [InlineData(false, "http://localhost:5173", "http://localhost:5173/cent-s/auth/google/callback")]
+    public async Task Environment_configuration_supports_production_and_local_callbacks_and_Cors(
+        bool production, string origin, string redirect)
+    {
+        var google = new FakeGoogle();
+        using var host = new CentFactory(production: production, googleClient: google,
+            environmentVariables: new Dictionary<string, string?> {
+                ["Cent__Google__Enabled"] = "true", ["Cent__Google__ClientId"] = "test-client",
+                ["Cent__Google__ClientSecret"] = "test-only-not-a-real-secret",
+                ["Cent__Google__RedirectUri"] = redirect, ["Cent__AllowedOrigins__0"] = origin
+            });
+        using var client = host.CreateClient(new() { BaseAddress = new Uri("https://lerona-app.com") });
+        foreach (var path in new[] { "/api/cent/v1/auth/google/start", "/api/cent/v1/auth/google/complete" }) {
+            using var preflight = new HttpRequestMessage(HttpMethod.Options, path);
+            preflight.Headers.Add("Origin", origin);
+            preflight.Headers.Add("Access-Control-Request-Method", "POST");
+            preflight.Headers.Add("Access-Control-Request-Headers", "content-type");
+            using var response = await client.SendAsync(preflight);
+            Assert.Equal(HttpStatusCode.NoContent, response.StatusCode);
+            Assert.Equal(origin, response.Headers.GetValues("Access-Control-Allow-Origin").Single());
+            Assert.False(response.Headers.Contains("Access-Control-Allow-Credentials"));
+        }
+        using var untrusted = new HttpRequestMessage(HttpMethod.Options, "/api/cent/v1/auth/google/start");
+        untrusted.Headers.Add("Origin", "https://attacker.example");
+        untrusted.Headers.Add("Access-Control-Request-Method", "POST");
+        using var denied = await client.SendAsync(untrusted);
+        Assert.False(denied.Headers.Contains("Access-Control-Allow-Origin"));
+
+        client.DefaultRequestHeaders.Add("Origin", origin);
+        var start = await Start(client);
+        var query = QueryHelpers.ParseQuery(new Uri(start.AuthorizationUrl).Query);
+        Assert.Equal(redirect, query["redirect_uri"]);
+        Assert.Equal("test-client", query["client_id"]);
+        Assert.DoesNotContain("test-only-not-a-real-secret", start.AuthorizationUrl);
+        using var completed = await Complete(client, start);
+        Assert.Equal(HttpStatusCode.OK, completed.StatusCode);
+        Assert.Equal(origin, completed.Headers.GetValues("Access-Control-Allow-Origin").Single());
+        Assert.Equal(redirect, google.Settings!.RedirectUri);
+        Assert.Equal("test-client", google.Settings.ClientId);
+        Assert.Equal("test-only-not-a-real-secret", google.Settings.ClientSecret);
+    }
+
+    [Fact]
+    public async Task Production_rejects_local_HTTP_callback_even_when_its_origin_is_allowed()
+    {
+        using var host = new CentFactory(production: true, environmentVariables: new Dictionary<string, string?> {
+            ["Cent__Google__Enabled"] = "true", ["Cent__Google__ClientId"] = "test-client",
+            ["Cent__Google__ClientSecret"] = "test-only-not-a-real-secret",
+            ["Cent__Google__RedirectUri"] = "http://localhost:5173/cent-s/auth/google/callback",
+            ["Cent__AllowedOrigins__0"] = "http://localhost:5173"
+        });
+        using var client = host.CreateClient();
+        using var response = await client.PostAsync("/api/cent/v1/auth/google/start", null);
+        Assert.Equal(HttpStatusCode.ServiceUnavailable, response.StatusCode);
+        Assert.Equal("google_unavailable", (await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
+        using var scope = host.Services.CreateScope();
+        Assert.Empty(await scope.ServiceProvider.GetRequiredService<CentDbContext>().GoogleAttempts.ToListAsync());
+    }
+
     [Fact]
     public async Task Registration_and_repeat_login_use_Cent_sessions_and_subject_even_after_email_changes()
     {
@@ -248,6 +309,7 @@ public sealed class CentGoogleAuthTests
 
     private sealed class FakeGoogle : ICentGoogleClient
     {
+        public CentGoogleSettings? Settings { get; private set; }
         public CentGoogleIdentity Identity { get; set; } = new("google-subject-123", "google@example.com", "Google Student");
         public int Calls { get; private set; }
         public bool Fail { get; set; }
@@ -256,6 +318,7 @@ public sealed class CentGoogleAuthTests
         public TaskCompletionSource Release { get; } = new(TaskCreationOptions.RunContinuationsAsynchronously);
         public async Task<CentGoogleIdentity> ExchangeAndValidate(CentGoogleSettings settings, string code, string verifier, string nonceHash, CancellationToken ct)
         {
+            Settings = settings;
             Calls++; Entered.TrySetResult(); if (HoldExchange) await Release.Task.WaitAsync(ct);
             if (Fail) throw CentGoogleSettings.Invalid(); return Identity;
         }

@@ -56,9 +56,9 @@ Preserve every existing Lerona environment variable and backup disk binding. Add
 
 ```text
 Cent__Enabled=true
-Cent__AllowedOrigins__0=https://your-cent-frontend.example
-Cent__ClientBaseUrl=https://your-cent-frontend.example/cent-s
-Cent__PublicApiBaseUrl=https://your-existing-api.example
+Cent__AllowedOrigins__0=https://itatest.ir
+Cent__ClientBaseUrl=https://itatest.ir
+Cent__PublicApiBaseUrl=https://lerona-app.com
 Cent__BootstrapToken=<at-least-32-random-characters>
 Cent__Payments__MerchantId=<zarinpal-merchant-uuid>
 Cent__Payments__Sandbox=true

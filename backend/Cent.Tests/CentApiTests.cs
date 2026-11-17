@@ -239,7 +239,8 @@ public sealed class CentFactory : WebApplicationFactory<Program>
     private readonly ICentGoogleClient? googleClient;
     private readonly Dictionary<string, string?> previous = new();
     private readonly SqliteConnection connection = new("Data Source=:memory:");
-    public CentFactory(bool enabled = true, bool production = false, ICentGoogleClient? googleClient = null)
+    public CentFactory(bool enabled = true, bool production = false, ICentGoogleClient? googleClient = null,
+        IReadOnlyDictionary<string, string?>? environmentVariables = null)
     {
         this.enabled = enabled; this.production = production; this.googleClient = googleClient;
         // Minimal hosting reads these before WebApplicationFactory applies ConfigureAppConfiguration.
@@ -251,6 +252,8 @@ public sealed class CentFactory : WebApplicationFactory<Program>
             ["Cent__AllowedOrigins__0"] = "https://cent.example",
             ["Cent__Payments__MerchantId"] = "", ["Cent__BootstrapToken"] = "cent-test-bootstrap-token-with-32-characters"
         };
+        if (environmentVariables is not null)
+            foreach (var pair in environmentVariables) values[pair.Key] = pair.Value;
         foreach (var pair in values) { previous[pair.Key] = Environment.GetEnvironmentVariable(pair.Key); Environment.SetEnvironmentVariable(pair.Key, pair.Value); }
     }
     protected override void ConfigureWebHost(IWebHostBuilder builder)
