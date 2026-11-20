@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CEnT Chemistry Preparation | فصل‌های ۱ تا ۵</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EC; --dot:#E7DEC7; --ink:#243027; --ink-soft:#5B6259;
+    --navy:#1C3A52; --navy-2:#16495A;
+    --blue:#2E6DA4; --blue-bg:#EAF2FA; --blue-line:#C9DDEF;
+    --green:#2F8F5B; --green-bg:#E7F7EE; --green-line:#BFE6D2;
+    --gold:#B8860B; --gold-bg:#FBF3DA; --gold-line:#EEDBA0;
+    --red:#C0392B; --red-bg:#FCEBE9; --red-line:#F0C6C0;
+    --purple:#7D4FB0; --purple-bg:#F3ECFA; --purple-line:#DFC9F2;
+    --teal:#2F7A6F; --teal-bg:#E7F4F1; --teal-line:#C4E4DD;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0; font-family:'Vazirmatn',sans-serif; background:radial-gradient(var(--dot) 1px, transparent 1px) 0 0/22px 22px, var(--bg); color:var(--ink); line-height:2;}
+  .en{direction:ltr; unicode-bidi:isolate; display:inline-block;}
+  .page{max-width:880px; margin:0 auto; padding:0 0 90px;}
+  nav{background:var(--navy); padding:18px 24px; display:flex; flex-wrap:wrap; justify-content:center; gap:10px 22px; position:sticky; top:0; z-index:5;}
+  nav a{color:#EAF1F6; text-decoration:none; font-size:13.5px; font-weight:500;}
+  nav a:hover{color:#fff; text-decoration:underline;}
+  .master-hero{margin:26px 20px 36px; padding:44px 30px; border-radius:26px; background:linear-gradient(135deg,var(--navy-2) 0%, #2F8F5B 100%); color:#fff; text-align:center;}
+  .master-hero .badge{display:inline-block; background:rgba(255,255,255,.18); padding:6px 18px; border-radius:20px; font-size:13px; margin-bottom:18px;}
+  .master-hero h1{font-size:29px; margin:0 0 12px;}
+  .master-hero p{font-size:15px; max-width:600px; margin:0 auto; opacity:.95;}
+  .content{padding:0 22px;}
+
+  .chapter-hero{margin:60px 0 30px; padding:36px 30px; border-radius:22px; color:#fff; text-align:center;}
+  .chapter-hero .badge{display:inline-block; background:rgba(255,255,255,.2); padding:5px 16px; border-radius:16px; font-size:12.5px; margin-bottom:14px;}
+  .chapter-hero h2{font-size:25px; margin:0 0 10px; color:#fff; border:none; padding:0;}
+  .chapter-hero p{font-size:14px; opacity:.95; max-width:560px; margin:0 auto;}
+  .ch1{background:linear-gradient(135deg,#1C3A52,#2E6DA4);}
+  .ch2{background:linear-gradient(135deg,#7A3B1E,#C0392B);}
+  .ch3{background:linear-gradient(135deg,#16495A,#2F7A6F);}
+  .ch4{background:linear-gradient(135deg,#4A2E73,#7D4FB0);}
+  .ch5{background:linear-gradient(135deg,#5C4A0F,#B8860B);}
+
+  h3.section-title{font-size:20px; color:var(--navy); margin:34px 0 15px; padding-bottom:8px; border-bottom:2px solid var(--navy-2);}
+  h4.sub-title{font-size:16.5px; color:var(--teal); margin:22px 0 10px;}
+
+  .box{border-radius:16px; padding:20px 22px; margin:18px 0;}
+  .box-label{display:flex; align-items:center; gap:10px; font-weight:700; font-size:15.5px; margin-bottom:12px;}
+  .dot{width:13px; height:13px; border-radius:50%; flex-shrink:0;}
+  .concept, .definition, .method{background:var(--blue-bg); border:1px solid var(--blue-line);}
+  .concept .box-label, .definition .box-label, .method .box-label{color:var(--blue);}
+  .concept .dot, .definition .dot, .method .dot{background:var(--blue);}
+  .concept p{margin:0 0 12px;}
+  .concept .step-lbl{font-weight:700; color:var(--navy);}
+  .example{background:var(--green-bg); border:1px solid var(--green-line);}
+  .example .box-label{color:var(--green);} .example .dot{background:var(--green);}
+  .example .inner{background:#fff; border-radius:10px; padding:13px 15px; margin:10px 0;}
+  .example .solid{background:var(--green); color:#fff; border-radius:10px; padding:10px 15px; font-weight:600; margin:10px 0;}
+  .step{background:#fff; border-radius:10px; padding:12px 15px; margin:8px 0; border-right:4px solid var(--green);}
+  .step .step-num{font-weight:700; color:var(--green); font-size:13px;}
+  .formula{background:var(--teal-bg); border:1px solid var(--teal-line);}
+  .formula .box-label{color:var(--teal);} .formula .dot{background:var(--teal);}
+  .tip{background:var(--gold-bg); border:1px solid var(--gold-line);}
+  .tip .box-label{color:var(--gold);} .tip .dot{background:var(--gold);}
+  .tip ul{margin:0; padding-right:20px;} .tip li{margin-bottom:5px;} .tip li::marker{content:"★ "; color:var(--gold);}
+  .mistake, .trap{background:var(--red-bg); border:1px solid var(--red-line);}
+  .mistake .box-label, .trap .box-label{color:var(--red);} .mistake .dot, .trap .dot{background:var(--red);}
+  .mistake ul{list-style:none; margin:0; padding:0;}
+  .mistake li{margin-bottom:8px; padding-right:24px; position:relative;}
+  .mistake li::before{content:"✗"; position:absolute; right:0; top:0; color:var(--red); font-weight:700;}
+  .visual{background:#fff; border:1px solid var(--dot); border-radius:16px; padding:18px 20px; margin:20px 0; text-align:center;}
+  .visual .cap{font-size:13px; color:var(--ink-soft); margin-top:10px;}
+  .remember{background:var(--gold-bg); border:1px solid var(--gold-line);}
+  .remember .box-label{color:var(--gold);} .remember .dot{background:var(--gold);}
+  .remember-cols{display:grid; grid-template-columns:1fr 1fr; gap:5px 22px;}
+  @media (max-width:560px){.remember-cols{grid-template-columns:1fr;} .diagrow{flex-direction:column;}}
+
+  table.simple{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+  table.simple th,table.simple td{border:1px solid var(--dot); padding:7px 9px; text-align:right;}
+  table.simple th{background:#F0E9D3;}
+
+  table.cheat{width:100%; border-collapse:collapse; margin:14px 0; font-size:14px;}
+  table.cheat th,table.cheat td{border:1px solid var(--blue-line); padding:9px 11px; text-align:right; vertical-align:top;}
+  table.cheat th{background:var(--blue-bg); color:var(--navy);}
+  table.cheat td.formula-cell{font-family:'JetBrains Mono',monospace; direction:ltr; text-align:left; font-weight:600; color:var(--teal);}
+
+  .q{background:#fff; border:1px solid var(--purple-line); border-radius:14px; padding:16px 18px; margin:14px 0;}
+  .q-head{display:flex; gap:10px; align-items:center; margin-bottom:8px; flex-wrap:wrap;}
+  .diff-badge{font-size:10.5px; padding:3px 11px; border-radius:12px; color:#fff; font-family:'JetBrains Mono',monospace;}
+  .easy{background:var(--green);} .medium{background:#C08A2E;} .hard{background:var(--red);}
+  .q .en{direction:ltr; text-align:left; display:block; width:100%;}
+  .q ol{margin:8px 0; padding-left:22px;} .q ol li{margin-bottom:4px;}
+  details{margin-top:8px;}
+  summary{cursor:pointer; font-weight:700; color:var(--purple); font-size:13.5px;}
+  .sol{background:var(--purple-bg); border-radius:10px; padding:11px 15px; margin-top:8px; font-size:14px;}
+  .sol h6{margin:7px 0 3px; font-size:12px; color:var(--ink-soft);} .sol h6:first-child{margin-top:0;}
+  .sol .step{border-right-color:var(--purple);}
+  .sol .step .step-num{color:var(--purple);}
+
+  hr{border:none; border-top:1px solid var(--dot); margin:44px 0;}
+  .diagrow{display:flex; gap:18px; justify-content:center; flex-wrap:wrap;}
+  .diag-item{text-align:center; width:150px;}
+  .diag-item .lbl{font-weight:700; margin-top:8px; font-size:14px;}
+  .footer-nav{display:flex; justify-content:space-between; padding:0 22px; color:var(--ink-soft); font-size:13px;}
+  .fill-note{background:#fff; border:1px dashed var(--gold); border-radius:12px; padding:12px 16px; font-size:13.5px; color:var(--ink-soft); margin:16px 0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#ch1">فصل ۱ · مدل ذره‌ای و حالت‌های ماده</a>
+  <a href="#ch2">فصل ۲ · تبدیلات شیمیایی</a>
+  <a href="#ch3">فصل ۳ · خواص ماکروسکوپیک</a>
+  <a href="#ch4">فصل ۴ · مخلوط‌ها و جداسازی</a>
+  <a href="#ch5">فصل ۵ · قوانین بنیادی</a>
+  <a href="#summary">جمع‌بندی کلی</a>
+  <a href="#cheatsheet">چیت‌شیت فرمول‌ها</a>
+</nav>
+
+<div class="page">
+
+  <div class="master-hero">
+    <span class="badge">CEnT Chemistry Preparation — واحد ۱ (خواص ماکروسکوپیک ماده)</span>
+    <h1>پنج فصل مستقل: از ذره تا قانون</h1>
+    <p>این نسخه از صفر شروع می‌کنه — هیچ پیش‌فرضی درباره‌ی دانسته‌های قبلیت نداریم. هر مفهوم قدم‌به‌قدم ساخته می‌شه، و هر مثال هم قدم‌به‌قدم حل می‌شه تا بتونی دقیقاً دنبالش کنی.</p>
+  </div>
+
+  <div class="content">
+
+    <div class="fill-note">
+      📌 با مقایسه‌ی این محتوا با سرفصل رسمی <span class="en">CEnT</span>، یک قانون بنیادی کم بود: <strong>قانون گای-لوساک (حجم‌های ترکیبی)</strong>. چون دیگه فایل منبعی در کار نیست، این قانون از دانش عمومی شیمی و مطابق با سرفصل رسمی اضافه شده — در فصل ۵ می‌بینیش.
+    </div>
+
+    <!-- =========================================================== -->
+    <!-- CHAPTER 1 -->
+    <!-- =========================================================== -->
+    <div class="chapter-hero ch1" id="ch1">
+      <span class="badge">فصل ۱</span>
+      <h2>مدل ذره‌ای ماده، حالت‌های ماده و تغییرات فیزیکی</h2>
+      <p><span class="en">Particle Model of Matter · States of Matter · Phase Changes</span></p>
+    </div>
+
+    <h3 class="section-title">🎯 اهداف یادگیری</h3>
+    <ul>
+      <li>رفتار فیزیکی مواد رو با مدل ذره‌ای (انرژی جنبشی در برابر نیروهای بین‌ذره‌ای) توضیح بدی.</li>
+      <li>ویژگی‌های جامد، مایع و گاز رو از روی چیدمان ذره‌هاشون پیش‌بینی کنی.</li>
+      <li>نمودار دما-گرما رو بخونی و تشخیص بدی هر بخشش مربوط به کدوم تغییر حالته.</li>
+    </ul>
+
+    <div class="box concept">
+      <div class="box-label"><span class="dot"></span> مفاهیم اصلی — از صفر شروع می‌کنیم</div>
+
+      <p><span class="step-lbl">قدم ۱ — ماده از چی ساخته شده؟</span><br>
+      به هر چیزی که دور و برت می‌بینی نگاه کن: میز، آب توی لیوان، هوایی که نفس می‌کشی. همه‌ی این‌ها رو دانشمندا «ماده» <span class="en">(matter)</span> می‌نامن. حالا سؤال اصلی اینه: اگه بتونیم ماده رو خیلی خیلی زیاد بزرگ‌نمایی کنیم (بیشتر از قوی‌ترین میکروسکوپ‌ها)، چی می‌بینیم؟ جواب: می‌بینیم که ماده از تعداد بی‌شماری ذره‌ی خیلی خیلی کوچیک ساخته شده — این ذره‌ها رو اتم، مولکول یا یون می‌نامیم (فرقشون رو توی فصل‌های بعدی دقیق یاد می‌گیریم). فعلاً همین‌قدر کافیه: <strong>هر چیزی = تعداد زیادی ذره‌ی خیلی ریز.</strong></p>
+
+      <p><span class="step-lbl">قدم ۲ — این ذره‌ها ساکن نیستن</span><br>
+      نکته‌ی مهم بعدی اینه که این ذره‌ها هیچ‌وقت کاملاً ساکن نمی‌مونن — همیشه در حال حرکتن. حتی توی یه سنگ که کاملاً بی‌حرکت به‌نظر می‌رسه، ذره‌های داخلش دارن سرجاشون می‌لرزن. به این انرژی حرکتی، «انرژی جنبشی» <span class="en">(Kinetic Energy)</span> می‌گیم. هرچی ذره‌ها سریع‌تر حرکت کنن، انرژی جنبشیشون بیشتره.</p>
+
+      <p><span class="step-lbl">قدم ۳ — یه کشمکش بین دو نیرو</span><br>
+      حالا تصور کن دو نیرو دارن با هم کشمکش می‌کنن:</p>
+      <table class="simple">
+        <tr><th>نیرو</th><th>کارش چیه</th><th>وقتی زیاد بشه چی می‌شه</th></tr>
+        <tr><td>انرژی جنبشی</td><td>ذره‌ها رو تند و پُرتحرک می‌کنه، سعی می‌کنه از هم دورشون کنه</td><td>ذره‌ها بی‌قرارتر می‌شن و می‌خوان آزاد باشن</td></tr>
+        <tr><td>نیروی بین‌ذره‌ای <span class="en">(Interparticle Forces)</span></td><td>ذره‌ها رو مثل آهنربا به هم می‌چسبونه</td><td>ذره‌ها به هم نزدیک و منظم می‌مونن</td></tr>
+      </table>
+      <p>هر ماده‌ای، بسته به اینکه کدوم طرف این کشمکش برنده باشه، به شکل جامد، مایع یا گاز درمیاد — همین چیزیه که توی قدم بعد می‌بینیم.</p>
+
+      <p><span class="step-lbl">قدم ۴ — دما دقیقاً چیه؟</span><br>
+      حالا که فهمیدیم ذره‌ها انرژی جنبشی دارن، می‌تونیم دما رو دقیق تعریف کنیم: <strong>دما، میانگینِ انرژی جنبشیِ کل ذره‌های یه ماده‌ست.</strong> توجه کن گفتیم «میانگین» — یعنی توی یه لیوان آب، بعضی مولکول‌ها تندتر و بعضی کندتر حرکت می‌کنن؛ دما فقط میانگین همه‌ی این سرعت‌ها رو نشون می‌ده، نه سرعت یه مولکول خاص.</p>
+
+      <p><span class="step-lbl">دام رایج:</span> گرما و دما رو با هم قاطی نکن! <strong>گرما</strong> انرژی‌ایه که از جایی به جای دیگه منتقل می‌شه (مثل انتقال گرما از شعله به قابلمه). <strong>دما</strong> فقط یه عدد نشون‌دهنده‌ی میانگین انرژی جنبشیه. دو جسم می‌تونن گرمای یکسان جذب کنن ولی به دماهای متفاوت برسن.</p>
+    </div>
+
+    <div class="visual">
+      <div class="diagrow">
+        <div class="diag-item">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <rect x="2" y="2" width="96" height="96" rx="8" fill="#EAF2FA" stroke="#C9DDEF"/>
+            <g fill="#2E6DA4">
+              <circle cx="20" cy="20" r="6"/><circle cx="50" cy="20" r="6"/><circle cx="80" cy="20" r="6"/>
+              <circle cx="20" cy="50" r="6"/><circle cx="50" cy="50" r="6"/><circle cx="80" cy="50" r="6"/>
+              <circle cx="20" cy="80" r="6"/><circle cx="50" cy="80" r="6"/><circle cx="80" cy="80" r="6"/>
+            </g>
+          </svg>
+          <div class="lbl">جامد <span class="en">Solid</span></div>
+          <div style="font-size:12px; color:var(--ink-soft);">نیروی بین‌ذره‌ای برنده‌ست</div>
+        </div>
+        <div class="diag-item">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <rect x="2" y="2" width="96" height="96" rx="8" fill="#E7F7EE" stroke="#BFE6D2"/>
+            <g fill="#2F8F5B">
+              <circle cx="22" cy="28" r="6"/><circle cx="48" cy="22" r="6"/><circle cx="74" cy="30" r="6"/>
+              <circle cx="30" cy="52" r="6"/><circle cx="58" cy="48" r="6"/><circle cx="80" cy="58" r="6"/>
+              <circle cx="18" cy="76" r="6"/><circle cx="46" cy="78" r="6"/><circle cx="70" cy="72" r="6"/>
+            </g>
+          </svg>
+          <div class="lbl">مایع <span class="en">Liquid</span></div>
+          <div style="font-size:12px; color:var(--ink-soft);">تقریباً مساوی — تعادل شکننده</div>
+        </div>
+        <div class="diag-item">
+          <svg viewBox="0 0 100 100" width="100" height="100">
+            <rect x="2" y="2" width="96" height="96" rx="8" fill="#FCEBE9" stroke="#F0C6C0"/>
+            <g fill="#C0392B">
+              <circle cx="12" cy="15" r="5"/><circle cx="60" cy="10" r="5"/><circle cx="88" cy="35" r="5"/>
+              <circle cx="35" cy="55" r="5"/><circle cx="70" cy="70" r="5"/><circle cx="15" cy="85" r="5"/>
+              <circle cx="90" cy="90" r="5"/>
+            </g>
+          </svg>
+          <div class="lbl">گاز <span class="en">Gas</span></div>
+          <div style="font-size:12px; color:var(--ink-soft);">انرژی جنبشی برنده‌ست</div>
+        </div>
+      </div>
+      <div class="cap">شکل ۱ — نتیجه‌ی همون کشمکش قدم ۳: هر چی انرژی جنبشی بیشتر بر نیروی بین‌ذره‌ای غلبه کنه، ذره‌ها آزادتر و پراکنده‌ترن.</div>
+    </div>
+
+    <div class="box concept">
+      <div class="box-label"><span class="dot"></span> حالا بیایم سه حالت رو دقیق تعریف کنیم</div>
+      <p><span class="step-lbl">جامد:</span> اینجا نیروی بین‌ذره‌ای برنده‌ست. ذره‌ها اونقدر محکم نگه داشته شدن که فقط می‌تونن سرجاشون بلرزن، نمی‌تونن جابه‌جا بشن. نتیجه: جامد شکل ثابت داره، حجم ثابت داره، و چگالی بالایی داره (چون ذره‌ها فشرده کنار هم‌ان).</p>
+      <p><span class="step-lbl">مایع:</span> اینجا انرژی جنبشی به‌اندازه‌ای هست که ذره‌ها بتونن از کنار هم رد بشن و سُر بخورن، ولی نیروی بین‌ذره‌ای هنوز اونقدر قویه که نذاره کاملاً از هم جدا بشن. نتیجه: مایع جاری می‌شه، شکل ظرفشو می‌گیره، ولی حجمش ثابت می‌مونه.</p>
+      <p><span class="step-lbl">گاز:</span> اینجا انرژی جنبشی کاملاً برنده‌ست. ذره‌ها اونقدر سریع حرکت می‌کنن که عملاً نیروی بین‌ذره‌ای رو نادیده می‌گیرن و آزادانه و تصادفی به هر طرف می‌رن. نتیجه: گاز هر حجمی که در اختیارش باشه رو کامل پُر می‌کنه و به‌راحتی فشرده می‌شه.</p>
+      <table class="simple">
+        <tr><th>حالت</th><th>چیدمان ذره‌ها</th><th>نتیجه‌ی عملی</th></tr>
+        <tr><td>جامد</td><td>در جای ثابت شبکه‌ای می‌لرزن</td><td>چگالی بالا، تراکم‌ناپذیر، شکل و حجم ثابت</td></tr>
+        <tr><td>مایع</td><td>از کنار هم رد می‌شن، نزدیک هم می‌مونن</td><td>جاری می‌شه، شکل ظرف رو می‌گیره، حجم ثابت</td></tr>
+        <tr><td>گاز</td><td>تصادفی و پرسرعت، فاصله‌ی زیاد بین ذره‌ها</td><td>خیلی تراکم‌پذیر، هر حجمی رو پر می‌کنه</td></tr>
+      </table>
+    </div>
+
+    <div class="box concept">
+      <div class="box-label"><span class="dot"></span> حالا: وقتی ماده از حالتی به حالت دیگه می‌ره چه اتفاقی می‌افته؟</div>
+      <p><span class="step-lbl">قدم ۱ — چرا یخ ذوب می‌شه؟</span><br>
+      وقتی به یخ گرما می‌دیم، این گرما به مولکول‌های آب انرژی می‌ده و باعث می‌شه سریع‌تر بلرزن. اگه اونقدر گرما بدیم که این لرزش‌ها بتونن نیروی بین‌ذره‌ای رو بشکنن، مولکول‌ها دیگه نمی‌تونن سرجای ثابتشون بمونن و شروع می‌کنن به سُرخوردن روی هم — این یعنی یخ آب شده.</p>
+      <p><span class="step-lbl">قدم ۲ — نکته‌ی عجیب: دما در طول ذوب ثابت می‌مونه!</span><br>
+      شاید فکر کنی وقتی داریم مدام گرما اضافه می‌کنیم، دما هم باید مدام بالا بره. ولی دقیقاً وسط ذوب‌شدن، دما ثابت می‌مونه (مثلاً روی صفر درجه برای آب). چرا؟ چون در این لحظه، تمام گرمای اضافه‌شده صرف <strong>شکستن نیروی بین‌ذره‌ای</strong> می‌شه، نه اینکه سرعت ذره‌ها (= انرژی جنبشی = دما) رو بالا ببره. فقط وقتی همه‌ی یخ کاملاً آب شد، دما دوباره شروع به بالارفتن می‌کنه.</p>
+      <p><span class="step-lbl">قدم ۳ — همین قانون برای جوشیدن هم صادقه</span><br>
+      دقیقاً همین اتفاق موقع جوشیدن آب هم می‌افته: دما روی ۱۰۰ درجه ثابت می‌مونه تا وقتی همه‌ی آب کاملاً بخار بشه، چون گرما داره نیروی بین‌ذره‌ای رو می‌شکنه، نه دما رو بالا می‌بره.</p>
+    </div>
+
+    <div class="box formula">
+      <div class="box-label"><span class="dot"></span> 🧪 فرمول — گرمای تغییر حالت</div>
+      <p class="en" style="font-size:17px; font-weight:700;">Q = mL</p>
+      <table class="simple">
+        <tr><th>نماد</th><th>معنی</th><th>واحد</th></tr>
+        <tr><td class="en">Q</td><td>گرمای جذب یا آزادشده در طول تغییر حالت</td><td class="en">J</td></tr>
+        <tr><td class="en">m</td><td>جرم ماده</td><td class="en">g</td></tr>
+        <tr><td class="en">L</td><td>گرمای نهان (ذوب یا تبخیر) — انرژی لازم برای تغییر حالت هر گرم از ماده</td><td class="en">J/g</td></tr>
+      </table>
+      <p><strong>شرط استفاده:</strong> فقط وقتی دما ثابته و دو حالت هم‌زمان حضور دارن (مثل بخش صاف نمودار). برای تغییر دما داخل یه حالت (مثلاً آب از ۲۰ به ۸۰ درجه)، به‌جاش از <span class="en">Q = mcΔT</span> استفاده می‌کنیم (ظرفیت گرمایی ویژه).</p>
+    </div>
+
+    <div class="visual">
+      <svg viewBox="0 0 340 160" width="100%" height="160" style="max-width:480px;">
+        <line x1="30" y1="140" x2="330" y2="140" stroke="#5B6259" stroke-width="1.5"/>
+        <line x1="30" y1="140" x2="30" y2="10" stroke="#5B6259" stroke-width="1.5"/>
+        <polyline points="30,130 70,90 130,90 170,55 230,55 270,20" fill="none" stroke="#2F7A6F" stroke-width="3"/>
+        <text x="5" y="95" font-size="10" fill="#5B6259">دما</text>
+        <text x="280" y="152" font-size="10" fill="#5B6259">گرما ←</text>
+        <text x="80" y="85" font-size="9" fill="#C0392B">ذوب (صاف)</text>
+        <text x="175" y="50" font-size="9" fill="#C0392B">جوش (صاف)</text>
+        <circle cx="70" cy="90" r="3" fill="#2F7A6F"/><circle cx="130" cy="90" r="3" fill="#2F7A6F"/>
+        <circle cx="170" cy="55" r="3" fill="#2F7A6F"/><circle cx="230" cy="55" r="3" fill="#2F7A6F"/>
+      </svg>
+      <div class="cap">شکل ۲ — نمودار گرمایش آب. بخش‌های صاف دقیقاً همون‌جاهاییه که در قدم ۲ و ۳ توضیح دادیم: دما ثابت، چون گرما داره نیروی بین‌ذره‌ای رو می‌شکنه.</div>
+    </div>
+
+    <h4 class="sub-title">مثال‌های حل‌شده — قدم‌به‌قدم</h4>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال ۱</div>
+      <div class="inner"><p class="en">How much heat is required to melt 50 g of ice at 0°C into water at 0°C? (L<sub>f</sub> = 334 J/g)</p></div>
+      <div class="step"><span class="step-num">قدم ۱ — چی داریم؟</span><br><span class="en">m = 50 g</span>، <span class="en">L_f = 334 J/g</span>، و دما از اول تا آخر روی صفر درجه ثابته.</div>
+      <div class="step"><span class="step-num">قدم ۲ — چی می‌خوایم؟</span><br>گرمای لازم <span class="en">(Q)</span> برای این تغییر حالت.</div>
+      <div class="step"><span class="step-num">قدم ۳ — کدوم فرمول؟</span><br>چون دما ثابته و داریم تغییر حالت می‌دیم (نه گرم‌شدن ساده)، باید از <span class="en">Q = mL</span> استفاده کنیم.</div>
+      <div class="step"><span class="step-num">قدم ۴ — جایگذاری و محاسبه</span><br><span class="en">Q = mL = (50)(334) = 16,700 J</span></div>
+      <div class="solid en">Final Answer: Q = 16,700 J</div>
+    </div>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال ۲</div>
+      <div class="inner"><p class="en">A sample of liquid water is heated from 20°C to 60°C without boiling. Is this a physical or chemical change, and why?</p></div>
+      <div class="step"><span class="step-num">قدم ۱ — چی داریم؟</span><br>آب مایع از ۲۰ درجه به ۶۰ درجه گرم می‌شه، بدون اینکه بجوشه.</div>
+      <div class="step"><span class="step-num">قدم ۲ — آیا از یه مرز فاز عبور کردیم؟</span><br>نه — آب در کل این بازه (۲۰ تا ۶۰ درجه) مایع باقی می‌مونه؛ نه به یخ تبدیل شده نه بخار.</div>
+      <div class="step"><span class="step-num">قدم ۳ — پس چه اتفاقی افتاده؟</span><br>طبق قدم ۴ بخش مفاهیم اصلی، فقط انرژی جنبشی مولکول‌های آب بالا رفته (سریع‌تر حرکت می‌کنن)، ولی هیچ فرمول شیمیایی جدیدی به‌وجود نیومده.</div>
+      <div class="solid en">Final Answer: Physical change — kinetic energy increases; the substance remains liquid H₂O throughout.</div>
+    </div>
+
+    <div class="box tip">
+      <div class="box-label"><span class="dot"></span> ⚡ روش سریع</div>
+      <p>روی هر نمودار گرمایش، بخش صاف = تغییر حالت. عرض بخش صاف با گرمای نهان اون تغییر حالت متناسبه — بدون هیچ محاسبه‌ای می‌تونی گرمای نهان‌ها رو مقایسه کنی.</p>
+    </div>
+
+    <h4 class="sub-title">📝 تمرین اختصاصی فصل ۱</h4>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge easy">🟢 EASY</span><strong>Q1</strong></div>
+      <div class="en"><p>Temperature is best described as a measure of:</p>
+      <ol type="A"><li>The total energy of a substance</li><li>The average kinetic energy of a substance's particles</li><li>The mass of a substance's particles</li><li>The pressure exerted by a substance</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>دما، طبق تعریف قدم ۴، میانگین انرژی جنبشی ذره‌هاست — نه انرژی کل، نه جرم، نه فشار.</div><h6>پاسخ نهایی</h6><p><strong class="en">B.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge medium">🟡 MEDIUM</span><strong>Q2</strong></div>
+      <div class="en"><p>How much heat is needed to vaporize 15 g of water already at 100°C? (L<sub>v</sub> = 2260 J/g)</p>
+      <ol type="A"><li>150.7 J</li><li>1507 J</li><li>15,070 J</li><li>33,900 J</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol">
+        <div class="step"><span class="step-num">قدم ۱</span><br>دما ثابت روی ۱۰۰ درجه‌ست، پس تغییر حالته → از <span class="en">Q = mL</span> استفاده می‌کنیم.</div>
+        <div class="step"><span class="step-num">قدم ۲</span><br class="en"><span class="en">Q = mL = (15)(2260) = 33,900 J</span></div>
+        <h6>پاسخ نهایی</h6><p><strong class="en">D.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge hard">🔴 HARD</span><strong>Q3</strong></div>
+      <div class="en"><p>On a heating curve for a pure substance, the plateau at the boiling point is much wider than the plateau at the melting point. What does this indicate?</p>
+      <ol type="A"><li>The substance has a higher mass during boiling</li><li>The latent heat of vaporization is greater than the latent heat of fusion</li><li>The substance is impure</li><li>The heating rate changed</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>عرض بخش صاف، مستقیماً با انرژی موردنیاز برای اون تغییر حالت (یعنی گرمای نهانش) متناسبه — پهن‌تر یعنی انرژی بیشتری لازم بوده.</div><h6>پاسخ نهایی</h6><p><strong class="en">B.</strong></p></div></details>
+    </div>
+
+    <hr>
+
+    <!-- =========================================================== -->
+    <!-- CHAPTER 2 -->
+    <!-- =========================================================== -->
+    <div class="chapter-hero ch2" id="ch2">
+      <span class="badge">فصل ۲</span>
+      <h2>تبدیلات شیمیایی: تغییر فیزیکی در برابر شیمیایی</h2>
+      <p><span class="en">Physical vs Chemical Change</span></p>
+    </div>
+
+    <div class="box concept">
+      <div class="box-label"><span class="dot"></span> مفاهیم اصلی — از صفر شروع می‌کنیم</div>
+
+      <p><span class="step-lbl">قدم ۱ — دو نوع «تغییر» در دنیای ماده</span><br>
+      وقتی به یه ماده نگاه می‌کنی و می‌بینی چیزی عوض شده، این تغییر همیشه یکی از این دو نوعه: یا فقط «شکل ظاهری» عوض شده (تغییر فیزیکی)، یا خود «هویت شیمیایی» ماده کاملاً عوض شده و یه ماده‌ی کاملاً جدید به‌وجود اومده (تغییر شیمیایی).</p>
+
+      <p><span class="step-lbl">قدم ۲ — تغییر فیزیکی یعنی چی دقیقاً؟</span><br>
+      در تغییر فیزیکی، مولکول‌های ماده دست‌نخورده باقی می‌مونن — فقط چیدمانشون یا حالتشون (جامد/مایع/گاز) عوض می‌شه. مثال: وقتی یخ آب می‌شه، هنوز مولکول <span class="en">H₂O</span> داریم، فقط چیدمانشون فرق کرده. وقتی کاغذ رو تیکه‌تیکه می‌کنی، هنوز همون کاغذه، فقط اندازه‌ش کوچیک‌تر شده.</p>
+
+      <p><span class="step-lbl">قدم ۳ — تغییر شیمیایی یعنی چی دقیقاً؟</span><br>
+      در تغییر شیمیایی، پیوندهای بین اتم‌ها می‌شکنن و اتم‌ها دوباره کنار هم می‌شینن تا مولکول‌های کاملاً جدیدی بسازن. مثال: وقتی آهن زنگ می‌زنه، اتم‌های آهن با اکسیژن هوا ترکیب می‌شن و یه ماده‌ی جدید به‌نام اکسید آهن می‌سازن — این ماده‌ی جدید، دیگه خواص آهن رو نداره (مثلاً سفت و براق نیست، بلکه شکننده و قهوه‌ای‌رنگه).</p>
+
+      <p><span class="step-lbl">قدم ۴ — چطور تشخیص بدیم کدوم اتفاق افتاده؟</span><br>
+      تنها آزمون قابل‌اعتماد اینه: <strong>آیا یه ماده‌ی جدید با فرمول شیمیایی جدید تشکیل شده؟</strong> اگه بله → شیمیایی. اگه نه، فقط شکل/حالت عوض شده → فیزیکی. نکته‌ی مهم: نباید فقط به ظاهر اعتماد کنیم! حل‌شدن شکر توی چای، ظاهرش رو کاملاً عوض می‌کنه (شکر دیگه دیده نمی‌شه) ولی مولکول‌های شکر دست‌نخورده‌ن — پس فیزیکیه.</p>
+
+      <p><span class="step-lbl">قدم ۵ — نشانه‌هایی که کمک می‌کنن تشخیص بدیم</span><br>
+      چون نمی‌تونیم همیشه مستقیم فرمول شیمیایی رو ببینیم، این نشونه‌ها معمولاً به تغییر شیمیایی اشاره می‌کنن:</p>
+      <ul>
+        <li>تولید گاز (حباب‌زدن، بدون اینکه منبع گرمای بیرونی وجود داشته باشه)</li>
+        <li>تشکیل رسوب (یه جامد جدید ناگهان از دو مایع شفاف ظاهر بشه)</li>
+        <li>آزاد یا جذب‌شدن انرژی به‌شکل گرما یا نور</li>
+        <li>تغییر رنگ غیرمنتظره و بدون دلیل فیزیکی روشن</li>
+      </ul>
+      <p><strong>دام رایج:</strong> این نشونه‌ها فقط «راهنما»ن، نه «قانون قطعی». آب جوشیدن هم حباب می‌زنه ولی فیزیکیه (هنوز <span class="en">H₂O</span>). برخی واکنش‌های شیمیایی هم هیچ نشونه‌ی ظاهری ندارن.</p>
+    </div>
+
+    <div class="visual">
+      <div class="diagrow">
+        <div class="diag-item">
+          <svg viewBox="0 0 100 80" width="120" height="96">
+            <rect x="5" y="5" width="90" height="70" rx="10" fill="#E7F7EE" stroke="#BFE6D2"/>
+            <text x="50" y="35" text-anchor="middle" font-size="11" fill="#2F8F5B">H₂O (s)</text>
+            <text x="50" y="55" text-anchor="middle" font-size="16" fill="#2F8F5B">↓</text>
+          </svg>
+          <div class="lbl" style="font-size:12px;">ذوب یخ → آب <span class="en">(still H₂O)</span></div>
+        </div>
+        <div class="diag-item">
+          <svg viewBox="0 0 100 80" width="120" height="96">
+            <rect x="5" y="5" width="90" height="70" rx="10" fill="#FCEBE9" stroke="#F0C6C0"/>
+            <text x="50" y="30" text-anchor="middle" font-size="10" fill="#C0392B" class="en">Fe + O₂</text>
+            <text x="50" y="48" text-anchor="middle" font-size="14" fill="#C0392B">↓</text>
+            <text x="50" y="66" text-anchor="middle" font-size="10" fill="#C0392B" class="en">Fe₂O₃</text>
+          </svg>
+          <div class="lbl" style="font-size:12px;">زنگ‌زدن آهن → ماده‌ی جدید</div>
+        </div>
+      </div>
+      <div class="cap">شکل ۳ — در سمت چپ فرمول ثابت می‌مونه (فیزیکی)؛ در سمت راست فرمول عوض می‌شه (شیمیایی).</div>
+    </div>
+
+    <h4 class="sub-title">مثال‌های حل‌شده — قدم‌به‌قدم</h4>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال ۱</div>
+      <div class="inner"><p class="en">A silver spoon left in air slowly turns black. Is this a physical or chemical change?</p></div>
+      <div class="step"><span class="step-num">قدم ۱</span><br>قاشق نقره در هوا سیاه می‌شه.</div>
+      <div class="step"><span class="step-num">قدم ۲ — چرا سیاه شده؟</span><br>نقره با گوگرد موجود در هوا (که مقدار کمی همیشه هست) واکنش می‌ده.</div>
+      <div class="step"><span class="step-num">قدم ۳ — آیا ماده‌ی جدیدی ساخته شده؟</span><br>بله — سولفید نقره <span class="en">(Ag₂S)</span>، که رنگ سیاه داره و فرمول شیمیایی کاملاً متفاوتی از نقره‌ی خالص داره.</div>
+      <div class="solid en">Final Answer: Chemical change — a new substance (silver sulfide) forms.</div>
+    </div>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال ۲</div>
+      <div class="inner"><p class="en">Sugar is stirred into hot tea and disappears from view. Is this a physical or chemical change?</p></div>
+      <div class="step"><span class="step-num">قدم ۱</span><br>شکر توی چای داغ حل می‌شه و دیگه دیده نمی‌شه.</div>
+      <div class="step"><span class="step-num">قدم ۲ — آیا فرمول شکر عوض شده؟</span><br>نه. مولکول‌های ساکارز فقط بین مولکول‌های آب پخش شدن، ولی هنوز همون مولکول ساکارزن.</div>
+      <div class="step"><span class="step-num">قدم ۳ — پس چرا دیگه دیده نمی‌شه؟</span><br>چون اندازه‌ی مولکول‌ها اونقدر کوچیکه که چشم نمی‌تونه ببینتشون وقتی به‌طور یکنواخت پخش شدن — این یه پدیده‌ی فیزیکیه (حل‌شدن)، نه شیمیایی.</div>
+      <div class="solid en">Final Answer: Physical change — dissolving does not alter the sugar's chemical formula.</div>
+    </div>
+
+    <div class="box trap">
+      <div class="box-label"><span class="dot"></span> 🪤 دام سؤال</div>
+      <p>«آب که می‌جوشه» بین گزینه‌های تغییر شیمیایی گذاشته می‌شه چون حباب می‌زنه. اما ماده قبل و بعد <span class="en">H₂O</span> است — فقط حالتش عوض شده.</p>
+    </div>
+
+    <h4 class="sub-title">📝 تمرین اختصاصی فصل ۲</h4>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge easy">🟢 EASY</span><strong>Q1</strong></div>
+      <div class="en"><p>Which is a chemical change?</p>
+      <ol type="A"><li>Melting butter</li><li>Tearing paper</li><li>Burning paper</li><li>Freezing juice</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>سوختن کاغذ، خاکستر و گازهای جدید (مثل <span class="en">CO₂</span>) تولید می‌کنه — فرمول کاملاً عوض شده. بقیه‌ی گزینه‌ها فقط حالت/شکل رو عوض می‌کنن.</div><h6>پاسخ نهایی</h6><p><strong class="en">C.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge medium">🟡 MEDIUM</span><strong>Q2</strong></div>
+      <div class="en"><p>Which observation is the WEAKEST evidence of a chemical change on its own?</p>
+      <ol type="A"><li>A new insoluble solid appears in a clear solution</li><li>The mixture's color changes for no obvious physical reason</li><li>The container simply feels warmer</li><li>A gas is released with no external heating applied</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>گرم‌شدن به‌تنهایی می‌تونه دلایل فیزیکی ساده‌ای هم داشته باشه (مثل حل‌شدن گرمازا)؛ بقیه‌ی گزینه‌ها شواهد قوی‌تری‌ان.</div><h6>پاسخ نهایی</h6><p><strong class="en">C.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge hard">🔴 HARD</span><strong>Q3</strong></div>
+      <div class="en"><p>Two colorless solutions are mixed. The result is still perfectly colorless and no bubbles or precipitate appear. Which is the most accurate conclusion?</p>
+      <ol type="A"><li>No chemical change occurred</li><li>A chemical change definitely occurred</li><li>The absence of visible signs does not rule out a chemical change</li><li>The solutions must be identical</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>برخی واکنش‌های شیمیایی (مثل خنثی‌سازی اسید-باز شفاف) هیچ نشانه‌ی ظاهری ندارن. نبود نشانه، دلیل قطعی بر نبود واکنش نیست.</div><h6>پاسخ نهایی</h6><p><strong class="en">C.</strong></p></div></details>
+    </div>
+
+    <hr>
+
+    <!-- =========================================================== -->
+    <!-- CHAPTER 3 -->
+    <!-- =========================================================== -->
+    <div class="chapter-hero ch3" id="ch3">
+      <span class="badge">فصل ۳</span>
+      <h2>خواص ماکروسکوپیک گازها، مایعات و جامدات</h2>
+      <p><span class="en">Macroscopic Properties: Compressibility, Diffusibility, Surface Tension</span></p>
+    </div>
+
+    <div class="box concept">
+      <div class="box-label"><span class="dot"></span> مفاهیم اصلی — از صفر شروع می‌کنیم</div>
+
+      <p><span class="step-lbl">قدم ۱ — «ماکروسکوپیک» یعنی چی؟</span><br>
+      «ماکروسکوپیک» یعنی چیزی که با چشم عادی (بدون میکروسکوپ) قابل‌مشاهده و قابل‌اندازه‌گیریه. در فصل ۱ درباره‌ی ذره‌های خیلی ریز (میکروسکوپیک) صحبت کردیم؛ حالا می‌خوایم ببینیم رفتار همون ذره‌های ریز، چطور روی رفتار قابل‌مشاهده‌ی ماده (مثلاً چقدر راحت فشرده می‌شه) اثر می‌ذاره.</p>
+
+      <p><span class="step-lbl">قدم ۲ — تراکم‌پذیری چیه؟</span><br>
+      «تراکم‌پذیری» <span class="en">(Compressibility)</span> یعنی اینکه چقدر راحت می‌شه حجم یه ماده رو با فشار کم کرد. حالا فکر کن: توی یه گاز، فاصله‌ی بین ذره‌ها خیلی خیلی بیشتر از خود ذره‌هاست — یعنی بیشتر حجم گاز، در واقع «فضای خالی» است. وقتی فشار می‌دیم، این فضای خالی جمع می‌شه و حجم به‌شدت کم می‌شه. اما توی مایع یا جامد، ذره‌ها از قبل تقریباً بهم چسبیده‌ن و فضای خالی تقریباً صفره — پس هرچقدر فشار بدیم، تقریباً نمی‌تونیم بیشتر جمعشون کنیم.</p>
+
+      <p><span class="step-lbl">قدم ۳ — نفوذپذیری چیه؟</span><br>
+      «نفوذپذیری» <span class="en">(Diffusibility)</span> یعنی چقدر راحت یه ماده در فضای موجود پخش می‌شه. ذره‌های گاز چون سریع حرکت می‌کنن و فاصله‌ی زیادی دارن، به‌سرعت در هر فضایی پخش می‌شن (مثل عطری که به‌سرعت توی اتاق پخش می‌شه). ذره‌های مایع کندتر پخش می‌شن چون شلوغ‌تر و کندترن. ذره‌های جامد عملاً پخش نمی‌شن چون سرجاشون قفلن.</p>
+
+      <p><span class="step-lbl">قدم ۴ — کشش سطحی چیه؟</span><br>
+      این یکی کمی متفاوته و فقط مخصوص مایعاته. تصور کن یه قطره آب: مولکول‌های داخلِ قطره از هر طرف توسط مولکول‌های اطرافشون کشیده می‌شن، پس نیروها متعادلن. اما مولکول‌های <em>سطح</em> قطره، فقط از پایین و کناره‌ها مولکول دارن (از بالا هوا هست، نه آب) — پس یه نیروی خالص به‌سمت پایین/داخل روشون اثر می‌ذاره. همین نیروی خالص باعث می‌شه سطح مایع مثل یه پرده‌ی کشیده‌شده رفتار کنه؛ به این پدیده «کشش سطحی» می‌گیم.</p>
+
+      <table class="simple">
+        <tr><th>ویژگی</th><th>تعریف</th><th>چرا (سطح ذره‌ای)</th></tr>
+        <tr><td>تراکم‌پذیری</td><td>کم‌شدن حجم زیر فشار</td><td>گاز فضای خالی زیاد داره؛ جامد/مایع ندارن</td></tr>
+        <tr><td>نفوذپذیری</td><td>پرکردن فضای موجود</td><td>گاز سریع و بی‌مانع حرکت می‌کنه</td></tr>
+        <tr><td>کشش سطحی</td><td>کمینه‌کردن سطح مایع</td><td>ذره‌های سطحی فقط از پایین کشیده می‌شن</td></tr>
+      </table>
+    </div>
+
+    <div class="visual">
+      <svg viewBox="0 0 300 90" width="100%" height="90" style="max-width:420px;">
+        <rect x="10" y="10" width="70" height="70" fill="#EAF2FA" stroke="#C9DDEF"/>
+        <circle cx="45" cy="45" r="30" fill="none" stroke="#2E6DA4" stroke-width="2" stroke-dasharray="3 3"/>
+        <text x="45" y="88" text-anchor="middle" font-size="9" fill="#5B6259">قبل از فشار</text>
+        <text x="130" y="48" font-size="16" fill="#5B6259">→</text>
+        <rect x="160" y="10" width="70" height="70" fill="#EAF2FA" stroke="#C9DDEF"/>
+        <circle cx="195" cy="45" r="14" fill="none" stroke="#2E6DA4" stroke-width="2" stroke-dasharray="3 3"/>
+        <text x="195" y="88" text-anchor="middle" font-size="9" fill="#5B6259">بعد از فشار (گاز)</text>
+      </svg>
+      <div class="cap">شکل ۴ — فضای خالی زیاد بین ذره‌های گاز، اجازه‌ی تراکم زیاد رو می‌ده؛ در جامد/مایع این فضا از قبل کمه.</div>
+    </div>
+
+    <h4 class="sub-title">مثال حل‌شده — قدم‌به‌قدم</h4>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال</div>
+      <div class="inner"><p class="en">Why can a gas be compressed into a much smaller container, while a liquid resists compression?</p></div>
+      <div class="step"><span class="step-num">قدم ۱ — فاصله‌ی ذره‌ها رو در دو حالت مقایسه کن</span><br>در گاز، فاصله‌ی بین ذره‌ها بارها بزرگ‌تر از اندازه‌ی خود ذره‌هاست. در مایع، ذره‌ها تقریباً بهم چسبیده‌ن.</div>
+      <div class="step"><span class="step-num">قدم ۲ — این فاصله موقع فشار چه نقشی داره؟</span><br>فشار فقط می‌تونه «فضای خالی» رو جمع کنه. گاز فضای خالی زیادی داره که بشه جمعش کرد؛ مایع تقریباً فضای خالی نداره.</div>
+      <div class="solid en">Final Answer: Gas particles have large empty space to lose under pressure; liquid particles are already close-packed.</div>
+    </div>
+
+    <div class="box tip">
+      <div class="box-label"><span class="dot"></span> ⭐ نکته امتحانی</div>
+      <p>هر سؤال مقایسه‌ای گاز/مایع/جامد رو به «چقدر فضای خالی هست» ترجمه کن — تقریباً همیشه جواب همینه.</p>
+    </div>
+
+    <h4 class="sub-title">📝 تمرین اختصاصی فصل ۳</h4>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge easy">🟢 EASY</span><strong>Q1</strong></div>
+      <div class="en"><p>Which property explains why perfume can be smelled across a room shortly after the bottle is opened?</p>
+      <ol type="A"><li>Surface tension</li><li>Diffusibility</li><li>Compressibility</li><li>Density</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>ذرات گازی عطر به‌سرعت در فضای اتاق پخش (نفوذ) می‌کنن — دقیقاً تعریف نفوذپذیری.</div><h6>پاسخ نهایی</h6><p><strong class="en">B.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge medium">🟡 MEDIUM</span><strong>Q2</strong></div>
+      <div class="en"><p>A water strider insect can walk on the surface of a pond without sinking. Which property is primarily responsible?</p>
+      <ol type="A"><li>Compressibility</li><li>Diffusibility</li><li>Surface tension</li><li>Boiling point</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>کشش سطحی، یه لایه‌ی «کشیده» روی سطح مایع می‌سازه که وزن سبک حشره رو تحمل می‌کنه.</div><h6>پاسخ نهایی</h6><p><strong class="en">C.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge hard">🔴 HARD</span><strong>Q3</strong></div>
+      <div class="en"><p>Why does increasing pressure have almost no effect on the volume of a liquid, unlike a gas?</p>
+      <ol type="A"><li>Liquids have stronger chemical bonds</li><li>Liquid particles are already nearly touching, leaving little empty space to remove</li><li>Liquids are always denser than gases</li><li>Pressure cannot act on liquids</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>گزینه‌ی <span class="en">A</span> نامربوطه (بحث پیوند شیمیایی نیست، بلکه فاصله‌ی فیزیکیه). <span class="en">C</span> و <span class="en">D</span> ادعاهای نادرست یا نامرتبط‌ان.</div><h6>پاسخ نهایی</h6><p><strong class="en">B.</strong></p></div></details>
+    </div>
+
+    <hr>
+
+    <!-- =========================================================== -->
+    <!-- CHAPTER 4 -->
+    <!-- =========================================================== -->
+    <div class="chapter-hero ch4" id="ch4">
+      <span class="badge">فصل ۴</span>
+      <h2>مخلوط‌های همگن و ناهمگن؛ روش‌های جداسازی</h2>
+      <p><span class="en">Homogeneous &amp; Heterogeneous Mixtures · Separation Methods</span></p>
+    </div>
+
+    <div class="box concept">
+      <div class="box-label"><span class="dot"></span> مفاهیم اصلی — از صفر شروع می‌کنیم</div>
+
+      <p><span class="step-lbl">قدم ۱ — مخلوط چیه؟</span><br>
+      وقتی دو یا چند ماده رو با هم قاطی می‌کنیم بدون اینکه واکنش شیمیایی بدن (یعنی هرکدوم هویت شیمیایی خودشون رو حفظ می‌کنن)، به این ترکیب می‌گیم «مخلوط». مثال: آب‌نمک یه مخلوطه چون هم مولکول‌های آب و هم یون‌های نمک هنوز همون‌ان که بودن.</p>
+
+      <p><span class="step-lbl">قدم ۲ — دو نوع مخلوط داریم</span><br>
+      حالا سؤال اینه: آیا اجزای مخلوط، در همه‌جای ظرف به یه شکل یکنواخت پخش شدن، یا نه؟</p>
+      <ul>
+        <li><strong>همگن <span class="en">(Homogeneous)</span>:</strong> اجزا اونقدر ریز و یکنواخت پخش شدن که حتی در سطح مولکولی هم نمی‌شه فرقشون رو دید. هر قسمتی که از مخلوط برداری، دقیقاً همون ترکیب رو داره. به این نوع مخلوط، «محلول» هم می‌گیم.</li>
+        <li><strong>ناهمگن <span class="en">(Heterogeneous)</span>:</strong> اجزا به‌شکل فازهای جدا از هم وجود دارن — یعنی حداقل اصولاً می‌شه با چشم یا ابزار ساده تشخیصشون داد یا از هم جداشون کرد.</li>
+      </ul>
+      <p><strong>دام رایج:</strong> «یکنواخت به‌نظررسیدن با چشم» با «همگن‌بودن واقعی» یکی نیست! شیر با چشم یکنواخت به‌نظر می‌رسه، ولی در واقع قطره‌های چربی توی آب معلقن — این یعنی شیر یه کلوئیده (نوعی مخلوط ناهمگن)، نه یه محلول واقعی. ملاک، یکنواختی در سطح <em>مولکولی</em> است، نه ظاهر چشمی.</p>
+
+      <p><span class="step-lbl">قدم ۳ — حالا چطور اجزای یه مخلوط رو از هم جدا کنیم؟</span><br>
+      نکته‌ی خیلی مهم: جداسازی همیشه از یه «تفاوت فیزیکی» بین اجزا استفاده می‌کنه — هیچ‌وقت از واکنش شیمیایی، چون واکنش شیمیایی ماده‌ی جدید می‌سازه، نه اینکه مواد اصلی رو دست‌نخورده جدا کنه. سه روش اصلی رو با هم می‌بینیم، هرکدوم بر پایه‌ی یه تفاوت فیزیکی خاص:</p>
+
+      <table class="simple">
+        <tr><th>روش</th><th>از چه تفاوتی استفاده می‌کنه؟</th><th>چطور کار می‌کنه؟</th></tr>
+        <tr><td>صافی‌کردن <span class="en">Filtration</span></td><td>اندازه‌ی ذره</td><td>یه مانع متخلخل (صافی) فقط ذره‌های بزرگ‌تر از سوراخ‌هاشو نگه می‌داره؛ ذره‌های کوچیک‌تر (مثل مولکول‌های حل‌شده) رد می‌شن</td></tr>
+        <tr><td>تقطیر <span class="en">Distillation</span></td><td>نقطه‌جوش</td><td>مخلوط رو گرم می‌کنیم؛ ماده‌ای که نقطه‌جوش پایین‌تری داره زودتر بخار می‌شه، بخارش رو جمع و سرد می‌کنیم تا دوباره مایع بشه</td></tr>
+        <tr><td>کروماتوگرافی</td><td>میزان تمایل به فاز ثابت (جامد) در برابر فاز متحرک (حلال)</td><td>ترکیباتی که به فاز ثابت تمایل بیشتری دارن کندتر حرکت می‌کنن، پس با فاصله از هم روی مسیر پخش می‌شن</td></tr>
+      </table>
+    </div>
+
+    <div class="visual">
+      <div class="diagrow">
+        <div class="diag-item">
+          <svg viewBox="0 0 100 100" width="110" height="110">
+            <circle cx="50" cy="50" r="46" fill="#EAF2FA" stroke="#C9DDEF" stroke-width="2"/>
+            <g fill="#2E6DA4">
+              <circle cx="30" cy="30" r="4"/><circle cx="50" cy="25" r="4"/><circle cx="70" cy="32" r="4"/>
+              <circle cx="28" cy="55" r="4"/><circle cx="50" cy="50" r="4"/><circle cx="72" cy="55" r="4"/>
+              <circle cx="32" cy="75" r="4"/><circle cx="50" cy="78" r="4"/><circle cx="68" cy="74" r="4"/>
+            </g>
+          </svg>
+          <div class="lbl" style="font-size:12px;">همگن <span class="en">Homogeneous</span></div>
+        </div>
+        <div class="diag-item">
+          <svg viewBox="0 0 100 100" width="110" height="110">
+            <circle cx="50" cy="50" r="46" fill="#FCEBE9" stroke="#F0C6C0" stroke-width="2"/>
+            <ellipse cx="35" cy="35" rx="14" ry="9" fill="#C0392B"/>
+            <ellipse cx="68" cy="60" rx="10" ry="14" fill="#2F8F5B"/>
+            <circle cx="35" cy="72" r="7" fill="#7D4FB0"/>
+          </svg>
+          <div class="lbl" style="font-size:12px;">ناهمگن <span class="en">Heterogeneous</span></div>
+        </div>
+      </div>
+      <div class="cap">شکل ۵ — در همگن، همه‌جای ظرف یه ترکیب یکسان داره؛ در ناهمگن، فازهای متفاوت و مجزا دیده می‌شه.</div>
+    </div>
+
+    <div class="visual">
+      <div class="diagrow">
+        <div class="diag-item">
+          <svg viewBox="0 0 100 100" width="90" height="90">
+            <polygon points="20,20 80,20 55,60 55,90 45,90 45,60" fill="none" stroke="#2E6DA4" stroke-width="3"/>
+            <circle cx="35" cy="30" r="2.5" fill="#C0392B"/><circle cx="55" cy="35" r="2.5" fill="#C0392B"/><circle cx="65" cy="28" r="2.5" fill="#C0392B"/>
+          </svg>
+          <div class="lbl" style="font-size:12px;">صافی <span class="en">Filtration</span></div>
+        </div>
+        <div class="diag-item">
+          <svg viewBox="0 0 100 100" width="90" height="90">
+            <circle cx="30" cy="70" r="20" fill="none" stroke="#2F7A6F" stroke-width="3"/>
+            <line x1="30" y1="50" x2="30" y2="30" stroke="#2F7A6F" stroke-width="3"/>
+            <line x1="30" y1="30" x2="75" y2="30" stroke="#2F7A6F" stroke-width="3"/>
+            <line x1="75" y1="30" x2="75" y2="55" stroke="#2F7A6F" stroke-width="3"/>
+            <circle cx="75" cy="65" r="8" fill="none" stroke="#2F7A6F" stroke-width="3"/>
+          </svg>
+          <div class="lbl" style="font-size:12px;">تقطیر <span class="en">Distillation</span></div>
+        </div>
+        <div class="diag-item">
+          <svg viewBox="0 0 100 100" width="90" height="90">
+            <rect x="42" y="10" width="16" height="80" fill="#fff" stroke="#7D4FB0" stroke-width="2"/>
+            <rect x="42" y="60" width="16" height="8" fill="#2E6DA4"/>
+            <rect x="42" y="45" width="16" height="6" fill="#2F8F5B"/>
+            <rect x="42" y="32" width="16" height="6" fill="#C0392B"/>
+          </svg>
+          <div class="lbl" style="font-size:12px;">کروماتوگرافی</div>
+        </div>
+      </div>
+      <div class="cap">شکل ۶ — سه روش جداسازی بر پایه‌ی سه ویژگی فیزیکی متفاوت.</div>
+    </div>
+
+    <h4 class="sub-title">مثال حل‌شده — قدم‌به‌قدم</h4>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال</div>
+      <div class="inner"><p class="en">A mixture contains sand and dissolved salt in water. Describe the correct separation sequence.</p></div>
+      <div class="step"><span class="step-num">قدم ۱ — هر جزء رو جدا تحلیل کن</span><br>شن: جامد نامحلول، ذره‌های نسبتاً بزرگ. نمک: کاملاً حل شده، در سطح یونی پخش شده.</div>
+      <div class="step"><span class="step-num">قدم ۲ — برای شن چی کار کنیم؟</span><br>چون شن حل نشده و اندازه‌ش خیلی بزرگ‌تر از سوراخ‌های صافیه، با صافی‌کردن جداش می‌کنیم.</div>
+      <div class="step"><span class="step-num">قدم ۳ — برای نمک چی کار کنیم؟</span><br>نمک چون کاملاً حل شده، از صافی رد می‌شه. باید آب رو تبخیر کنیم تا فقط نمک جامد باقی بمونه.</div>
+      <div class="solid en">Final Answer: Filter to remove the sand, then evaporate the water to recover the dissolved salt.</div>
+    </div>
+
+    <div class="box mistake">
+      <div class="box-label"><span class="dot"></span> ⚠️ اشتباه رایج</div>
+      <p>استفاده از صافی برای جدا‌کردن جامد <em>حل‌شده</em>. جامد حل‌شده بخشی از محلول همگنه و از صافی رد می‌شه.</p>
+    </div>
+
+    <h4 class="sub-title">📝 تمرین اختصاصی فصل ۴</h4>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge easy">🟢 EASY</span><strong>Q1</strong></div>
+      <div class="en"><p>Which of the following is a heterogeneous mixture?</p>
+      <ol type="A"><li>Air</li><li>Saltwater</li><li>Oil and water</li><li>Sugar water</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>روغن و آب مخلوط نمی‌شن و دو فاز مجزای قابل‌مشاهده می‌سازن.</div><h6>پاسخ نهایی</h6><p><strong class="en">C.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge medium">🟡 MEDIUM</span><strong>Q2</strong></div>
+      <div class="en"><p>Which separation method should be used to separate two miscible liquids with different boiling points?</p>
+      <ol type="A"><li>Filtration</li><li>Distillation</li><li>Chromatography</li><li>Decantation</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>تقطیر دقیقاً برای همین سناریو طراحی شده: از تفاوت نقطه‌جوش استفاده می‌کنه.</div><h6>پاسخ نهایی</h6><p><strong class="en">B.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge hard">🔴 HARD</span><strong>Q3</strong></div>
+      <div class="en"><p>Milk appears completely uniform to the naked eye. Why is it still classified as heterogeneous?</p>
+      <ol type="A"><li>It has a white color</li><li>It contains fat droplets suspended in water that can be seen with proper tools and can separate over time</li><li>It is a pure substance</li><li>It cannot be filtered</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><div class="step"><span class="step-num">استدلال</span><br>معیار همگن‌بودن، یکنواختی در سطح مولکولیه، نه ظاهر چشمی. شیر یه کلوئیده (قدم ۲ رو ببین).</div><h6>پاسخ نهایی</h6><p><strong class="en">B.</strong></p></div></details>
+    </div>
+
+    <hr>
+
+    <!-- =========================================================== -->
+    <!-- CHAPTER 5 -->
+    <!-- =========================================================== -->
+    <div class="chapter-hero ch5" id="ch5">
+      <span class="badge">فصل ۵</span>
+      <h2>قوانین بنیادی شیمی</h2>
+      <p><span class="en">Lavoisier · Proust · Gay-Lussac · Avogadro</span></p>
+    </div>
+
+    <div class="box concept">
+      <div class="box-label"><span class="dot"></span> مفاهیم اصلی — از صفر شروع می‌کنیم</div>
+
+      <p><span class="step-lbl">قدم ۱ — چرا اصلاً به «قانون» نیاز داریم؟</span><br>
+      وقتی دانشمندای قرن ۱۸ و ۱۹ شروع کردن به وزن‌کردن دقیق مواد قبل و بعد واکنش‌های شیمیایی، چند الگوی ثابت و همیشگی پیدا کردن که هیچ‌وقت نقض نمی‌شدن. این الگوها رو به‌عنوان «قانون» ثبت کردن، چون همیشه و برای همه‌ی واکنش‌ها صادق بودن. بیایم هرکدوم رو جدا و قدم‌به‌قدم بفهمیم.</p>
+
+      <p><span class="step-lbl">قدم ۲ — قانون بقای جرم (لاوازیه)</span><br>
+      لاوازیه با دقت، جرم مواد رو قبل و بعد واکنش (توی یه ظرف کاملاً بسته که هیچی وارد یا خارج نشه) وزن کرد. نتیجه: <strong>جرم کل هیچ‌وقت عوض نمی‌شه.</strong> چرا؟ چون یه واکنش شیمیایی فقط اتم‌ها رو دوباره کنار هم می‌چینه (پیوندها می‌شکنن و پیوند جدید ساخته می‌شه) — هیچ اتمی نه ساخته می‌شه نه از بین می‌ره. پس اگه همه‌ی اتم‌های اول رو بشماری، دقیقاً همون تعداد اتم رو آخر هم داری، یعنی جرم کل هم عوض نمی‌شه.</p>
+
+      <p><span class="step-lbl">قدم ۳ — قانون نسبت‌های معین (پروست)</span><br>
+      پروست ترکیبات مختلف رو از منابع متفاوت (مثلاً آب از رودخونه، آب از سوزوندن هیدروژن) تحلیل کرد. نتیجه: <strong>نسبت جرمی عناصر توی یه ترکیب خاص، همیشه ثابته</strong>، فارغ از اینکه اون ترکیب چطور و از کجا ساخته شده. مثال: آب همیشه ۱۱٪ هیدروژن و ۸۹٪ اکسیژن از نظر جرمیه — چه از رودخونه بیاد چه از آزمایشگاه.</p>
+
+      <p><span class="step-lbl">قدم ۴ — قانون گای-لوساک (حجم‌های ترکیبی)</span><br>
+      گای-لوساک روی واکنش‌های <em>گازی</em> کار می‌کرد و حجم گازهای واکنش‌دهنده و فرآورده رو (در دما و فشار یکسان) اندازه گرفت. نتیجه: <strong>این حجم‌ها همیشه نسبتی از عددهای صحیح کوچیک دارن.</strong> مثال: وقتی هیدروژن و اکسیژن واکنش می‌دن تا بخار آب بسازن، همیشه ۲ حجم هیدروژن با ۱ حجم اکسیژن ترکیب می‌شه تا ۲ حجم بخار آب بسازه — نسبت <span class="en">2:1:2</span>.</p>
+
+      <p><span class="step-lbl">قدم ۵ — قانون آووگادرو (توضیح چرایی قانون گای-لوساک)</span><br>
+      سؤالی که بعد از گای-لوساک باقی موند این بود: چرا این حجم‌ها چنین نسبت ساده‌ای دارن؟ آووگادرو جواب داد: <strong>چون حجم‌های مساوی از هر گازی، در دما و فشار یکسان، همیشه تعداد ذره‌ی برابر دارن</strong> <span class="en">(V ∝ n)</span>. یعنی وقتی می‌گیم «۲ حجم هیدروژن»، در واقع داریم می‌گیم «۲ برابر تعداد ذره‌ی هیدروژن» — و همین باعث می‌شه نسبت حجمی، دقیقاً همون نسبت تعداد ذره (و در نتیجه نسبت ضرایب معادله‌ی شیمیایی) باشه.</p>
+
+      <p><strong>دام رایج:</strong> فرض‌نکن حجم برابر یعنی جرم برابر! آووگادرو فقط درباره‌ی تعداد ذره حرف می‌زنه، نه جرم — گازهای مختلف جرم مولی متفاوتی دارن.</p>
+
+      <p><span class="step-lbl">قدم ۶ — یه قانون اضافه: نسبت‌های چندگانه (بونوس)</span><br>
+      گاهی دو عنصر می‌تونن بیشتر از یه ترکیب با هم بسازن (مثل <span class="en">CO</span> و <span class="en">CO₂</span>). این قانون می‌گه: اگه جرم عنصر اول رو ثابت نگه داریم، جرم‌های عنصر دوم که باهاش ترکیب می‌شن، نسبتی از عددهای صحیح کوچیک دارن. مثال: برای ۱۲ گرم کربن ثابت، <span class="en">CO</span> شامل ۱۶ گرم اکسیژنه و <span class="en">CO₂</span> شامل ۳۲ گرم — نسبت ۱:۲.</p>
+    </div>
+
+    <div class="visual">
+      <svg viewBox="0 0 300 80" width="100%" height="80" style="max-width:420px;">
+        <rect x="10" y="20" width="30" height="40" fill="#EAF2FA" stroke="#2E6DA4"/>
+        <rect x="45" y="20" width="30" height="40" fill="#EAF2FA" stroke="#2E6DA4"/>
+        <text x="40" y="72" text-anchor="middle" font-size="10" fill="#5B6259" class="en">2 H₂</text>
+        <text x="90" y="45" font-size="16" fill="#5B6259">+</text>
+        <rect x="110" y="20" width="30" height="40" fill="#FCEBE9" stroke="#C0392B"/>
+        <text x="125" y="72" text-anchor="middle" font-size="10" fill="#5B6259" class="en">1 O₂</text>
+        <text x="155" y="45" font-size="16" fill="#5B6259">→</text>
+        <rect x="175" y="20" width="30" height="40" fill="#E7F7EE" stroke="#2F8F5B"/>
+        <rect x="210" y="20" width="30" height="40" fill="#E7F7EE" stroke="#2F8F5B"/>
+        <text x="205" y="72" text-anchor="middle" font-size="10" fill="#5B6259" class="en">2 H₂O</text>
+      </svg>
+      <div class="cap">شکل ۷ — نسبت حجمی ۲:۱:۲ در واکنش تشکیل بخار آب (گای-لوساک)؛ چرایی این نسبت رو آووگادرو توضیح می‌ده (قدم ۵).</div>
+    </div>
+
+    <h4 class="sub-title">مثال‌های حل‌شده — قدم‌به‌قدم</h4>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال ۱ — بقای جرم</div>
+      <div class="inner"><p class="en">12 g of carbon reacts completely with oxygen in a sealed container to form only CO₂. If 44 g of CO₂ is produced, how many grams of oxygen reacted?</p></div>
+      <div class="step"><span class="step-num">قدم ۱ — چی داریم؟</span><br>جرم کربن اولیه: ۱۲ گرم. جرم <span class="en">CO₂</span> نهایی: ۴۴ گرم. ظرف کاملاً بسته‌ست (پس بقای جرم برقراره).</div>
+      <div class="step"><span class="step-num">قدم ۲ — قانون رو بنویس</span><br><span class="en">m(reactants) = m(products) → m(C) + m(O₂) = m(CO₂)</span></div>
+      <div class="step"><span class="step-num">قدم ۳ — جایگذاری</span><br><span class="en">12 + m(O₂) = 44</span></div>
+      <div class="step"><span class="step-num">قدم ۴ — حل کن</span><br><span class="en">m(O₂) = 44 − 12 = 32 g</span></div>
+      <div class="solid en">Final Answer: m(O₂) = 32 g</div>
+    </div>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال ۲ — گای-لوساک</div>
+      <div class="inner"><p class="en">Nitrogen and hydrogen react to form ammonia gas: N₂ + 3H₂ → 2NH₃. If 20 mL of N₂ reacts completely, what volume of H₂ is needed and what volume of NH₃ forms (same T and P)?</p></div>
+      <div class="step"><span class="step-num">قدم ۱ — ضرایب معادله رو به نسبت حجمی ترجمه کن</span><br>طبق گای-لوساک، در دما/فشار یکسان، نسبت حجمی گازها دقیقاً همون نسبت ضرایب معادله‌ست: <span class="en">N₂ : H₂ : NH₃ = 1 : 3 : 2</span>.</div>
+      <div class="step"><span class="step-num">قدم ۲ — حجم <span class="en">H₂</span> رو پیدا کن</span><br>چون <span class="en">N₂</span> نسبتش ۱ و حجمش ۲۰ میلی‌لیتره، هر واحد نسبت = ۲۰ میلی‌لیتر. پس <span class="en">H₂ = 3 × 20 = 60 mL</span></div>
+      <div class="step"><span class="step-num">قدم ۳ — حجم <span class="en">NH₃</span> رو پیدا کن</span><br><span class="en">NH₃ = 2 × 20 = 40 mL</span></div>
+      <div class="solid en">Final Answer: 60 mL of H₂ needed; 40 mL of NH₃ forms.</div>
+    </div>
+
+    <div class="box example">
+      <div class="box-label"><span class="dot"></span> مثال ۳ — آووگادرو</div>
+      <div class="inner"><p class="en">Flask A holds 3 L of nitrogen gas and Flask B holds 3 L of chlorine gas, both at the same temperature and pressure. Which flask has more gas particles, and why?</p></div>
+      <div class="step"><span class="step-num">قدم ۱ — شرایط رو چک کن</span><br>حجم مساوی (۳ لیتر)، دما و فشار هم مساوی — دقیقاً شرط قانون آووگادرو.</div>
+      <div class="step"><span class="step-num">قدم ۲ — قانون رو اعمال کن</span><br>طبق آووگادرو، حجم مساوی در دما/فشار یکسان یعنی تعداد ذره‌ی مساوی — مهم نیست گاز چی باشه (نیتروژن یا کلر).</div>
+      <div class="solid en">Final Answer: Neither — both flasks contain the same number of particles.</div>
+    </div>
+
+    <div class="box tip">
+      <div class="box-label"><span class="dot"></span> ⭐ نکته امتحانی</div>
+      <ul>
+        <li>هر چهار قانون یه ایده‌ان: ماده حفظ می‌شه و کوانتیده‌ست. اگه گزینه‌ای نیاز داره اتم‌ها ظاهر/ناپدید بشن یا هویت عوض کنن، رد کن.</li>
+        <li>گای-لوساک فقط برای <strong>گازها</strong>ست؛ با نسبت‌های جرمی (پروست، نسبت‌های چندگانه) اشتباه نگیرش.</li>
+      </ul>
+    </div>
+
+    <h4 class="sub-title">📝 تمرین اختصاصی فصل ۵</h4>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge easy">🟢 EASY</span><strong>Q1</strong></div>
+      <div class="en"><p>Which law states that mass is neither created nor destroyed in a chemical reaction?</p>
+      <ol type="A"><li>Law of Definite Proportions</li><li>Law of Conservation of Mass</li><li>Gay-Lussac's Law</li><li>Avogadro's Law</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><h6>پاسخ نهایی</h6><p><strong class="en">B.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge medium">🟡 MEDIUM</span><strong>Q2</strong></div>
+      <div class="en"><p>Hydrogen and oxygen react to form water vapor: 2H₂ + O₂ → 2H₂O. If 40 mL of oxygen reacts completely, what volume of hydrogen was used (same T, P)?</p>
+      <ol type="A"><li>20 mL</li><li>40 mL</li><li>60 mL</li><li>80 mL</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol">
+        <div class="step"><span class="step-num">قدم ۱</span><br>نسبت حجمی <span class="en">H₂ : O₂ = 2 : 1</span></div>
+        <div class="step"><span class="step-num">قدم ۲</span><br><span class="en">H₂ = 40 × 2 = 80 mL</span></div>
+        <h6>پاسخ نهایی</h6><p><strong class="en">D.</strong></p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge hard">🔴 HARD</span><strong>Q3</strong></div>
+      <div class="en"><p>Two compounds contain only carbon and oxygen. Compound A has 3.00 g of oxygen per 1.00 g of carbon. Compound B has 1.50 g of oxygen per 1.00 g of carbon. Which law is illustrated, and what is the ratio?</p>
+      <ol type="A"><li>1:2 — Law of Definite Proportions</li><li>2:1 — Law of Multiple Proportions</li><li>2:1 — Gay-Lussac's Law</li><li>1:1 — Avogadro's Law</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol">
+        <div class="step"><span class="step-num">قدم ۱</span><br>کربن در هر دو ترکیب ثابت (۱ گرم) — پس می‌تونیم جرم‌های اکسیژن رو مستقیم مقایسه کنیم.</div>
+        <div class="step"><span class="step-num">قدم ۲</span><br><span class="en">3.00 : 1.50 = 2 : 1</span></div>
+        <h6>پاسخ نهایی</h6><p><strong class="en">B.</strong> گای-لوساک فقط برای حجم گازهاست، نه جرم — گزینه‌ی <span class="en">C</span> قانون اشتباهی رو نام برده.</p></div></details>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><span class="diff-badge hard">🔴 HARD</span><strong>Q4</strong></div>
+      <div class="en"><p>A sealed flask contains 2 L of helium and another sealed flask contains 2 L of carbon dioxide, both at equal temperature and pressure. Which statement is correct?</p>
+      <ol type="A"><li>The flasks have equal mass</li><li>The flasks have equal numbers of particles but different masses</li><li>The CO₂ flask has fewer particles</li><li>This is impossible without knowing the flask shape</li></ol></div>
+      <details><summary>مشاهده‌ی پاسخ</summary><div class="sol"><h6>پاسخ نهایی</h6><p><strong class="en">B.</strong> آووگادرو تعداد ذره رو تضمین می‌کنه، نه جرم — <span class="en">CO₂</span> جرم مولی بیشتری از <span class="en">He</span> داره.</p></div></details>
+    </div>
+
+    <hr>
+
+    <!-- =========================================================== -->
+    <!-- OVERALL SUMMARY -->
+    <!-- =========================================================== -->
+    <h3 class="section-title" id="summary">🚀 جمع‌بندی کلی پنج فصل</h3>
+
+    <div class="box remember">
+      <div class="box-label"><span class="dot"></span> 🧠 حتماً به‌خاطر بسپار</div>
+      <div class="remember-cols">
+        <ul>
+          <li><strong>فصل ۱:</strong> دما = میانگین انرژی جنبشی؛ بخش صاف نمودار = تغییر حالت.</li>
+          <li><strong>فصل ۲:</strong> فرمول شیمیایی جدید = تغییر شیمیایی؛ ظاهر به‌تنهایی کافی نیست.</li>
+          <li><strong>فصل ۳:</strong> فضای خالی بین ذره‌ها، تراکم‌پذیری و نفوذپذیری رو تعیین می‌کنه.</li>
+        </ul>
+        <ul>
+          <li><strong>فصل ۴:</strong> همگن = یکنواخت مولکولی؛ روش جداسازی رو با ویژگی فیزیکی انتخاب کن، نه با ظاهر.</li>
+          <li><strong>فصل ۵:</strong> جرم حفظ می‌شه (لاوازیه)، نسبت جرمی ثابته (پروست)، نسبت حجمی گازها ساده‌ست (گای-لوساک)، حجم مساوی = تعداد ذره‌ی مساوی (آووگادرو).</li>
+        </ul>
+      </div>
+    </div>
+
+    <p>این پنج فصل با هم یه داستان واحد می‌سازن: ماده از ذره تشکیل شده (فصل ۱)، این ذره‌ها می‌تونن بدون یا با تشکیل ماده‌ی جدید تغییر کنن (فصل ۲)، رفتار ماکروسکوپی هر حالت از همون چیدمان ذره‌ای میاد (فصل ۳)، مخلوط‌ها ترکیبی از این مواد هستن که با روش‌های فیزیکی از هم جدا می‌شن (فصل ۴)، و در نهایت، هرچی سر این ماده بیاد، از چهار قانون بنیادی پیروی می‌کنه (فصل ۵) — همین قوانین پایه‌ی استوکیومتری در فصل‌های بعدی خواهند بود.</p>
+
+    <!-- =========================================================== -->
+    <!-- CHEAT SHEET -->
+    <!-- =========================================================== -->
+    <h3 class="section-title" id="cheatsheet">📋 چیت‌شیت فرمول‌ها</h3>
+
+    <table class="cheat">
+      <tr><th>فرمول</th><th>نام</th><th>کاربرد</th></tr>
+      <tr><td class="formula-cell">Q = mL</td><td>گرمای تغییر حالت</td><td>دمای ثابت، حین ذوب/تبخیر</td></tr>
+      <tr><td class="formula-cell">Q = mcΔT</td><td>گرمای تغییر دما</td><td>دمای متغیر، داخل یه حالت</td></tr>
+      <tr><td class="formula-cell">m(reactants) = m(products)</td><td>بقای جرم (لاوازیه)</td><td>هر واکنش در سیستم بسته</td></tr>
+      <tr><td class="formula-cell">% element = (mass of element / total mass) × 100</td><td>ترکیب درصدی (پروست)</td><td>بررسی نسبت جرمی ثابت یه ترکیب</td></tr>
+      <tr><td class="formula-cell">V₁ : V₂ : V₃ = small whole numbers</td><td>حجم‌های ترکیبی (گای-لوساک)</td><td>نسبت حجمی گازهای واکنش‌دهنده/فرآورده</td></tr>
+      <tr><td class="formula-cell">V ∝ n</td><td>قانون آووگادرو</td><td>مقایسه‌ی تعداد ذره از روی حجم گاز (دما/فشار ثابت)</td></tr>
+      <tr><td class="formula-cell">mass ratio → small whole numbers</td><td>نسبت‌های چندگانه</td><td>مقایسه‌ی جرم یه عنصر در دو ترکیب مختلف</td></tr>
+      <tr><td class="formula-cell">K = °C + 273</td><td>تبدیل دما</td><td>ΔT در °C = ΔT در K</td></tr>
+      <tr><td class="formula-cell">1 cal = 4.184 J</td><td>تبدیل واحد گرما</td><td>یکسان‌سازی واحد قبل از محاسبه</td></tr>
+    </table>
+
+  </div>
+
+  <div class="footer-nav">
+    <span>CEnT Chemistry Preparation</span>
+    <span>فصل‌های ۱ تا ۵ · واحد ۱: خواص ماکروسکوپیک ماده</span>
+  </div>
+
+</div>
+</body>
+</html>

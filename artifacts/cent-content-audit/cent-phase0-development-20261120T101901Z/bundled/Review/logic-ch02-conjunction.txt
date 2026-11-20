@@ -1,0 +1,101 @@
+جزوه لاجیک CEnT — فصل ۲: عطف
+
+CENT LOGIC — PART A · CHAPTER 2 / 13
+فصل ۲: عطف — «A and B» (Conjunction)
+عطف (conjunction) ساده‌ترین عملگریه که یاد می‌گیری، ولی آزمون معمولاً اون رو پشت کلماتی مثل «but» یا جمله‌های با فاعل مشترک پنهان می‌کنه. این فصل هم قانون پایه رو بهت می‌ده، هم یاد می‌ده چطور عطف‌های پنهان رو پیدا کنی.
+Bاین مبحث چیست؟
+هر وقت آزمون بخواد بگه «این دو (یا چند) چیز، هر دو با هم درستن»، از عطف استفاده می‌کنه. کلمه‌ی ظاهری همیشه «and» نیست — گاهی «but»، «however»، «although» یا حتی فقط یک ویرگول با فاعل مشترکه. از نظر منطقی، همه‌ی این‌ها دقیقاً همون رفتار «and» رو دارن.
+Cمفهوم اصلی
+قدم ۱ — تعریف: «A and B» فقط وقتی درسته که هر دوی A و B درست باشن. اگه حتی یکی‌شون غلط باشه، کل گزاره‌ی عطفی غلط می‌شه.
+A
+B
+A and B
+T
+T
+T
+T
+F
+F
+F
+T
+F
+F
+F
+F
+توجه: در نسخه‌ی اسکن‌شده‌ی جزوه‌ی منبع، ردیف سوم این جدول به‌اشتباه «F F T» چاپ شده بود (احتمالاً خطای اسکن/تراز ستون). جدول بالا نسخه‌ی درست و استانداردِ منطق گزاره‌ای برای «and» است — فقط یک حالت (هر دو True) نتیجه‌ی True می‌ده.
+قدم ۲ — کلماتی که ظاهرشون فرق داره ولی منطقشون «and» است. کلماتی مثل but, however, although, yet از نظر لحن یک تضاد یا تعجب رو نشون می‌دن، ولی از نظر منطقی دقیقاً مثل «and» عمل می‌کنن — یعنی فقط وقتی کل گزاره درسته که هر دو طرفش درست باشن.
+"John is a Rolling Stones fan but he doesn't like The Who."
+از نظر منطقی این معادل «John is a Rolling Stones fan and he doesn't like The Who» است. تضادی که کلمه‌ی «but» القا می‌کنه فقط جنبه‌ی سبکی و ادبی داره؛ ساختار منطقی همون عطف ساده‌ست.
+قدم ۳ — فاعل مشترک، عطف رو کوتاه می‌کنه. وقتی دو گزاره فاعل یکسان دارن، آزمون ممکنه اون رو یک‌بار بنویسه.
+"John is a Rolling Stones fan and a teacher."
+این دقیقاً همون معنی «John is a Rolling Stones fan and John is a teacher» رو داره — فقط فاعل تکراری حذف شده. قبل از تحلیل، همیشه اول این نوع جمله رو به دو گزاره‌ی کامل و جدا باز کن.
+قدم ۴ — عطف زنجیره‌ای: «A and B and C and D and E». همون قانون «and» ساده رو دنبال می‌کنه: کل زنجیره فقط وقتی درسته که همه‌ی حلقه‌ها درست باشن. کافیه یکی غلط باشه تا کل زنجیره غلط بشه.
+Dقوانین و اصول مهم
+عطف فقط در یک حالت درسته: هر دو (یا همه‌ی) طرفش درست باشن.
+کلمات but, however, although, yet, moreover در متن سوال، از نظر منطقی معادل «and» هستن.
+جمله‌های با فاعل مشترک («X is A and B») باید به دو گزاره‌ی کامل و جدا («X is A» و «X is B») باز بشن.
+عطف زنجیره‌ای («A and B and C…») هم از همون قانون پیروی می‌کنه — با هر تعداد حلقه.
+Eروش حل
+همه‌ی حلقه‌های عطف رو پیدا کن — حتی اون‌هایی که پشت «but/however/although» یا فاعل مشترک پنهانن.
+هر جمله‌ی با فاعل مشترک رو به گزاره‌های کامل و جدا باز کن.
+ارزش درستی هر حلقه رو جداگانه مشخص کن.
+اگه حتی یک حلقه غلط بود، کل گزاره‌ی عطفی غلطه — دیگه نیازی به چک کردن بقیه نیست.
+→ جواب: فقط اگه همه‌ی حلقه‌ها درست بودن، کل عطف درسته.
+Fمثال آموزشی
+"The store is open and it has a discount today." The store is open (True). It does NOT have a discount today (False). Is the whole claim true or false?
+پاسخ: غلط. با اینکه بخش اول درسته، چون بخش دوم غلطه، کل گزاره‌ی عطفی غلط می‌شه — طبق قانون قدم ۱.
+Gمثال امتحانی
+"Maria speaks French and Spanish, but she doesn't speak Italian." Which statement, if true, would make the whole claim FALSE?
+A) Maria speaks French.
+B) Maria doesn't speak Italian.
+C) Maria doesn't speak Spanish.
+D) Maria speaks a fourth language.
+🎯 EXAM TIP
+هر وقت کلمات but, however, although, yet رو دیدی، فوراً توی ذهنت جایگزینش کن با «and». این کلمات فقط برای طبیعی‌تر شدن جمله‌ی انگلیسی استفاده می‌شن، هیچ تاثیری روی منطق ندارن.
+⚡ QUICK METHOD
+برای رد کردن سریع یک گزاره‌ی عطفی، دنبال اولین حلقه‌ی غلط بگرد و همون‌جا متوقف شو — نیازی نیست بقیه‌ی حلقه‌ها رو چک کنی، چون یک «False» کافیه که کل گزاره False بشه.
+⚠️ COMMON MISTAKES
+اشتباه: فکر کردن به اینکه کلمه‌ی «but» یعنی یک استثنا یا نفی در ساختار منطقی وجود داره.
+چرا اتفاق می‌افته: در زبان روزمره، «but» حس تضاد می‌ده و داوطلب ناخودآگاه فکر می‌کنه یعنی یک طرف باید غلط باشه یا یک رابطه‌ی متفاوت از «and» در کاره.
+چطور جلوش رو بگیریم: همیشه اول «but/however/although» رو با «and» جایگزین کن و بعد جمله رو تحلیل کن. اگه این جایگزینی معنی جمله رو عوض نکرد (که هیچ‌وقت از نظر منطقی عوض نمی‌کنه)، خیالت راحت باشه که با یک عطف ساده روبرویی.
+🪤 QUESTION TRAP
+در سوالات با عطف زنجیره‌ای بلند (سه، چهار یا پنج حلقه)، آزمون گزینه‌هایی می‌ذاره که فقط بعضی حلقه‌ها رو درست فرض می‌کنن و ادعا می‌کنن کل گزاره «تقریباً درسته» یا «بیشترش درسته». این تله‌ست — در منطق گزاره‌ای، درستیِ نسبی وجود نداره؛ یا همه‌ی حلقه‌ها درستن (کل گزاره True) یا حداقل یکی غلطه (کل گزاره False).
+🧠 MUST REMEMBER
+عطف فقط در یک حالت درسته: همه‌ی طرف‌ها درست باشن. کلمات but, however, although, yet منطقاً همون «and» هستن. جمله‌های با فاعل مشترک رو قبل از تحلیل به گزاره‌های جدا باز کن.
+📝تمرین
+"Ana plays the violin and the piano." Ana plays the violin (True). Ana does NOT play the piano (False). What is the truth value of the whole claim?
+A) True
+B) False
+C) Cannot be determined
+D) Depends on which instrument is mentioned first
+نمایش پاسخ و توضیح
+پاسخ درست: B. «Ana plays the violin and the piano» یعنی «Ana plays the violin AND Ana plays the piano». چون بخش دوم غلطه، طبق جدول درستی «and»، کل گزاره غلط می‌شه — فارغ از اینکه بخش اول درست باشه.
+"The flight departed on time, but it landed late." Which pair of truth values for the two parts makes this whole claim TRUE?
+A) Departed on time = False, Landed late = True
+B) Departed on time = True, Landed late = True
+C) Departed on time = True, Landed late = False
+D) Departed on time = False, Landed late = False
+نمایش پاسخ و توضیح
+پاسخ درست: B. «but» اینجا منطقاً «and» است، پس گزاره «Departed on time AND Landed late» است. طبق جدول درستی «and»، تنها حالتی که کل گزاره True می‌شه وقتیه که هر دو بخش True باشن. گزینه‌های دیگه هر کدوم حداقل یک بخش را False دارن.
+"Omar finished the report, submitted it on time, and informed his manager, but he forgot to attach the appendix." Exactly one of the four sub-claims in this sentence is false. Is the whole claim true or false, and why?
+A) True, because most of the sub-claims are true
+B) False, because it is a conjunction and one sub-claim is false
+C) True, because "but" cancels out the earlier claims
+D) Cannot be determined without knowing which sub-claim is false
+نمایش پاسخ و توضیح
+پاسخ درست: B. این جمله چهار حلقه دارد که همه با «and» (یکی‌شون به‌شکل «but») به هم وصلن: finished the report / submitted it on time / informed his manager / attached the appendix (که در واقع «forgot to attach» یعنی این حلقه غلطه). طبق قانون عطف زنجیره‌ای، همین که یکی از چهار حلقه غلط باشه (فارغ از اینکه کدومه) کافیه کل گزاره غلط بشه. گزینه‌ی A دقیقاً همون دام «Question Trap» بالاست — درستیِ نسبی در منطق گزاره‌ای وجود نداره. گزینه‌ی D هم لازم نیست بدونی کدوم حلقه غلطه، چون در عطف، فقط تعداد حلقه‌های غلط (حداقل یکی) اهمیت داره، نه هویتشون.
+🚀مرور سریع — فصل ۲
+مفاهیم اصلی
+عطف فقط وقتی درسته که همه‌ی طرف‌هاش درست باشن.
+but, however, although, yet منطقاً همون «and» هستن.
+جمله‌های با فاعل مشترک باید به گزاره‌های جدا باز بشن.
+روش
+همه‌ی حلقه‌های عطف — حتی پنهان‌شده‌ها — رو پیدا کن.
+دنبال یک حلقه‌ی غلط بگرد؛ همون کافیه.
+عطف زنجیره‌ای هم همون قانون رو داره، با هر تعداد حلقه.
+اشتباهات رایج
+فکر کردن به «but» به‌عنوان یک استثنای منطقی.
+قبول کردن «تقریباً درست» به‌جای «کاملاً درست».
+دام‌های تستی
+گزینه‌هایی که ادعای درستیِ نسبی می‌کنن.
+عطف‌های زنجیره‌ای بلند که حواس‌پرتی ایجاد می‌کنن.

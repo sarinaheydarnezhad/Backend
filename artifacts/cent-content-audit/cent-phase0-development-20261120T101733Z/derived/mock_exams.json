@@ -1,0 +1,17 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "backend/Cent.Module/CentPractice.cs:CentPractice.Start and Entities.cs:CentAttempt",
+  "storedReusableMockExamDefinitions": 0,
+  "records": [],
+  "supportedKinds": [
+    "diagnostic",
+    "simulator",
+    "practice"
+  ],
+  "questionLimit": 20,
+  "durationMinutes": 60,
+  "eligibility": "Active questions with Kind equal to the requested kind or both; optional subject and stable TopicId filters.",
+  "selection": "Randomized round robin across subjects; interleaved topic queues within subjects. There is no fixed stored exam sequence or static exam template.",
+  "persistence": "Selections and answer keys are snapshotted into owner-linked cent_attempts / cent_attempt_questions. Those tables were not read or exported.",
+  "limitations": "Runtime behavior is documented from source inspection only. No attempt or exam was generated during this audit."
+}

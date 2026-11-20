@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۴: شرطی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 4 / 13</p>
+  <h1>فصل ۴: شرطی — «If A then B» (Conditional)</h1>
+  <p class="lede">شرطی <span class="term">(conditional)</span> پرکاربردترین و پردام‌ترین ساختار در بخش Logic آزمونه. بیشتر اشتباهات داوطلب‌ها نه از ندونستن تعریف، بلکه از این میاد که فکر می‌کنن شرطی چیزی رو ادعا می‌کنه که در واقع ادعا نمی‌کنه.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>هر جمله‌ای که با «If … then …» ساخته شده باشه، یک شرطیه. بخش بعد از «If» رو مقدم <span class="term">(antecedent)</span> و بخش بعد از «then» رو تالی <span class="term">(consequent)</span> می‌گن.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"If I miss the bus, then I'll be late for work."</p>
+    </div>
+    <p style="margin-top:10px;">مقدم: "I miss the bus" — تالی: "I'll be late for work".</p>
+  </div>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — یک شرطی، هیچ‌کدوم از A یا B رو به‌تنهایی ادعا نمی‌کنه.</strong> این مهم‌ترین و بیشتر گم‌شده‌ترین نکته‌ی این فصله. «If A then B» ادعا نمی‌کنه A درسته، ادعا نمی‌کنه B درسته — فقط یک <em>رابطه</em> بین A و B رو ادعا می‌کنه: «هر وقت A درست باشه، B هم باید درست باشه».</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"If I drive drunk, then I'll get into a car accident."</p>
+    </div>
+    <p style="margin-top:10px;">این جمله نمی‌گه «من الان مست رانندگی می‌کنم» و نمی‌گه «من تصادف می‌کنم». فقط می‌گه: اگه اون اتفاق (مست رانندگی کردن) بیفته، این یکی (تصادف) هم به‌دنبالش میاد.</p>
+  </div>
+
+  <p><strong>قدم ۲ — یک شرطی کِی غلطه؟</strong> فقط در <strong>یک</strong> حالت: وقتی مقدم درست باشه ولی تالی غلط باشه. یعنی چیزی که ادعا شده «اگه A بیفته B هم میاد» نقض شده باشه.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"If I study hard, then I'll pass the test." — Case: I studied hard (A = True). I didn't pass the test (B = False).</p>
+    </div>
+    <p style="margin-top:10px;">این تنها حالتیه که کل شرطی غلط می‌شه: قول (A→B) داده شده بود، ولی نقض شد.</p>
+  </div>
+
+  <p><strong>قدم ۳ — نکته‌ی مهم: اگه مقدم غلط باشه، کل شرطی همیشه درسته — حتی اگه تالی هم غلط باشه.</strong> این نکته با شهود روزمره در تضاده، ولی قانون منطقیه.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"If I live in Beijing, then I live in China." — Suppose: I don't live in Beijing (A = False) and, hypothetically, I don't live in China either (B = False).</p>
+    </div>
+    <p style="margin-top:10px;">حتی در این حالت، کل جمله‌ی شرطی هنوز <strong>درست</strong> در نظر گرفته می‌شه — چون شرطی فقط زمانی رو محک می‌زنه که مقدمش واقعاً درست باشه. وقتی مقدم اصلاً پیش نمیاد (غلطه)، ادعای شرطی هیچ‌وقت نقض نمی‌شه.</p>
+  </div>
+
+  <p><strong>قدم ۴ — جدول درستی کامل.</strong></p>
+  <table>
+    <tr><th>A</th><th>B</th><th>If A then B</th></tr>
+    <tr><td>T</td><td>T</td><td>T</td></tr>
+    <tr><td>T</td><td>F</td><td>F</td></tr>
+    <tr><td>F</td><td>T</td><td>T</td></tr>
+    <tr><td>F</td><td>F</td><td>T</td></tr>
+  </table>
+  <p style="font-size:14px; color:var(--ink-soft);">فقط یک ردیف (دومی) کل شرطی رو غلط می‌کنه. (نسخه‌ی اسکن‌شده‌ی منبع در ردیف آخر این جدول به‌اشتباه «F» چاپ شده بود؛ نسخه‌ی بالا مطابق تعریف استاندارد منطق گزاره‌ای برای شرطیه — وقتی مقدم غلطه، شرطی همیشه درسته.)</p>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>شرطی فقط در <strong>یک</strong> حالت غلطه: مقدم درست، تالی غلط.</li>
+    <li>در سه حالت دیگه (از جمله وقتی مقدم غلطه) شرطی همیشه درسته.</li>
+    <li>شرطی هیچ ادعایی درباره‌ی درست بودن A یا B به‌تنهایی نمی‌کنه — فقط رابطه بینشون رو ادعا می‌کنه.</li>
+    <li>وقتی مقدم غلطه، شرطی به‌طور خودکار درسته — این حالت رو «درستی پوچ» <span class="term">(vacuous truth)</span> می‌گن.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>مقدم (A) و تالی (B) رو مشخص کن — دقت کن که کدوم بعد از «if» و کدوم بعد از «then» اومده.</li>
+    <li>اگه ارزش درستی A و B رو داری: فقط چک کن آیا A=True و B=False است.</li>
+    <li>اگه این حالت برقرار بود، کل شرطی غلطه. در غیر این صورت (هر ترکیب دیگه‌ای)، کل شرطی درسته.</li>
+    <li>اگه سؤال می‌پرسه «چه چیزی این شرطی رو نقض می‌کنه؟»، دنبال سناریویی بگرد که در اون A درست ولی B غلط باشه.</li>
+    <li class="arrow-final">→ جواب: بر اساس همین یک قانون تعیین می‌شه.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">"If the alarm goes off, then the building will be evacuated." Suppose the alarm did NOT go off, and the building was NOT evacuated. Is the conditional true or false?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: درسته.</strong> چون مقدم («the alarm goes off») غلطه، طبق قانون قدم ۳، کل شرطی به‌طور خودکار درست در نظر گرفته می‌شه — فارغ از اینکه تالی چی شده.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">"If a candidate scores above 80%, then the candidate is admitted." Which of the following scenarios proves this conditional claim FALSE?</p>
+      <ul class="options">
+        <li>A) A candidate scores 75% and is not admitted.</li>
+        <li class="correct">B) A candidate scores 85% and is not admitted.</li>
+        <li>C) A candidate scores 90% and is admitted.</li>
+        <li>D) A candidate scores 60% and is admitted.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>مقدم رو مشخص کن: "scores above 80%". تالی: "is admitted". طبق قانون قدم ۲، فقط یک سناریو این شرطی رو نقض می‌کنه: مقدم درست (نمره بالای ۸۰٪) ولی تالی غلط (پذیرفته نشدن).</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>گزینه‌ی B دقیقاً همین سناریوست: نمره ۸۵٪ (بالای ۸۰٪، پس مقدم درسته) ولی پذیرفته نشده (تالی غلطه).</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A مقدمش غلطه (۷۵٪ زیر ۸۰٪ است)، پس طبق قانون «درستیِ پوچ»، این سناریو هیچ تناقضی با شرطی نداره — حتی اگه پذیرفته نشده باشه. گزینه‌های C و D هر دو تالی‌شون درسته، پس نمی‌تونن ناقض شرطی باشن، چون شرطی فقط با «مقدم درست + تالی غلط» نقض می‌شه.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای بررسی همه‌ی گزینه‌ها با شهود، مستقیم دنبال تنها الگوی نقض‌کننده‌ (T,F) می‌گردیم — این کار زمان حل رو به‌شدت کم می‌کنه.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>هر وقت سؤال پرسید «کدوم گزینه این ادعا رو نقض می‌کنه؟» یا «کدوم گزینه ثابت می‌کنه ادعا غلطه؟»، فقط دنبال یک الگو بگرد: <strong>مقدم درست + تالی غلط</strong>. بقیه‌ی گزینه‌ها رو سریع حذف کن.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>به‌جای حفظ کردن چهار ردیف جدول، فقط یک جمله رو حفظ کن: «شرطی همیشه درسته، مگر اینکه مقدم درست و تالی غلط باشه.» این یک قانون، جایگزین کل جدول می‌شه.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> فکر کردن به اینکه وقتی مقدم غلطه، کل شرطی هم باید غلط باشه.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> در زبان روزمره، وقتی می‌گیم «اگه بارون بیاد، خیس می‌شیم» و بارون نمیاد، حس می‌کنیم جمله دیگه معنی نداره یا نه‌درست‌ونه‌غلطه. اما در منطق گزاره‌ای، این حالت رو صراحتاً <strong>درست</strong> در نظر می‌گیریم.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه جدول درستی رو مرور کن: تنها ردیفی که شرطی غلط می‌شه، ردیف «مقدم درست، تالی غلط»ه. سه ردیف دیگه — حتی وقتی مقدم غلطه — همیشه درستن.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>آزمون گاهی گزینه‌ای می‌ذاره که با تعویض جای مقدم و تالی ساخته شده (یعنی معکوس شرطی — «If B then A» به‌جای «If A then B»). این دو از نظر منطقی <strong>معادل هم نیستن</strong> (این موضوع رو در فصل «معکوس و متضاد شرطی» با جزئیات بیشتر می‌بینی). فعلاً فقط حواست باشه که «مقدم» و «تالی» رو با هم اشتباه نگیری.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>«If A then B» فقط در یک حالت غلطه: <strong>A درست، B غلط</strong>. در همه‌ی حالت‌های دیگه — از جمله وقتی A غلطه — شرطی درسته. شرطی هیچ ادعایی درباره‌ی درست بودن واقعیِ A یا B نمی‌کنه، فقط رابطه‌ی بینشون رو ادعا می‌کنه.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">"If the light is red, then cars must stop." A car sees a red light and stops. Is the conditional true or false in this case?</p>
+      <ul class="options">
+        <li class="correct">A) True</li>
+        <li>B) False</li>
+        <li>C) Cannot be determined</li>
+        <li>D) Neither true nor false</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> مقدم (چراغ قرمزه) درسته و تالی (ماشین توقف کرد) هم درسته. طبق جدول درستی، ردیف اول (T,T) نتیجه‌اش True است.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">"If a metal is heated, then it expands." A piece of metal was NOT heated, and it did NOT expand. What is the truth value of the conditional in this case?</p>
+      <ul class="options">
+        <li class="correct">A) True</li>
+        <li>B) False</li>
+        <li>C) Cannot be determined without more information</li>
+        <li>D) The claim is irrelevant in this case</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> مقدم غلطه (فلز گرم نشده). طبق قانون قدم ۳ (درستیِ پوچ)، وقتی مقدم غلطه، شرطی همیشه درسته — فارغ از اینکه تالی چی شده. گزینه‌ی D اشتباهه چون شرطی هرگز «بی‌ربط» نمی‌شه؛ همیشه یک ارزش درستی مشخص داره.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">A company's policy states: "If an employee works more than 40 hours in a week, then the employee receives overtime pay." An employee worked 45 hours and did NOT receive overtime pay. Later, another employee worked 30 hours and also did NOT receive overtime pay. Which employee's case proves the policy claim FALSE?</p>
+      <ul class="options">
+        <li class="correct">A) Only the first employee (45 hours, no overtime pay)</li>
+        <li>B) Only the second employee (30 hours, no overtime pay)</li>
+        <li>C) Both employees</li>
+        <li>D) Neither employee</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> کارمند اول: مقدم درسته (بیش از ۴۰ ساعت کار کرده) ولی تالی غلطه (اضافه‌کاری نگرفته) — این دقیقاً الگوی نقض‌کننده‌ی (T,F) است. کارمند دوم: مقدم غلطه (کمتر از ۴۰ ساعت کار کرده)، پس طبق قانون درستیِ پوچ، این مورد هیچ تناقضی با شرطی نداره — نداشتنِ اضافه‌کاری برای کسی که اصلاً بیش از ۴۰ ساعت کار نکرده، ادعای شرطی رو نقض نمی‌کنه. این تمرین دقیقاً همون دام رایج بالاست: قاطی کردن «مقدم غلط» با نقض شرطی.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۴</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>شرطی ادعای درستیِ A یا B رو نمی‌کنه — فقط رابطه‌شون رو ادعا می‌کنه.</li>
+          <li>مقدم = بخش if، تالی = بخش then.</li>
+          <li>مقدم غلط ⇒ شرطی خودکار درسته.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>اول چک کن مقدم غلطه یا نه — اگه غلطه، تمام، شرطی درسته.</li>
+          <li>فقط دنبال ترکیب «مقدم درست، تالی غلط» بگرد.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>فکر کردن که مقدم غلط یعنی شرطی هم غلط یا بی‌معنیه.</li>
+          <li>قاطی کردن «If A then B» با «If B then A».</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>گزینه‌هایی که جهت شرطی رو برعکس می‌کنن (converse).</li>
+          <li>سناریوهایی که فقط تالی رو چک می‌کنن و مقدم رو نادیده می‌گیرن.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

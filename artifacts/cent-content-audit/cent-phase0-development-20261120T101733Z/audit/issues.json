@@ -1,0 +1,3072 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "audit",
+  "recordCount": 280,
+  "records": [
+    {
+      "code": "SOURCE_CHANGED_DURING_READ",
+      "severity": "warning",
+      "table": null,
+      "id": null,
+      "field": null,
+      "detail": "Database/sidecar fingerprint changed during read. A single read transaction supplies all exported records, but an external writer may have changed the source."
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "01E10580-528D-3225-AFED-4C48E5BBC730",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "02A050D5-E074-5401-53C2-D8867BE37D9A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "02D7D17A-24CB-16BD-5F0F-9C652780D368",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "02EFD9C2-72AB-571F-C608-3D0C1B401440",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "041A756B-D87D-2E0D-48D6-F755027C861C",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "05AD714A-7EAF-876A-222C-8F587395C50B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "07DE2D90-1E62-25B6-B96F-6BD4F92AFD26",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "0816973F-1B84-0E01-1078-52FF21376E96",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "082D5937-F951-C8BA-6A2D-96CA18AB38B4",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "0BAB2A6D-9099-6871-D277-16D537A39B4D",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "11340FB8-7338-3A12-12D6-C9670437E807",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "115E9697-EF85-C030-6A86-8892CE62E08E",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "1169D073-6663-7FD8-95BF-FBF0A85B4CCE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "12360A23-5C1B-F067-D0F9-1859729205C0",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "1297A688-B437-1DB8-6D6B-B7963FEF92D4",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "12D51D93-8995-501A-EB6F-3BA3EB468E1B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "13292F3D-B11F-D56A-325D-757154BD02AE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "143C8BEB-0059-50DF-4986-3EDA2D1650DE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "144D459F-812D-1DBD-566E-68A3BEC3535F",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "14B5CECF-ECEB-C181-2D89-20EF339EB810",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "171B6477-1A0D-5E4F-6279-843156D6A723",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "19487485-83D5-9B8D-BDEF-BE63649E6948",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "19E3C987-580B-EC96-E695-8D5F9000EF97",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "1D628645-4E00-B679-1F4C-F7607E36650B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "1DFF9B76-119E-53BD-965B-022698F9B25F",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "24B2B465-CFEE-6FB4-BF21-0653429793D1",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "2842062F-02F7-7FC8-B6C6-0B5602E1958B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "2AE8946F-F5AC-740C-8F72-0C257C71A3F6",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "2B5E1193-50A7-A50A-3774-007106FF63D0",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "2C4724A7-8743-CF0B-DD91-C4F9973ECB54",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "2CEF8323-1289-8457-229E-6B9A1228FC40",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "33DFEA9D-D9F8-7C99-4742-6F8A784321E2",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "3452BF26-B576-0D7F-76D5-7A5081E2BB3E",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "37F5DCFC-84C9-2265-2D8C-6B0F37320F17",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "384AF3FC-C388-051C-FD39-74542BF406A9",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "38CB870F-7162-6838-F4BE-5198AF6F83BA",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "38EC04CD-5A5F-001F-D977-11F3E348085B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "3911D783-342A-E7B3-4CF5-E2AA8C221009",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "3B3583E0-55E6-CCB8-71DA-EBF8A0A38F92",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "41F3C1EC-64E4-71FD-8D6B-37C9B78FC2A5",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "443F009D-8C31-2E73-1B13-2802B92339E4",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "4501BD2E-03B8-F0F9-49FC-AB00229448A1",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "46ACBC0F-8599-787A-0CF6-C24F68CAD471",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "4718361C-EC4D-FBB5-1F08-02E25561770D",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "497793FD-C085-A74B-4601-6BBBED1C51C7",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "4C6A5168-A4EA-728C-F895-C601E0BDF520",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "4C784AE8-D57C-7727-2487-215EBFE48858",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "4E0CCF6C-9864-7218-4159-8A2BD1D57C18",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "500F0604-92D4-AB1C-D066-ADDDC8E456FA",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "50E9A070-C17B-FF9C-483F-9B1266A0A93A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "50FBACAF-8421-AAD3-1B4A-F2E06934E852",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "5222CCA2-3B88-5945-0583-A440B271E00A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "524226A4-CEF9-90BF-D223-8209A8520055",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "52B60252-6F00-4896-B749-33CBE333DF0D",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "52DE5BA2-69D1-A240-3DC0-81739E118825",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "53A8A4DC-9A4F-D51E-9A99-356001CDDB43",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "5706DD3D-6443-DBCF-DAF9-6871B3763A00",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "580E9C16-DE56-094F-40E2-0A85B5693944",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "58139B28-22C9-79D6-00E4-7E0522B23F67",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "5882F6F8-75E0-515B-F4BE-71A7A47F2CCE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "5A47EAD5-0C7E-1181-351C-3BA98C8962B9",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "5B55F456-0B9F-0925-3A90-4F3055A498E8",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "5BA84761-5622-F3E4-E5A8-9CC6F96267CC",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "5F0D1D7E-B1F1-AC5E-7486-67350A0DC812",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "5FFCFCF9-9755-3718-D2B3-29D40403E81A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "629A2CEA-4360-C27B-4E23-2969B0590ABC",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "63C7FA1C-20AF-B864-AF66-8BA5294DBFA8",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "65F5E476-A99A-88FE-D1F4-FE52853B855A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "670675BC-03B6-EE1C-EC96-E7543830D5AE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "67964BA7-6FD9-7183-E30B-B2D85C3BB6E0",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "6AF0529B-6656-2A83-5D66-6360ADAA5D87",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "6D1F62A7-41BF-9721-A9C6-4D382C82DFCC",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "6F2447C9-A49E-14CD-01DA-B01B733A4986",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "6F84B485-D562-1EAF-1675-A7C468E155CA",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "7018D66D-9657-F92E-D151-A77B53EF8175",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "733C220B-A849-CD4A-E1F7-6BAE8D344316",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "74A57C01-F824-A3D6-DFC2-1548045D05B3",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "783F6F3B-65E9-4EBF-0863-79C9C6767EDB",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "7CAC3307-1738-C645-7D07-C79B7F9C6373",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "7D040FEB-377F-30E0-C4C3-E37A40C66C25",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "7FA900E1-5CEB-5A1A-2A7A-7A8658E1B52B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "7FF7AB3D-CFEA-CEC7-F2B6-4BC1B4E5255F",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "813FE6DC-10A1-BF44-2A4F-B31D48D2B3F0",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "847F7D04-AC38-D4BC-DFEC-F5209666A243",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "84807BD7-332C-5445-2250-D3ECC3EF34C6",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "8589370E-C84A-90FF-A322-A06BD08FA37B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "85D5B5F4-16E7-560C-7ED3-8F7E223BE209",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "85E7032A-F720-959B-BF68-EF5FDB987CD9",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "894889AD-DC92-70B5-B8AD-3C29B76759BA",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "897D1CE0-F94B-6CBC-119D-5AA71F272413",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "8A6D23EA-C1C8-09F8-AE32-996EB6F0C484",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "8BF01AB6-7C07-597C-7F58-C5802292C1F8",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "8EFAF987-CF91-D2E8-4514-8A35AD91C7FE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "8F014A8A-86A1-1543-8943-3528F3DF5F26",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "8F48E236-4453-20B1-002C-A3102A11B6BC",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "8F8A9775-D314-A976-1051-02608537783B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "927F52C9-1CCF-18D6-D4FF-017CDF4B21D6",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "985941E4-C249-08FC-055F-8ED5E6756637",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "9B780B50-F45B-3801-C52D-DE23B20C72BB",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "9C7E96C2-862A-FFBC-6123-F846FD7EBDB3",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "9E54981F-1DDC-79A7-57A4-8BEF44B84E75",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "A02F1F09-EA07-456C-4E27-20BA5C3A5C88",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "A11F88A7-9277-3726-C4F7-839E05E55051",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "A3C490BD-D666-4516-B8CE-38FAA0E27922",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "A3E02D80-2C66-73B4-B54C-EFDD6FF4E11F",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "A6503E07-DC72-F2BA-6991-5B48EE8EE557",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "A8627422-419B-1F9B-2B9B-78A1DFFF8D31",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "A9A45452-179D-AADB-064E-3565CB221159",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "ABBA61E2-89DD-39A3-DEAB-7A169679E50A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "AE42E043-AE51-DA52-3C6D-4C439C3453EE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "AEF6C95E-860A-669A-5BDF-10865922A7F4",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "B1A295A5-C905-BE5E-E0C4-445DDA22846A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "B567A414-A73D-359B-818E-D805AF519D94",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "B5959161-8B54-147E-3796-65A31EDBB891",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "B73E3C21-F234-79A6-5400-11ACCE95E7AF",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "B8B5509B-C38F-ED5E-E33B-B6CC7D231B89",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "B9768EE9-5B6C-EF6C-F03A-D9E703E2630B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "BC8CE0C5-8D5C-9F9D-8CEC-5E257F2F75F6",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "BCB32A50-FA78-3190-9BD6-F4E8A91261C6",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "BCDCC41F-9120-6B52-C387-FAB2B22727E1",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "BE7FD0D8-16D2-8BCF-5246-69F01E90F584",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "BEDC925A-12DC-F252-D8B8-A3A50B374914",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "C0A47823-14A7-DFB4-D174-2B506957B1A3",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "C27D17AB-08BC-9BDD-475B-46B3B1E9381D",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "C3370196-D4FB-6ACB-4812-21C36A699B55",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "C35B97CB-3E9B-6590-A2DD-1360858463C4",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "C3A403E2-B1D3-F5C9-7070-E7C189E30C03",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "C3B13704-9BB0-8B1F-89B4-ECC367CD9465",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "C3F0C88A-B565-CBCC-EE21-70B034652780",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "C7672690-B886-F927-B686-E1F31751B650",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "CACFB9D2-7CC4-F187-5EEE-B8D1CA5060F8",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "CAFEDF0F-EE15-DAAC-B755-2A8F58BDB575",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "CDDE91B3-EB0B-8475-4D13-C1B18E7EF243",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "CE2E6F19-A990-5CE9-7035-CECEBF412655",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "CF5EFE14-4B34-5D35-9FF5-8F004D5E1A5B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "CFCA900F-FFD1-F8E9-789D-019C81D1EAB6",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D096619B-989C-B322-750A-BE4E6D980506",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D2C63906-C778-FF77-0507-9C0E535432DB",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D4A7BB00-4A06-0917-57DE-646BDF27F5FF",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D5972F22-BE11-A5DE-CA28-37B933CA01EB",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D608F4A9-C025-1797-002C-4CE5861AF575",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D7163253-ADC8-EC93-6872-CFB02A77FA26",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D76FF196-6A37-616C-92C6-B42C70EA3FCF",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D835C967-2B54-A5B2-8493-1D01757A3CF1",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D8C4C36C-AD5E-E134-7841-8368D9AF6FD2",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "D996EEBC-ACC6-86FD-1BA5-0531E16A700B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "DD03A07D-EA00-AF5F-5E57-30EB74C8EDF5",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "E0FAE64E-14B5-4BD9-A562-B82382AD3B15",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "E1BEABDE-803F-A6B8-D071-F3C6842C94F5",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "E446AAD3-BFF3-AE5A-9E1F-A6637FC84254",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "E51177D0-F440-13FC-0CF8-1FEEA3C1F5F7",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "E5A7A3F5-9111-9AC5-B067-730CE2AEDBE6",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "EA2F9163-E324-45E4-8DC1-0886C6A03EFE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "EAE79919-71B9-D1FB-AB17-0BD637461413",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "EB5EF669-C4FA-700F-87F5-FE38FB87CAAB",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "EBCC1974-796C-F76A-DB7F-C3A1B3F7A3BE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "EC51FB89-5042-8466-7B74-97265FA0FCC7",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "ED2B13A3-A9A3-5FAA-CED2-A5E7EB6FA80F",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "EE9D2837-DF9B-0B91-719E-B073C64C9902",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "EEC3C921-D2F6-A3A0-7038-47243DABDAFE",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F020C193-CC0D-25A9-8A68-8E6ABCC9AC9A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F0CD1AF2-9FF8-0B35-B3CC-E86BCAD2CB88",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F1A57E73-7E62-4572-69DC-C104F63FD91D",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F2F21E2D-A5CE-B375-E05E-E4123BB91E78",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F3A50D9C-733F-E26D-1CDA-F893EF32C5B4",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F3F4BABE-A7D5-F046-EACB-25E28FF830A7",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F409E625-275D-D22C-8183-3D843CDC6D3A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F5B232F3-9765-EDB3-2F20-422EEC66DBF8",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F5DD3FD1-0CBA-F8E7-E8E0-DC8B145BC30A",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F5E32F23-B780-3C48-C8AF-89060E36C68C",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F60676F6-AE4F-9239-8DBB-61057908918E",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F633BF5A-68C3-F9D6-9319-6F7D634F31D9",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F81C8E26-A4EB-3CAF-71CF-1EF48DB39CBD",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "F8B1FE70-F33C-45E2-78D1-58A973999295",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "FA3B0786-1563-574A-4B9D-D6EA7A52E115",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "FB33246C-468F-A138-42DD-F071B6794915",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX",
+      "severity": "info",
+      "table": "cent_source_exercises",
+      "id": "FB663BE3-8C14-37AD-8E5C-5A46A013CE4B",
+      "field": "OriginalCorrectAnswer",
+      "detail": {
+        "status": "open-response",
+        "optionCount": 0,
+        "note": "May be an open-response item; original solution is retained."
+      }
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "04D69DB4-AEF0-A6C7-28EA-BAACAA494856",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "04F3ACEA-6F1A-736E-B8EC-B73C57203525",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "06A313B0-9A5C-4CEB-F2BF-A10EADF8CE53",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "077D92A5-5E2F-DF1D-3EFE-DE61B88E8C4E",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "0A2E34B1-2856-410A-6217-BCF80EAE1FFC",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "0AB16247-0394-8552-6BED-7850266F1646",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "0DA2F53E-551E-84E4-44E7-82C79C43FCDA",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "0DC06989-5CB5-FD3E-49E2-CD7BF3844AF7",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "1D27CC8A-8D2F-51CC-D074-71EC3856F8B0",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "1F836C92-840A-8C4A-7CD4-8211CE13B1A8",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "20CF1252-6F9C-5208-F00B-37F64BB67106",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "2499AFF2-B445-6E20-0F69-AF15886E44A6",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "348CB3EB-AA3A-DD92-C61F-7C3808630AF9",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "36E8B2A0-1CBB-ED67-798C-958E2F88DB74",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "3959340C-71CD-6BCC-C157-E88538039D14",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "3C1BE244-A742-CF98-BBE7-CC56A77817AF",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "3F7E203F-DF36-A0A2-58DC-0927A386EF72",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "42BB73AE-B303-0A55-664E-DF695AF05F32",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "45152A19-B9B1-B7B2-EF0D-EE83D5F0154D",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "4A4E9F67-2633-1582-550E-F9012B81BABA",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "55FBDA4B-9CD1-3CAB-5C91-4ECF9A67FF33",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "5889003D-5BAD-F198-B63E-BB0D0A183572",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "5DDBA5FA-0E1F-3988-9B7F-8D7E5D0582E4",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "5EFFB83E-D0CA-AA63-CDAE-3D330F1E48BE",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "68FCAC9C-E5CB-9A4E-2220-C33C150AB3A3",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "6989A4BB-1180-ED92-B409-9308763C3C15",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "6A11DC6C-D936-5213-F08F-22FF5B6576F9",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "6BF5017E-FD9B-9697-B0DC-F70588567617",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "73058EE7-0D77-1470-79EB-A64A90CE3CAB",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "733415F2-23FF-209F-5FB7-206618F3EBCB",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "7582C863-A92C-1185-1F59-C59A6E52AE1A",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "76B365DD-72BF-763D-C86A-F59A718068E6",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "79BA8728-9BF6-3CC0-7297-9859672FDB37",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "7ABB2DE5-5B34-FC5E-22E2-5DF3D0FC9A68",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "7B6881AF-8671-5B5F-6C2B-86AF26FB8AE8",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "7E6B813D-1566-F136-298E-D090684FE92C",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "7FE8D33F-FFCB-19A3-8EEF-C6FF7B7F53C8",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "87C979F4-8AEA-5866-7325-E40381CB90DD",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "88B413C9-0A40-432D-1C5E-634BDCC61D54",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "8D0D492E-2C3C-E47C-9C25-5CA153BC8E32",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "8F525E4B-411A-95A9-8701-6832889126E0",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "910A32E8-36E5-7109-9ECF-EBFEA7843F6D",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "923AA894-4842-05A3-7221-A4252DB6682A",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "96084829-D678-725C-1795-90B257474D73",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "966E92EB-6780-7697-598A-4DA77EB74313",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "99CA183C-3C31-03F8-8249-E7CC5B969255",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "9A2484E5-693A-069A-BCB5-34559C9C48DB",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "9C68C592-2A04-58C3-56AE-0EF8C5B77663",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "A02513D2-1471-D5B0-C7D2-774EF17588AA",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "A1AC83DA-94B8-6FEA-9549-AD151F1FA506",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "A30EC228-B985-6282-35C5-D7B6A8F1E228",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "A538D178-6FB3-44B4-0606-0E292C2158CF",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "A62ADF83-75A1-8D1C-3D5A-89EC072843E3",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "AA5A9CA4-3683-B905-2940-62679EA405D3",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "AA8859F5-05A5-190D-AAEC-6C6EF27CC7DC",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "ACCF2B07-CFBD-03BD-3782-4F9D9FAE98B6",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "B129AD3C-3842-09A1-1EE2-FA6C7767B5B5",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "B75E569E-0D7F-5626-ECC8-42ACED8EA533",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "B8F39AF3-AB38-7789-CF64-5C2D0926C461",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "BC40A8E2-C9D6-E41A-F921-D50330546B37",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "BFBAD06B-6E39-1527-BDA5-F7A2058FD9CC",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "C20F4B82-9657-6FCC-9257-59584E9C53F0",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "C2842F77-E3ED-8FF1-8EFD-215288CF6349",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "C36A66B0-EA42-B0B4-64C6-499AA15B4E8C",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "C4F49594-AD30-31F6-D741-C22D4E2433D3",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "C7EAAE68-643B-8F85-1A61-15013B01C6AB",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "CFF31DD0-0D9C-E91A-2E88-C00187633B6C",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "D84AD582-AAB8-83F0-C2C3-AB6B674A06AE",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "DB9E5B9D-B824-2D75-2142-70FACCE8BABD",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "DCCB8044-432E-3F51-7168-6EAFE96ED807",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "DF3D8C15-EE3C-EFD3-8458-4B8919EAB06C",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "E04C1A50-0493-310B-EABB-BF71FF74FE36",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "E7D2E5FD-B816-60FE-8243-AA7A4B8A447C",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "EBC26562-4452-F61C-07F4-1CF4987854F3",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "EBDCD75F-2B59-7C65-8A63-4DA0A2560E20",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "EF726FED-EEC0-64B4-992A-5725C9571916",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "F3739AF3-25FA-521F-89C9-1DF9A50DACCE",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "MISSING_ENGLISH_TOPIC_TITLE",
+      "severity": "info",
+      "table": "cent_topics",
+      "id": "FFCB1D1D-F310-35E6-3BC2-6E86FA734D17",
+      "field": "EnglishTitle",
+      "detail": "Optional English topic label is empty."
+    },
+    {
+      "code": "QUESTION_EXERCISE_TOPIC_MISMATCH",
+      "severity": "warning",
+      "table": "cent_questions",
+      "id": "2570525F-61FB-D210-144D-CD7DEBC44DCA",
+      "field": "TopicId",
+      "detail": {
+        "questionTopic": "8BB969C2-79F5-AAD2-6D43-CA1668AC942F",
+        "questionTopicTitle": "7امواج: نور و صدا (Waves: Light & Sound)",
+        "exerciseId": "4A241AAD-FB9D-0C55-A47E-6B0A0C90E063",
+        "exerciseTopic": "FD1EB2B5-6D6B-B153-ECAB-036AA32B53BD",
+        "exerciseTopicTitle": "2قانون کولن (Coulomb's Law)",
+        "note": "Both IDs exist and match the bundle; this may be intentional retagging and needs editorial review."
+      }
+    },
+    {
+      "code": "QUESTION_EXERCISE_TOPIC_MISMATCH",
+      "severity": "warning",
+      "table": "cent_questions",
+      "id": "4672ABC6-557C-7B8F-8A5E-B33AB0BECBA0",
+      "field": "TopicId",
+      "detail": {
+        "questionTopic": "DF822AEC-E8F6-2F15-450F-2D9F2505B569",
+        "questionTopicTitle": "8قوانین سه‌گانهٔ نیوتن (Newton's Laws)",
+        "exerciseId": "03956D5F-699A-AC0C-8C75-5652CC6D7A25",
+        "exerciseTopic": "A2BB973C-A047-5CF7-0BFA-B9BD6F55A13C",
+        "exerciseTopicTitle": "7عملیات برداری (Vector Operations)",
+        "note": "Both IDs exist and match the bundle; this may be intentional retagging and needs editorial review."
+      }
+    },
+    {
+      "code": "QUESTION_EXERCISE_TOPIC_MISMATCH",
+      "severity": "warning",
+      "table": "cent_questions",
+      "id": "5F2C1680-2479-8EC6-DD49-8190E2FC4FE5",
+      "field": "TopicId",
+      "detail": {
+        "questionTopic": "0EC3B515-DC4F-39D0-08B8-35CC26AFA459",
+        "questionTopicTitle": "2یکاهای پایه و مشتق SI (SI Units)",
+        "exerciseId": "5D608A1A-1866-8C10-24BC-D897D2D767EE",
+        "exerciseTopic": "112B598C-C08D-1FD2-2531-F5D387B10F20",
+        "exerciseTopicTitle": "10معادلات حرکت با شتاب ثابت (Constant-Acceleration Equations)",
+        "note": "Both IDs exist and match the bundle; this may be intentional retagging and needs editorial review."
+      }
+    },
+    {
+      "code": "QUESTION_EXERCISE_TOPIC_MISMATCH",
+      "severity": "warning",
+      "table": "cent_questions",
+      "id": "6C2239E2-FB5E-364E-68AC-F0187D176FC8",
+      "field": "TopicId",
+      "detail": {
+        "questionTopic": "FCEABDDB-2246-159C-29DB-6165CFD37E52",
+        "questionTopicTitle": "11سقوط آزاد (Free Fall)",
+        "exerciseId": "358F11FA-C41A-4BBC-37BB-0CA2059E69E6",
+        "exerciseTopic": "F65044D1-934F-E279-3D8D-69D936008808",
+        "exerciseTopicTitle": "9خطاهای تصادفی و سیستماتیک (Random & Systematic Errors)",
+        "note": "Both IDs exist and match the bundle; this may be intentional retagging and needs editorial review."
+      }
+    },
+    {
+      "code": "QUESTION_EXERCISE_TOPIC_MISMATCH",
+      "severity": "warning",
+      "table": "cent_questions",
+      "id": "7AAB407F-6270-D763-489E-31C20B8676C8",
+      "field": "TopicId",
+      "detail": {
+        "questionTopic": "BC0ED43A-87B0-D015-4BF5-ABCFD715D1A3",
+        "questionTopicTitle": "6شتاب و انواع حرکت (Acceleration)",
+        "exerciseId": "F9ECD4E1-0509-D007-084A-F6AD09ADCF51",
+        "exerciseTopic": "112B598C-C08D-1FD2-2531-F5D387B10F20",
+        "exerciseTopicTitle": "10معادلات حرکت با شتاب ثابت (Constant-Acceleration Equations)",
+        "note": "Both IDs exist and match the bundle; this may be intentional retagging and needs editorial review."
+      }
+    },
+    {
+      "code": "QUESTION_EXERCISE_TOPIC_MISMATCH",
+      "severity": "warning",
+      "table": "cent_questions",
+      "id": "8C09FE90-11DB-791A-011E-7DD1E2043FDF",
+      "field": "TopicId",
+      "detail": {
+        "questionTopic": "BC9707DD-B7E7-F2C8-7C16-3910A542358F",
+        "questionTopicTitle": "فصل ۷: نقیض گزاره‌های ترکیبی (De Morgan's Rules)",
+        "exerciseId": "AE92179E-AF45-EA69-5B52-584983499180",
+        "exerciseTopic": "79BC368D-0E70-A098-F148-709A8804AAAD",
+        "exerciseTopicTitle": "فصل ۱۳: نقیض گزاره‌های کمّی — Negating Universal & Existential Statements",
+        "note": "Both IDs exist and match the bundle; this may be intentional retagging and needs editorial review."
+      }
+    },
+    {
+      "code": "QUESTION_EXERCISE_TOPIC_MISMATCH",
+      "severity": "warning",
+      "table": "cent_questions",
+      "id": "93A20980-A82D-74AB-3D37-DC0B5BD34E52",
+      "field": "TopicId",
+      "detail": {
+        "questionTopic": "675B6883-B9FA-8B47-0C43-068636BE1B77",
+        "questionTopicTitle": "3فرایند هم‌حجم (Isochoric Process)",
+        "exerciseId": "0AE78070-2CEE-5C68-74BB-CD4DD031CC72",
+        "exerciseTopic": "09A8C98C-E431-0511-3BDF-FFA43F59ACC7",
+        "exerciseTopicTitle": "1متغیرهای حالت و معادلهٔ گاز کامل (State Variables & Ideal Gas Law)",
+        "note": "Both IDs exist and match the bundle; this may be intentional retagging and needs editorial review."
+      }
+    },
+    {
+      "code": "QUESTION_EXERCISE_TOPIC_MISMATCH",
+      "severity": "warning",
+      "table": "cent_questions",
+      "id": "B53D2A5B-C1A6-ED57-73F4-166BE4ED22FE",
+      "field": "TopicId",
+      "detail": {
+        "questionTopic": "20281958-B4F4-D891-5CD8-155CDF8F4FB3",
+        "questionTopicTitle": "2سرعت متوسط و تندی متوسط (Average Velocity & Speed)",
+        "exerciseId": "C5C620D7-7D63-0FA8-A2CF-ABF353CE65F1",
+        "exerciseTopic": "1A9577F6-E8D8-68FC-CDBE-716E3CD13698",
+        "exerciseTopicTitle": "3همگنی معادلات فیزیکی (Homogeneity)",
+        "note": "Both IDs exist and match the bundle; this may be intentional retagging and needs editorial review."
+      }
+    },
+    {
+      "code": "SOURCE_EXERCISE_REVIEW_STATUS",
+      "severity": "warning",
+      "table": "cent_source_exercises",
+      "id": "440A309A-70A0-C5BB-CED6-BD5251B50AC1",
+      "field": "Status",
+      "detail": {
+        "status": "quarantined",
+        "reviewNote": "The explanation changes an unconditional universal statement into a conditional. The options also overlap; this item is excluded from scoring.",
+        "scoredQuestionIds": []
+      }
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "29856693-615D-4665-B11B-98CD6E7E57AD",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "43A380FF-1A22-401B-8729-8449ADC673CB",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "IMAGE_ONLY_LESSON",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E",
+      "field": "SourceId",
+      "detail": "No stored machine-readable lesson text or original PDF. Exact page images are exported; no OCR or text reconstruction was performed."
+    },
+    {
+      "code": "DUPLICATE_CANDIDATE",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": [
+        "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+        "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+        "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+        "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+        "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+        "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E"
+      ],
+      "field": null,
+      "detail": {
+        "criterion": "same normalized title",
+        "count": 6,
+        "fingerprint": "340df925d05c2e13a1a21ca55ae5c088dc6dca9212bee6c74470f89d994eb7b9"
+      }
+    },
+    {
+      "code": "DUPLICATE_CANDIDATE",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": [
+        "29856693-615D-4665-B11B-98CD6E7E57AD",
+        "43A380FF-1A22-401B-8729-8449ADC673CB",
+        "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E"
+      ],
+      "field": null,
+      "detail": {
+        "criterion": "same normalized title",
+        "count": 3,
+        "fingerprint": "14af4747f34c940625340b70101491134e4533d587bb27e79380390fca8f8783"
+      }
+    },
+    {
+      "code": "DUPLICATE_CANDIDATE",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": [
+        "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+        "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+        "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+        "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+        "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+        "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E"
+      ],
+      "field": null,
+      "detail": {
+        "criterion": "identical ordered page-image hashes (image-only lessons)",
+        "count": 6,
+        "fingerprint": "9b8e368fcd02e7d23939d155357793faf97857299f9d387a7b19dcd8771a4a4a"
+      }
+    },
+    {
+      "code": "DUPLICATE_CANDIDATE",
+      "severity": "info",
+      "table": "cent_documents",
+      "id": [
+        "29856693-615D-4665-B11B-98CD6E7E57AD",
+        "43A380FF-1A22-401B-8729-8449ADC673CB",
+        "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E"
+      ],
+      "field": null,
+      "detail": {
+        "criterion": "identical ordered page-image hashes (image-only lessons)",
+        "count": 3,
+        "fingerprint": "d2607046f2b42a20922e4f2cfabd3992c4d39d0174410a098cae1c26ae59b90c"
+      }
+    },
+    {
+      "code": "DUPLICATE_CANDIDATE",
+      "severity": "info",
+      "table": "cent_trainings",
+      "id": [
+        "0B96F1DE-764A-47F7-931B-2FDDFFB3E681",
+        "8B53B160-10DB-46CC-9A06-F4F128553B4D",
+        "CAA10614-F0E6-4F56-84E8-69167147066C",
+        "EB0BD398-C645-4DD1-B47E-633904D18C67",
+        "EE17FD5D-ADE1-43A6-8E3B-C61ED983E56A",
+        "F271F06A-9425-464D-95D6-55B5452316F1"
+      ],
+      "field": null,
+      "detail": {
+        "criterion": "same normalized title",
+        "count": 6,
+        "fingerprint": "31cbecad3e9bf7214c4ffca5ffdd8fb92d19c203a1c72cdf248a508c3582a408"
+      }
+    },
+    {
+      "code": "DUPLICATE_CANDIDATE",
+      "severity": "info",
+      "table": "cent_trainings",
+      "id": [
+        "21EF91B0-71F2-4BEC-A0ED-C2F5AD24E0B8",
+        "602AB3A0-D200-4B2D-80E9-DC9157389F92",
+        "AED10460-71F5-4878-A3AD-3E570A9F9AD5"
+      ],
+      "field": null,
+      "detail": {
+        "criterion": "same normalized title",
+        "count": 3,
+        "fingerprint": "186083e4677cf7ad52f8e7713ff69d605a20c27fd623d3dacc136d5815466784"
+      }
+    }
+  ]
+}

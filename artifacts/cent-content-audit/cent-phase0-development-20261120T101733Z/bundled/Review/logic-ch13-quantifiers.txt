@@ -1,0 +1,93 @@
+جزوه لاجیک CEnT — فصل ۱۲: قیاس فرضی و Modus Ponens
+
+CENT LOGIC — PART A · CHAPTER 13 / 13 · 🔴 CHALLENGE
+فصل ۱۳: نقیض گزاره‌های کمّی — Negating Universal & Existential Statements
+این آخرین فصل بخش A است و مستقیماً روی فصل ۱۰ بنا می‌شه — همون قوانین «All / Some / No»، ولی این‌بار به زبان نمادین کمّی‌سنج‌ها (quantifiers) و با جمله‌های انگلیسیِ پیچیده‌تر و گول‌زننده‌تر.
+Bاین مبحث چیست؟
+خیلی از جمله‌های انگلیسی، بدون استفاده از کلمات صریح «all» یا «some»، در واقع یک ادعای کمّی رو پنهان می‌کنن — مثل «each time…»، «anyone who…»، یا «no one has…». این فصل کمکت می‌کنه این کمّی‌سنج‌های پنهان رو پیدا کنی و درست نقیضشون کنی.
+Cمفهوم اصلی
+قدم ۱ — نمادهای کمّی‌سنج: ∀x یعنی «برای همه‌ی x» (all/every/each)، ∃x یعنی «حداقل یک x وجود داره» (some/there exists/a…that)، و ∄x یعنی «هیچ x ای وجود نداره» (no/none).
+قدم ۲ — سه قانون نقیضِ کمّی‌سنج (دقیقاً معادلِ همون قوانین فصل ۱۰، فقط با نماد):
+گزاره
+نقیضش
+∀x; p(x)
+∃x; ~p(x)
+∃x; p(x)
+∀x; ~p(x) (= ∄x; p(x))
+∄x; p(x)
+∃x; p(x)
+"All doctors have illegible handwriting." (همه‌ی دکترها خط ناخوانا دارن)
+نقیض: "There exists a doctor who has legible handwriting." (دکتری وجود داره که خط خوانا داره) — طبق قدم ۲، فقط یک استثنا کافیه.
+"There exists a bear that is white." (خرسی وجود داره که سفیده)
+نقیض: "No bear is white." (هیچ خرسی سفید نیست) — طبق قدم ۲، باید نشون بدی هیچ نمونه‌ای وجود نداره.
+"No child lies." (هیچ کودکی دروغ نمی‌گه)
+نقیض: "There exists a child who lies." (کودکی وجود داره که دروغ می‌گه)
+قدم ۳ — کمّی‌سنج‌های پنهان: عبارت‌هایی مثل «each time…»، «whenever…»، «anyone who…» در واقع یک شرطیِ زیرِ یک ∀ پنهان هستن. «Each time X, Y» یعنی «برای هر لحظه‌ای، اگه X پیش بیاد، Y هم پیش میاد» — یک ترکیب از ∀ (فصل ۱۳) و شرطی (فصل ۴).
+"Each time I took my umbrella, it did not rain."
+این معادلِ «∀t: If (I took my umbrella at time t) then (it did not rain at time t)» است. برای نقیض کردنش، باید هم قانونِ نقیضِ ∀ (قدم ۲) رو اعمال کنیم، هم قانونِ نقیضِ شرطی (فصل ۷): not-(if A then B) = A and not-B. نتیجه: "There is at least one time I took my umbrella AND it rained."
+Dقوانین و اصول مهم
+All ⟷ نقیض: Some…not (فقط یک استثنا کافیه).
+Some ⟷ نقیض: No (باید نشون بدی هیچ نمونه‌ای نیست).
+No ⟷ نقیض: Some (فقط یک نمونه کافیه).
+عبارت‌های «each time / whenever / anyone who» یک ∀ پنهان دارن که معمولاً با یک شرطی ترکیب شده — برای نقیضشون، هم قانون کمّی‌سنج و هم قانون نقیضِ شرطی (فصل ۷) رو با هم لازم داری.
+Eروش حل
+کمّی‌سنجِ پنهان یا صریحِ جمله رو پیدا کن (all/each/every = ∀، some/a…that = ∃، no/none = ∄).
+اگه جمله شاملِ یک شرطیِ داخلی هم بود (مثل «each time X, Y»)، اول اون رو به فرم «If X then Y» بازنویسی کن.
+قانونِ نقیضِ کمّی‌سنج رو از جدول قدم ۲ اعمال کن (∀⇄∃).
+اگه شرطیِ داخلی هم داشت، طبق فصل ۷ نقیضش کن (not-(if X then Y) = X and not-Y).
+→ جواب: گزاره‌ی نقیض‌شده به زبان طبیعی.
+Fمثال آموزشی
+Write the negation of: "Not all donuts come out with a hole."
+این جمله خودش از قبل یک نقیض داره (not-All). طبق قدم ۲، «not-(All A are B)» = «Some A are not-B». پس معادلش می‌شه: "Some donuts do not come out with a hole." — نه یک ادعای جدید و شدیدتر مثل «هیچ دونات‌ای سوراخ نداره».
+Gمثال امتحانی
+The statement "Each student who studies passes the exam" is FALSE. What does this tell us?
+A) Whoever does not study will fail.
+B) There are students who pass the exam without having studied.
+C) Some students who studied did not pass the exam.
+D) All those who study pass the exam.
+🎯 EXAM TIP
+هر وقت کلمات each, every, whenever, anyone who, no one رو دیدی، فوراً تشخیص بده که یک کمّی‌سنج (∀ یا ∄) پنهانه. اگه بعدش یک رابطه‌ی «اگه…پس» هم بود، هر دو قانون (نقیضِ کمّی‌سنج از این فصل + نقیضِ شرطی از فصل ۷) رو با هم لازم داری.
+⚡ QUICK METHOD
+سه قانون این فصل، دقیقاً همون سه قانونِ فصل ۱۰ هستن با نماد جدید: ∀↔∃not، ∃↔∀not (یا ∄)، ∄↔∃. اگه فصل ۱۰ رو خوب یاد گرفتی، فقط کافیه علائم رو بشناسی — هیچ قانونِ جدیدی یاد نگرفتی.
+⚠️ COMMON MISTAKES
+اشتباه: نقیض کردن فقط جمله‌ی داخلی (predicate) بدون تغییر کمّی‌سنج — مثلاً نقیضِ «Each time I took my umbrella, it did not rain» رو اشتباهاً «Each time I took my umbrella, it rained» نوشتن.
+چرا اتفاق می‌افته: ذهن معمولاً روی نقیضِ فعلِ اصلی (rained/did not rain) تمرکز می‌کنه و فراموش می‌کنه که خودِ کمّی‌سنجِ «each» هم باید به «حداقل یک مورد» (∃) تبدیل بشه.
+چطور جلوش رو بگیریم: همیشه هر دو مرحله رو جداگانه چک کن: (۱) کمّی‌سنج عوض شد؟ (۲) شرطیِ داخلی هم طبق فصل ۷ درست نقیض شد؟
+🪤 QUESTION TRAP
+در سؤالاتی مثل «No man has one name only»، گزینه‌ی نادرست معمولاً یک ادعای مثبتِ نامرتبط می‌ذاره (مثل «همه‌ی مردها اسم دارن» یا «مردی به نام Mario وجود داره») به‌جای نقیضِ دقیقِ گزاره. همیشه فقط دنبال نقیضِ مستقیمِ همون کمّی‌سنجِ اصلی باش، نه یک ادعای جدید و نامرتبط.
+🧠 MUST REMEMBER
+not-(∀x; p(x)) = ∃x; not-p(x) | not-(∃x; p(x)) = ∀x; not-p(x) | not-(∄x; p(x)) = ∃x; p(x). عبارت‌های «each/whenever/anyone who» یک ∀+شرطیِ پنهان دارن — برای نقیضشون هر دو قانون (این فصل + فصل ۷) لازمه.
+📝تمرین
+Consider the statement "No dog has three paws." Saying that it is false means that:
+A) All dogs have four paws.
+B) At least one dog has three paws.
+C) At least one dog has a number of paws different from three.
+D) All dogs have three paws.
+نمایش پاسخ و توضیح
+پاسخ درست: B. طبق قدم ۲، نقیضِ «∄x; p(x)» می‌شه «∃x; p(x)». نقیضِ «هیچ سگی سه‌پا نداره» یعنی «حداقل یک سگ سه‌پا داره» — نه ادعای بی‌ربطی درباره‌ی چهارپا بودن یا تعداد پاهای متفاوت.
+Saying that it's false that "no man has one name only" is equivalent to saying that:
+A) At least one man has two names.
+B) There exists a man named Mario.
+C) There exists at least one man with one name only.
+D) There exists a man without a name.
+نمایش پاسخ و توضیح
+پاسخ درست: C. "No man has one name only" یک گزاره‌ی ∄ است. طبق قدم ۲، نقیضش «∃x; p(x)» می‌شه — یعنی مستقیماً «حداقل یک مرد با فقط یک اسم وجود داره». گزینه‌های A، B و D همه ادعاهای اضافه یا نامرتبطی هستن که هیچ‌کدوم دقیقاً نقیضِ گزاره‌ی اصلی نیستن.
+The statement "It's not true that it is rainy and windy" means that:
+A) It is not rainy, or it is not windy.
+B) It is rainy and it is not windy.
+C) It is not rainy and it is not windy.
+D) It is not rainy and it is windy.
+نمایش پاسخ و توضیح
+پاسخ درست: A. این یک نقیضِ عطف ساده‌ست (فصل ۷)، نه یک گزاره‌ی کمّی، ولی دقیقاً همون منطقِ «and⇄or» رو نشون می‌ده که در کل این بخش دیدیم: not-(P and Q) = (not-P) or (not-Q). گزینه‌ی C دقیقاً همون اشتباه رایج هست — عملگر رو عوض نکرده و «and» رو نگه داشته.
+🚀مرور سریع — فصل ۱۳ (پایان بخش A)
+مفاهیم اصلی
+∀x;p(x) ↔ نقیض: ∃x;~p(x)
+∃x;p(x) ↔ نقیض: ∀x;~p(x) (=∄x;p(x))
+∄x;p(x) ↔ نقیض: ∃x;p(x)
+روش
+کمّی‌سنجِ پنهان (each/whenever/no one) رو پیدا کن.
+اگه شرطیِ داخلی داشت، فصل ۷ رو هم اعمال کن.
+اشتباهات رایج
+فراموش کردنِ تغییرِ خودِ کمّی‌سنج، فقط نقیضِ فعل.
+دام‌های تستی
+گزینه‌های نامرتبط به‌جای نقیضِ دقیق.

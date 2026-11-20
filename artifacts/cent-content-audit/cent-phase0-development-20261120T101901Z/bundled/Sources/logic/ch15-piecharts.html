@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۵: نمودار دایره‌ای</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART B · CHAPTER 15 / 19</p>
+  <h1>فصل ۱۵: خواندن نمودارهای دایره‌ای — Reading Pie Charts</h1>
+  <p class="lede">نمودار دایره‌ای سهم هر بخش از یک کل رو نشون می‌ده. قانون طلایی: مجموع همه‌ی سهم‌ها همیشه باید ۱۰۰٪ بشه — و همین قانون، ابزار اصلیِ چک کردنِ سریعِ درستیِ جواب‌هاته.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>در نمودار دایره‌ای <span class="term">(pie chart)</span>، هر قطاع (slice) درصدی از کل رو نشون می‌ده. سؤالات معمولاً می‌خوان مقدارِ واقعیِ یک قطاع رو از روی درصد و کل حساب کنی، یا برعکس — از روی مقدار یک قطاع، کل رو پیدا کنی.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — تبدیل درصد به مقدار: <code>مقدار = درصد × کل</code>.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p><strong>Monthly Budget of a Household</strong> — Rent: 40%, Food: 25%, Transportation: 15%, Savings: 10%, Other: 10%</p>
+      <p class="q" style="margin-top:8px;">If the total budget is 50 million Tomans, how much is spent on food?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ:</strong> ۲۵٪ × ۵۰,۰۰۰,۰۰۰ = ۱۲,۵۰۰,۰۰۰ تومان.</p>
+  </div>
+
+  <p><strong>قدم ۲ — همون فرمول برای شمارش افراد هم کار می‌کنه، نه فقط پول.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p><strong>Favorite Beverage Survey</strong> — Tea: 45%, Coffee: 30%, Water: 15%, Juice: 10%</p>
+      <p class="q" style="margin-top:8px;">If 200 people participated, how many chose coffee?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ:</strong> ۳۰٪ × ۲۰۰ = ۶۰ نفر.</p>
+  </div>
+
+  <p><strong>قدم ۳ — ابزار چک کردنِ خودکار: چون همه‌ی سهم‌ها باید ۱۰۰٪ بشن، اگه یک عدد رو گم کردی، می‌تونی از باقی‌مونده حسابش کنی.</strong> و اگه یک جدولِ اعداد خام (نه درصد) بهت دادن و پرسیدن «کدوم جدول با این نمودار جور در میاد؟»، باید هم اندازه‌ی نسبیِ قطاع‌ها رو چک کنی، هم اینکه مجموعشون با هم سازگاره.</p>
+
+  <div class="ex-block">
+    <div class="ex-tag">نمونه‌ی تشخیصی</div>
+    <div class="en-block">
+      <p>Suppose a pie chart shows: "Vanilla" and "Mint" as the two smallest, clearly EQUAL slices; "Raspberry" as a medium slice; "Chocolate" and "Strawberry" as the two largest, clearly EQUAL slices.</p>
+    </div>
+    <p style="margin-top:10px;">هر جدولی که این توصیف رو نقض کنه — مثلاً «Vanilla» و «Mint» رو خیلی متفاوت نشون بده، یا «Raspberry» رو بزرگ‌تر از «Chocolate» نشون بده — نمی‌تونه با این نمودار مطابقت داشته باشه، فارغ از اینکه مجموع اعدادش درست باشه یا نه.</p>
+  </div>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>مجموع همه‌ی سهم‌های یک نمودار دایره‌ای همیشه باید ۱۰۰٪ بشه.</li>
+    <li><code>مقدار یک قطاع = درصد × کل</code>؛ برعکسش: <code>کل = مقدار یک قطاع / درصد</code>.</li>
+    <li>برای تطبیقِ یک جدولِ اعداد خام با یک نمودار دایره‌ای، هم <strong>ترتیب نسبیِ اندازه‌ها</strong> باید مطابقت داشته باشه، هم <strong>مجموع اعداد</strong> باید با هم سازگار باشه.</li>
+    <li>قطاع‌هایی که در نمودار تقریباً مساوی به‌نظر می‌رسن، باید در جدولِ اعدادِ خام هم تقریباً مساوی باشن.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>مشخص کن سؤال دنبال چیه: مقدار یک قطاع، کلِ مجموعه، یا تطبیقِ یک جدول با نمودار.</li>
+    <li>اگه دنبال مقدار یک قطاعی: درصدش رو در کل ضرب کن.</li>
+    <li>اگه دنبال کل هستی: مقدار قطاع رو بر درصدش تقسیم کن.</li>
+    <li>اگه باید یک جدول رو با نمودار تطبیق بدی: اول ترتیب نسبیِ بزرگی/کوچیکیِ قطاع‌ها رو با ترتیب اعداد جدول مقایسه کن، بعد مجموع رو چک کن.</li>
+    <li class="arrow-final">→ جواب: طبق محاسبه یا تطبیقِ دقیق.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">A pie chart shows a company's expenses: Salaries 50%, Rent 20%, Marketing 20%, Other 10%. If the amount spent on Rent is €40,000, what is the company's TOTAL expense?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ:</strong> کل = مقدار / درصد = ۴۰,۰۰۰ / ۰.۲۰ = ۲۰۰,۰۰۰ یورو. اینجا برخلاف مثال‌های قبلی، از یک قطاع به سمت کل حرکت کردیم، نه برعکس.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">A pie chart shows the favorite ice cream flavor for a sample of students. Visually: "Vanilla" and "Mint" are the two smallest slices and look equal to each other; "Raspberry" is a medium-sized slice; "Chocolate" and "Strawberry" are the two largest slices and look equal to each other. Which row could show the number of students who chose each flavor?</p>
+      <table style="margin-top:10px;">
+        <tr><th></th><th>Vanilla</th><th>Raspberry</th><th>Strawberry</th><th>Chocolate</th><th>Mint</th></tr>
+        <tr><td>A</td><td>23</td><td>41</td><td>35</td><td>35</td><td>16</td></tr>
+        <tr><td>B</td><td>5</td><td>34</td><td>36</td><td>35</td><td>10</td></tr>
+        <tr><td>C</td><td>15</td><td>29</td><td>32</td><td>31</td><td>13</td></tr>
+        <tr><td>D</td><td>26</td><td>61</td><td>73</td><td>73</td><td>37</td></tr>
+        <tr><td>E</td><td>36</td><td>55</td><td>71</td><td>72</td><td>36</td></tr>
+      </table>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>قبل از هر محاسبه‌ای، توصیفِ نموداری رو به یک چک‌لیست تبدیل کن: (۱) Vanilla ≈ Mint (تقریباً مساوی و کوچیک)، (۲) Chocolate ≈ Strawberry (تقریباً مساوی و بزرگ)، (۳) Raspberry باید بینِ این دو گروه باشه (نه خیلی کوچیک، نه به بزرگیِ دو قطاع اصلی).</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>ردیف E: Vanilla=36, Mint=36 (کاملاً مساوی ✓). Strawberry=71, Chocolate=72 (تقریباً مساوی ✓). Raspberry=55 (دقیقاً بین ۳۶ و ۷۱/۷۲ قرار داره ✓). همه‌ی سه شرط برقرارن.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>ردیف A: Raspberry=41 بزرگ‌تر از Strawberry و Chocolate (هر دو ۳۵) است — این برخلاف توصیفِ نمودار (که Raspberry باید کوچیک‌تر از این دو باشه) است، رد می‌شه. ردیف D: Vanilla=26 در مقابل Mint=37 — این دو زیادی با هم فرق دارن تا «تقریباً مساوی» حساب بشن، در حالی که در نمودار این دو قطاع کاملاً یکسان به‌نظر می‌رسیدن.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای حدس زدن یا فقط چک کردنِ مجموع اعداد (که در چند ردیف ممکنه یکسان باشه)، مستقیماً روابطِ نسبیِ بینِ قطاع‌ها رو — که خودِ تصویر نمودار نشونمون داده — امتحان کردیم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>وقتی باید یک جدولِ اعداد رو با یک نمودار دایره‌ای تطبیق بدی، اول فقط به روابطِ نسبی نگاه کن (کدوم بزرگ‌تره، کدوم‌ها مساوی‌ان) — نه به اعداد دقیق. این کار خیلی سریع‌تر از محاسبه‌ی درصدِ دقیقِ هر ردیفه.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>اگه مقدارِ یک قطاع رو داری و می‌خوای مقدارِ قطاعِ دیگه‌ای رو پیدا کنی، لازم نیست حتماً از «کل» عبور کنی — می‌تونی مستقیماً نسبتِ دو درصد رو ضرب کنی: <code>مقدارِ B = مقدارِ A × (درصد B / درصد A)</code>. این یک مرحله رو حذف می‌کنه.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> فراموش کردنِ اینکه درصدها باید به کل مجموعه اعمال بشن، نه به یک زیرمجموعه‌ی دیگه.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> وقتی چند درصد پشتِ سرِ هم در سؤال میان (مثلاً درصدِ زنان از کل، و بعد درصدِ یک رشته از زنان)، ذهن گاهی هر دو درصد رو مستقیم روی «کل» اعمال می‌کنه، در حالی که درصدِ دوم باید روی نتیجه‌ی درصدِ اول اعمال بشه (این دقیقاً همون منطقِ فصل «Percentages» در تیپِ ریاضیه که قبلاً دیدیم).</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه با دقت مشخص کن هر درصد نسبت به کدوم مبناست — کلِ اصلی، یا یک زیرمجموعه‌ی قبلی.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>در سؤالاتِ تطبیقِ جدول با نمودار، آزمون گزینه‌هایی می‌ذاره که مجموعشون دقیقاً با هم برابره (مثل ردیف‌های D و E که هر دو مجموعِ ۲۷۰ دارن)، ولی فقط یکی از اون‌ها روابطِ نسبیِ صحیح رو رعایت می‌کنه. مجموع بودنِ برابر، به‌تنهایی کافی نیست.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>مجموعِ سهم‌ها = ۱۰۰٪. <code>مقدار قطاع = درصد × کل</code>. برای تطبیقِ جدول با نمودار، هم اندازه‌ی نسبیِ قطاع‌ها رو چک کن، هم مجموعِ کل رو.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">A pie chart shows a class's favorite subjects: Math 30%, Science 25%, Art 20%, History 15%, Other 10%. If there are 40 students, how many chose Science?</p>
+      <ul class="options">
+        <li>A) 8</li>
+        <li class="correct">B) 10</li>
+        <li>C) 12</li>
+        <li>D) 15</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> ۲۵٪ × ۴۰ = ۱۰.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">A pie chart shows a store's inventory by category. "Electronics" makes up 35% of inventory, and there are 210 electronic items. How many total items are in the inventory?</p>
+      <ul class="options">
+        <li>A) 500</li>
+        <li>B) 550</li>
+        <li class="correct">C) 600</li>
+        <li>D) 650</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> کل = مقدار / درصد = ۲۱۰ / ۰.۳۵ = ۶۰۰.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">A pie chart shows a household's monthly spending: Rent 45%, Food 20%, Utilities 15%, Entertainment 10%, Savings 10%. This month, the amount spent on Food was €300. Next month, if the total budget increases by 20% but the percentage breakdown stays exactly the same, how much will be spent on Rent next month?</p>
+      <ul class="options">
+        <li>A) €675</li>
+        <li class="correct">B) €810</li>
+        <li>C) €900</li>
+        <li>D) €945</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> اول کلِ فعلی رو پیدا کن: کل = ۳۰۰ / ۰.۲۰ = ۱,۵۰۰ یورو. کلِ ماه بعد با ۲۰٪ افزایش: ۱,۵۰۰ × ۱.۲۰ = ۱,۸۰۰ یورو. چون درصدِ اجاره (۴۵٪) ثابت مونده: ۴۵٪ × ۱,۸۰۰ = ۸۱۰ یورو. این سؤال دو مرحله داره — اول برگشت به کل از روی یک قطاع، بعد رفتن به قطاعِ دیگه با کلِ جدید.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۵</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>مجموعِ سهم‌ها = ۱۰۰٪.</li>
+          <li>مقدار قطاع = درصد × کل.</li>
+          <li>کل = مقدار قطاع / درصد.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>برای تطبیقِ جدول با نمودار، اول روابطِ نسبی رو چک کن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>اعمالِ یک درصدِ زیرمجموعه روی کلِ اصلی، به‌جای زیرمجموعه.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>گزینه‌هایی با مجموعِ برابر ولی روابطِ نسبیِ متفاوت.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

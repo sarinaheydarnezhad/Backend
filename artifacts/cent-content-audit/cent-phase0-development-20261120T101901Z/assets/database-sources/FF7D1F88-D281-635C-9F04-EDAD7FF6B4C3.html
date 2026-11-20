@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۷: نقیض گزاره‌های ترکیبی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 7 / 13 · 🔴 CHALLENGE</p>
+  <h1>فصل ۷: نقیض گزاره‌های ترکیبی (De Morgan's Rules)</h1>
+  <p class="lede">تا اینجا یاد گرفتی چطور نقیضِ یک گزاره‌ی ساده رو بسازی. اما وقتی گزاره ترکیبیه (and, or, if…then)، نقیض گرفتن یک قانون خاص و بسیار پرکاربرد داره: <strong>عملگر عوض می‌شه</strong>. این یکی از باارزش‌ترین قوانینیه که در کل بخش Logic حفظ می‌کنی.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>سؤالات «نقیض این گزاره چیه؟» <span class="term">(Write the contradictory of...)</span> در آزمون CEnT خیلی رایجن. وقتی گزاره‌ی اصلی یک عطف، فصل، یا شرطیه، نقیضش با گذاشتن ساده‌ی «not» جلوی کل جمله ساخته نمی‌شه — باید طبق قوانین <span class="term">De Morgan's Rules</span> بازنویسیش کنی.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — نقیض مضاعف: not-(not-A) = A.</strong> دو تا «not» پشت سر هم، همدیگه رو خنثی می‌کنن.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>A = "Sarah makes good coffee."<br>not-A = "Sarah does not make good coffee."<br>not-(not-A) = "Sarah makes good coffee." (= A)</p>
+    </div>
+    <p style="margin-top:10px;">⚠️ هشدار: این قانون فقط وقتی درست کار می‌کنه که واقعاً یک نقیضِ درست ساخته باشی، نه یک contrary (طبق فصل ۵). مثال: "It's false that Sarah and Tom didn't go bike riding." = "Both Sarah and Tom went bike riding."</p>
+  </div>
+
+  <p><strong>قدم ۲ — نقیض عطف: not-(A and B) = (not-A) or (not-B).</strong> برای غلط کردن یک ادعای «هر دو درست»، کافیه <em>حداقل یکی</em> غلط باشه — برای همین نتیجه یک فصل می‌شه.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>A = "Dan got an A in physics and a B in history."<br>Contradictory = "Either Dan didn't get an A in physics or he didn't get a B in history."</p>
+    </div>
+  </div>
+
+  <p><strong>قدم ۳ — نقیض فصل: not-(A or B) = (not-A) and (not-B).</strong> برای غلط کردن یک ادعای «حداقل یکی درست»، باید <em>هر دو</em> غلط باشن — برای همین نتیجه یک عطف می‌شه. به این دو قانون (قدم ۲ و ۳) با هم <span class="term">De Morgan's Rules</span> می‌گن.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>A = "Dan will either go to law school or become a priest."<br>Contradictory = "Dan will not go to law school and he will not become a priest." (= "Dan will neither go to law school nor become a priest.")</p>
+    </div>
+  </div>
+
+  <p><strong>قدم ۴ — نقیض شرطی: not-(if A then B) = A and not-B.</strong> یادت باشه از فصل ۴: شرطی فقط در یک حالت غلطه — مقدم درست و تالی غلط. پس نقیضِ شرطی دقیقاً همون یک حالتِ خاصه، به‌فرم یک عطف.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>A = "If I pay for dinner, then you'll pay for drinks."<br>Contradictory = "I pay for dinner, but you don't pay for drinks."</p>
+    </div>
+    <p style="margin-top:10px;">این تطابق با جدول درستی فصل ۴ کاملاً هم‌خونیه: تنها ردیفی که شرطی رو غلط می‌کنه، دقیقاً همینه.</p>
+  </div>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم — جدول تبدیل</h2>
+  <table>
+    <tr><th>گزاره‌ی اصلی</th><th>نقیضش</th></tr>
+    <tr><td><code>not-(not-A)</code></td><td><code>A</code></td></tr>
+    <tr><td><code>not-(A and B)</code></td><td><code>(not-A) or (not-B)</code></td></tr>
+    <tr><td><code>not-(A or B)</code></td><td><code>(not-A) and (not-B)</code></td></tr>
+    <tr><td><code>not-(if A then B)</code></td><td><code>A and (not-B)</code></td></tr>
+  </table>
+  <ul>
+    <li>نقیض یک عطف، همیشه یک فصله (و برعکس) — عملگر «عوض» می‌شه.</li>
+    <li>نقیض یک شرطی، همیشه یک عطفه — و مقدم دست‌نخورده می‌مونه، فقط تالی نقیض می‌شه.</li>
+    <li>در همه‌ی این قوانین، «not» به‌جای اینکه جلوی کل جمله بمونه، به داخل جمله <strong>پخش می‌شه</strong> و در همین حین عملگر رو عوض می‌کنه.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>مشخص کن گزاره‌ی اصلی چه ساختاری داره: عطف، فصل، یا شرطی.</li>
+    <li>طبق جدول بالا، قانون تبدیلِ مناسب رو انتخاب کن.</li>
+    <li>اجزای داخلی رو هم — طبق قانونِ همون قانون — نقیض کن (فقط برای عطف/فصل هر دو جزء نقیض می‌شن؛ برای شرطی، فقط تالی نقیض می‌شه و مقدم دست‌نخورده می‌مونه).</li>
+    <li>نتیجه رو با یک مثال عددی/واقعی چک کن تا مطمئن بشی درسته.</li>
+    <li class="arrow-final">→ جواب: نقیضِ درستِ گزاره‌ی ترکیبی.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">Write the contradictory of: "John and Mary went to the zoo."</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ:</strong> "Either John didn't go to the zoo or Mary didn't go to the zoo." این یک عطفه («John went» and «Mary went»)، پس طبق قدم ۲، نقیضش یک فصل از نقیض هر دو جزء می‌شه.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">"Sam loves hotdogs, but he doesn't like relish." What is the correct contradictory of this claim?</p>
+      <ul class="options">
+        <li>A) "Sam doesn't love hotdogs and he likes relish."</li>
+        <li class="correct">B) "Either Sam doesn't love hotdogs, or he likes relish."</li>
+        <li>C) "Sam doesn't love hotdogs or he doesn't like relish."</li>
+        <li>D) "Sam loves hotdogs and he likes relish."</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>اول یادت باشه «but» طبق فصل ۲ منطقاً همون «and» است. پس گزاره اینه: "Sam loves hotdogs AND he doesn't like relish."</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>طبق قدم ۲، نقیضِ یک عطف، یک فصله از نقیضِ هر جزء: نقیضِ «loves hotdogs» می‌شه «doesn't love hotdogs»، و نقیضِ «doesn't like relish» می‌شه «likes relish». پس نتیجه: "Sam doesn't love hotdogs, OR he likes relish."</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A دقیقاً همون رایج‌ترین اشتباهه: فقط اجزا رو نقیض کرده ولی عملگر «and» رو عوض نکرده به «or». گزینه‌ی C اجزا رو درست نقیض نکرده (جزء دوم رو دوباره نقیض کرده، در حالی که باید برگرده به حالت مثبت "likes relish"). گزینه‌ی D اصلاً هیچ نقیضی انجام نداده.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای حدس زدن، مستقیم از فرمول not-(A and B) = (not-A) or (not-B) استفاده کردیم و هر جزء رو جداگانه و دقیق نقیض کردیم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>یک قانون حفظی ساده برای همه‌ی این فصل: <strong>«not» که وارد پرانتز می‌شه، عملگر رو برعکس می‌کنه.»</strong> and ⇄ or، و if…then تبدیل به and می‌شه (با فقط تالی نقیض‌شده). این یک قانون مکانیکیه — نیازی به فکر کردن دوباره از صفر نیست، فقط کافیه ساختار رو تشخیص بدی و قانون رو اعمال کنی.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>برای چک کردن سریع جوابت، یک مثال عددی/واقعی با یک ترکیب خاص از T/F امتحان کن. مثلاً برای «not-(A and B)»، فرض کن A=True, B=False. گزاره‌ی اصلی «A and B» می‌شه False، پس نقیضش باید True باشه. حالا «(not-A) or (not-B)» = «False or True» = True. ✓ جواب تأیید شد.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> نقیض کردن هر دو جزء ولی عملگر رو بدون تغییر نگه داشتن — یعنی نوشتن «not-(A and B) = (not-A) and (not-B)» به‌جای «or».</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> ذهن به‌طور شهودی فکر می‌کنه چون «not» داخل پرانتز پخش شده، فقط باید اجزا عوض بشن، بدون توجه به اینکه خودِ رابط بین اجزا هم باید عوض بشه.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه جدول قدم ۴ رو مرور کن: and⇄or. این تبدیل، جدا از نقیض کردنِ اجزا، یک مرحله‌ی اضافه‌ست که هیچ‌وقت نباید فراموشش کنی.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>برای نقیض شرطی، آزمون گاهی گزینه‌ای می‌ذاره به‌فرم «If not-A then not-B» — این اشتباهه و اصلاً نقیضِ شرطی نیست (این تبدیل، که بهش <span class="term">inverse</span> می‌گن، موضوع فصل ۸ است و رابطه‌ی دیگه‌ای با گزاره‌ی اصلی داره). نقیضِ درستِ «If A then B» همیشه یک عطفه: «A and not-B» — نه یک شرطیِ دیگه.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p><code>not-(A and B) = (not-A) or (not-B)</code> &nbsp;|&nbsp; <code>not-(A or B) = (not-A) and (not-B)</code> &nbsp;|&nbsp; <code>not-(if A then B) = A and not-B</code>. عملگر همیشه عوض می‌شه؛ نقیضِ شرطی همیشه یک عطفه با مقدم دست‌نخورده.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">What is the contradictory of "The package arrived on time and undamaged"?</p>
+      <ul class="options">
+        <li>A) "The package didn't arrive on time and it was damaged."</li>
+        <li class="correct">B) "The package didn't arrive on time, or it was damaged."</li>
+        <li>C) "The package arrived on time or undamaged."</li>
+        <li>D) "The package arrived late and undamaged."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> این یک عطفه؛ طبق قانون، نقیضش یک فصله از نقیضِ هر جزء. گزینه‌ی A دقیقاً همون اشتباه رایجه (عملگر رو عوض نکرده).</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">What is the contradictory of "Either the printer is out of paper, or it is out of toner"?</p>
+      <ul class="options">
+        <li>A) "The printer is out of paper or out of toner."</li>
+        <li>B) "The printer is not out of paper, or it is not out of toner."</li>
+        <li class="correct">C) "The printer is not out of paper, and it is not out of toner."</li>
+        <li>D) "The printer is out of both paper and toner."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> این یک فصله؛ طبق De Morgan's Rules، نقیضِ فصل، یک عطفه از نقیضِ هر جزء. گزینه‌ی B عملگر رو عوض نکرده (هنوز «or» مونده). گزینه‌ی D اصلاً نقیض نیست، بلکه خودِ حالت مثبتِ هر دو جزئه.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">What is the contradictory of "If the invoice is approved, then payment is processed within 48 hours"?</p>
+      <ul class="options">
+        <li>A) "If the invoice is not approved, then payment is not processed within 48 hours."</li>
+        <li>B) "The invoice is not approved, and payment is not processed within 48 hours."</li>
+        <li class="correct">C) "The invoice is approved, and payment is not processed within 48 hours."</li>
+        <li>D) "If payment is not processed within 48 hours, then the invoice was not approved."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> طبق قدم ۴، نقیضِ «If A then B» همیشه «A and not-B» است — مقدم (تأیید فاکتور) دست‌نخورده می‌مونه و فقط تالی نقیض می‌شه. گزینه‌ی A دقیقاً همون دام «Question Trap» است — یک شرطیِ دیگه (inverse) که اصلاً نقیض نیست. گزینه‌ی D هم یک شرطیِ دیگه‌ست (contrapositive که در فصل ۸ می‌بینیم و در واقع با گزاره‌ی اصلی هم‌ارزه، نه نقیضش). گزینه‌ی B مقدم رو هم اشتباهاً نقیض کرده.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۷</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی (جدول تبدیل)</h3>
+        <ul>
+          <li>not-(not-A) = A</li>
+          <li>not-(A and B) = (not-A) or (not-B)</li>
+          <li>not-(A or B) = (not-A) and (not-B)</li>
+          <li>not-(if A then B) = A and not-B</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>ساختار رو تشخیص بده (and/or/if…then).</li>
+          <li>قانون تبدیل مناسب رو اعمال کن.</li>
+          <li>با یک مثال T/F جواب رو چک کن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>نقیض کردن اجزا بدون عوض کردن عملگر.</li>
+          <li>ساختن «If not-A then not-B» به‌جای «A and not-B».</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>گزینه‌های inverse یا contrapositive به‌جای نقیضِ واقعی.</li>
+          <li>عوض نشدنِ and⇄or در گزینه‌های نادرست.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۶: سازگاری و ناسازگاری</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 6 / 13</p>
+  <h1>فصل ۶: سازگاری و ناسازگاری — Consistency vs Inconsistency</h1>
+  <p class="lede">حالا که با تناقض («A and not-A») آشنا شدی، وقتشه یاد بگیری چطور بفهمی چند گزاره‌ی کنار هم، جمعاً یک تناقض می‌سازن یا نه — حتی وقتی هیچ دوتاشون به‌تنهایی متناقض به‌نظر نمی‌رسن.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>وقتی آزمون چند گزاره رو با هم بهت می‌ده، ازت می‌خواد بگی آیا ممکنه <strong>همه‌شون هم‌زمان درست باشن</strong> یا نه. اگه ممکن باشه، مجموعه <strong>سازگاره (consistent)</strong>؛ اگه نشه — یعنی پذیرفتنشون با هم اجباراً به یک تناقض ختم بشه — مجموعه <strong>ناسازگاره (inconsistent)</strong>.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — تعریف: یک مجموعه از گزاره‌ها سازگاره اگه از نظر منطقی ممکن باشه همه‌شون هم‌زمان درست باشن.</strong> «ممکن بودن» یعنی «به یک تناقض ختم نمی‌شه» — یعنی نمی‌تونی از ترکیبشون یک گزاره به فرم «A and not-A» بسازی.</p>
+
+  <p><strong>قدم ۲ — مثال سازگار.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>1. All humans are mortal.<br>2. Simon is immortal.</p>
+    </div>
+    <p style="margin-top:10px;">این دو گزاره با هم سازگارن — چون ممکنه سایمون اصلاً انسان نباشه (مثلاً یک شخصیت افسانه‌ای یا خدا باشه). هیچ تناقضی از ترکیبشون به‌دست نمیاد.</p>
+  </div>
+
+  <p><strong>قدم ۳ — مثال ناسازگار مستقیم.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>1. All humans are mortal.<br>2. Some humans are not mortal.</p>
+    </div>
+    <p style="margin-top:10px;">این دو مستقیماً همدیگه رو نقض می‌کنن — گزاره‌ی دوم دقیقاً نقیض گزاره‌ی اوله (این رو در فصل ۱۰ به‌طور کامل با عنوان «نقیض All A are B» می‌بینیم). هیچ راهی نیست که هر دو هم‌زمان درست باشن.</p>
+  </div>
+
+  <p><strong>قدم ۴ — نکته‌ی مهم‌تر: ناسازگاری می‌تونه از ترکیبِ چند گزاره پدید بیاد، حتی وقتی هیچ دوتاشون به‌تنهایی متناقض نیستن.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>1. All humans are mortal.<br>2. Simon is immortal.<br>3. Simon is human.</p>
+    </div>
+    <p style="margin-top:10px;">این‌بار همون دو گزاره‌ی قدم ۲ رو داریم، ولی یک گزاره‌ی سوم («Simon is human») بهشون اضافه شده. حالا از گزاره‌های ۱ و ۳ نتیجه می‌گیریم «Simon is mortal» — که مستقیماً با گزاره‌ی ۲ («Simon is immortal») در تناقضه. این مجموعه، برخلاف قدم ۲، <strong>ناسازگاره</strong>. اضافه شدن فقط یک گزاره‌ی به‌ظاهر بی‌ضرر، کل مجموعه رو ناسازگار کرد.</p>
+  </div>
+
+  <p><strong>قدم ۵ — نکته‌ی مهم: اگه یک مجموعه ناسازگار باشه، حداقل یکی از گزاره‌هاش باید غلط باشه — ولی خودِ منطق نمی‌گه کدومش.</strong> در مثال قدم ۴، فقط می‌دونیم <em>حداقل یکی</em> از این سه گزاره غلطه؛ نمی‌تونیم بدون اطلاعات بیرونی بگیم دقیقاً کدوم‌یکی.</p>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>سازگار (consistent) = ممکنه همه هم‌زمان درست باشن (به تناقض ختم نمی‌شه).</li>
+    <li>ناسازگار (inconsistent) = پذیرفتن همه‌شون با هم اجباراً یک تناقض می‌سازه.</li>
+    <li>یک مجموعه می‌تونه در نگاه دوتایی سازگار به‌نظر برسه، ولی با اضافه شدن یک گزاره‌ی سوم ناسازگار بشه — همیشه ترکیب کامل رو چک کن، نه فقط جفت‌ها رو.</li>
+    <li>ناسازگاری فقط می‌گه «حداقل یکی غلطه»، نه اینکه کدوم‌یکی.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>همه‌ی گزاره‌های مجموعه رو فهرست کن.</li>
+    <li>دنبال تناقض مستقیم بین هر دو گزاره بگرد (مثل «All A are B» و «Some A are not B»).</li>
+    <li>اگه تناقض مستقیمی پیدا نکردی، ببین آیا می‌تونی با ترکیبِ چند گزاره (مثل یک قیاس ساده) یک نتیجه بسازی که با یکی از گزاره‌های دیگه در تناقض باشه.</li>
+    <li>اگه به هر طریقی به یک «A and not-A» رسیدی، مجموعه ناسازگاره؛ در غیر این صورت سازگاره.</li>
+    <li class="arrow-final">→ جواب: سازگار یا ناسازگار.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">Is the following set consistent? "1. No cats are reptiles. 2. Whiskers is a cat. 3. Whiskers is not a reptile."</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: سازگاره.</strong> از گزاره‌های ۱ و ۲ نتیجه می‌گیریم «Whiskers is not a reptile» — که دقیقاً همون گزاره‌ی ۳ است، نه نقیضش. هیچ تناقضی ساخته نمی‌شه؛ هر سه گزاره کاملاً می‌تونن هم‌زمان درست باشن.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">Consider the set: "1. All members of the committee voted yes. 2. Anna is a member of the committee. 3. Anna voted no." Is this set consistent or inconsistent?</p>
+      <ul class="options">
+        <li>A) Consistent, because each statement is independently plausible.</li>
+        <li class="correct">B) Inconsistent, because statements 1 and 2 together entail "Anna voted yes," which contradicts statement 3.</li>
+        <li>C) Cannot be determined without knowing the actual vote count.</li>
+        <li>D) Consistent, because "voted no" and "voted yes" are only contraries, not contradictories.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>اول ببین آیا هر دو گزاره به‌تنهایی با هم تناقض دارن یا نه — گزاره‌های ۱ و ۲ به‌تنهایی مشکلی ندارن. حالا ببین آیا ترکیبشون چیزی می‌سازه که با گزاره‌ی ۳ تناقض داشته باشه.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>از گزاره‌های ۱ («همه‌ی اعضا رأی بله دادن») و ۲ («آنا عضو کمیته‌ست») نتیجه می‌گیریم «آنا رأی بله داده». این نتیجه مستقیماً با گزاره‌ی ۳ («آنا رأی نه داده») در تناقضه.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A فقط گزاره‌ها رو تک‌تک و مجزا بررسی کرده، بدون ترکیب کردنشون — دقیقاً همون اشتباهی که این فصل هشدارش رو می‌ده. گزینه‌ی D اشتباه می‌کنه چون «voted yes» و «voted no» درباره‌ی یک نفر و یک رأی، دقیقاً نقیض همن (نه صرفاً تضاد) — کسی نمی‌تونه هم‌زمان هم بله رأی بده هم نه.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای قضاوت شهودی («به‌نظر همه‌چی درسته»)، مستقیماً یک استنتاج منطقی از دو گزاره ساختیم و اون رو با گزاره‌ی سوم مقایسه کردیم — دقیقاً همون روش قدم ۴ در بخش مفهوم اصلی.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>وقتی سه یا چند گزاره باهم دادن، هیچ‌وقت فقط جفت‌به‌جفت چکشون نکن. سعی کن اول ببینی آیا از ترکیب دو گزاره می‌تونی یک نتیجه‌ی جدید بسازی (مثل یک قیاس ساده «All A are B» + «X is A» ⇒ «X is B»)، و بعد اون نتیجه رو با گزاره‌های باقی‌مونده مقایسه کن.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>یک الگوی خیلی رایج برای ناسازگاری مستقیم: هر وقت یک گزاره‌ی کلی («All A are B» یا «No A are B») در کنار یک گزاره‌ی جزئیِ متناقض («Some A are not B» یا «Some A are B») ظاهر بشه، بلافاصله بدون تحلیل بیشتر بدون مجموعه ناسازگاره. جزئیات کامل این الگوها در فصل ۱۰ و ۱۱ (منطق قیاسی و مربع تعارض) میاد.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> بررسی هر گزاره به‌طور مجزا و نتیجه‌گیری که چون هیچ‌کدوم به‌تنهایی «غیرممکن» به‌نظر نمی‌رسه، پس کل مجموعه سازگاره.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> ذهن آدم به‌طور طبیعی گزاره‌ها رو یکی‌یکی می‌خونه و ارزیابی می‌کنه، نه اینکه به‌طور فعال دنبال ترکیبی از دو یا چند گزاره بگرده که یک نتیجه‌ی متناقض بسازه.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه از خودت بپرس: «اگه دو گزاره‌ی اول رو با هم قبول کنم، به چه نتیجه‌ی جدیدی می‌رسم؟ آیا اون نتیجه با بقیه‌ی گزاره‌ها جور در میاد؟»</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>گاهی سؤال می‌پرسه «کدوم گزاره، اگه حذف بشه، مجموعه رو سازگار می‌کنه؟» این با پرسیدن «مجموعه سازگاره یا نه؟» فرق داره — اینجا باید مشخص کنی دقیقاً کدوم گزاره «متهم اصلی» ناسازگاریه. یادت باشه طبق قدم ۵، خودِ منطق به‌تنهایی نمی‌گه کدوم گزاره غلطه؛ باید ببینی حذف کدوم گزاره، تناقض رو از بین می‌بره.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>سازگار = ممکنه همه هم‌زمان درست باشن. ناسازگار = ترکیبشون یک تناقض می‌سازه. همیشه ترکیب گزاره‌ها رو چک کن، نه فقط هر گزاره رو تنها. ناسازگاری فقط می‌گه «حداقل یکی غلطه»، نه اینکه دقیقاً کدوم.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">Is the set consistent or inconsistent? "1. No birds can swim underwater for more than an hour. 2. Penguins can swim underwater for more than an hour."</p>
+      <ul class="options">
+        <li class="correct">A) Inconsistent, if penguins are considered birds.</li>
+        <li>B) Consistent, because penguins are unusual birds.</li>
+        <li>C) Consistent, because statement 1 only refers to "most" birds.</li>
+        <li>D) Cannot be determined.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> اگه پنگوئن رو یک پرنده در نظر بگیریم، گزاره‌ی ۲ مستقیماً گزاره‌ی ۱ («No birds…») رو نقض می‌کنه — چون گزاره‌ی ۱ می‌گه هیچ پرنده‌ای نمی‌تونه، ولی گزاره‌ی ۲ می‌گه یک نوع پرنده (پنگوئن) می‌تونه. گزینه‌ی C اشتباهه چون گزاره‌ی ۱ کلمه‌ی «No» (یعنی هیچ) رو به‌کار برده، نه «most» (بیشتر).</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">Is the set consistent or inconsistent? "1. Every student in the class passed the exam. 2. Tom is in the class. 3. Tom did not take the exam."</p>
+      <ul class="options">
+        <li class="correct">A) Consistent — statement 3 doesn't contradict statements 1 and 2.</li>
+        <li>B) Inconsistent — Tom must have passed, so he must have taken the exam.</li>
+        <li>C) Inconsistent — statement 1 and statement 3 directly clash.</li>
+        <li>D) Cannot be determined without knowing if the exam was mandatory.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> از گزاره‌های ۱ و ۲ فقط می‌تونیم نتیجه بگیریم که <em>اگه</em> تام امتحان داده باشه، حتماً قبول شده. اما گزاره‌ی ۳ می‌گه تام اصلاً امتحان نداده — این هیچ تناقضی نمی‌سازه، چون گزاره‌ی ۱ فقط درباره‌ی کسانیه که امتحان دادن و قبول شدن، نه اینکه همه‌ی دانش‌آموزها حتماً امتحان داده باشن. گزینه‌ی B دقیقاً استنتاج غلطیه که فرض می‌کنه هر دانش‌آموزی الزاماً امتحان داده.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">A set contains: "1. If it rained last night, the streets are wet. 2. It rained last night. 3. The streets are not wet." Is this set consistent or inconsistent?</p>
+      <ul class="options">
+        <li>A) Consistent — it's possible for rain not to make streets wet under some conditions.</li>
+        <li class="correct">B) Inconsistent — statements 1 and 2 together entail "the streets are wet," which contradicts statement 3.</li>
+        <li>C) Cannot be determined without visiting the location.</li>
+        <li>D) Consistent — statement 1 and statement 3 are only contraries, not contradictories.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> از گزاره‌های ۱ و ۲ — یک شرطی به‌همراه تأیید مقدمش — طبق قانون Modus Ponens (که در فصل ۱۲ کامل می‌بینیمش) نتیجه می‌گیریم «the streets are wet». این نتیجه مستقیماً نقیض گزاره‌ی ۳ است. طبق تعریف نقیض در فصل ۵، «wet» و «not wet» دقیقاً یکی درست و یکی غلطن (contradictory)، نه فقط contrary — پس گزینه‌ی D رد می‌شه. گزینه‌ی A هم واقعیت بیرونی رو قاطی منطق درونیِ خودِ سه گزاره کرده؛ درون این سیستم بسته، اگه ۱ و ۲ رو بپذیریم، دیگه راهی برای درست بودن ۳ باقی نمی‌مونه.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۶</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>سازگار = ممکنه همه هم‌زمان درست باشن.</li>
+          <li>ناسازگار = ترکیبشون یک تناقض می‌سازه.</li>
+          <li>ناسازگاری می‌تونه از ترکیب چند گزاره پدید بیاد، نه فقط از یک جفت.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>دنبال تناقض مستقیم بین جفت‌ها بگرد.</li>
+          <li>اگه نبود، سعی کن از ترکیب گزاره‌ها یک نتیجه‌ی جدید بسازی.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>بررسی مجزای هر گزاره بدون ترکیب کردنشون.</li>
+          <li>فرض کردن که همه‌ی محدودیت‌های دنیای واقعی، تناقض منطقی‌ان.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>پرسیدن «کدوم گزاره باعث ناسازگاریه؟» به‌جای «سازگاره یا نه؟».</li>
+          <li>الگوی کلی + جزئیِ متناقض (فصل ۱۰-۱۱).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

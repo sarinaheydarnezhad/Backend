@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۶: نمودار خطی و روند</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART B · CHAPTER 16 / 19</p>
+  <h1>فصل ۱۶: نمودارهای خطی و تحلیل روند — Line Graphs &amp; Trend Analysis</h1>
+  <p class="lede">نمودار خطی روندِ یک کمیت رو در طول زمان نشون می‌ده. سخت‌ترین بخشِ این نوع سؤالات، فرق گذاشتن بین چهار مفهومِ شبیه‌به‌هم است: بالاترین نقطه، تیزترین افزایش، روندِ کلی، و یک نوسانِ موقتی.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>در نمودار خطی <span class="term">(line graph)</span>، نقاط داده به ترتیبِ زمان به هم وصل می‌شن. سؤالات معمولاً درباره‌ی یکی از این چهار چیز می‌پرسن: <strong>بالاترین نقطه</strong>، <strong>تیزترین تغییر (افزایش یا کاهش)</strong>، <strong>روندِ کلی</strong>، یا یک <strong>نوسانِ موقتیِ محلی</strong>.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — خوندنِ مستقیمِ یک نقطه از روی نمودار.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p><strong>Height Growth of a Child (0 to 5 years)</strong></p>
+      <table style="margin-top:8px;"><tr><th>Age</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr>
+      <tr><td>Height (cm)</td><td>50</td><td>75</td><td>88</td><td>98</td><td>106</td><td>112</td></tr></table>
+    </div>
+  </div>
+
+  <p><strong>قدم ۲ — برای پیدا کردنِ تیزترین تغییر، باید تفاضلِ هر دو نقطه‌ی پیاپی رو حساب کنی — نه فقط با چشم به شیبِ خط نگاه کنی.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">تفاضل‌های پیاپی</div>
+    <div class="en-block">
+      <p>0→1: +25 &nbsp;|&nbsp; 1→2: +13 &nbsp;|&nbsp; 2→3: +10 &nbsp;|&nbsp; 3→4: +8 &nbsp;|&nbsp; 4→5: +6</p>
+      <p class="q" style="margin-top:8px;">In which age interval did the child have the highest growth in height?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: از بدو تولد تا ۱ سالگی (رشد ۲۵ سانتی‌متری).</strong> این بزرگ‌ترین عددِ بینِ همه‌ی تفاضل‌های پیاپیه — نه لزوماً بازه‌ای که در نگاهِ اول «شیب‌دارترین» به‌نظر می‌رسه، چون مقیاسِ محورها می‌تونه چشم رو گول بزنه.</p>
+  </div>
+
+  <p><strong>قدم ۳ — فرقِ «بالاترین نقطه»، «تیزترین تغییر» و «روندِ کلی».</strong></p>
+  <ul>
+    <li><strong>بالاترین نقطه:</strong> بزرگ‌ترین مقدارِ مطلق در کل نمودار (فارغ از اینکه چطور بهش رسیده).</li>
+    <li><strong>تیزترین تغییر:</strong> بزرگ‌ترین تفاضلِ بینِ دو نقطه‌ی <em>پیاپی</em> (می‌تونه در هر جای نمودار اتفاق بیفته، حتی اگه نقطه‌ی پایانیش بالاترین نقطه نباشه).</li>
+    <li><strong>روندِ کلی:</strong> جهتِ عمومیِ تغییرات از ابتدا تا انتها — که باید <em>کلِ الگو</em> رو در نظر بگیره، نه فقط مقایسه‌ی اولین و آخرین نقطه.</li>
+  </ul>
+
+  <p><strong>قدم ۴ — یک روندِ کلیِ صعودی می‌تونه نوسانِ موقتیِ نزولی هم داشته باشه، بدون اینکه ادعای «روندِ صعودی» غلط بشه.</strong> یک افتِ کوچیک در وسطِ راه، الزاماً کلِ روند رو نقض نمی‌کنه — باید ببینی جهتِ غالب (dominant) چیه.</p>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li>برای تیزترین افزایش/کاهش، همیشه تفاضلِ هر دو نقطه‌ی پیاپی رو محاسبه کن — به شیبِ بصری اعتماد نکن، چون مقیاسِ محور می‌تونه گمراه‌کننده باشه.</li>
+    <li>بالاترین نقطه، تیزترین تغییر، و روندِ کلی سه سؤالِ کاملاً متفاوتن.</li>
+    <li>روندِ کلی باید بر اساسِ الگوی کاملِ داده‌ها تشخیص داده بشه، نه فقط مقایسه‌ی نقطه‌ی اول و آخر.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>همه‌ی نقاطِ داده رو به‌ترتیب فهرست کن.</li>
+    <li>اگه سؤال درباره‌ی تغییره، تفاضلِ هر جفت نقطه‌ی پیاپی رو یک‌بار و از اول تا آخر محاسبه کن.</li>
+    <li>مشخص کن دقیقاً کدوم نوع سؤاله: بالاترین نقطه، تیزترین تغییر، یا روندِ کلی.</li>
+    <li>هر گزینه رو با محاسبه‌ی دقیق (نه با نگاهِ چشمی) تأیید یا رد کن.</li>
+    <li class="arrow-final">→ جواب: طبق دقیقاً همون نوع سؤالی که پرسیده شده.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p><strong>Average Daily Temperature (°C) Over a Week</strong></p>
+      <table style="margin-top:8px;"><tr><th>Day</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+      <tr><td>Temp</td><td>22</td><td>24</td><td>25</td><td>22</td><td>20</td><td>19</td><td>21</td></tr></table>
+      <p class="q" style="margin-top:8px;">On which day did the largest temperature DROP compared to the previous day occur?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ: روز ۴ (نسبت به روز ۳).</strong> تفاضل‌های پیاپی: Day1→2: +2, Day2→3: +1, Day3→4: <strong>−3</strong>, Day4→5: −2, Day5→6: −1, Day6→7: +2. بزرگ‌ترین افتِ منفی، از روز ۳ به روز ۴ (۳ درجه) اتفاق افتاده — نه بازه‌ای دیگه که شاید در نگاهِ اول به چشم بیاد.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p><strong>Company Quarterly Profits (Million €)</strong></p>
+      <table style="margin-top:8px;"><tr><th>Q1</th><th>Q2</th><th>Q3</th><th>Q4</th><th>Q5</th><th>Q6</th><th>Q7</th><th>Q8</th></tr>
+      <tr><td>4</td><td>7</td><td>5</td><td>9</td><td>8</td><td>10</td><td>6</td><td>11</td></tr></table>
+      <p class="q" style="margin-top:8px;">Which statement is correct?</p>
+      <ul class="options">
+        <li>A) Profit increased in every quarter.</li>
+        <li class="correct">B) The largest drop occurred between Q6 and Q7.</li>
+        <li>C) The largest rise occurred between Q4 and Q5.</li>
+        <li>D) The overall increase from Q1 to Q8 was 6 million euros.</li>
+        <li>E) Profit was highest at Q6.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>طبق قدم ۲، اول همه‌ی تفاضل‌های پیاپی رو یک‌جا حساب کن: Q1→2: +3, Q2→3: −2, Q3→4: +4, Q4→5: −1, Q5→6: +2, Q6→7: <strong>−4</strong>, Q7→8: +5.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>بزرگ‌ترین عددِ منفی در این لیست، −4 است که بینِ Q6 و Q7 اتفاق افتاده — دقیقاً گزینه‌ی B.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A با وجودِ چند افتِ واضح (مثل Q2→Q3) نقض می‌شه. گزینه‌ی C بازه‌ی اشتباهی رو نام برده — Q4→Q5 در واقع یک <em>افت</em> (−1) است، نه یک رشد؛ بزرگ‌ترین رشدِ واقعی بینِ Q7 و Q8 (+5) اتفاق افتاده. گزینه‌ی D محاسبه‌اش غلطه: ۱۱−۴=۷، نه ۶. گزینه‌ی E هم اشتباهه چون بالاترین نقطه در Q8 (=11) است، نه Q6 (=10).</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای قضاوتِ چشمی روی شکلِ نمودار، هر پنج گزینه رو با محاسبه‌ی دقیق و مستقل تست کردیم — دقیقاً طبقِ قدمِ ۴ در «روش حل».</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>قبل از نگاه به گزینه‌ها، یک جدولِ کوچیک از تفاضل‌های پیاپی برای خودت بساز (حتی روی کاغذِ سررسید). این کار سریع‌تر از اینه که برای هر گزینه دوباره برگردی و از نمودار عدد بخونی.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>برای سؤالِ «روندِ کلی»، اگه فقط اولین و آخرین نقطه رو با هم مقایسه کنی ممکنه گمراه بشی. به‌جاش، به علامتِ اکثریتِ تفاضل‌های پیاپی نگاه کن — اگه بیشترشون مثبت‌ان، روندِ کلی صعودیه، حتی اگه یکی‌دو تا نوسانِ منفی هم داشته باشه.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> محاسبه‌ی «افزایشِ کلی» با فرمولِ «بالاترین نقطه منهای پایین‌ترین نقطه» به‌جای «آخرین نقطه منهای اولین نقطه».</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> وقتی داده‌ها نوسان دارن، ذهن به‌طور طبیعی به سمتِ بزرگ‌ترین و کوچک‌ترین عددِ کلِ جدول کشیده می‌شه، در حالی که «افزایشِ کلی از ابتدا تا انتها» فقط به دو نقطه‌ی خاص (اول و آخر) مربوطه.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه دقیقاً بخونِ سؤال از کدوم دو نقطه صحبت می‌کنه — «بالاترین تا پایین‌ترین» یا «اول تا آخر» — و فقط همون دو تا رو کم کن.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>گزینه‌هایی که یک بازه‌ی زمانیِ اشتباه رو با یک ادعای درست ترکیب می‌کنن (مثل «بزرگ‌ترین رشد بینِ Q4 و Q5» — که در واقع یک افت بوده، نه رشد) خیلی رایجن. همیشه هم جهتِ تغییر (رشد یا افت) و هم بازه‌ی زمانی رو جداگانه چک کن.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>تیزترین تغییر = بزرگ‌ترین تفاضلِ پیاپی (نه شیبِ بصری). بالاترین نقطه ≠ تیزترین تغییر ≠ روندِ کلی. افزایشِ کلی = آخرین نقطه − اولین نقطه (نه بالاترین − پایین‌ترین).</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">A line graph shows monthly rainfall (mm): Jan 40, Feb 55, Mar 30, Apr 60. Between which two consecutive months was the increase the largest?</p>
+      <ul class="options">
+        <li>A) Jan to Feb</li>
+        <li>B) Feb to Mar</li>
+        <li class="correct">C) Mar to Apr</li>
+        <li>D) All increases were equal.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> تفاضل‌ها: Jan→Feb: +15, Feb→Mar: −25, Mar→Apr: +30. بزرگ‌ترین افزایش بینِ مارس و آوریل (+30) اتفاق افتاده.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">A line graph tracks a stock price over 5 days: Day1=€50, Day2=€65, Day3=€40, Day4=€55, Day5=€45. What is the overall change from Day 1 to Day 5?</p>
+      <ul class="options">
+        <li>A) An increase of €15 (using the highest and lowest points)</li>
+        <li class="correct">B) A decrease of €5 (Day 5 minus Day 1)</li>
+        <li>C) An increase of €25</li>
+        <li>D) No overall change.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> «تغییرِ کلی از روز ۱ تا روز ۵» یعنی Day5 − Day1 = 45 − 50 = −5 (یعنی ۵ یورو کاهش). گزینه‌ی A دقیقاً همون اشتباهِ رایجه — به‌جای اول و آخر، بالاترین (۶۵) و پایین‌ترین (۴۰) رو با هم مقایسه کرده.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">A line graph shows a factory's weekly output (units) over 6 weeks: W1=100, W2=120, W3=90, W4=140, W5=130, W6=160. Which of the following is TRUE?</p>
+      <ul class="options">
+        <li>A) Output decreased overall from Week 1 to Week 6.</li>
+        <li>B) The sharpest single-week drop was larger than the sharpest single-week rise.</li>
+        <li class="correct">C) The overall trend is upward, despite a temporary dip in Week 3.</li>
+        <li>D) Output was highest in Week 5.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> تفاضل‌های پیاپی: W1→2: +20, W2→3: −30, W3→4: +50, W4→5: −10, W5→6: +30. با اینکه یک افتِ محلی در هفته‌ی ۳ داریم (−30)، روندِ کلی از ۱۰۰ به ۱۶۰ صعودیه — و اکثرِ تفاضل‌ها هم مثبت‌ان. گزینه‌ی A مستقیماً غلطه (۱۰۰ به ۱۶۰ که افزایشه). گزینه‌ی B غلطه چون بزرگ‌ترین افزایشِ پیاپی (+50) از بزرگ‌ترین افتِ پیاپی (−30) بزرگ‌تره. گزینه‌ی D هم غلطه — بالاترین مقدار در هفته‌ی ۶ (۱۶۰) است، نه هفته‌ی ۵ (۱۳۰).</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۶</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>تیزترین تغییر = بزرگ‌ترین تفاضلِ پیاپی.</li>
+          <li>بالاترین نقطه ≠ تیزترین تغییر ≠ روندِ کلی.</li>
+          <li>روندِ کلی = آخر − اول، نه بالاترین − پایین‌ترین.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>همه‌ی تفاضل‌های پیاپی رو یک‌جا حساب کن.</li>
+          <li>نوع دقیقِ سؤال رو مشخص کن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>محاسبه‌ی «افزایشِ کلی» با بالاترین/پایین‌ترین به‌جای اول/آخر.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>بازه‌ی زمانیِ اشتباه با جهتِ تغییرِ اشتباه ترکیب‌شده.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

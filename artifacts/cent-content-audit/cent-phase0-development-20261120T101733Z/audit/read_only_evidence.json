@@ -1,0 +1,91 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "databasePath": "D:\\Lerona\\Backend\\backend\\Cent.Preview\\App_Data\\preview.db",
+  "readOnlyOpen": true,
+  "queryOnlyPragma": true,
+  "allowExtension": false,
+  "singleReadTransaction": true,
+  "databaseAndSidecarsUnchanged": false,
+  "before": {
+    "preview.db": {
+      "exists": true,
+      "bytes": 11825152,
+      "modifiedUtc": "2026-11-19T13:47:54.312Z",
+      "sha256": "ecaef99c2f4e646cc475abd67d677f0e83c6d98327a1e1352895f0db1b180070"
+    },
+    "preview.db-wal": {
+      "exists": false
+    },
+    "preview.db-shm": {
+      "exists": false
+    },
+    "preview.db-journal": {
+      "exists": false
+    }
+  },
+  "after": {
+    "preview.db": {
+      "exists": true,
+      "bytes": 11825152,
+      "modifiedUtc": "2026-11-19T13:47:54.312Z",
+      "sha256": "ecaef99c2f4e646cc475abd67d677f0e83c6d98327a1e1352895f0db1b180070"
+    },
+    "preview.db-wal": {
+      "exists": true,
+      "bytes": 0,
+      "modifiedUtc": "2026-11-20T10:17:33.798Z",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "preview.db-shm": {
+      "exists": true,
+      "bytes": 32768,
+      "modifiedUtc": "2026-11-20T10:17:33.806Z",
+      "sha256": "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb"
+    },
+    "preview.db-journal": {
+      "exists": false
+    }
+  },
+  "statementPolicy": "Only SELECTs of explicit educational columns and metadata, read-only PRAGMAs, BEGIN, and ROLLBACK. No application host or DbContext startup.",
+  "rowCounts": {
+    "cent_courses": 5,
+    "cent_chapters": 43,
+    "cent_topics": 190,
+    "cent_trainings": 14,
+    "cent_documents": 48,
+    "cent_document_pages": 18,
+    "cent_document_sections": 4,
+    "cent_sources": 39,
+    "cent_source_sections": 430,
+    "cent_source_exercises": 666,
+    "cent_questions": 819,
+    "cent_curriculum_imports": 2
+  },
+  "mode": "Explicit table AND column allowlist; no user-table SELECTs, API calls, login, seeding, application startup, migrations, or external network access.",
+  "excludedTables": [
+    "cent_ai_analyses",
+    "cent_attempt_questions",
+    "cent_attempts",
+    "cent_audit_events",
+    "cent_entitlements",
+    "cent_google_attempts",
+    "cent_notes",
+    "cent_orders",
+    "cent_payment_events",
+    "cent_products",
+    "cent_sessions",
+    "cent_study_progress",
+    "cent_users"
+  ],
+  "excludedCategories": [
+    "all users and account identifiers",
+    "authentication sessions and OAuth state",
+    "personal notes and study progress",
+    "products, prices, purchases, orders, entitlements and payment events",
+    "learner attempts, answer snapshots, results and AI analyses",
+    "administrator audit events",
+    "all Lerona tables and records",
+    "whole SQLite database and backups"
+  ],
+  "exportedContentTimestamps": "Only educational content creation/import timestamps; no owner or actor metadata."
+}

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۹: جدول و معادلات همزمان</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+
+  .venn-wrap{ margin:20px 0; text-align:center; }
+  .venn-svg{ max-width:320px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART B · CHAPTER 19 / 19 · 🔴 CHALLENGE</p>
+  <h1>فصل ۱۹: حل مسئله با جدول و معادلات همزمان — Tables &amp; Simultaneous Equations</h1>
+  <p class="lede">این آخرین فصلِ اصلیِ جزوه‌ست. اینجا با مسئله‌هایی سروکار داریم که چند مجهول دارن و از طریقِ چند رابطه (نه یک فرمولِ ساده) به هم وصل شدن — دقیقاً جایی که یک روشِ نظام‌مند، تفاوتِ بینِ حلِ سریع و گم شدن در جبر رو می‌سازه.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>دو الگوی رایج وجود داره: (۱) چند مجهول که یک «مجموعِ کل» دارن و هرکدوم بر اساسِ یکی دیگه توصیف شدن — اینجا از <strong>روشِ جدول</strong> استفاده می‌کنیم. (۲) چند مجهول که هرکدوم فقط در بعضی از معادله‌ها با هم ظاهر می‌شن (نه یک مجموعِ کل) — اینجا از <strong>جایگذاری (substitution)</strong> استفاده می‌کنیم.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — روشِ جدول: یک مجهول رو به‌عنوانِ پایه انتخاب کن، بقیه رو بر حسبِ اون بنویس، بعد یک معادله از رویِ «مجموعِ کل» بساز.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p class="q">The sum of the ages of Mia and Noah is 45. Mia is 7 years older than Noah. Find each person's age.</p>
+    </div>
+    <table style="margin-top:10px;">
+      <tr><th>Person</th><th>Age</th></tr>
+      <tr><td>Noah</td><td>N</td></tr>
+      <tr><td>Mia</td><td>N + 7</td></tr>
+    </table>
+    <p style="margin-top:10px;">معادله: N + (N+7) = 45 ⟹ 2N+7=45 ⟹ 2N=38 ⟹ N=19. پس نوآ ۱۹ ساله و میا ۲۶ ساله‌ست.</p>
+  </div>
+
+  <p><strong>قدم ۲ — وقتی سه مجهول داریم ولی به‌جایِ یک «مجموعِ کل»، سه معادله‌ی دوتایی جدا داریم، باید با جایگذاریِ متوالی جلو بریم.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p class="q">Find the price of three fruits — Apple, Banana, Orange — given:<br>
+      • Price of 2 Apples and 1 Banana: 15,000 Tomans<br>
+      • Price of 1 Banana and 2 Oranges: 13,000 Tomans<br>
+      • Price of 1 Apple and 1 Orange: 8,000 Tomans</p>
+    </div>
+    <ol style="margin-top:10px;">
+      <li>معادلات: (۱) 2A+B=15000، (۲) B+2O=13000، (۳) A+O=8000</li>
+      <li>از (۳): O = 8000 − A</li>
+      <li>جایگذاریِ O در (۲): B + 2(8000−A) = 13000 ⟹ B + 16000 − 2A = 13000 ⟹ B − 2A = −3000 (معادله‌ی ۴)</li>
+      <li>حالا (۱) و (۴) رو با هم جمع بزن: (2A+B) + (−2A+B) = 15000 + (−3000) ⟹ 2B = 12000 ⟹ B = 6000</li>
+      <li>جایگذاریِ B در (۱): 2A+6000=15000 ⟹ A=4500</li>
+      <li>جایگذاریِ A در (۳): 4500+O=8000 ⟹ O=3500</li>
+    </ol>
+    <p style="margin-top:8px;"><strong>پاسخ: سیب ۴۵۰۰، موز ۶۰۰۰، پرتقال ۳۵۰۰ تومان.</strong></p>
+  </div>
+
+  <p><strong>قدم ۳ — همیشه در پایان، جواب‌ها رو در <em>همه‌ی</em> معادله‌های اصلی جایگذاری کن تا مطمئن بشی جور در میان.</strong> این ساده‌ترین راه برای گرفتنِ اشتباهاتِ علامت یا جایگذاریه.</p>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <table>
+    <tr><th>نوعِ داده‌ها</th><th>روش</th></tr>
+    <tr><td>یک «مجموعِ کل» + توصیفِ همه بر حسبِ یکی</td><td>روشِ جدول: همه رو بر حسبِ یک متغیر بنویس، یک معادله بساز</td></tr>
+    <tr><td>چند معادله‌ی دوتاییِ جدا (بدون مجموعِ کل)</td><td>جایگذاریِ متوالی: از ساده‌ترین معادله شروع کن و مجهول‌ها رو یکی‌یکی حذف کن</td></tr>
+  </table>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>همه‌ی مجهول‌ها رو فهرست کن.</li>
+    <li>مشخص کن چه نوع رابطه‌ای بینشون داده شده: یک مجموعِ کل، یا چند معادله‌ی دوتاییِ جدا.</li>
+    <li>برای روشِ جدول: یک متغیر پایه انتخاب کن، بقیه رو بر حسبش بنویس، یک معادله از مجموع بساز و حل کن.</li>
+    <li>برای جایگذاری: ساده‌ترین معادله رو برای یک متغیر حل کن، در معادله‌ی دیگه جایگذاری کن، تا وقتی فقط یک مجهول بمونه تکرار کن.</li>
+    <li>همه‌ی جواب‌ها رو در معادله‌های اصلی چک کن.</li>
+    <li class="arrow-final">→ جواب: مقدارِ هر مجهول.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">The sum of two numbers is 50. The first number is 10 more than the second. Find both numbers.</p>
+    </div>
+    <p style="margin-top:10px;">فرض کن دومی N باشه؛ اولی N+10. معادله: N+(N+10)=50 ⟹ 2N=40 ⟹ N=20. پس دومی ۲۰ و اولی ۳۰ است.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">Three coworkers — Alex, Ben, and Cara — have a combined 34 years of experience. Ben has 4 years more experience than Alex. Cara has 6 years more experience than Alex. How many years of experience does Ben have?</p>
+      <ul class="options">
+        <li>A) 8</li>
+        <li>B) 10</li>
+        <li class="correct">C) 12</li>
+        <li>D) 16</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>این یک «مجموعِ کل» با توصیفِ زنجیره‌ای داره — دقیقاً الگوی روشِ جدول. هم Ben و هم Cara مستقیماً بر حسبِ Alex توصیف شدن، پس منطقی‌ترین انتخابِ متغیرِ پایه، Alex است.</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>فرض کن Alex = A. طبقِ متن: Ben = A+4، Cara = A+6. معادله: A + (A+4) + (A+6) = 34 ⟹ 3A+10=34 ⟹ 3A=24 ⟹ A=8. پس Ben = A+4 = 12.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌ی A (=8) دقیقاً سنِ Alex است، نه Ben — کسی که عجله کنه ممکنه بعد از پیدا کردنِ A، فراموش کنه سؤال از Ben پرسیده، نه از متغیرِ پایه. گزینه‌ی D (=16) هم از جمع زدنِ اشتباهِ ۴+۶+A به‌جایِ اضافه کردنِ فقط ۴ به A به‌دست میاد.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چک نهایی: Alex=8, Ben=12, Cara=14. جمع = 8+12+14 = 34 ✓ — دقیقاً با مجموعِ داده‌شده مطابقت داره.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>همیشه به‌عنوانِ متغیرِ پایه، اونی رو انتخاب کن که بقیه‌ی رابطه‌ها مستقیماً بر حسبش نوشته شدن — این کارِ جبری رو به حداقل می‌رسونه و احتمالِ اشتباه رو کم می‌کنه.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>بعد از پیدا کردنِ همه‌ی جواب‌ها، همیشه جمعشون بزن و با «مجموعِ کل»ی که سؤال داده مقایسه کن (یا در موردِ معادله‌های چندگانه، هر سه معادله رو دوباره چک کن). این یک ثانیه طول می‌کشه ولی تقریباً همه‌ی اشتباهاتِ جبری رو می‌گیره.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> نوشتنِ رابطه‌ی «X، Y سال کمتر از Z است» در جهتِ اشتباه — مثلاً X=Z+Y به‌جایِ X=Z−Y.</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> عبارت‌های «کمتر از» و «بیشتر از» در جمله‌های طولانی و زنجیره‌ای به‌راحتی با هم قاطی می‌شن، مخصوصاً وقتی چند رابطه پشتِ سرِ هم بیان می‌شن.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> برای هر رابطه، جدا و آهسته بخون: «X … than Y» — اگه «less» بود، X کوچیک‌تره (X = Y − عدد)؛ اگه «more» بود، X بزرگ‌تره (X = Y + عدد). هیچ‌وقت دو رابطه رو هم‌زمان در ذهن ترجمه نکن.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>وقتی چند رابطه‌ی زنجیره‌ای پشتِ سرِ هم میان («A نسبت به B …، و C نسبت به A …»)، آزمون گاهی جهتِ یکی از رابطه‌ها رو در وسطِ جمله عوض می‌کنه تا داوطلب که به الگوی قبلی عادت کرده، غافلگیر بشه. هر رابطه رو کاملاً مستقل و از اول بخون.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>مجموعِ کل + توصیفِ زنجیره‌ای ⟹ روشِ جدول (یک متغیر پایه). چند معادله‌ی دوتاییِ جدا ⟹ جایگذاریِ متوالی. همیشه در پایان، جواب‌ها رو در معادله‌های اصلی چک کن.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">The sum of two numbers is 60. The first number is 12 more than the second. What is the second number?</p>
+      <ul class="options">
+        <li>A) 20</li>
+        <li class="correct">B) 24</li>
+        <li>C) 30</li>
+        <li>D) 36</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> فرض کن دومی=N، اولی=N+12. N+(N+12)=60 ⟹ 2N=48 ⟹ N=24.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">Three siblings have a combined age of 54. Emma is twice as old as Liam. Liam is 3 years younger than Noah. If Liam's age is L, which equation correctly represents the total?</p>
+      <ul class="options">
+        <li>A) L + 2L + (L−3) = 54</li>
+        <li class="correct">B) L + 2L + (L+3) = 54</li>
+        <li>C) L + (L/2) + (L+3) = 54</li>
+        <li>D) L + 2L + (L+3) = 27</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> Emma = 2L (دو برابرِ لیام). "Liam is 3 years younger than Noah" یعنی Liam = Noah−3، پس Noah = Liam+3 = L+3. جمعِ کل: L + 2L + (L+3) = 54. گزینه‌ی A جهتِ رابطه‌ی Noah رو برعکس کرده — دقیقاً همون دامِ رایجِ این فصل.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">Find the price of three items — X, Y, Z — given:<br>
+      • Price of 1 X and 2 Y: 32<br>
+      • Price of 2 Y and 1 Z: 28<br>
+      • Price of 1 X and 1 Z: 20<br>
+      What is the price of Y?</p>
+      <ul class="options">
+        <li>A) 6</li>
+        <li>B) 8</li>
+        <li class="correct">C) 10</li>
+        <li>D) 12</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> معادلات: (۱) X+2Y=32، (۲) 2Y+Z=28، (۳) X+Z=20. از (۱): X=32−2Y. جایگذاری در (۳): (32−2Y)+Z=20 ⟹ Z=2Y−12 (معادله‌ی ۴). جایگذاریِ (۴) در (۲): 2Y+(2Y−12)=28 ⟹ 4Y−12=28 ⟹ 4Y=40 ⟹ Y=10. چک نهایی: X=32−20=12، Z=2(10)−12=8. جایگذاری در (۲): 2(10)+8=28 ✓. در (۳): 12+8=20 ✓. همه‌ی معادلات جور در میان.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۹ (پایانِ فصل‌های اصلی)</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>مجموعِ کل + توصیفِ زنجیره‌ای ⟹ روشِ جدول.</li>
+          <li>چند معادله‌ی دوتاییِ جدا ⟹ جایگذاریِ متوالی.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>یک متغیرِ پایه انتخاب کن که بیشترین رابطه‌ها بر حسبشن.</li>
+          <li>همیشه در پایان، در معادله‌های اصلی چک کن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>برعکس نوشتنِ جهتِ «کمتر از / بیشتر از».</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>عوض شدنِ جهتِ یک رابطه در وسطِ زنجیره.</li>
+          <li>جواب دادن با متغیرِ پایه به‌جایِ چیزی که واقعاً پرسیده شده.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

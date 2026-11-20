@@ -1,0 +1,89 @@
+جزوه لاجیک CEnT — فصل ۱۷: نتیجه‌گیری و ارزیابی ادعاها
+
+CENT LOGIC — PART B · CHAPTER 17 / 19
+فصل ۱۷: نتیجه‌گیری و ارزیابیِ ادعاها — Drawing Conclusions & Evaluating Claims
+در این فصل یک ادعای کلامی («بیشترِ کارمندها راضی‌ان»، «فروش در همه‌ی مناطق رشد کرد») رو در برابرِ داده‌های واقعی می‌ذاریم. هدف اینه که دقیقاً مشخص کنی این ادعا با داده‌ها تأیید می‌شه، رد می‌شه، یا اصلاً از این داده‌ها قابلِ تعیین نیست.
+Bاین مبحث چیست؟
+این نوع سؤالات دو تکه دارن: یک ادعای کلامی و یک مجموعه داده. کارِ تو اینه که ادعا رو دقیق ترجمه کنی به یک شرطِ قابلِ محاسبه، و بعد فقط همون محاسبه‌ی لازم رو انجام بدی — نه بیشتر، نه کمتر.
+Cمفهوم اصلی
+قدم ۱ — قبل از هر محاسبه‌ای، مشخص کن «کل» چیه. ادعاهای درصدی و کلی همیشه نسبت به یک مبنای مشخص سنجیده می‌شن.
+Claim: "Most of the company's employees are satisfied with the work environment."
+Data (survey of 200 employees): Very Satisfied 60, Satisfied 70, Neutral 40, Dissatisfied 20, Very Dissatisfied 10.
+مجموعِ راضی‌ها = ۶۰+۷۰=۱۳۰. درصد = ۱۳۰/۲۰۰ × ۱۰۰٪ = ۶۵٪. طبق تعریفِ استاندارد، «most» یعنی بیش از ۵۰٪. چون ۶۵٪ > ۵۰٪، ادعا توسط داده‌ها پشتیبانی می‌شه (True).
+قدم ۲ — ادعاهای «همه (all)» فقط با یک استثنا رد می‌شن — دقیقاً مثلِ فصل ۱۰.
+Claim: "Sales of our new product have grown in all regions."
+Data (% change vs previous quarter): North +10%, South +5%, East −2%, West +8%.
+منطقه‌ی شرق (East) کاهش (−۲٪) داشته. چون ادعا از «همه‌ی مناطق» صحبت کرده، همینِ یک استثنا کافیه: ادعا غلطه (False) — حتی اگه سه منطقه‌ی دیگه رشدِ خوبی داشته باشن.
+قدم ۳ — «باید حتماً درست باشه (must be true)» با «به‌نظر منطقی میاد» فرق داره. این مهم‌ترین و ظریف‌ترین نکته‌ی این فصله. یک گزینه فقط وقتی «must be true» است که داده‌های داده‌شده، بدون هیچ فرضِ اضافه، اون رو تضمین کنن.
+Data: 120 applicants studied Biology, 90 studied Chemistry, 70 studied Physics (out of an unknown total, with unknown overlaps).
+آیا می‌تونیم بگیم «حداقل ۲۰ نفر هم زیست هم شیمی خوندن»؟ نه — چون هیچ اطلاعاتی درباره‌ی هم‌پوشانیِ این دو گروه نداریم؛ ممکنه هیچ‌کس هر دو رو هم‌زمان نخونده باشه. اما آیا می‌تونیم بگیم «تعداد کسانی که زیست خوندن از تعداد کسانی که شیمی خوندن بیشتره»؟ بله — چون ۱۲۰ > ۹۰، این مستقیماً از خودِ اعداد نتیجه می‌شه، بدون هیچ فرضِ اضافه‌ای.
+Dقوانین و اصول مهم
+قبل از محاسبه، «کل» یا مبنای ادعا رو دقیق مشخص کن.
+«Most» یعنی بیش از ۵۰٪ از کل.
+ادعای «All» با یک استثنای تنها، کاملاً رد می‌شه — نیازی به بررسیِ همه‌ی موارد نیست.
+«Must be true» فقط شاملِ چیزهاییه که مستقیماً و بدون فرضِ اضافه از داده‌ها نتیجه می‌شن؛ هم‌پوشانی/تقاطعِ گروه‌ها هرگز فرض نمی‌شه مگر صریحاً داده شده باشه.
+Eروش حل
+ادعا رو دقیق بازنویسی کن: آیا یک ادعای «همه»، «بیشتر»، یا یک مقایسه‌ی مستقیمه؟
+مشخص کن دقیقاً چه داده‌ای برای تستِ این ادعا لازمه.
+فقط همون محاسبه‌ی لازم رو انجام بده.
+برای ادعاهای «همه»، فعالانه دنبالِ یک استثنا بگرد.
+نتیجه رو با آستانه یا منطقِ ادعا مقایسه کن.
+→ جواب: تأیید (True) / رد (False) / غیرقابلِ تعیین (Cannot be determined).
+Fمثال آموزشی
+Claim: "The majority of survey respondents prefer working from home." Data: 45 out of 100 respondents said they prefer working from home. Is the claim supported?
+پاسخ: نه، ادعا رد می‌شه. ۴۵/۱۰۰ = ۴۵٪، که کمتر از ۵۰٪ است. «majority» به‌معنیِ بیش از نیمی‌ست، پس این داده‌ها ادعا رو تأیید نمی‌کنن.
+Gمثال امتحانی
+A survey of medical applicants found that: 120 applicants studied Biology, 90 studied Chemistry, 70 studied Physics.
+Which statement MUST be true?
+A) At least 20 applicants studied both Biology and Chemistry.
+B) Exactly 280 applicants were surveyed.
+C) More applicants studied Biology than Chemistry.
+D) No applicant studied all three subjects.
+E) Every Physics student also studied Biology.
+🎯 EXAM TIP
+برای سؤالاتِ «must be true»، هر گزینه رو با این سؤال تست کن: «آیا این گزینه، بدون هیچ فرضِ اضافه‌ای، مستقیماً از دقیقاً همین اعدادی که دادن نتیجه می‌شه؟» اگه برای درست بودنش به یک فرضِ نانوشته نیاز داری (مثلِ هم‌پوشانی یا نبودِ افرادِ دیگه)، اون گزینه رد می‌شه.
+⚡ QUICK METHOD
+برای ادعاهای «all/every»، به‌جای بررسیِ همه‌ی موارد، مستقیم دنبالِ یک استثنا بگرد. همین که یکی پیدا کردی، بدونِ محاسبه‌ی بیشتر می‌تونی نتیجه بگیری ادعا غلطه.
+⚠️ COMMON MISTAKES
+اشتباه: فرض کردنِ هم‌پوشانی یا رابطه‌ی بینِ دو گروهِ جدا، وقتی فقط تعدادِ هرکدوم به‌طور مجزا داده شده.
+چرا اتفاق می‌افته: وقتی چند عددِ مرتبط با هم می‌بینیم (مثلِ تعدادِ دانش‌آموزانِ هر درس)، ذهن به‌طور طبیعی سعی می‌کنه بینشون رابطه بسازه (مثلاً جمع بزنه یا هم‌پوشانی فرض کنه)، حتی وقتی داده‌ها همچین اطلاعاتی نمی‌دن.
+چطور جلوش رو بگیریم: همیشه از خودت بپرس: «آیا این عدد یا رابطه مستقیماً در متن سؤال گفته شده، یا من دارم فرضش می‌کنم؟» اگه فرضشه، اون گزینه نمی‌تونه «must be true» باشه.
+🪤 QUESTION TRAP
+سؤال معمولاً بینِ گزینه‌ها، ادعایی می‌ذاره که در دنیای واقعی «به‌نظر منطقی» یا «معمولاً درسته» میاد (مثلِ «همه‌ی داوطلبانِ فیزیک، زیست هم خوندن») ولی از خودِ داده‌های داده‌شده تضمین نمی‌شه. همیشه بینِ «ممکنه درست باشه» و «حتماً درسته» فرق بذار.
+🧠 MUST REMEMBER
+Most = بیش از ۵۰٪. All فقط با یک استثنا رد می‌شه. Must be true = فقط چیزی که بدونِ فرضِ اضافه از داده‌ها نتیجه می‌شه — هم‌پوشانیِ گروه‌ها هرگز فرض نمی‌شه مگر صریحاً داده شده باشه.
+📝تمرین
+Claim: "Most customers rated the service as excellent." Data: 55 out of 100 customers rated it "excellent." Is the claim supported?
+A) Yes, since 55% is more than half.
+B) No, since 55% is not a large enough majority.
+C) Cannot be determined.
+D) Yes, but only if the other 45% rated it "poor."
+نمایش پاسخ و توضیح
+پاسخ درست: A. ۵۵٪ بیشتر از ۵۰٪ است، پس طبق تعریفِ «most»، ادعا تأیید می‌شه. گزینه‌ی D هم شرطِ اضافه‌ای گذاشته که در ادعا نیومده.
+Claim: "Every department reduced its budget this year." Data: Marketing −5%, Sales −3%, IT +2%, HR −8%. Is the claim supported?
+A) Yes, because most departments show a decrease.
+B) No, because IT's budget increased.
+C) Cannot be determined without more data.
+D) Yes, since the average change across departments is still negative.
+نمایش پاسخ و توضیح
+پاسخ درست: B. ادعا از «every department» صحبت کرده — یک ادعای «all». همینِ یک استثنا (IT با +۲٪) کافیه که کل ادعا رد بشه، فارغ از اینکه میانگین یا اکثریت چی نشون بده.
+Data: In a survey of 500 people, 150 people own a car and 80 people own a bicycle. Which statement MUST be true?
+A) At least 30 people own both a car and a bicycle.
+B) More people own a car than own a bicycle.
+C) Exactly 270 people own neither a car nor a bicycle.
+D) No one owns both a car and a bicycle.
+نمایش پاسخ و توضیح
+پاسخ درست: B. ۱۵۰ > ۸۰ مستقیماً و بدونِ هیچ فرضِ اضافه‌ای از خودِ اعداد نتیجه می‌شه. گزینه‌های A و D هر دو درباره‌ی هم‌پوشانیِ این دو گروه فرض می‌کنن — که هیچ‌جا داده نشده؛ چون ۱۵۰+۸۰=۲۳۰ کمتر از کلِ ۵۰۰ نفره، اصلاً هم‌پوشانی اجباری نیست (می‌تونه صفر باشه، یا هر عددی تا ۸۰). گزینه‌ی C هم دقیقاً همون فرضِ «هیچ هم‌پوشانی‌ای نیست» رو داره که تضمین‌شده نیست.
+🚀مرور سریع — فصل ۱۷
+مفاهیم اصلی
+Most = بیش از ۵۰٪.
+All فقط با یک استثنا رد می‌شه.
+Must be true ≠ به‌نظر منطقی میاد.
+روش
+اول «کل» رو مشخص کن.
+برای «all»، دنبالِ یک استثنا بگرد.
+برای «must be true»، هر گزینه رو با اعدادِ خام تست کن.
+اشتباهات رایج
+فرضِ هم‌پوشانی بینِ گروه‌های مجزا.
+دام‌های تستی
+ادعاهای «منطقاً محتمل» به‌جای «تضمین‌شده».

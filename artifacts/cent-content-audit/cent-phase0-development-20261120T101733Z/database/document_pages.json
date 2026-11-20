@@ -1,0 +1,241 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "cent_document_pages",
+  "recordCount": 18,
+  "records": [
+    {
+      "DocumentId": "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/02B7FEB1-CCE1-4EB3-BF77-61F390571AC5/1.webp",
+        "bytes": 18386,
+        "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/02B7FEB1-CCE1-4EB3-BF77-61F390571AC5/2.webp",
+        "bytes": 22604,
+        "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/0FEA7086-ED9E-41A0-9323-E2E42C9B20BD/1.webp",
+        "bytes": 18386,
+        "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/0FEA7086-ED9E-41A0-9323-E2E42C9B20BD/2.webp",
+        "bytes": 22604,
+        "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "29856693-615D-4665-B11B-98CD6E7E57AD",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/29856693-615D-4665-B11B-98CD6E7E57AD/1.webp",
+        "bytes": 14588,
+        "sha256": "4fbb454dfa0b329098e659f35759ccd8befc498b387fc52144060c405ae9f258",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "29856693-615D-4665-B11B-98CD6E7E57AD",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/29856693-615D-4665-B11B-98CD6E7E57AD/2.webp",
+        "bytes": 15764,
+        "sha256": "a6a2b467fe3663857855e9b1787364f4a126e6bf5fb07521ffba7505230198b2",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "43A380FF-1A22-401B-8729-8449ADC673CB",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/43A380FF-1A22-401B-8729-8449ADC673CB/1.webp",
+        "bytes": 14588,
+        "sha256": "4fbb454dfa0b329098e659f35759ccd8befc498b387fc52144060c405ae9f258",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "43A380FF-1A22-401B-8729-8449ADC673CB",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/43A380FF-1A22-401B-8729-8449ADC673CB/2.webp",
+        "bytes": 15764,
+        "sha256": "a6a2b467fe3663857855e9b1787364f4a126e6bf5fb07521ffba7505230198b2",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/705262B2-72ED-4FCD-839A-50D76C6B49DE/1.webp",
+        "bytes": 18386,
+        "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/705262B2-72ED-4FCD-839A-50D76C6B49DE/2.webp",
+        "bytes": 22604,
+        "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E/1.webp",
+        "bytes": 14588,
+        "sha256": "4fbb454dfa0b329098e659f35759ccd8befc498b387fc52144060c405ae9f258",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E/2.webp",
+        "bytes": 15764,
+        "sha256": "a6a2b467fe3663857855e9b1787364f4a126e6bf5fb07521ffba7505230198b2",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7/1.webp",
+        "bytes": 18386,
+        "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7/2.webp",
+        "bytes": 22604,
+        "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/D3DDCA98-78FD-48F0-A91C-EAA61C44D99C/1.webp",
+        "bytes": 18386,
+        "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/D3DDCA98-78FD-48F0-A91C-EAA61C44D99C/2.webp",
+        "bytes": 22604,
+        "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E",
+      "Number": 1,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/FC18C2D6-E80F-460C-ACE3-D848FBE50F1E/1.webp",
+        "bytes": 18386,
+        "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    },
+    {
+      "DocumentId": "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E",
+      "Number": 2,
+      "Image": {
+        "encoding": "external-file",
+        "path": "assets/document-pages/FC18C2D6-E80F-460C-ACE3-D848FBE50F1E/2.webp",
+        "bytes": 22604,
+        "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+        "mediaType": "image/webp"
+      },
+      "Width": 1102,
+      "Height": 1426
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "files": [
+    {
+      "file": "CENT.md",
+      "description": "Module isolation and historical curriculum documentation; actual database/package take precedence over historical counts.",
+      "sha256": "b5973ca73aebb0cc2db4e6dec375b6f5b90c7869535ca4bb8db84ef036c365f2"
+    },
+    {
+      "file": "backend/Cent.Module/CentDbContext.cs",
+      "description": "Cent DbSets, table mappings and SQL Server fallback factory; code read only, never instantiated.",
+      "sha256": "173679ad75ecc7e5b8e0231d2fbc00f86b0b21c5f25c08b1b582b5069aa4b473"
+    },
+    {
+      "file": "backend/Cent.Module/CurriculumEntities.cs",
+      "description": "Curriculum properties, keys and relationships.",
+      "sha256": "aa27e91b7349b2f24b4df75a2f1c4c790df5357eec3e279d14d84ca68c5c75ff"
+    },
+    {
+      "file": "backend/Cent.Module/Entities.cs",
+      "description": "Lesson/question properties; distinction between content and user-owned entities.",
+      "sha256": "a28c37cfe314165bb7242da70958d2dcff4e843aedddcb542c27adab0ee402bf"
+    },
+    {
+      "file": "backend/Cent.Module/CurriculumPackage.cs",
+      "description": "Bundled corpus DTOs, course definitions and deterministic GUID algorithm.",
+      "sha256": "d9034f79bcd6f62121e4dbb1bf13df01f912c331049c3fd8d95b9f6562c37d3a"
+    },
+    {
+      "file": "backend/Cent.Module/CentCurriculumImporter.cs",
+      "description": "Expected bundled-to-database mappings; inspected, never executed.",
+      "sha256": "16f630bae576d26a7c28570b3c1c76a4e0205363d2537e8c272fd38db01db2ce"
+    },
+    {
+      "file": "backend/Cent.Module/CentPractice.cs",
+      "description": "Answer indexing and runtime assessment assembly; inspected, never executed.",
+      "sha256": "00d7d70c9348c40e90bb31e731291077ab6589341181df36677968ac0a2c1952"
+    },
+    {
+      "file": "backend/Cent.Module/CentContent.cs",
+      "description": "Reader storage and personal-note separation; inspected, never executed.",
+      "sha256": "5641206382a39b854fe2830bc210d08f38a40bc322131529f554c96ea4a4651e"
+    },
+    {
+      "file": "backend/Cent.Module/CentAdmin.cs",
+      "description": "Image storage and publication constraints; inspected, never executed.",
+      "sha256": "fdcbe69953822af34640da4b6298f59d4bcd270df9b2c30fae380f3f20d27c62"
+    },
+    {
+      "file": "backend/Cent.Module/CentLearning.cs",
+      "description": "Source-section reader and curriculum hierarchy.",
+      "sha256": "15d75e75984de2993e919b15a76306df9300eae5315b0b5e60f22dd801e44d6e"
+    },
+    {
+      "file": "backend/Cent.Module/CentModule.cs",
+      "description": "Connection configuration precedence; inspected, never loaded.",
+      "sha256": "ab0ca2f7011492443a4c4bc361e26a5e273dfa31a404e94cf1f7365b78a6f526"
+    },
+    {
+      "file": "backend/Cent.Module/Cent.Module.csproj",
+      "description": "JSON and HTML EmbeddedResource declarations.",
+      "sha256": "294dfd7c4b3b27c94534e0b68d194a730130e2f33bff637dfb04bfc63a90e6ed"
+    },
+    {
+      "file": "backend/Cent.Preview/Program.cs",
+      "description": "Confirmed local SQLite path and DateTimeOffset UTC tick conversion; startup would write and was never run.",
+      "sha256": "4d96374000cbb9b747a45c5d999bb1bee0518e15d7b6f10b2b0fd953346ba017"
+    },
+    {
+      "file": "backend/Cent.Preview/README.md",
+      "description": "Development-only preview database documentation.",
+      "sha256": "0a8c5ca502f49cfd47d24ca3a7ba7129a6e730a37ddd91956fdcc1fe9277599c"
+    },
+    {
+      "file": "backend/Cent.Curriculum/README.md",
+      "description": "Bundled sources and authoring workflow; no generators executed.",
+      "sha256": "425d52125fd4e863dc8b0270c8f160a5d498c9ff8053f8c99de57d7ff724fb66"
+    },
+    {
+      "file": "backend/Cent.Curriculum/SourceReader.cs",
+      "description": "Extraction, sanitization, SVG processing and original-HTML preservation.",
+      "sha256": "5f590d22d325aa81e7fc59179b77e2b4518fd37c7e7ed5a0aac655e054ce6a92"
+    },
+    {
+      "file": "backend/Flashcards.Infrastructure/Persistence/FlashcardsDbContext.cs",
+      "description": "Separate Lerona context identified by source only; no Lerona records read.",
+      "sha256": "e6e32704826685e5e939608b473cbe7c27e6d372755e3da2d36ca06ccbcfa3e6"
+    }
+  ],
+  "configurationLocations": [
+    "backend/Flashcards.Api/appsettings*.json (values not exported)",
+    "environment ConnectionStrings__CentDb / ConnectionStrings__FlashcardsDb (not used)",
+    "Cent.Preview computes its local path without using those SQL Server connections"
+  ],
+  "databaseProvider": "SQLite; node:sqlite readOnly=true",
+  "runtimeVersions": {
+    "node": "v24.20.0",
+    "sqlite": "Queried provider was node:sqlite; no SQL Server provider loaded."
+  }
+}

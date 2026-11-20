@@ -1,0 +1,1719 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "tables": {
+    "cent_courses": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Code",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "Title",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "EnglishTitle",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "SortOrder",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "TrainingId",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "Active",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Code",
+        "Title",
+        "EnglishTitle",
+        "SortOrder",
+        "TrainingId",
+        "Active"
+      ],
+      "primaryKey": [
+        "Code"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_trainings",
+          "from": "TrainingId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_courses_TrainingId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 4,
+              "name": "TrainingId"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "sqlite_autoindex_cent_courses_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Code"
+            }
+          ]
+        }
+      ],
+      "count": 5
+    },
+    "cent_chapters": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "ImportKey",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "CourseCode",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "SourceId",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "Title",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "SortOrder",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "ImportKey",
+        "CourseCode",
+        "SourceId",
+        "Title",
+        "SortOrder"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_sources",
+          "from": "SourceId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "cent_courses",
+          "from": "CourseCode",
+          "to": "Code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_chapters_SourceId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 3,
+              "name": "SourceId"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "IX_cent_chapters_ImportKey",
+          "unique": 1,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 1,
+              "name": "ImportKey"
+            }
+          ]
+        },
+        {
+          "seq": 2,
+          "name": "IX_cent_chapters_CourseCode",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 2,
+              "name": "CourseCode"
+            }
+          ]
+        },
+        {
+          "seq": 3,
+          "name": "sqlite_autoindex_cent_chapters_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 43
+    },
+    "cent_topics": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "ImportKey",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "ChapterId",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "CourseCode",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "Title",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "EnglishTitle",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "SortOrder",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "Foundation",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "ImportKey",
+        "ChapterId",
+        "CourseCode",
+        "Title",
+        "EnglishTitle",
+        "SortOrder",
+        "Foundation"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_courses",
+          "from": "CourseCode",
+          "to": "Code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "cent_chapters",
+          "from": "ChapterId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_topics_ImportKey",
+          "unique": 1,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 1,
+              "name": "ImportKey"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "IX_cent_topics_CourseCode_ChapterId_SortOrder",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 3,
+              "name": "CourseCode"
+            },
+            {
+              "seqno": 1,
+              "cid": 2,
+              "name": "ChapterId"
+            },
+            {
+              "seqno": 2,
+              "cid": 6,
+              "name": "SortOrder"
+            }
+          ]
+        },
+        {
+          "seq": 2,
+          "name": "IX_cent_topics_ChapterId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 2,
+              "name": "ChapterId"
+            }
+          ]
+        },
+        {
+          "seq": 3,
+          "name": "sqlite_autoindex_cent_topics_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 190
+    },
+    "cent_trainings": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "Title",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "Description",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "IncludedInSubscription",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "Published",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "CreatedAt",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "Title",
+        "Description",
+        "IncludedInSubscription",
+        "Published",
+        "CreatedAt"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "sqlite_autoindex_cent_trainings_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 14
+    },
+    "cent_documents": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "TrainingId",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "SourceId",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "Title",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "SortOrder",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "PageCount",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "Published",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "CreatedAt",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "TrainingId",
+        "SourceId",
+        "Title",
+        "SortOrder",
+        "PageCount",
+        "Published",
+        "CreatedAt"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_trainings",
+          "from": "TrainingId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "cent_sources",
+          "from": "SourceId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_documents_TrainingId_SortOrder",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 1,
+              "name": "TrainingId"
+            },
+            {
+              "seqno": 1,
+              "cid": 4,
+              "name": "SortOrder"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "IX_cent_documents_SourceId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 2,
+              "name": "SourceId"
+            }
+          ]
+        },
+        {
+          "seq": 2,
+          "name": "sqlite_autoindex_cent_documents_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 48
+    },
+    "cent_document_pages": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "DocumentId",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "Number",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 2
+        },
+        {
+          "cid": 2,
+          "name": "Image",
+          "type": "BLOB",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "Width",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "Height",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "DocumentId",
+        "Number",
+        "Image",
+        "Width",
+        "Height"
+      ],
+      "primaryKey": [
+        "DocumentId",
+        "Number"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_documents",
+          "from": "DocumentId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "sqlite_autoindex_cent_document_pages_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "DocumentId"
+            },
+            {
+              "seqno": 1,
+              "cid": 1,
+              "name": "Number"
+            }
+          ]
+        }
+      ],
+      "count": 18
+    },
+    "cent_document_sections": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "DocumentId",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "Title",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "StartPage",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "DocumentId",
+        "Title",
+        "StartPage"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_documents",
+          "from": "DocumentId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_document_sections_DocumentId_StartPage",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 1,
+              "name": "DocumentId"
+            },
+            {
+              "seqno": 1,
+              "cid": 3,
+              "name": "StartPage"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "sqlite_autoindex_cent_document_sections_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 4
+    },
+    "cent_sources": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "ImportKey",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "CourseCode",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "FileName",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "Title",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "OriginalTitle",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "Sha256",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "OriginalHtml",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "PlainText",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "ImportedAt",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "ImportKey",
+        "CourseCode",
+        "FileName",
+        "Title",
+        "OriginalTitle",
+        "Sha256",
+        "OriginalHtml",
+        "PlainText",
+        "ImportedAt"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_courses",
+          "from": "CourseCode",
+          "to": "Code",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_sources_ImportKey",
+          "unique": 1,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 1,
+              "name": "ImportKey"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "IX_cent_sources_CourseCode",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 2,
+              "name": "CourseCode"
+            }
+          ]
+        },
+        {
+          "seq": 2,
+          "name": "sqlite_autoindex_cent_sources_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 39
+    },
+    "cent_source_sections": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "SourceId",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "TopicId",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "ImportKey",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "Heading",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "SortOrder",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "Text",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "Html",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "SourceId",
+        "TopicId",
+        "ImportKey",
+        "Heading",
+        "SortOrder",
+        "Text",
+        "Html"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_topics",
+          "from": "TopicId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "cent_sources",
+          "from": "SourceId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_source_sections_TopicId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 2,
+              "name": "TopicId"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "IX_cent_source_sections_SourceId_SortOrder",
+          "unique": 1,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 1,
+              "name": "SourceId"
+            },
+            {
+              "seqno": 1,
+              "cid": 5,
+              "name": "SortOrder"
+            }
+          ]
+        },
+        {
+          "seq": 2,
+          "name": "IX_cent_source_sections_ImportKey",
+          "unique": 1,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 3,
+              "name": "ImportKey"
+            }
+          ]
+        },
+        {
+          "seq": 3,
+          "name": "sqlite_autoindex_cent_source_sections_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 430
+    },
+    "cent_source_exercises": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "SourceSectionId",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "TopicId",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "ImportKey",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "Text",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "OptionsJson",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "OriginalCorrectAnswer",
+          "type": "INTEGER",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "Solution",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "Status",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "ReviewNote",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "SourceSectionId",
+        "TopicId",
+        "ImportKey",
+        "Text",
+        "OptionsJson",
+        "OriginalCorrectAnswer",
+        "Solution",
+        "Status",
+        "ReviewNote"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_topics",
+          "from": "TopicId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "cent_source_sections",
+          "from": "SourceSectionId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_source_exercises_TopicId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 2,
+              "name": "TopicId"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "IX_cent_source_exercises_SourceSectionId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 1,
+              "name": "SourceSectionId"
+            }
+          ]
+        },
+        {
+          "seq": 2,
+          "name": "IX_cent_source_exercises_ImportKey",
+          "unique": 1,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 3,
+              "name": "ImportKey"
+            }
+          ]
+        },
+        {
+          "seq": 3,
+          "name": "sqlite_autoindex_cent_source_exercises_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 666
+    },
+    "cent_questions": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "Id",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "Subject",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "TopicId",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "SourceSectionId",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "SourceExerciseId",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 5,
+          "name": "ImportKey",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 6,
+          "name": "Origin",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": "'manual'",
+          "pk": 0
+        },
+        {
+          "cid": 7,
+          "name": "FigureSvg",
+          "type": "TEXT",
+          "notnull": 0,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 8,
+          "name": "Topic",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 9,
+          "name": "Difficulty",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 10,
+          "name": "Text",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 11,
+          "name": "OptionsJson",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 12,
+          "name": "CorrectAnswer",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 13,
+          "name": "Explanation",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 14,
+          "name": "Kind",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 15,
+          "name": "Active",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "Id",
+        "Subject",
+        "TopicId",
+        "SourceSectionId",
+        "SourceExerciseId",
+        "ImportKey",
+        "Origin",
+        "FigureSvg",
+        "Topic",
+        "Difficulty",
+        "Text",
+        "OptionsJson",
+        "CorrectAnswer",
+        "Explanation",
+        "Kind",
+        "Active"
+      ],
+      "primaryKey": [
+        "Id"
+      ],
+      "foreignKeys": [
+        {
+          "id": 0,
+          "seq": 0,
+          "table": "cent_topics",
+          "from": "TopicId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 1,
+          "seq": 0,
+          "table": "cent_source_sections",
+          "from": "SourceSectionId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        },
+        {
+          "id": 2,
+          "seq": 0,
+          "table": "cent_source_exercises",
+          "from": "SourceExerciseId",
+          "to": "Id",
+          "on_update": "NO ACTION",
+          "on_delete": "NO ACTION",
+          "match": "NONE"
+        }
+      ],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "IX_cent_questions_TopicId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 2,
+              "name": "TopicId"
+            }
+          ]
+        },
+        {
+          "seq": 1,
+          "name": "IX_cent_questions_Subject_Active_TopicId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 1,
+              "name": "Subject"
+            },
+            {
+              "seqno": 1,
+              "cid": 15,
+              "name": "Active"
+            },
+            {
+              "seqno": 2,
+              "cid": 2,
+              "name": "TopicId"
+            }
+          ]
+        },
+        {
+          "seq": 2,
+          "name": "IX_cent_questions_SourceSectionId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 3,
+              "name": "SourceSectionId"
+            }
+          ]
+        },
+        {
+          "seq": 3,
+          "name": "IX_cent_questions_SourceExerciseId",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 4,
+              "name": "SourceExerciseId"
+            }
+          ]
+        },
+        {
+          "seq": 4,
+          "name": "IX_cent_questions_ImportKey",
+          "unique": 1,
+          "origin": "c",
+          "partial": 1,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 5,
+              "name": "ImportKey"
+            }
+          ]
+        },
+        {
+          "seq": 5,
+          "name": "IX_cent_questions_Active_Kind",
+          "unique": 0,
+          "origin": "c",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 15,
+              "name": "Active"
+            },
+            {
+              "seqno": 1,
+              "cid": 14,
+              "name": "Kind"
+            }
+          ]
+        },
+        {
+          "seq": 6,
+          "name": "sqlite_autoindex_cent_questions_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "Id"
+            }
+          ]
+        }
+      ],
+      "count": 819
+    },
+    "cent_curriculum_imports": {
+      "columns": [
+        {
+          "cid": 0,
+          "name": "PackageHash",
+          "type": "TEXT",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 1
+        },
+        {
+          "cid": 1,
+          "name": "ImportedAt",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 2,
+          "name": "SourceCount",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 3,
+          "name": "TopicCount",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        },
+        {
+          "cid": 4,
+          "name": "QuestionCount",
+          "type": "INTEGER",
+          "notnull": 1,
+          "dflt_value": null,
+          "pk": 0
+        }
+      ],
+      "exportedColumns": [
+        "PackageHash",
+        "ImportedAt",
+        "SourceCount",
+        "TopicCount",
+        "QuestionCount"
+      ],
+      "primaryKey": [
+        "PackageHash"
+      ],
+      "foreignKeys": [],
+      "indexes": [
+        {
+          "seq": 0,
+          "name": "sqlite_autoindex_cent_curriculum_imports_1",
+          "unique": 1,
+          "origin": "pk",
+          "partial": 0,
+          "columns": [
+            {
+              "seqno": 0,
+              "cid": 0,
+              "name": "PackageHash"
+            }
+          ]
+        }
+      ],
+      "count": 2
+    }
+  }
+}

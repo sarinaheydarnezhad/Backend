@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۹: شرط لازم و کافی</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 9 / 13 · 🔴 CHALLENGE</p>
+  <h1>فصل ۹: شرط لازم و کافی — Necessary and Sufficient Conditions</h1>
+  <p class="lede">کلمات «necessary» و «sufficient» فقط یک زبان دیگه برای گفتن همون «If A then B» هستن — ولی هر کدوم از یک زاویه‌ی متفاوت به رابطه نگاه می‌کنن. این فصل مستقیماً روی چیزی که در فصل ۸ یاد گرفتی بنا می‌شه.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>وقتی سؤال می‌گه «X برای Y لازمه (necessary)» یا «X برای Y کافیه (sufficient)»، در واقع داره یک گزاره‌ی شرطی رو توصیف می‌کنه — فقط باید بدونی هر کلمه به کدوم جهت اشاره می‌کنه.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — «A sufficient for B» (A برای B کافیه) = «If A then B».</strong> یعنی وجود A به‌تنهایی برای تضمین B کافیه — هرچند ممکنه B از راه‌های دیگه هم اتفاق بیفته.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"If I become rich, then I'll be happy."<br>→ "Becoming rich" is <strong>sufficient</strong> for "being happy."</p>
+    </div>
+    <p style="margin-top:10px;">پولدار شدن به‌تنهایی کافیه تا خوشحال بشم — ولی شاید از راه‌های دیگه‌ای هم (بدون پولدار شدن) بشه خوشحال بود.</p>
+  </div>
+
+  <p><strong>قدم ۲ — «A necessary for B» (A برای B لازمه) = «If B then A»</strong> (که هم‌ارزه با «If not-A then not-B»). یعنی بدون A، رسیدن به B غیرممکنه — A یک پیش‌نیازه.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"Oxygen is necessary for combustion."<br>= "If there's combustion, then there's oxygen."<br>= "If there's no oxygen, then there's no combustion."</p>
+    </div>
+  </div>
+
+  <p><strong>قدم ۳ — نکته‌ی کلیدی: یک شرطیِ واحد، هم‌زمان می‌تونه هم «sufficient» و هم «necessary» توصیف بشه — فقط بستگی داره از کدوم طرف نگاهش کنی.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>"If I have a driver's license, then I passed a driver's test."</p>
+    </div>
+    <p style="margin-top:10px;">این یک گزاره‌ی شرطیه، ولی دو تا توصیف داره:</p>
+    <ul style="margin-top:8px;">
+      <li>"Passing a driver's test" is <strong>necessary</strong> for "having a driver's license." (چون بدون قبولی در آزمون، نمی‌شه گواهینامه داشت)</li>
+      <li>"Having a driver's license" is <strong>sufficient</strong> for "passing a driver's test." (چون داشتن گواهینامه به‌تنهایی تضمین می‌کنه که آزمون رو قبول شدی)</li>
+    </ul>
+    <p style="margin-top:10px;">هر دو جمله دقیقاً همون یک شرطی رو توصیف می‌کنن — فقط از دو زاویه.</p>
+  </div>
+
+  <p><strong>قدم ۴ — «A necessary AND sufficient for B» = «A if and only if B».</strong> یعنی هر دو جهت («If A then B» و «If B then A») هم‌زمان برقرارن — همون بایکاندیشنالِ فصل ۸.</p>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <table>
+    <tr><th>توصیف</th><th>معادل شرطی</th></tr>
+    <tr><td>A necessary for B</td><td>If B then A</td></tr>
+    <tr><td>A sufficient for B</td><td>If A then B</td></tr>
+    <tr><td>A necessary and sufficient for B</td><td>If A then B <strong>and</strong> If B then A</td></tr>
+  </table>
+  <ul>
+    <li>«Sufficient» همیشه با مقدم (بخش if) یک شرطی مچ می‌شه.</li>
+    <li>«Necessary» همیشه با تالی (بخش then) یک شرطی مچ می‌شه.</li>
+    <li>یک شرطیِ واحد، هم‌زمان از دو زاویه قابل توصیفه: «مقدم برای تالی کافیه» و «تالی برای مقدم لازمه».</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>مشخص کن کلمه‌ی «necessary» به‌کار رفته یا «sufficient».</li>
+    <li>اگه «sufficient»، همون چیزیه که مقدمِ شرطیه (If X then Y). اگه «necessary»، همون چیزیه که تالیه (If Y then X).</li>
+    <li>جمله رو به فرم استاندارد «If…then» بازنویسی کن.</li>
+    <li>اگه لازم شد، از هم‌ارزیِ contrapositive (فصل ۸) هم برای بیان دیگه‌ای از همون رابطه استفاده کن.</li>
+    <li class="arrow-final">→ جواب: گزاره‌ی شرطیِ استاندارد.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">"Having a valid ticket is necessary for boarding the train." Rewrite this in standard "If...then" form.</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ:</strong> "If a person boards the train, then they have a valid ticket." طبق قدم ۲، «necessary» همیشه تالیِ شرطیه — یعنی «boarding the train» مقدمه و «having a valid ticket» تالی.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">"Being a licensed pharmacist is sufficient to dispense prescription medication." Which of the following must be true, based only on this claim?</p>
+      <ul class="options">
+        <li class="correct">A) If a person is a licensed pharmacist, they can dispense prescription medication.</li>
+        <li>B) Only licensed pharmacists can dispense prescription medication.</li>
+        <li>C) If a person can dispense prescription medication, they are a licensed pharmacist.</li>
+        <li>D) Being a licensed pharmacist is also necessary to dispense prescription medication.</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>کلمه‌ی «sufficient» یعنی همون مقدمِ شرطیه. پس: "If (a person is a licensed pharmacist) then (they can dispense prescription medication)."</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>این دقیقاً همون گزینه‌ی A است. سؤال فقط از یک جهت (sufficient) صحبت کرده — هیچ ادعایی درباره‌ی جهت برعکس (necessary) نکرده.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌های B، C و D همه فرض می‌کنن که پروانه‌ی داروسازی <em>لازم</em> هم هست (یعنی راه دیگه‌ای برای تجویز دارو وجود نداره) — که این یک ادعای اضافه‌ست که در متن اصلی سؤال نیومده. شاید افراد دیگه‌ای (مثل پزشکان) هم بتونن دارو تجویز کنن؛ «sufficient» این امکان رو رد نمی‌کنه.</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون به‌جای فرض کردن یک رابطه‌ی دوطرفه، دقیقاً فقط همون یک جهتی که کلمه‌ی «sufficient» تضمین می‌کنه رو نتیجه گرفتیم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>یک ترفند حفظی: <strong>Sufficient = Enough</strong> (به‌تنهایی کافیه، پس مقدمه) و <strong>Necessary = Needed</strong> (بدونش نمی‌شه، پس تالیه که باید همراه باشه). هر بار قبل از حل، این دو کلمه رو با معادل فارسیشون («کافی» و «لازم») تطبیق بده تا جهت رو گم نکنی.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>یادت باشه از فصل ۸: «X only if Y» = «X is sufficient for Y» (چون هر دو یعنی «If X then Y»)، و «X if Y» = «X is necessary for Y» (چون هر دو یعنی «If Y then X»). اگه جمله‌ی «only if» یا «if» رو راحت‌تر می‌فهمی، همیشه می‌تونی بین این دو زبان جابه‌جا بشی.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> جابه‌جا کردن جهت «necessary» و «sufficient» — مثلاً فکر کردن «A sufficient for B» یعنی «If B then A».</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> این دو کلمه از نظر شهودی خیلی به هم شبیهن و بدون یک قاعده‌ی ثابت، ذهن به‌راحتی جهتشون رو با هم قاطی می‌کنه.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه اول جمله رو به فرم «If…then» ساده برگردون (طبق جدول قدم ۴)، و فقط بعد از اون با فرم استانداردی که بلدی (فصل ۴ و ۷) کار کن — به‌جای اینکه مستقیم با کلمات «necessary/sufficient» استدلال کنی.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>وقتی سؤال فقط ادعای «necessary» (یا فقط «sufficient») می‌کنه، آزمون گزینه‌ای می‌ذاره که انگار رابطه دوطرفه‌ست (یعنی هم لازمه هم کافیه). همیشه چک کن که آیا متن سؤال واقعاً هر دو جهت رو گفته یا فقط یکی — دقیقاً مثل مثال امتحانی بالا.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p><code>A necessary for B</code> = <code>If B then A</code> &nbsp;|&nbsp; <code>A sufficient for B</code> = <code>If A then B</code> &nbsp;|&nbsp; هر دو با هم = بایکاندیشنال (iff). Sufficient ↔ مقدم، Necessary ↔ تالی.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">"Having a pulse is necessary for being alive." Which is the correct standard form?</p>
+      <ul class="options">
+        <li>A) "If a person has a pulse, then they are alive."</li>
+        <li class="correct">B) "If a person is alive, then they have a pulse."</li>
+        <li>C) "A person is alive if and only if they have a pulse."</li>
+        <li>D) "Having a pulse guarantees being alive."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> «necessary» یعنی تالیِ شرطیه. اینجا "having a pulse" برای "being alive" لازمه، پس: "If (alive) then (has a pulse)".</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">"Scoring above 90% is sufficient to receive an A grade." A student scored 95% but did NOT receive an A (due to an unrelated academic misconduct penalty). Does this contradict the original claim?</p>
+      <ul class="options">
+        <li class="correct">A) Yes — the claim guarantees an A for any score above 90%, with no stated exceptions.</li>
+        <li>B) No — "sufficient" only means it's possible to get an A, not guaranteed.</li>
+        <li>C) No — academic misconduct is a necessary condition, so it overrides sufficiency.</li>
+        <li>D) Cannot be determined without knowing the full grading policy.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> «Sufficient» طبق تعریف یعنی «If A then B» بدون قید و شرط اضافه — یعنی نمره‌ی بالای ۹۰٪ به‌تنهایی باید A رو تضمین کنه. وقتی این اتفاق نمی‌افته، طبق جدول درستی فصل ۴ (مقدم درست، تالی غلط)، خودِ گزاره‌ی اصلی نقض شده. گزینه‌ی B معنای «sufficient» رو اشتباه، به‌عنوان «ممکنه» به‌جای «تضمین‌شده» تفسیر کرده.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">"Being a mammal is necessary for being a dog, but it is not sufficient." Which of the following best captures what this claim tells us?</p>
+      <ul class="options">
+        <li>A) Every mammal is a dog.</li>
+        <li class="correct">B) Every dog is a mammal, but not every mammal is a dog.</li>
+        <li>C) No mammal can be a dog.</li>
+        <li>D) Being a mammal and being a dog are logically equivalent.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> «Being a mammal is necessary for being a dog» = «If (is a dog) then (is a mammal)» — یعنی هر سگی پستاندار است. «but not sufficient» یعنی «If (is a mammal) then (is a dog)» برقرار <strong>نیست</strong> — یعنی هر پستانداری لزوماً سگ نیست (مثل گربه یا فیل). گزینه‌ی D اشتباهه چون دقیقاً می‌گه رابطه یک‌طرفه‌ست، نه دوطرفه (iff)؛ اگه دوطرفه بود، «sufficient» هم برقرار می‌بود.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۹</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>A necessary for B = If B then A</li>
+          <li>A sufficient for B = If A then B</li>
+          <li>هر دو با هم = بایکاندیشنال (iff)</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>Sufficient ↔ مقدم، Necessary ↔ تالی.</li>
+          <li>اول به فرم «If…then» ساده برگردون.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>جابه‌جا کردن جهت necessary/sufficient.</li>
+          <li>استدلال مستقیم با کلمات، بدون بازنویسیِ شرطی.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>فرض کردن رابطه‌ی دوطرفه وقتی فقط یک جهت گفته شده.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

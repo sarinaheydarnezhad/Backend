@@ -1,0 +1,21 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "cent_curriculum_imports",
+  "recordCount": 2,
+  "records": [
+    {
+      "PackageHash": "446c2f4b6e170d817efdf50ebaca98b1eda17eb0000048a5f73c74c543411e50",
+      "ImportedAt": "639297219503273700",
+      "SourceCount": 39,
+      "TopicCount": 190,
+      "QuestionCount": 819
+    },
+    {
+      "PackageHash": "5f5c16c6ab02e019de2604160307ed1e1f9adc734fc94ec840947f36f3f287a9",
+      "ImportedAt": "639297670997415989",
+      "SourceCount": 39,
+      "TopicCount": 190,
+      "QuestionCount": 819
+    }
+  ]
+}

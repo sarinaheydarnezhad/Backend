@@ -1,0 +1,30 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "mode": "Explicit table AND column allowlist; no user-table SELECTs, API calls, login, seeding, application startup, migrations, or external network access.",
+  "excludedTables": [
+    "cent_ai_analyses",
+    "cent_attempt_questions",
+    "cent_attempts",
+    "cent_audit_events",
+    "cent_entitlements",
+    "cent_google_attempts",
+    "cent_notes",
+    "cent_orders",
+    "cent_payment_events",
+    "cent_products",
+    "cent_sessions",
+    "cent_study_progress",
+    "cent_users"
+  ],
+  "excludedCategories": [
+    "all users and account identifiers",
+    "authentication sessions and OAuth state",
+    "personal notes and study progress",
+    "products, prices, purchases, orders, entitlements and payment events",
+    "learner attempts, answer snapshots, results and AI analyses",
+    "administrator audit events",
+    "all Lerona tables and records",
+    "whole SQLite database and backups"
+  ],
+  "exportedContentTimestamps": "Only educational content creation/import timestamps; no owner or actor metadata."
+}

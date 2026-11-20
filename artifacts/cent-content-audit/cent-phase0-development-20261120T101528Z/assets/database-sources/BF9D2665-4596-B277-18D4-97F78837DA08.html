@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>فصل مثلثات | جزوهٔ آموزشی گام‌به‌گام</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAF6EC;
+    --dot:#E3DCC8;
+    --navy:#1F3A52;
+    --blue:#2C6E8E;   --blue-bg:#EAF4F8;
+    --green:#2E9B6F;  --green-bg:#EAF7F0;
+    --red:#D2534A;    --red-bg:#FBEAE8;
+    --gold:#D79E28;   --gold-bg:#FCF3DD;
+    --purple:#7C4A99; --purple-bg:#F4EDF8;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Vazirmatn', sans-serif;
+    background-color:var(--bg);
+    background-image:radial-gradient(var(--dot) 1.5px, transparent 1.5px);
+    background-size:22px 22px;
+    color:#2A2A2A;
+    line-height:1.9;
+  }
+  .ltr{ direction:ltr; unicode-bidi:isolate; display:inline-block; }
+  .frac{ display:inline-flex; flex-direction:column; align-items:center; vertical-align:middle; margin:0 3px; direction:ltr; unicode-bidi:isolate; font-size:0.95em; }
+  .frac .num{ border-bottom:2px solid currentColor; padding:0 6px 2px 6px; }
+  .frac .den{ padding:2px 6px 0 6px; }
+
+  /* ===== NAVBAR ===== */
+  nav{
+    position:sticky; top:0; z-index:100;
+    background:var(--navy);
+    display:flex; flex-wrap:wrap; gap:6px;
+    padding:12px 18px; justify-content:center;
+  }
+  nav a{
+    color:#EAF4F8; text-decoration:none; font-size:0.85rem; font-weight:600;
+    padding:8px 14px; border-radius:20px; background:rgba(255,255,255,0.08);
+    transition:background .2s;
+    white-space:nowrap;
+  }
+  nav a:hover{ background:rgba(255,255,255,0.22); }
+
+  .wrap{ max-width:900px; margin:0 auto; padding:0 18px 60px 18px; }
+
+  /* ===== HERO ===== */
+  .hero{
+    margin-top:26px;
+    border-radius:22px;
+    padding:42px 30px;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    background-image:
+      radial-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px),
+      linear-gradient(135deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    background-size:22px 22px, cover;
+    color:#fff; text-align:center;
+    box-shadow:0 14px 34px rgba(31,58,82,0.25);
+  }
+  .hero .eyebrow{
+    display:inline-block; background:rgba(255,255,255,0.18);
+    padding:6px 16px; border-radius:20px; font-size:0.82rem; font-weight:600; margin-bottom:16px;
+  }
+  .hero h1{ margin:0 0 12px 0; font-size:2rem; font-weight:900; }
+  .hero p{ margin:0; font-size:1rem; opacity:0.92; }
+
+  /* ===== HOW TO USE ===== */
+  .howto{ margin-top:46px; }
+  .howto h2{ text-align:center; color:var(--navy); font-size:1.4rem; margin-bottom:30px; }
+  .cycle{
+    display:flex; flex-wrap:wrap; gap:14px; justify-content:center;
+  }
+  .cycle .step{
+    flex:1 1 160px; max-width:190px; text-align:center;
+    background:#fff; border-radius:16px; padding:20px 12px;
+    box-shadow:0 4px 14px rgba(0,0,0,0.06);
+    border-top:5px solid var(--c);
+  }
+  .cycle .step .num{
+    width:38px; height:38px; border-radius:50%; background:var(--c); color:#fff;
+    display:flex; align-items:center; justify-content:center; margin:0 auto 10px auto;
+    font-weight:800;
+  }
+  .cycle .step p{ margin:0; font-size:0.86rem; font-weight:600; color:#333; }
+
+  /* ===== SECTION HEADERS ===== */
+  section.topic{ margin-top:56px; }
+  .sec-head{ display:flex; align-items:center; gap:14px; margin-bottom:22px; }
+  .sec-head .badge{
+    width:46px; height:46px; min-width:46px; border-radius:50%;
+    background:var(--navy); color:#fff; display:flex; align-items:center; justify-content:center;
+    font-weight:800; font-size:1.2rem;
+  }
+  .sec-head .label{ font-size:0.78rem; color:var(--blue); font-weight:700; }
+  .sec-head h2{ margin:2px 0 0 0; font-size:1.3rem; color:var(--navy); }
+
+  /* ===== CARDS ===== */
+  .card{ border-radius:16px; padding:22px 22px; margin-bottom:18px; box-shadow:0 3px 12px rgba(0,0,0,0.05); }
+  .card h3{ margin:0 0 14px 0; font-size:1.05rem; display:flex; align-items:center; gap:8px; }
+  .card h3 .ic{ font-size:1.1rem; }
+
+  .concept{ background:var(--blue-bg); border-inline-start:5px solid var(--blue); }
+  .concept h3{ color:var(--blue); }
+  .formula-box{
+    background:var(--navy); color:#fff; border-radius:12px; padding:16px 20px;
+    margin:14px 0; text-align:center; font-size:1.1rem;
+  }
+  .formula-box .ltr{ font-size:1.1rem; }
+  .steps{ background:rgba(255,255,255,0.6); border-radius:10px; padding:14px 18px; margin:10px 0; }
+  .steps ol{ margin:0; padding-inline-start:20px; }
+  .steps li{ margin-bottom:8px; }
+
+  .example{ background:var(--green-bg); border-inline-start:5px solid var(--green); }
+  .example h3{ color:var(--green); }
+  .example .steps{ background:rgba(255,255,255,0.65); }
+  .result{
+    background:var(--green); color:#fff; border-radius:10px; padding:10px 16px;
+    margin-top:10px; font-weight:700; display:inline-block;
+  }
+
+  .mistakes{ background:var(--red-bg); border-inline-start:5px solid var(--red); }
+  .mistakes h3{ color:var(--red); }
+  .mistakes ul{ margin:0; padding:0; list-style:none; }
+  .mistakes li{ margin-bottom:12px; padding-inline-start:26px; position:relative; }
+  .mistakes li::before{ content:"✗"; position:absolute; right:0; color:var(--red); font-weight:800; }
+
+  .tips{ background:var(--gold-bg); border-inline-start:5px solid var(--gold); }
+  .tips h3{ color:var(--gold); }
+  .tips ul{ margin:0; padding:0; list-style:none; }
+  .tips li{ margin-bottom:12px; padding-inline-start:26px; position:relative; }
+  .tips li::before{ content:"★"; position:absolute; right:0; color:var(--gold); font-weight:800; }
+
+  /* ===== DATA TABLES ===== */
+  .data-table-wrap{ overflow-x:auto; margin:14px 0; border-radius:12px; }
+  table.data-table{ border-collapse:collapse; width:100%; min-width:560px; background:#fff; font-size:0.85rem; text-align:center; }
+  table.data-table caption{ caption-side:top; text-align:right; font-weight:700; color:var(--navy); padding-bottom:8px; font-size:0.92rem; }
+  table.data-table th, table.data-table td{ border:1px solid #D7E4EA; padding:9px 6px; }
+  table.data-table thead th{ background:var(--navy); color:#fff; font-weight:700; }
+  table.data-table tbody th{ background:var(--blue); color:#fff; font-weight:700; }
+  table.data-table tbody tr:nth-child(even) td{ background:#F4FAFC; }
+  table.data-table td.pos{ color:var(--green); font-weight:700; }
+  table.data-table td.neg{ color:var(--red); font-weight:700; }
+  table.data-table td.und{ color:#999; }
+
+  /* ===== DIAGRAMS ===== */
+  .diagram-box{ background:#fff; border-radius:14px; padding:16px; margin:16px 0; text-align:center; }
+  .diagram-box svg{ max-width:100%; height:auto; }
+  .diagram-box .cap{ font-size:0.8rem; color:#667; margin-top:8px; }
+  .diagram-row{ display:flex; flex-wrap:wrap; gap:14px; justify-content:center; }
+  .diagram-row .diagram-box{ flex:1 1 210px; max-width:230px; }
+
+  .recap{ background:var(--navy); color:#fff; border-radius:16px; padding:24px 22px; margin-top:22px; }
+  .recap h3{ color:#fff; margin:0 0 14px 0; font-size:1.05rem; display:flex; align-items:center; gap:8px; }
+  .recap table{ width:100%; border-collapse:collapse; font-size:0.86rem; }
+  .recap table th, .recap table td{ border:1px solid rgba(255,255,255,0.25); padding:10px 8px; text-align:center; }
+  .recap table th{ background:rgba(255,255,255,0.12); }
+
+  .practice{ background:var(--purple-bg); border-inline-start:5px solid var(--purple); }
+  .practice h3{ color:var(--purple); }
+  .q{ background:rgba(255,255,255,0.6); border-radius:10px; padding:14px 18px; margin-bottom:12px; }
+  .q p.qtext{ margin:0 0 8px 0; font-weight:600; }
+  details{ margin-top:6px; }
+  summary{
+    cursor:pointer; color:var(--purple); font-weight:700; font-size:0.9rem;
+    background:rgba(124,74,153,0.1); display:inline-block; padding:6px 14px; border-radius:20px;
+  }
+  .ans{ margin-top:10px; padding-inline-start:8px; }
+  .final-ans{ font-weight:800; color:var(--purple); margin-top:8px; display:block; }
+
+  /* ===== SUMMARY ===== */
+  .summary{
+    margin-top:56px; border-radius:22px; padding:38px 30px; color:#fff; text-align:center;
+    background:linear-gradient(135deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    background-image:
+      radial-gradient(rgba(255,255,255,0.12) 1.5px, transparent 1.5px),
+      linear-gradient(135deg, var(--navy) 0%, var(--blue) 55%, var(--green) 100%);
+    background-size:22px 22px, cover;
+  }
+  .summary h2{ margin-top:0; }
+  .pills{ display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin:18px 0; }
+  .pills span{ background:rgba(255,255,255,0.18); padding:6px 16px; border-radius:20px; font-size:0.82rem; }
+  .compass{
+    background:rgba(255,255,255,0.14); border-radius:14px; padding:16px 20px; margin-top:20px;
+    font-weight:600; font-size:0.95rem;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#howto">راهنمای استفاده</a>
+  <a href="#s1">۱. رادیان و درجه</a>
+  <a href="#s2">۲. نسبت‌ها در مثلث</a>
+  <a href="#s3">۳. دایرهٔ مثلثاتی</a>
+  <a href="#s4">۴. فرمول‌های تبدیل</a>
+  <a href="#s5">۵. مجموع و تفاضل</a>
+  <a href="#s6">۶. معادلات مثلثاتی</a>
+  <a href="#s7">۷. تابع و مثلثات</a>
+  <a href="#summary">جمع‌بندی</a>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="eyebrow">فصل مثلثات | جزوهٔ آموزشی گام‌به‌گام</span>
+    <h1>مثلثات؛ از رادیان تا حل معادله</h1>
+    <p>از رابطهٔ درجه و رادیان شروع می‌کنیم، با دایرهٔ مثلثاتی و علامت نسبت‌ها آشنا می‌شویم، فرمول‌های تبدیل و جمع زوایا را یاد می‌گیریم و در نهایت معادلات مثلثاتی را بدون هیچ ریشه‌سوزی حل می‌کنیم.</p>
+  </div>
+
+  <!-- HOW TO USE -->
+  <div class="howto" id="howto">
+    <h2>چگونه از این جزوه استفاده کنیم؟</h2>
+    <div class="cycle">
+      <div class="step" style="--c:var(--blue)"><div class="num">۱</div><p>فهم مفهوم</p></div>
+      <div class="step" style="--c:var(--green)"><div class="num">۲</div><p>دیدن مثال</p></div>
+      <div class="step" style="--c:var(--red)"><div class="num">۳</div><p>بررسی دام‌ها</p></div>
+      <div class="step" style="--c:var(--gold)"><div class="num">۴</div><p>هایلایت امتحانی</p></div>
+      <div class="step" style="--c:var(--purple)"><div class="num">۵</div><p>حل تمرین</p></div>
+    </div>
+  </div>
+
+  <!-- ================= SECTION 1 ================= -->
+  <section class="topic" id="s1">
+    <div class="sec-head">
+      <div class="badge">۱</div>
+      <div>
+        <div class="label">بخش اول</div>
+        <h2>رادیان، درجه، طول کمان و مساحت مطاع</h2>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <h3><span class="ic">💡</span>مفاهیم اصلی</h3>
+      <p>هر دایره را می‌توان با دو واحد اندازه‌گیری کرد: «درجه» و «رادیان». رادیان زاویه‌ای است که کمان روبه‌رویش، برابر با شعاع دایره باشد.</p>
+      <div class="formula-box">
+        <span class="ltr">۱ رادیان ≈ ۵۷ درجه &nbsp;&nbsp;|&nbsp;&nbsp; π رادیان = ۱۸۰ درجه</span>
+      </div>
+      <div class="steps">
+        <ol>
+          <li>برای تبدیل درجه به رادیان: <span class="ltr">رادیان = درجه × <span class="frac"><span class="num">π</span><span class="den">۱۸۰</span></span></span></li>
+          <li>برای تبدیل رادیان به درجه: <span class="ltr">درجه = رادیان × <span class="frac"><span class="num">۱۸۰</span><span class="den">π</span></span></span></li>
+          <li>طول کمان (وقتی زاویهٔ مرکزی برحسب رادیان باشد): <span class="ltr">L = r × θ</span></li>
+          <li>مساحت مطاع (قطاع دایره): <span class="ltr">A = <span class="frac"><span class="num">۱</span><span class="den">۲</span></span> r<sup>۲</sup> θ</span> — و اگر زاویه برحسب درجه باشد: <span class="ltr">A = <span class="frac"><span class="num">θ</span><span class="den">۳۶۰</span></span> × π r<sup>۲</sup></span></li>
+        </ol>
+      </div>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 260 200" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="90" cy="100" r="70" fill="#EAF4F8" stroke="#1F3A52" stroke-width="2"/>
+          <line x1="90" y1="100" x2="160" y2="100" stroke="#2C6E8E" stroke-width="2"/>
+          <line x1="90" y1="100" x2="122" y2="35" stroke="#2E9B6F" stroke-width="2"/>
+          <path d="M 150 100 A 60 60 0 0 0 122 45" fill="none" stroke="#D79E28" stroke-width="3"/>
+          <text x="128" y="98" font-size="12" fill="#1F3A52" font-weight="700">r</text>
+          <text x="108" y="65" font-size="12" fill="#1F3A52" font-weight="700">r</text>
+          <text x="96" y="80" font-size="12" fill="#D79E28" font-weight="700">θ</text>
+          <text x="150" y="60" font-size="11" fill="#2E9B6F" font-weight="700" class="ltr">L = r·θ</text>
+          <text x="190" y="30" font-size="12" fill="#1F3A52" font-weight="700" class="ltr">A = ½r²θ</text>
+        </svg>
+        <p class="cap">وقتی زاویهٔ مرکزی θ برحسب رادیان باشد، کمان روبه‌رو (L) و مساحت قطاع (A) مستقیماً از روی شعاع r به دست می‌آیند.</p>
+      </div>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۱ — تبدیل درجه به رادیان</h3>
+      <div class="steps">تبدیل <span class="ltr">۹۰°</span> به رادیان:
+        <ol>
+          <li>در فرمول تبدیل قرار می‌دهیم: <span class="ltr">۹۰ × <span class="frac"><span class="num">π</span><span class="den">۱۸۰</span></span></span></li>
+          <li>ساده می‌کنیم: <span class="ltr"><span class="frac"><span class="num">π</span><span class="den">۲</span></span></span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">۹۰° = π/۲ رادیان</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۲ — طول کمان</h3>
+      <div class="steps">دایره‌ای به شعاع <span class="ltr">۶ سانتی‌متر</span> داریم و زاویهٔ مرکزی <span class="ltr">π/۳</span> رادیان است:
+        <ol>
+          <li>از فرمول <span class="ltr">L = r × θ</span> استفاده می‌کنیم.</li>
+          <li>جای‌گذاری می‌کنیم: <span class="ltr">L = ۶ × <span class="frac"><span class="num">π</span><span class="den">۳</span></span></span></li>
+          <li>ساده می‌کنیم: <span class="ltr">L = ۲π</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">طول کمان = ۲π سانتی‌متر</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۳ — مساحت مطاع</h3>
+      <div class="steps">شعاع دایره <span class="ltr">۴</span> و زاویهٔ مرکزی <span class="ltr">۹۰°</span> است:
+        <ol>
+          <li>چون زاویه برحسب درجه است، از فرمول <span class="ltr">A = <span class="frac"><span class="num">θ</span><span class="den">۳۶۰</span></span> × π r<sup>۲</sup></span> استفاده می‌کنیم.</li>
+          <li>جای‌گذاری: <span class="ltr">A = <span class="frac"><span class="num">۹۰</span><span class="den">۳۶۰</span></span> × π × ۴<sup>۲</sup></span></li>
+          <li>ساده‌سازی: <span class="ltr">A = <span class="frac"><span class="num">۱</span><span class="den">۴</span></span> × ۱۶π = ۴π</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">مساحت مطاع = ۴π</span></span>
+    </div>
+
+    <div class="card mistakes">
+      <h3><span class="ic">⚠</span>اشتباهات پرتکرار</h3>
+      <ul>
+        <li>فراموش کردن اینکه فرمول <span class="ltr">L = rθ</span> فقط وقتی درست است که θ برحسب رادیان باشد؛ اگر زاویه درجه باشد باید اول آن را به رادیان تبدیل کنی.</li>
+        <li>جابه‌جا کردن فرمول تبدیل — یعنی برای تبدیل درجه به رادیان، به‌جای ضرب در <span class="ltr">π/۱۸۰</span>، در <span class="ltr">۱۸۰/π</span> ضرب کردن.</li>
+      </ul>
+    </div>
+
+    <div class="card tips">
+      <h3><span class="ic">★</span>نکات امتحانی</h3>
+      <ul>
+        <li>زوایای پرکاربرد <span class="ltr">۳۰°، ۴۵°، ۶۰°، ۹۰°، ۱۸۰°، ۳۶۰°</span> را با معادل رادیانشان (<span class="ltr">π/۶، π/۴، π/۳، π/۲، π، ۲π</span>) از حفظ باش تا وقت کنکور محاسبه نکنی.</li>
+        <li>در مسائل ترکیبی طول کمان و مساحت مطاع، اول واحد زاویه را چک کن؛ نیمی از خطاها از همین‌جاست.</li>
+      </ul>
+    </div>
+
+    <div class="card practice">
+      <h3><span class="ic">📝</span>تمرین این بخش</h3>
+      <div class="q">
+        <p class="qtext">۱) <span class="ltr">۱۲۰°</span> را به رادیان تبدیل کنید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">۱۲۰ × π/۱۸۰ = ۲π/۳</span>
+            <span class="final-ans">پاسخ نهایی: ۲π/۳ رادیان</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۲) شعاع دایره‌ای <span class="ltr">۵</span> و زاویهٔ مرکزی آن <span class="ltr">π/۵</span> رادیان است. طول کمان را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">L = r × θ = ۵ × π/۵ = π</span>
+            <span class="final-ans">پاسخ نهایی: L = π</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۳) اگر شعاع دایره <span class="ltr">۳</span> و زاویهٔ مرکزی <span class="ltr">۶۰°</span> باشد، مساحت مطاع را حساب کنید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">A = (۶۰/۳۶۰) × π × ۳<sup>۲</sup> = (۱/۶) × ۹π = ۳π/۲</span>
+            <span class="final-ans">پاسخ نهایی: A = ۳π/۲</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 2 ================= -->
+  <section class="topic" id="s2">
+    <div class="sec-head">
+      <div class="badge">۲</div>
+      <div>
+        <div class="label">بخش دوم</div>
+        <h2>نسبت‌های مثلثاتی در مثلث قائم‌الزاویه</h2>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <h3><span class="ic">💡</span>مفاهیم اصلی</h3>
+      <p>در یک مثلث قائم‌الزاویه با زاویهٔ حاده <span class="ltr">θ</span>، ضلع روبه‌رو (a)، ضلع مجاور (b) و وتر (c) داریم:</p>
+      <div class="formula-box">
+        <span class="ltr">sin θ = <span class="frac"><span class="num">a</span><span class="den">c</span></span> &nbsp;&nbsp; cos θ = <span class="frac"><span class="num">b</span><span class="den">c</span></span> &nbsp;&nbsp; tan θ = <span class="frac"><span class="num">a</span><span class="den">b</span></span> &nbsp;&nbsp; cot θ = <span class="frac"><span class="num">b</span><span class="den">a</span></span></span>
+      </div>
+      <div class="steps">
+        <ol>
+          <li>ابتدا ضلع روبه‌رو، مجاور و وتر را نسبت به زاویهٔ موردنظر مشخص کن.</li>
+          <li>با توجه به نسبت خواسته‌شده (سینوس، کسینوس، تانژانت یا کتانژانت) دو ضلع مناسب را در کسر بگذار.</li>
+          <li>اگر یک نسبت را داشته باشی، با قضیهٔ فیثاغورس ضلع سوم را پیدا کن و بقیهٔ نسبت‌ها را بساز.</li>
+        </ol>
+      </div>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 220 150" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="30,120 190,120 190,30" fill="#fff" stroke="#1F3A52" stroke-width="2"/>
+          <rect x="176" y="106" width="14" height="14" fill="none" stroke="#1F3A52" stroke-width="1.5"/>
+          <path d="M 55 120 A 25 25 0 0 1 46 100" fill="none" stroke="#D79E28" stroke-width="2"/>
+          <text x="58" y="112" font-size="12" fill="#D79E28" font-weight="700">θ</text>
+          <text x="105" y="135" font-size="13" fill="#2C6E8E" font-weight="700">b (مجاور)</text>
+          <text x="196" y="80" font-size="13" fill="#2E9B6F" font-weight="700">a (مقابل)</text>
+          <text x="90" y="65" font-size="13" fill="#7C4A99" font-weight="700">c (وتر)</text>
+        </svg>
+        <p class="cap ltr">sin θ = a/c &nbsp; cos θ = b/c &nbsp; tan θ = a/b &nbsp; cot θ = b/a</p>
+      </div>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۱</h3>
+      <div class="steps">اگر <span class="ltr">sin α = ۱/۲</span> باشد، بقیهٔ نسبت‌ها را بیابید:
+        <ol>
+          <li>چون <span class="ltr">sin α = ۱/۲</span>، ضلع روبه‌رو را <span class="ltr">۱</span> و وتر را <span class="ltr">۲</span> در نظر می‌گیریم.</li>
+          <li>با فیثاغورس، ضلع مجاور: <span class="ltr">√(۲<sup>۲</sup> − ۱<sup>۲</sup>) = √۳</span></li>
+          <li>پس: <span class="ltr">cos α = √۳/۲</span>، <span class="ltr">tan α = ۱/√۳</span>، <span class="ltr">cot α = √۳</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: زاویهٔ <span class="ltr">α</span> همان <span class="ltr">۳۰°</span> است.</span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۲</h3>
+      <div class="steps">در مثلث قائم‌الزاویه، ضلع مجاور <span class="ltr">۴</span> و ضلع مقابل <span class="ltr">۳</span> است. <span class="ltr">tan θ</span> و <span class="ltr">cos θ</span> را بیابید:
+        <ol>
+          <li>وتر: <span class="ltr">√(۳<sup>۲</sup> + ۴<sup>۲</sup>) = ۵</span></li>
+          <li><span class="ltr">tan θ = مقابل/مجاور = ۳/۴</span></li>
+          <li><span class="ltr">cos θ = مجاور/وتر = ۴/۵</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">tan θ = ۳/۴ , cos θ = ۴/۵</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۳</h3>
+      <div class="steps">نشان دهید اگر <span class="ltr">tan α = ۱</span> باشد، آنگاه <span class="ltr">sin α = cos α</span>:
+        <ol>
+          <li>چون <span class="ltr">tan α = مقابل/مجاور = ۱</span>، پس ضلع مقابل و مجاور با هم برابرند.</li>
+          <li>اگر هر دو ضلع را <span class="ltr">۱</span> بگیریم، وتر برابر <span class="ltr">√۲</span> می‌شود.</li>
+          <li>پس <span class="ltr">sin α = ۱/√۲</span> و <span class="ltr">cos α = ۱/√۲</span> که با هم برابرند.</li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: زاویهٔ <span class="ltr">α = ۴۵°</span> است.</span>
+    </div>
+
+    <div class="card mistakes">
+      <h3><span class="ic">⚠</span>اشتباهات پرتکرار</h3>
+      <ul>
+        <li>اشتباه گرفتن ضلع «مقابل» و «مجاور» — این دو، نسبت به زاویهٔ موردنظر تعیین می‌شوند، نه ثابت در مثلث؛ با عوض‌شدن زاویه، مقابل و مجاور هم عوض می‌شوند.</li>
+        <li>فراموش کردن اینکه نسبت‌های مثلثاتی فقط برای زاویهٔ حاده در مثلث قائم‌الزاویه تعریف می‌شوند، نه برای هر زاویه‌ای؛ برای زوایای دیگر باید سراغ دایرهٔ مثلثاتی رفت.</li>
+      </ul>
+    </div>
+
+    <div class="card tips">
+      <h3><span class="ic">★</span>نکات امتحانی</h3>
+      <ul>
+        <li>رابطهٔ <span class="ltr">tan α × cot α = ۱</span> و <span class="ltr">tan α = sin α / cos α</span> را حفظ کن؛ در بیشتر تست‌ها یکی از این دو رابطه، مسیر سریع‌تر حل است.</li>
+        <li>رابطهٔ طلایی <span class="ltr">sin<sup>۲</sup>α + cos<sup>۲</sup>α = ۱</span> همیشه برای پیدا کردن نسبت مجهول از روی نسبت معلوم به کار می‌آید.</li>
+      </ul>
+    </div>
+
+    <div class="card practice">
+      <h3><span class="ic">📝</span>تمرین این بخش</h3>
+      <div class="q">
+        <p class="qtext">۱) اگر <span class="ltr">cos β = √۲/۲</span> باشد، <span class="ltr">sin β</span> و <span class="ltr">tan β</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">sin<sup>۲</sup>β = ۱ − ۱/۲ = ۱/۲ ⇒ sin β = √۲/۲</span><br>
+            <span class="ltr">tan β = sin β / cos β = ۱</span>
+            <span class="final-ans">پاسخ نهایی: sin β = √۲/۲ ، tan β = ۱</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۲) در مثلث قائم‌الزاویه، وتر <span class="ltr">۱۰</span> و ضلع مقابل <span class="ltr">۶</span> است. <span class="ltr">cot θ</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">ضلع مجاور = √(۱۰<sup>۲</sup> − ۶<sup>۲</sup>) = ۸</span><br>
+            <span class="ltr">cot θ = مجاور/مقابل = ۸/۶ = ۴/۳</span>
+            <span class="final-ans">پاسخ نهایی: cot θ = ۴/۳</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۳) اگر <span class="ltr">tan α = √۳</span> باشد، زاویهٔ <span class="ltr">α</span> کدام است؟</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">tan ۶۰° = √۳</span>
+            <span class="final-ans">پاسخ نهایی: α = ۶۰°</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 3 ================= -->
+  <section class="topic" id="s3">
+    <div class="sec-head">
+      <div class="badge">۳</div>
+      <div>
+        <div class="label">بخش سوم</div>
+        <h2>دایرهٔ مثلثاتی، علامت نسبت‌ها و زوایای ویژه</h2>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <h3><span class="ic">💡</span>مفاهیم اصلی</h3>
+      <p>دایرهٔ مثلثاتی به چهار ربع تقسیم می‌شود و علامت هر نسبت در هر ربع، از روی محور مربوط به آن نسبت مشخص می‌شود.</p>
+      <div class="steps">
+        <ol>
+          <li>ربع اول: <span class="ltr">۰° تا ۹۰°</span> — همهٔ نسبت‌ها مثبت‌اند.</li>
+          <li>ربع دوم: <span class="ltr">۹۰° تا ۱۸۰°</span> — فقط <span class="ltr">sin</span> مثبت است.</li>
+          <li>ربع سوم: <span class="ltr">۱۸۰° تا ۲۷۰°</span> — فقط <span class="ltr">tan</span> و <span class="ltr">cot</span> مثبت‌اند.</li>
+          <li>ربع چهارم: <span class="ltr">۲۷۰° تا ۳۶۰°</span> — فقط <span class="ltr">cos</span> مثبت است.</li>
+        </ol>
+      </div>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <caption>بازهٔ هر ربع، هم‌زمان بر حسب درجه و رادیان</caption>
+          <thead>
+            <tr><th>ربع</th><th class="ltr">بر حسب درجه</th><th class="ltr">بر حسب رادیان</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>ربع اول</th><td class="ltr">۰° &lt; α &lt; ۹۰°</td><td class="ltr">۰ &lt; α &lt; π/۲</td></tr>
+            <tr><th>ربع دوم</th><td class="ltr">۹۰° &lt; α &lt; ۱۸۰°</td><td class="ltr">π/۲ &lt; α &lt; π</td></tr>
+            <tr><th>ربع سوم</th><td class="ltr">۱۸۰° &lt; α &lt; ۲۷۰°</td><td class="ltr">π &lt; α &lt; ۳π/۲</td></tr>
+            <tr><th>ربع چهارم</th><td class="ltr">۲۷۰° &lt; α &lt; ۳۶۰°</td><td class="ltr">۳π/۲ &lt; α &lt; ۲π</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 350 340" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="150" cy="170" r="110" fill="#FFEB00" stroke="#E6C200" stroke-width="1"/>
+          <line x1="150" y1="15" x2="150" y2="325" stroke="#2C6E8E" stroke-width="2"/>
+          <line x1="15" y1="170" x2="335" y2="170" stroke="#2C6E8E" stroke-width="2"/>
+          <line x1="260" y1="15" x2="260" y2="170" stroke="#2C6E8E" stroke-width="2"/>
+          <line x1="150" y1="60" x2="335" y2="60" stroke="#2C6E8E" stroke-width="2"/>
+          <text x="126" y="14" font-size="16" fill="#2C6E8E" font-weight="700" font-style="italic">Sin</text>
+          <text x="340" y="176" font-size="16" fill="#2C6E8E" font-weight="700" font-style="italic">Cos</text>
+          <text x="246" y="12" font-size="16" fill="#2C6E8E" font-weight="700" font-style="italic">tan</text>
+          <text x="340" y="56" font-size="16" fill="#2C6E8E" font-weight="700" font-style="italic">Cot</text>
+        </svg>
+        <p class="cap">دایرهٔ مثلثاتی به همراه هر چهار محور: <span class="ltr">sin</span> (محور عمودیِ گذرنده از مرکز)، <span class="ltr">cos</span> (محور افقیِ گذرنده از مرکز)، <span class="ltr">tan</span> (خط مماس بر دایره در نقطهٔ تلاقی با محور <span class="ltr">cos</span>) و <span class="ltr">cot</span> (خط مماس بر دایره در نقطهٔ تلاقی با محور <span class="ltr">sin</span>).</p>
+      </div>
+
+      <div class="formula-box">
+        <span class="ltr">زوایای منفی: sin(−θ) = −sin θ &nbsp; cos(−θ) = cos θ &nbsp; tan(−θ) = −tan θ &nbsp; cot(−θ) = −cot θ</span>
+      </div>
+
+      <div class="diagram-box">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="150" cy="150" r="110" fill="#EAF4F8" stroke="#1F3A52" stroke-width="2"/>
+          <line x1="20" y1="150" x2="280" y2="150" stroke="#2C6E8E" stroke-width="1.5"/>
+          <line x1="150" y1="20" x2="150" y2="280" stroke="#2C6E8E" stroke-width="1.5"/>
+          <line x1="260" y1="40" x2="260" y2="150" stroke="#7C4A99" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <line x1="150" y1="40" x2="260" y2="40" stroke="#D79E28" stroke-width="1.5" stroke-dasharray="4 3"/>
+          <text x="284" y="156" font-size="14" fill="#2C6E8E" font-weight="700">cos</text>
+          <text x="138" y="14" font-size="14" fill="#2C6E8E" font-weight="700">sin</text>
+          <text x="264" y="34" font-size="13" fill="#7C4A99" font-weight="700">tan</text>
+          <text x="264" y="56" font-size="13" fill="#D79E28" font-weight="700">cot</text>
+          <text x="200" y="105" font-size="17" fill="#2E9B6F" font-weight="800">I</text>
+          <text x="90" y="105" font-size="17" fill="#2E9B6F" font-weight="800">II</text>
+          <text x="88" y="215" font-size="17" fill="#2E9B6F" font-weight="800">III</text>
+          <text x="200" y="215" font-size="17" fill="#2E9B6F" font-weight="800">IV</text>
+        </svg>
+        <p class="cap">دایرهٔ مثلثاتی به همراه چهار محور — محور افقی (cos)، محور عمودی (sin) و دو محور مماسی برای tan و cot</p>
+      </div>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <caption>جدول علامت نسبت‌های مثلثاتی در چهار ربع</caption>
+          <thead>
+            <tr><th></th><th>ربع اول</th><th>ربع دوم</th><th>ربع سوم</th><th>ربع چهارم</th></tr>
+          </thead>
+          <tbody>
+            <tr><th>sin</th><td class="pos">+</td><td class="pos">+</td><td class="neg">−</td><td class="neg">−</td></tr>
+            <tr><th>cos</th><td class="pos">+</td><td class="neg">−</td><td class="neg">−</td><td class="pos">+</td></tr>
+            <tr><th>tan</th><td class="pos">+</td><td class="neg">−</td><td class="pos">+</td><td class="neg">−</td></tr>
+            <tr><th>cot</th><td class="pos">+</td><td class="neg">−</td><td class="pos">+</td><td class="neg">−</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <caption>جدول مقادیر ویژهٔ نسبت‌های مثلثاتی (برای مقایسه و حفظ‌کردن)</caption>
+          <thead>
+            <tr>
+              <th></th>
+              <th class="ltr">۰</th>
+              <th class="ltr">π/۶ یا ۳۰°</th>
+              <th class="ltr">π/۴ یا ۴۵°</th>
+              <th class="ltr">π/۳ یا ۶۰°</th>
+              <th class="ltr">π/۲ یا ۹۰°</th>
+              <th class="ltr">π یا ۱۸۰°</th>
+              <th class="ltr">۳π/۲ یا ۲۷۰°</th>
+              <th class="ltr">۲π یا ۳۶۰°</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>sin</th>
+              <td>۰</td><td><span class="frac"><span class="num">۱</span><span class="den">۲</span></span></td>
+              <td><span class="frac"><span class="num">√۲</span><span class="den">۲</span></span></td>
+              <td><span class="frac"><span class="num">√۳</span><span class="den">۲</span></span></td>
+              <td>۱</td><td>۰</td><td>−۱</td><td>۰</td>
+            </tr>
+            <tr>
+              <th>cos</th>
+              <td>۱</td>
+              <td><span class="frac"><span class="num">√۳</span><span class="den">۲</span></span></td>
+              <td><span class="frac"><span class="num">√۲</span><span class="den">۲</span></span></td>
+              <td><span class="frac"><span class="num">۱</span><span class="den">۲</span></span></td>
+              <td>۰</td><td>−۱</td><td>۰</td><td>۱</td>
+            </tr>
+            <tr>
+              <th>tan</th>
+              <td>۰</td>
+              <td><span class="frac"><span class="num">√۳</span><span class="den">۳</span></span></td>
+              <td>۱</td><td>√۳</td>
+              <td class="und">تعریف‌نشده</td><td>۰</td><td class="und">تعریف‌نشده</td><td>۰</td>
+            </tr>
+            <tr>
+              <th>cot</th>
+              <td class="und">تعریف‌نشده</td>
+              <td>√۳</td><td>۱</td>
+              <td><span class="frac"><span class="num">√۳</span><span class="den">۳</span></span></td>
+              <td>۰</td><td class="und">تعریف‌نشده</td><td>۰</td><td class="und">تعریف‌نشده</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۱ — تعیین علامت</h3>
+      <div class="steps">علامت <span class="ltr">sin ۲۱۰°</span> را تعیین کنید:
+        <ol>
+          <li><span class="ltr">۲۱۰°</span> بین <span class="ltr">۱۸۰°</span> و <span class="ltr">۲۷۰°</span> است، پس در ربع سوم قرار دارد.</li>
+          <li>در ربع سوم فقط <span class="ltr">tan</span> و <span class="ltr">cot</span> مثبت‌اند، بنابراین <span class="ltr">sin</span> منفی است.</li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">sin ۲۱۰° منفی است.</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۲ — محاسبهٔ مقدار ویژه</h3>
+      <div class="steps">مقدار <span class="ltr">tan ۱۲۰°</span> را بیابید:
+        <ol>
+          <li><span class="ltr">۱۲۰°</span> در ربع دوم است؛ آن را به‌صورت <span class="ltr">۱۸۰° − ۶۰°</span> می‌نویسیم.</li>
+          <li>در ربع دوم، <span class="ltr">tan</span> منفی است، پس <span class="ltr">tan ۱۲۰° = −tan ۶۰°</span></li>
+          <li>از جدول مقادیر ویژه: <span class="ltr">tan ۶۰° = √۳</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">tan ۱۲۰° = −√۳</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۳ — زاویهٔ منفی</h3>
+      <div class="steps">مقدار <span class="ltr">cos(−۱۲۰°)</span> را بیابید:
+        <ol>
+          <li>از رابطهٔ زوایای منفی: <span class="ltr">cos(−θ) = cos θ</span></li>
+          <li>پس <span class="ltr">cos(−۱۲۰°) = cos ۱۲۰°</span></li>
+          <li><span class="ltr">۱۲۰°</span> در ربع دوم است و <span class="ltr">cos ۱۲۰° = −cos ۶۰° = −۱/۲</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">cos(−۱۲۰°) = −۱/۲</span></span>
+    </div>
+
+    <div class="card mistakes">
+      <h3><span class="ic">⚠</span>اشتباهات پرتکرار</h3>
+      <ul>
+        <li>فراموش کردن این‌که «منفی» فقط روی <span class="ltr">sin، tan، cot</span> اثر می‌کند و باعث تغییر علامت می‌شود، اما <span class="ltr">cos</span> با منفی‌شدن زاویه تغییری نمی‌کند.</li>
+        <li>اشتباه در تشخیص ربع؛ همیشه اول باید مشخص کنی زاویه بین کدام دو مقدار (۰، ۹۰، ۱۸۰، ۲۷۰، ۳۶۰ درجه) قرار دارد.</li>
+      </ul>
+    </div>
+
+    <div class="card tips">
+      <h3><span class="ic">★</span>نکات امتحانی</h3>
+      <ul>
+        <li>برای علامت‌ها این جمله را به یاد داشته باش: «در ربع اول همه مثبت، دوم فقط سینوس، سوم فقط تانژانت و کتانژانت، چهارم فقط کسینوس».</li>
+        <li>جدول مقادیر ویژهٔ <span class="ltr">۰°، ۳۰°، ۴۵°، ۶۰°، ۹۰°</span> را حتماً از حفظ باش؛ اکثر سؤالات کنکور با تبدیل به یکی از همین زوایا حل می‌شوند.</li>
+      </ul>
+    </div>
+
+    <div class="card practice">
+      <h3><span class="ic">📝</span>تمرین این بخش</h3>
+      <div class="q">
+        <p class="qtext">۱) مقدار <span class="ltr">cot ۲۷۰°</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">در ۲۷۰° مقدار sin برابر −۱ و cos برابر ۰ است، پس cot ۲۷۰° = cos/sin = ۰/−۱ = ۰</span>
+            <span class="final-ans">پاسخ نهایی: cot ۲۷۰° = ۰</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۲) مقدار <span class="ltr">sin(+۳۰°)</span> و <span class="ltr">sin(−۳۰°)</span> را با هم مقایسه کنید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">sin ۳۰° = ۱/۲ &nbsp; و &nbsp; sin(−۳۰°) = −sin ۳۰° = −۱/۲</span>
+            <span class="final-ans">پاسخ نهایی: مقدار دوم، قرینهٔ مقدار اول است.</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۳) مقدار <span class="ltr">tan(−۴۵°)</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">tan(−θ) = −tan θ ⇒ tan(−۴۵°) = −tan ۴۵° = −۱</span>
+            <span class="final-ans">پاسخ نهایی: tan(−۴۵°) = −۱</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 4 ================= -->
+  <section class="topic" id="s4">
+    <div class="sec-head">
+      <div class="badge">۴</div>
+      <div>
+        <div class="label">بخش چهارم</div>
+        <h2>فرمول‌های تبدیل زاویه (زوایای وتری)</h2>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <h3><span class="ic">💡</span>مفاهیم اصلی</h3>
+      <p>برای محاسبهٔ نسبت مثلثاتی زوایایی مثل <span class="ltr">۹۰° − θ</span>، <span class="ltr">۹۰° + θ</span>، <span class="ltr">۱۸۰° − θ</span> و <span class="ltr">۱۸۰° + θ</span> از فرمول‌های تبدیل استفاده می‌کنیم.</p>
+      <div class="formula-box">
+        <span class="ltr">sin(π − θ) = sin θ &nbsp;&nbsp; cos(π − θ) = −cos θ &nbsp;&nbsp; sin(π + θ) = −sin θ &nbsp;&nbsp; cos(π + θ) = −cos θ</span>
+      </div>
+      <div class="steps">
+        <ol>
+          <li>ابتدا زاویه را بر اساس نزدیک‌ترین مقدار محوری (<span class="ltr">π/۲</span> یا <span class="ltr">π</span>) به‌شکل جمع یا تفاضل بنویس.</li>
+          <li>ببین جمع است یا تفاضل، و کدام یک از چهار فرمول اصلی (ربع دوم تا چهارم) روی آن صدق می‌کند.</li>
+          <li>در فرمول‌های <span class="ltr">π/۲ ± θ</span>، نسبت اصلی به نسبت «متمم» خودش تبدیل می‌شود (<span class="ltr">sin ↔ cos</span> و <span class="ltr">tan ↔ cot</span>)؛ اما در فرمول‌های <span class="ltr">π ± θ</span>، نسبت همان می‌ماند.</li>
+          <li>علامت نهایی را از روی ربعی که زاویهٔ اصلی در آن قرار دارد تعیین کن.</li>
+        </ol>
+      </div>
+
+      <div class="diagram-row">
+        <div class="diagram-box">
+          <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="70" cy="70" r="55" fill="#fff" stroke="#1F3A52" stroke-width="1.5"/>
+            <line x1="10" y1="70" x2="130" y2="70" stroke="#2C6E8E" stroke-width="1"/>
+            <line x1="70" y1="10" x2="70" y2="130" stroke="#2C6E8E" stroke-width="1"/>
+            <line x1="70" y1="70" x2="115" y2="38" stroke="#2E9B6F" stroke-width="2"/>
+            <text x="30" y="20" font-size="11" fill="#1F3A52" font-weight="700" class="ltr">π/۲−θ</text>
+          </svg>
+          <p class="cap ltr">ربع اول</p>
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="70" cy="70" r="55" fill="#fff" stroke="#1F3A52" stroke-width="1.5"/>
+            <line x1="10" y1="70" x2="130" y2="70" stroke="#2C6E8E" stroke-width="1"/>
+            <line x1="70" y1="10" x2="70" y2="130" stroke="#2C6E8E" stroke-width="1"/>
+            <line x1="70" y1="70" x2="38" y2="25" stroke="#2E9B6F" stroke-width="2"/>
+            <text x="4" y="18" font-size="11" fill="#1F3A52" font-weight="700" class="ltr">π/۲+θ</text>
+          </svg>
+          <p class="cap ltr">ربع دوم</p>
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="70" cy="70" r="55" fill="#fff" stroke="#1F3A52" stroke-width="1.5"/>
+            <line x1="10" y1="70" x2="130" y2="70" stroke="#2C6E8E" stroke-width="1"/>
+            <line x1="70" y1="10" x2="70" y2="130" stroke="#2C6E8E" stroke-width="1"/>
+            <line x1="70" y1="70" x2="25" y2="38" stroke="#2E9B6F" stroke-width="2"/>
+            <text x="2" y="122" font-size="11" fill="#1F3A52" font-weight="700" class="ltr">π−θ</text>
+          </svg>
+          <p class="cap ltr">ربع دوم</p>
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="70" cy="70" r="55" fill="#fff" stroke="#1F3A52" stroke-width="1.5"/>
+            <line x1="10" y1="70" x2="130" y2="70" stroke="#2C6E8E" stroke-width="1"/>
+            <line x1="70" y1="10" x2="70" y2="130" stroke="#2C6E8E" stroke-width="1"/>
+            <line x1="70" y1="70" x2="25" y2="102" stroke="#2E9B6F" stroke-width="2"/>
+            <text x="2" y="122" font-size="11" fill="#1F3A52" font-weight="700" class="ltr">π+θ</text>
+          </svg>
+          <p class="cap ltr">ربع سوم</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۱</h3>
+      <div class="steps">مقدار <span class="ltr">sin ۱۵۰°</span> را بیابید:
+        <ol>
+          <li><span class="ltr">۱۵۰° = ۱۸۰° − ۳۰°</span></li>
+          <li>از فرمول <span class="ltr">sin(π − θ) = sin θ</span> استفاده می‌کنیم.</li>
+          <li>پس <span class="ltr">sin ۱۵۰° = sin ۳۰° = ۱/۲</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">sin ۱۵۰° = ۱/۲</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۲</h3>
+      <div class="steps">مقدار <span class="ltr">cos ۵π/۶</span> را بیابید:
+        <ol>
+          <li><span class="ltr">۵π/۶ = π − π/۶</span></li>
+          <li>از فرمول <span class="ltr">cos(π − θ) = −cos θ</span> استفاده می‌کنیم.</li>
+          <li>پس <span class="ltr">cos(۵π/۶) = −cos(π/۶) = −√۳/۲</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">cos ۵π/۶ = −√۳/۲</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۳</h3>
+      <div class="steps">مقدار <span class="ltr">sin ۱۲۰°</span> را با استفاده از فرمول متمم بیابید:
+        <ol>
+          <li><span class="ltr">۱۲۰° = ۹۰° + ۳۰°</span></li>
+          <li>از فرمول ربع دوم <span class="ltr">sin(π/۲ + θ) = cos θ</span> استفاده می‌کنیم؛ توجه کن نسبت از سینوس به کسینوس تبدیل شد.</li>
+          <li>پس <span class="ltr">sin ۱۲۰° = cos ۳۰° = √۳/۲</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">sin ۱۲۰° = √۳/۲</span></span>
+    </div>
+
+    <div class="card mistakes">
+      <h3><span class="ic">⚠</span>اشتباهات پرتکرار</h3>
+      <ul>
+        <li>قاطی کردن دو نوع فرمول: در فرمول‌های مربوط به <span class="ltr">π/۲</span> نسبت عوض می‌شود (متمم)، ولی در فرمول‌های مربوط به <span class="ltr">π</span> نسبت عوض نمی‌شود؛ خیلی‌ها این دو حالت را با هم اشتباه می‌گیرند.</li>
+        <li>تعیین نکردن علامت پیش از نوشتن جواب نهایی — فرمول را درست به‌کار می‌برند اما علامت منفی را جا می‌اندازند.</li>
+      </ul>
+    </div>
+
+    <div class="card tips">
+      <h3><span class="ic">★</span>نکات امتحانی</h3>
+      <ul>
+        <li>یک ترفند سریع: زاویه را روی دایرهٔ مثلثاتی رسم کن و مستقیماً از روی شکل، هم نسبت متناظر و هم علامتش را بخوان؛ این کار از حفظ‌کردن کورکورانهٔ هشت فرمول مطمئن‌تر است.</li>
+        <li>در فرمول‌های تبدیل، فقط علامت زاویهٔ اصلی (نه زاویهٔ تبدیل‌شده) تعیین‌کنندهٔ علامت پاسخ نهایی است.</li>
+      </ul>
+    </div>
+
+    <div class="card practice">
+      <h3><span class="ic">📝</span>تمرین این بخش</h3>
+      <div class="q">
+        <p class="qtext">۱) مقدار <span class="ltr">tan ۲۴۰°</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">۲۴۰° = ۱۸۰° + ۶۰° ⇒ tan(π + θ) = tan θ ⇒ tan ۲۴۰° = tan ۶۰° = √۳</span>
+            <span class="final-ans">پاسخ نهایی: tan ۲۴۰° = √۳</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۲) مقدار <span class="ltr">cot ۳۰۰°</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">۳۰۰° در ربع چهارم قرار دارد؛ ۳۰۰° = ۳۶۰° − ۶۰° و cot در ربع چهارم منفی است.</span><br>
+            <span class="ltr">cot ۳۰۰° = −cot ۶۰° = −۱/√۳</span>
+            <span class="final-ans">پاسخ نهایی: cot ۳۰۰° = −۱/√۳</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۳) مقدار <span class="ltr">sin ۷π/۶</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">۷π/۶ = π + π/۶ ⇒ sin(π + θ) = −sin θ ⇒ sin(۷π/۶) = −sin(π/۶) = −۱/۲</span>
+            <span class="final-ans">پاسخ نهایی: sin ۷π/۶ = −۱/۲</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 5 ================= -->
+  <section class="topic" id="s5">
+    <div class="sec-head">
+      <div class="badge">۵</div>
+      <div>
+        <div class="label">بخش پنجم</div>
+        <h2>فرمول‌های مجموع، تفاضل و زاویهٔ دوبرابر</h2>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <h3><span class="ic">💡</span>مفاهیم اصلی</h3>
+      <p>وقتی زاویه به‌صورت مجموع یا تفاضل دو زاویهٔ معلوم باشد (مثل <span class="ltr">۷۵° = ۴۵° + ۳۰°</span>)، از فرمول‌های زیر استفاده می‌کنیم:</p>
+      <div class="formula-box">
+        <span class="ltr">sin(α ± β) = sin α cos β ± cos α sin β</span><br><br>
+        <span class="ltr">cos(α ± β) = cos α cos β ∓ sin α sin β</span>
+      </div>
+      <div class="steps">
+        <ol>
+          <li>زاویه را به دو زاویهٔ ویژه (که مقدارشان معلوم است) بشکن.</li>
+          <li>با توجه به علامت (جمع یا تفاضل)، فرمول درست را انتخاب کن — دقت کن علامت داخل فرمول <span class="ltr">cos</span> برعکس علامت اصلی زاویه است.</li>
+          <li>مقادیر <span class="ltr">sin</span> و <span class="ltr">cos</span> هر دو زاویه را جای‌گذاری و ساده کن.</li>
+        </ol>
+      </div>
+      <div class="formula-box">
+        <span class="ltr">sin ۲α = ۲sin α cos α &nbsp;&nbsp; cos ۲α = cos<sup>۲</sup>α − sin<sup>۲</sup>α = ۲cos<sup>۲</sup>α − ۱ = ۱ − ۲sin<sup>۲</sup>α</span>
+      </div>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۱</h3>
+      <div class="steps">مقدار <span class="ltr">sin ۷۵°</span> را بیابید:
+        <ol>
+          <li><span class="ltr">۷۵° = ۴۵° + ۳۰°</span></li>
+          <li>از فرمول <span class="ltr">sin(α + β) = sin α cos β + cos α sin β</span> استفاده می‌کنیم.</li>
+          <li>جای‌گذاری: <span class="ltr">sin ۴۵° cos ۳۰° + cos ۴۵° sin ۳۰° = (√۲/۲)(√۳/۲) + (√۲/۲)(۱/۲)</span></li>
+          <li>ساده‌سازی: <span class="ltr">(√۶ + √۲)/۴</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">sin ۷۵° = (√۶ + √۲)/۴</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۲</h3>
+      <div class="steps">اگر <span class="ltr">sin α = ۱/۲</span> و <span class="ltr">cos β = √۲/۲</span> (هر دو حادّه) باشند، <span class="ltr">sin(α + β)</span> را بیابید:
+        <ol>
+          <li>از <span class="ltr">sin α = ۱/۲</span> نتیجه می‌گیریم <span class="ltr">cos α = √۳/۲</span>.</li>
+          <li>از <span class="ltr">cos β = √۲/۲</span> نتیجه می‌گیریم <span class="ltr">sin β = √۲/۲</span>.</li>
+          <li>در فرمول جای‌گذاری می‌کنیم: <span class="ltr">sin(α+β) = (۱/۲)(√۲/۲) + (√۳/۲)(√۲/۲) = (√۲ + √۶)/۴</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">sin(α + β) = (√۲ + √۶)/۴</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۳ — زاویهٔ دوبرابر</h3>
+      <div class="steps">اگر <span class="ltr">sin α = ۳/۵</span> و <span class="ltr">α</span> حادّه باشد، <span class="ltr">sin ۲α</span> را بیابید:
+        <ol>
+          <li>ابتدا <span class="ltr">cos α</span> را پیدا می‌کنیم: <span class="ltr">cos α = √(۱ − ۹/۲۵) = ۴/۵</span></li>
+          <li>از فرمول <span class="ltr">sin ۲α = ۲ sin α cos α</span> استفاده می‌کنیم.</li>
+          <li>جای‌گذاری: <span class="ltr">sin ۲α = ۲ × (۳/۵) × (۴/۵) = ۲۴/۲۵</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">sin ۲α = ۲۴/۲۵</span></span>
+    </div>
+
+    <div class="card mistakes">
+      <h3><span class="ic">⚠</span>اشتباهات پرتکرار</h3>
+      <ul>
+        <li>فراموش کردن علامت معکوس در فرمول کسینوس — یعنی نوشتن <span class="ltr">cos(α+β) = cos α cos β + sin α sin β</span> به‌جای علامت منفی درست.</li>
+        <li>استفاده از فرمول اشتباه <span class="ltr">sin(α+β) ≠ sin α + sin β</span>؛ این یکی از پرتکرارترین خطاهای مفهومی در مثلثات است.</li>
+      </ul>
+    </div>
+
+    <div class="card tips">
+      <h3><span class="ic">★</span>نکات امتحانی</h3>
+      <ul>
+        <li>برای زوایایی مثل <span class="ltr">۱۵°، ۷۵°، ۱۰۵°</span> که مستقیماً در جدول نیستند، همیشه به فکر شکستن به دو زاویهٔ ویژه (<span class="ltr">۳۰، ۴۵، ۶۰</span>) باش.</li>
+        <li>سه‌فرم مختلف <span class="ltr">cos ۲α</span> را بشناس؛ در تست‌ها بسته به این‌که کدام مقدار (<span class="ltr">sin α</span> یا <span class="ltr">cos α</span>) داده شده، یکی از این سه فرم مسیر سریع‌تری می‌دهد.</li>
+      </ul>
+    </div>
+
+    <div class="card practice">
+      <h3><span class="ic">📝</span>تمرین این بخش</h3>
+      <div class="q">
+        <p class="qtext">۱) اگر <span class="ltr">sin α = ۱/۲</span> و <span class="ltr">cos β = √۲/۲</span> (هر دو حادّه) باشند، <span class="ltr">cos(α − β)</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">cos α = √۳/۲ ، sin β = √۲/۲</span><br>
+            <span class="ltr">cos(α−β) = cos α cos β + sin α sin β = (√۳/۲)(√۲/۲) + (۱/۲)(√۲/۲) = (√۶ + √۲)/۴</span>
+            <span class="final-ans">پاسخ نهایی: cos(α − β) = (√۶ + √۲)/۴</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۲) با همان مقادیر بالا، <span class="ltr">tan(α + β)</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">tan α = ۱/√۳ ، tan β = ۱</span><br>
+            <span class="ltr">tan(α+β) = (tan α + tan β)/(۱ − tan α tan β) = (۱/√۳ + ۱)/(۱ − ۱/√۳)</span>
+            <span class="final-ans">پاسخ نهایی: پس از ساده‌سازی و گویا کردن مخرج، حاصل برابر (√۳+۳)/(√۳−۱) = ۲+√۳ به‌دست می‌آید.</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۳) اگر <span class="ltr">cos α = ۱/۳</span> باشد، <span class="ltr">cos ۲α</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">cos ۲α = ۲cos<sup>۲</sup>α − ۱ = ۲(۱/۹) − ۱ = ۲/۹ − ۱ = −۷/۹</span>
+            <span class="final-ans">پاسخ نهایی: cos ۲α = −۷/۹</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 6 ================= -->
+  <section class="topic" id="s6">
+    <div class="sec-head">
+      <div class="badge">۶</div>
+      <div>
+        <div class="label">بخش ششم</div>
+        <h2>معادلات مثلثاتی</h2>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <h3><span class="ic">💡</span>مفاهیم اصلی</h3>
+      <p>معادلات مثلثاتی معمولاً بی‌نهایت جواب دارند، چون نسبت‌های مثلثاتی تناوبی‌اند. جواب کلی با یک پارامتر صحیح (<span class="ltr">k ∈ ℤ</span>) نوشته می‌شود.</p>
+      <div class="formula-box">
+        <span class="ltr">sin x = sin α ⇒ x = ۲kπ + α &nbsp; یا &nbsp; x = ۲kπ + (π − α)</span><br><br>
+        <span class="ltr">cos x = cos α ⇒ x = ۲kπ ± α</span><br><br>
+        <span class="ltr">tan x = tan α ⇒ x = kπ + α</span>
+      </div>
+      <div class="steps">
+        <ol>
+          <li>معادله را به یکی از سه قالب بالا (<span class="ltr">sin x = sin α</span> یا <span class="ltr">cos x = cos α</span> یا <span class="ltr">tan x = tan α</span>) برسان.</li>
+          <li>فرمول جواب کلی متناظر را بنویس و <span class="ltr">α</span> را جای‌گذاری کن.</li>
+          <li>اگر معادله چند جمله‌ای و مساوی صفر بود، هرگز آن را بر عبارت مجهول‌دار تقسیم نکن — به‌جایش همه‌چیز را به یک طرف ببر و فاکتور بگیر، سپس هر عامل را جداگانه مساوی صفر قرار بده.</li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۱ — معادلهٔ ساده</h3>
+      <div class="steps">معادلهٔ <span class="ltr">sin x = sin(π/۶)</span> را حل کنید:
+        <ol>
+          <li>طبق فرمول: <span class="ltr">x = ۲kπ + π/۶</span> یا <span class="ltr">x = ۲kπ + (π − π/۶)</span></li>
+          <li>عبارت دوم را ساده می‌کنیم: <span class="ltr">π − π/۶ = ۵π/۶</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">x = ۲kπ + π/۶ &nbsp; یا &nbsp; x = ۲kπ + ۵π/۶ &nbsp; (k ∈ ℤ)</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۲ — معادلهٔ کسینوسی</h3>
+      <div class="steps">معادلهٔ <span class="ltr">cos x = cos(π/۴)</span> را حل کنید:
+        <ol>
+          <li>طبق فرمول: <span class="ltr">x = ۲kπ ± π/۴</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">x = ۲kπ + π/۴ &nbsp; یا &nbsp; x = ۲kπ − π/۴ &nbsp; (k ∈ ℤ)</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۳ — فاکتورگیری به‌جای خط‌زدن</h3>
+      <div class="steps">معادلهٔ <span class="ltr">sin ۲x = sin x</span> را حل کنید:
+        <ol>
+          <li>با فرمول کمان دو برابر، <span class="ltr">sin ۲x</span> را باز می‌کنیم: <span class="ltr">۲sin x cos x = sin x</span></li>
+          <li>همه را به یک طرف می‌بریم: <span class="ltr">۲sin x cos x − sin x = ۰</span></li>
+          <li>از عامل مشترک <span class="ltr">sin x</span> فاکتور می‌گیریم: <span class="ltr">sin x (۲cos x − ۱) = ۰</span></li>
+          <li>هر عامل را جداگانه مساوی صفر قرار می‌دهیم: <span class="ltr">sin x = ۰</span> یا <span class="ltr">cos x = ۱/۲</span></li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">x = kπ &nbsp; یا &nbsp; x = ۲kπ ± π/۳ &nbsp; (k ∈ ℤ)</span></span>
+    </div>
+
+    <div class="card mistakes">
+      <h3><span class="ic">⚠</span>اشتباهات پرتکرار</h3>
+      <ul>
+        <li><b>هرگز عبارت شامل مجهول را از دو طرف معادله خط نزن یا ساده نکن.</b> در معادلهٔ <span class="ltr">sin ۲x = sin x</span>، تقسیم دو طرف بر <span class="ltr">sin x</span> باعث می‌شود دستهٔ مهمی از جواب‌ها (همان <span class="ltr">x = kπ</span>، حاصل از صفر شدن <span class="ltr">sin x</span>) به‌طور کامل گم شود؛ چون این کار یعنی از قبل فرض کرده‌ایم <span class="ltr">sin x</span> هرگز صفر نیست.</li>
+        <li>این خطا مخصوص مثلثات نیست: در معادلات جبری مثل <span class="ltr">x<sup>۲</sup> = ۲x</span> هم اگر دو طرف را بر <span class="ltr">x</span> تقسیم کنی، جواب <span class="ltr">x = ۰</span> را از دست می‌دهی. قاعدهٔ درست همیشه یکی است: همه‌چیز را به یک طرف ببر و فاکتور بگیر.</li>
+        <li>در ضابطهٔ توابع کسری هم همین اتفاق به‌شکل دیگری می‌افتد: ساده‌کردن کورکورانهٔ کسر پیش از تعیین دامنه، محدودیت‌های اصلی دامنه را از بین می‌برد.</li>
+      </ul>
+    </div>
+
+    <div class="card tips">
+      <h3><span class="ic">★</span>نکات امتحانی</h3>
+      <ul>
+        <li>پیش از هر کاری، معادله را کاملاً به یک طرف ببر تا طرف دیگر صفر شود؛ این عادت، جلوی «ریشه‌سوزی» را قطعی می‌گیرد.</li>
+        <li>حالت‌های خاص را از حفظ باش: <span class="ltr">sin x = ۰ ⇒ x = kπ</span>، <span class="ltr">sin x = ۱ ⇒ x = ۲kπ + π/۲</span>، <span class="ltr">cos x = ۰ ⇒ x = kπ + π/۲</span> — این‌ها زمان زیادی در جلسهٔ امتحان صرفه‌جویی می‌کنند.</li>
+        <li>پس از پیدا کردن جواب‌ها، اگر دامنهٔ مسئله محدود بود (مثلاً <span class="ltr">۰ ≤ x < ۲π</span>)، حتماً با جای‌گذاری مقادیر مختلف <span class="ltr">k</span>، جواب‌های داخل بازه را استخراج کن.</li>
+      </ul>
+    </div>
+
+    <div class="card practice">
+      <h3><span class="ic">📝</span>تمرین این بخش</h3>
+      <div class="q">
+        <p class="qtext">۱) معادلهٔ <span class="ltr">tan x = tan(π/۳)</span> را حل کنید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">طبق فرمول: x = kπ + α</span>
+            <span class="final-ans">پاسخ نهایی: x = kπ + π/۳ &nbsp; (k ∈ ℤ)</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۲) معادلهٔ <span class="ltr">۲sin<sup>۲</sup>x = sin x</span> را حل کنید. (به فاکتورگیری دقت کنید.)</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">همه را به یک طرف می‌بریم: ۲sin<sup>۲</sup>x − sin x = ۰</span><br>
+            <span class="ltr">فاکتور می‌گیریم: sin x (۲sin x − ۱) = ۰</span><br>
+            <span class="ltr">پس sin x = ۰ یا sin x = ۱/۲</span>
+            <span class="final-ans">پاسخ نهایی: x = kπ &nbsp; یا &nbsp; x = ۲kπ + π/۶ &nbsp; یا &nbsp; x = ۲kπ + ۵π/۶</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۳) معادلهٔ <span class="ltr">cos ۲x = cos x</span> را حل کنید. (راهنمایی: از فرمول <span class="ltr">cos ۲x = ۲cos<sup>۲</sup>x − ۱</span> استفاده کنید و به یک معادلهٔ درجه دوم برحسب <span class="ltr">cos x</span> برسید؛ سپس فاکتور بگیرید، نه ساده‌سازی مستقیم.)</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">۲cos<sup>۲</sup>x − ۱ = cos x ⇒ ۲cos<sup>۲</sup>x − cos x − ۱ = ۰</span><br>
+            <span class="ltr">فاکتور می‌گیریم: (۲cos x + ۱)(cos x − ۱) = ۰</span><br>
+            <span class="ltr">پس cos x = −۱/۲ یا cos x = ۱</span>
+            <span class="final-ans">پاسخ نهایی: x = ۲kπ ± ۲π/۳ &nbsp; یا &nbsp; x = ۲kπ</span>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <div class="recap">
+      <h3><span class="ic">📚</span>جمع‌بندی: همهٔ فرمول‌های معادلات مثلثاتی در یک نگاه</h3>
+      <table>
+        <thead><tr><th>معادله</th><th>جواب کلی (k ∈ ℤ)</th></tr></thead>
+        <tbody>
+          <tr><td class="ltr">sin x = sin α</td><td class="ltr">x = ۲kπ + α &nbsp; یا &nbsp; x = ۲kπ + (π − α)</td></tr>
+          <tr><td class="ltr">cos x = cos α</td><td class="ltr">x = ۲kπ ± α</td></tr>
+          <tr><td class="ltr">tan x = tan α</td><td class="ltr">x = kπ + α</td></tr>
+          <tr><td class="ltr">cot x = cot α</td><td class="ltr">x = kπ + α</td></tr>
+        </tbody>
+      </table>
+      <br>
+      <table>
+        <thead><tr><th colspan="2">حالت‌های خاص</th></tr></thead>
+        <tbody>
+          <tr><td class="ltr">sin x = ۰ ⇒ x = kπ</td><td class="ltr">cos x = ۰ ⇒ x = kπ + π/۲</td></tr>
+          <tr><td class="ltr">sin x = ۱ ⇒ x = ۲kπ + π/۲</td><td class="ltr">cos x = ۱ ⇒ x = ۲kπ</td></tr>
+          <tr><td class="ltr">sin x = −۱ ⇒ x = ۲kπ − π/۲</td><td class="ltr">cos x = −۱ ⇒ x = ۲kπ + π</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:16px; font-size:0.88rem; opacity:0.92;">یادت باشه: قبل از استفاده از هر کدام از این فرمول‌ها، معادله را کامل به یک طرف ببر و در صورت نیاز فاکتور بگیر — هرگز عبارت مجهول‌دار را از دو طرف خط نزن، وگرنه بخشی از جواب‌ها را برای همیشه از دست می‌دهی.</p>
+    </div>
+  </section>
+
+  <!-- ================= SECTION 7 ================= -->
+  <section class="topic" id="s7">
+    <div class="sec-head">
+      <div class="badge">۷</div>
+      <div>
+        <div class="label">بخش هفتم</div>
+        <h2>توابع مثلثاتی: نمودار، دامنه و برد</h2>
+      </div>
+    </div>
+
+    <div class="card concept">
+      <h3><span class="ic">💡</span>مفاهیم اصلی</h3>
+      <p>تا این‌جا با نسبت‌های مثلثاتی به‌عنوان عدد کار کردیم؛ حالا آن‌ها را به‌صورت یک «تابع» با دامنه، برد و نمودار مشخص نگاه می‌کنیم.</p>
+      <div class="steps">
+        <ol>
+          <li>دامنهٔ <span class="ltr">sin x</span> و <span class="ltr">cos x</span>: تمام اعداد حقیقی (<span class="ltr">ℝ</span>) — چون هیچ مخرجی در کار نیست.</li>
+          <li>برد <span class="ltr">sin x</span> و <span class="ltr">cos x</span>: بازهٔ <span class="ltr">[−۱ , ۱]</span> — یعنی مقدار این دو تابع هرگز از <span class="ltr">۱</span> بیشتر یا از <span class="ltr">−۱</span> کمتر نمی‌شود.</li>
+          <li>دامنهٔ <span class="ltr">tan x</span>: چون <span class="ltr">tan x = sin x / cos x</span> است، هرجا <span class="ltr">cos x = ۰</span> شود تابع تعریف‌نشده است؛ یعنی <span class="ltr">x ≠ π/۲ + kπ</span>. برد آن همهٔ <span class="ltr">ℝ</span> است.</li>
+          <li>دامنهٔ <span class="ltr">cot x</span>: چون <span class="ltr">cot x = cos x / sin x</span> است، باید <span class="ltr">sin x ≠ ۰</span> باشد؛ یعنی <span class="ltr">x ≠ kπ</span>. برد آن هم همهٔ <span class="ltr">ℝ</span> است.</li>
+          <li>برای تابع ترکیبی مثل <span class="ltr">f(x) = √(A − B cos x)</span> یا <span class="ltr">f(x) = ۱/sin x</span>، دامنه را دقیقاً مثل توابع جبری معمولی پیدا می‌کنیم: زیر رادیکال منفی نشود، مخرج صفر نشود — فقط این‌بار عبارت داخل رادیکال یا مخرج، یک نسبت مثلثاتی است.</li>
+        </ol>
+      </div>
+
+      <div class="diagram-row">
+        <div class="diagram-box">
+          <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="65" x2="250" y2="65" stroke="#999" stroke-width="1"/>
+            <line x1="10" y1="10" x2="10" y2="120" stroke="#999" stroke-width="1"/>
+            <path d="M10,65 C35,20 60,20 85,65 C110,110 135,110 160,65 C185,20 210,20 235,65" fill="none" stroke="#2C6E8E" stroke-width="2.5"/>
+            <text x="80" y="128" font-size="10" fill="#667" class="ltr">۰ ، π ، ۲π ...</text>
+            <text x="200" y="18" font-size="11" fill="#2C6E8E" font-weight="700" class="ltr">y = sin x</text>
+          </svg>
+          <p class="cap ltr">دامنه: ℝ &nbsp; | &nbsp; برد: [−۱,۱]</p>
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="65" x2="250" y2="65" stroke="#999" stroke-width="1"/>
+            <line x1="10" y1="10" x2="10" y2="120" stroke="#999" stroke-width="1"/>
+            <path d="M10,20 C35,65 60,65 85,20 C110,-25 60,-25 10,20" fill="none" stroke="#2E9B6F" stroke-width="0"/>
+            <path d="M10,20 C35,65 60,65 85,20 C110,-25 135,-25 160,20 C185,65 210,65 235,20" fill="none" stroke="#2E9B6F" stroke-width="2.5"/>
+            <text x="80" y="128" font-size="10" fill="#667" class="ltr">۰ ، π ، ۲π ...</text>
+            <text x="185" y="35" font-size="11" fill="#2E9B6F" font-weight="700" class="ltr">y = cos x</text>
+          </svg>
+          <p class="cap ltr">دامنه: ℝ &nbsp; | &nbsp; برد: [−۱,۱]</p>
+        </div>
+        <div class="diagram-box">
+          <svg viewBox="0 0 260 130" xmlns="http://www.w3.org/2000/svg">
+            <line x1="10" y1="65" x2="250" y2="65" stroke="#999" stroke-width="1"/>
+            <line x1="10" y1="10" x2="10" y2="120" stroke="#999" stroke-width="1"/>
+            <line x1="70" y1="8" x2="70" y2="122" stroke="#D2534A" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <line x1="190" y1="8" x2="190" y2="122" stroke="#D2534A" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <path d="M15,90 C35,55 50,20 65,10" fill="none" stroke="#7C4A99" stroke-width="2.5"/>
+            <path d="M75,120 C90,80 105,50 135,65 C150,72 160,80 165,90" fill="none" stroke="#7C4A99" stroke-width="2.5"/>
+            <path d="M195,120 C210,80 225,50 245,10" fill="none" stroke="#7C4A99" stroke-width="2.5"/>
+            <text x="55" y="8" font-size="9" fill="#D2534A" class="ltr">π/۲</text>
+            <text x="175" y="8" font-size="9" fill="#D2534A" class="ltr">۳π/۲</text>
+            <text x="185" y="45" font-size="11" fill="#7C4A99" font-weight="700" class="ltr">y = tan x</text>
+          </svg>
+          <p class="cap ltr">دامنه: x ≠ π/۲+kπ &nbsp; | &nbsp; برد: ℝ</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۱ — دامنهٔ تابع مثلثاتی-کسری</h3>
+      <div class="steps">دامنهٔ <span class="ltr">f(x) = ۱ / sin x</span> را بیابید:
+        <ol>
+          <li>مخرج کسر نباید صفر شود، پس باید <span class="ltr">sin x ≠ ۰</span></li>
+          <li>از حالت خاص می‌دانیم <span class="ltr">sin x = ۰ ⇒ x = kπ</span></li>
+          <li>پس این مقادیر باید از دامنه حذف شوند.</li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">دامنه: x ∈ ℝ − {kπ | k ∈ ℤ}</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۲ — دامنهٔ تابع مثلثاتی-رادیکالی</h3>
+      <div class="steps">دامنهٔ <span class="ltr">f(x) = √(۲cos x − ۱)</span> را در بازهٔ <span class="ltr">[۰ , ۲π]</span> بیابید:
+        <ol>
+          <li>عبارت زیر رادیکال باید نامنفی باشد: <span class="ltr">۲cos x − ۱ ≥ ۰</span></li>
+          <li>حل نامعادله: <span class="ltr">cos x ≥ ۱/۲</span></li>
+          <li>با نگاه به دایرهٔ مثلثاتی، <span class="ltr">cos x ≥ ۱/۲</span> بین <span class="ltr">−π/۳</span> و <span class="ltr">π/۳</span> برقرار است؛ در بازهٔ <span class="ltr">[۰,۲π]</span> این یعنی دو بخشِ نزدیک به دو سرِ بازه.</li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">x ∈ [۰ , π/۳] ∪ [۵π/۳ , ۲π]</span></span>
+    </div>
+
+    <div class="card example">
+      <h3><span class="ic">✎</span>مثال ۳ — دامنهٔ ترکیبی جبری و مثلثاتی</h3>
+      <div class="steps">دامنهٔ <span class="ltr">f(x) = <span class="frac"><span class="num">۱</span><span class="den">cos x − ۱</span></span></span> را بیابید:
+        <ol>
+          <li>مخرج نباید صفر شود: <span class="ltr">cos x − ۱ ≠ ۰</span> یعنی <span class="ltr">cos x ≠ ۱</span></li>
+          <li>از حالت خاص: <span class="ltr">cos x = ۱ ⇒ x = ۲kπ</span></li>
+          <li>پس این نقاط باید از دامنه حذف شوند؛ توجه کن این‌جا برخلاف مثال ۱، فقط تعداد محدودی نقطه (روی هر دور کامل، یک نقطه) حذف می‌شود نه بی‌نهایت نقطهٔ پرتکرارتر.</li>
+        </ol>
+      </div>
+      <span class="result">نتیجه: <span class="ltr">دامنه: x ∈ ℝ − {۲kπ | k ∈ ℤ}</span></span>
+    </div>
+
+    <div class="card mistakes">
+      <h3><span class="ic">⚠</span>اشتباهات پرتکرار</h3>
+      <ul>
+        <li>فکر کردن به این‌که چون <span class="ltr">sin x</span> و <span class="ltr">cos x</span> خودشان دامنه‌شان کل <span class="ltr">ℝ</span> است، تابع ترکیبی‌شان هم همیشه دامنهٔ کامل دارد — در حالی که وقتی این نسبت‌ها زیر رادیکال یا در مخرج قرار بگیرند، دقیقاً مثل هر تابع جبری دیگر باید شرط گذاشت.</li>
+        <li>فراموش کردن این‌که جواب‌های <span class="ltr">sin x = ۰</span> یا <span class="ltr">cos x = ۱</span> و مانند آن‌ها بی‌نهایت جواب (به ازای هر <span class="ltr">k</span>) هستند، نه یک نقطهٔ تکی؛ پس در نوشتن دامنه باید همهٔ این خانواده را حذف کرد، نه فقط یک مقدار.</li>
+      </ul>
+    </div>
+
+    <div class="card tips">
+      <h3><span class="ic">★</span>نکات امتحانی</h3>
+      <ul>
+        <li>برای دامنهٔ تابع مثلثاتی-رادیکالی، همیشه اول نامعادله را با کمک دایرهٔ مثلثاتی (نه فقط جدول اعداد) حل کن؛ تشخیص بازهٔ درست روی دایره خیلی سریع‌تر و مطمئن‌تر است.</li>
+        <li>تبدیل <span class="ltr">y = A sin(Bx + C) + D</span>: دامنه همیشه <span class="ltr">ℝ</span> است، برد <span class="ltr">[D−|A| , D+|A|]</span>، و دورهٔ تناوب <span class="ltr">۲π/|B|</span> — این فرمول‌ها برای تشخیص سریع دامنه و برد در توابع تبدیل‌یافته حیاتی‌اند.</li>
+      </ul>
+    </div>
+
+    <div class="card practice">
+      <h3><span class="ic">📝</span>تمرین این بخش</h3>
+      <div class="q">
+        <p class="qtext">۱) دامنهٔ <span class="ltr">f(x) = ۱ / cos x</span> را بنویسید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">باید cos x ≠ ۰ باشد؛ از حالت خاص: cos x = ۰ ⇒ x = π/۲ + kπ</span>
+            <span class="final-ans">پاسخ نهایی: x ∈ ℝ − {π/۲ + kπ | k ∈ ℤ}</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۲) برد تابع <span class="ltr">y = ۳sin x − ۱</span> را بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">چون sin x ∈ [−۱,۱] است، ۳sin x ∈ [−۳,۳] و با کم‌کردن ۱: ۳sin x − ۱ ∈ [−۴,۲]</span>
+            <span class="final-ans">پاسخ نهایی: برد = [−۴ , ۲]</span>
+          </div>
+        </details>
+      </div>
+      <div class="q">
+        <p class="qtext">۳) دامنهٔ <span class="ltr">f(x) = √(sin x)</span> را در بازهٔ <span class="ltr">[۰ , ۲π]</span> بیابید.</p>
+        <details><summary>نمایش پاسخ</summary>
+          <div class="ans">
+            <span class="ltr">باید sin x ≥ ۰ باشد؛ روی دایرهٔ مثلثاتی، sin مثبت یا صفر در ربع اول و دوم است.</span>
+            <span class="final-ans">پاسخ نهایی: x ∈ [۰ , π]</span>
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= SUMMARY ================= -->
+  <div class="summary" id="summary">
+    <h2>جمع‌بندی فصل</h2>
+    <div class="pills">
+      <span>رادیان و درجه</span>
+      <span>طول کمان و مطاع</span>
+      <span>نسبت‌ها در مثلث</span>
+      <span>دایرهٔ مثلثاتی</span>
+      <span>فرمول‌های تبدیل</span>
+      <span>مجموع و تفاضل</span>
+      <span>زاویهٔ دوبرابر</span>
+      <span>معادلات مثلثاتی</span>
+      <span>توابع و دامنه</span>
+    </div>
+    <p>در این فصل از تعریف زاویه با دو واحد رادیان و درجه شروع کردیم، نسبت‌های مثلثاتی را در مثلث قائم‌الزاویه و سپس روی دایرهٔ مثلثاتی گسترش دادیم، فرمول‌های تبدیل و ترکیب زوایا را یاد گرفتیم، با تکیه بر فاکتورگیری (و نه خط‌زدن عبارت مجهول) معادلات مثلثاتی را بدون ریشه‌سوزی حل کردیم، و در پایان نگاه تابعی به مثلثات انداختیم تا دامنه و برد این توابع را هم بشناسیم.</p>
+    <div class="compass">
+      🧭 هر بار که با یک معادله یا رابطهٔ مثلثاتی روبه‌رو شدی و وسوسه شدی چیزی را از دو طرف خط بزنی، یک لحظه مکث کن: همه‌چیز را به یک طرف ببر و فاکتور بگیر. همین یک عادت، جلوی بیشترین خطاهای این فصل را می‌گیرد.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+    "datasetLabel":  "DEVELOPMENT DATA",
+    "result":  "PASS",
+    "verifiedUtc":  "2026-11-20T10:20:07.4538575+00:00",
+    "archive":  "D:\\Lerona\\Backend\\artifacts\\cent-content-audit\\cent-phase0-development-20261120T101901Z.zip",
+    "archiveBytes":  5661384,
+    "sha256":  "e632160da578b1c0e3abf8c6b3582582f01858f491e685eacc4a96a276f45142",
+    "verifiedEntries":  173,
+    "allPathsSizesAndHashesMatch":  true,
+    "prohibitedDatabaseOrConfigurationFiles":  0
+}

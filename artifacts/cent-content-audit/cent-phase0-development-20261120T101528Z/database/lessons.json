@@ -1,0 +1,487 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "cent_documents",
+  "recordCount": 48,
+  "records": [
+    {
+      "Id": "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+      "TrainingId": "0B96F1DE-764A-47F7-931B-2FDDFFB3E681",
+      "SourceId": null,
+      "Title": "معادله‌های خطی؛ مثال و تمرین",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306920164802259"
+    },
+    {
+      "Id": "0345BE8D-B1A6-198F-5806-098DA3D3DECB",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "0F2CA150-41C3-0AEE-548B-844AE19755F9",
+      "Title": "فصل ۳: فصل — «A or B» (Disjunction)",
+      "SortOrder": 3,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502651085"
+    },
+    {
+      "Id": "0EDDA12B-31E3-3FCB-FC06-59CAF8DCEDEF",
+      "TrainingId": "C08B0D99-0903-A706-A033-4552009C94EE",
+      "SourceId": "03D25309-4471-923F-14E4-2A898A42B10E",
+      "Title": "جنبش‌شناسی ذرهPoint-Particle Kinematics",
+      "SortOrder": 2,
+      "PageCount": 17,
+      "Published": 1,
+      "CreatedAt": "639297219503165418"
+    },
+    {
+      "Id": "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+      "TrainingId": "EB0BD398-C645-4DD1-B47E-633904D18C67",
+      "SourceId": null,
+      "Title": "معادله‌های خطی؛ مثال و تمرین",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306918511643698"
+    },
+    {
+      "Id": "1563F1FF-1228-2A36-9349-3981C70E2BE2",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "040CA2F5-3BDB-8995-C114-54E4EE8F53AC",
+      "Title": "فصل ۱۰: گزاره‌های قیاسی — Categorical Claims (All / Some / No / Only A are B)",
+      "SortOrder": 10,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502770412"
+    },
+    {
+      "Id": "26559545-07B6-5BD7-0723-EA951534B1D7",
+      "TrainingId": "771B2AF9-F1AD-7DBB-11E6-238B06A18611",
+      "SourceId": "19C7CDBD-2DF8-9F2C-1A05-63D46DE121F4",
+      "Title": "مسترکلاس ریاضی: پایه‌های محاسباتی",
+      "SortOrder": 1,
+      "PageCount": 14,
+      "Published": 1,
+      "CreatedAt": "639297219503070716"
+    },
+    {
+      "Id": "29856693-615D-4665-B11B-98CD6E7E57AD",
+      "TrainingId": "21EF91B0-71F2-4BEC-A0ED-C2F5AD24E0B8",
+      "SourceId": null,
+      "Title": "درس اول: معادله‌های خطی",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306125171019837"
+    },
+    {
+      "Id": "2A4CEDD5-21DF-8B00-58DC-0DBA2FA1D0A1",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "A9B4A6D8-4779-AA00-AFDF-4F3E31DE7DA8",
+      "Title": "فصل ۴: شرطی — «If A then B» (Conditional)",
+      "SortOrder": 4,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502668059"
+    },
+    {
+      "Id": "3654F019-3168-659A-4E44-7FD523681601",
+      "TrainingId": "771B2AF9-F1AD-7DBB-11E6-238B06A18611",
+      "SourceId": "FF202D05-9692-A6E3-39B6-BB651FBA345A",
+      "Title": "توابع (Functions)",
+      "SortOrder": 3,
+      "PageCount": 14,
+      "Published": 1,
+      "CreatedAt": "639297219503119087"
+    },
+    {
+      "Id": "3E4B118A-332B-7900-537A-9B6EBA687B13",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "1F9B5357-1054-D852-3665-EAC1BF041AA5",
+      "Title": "فصل ۱۷: نتیجه‌گیری و ارزیابیِ ادعاها — Drawing Conclusions & Evaluating Claims",
+      "SortOrder": 17,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502901474"
+    },
+    {
+      "Id": "43A380FF-1A22-401B-8729-8449ADC673CB",
+      "TrainingId": "AED10460-71F5-4878-A3AD-3E570A9F9AD5",
+      "SourceId": null,
+      "Title": "درس اول: معادله‌های خطی",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306157017444561"
+    },
+    {
+      "Id": "44826601-8419-0CBD-C04D-B45A54B8B2F5",
+      "TrainingId": "D006A122-8150-BAB1-506D-519014A87BB2",
+      "SourceId": "4B4FBFB9-896A-1407-073A-A3F6881591FE",
+      "Title": "بنیان شیمیایی \nThe Chemical Foundation",
+      "SortOrder": 1,
+      "PageCount": 15,
+      "Published": 1,
+      "CreatedAt": "639297219501552574"
+    },
+    {
+      "Id": "47B18324-10AA-0CAD-08E3-FB93D52BE7BA",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "0B42FE17-B855-76B8-08E2-BED445C24111",
+      "Title": "فصل ۱: مبانی — گزاره چیست؟ گزاره‌های ترکیبی چه هستند؟",
+      "SortOrder": 1,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502606011"
+    },
+    {
+      "Id": "51CE5339-D72C-8290-A2BD-31EE70A0251E",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "02B0C98C-BFA6-D4CF-B9DA-EECC6F2C5E3D",
+      "Title": "فصل ۱۶: نمودارهای خطی و تحلیل روند — Line Graphs & Trend Analysis",
+      "SortOrder": 16,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502882837"
+    },
+    {
+      "Id": "64DF0494-1D9D-04B2-1069-BECFA1961716",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "A6FED340-4FB2-DF1A-F925-63D5D5223CF5",
+      "Title": "فصل ۱۸: حل مسئله با نمودار ون — Venn Diagram Word Problems",
+      "SortOrder": 18,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502935810"
+    },
+    {
+      "Id": "6B6F7581-5069-1143-06F4-37830DFAF983",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "3988520F-3CAB-5534-5220-01D13E8437C2",
+      "Title": "فصل ۱۹: حل مسئله با جدول و معادلات همزمان — Tables & Simultaneous Equations",
+      "SortOrder": 19,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502967866"
+    },
+    {
+      "Id": "6D7121B2-4929-1B2B-B2C3-F290EC70C69B",
+      "TrainingId": "771B2AF9-F1AD-7DBB-11E6-238B06A18611",
+      "SourceId": "E9A151B7-6771-BD88-21E8-92C20F5BE4FC",
+      "Title": "معادلات، نامعادلات و هندسهٔ مختصات",
+      "SortOrder": 2,
+      "PageCount": 15,
+      "Published": 1,
+      "CreatedAt": "639297219502989762"
+    },
+    {
+      "Id": "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+      "TrainingId": "CAA10614-F0E6-4F56-84E8-69167147066C",
+      "SourceId": null,
+      "Title": "معادله‌های خطی؛ مثال و تمرین",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306915102453630"
+    },
+    {
+      "Id": "738E0E4B-4FE4-CB54-6EDC-1D71FB5E7C92",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "6109430A-B05F-9057-3E64-C69EB1A9D2E7",
+      "Title": "🧠 Logic Cheat Sheet — چکیده‌ی فشرده‌ی کل جزوه",
+      "SortOrder": 20,
+      "PageCount": 3,
+      "Published": 1,
+      "CreatedAt": "639297219502589982"
+    },
+    {
+      "Id": "7B7194C1-8DE6-E33F-6AF0-A7D1F7A6CAA1",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "00E861CC-37A3-973A-EB9F-622250C58294",
+      "Title": "فصل ۲: عطف — «A and B» (Conjunction)",
+      "SortOrder": 2,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502633388"
+    },
+    {
+      "Id": "7F112198-7F2A-89F8-E8BC-8CA74E9BE285",
+      "TrainingId": "C08B0D99-0903-A706-A033-4552009C94EE",
+      "SourceId": "32BC651C-E08E-D293-329A-BF25EA5F804A",
+      "Title": "کمیت‌های فیزیکیPhysical Quantities",
+      "SortOrder": 1,
+      "PageCount": 13,
+      "Published": 1,
+      "CreatedAt": "639297219503145366"
+    },
+    {
+      "Id": "83C57C7A-1577-D89B-4A55-51CC0984AEC0",
+      "TrainingId": "771B2AF9-F1AD-7DBB-11E6-238B06A18611",
+      "SourceId": "BF9D2665-4596-B277-18D4-97F78837DA08",
+      "Title": "مثلثات؛ از رادیان تا حل معادله",
+      "SortOrder": 4,
+      "PageCount": 10,
+      "Published": 1,
+      "CreatedAt": "639297219503104321"
+    },
+    {
+      "Id": "8998E945-388D-ABD7-7ADC-8A5A6632B10C",
+      "TrainingId": "58D5D94D-6AEC-A74B-3F43-663981885E96",
+      "SourceId": "7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5",
+      "Title": "پنج فصل مستقل: از ذره تا قانون",
+      "SortOrder": 1,
+      "PageCount": 6,
+      "Published": 1,
+      "CreatedAt": "639297219502572136"
+    },
+    {
+      "Id": "9D4726C0-BDFB-9A84-739D-352668CD0CF7",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "1174E3F6-071A-01D4-C9A8-280BEAB9E5B8",
+      "Title": "فصل ۵: نقیض و تضاد — «not-A» (Negation, Contradictories & Contraries)",
+      "SortOrder": 5,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502686154"
+    },
+    {
+      "Id": "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E",
+      "TrainingId": "602AB3A0-D200-4B2D-80E9-DC9157389F92",
+      "SourceId": null,
+      "Title": "درس اول: معادله‌های خطی",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306126873354103"
+    },
+    {
+      "Id": "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+      "TrainingId": "F271F06A-9425-464D-95D6-55B5452316F1",
+      "SourceId": null,
+      "Title": "معادله‌های خطی؛ مثال و تمرین",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306920221106412"
+    },
+    {
+      "Id": "9ED82E4F-0310-EEFC-9678-5F3DE44BE0CB",
+      "TrainingId": "D006A122-8150-BAB1-506D-519014A87BB2",
+      "SourceId": "62919066-707D-C4CB-C842-529D943E9145",
+      "Title": "سلول و انرژی‌شناسی زیستی \nThe Cell and Bioenergetics",
+      "SortOrder": 2,
+      "PageCount": 15,
+      "Published": 1,
+      "CreatedAt": "639297219502483812"
+    },
+    {
+      "Id": "9FC2A48E-FAB4-214B-B6DA-323D96ECC7CF",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "2D0B80D9-A16D-5BF5-FD86-DA0844DF0087",
+      "Title": "فصل ۹: شرط لازم و کافی — Necessary and Sufficient Conditions",
+      "SortOrder": 9,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502755290"
+    },
+    {
+      "Id": "A623F8F8-A440-011E-FEE6-346274A6F253",
+      "TrainingId": "D006A122-8150-BAB1-506D-519014A87BB2",
+      "SourceId": "B4C78CA8-700F-04B6-0772-8E7EA87E1C7E",
+      "Title": "گیاه‌شناسی، بوم‌شناسی و تکامل \nPlant Biology, Ecology and Evolution",
+      "SortOrder": 4,
+      "PageCount": 16,
+      "Published": 1,
+      "CreatedAt": "639297219502516960"
+    },
+    {
+      "Id": "A76EB7A7-43C6-B02D-B891-EB953B2C75F9",
+      "TrainingId": "C08B0D99-0903-A706-A033-4552009C94EE",
+      "SourceId": "99E58871-BEAC-5D0B-A94C-E5DF575746DA",
+      "Title": "الکترومغناطیس و امواجElectromagnetism & Waves",
+      "SortOrder": 6,
+      "PageCount": 12,
+      "Published": 1,
+      "CreatedAt": "639297219503252517"
+    },
+    {
+      "Id": "A840A773-6EB1-13F8-A41F-E43DC382669F",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "C818184C-3433-4055-C8C4-041F88038CB4",
+      "Title": "فصل ۶: سازگاری و ناسازگاری — Consistency vs Inconsistency",
+      "SortOrder": 6,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502703725"
+    },
+    {
+      "Id": "B0A8F648-71A0-17AD-4370-2AA9BC86A816",
+      "TrainingId": "771B2AF9-F1AD-7DBB-11E6-238B06A18611",
+      "SourceId": "9AD1CEE3-A225-3CCD-7691-660587C34F1A",
+      "Title": "ترکیبات و احتمال",
+      "SortOrder": 6,
+      "PageCount": 11,
+      "Published": 1,
+      "CreatedAt": "639297219503004741"
+    },
+    {
+      "Id": "B8A4DBAE-ABE7-F49B-C0CC-FB34D024F7D6",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "27C6F8B1-8C19-E424-5E42-F16F99BCAB79",
+      "Title": "فصل ۱۴: خواندن نمودارهای میله‌ای — Reading Bar Charts",
+      "SortOrder": 14,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502853861"
+    },
+    {
+      "Id": "C2EE0F94-DE1C-DB14-BE5B-B3227118ABA6",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "B7E4AFA2-59FC-382C-AFCF-883920732837",
+      "Title": "فصل ۱۳: نقیض گزاره‌های کمّی — Negating Universal & Existential Statements",
+      "SortOrder": 13,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502837789"
+    },
+    {
+      "Id": "C48A81E2-E25B-8BEF-B55D-35FA669FF459",
+      "TrainingId": "771B2AF9-F1AD-7DBB-11E6-238B06A18611",
+      "SourceId": "FB4BA96D-9049-D967-8C15-D757133E6642",
+      "Title": "هندسه از صفر تا تشابه و مختصات",
+      "SortOrder": 5,
+      "PageCount": 8,
+      "Published": 1,
+      "CreatedAt": "639297219503038380"
+    },
+    {
+      "Id": "CA0F7CA0-403B-CAB5-4E97-063D5F074475",
+      "TrainingId": "C08B0D99-0903-A706-A033-4552009C94EE",
+      "SourceId": "8F78D75B-1244-01CC-C04F-2BAE4964D664",
+      "Title": "دینامیک ذره، کار و انرژیDynamics, Work & Energy",
+      "SortOrder": 3,
+      "PageCount": 18,
+      "Published": 1,
+      "CreatedAt": "639297219503193876"
+    },
+    {
+      "Id": "CE12F957-E736-9E1B-C9FD-5955A91FB384",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "E6007D25-BBE6-F64F-12CC-B488C06B6E83",
+      "Title": "فصل ۱۲: قیاس فرضی و Modus Ponens — استنتاج معتبر و نامعتبر",
+      "SortOrder": 12,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502810727"
+    },
+    {
+      "Id": "D1E3D053-D382-25D9-D2AA-4C7DD87B823C",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "89252BC7-A012-C58E-BA93-DEEE353C33F9",
+      "Title": "فصل ۸: معادل‌های شرطی — Equivalent Forms of \"If A then B\"",
+      "SortOrder": 8,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502737488"
+    },
+    {
+      "Id": "D3003336-18F0-D405-4B1E-CAE651782812",
+      "TrainingId": "C08B0D99-0903-A706-A033-4552009C94EE",
+      "SourceId": "7EA0A24A-3E64-5F99-256B-7B4A6D2F8861",
+      "Title": "فشارPressure",
+      "SortOrder": 4,
+      "PageCount": 18,
+      "Published": 1,
+      "CreatedAt": "639297219503218608"
+    },
+    {
+      "Id": "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+      "TrainingId": "EE17FD5D-ADE1-43A6-8E3B-C61ED983E56A",
+      "SourceId": null,
+      "Title": "معادله‌های خطی؛ مثال و تمرین",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306913583393710"
+    },
+    {
+      "Id": "D5659FCB-E36C-48BF-7D15-0D6AC81B44E1",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "24EDDFE0-94BC-8FCA-4158-6E6FD45480FD",
+      "Title": "فصل ۱۵: خواندن نمودارهای دایره‌ای — Reading Pie Charts",
+      "SortOrder": 15,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502868325"
+    },
+    {
+      "Id": "DD4DCB48-A86C-15AD-A3D3-BF447C2F49C4",
+      "TrainingId": "D006A122-8150-BAB1-506D-519014A87BB2",
+      "SourceId": "9250EAC1-6BD0-1F6E-BBDC-E0A7952F1A21",
+      "Title": "آناتومی و فیزیولوژی جانوران \nAnimal Anatomy, Physiology and Homeostasis",
+      "SortOrder": 5,
+      "PageCount": 16,
+      "Published": 1,
+      "CreatedAt": "639297219502546997"
+    },
+    {
+      "Id": "E1E81FC8-642B-94E5-24B8-663CB39C2E29",
+      "TrainingId": "D006A122-8150-BAB1-506D-519014A87BB2",
+      "SourceId": "044EC217-FC60-4A65-1CE6-36DFABDB96FB",
+      "Title": "ژنتیک مولکولی، چرخهٔ سلولی و وراثت \nMolecular Genetics, the Cell Cycle and Heredity",
+      "SortOrder": 3,
+      "PageCount": 16,
+      "Published": 1,
+      "CreatedAt": "639297219502501153"
+    },
+    {
+      "Id": "E35E3009-C939-1C85-351B-9C88FA91817A",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "C567E022-D4EF-F1C6-B839-10579E95365D",
+      "Title": "فصل ۱۱: مربع تعارض — Square of Opposition",
+      "SortOrder": 11,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502791194"
+    },
+    {
+      "Id": "E9CB7B90-D5D5-1D04-4662-D9AD0015BBB7",
+      "TrainingId": "771B2AF9-F1AD-7DBB-11E6-238B06A18611",
+      "SourceId": "252303E1-32E1-77F4-D8E2-B3F765C5F480",
+      "Title": "آمار (Statistics)",
+      "SortOrder": 7,
+      "PageCount": 8,
+      "Published": 1,
+      "CreatedAt": "639297219503020284"
+    },
+    {
+      "Id": "EA9FD74D-457A-A9A3-C8BA-2832D33747E9",
+      "TrainingId": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "SourceId": "FF7D1F88-D281-635C-9F04-EDAD7FF6B4C3",
+      "Title": "فصل ۷: نقیض گزاره‌های ترکیبی (De Morgan's Rules)",
+      "SortOrder": 7,
+      "PageCount": 9,
+      "Published": 1,
+      "CreatedAt": "639297219502719588"
+    },
+    {
+      "Id": "ED57EB67-56AE-E14A-343A-9E92B34A3C91",
+      "TrainingId": "C08B0D99-0903-A706-A033-4552009C94EE",
+      "SourceId": "21CA9FB7-D3AE-E03C-923B-6BCC18A11C0F",
+      "Title": "ترمودینامیکThermodynamics",
+      "SortOrder": 5,
+      "PageCount": 14,
+      "Published": 1,
+      "CreatedAt": "639297219503236900"
+    },
+    {
+      "Id": "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E",
+      "TrainingId": "8B53B160-10DB-46CC-9A06-F4F128553B4D",
+      "SourceId": null,
+      "Title": "معادله‌های خطی؛ مثال و تمرین",
+      "SortOrder": 0,
+      "PageCount": 2,
+      "Published": 1,
+      "CreatedAt": "639306916409617455"
+    }
+  ]
+}

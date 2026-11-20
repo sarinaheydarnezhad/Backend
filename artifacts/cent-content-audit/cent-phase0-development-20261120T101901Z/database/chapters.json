@@ -1,0 +1,351 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "cent_chapters",
+  "recordCount": 43,
+  "records": [
+    {
+      "Id": "06E23775-BF1F-90E6-3AE6-923590B9D6DD",
+      "ImportKey": "logic/ch12-syllogism.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "E6007D25-BBE6-F64F-12CC-B488C06B6E83",
+      "Title": "فصل ۱۲: قیاس فرضی و Modus Ponens — استنتاج معتبر و نامعتبر",
+      "SortOrder": 12
+    },
+    {
+      "Id": "07043965-DF1E-6937-86F1-2D61A77E15D3",
+      "ImportKey": "logic/ch10-categorical.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "040CA2F5-3BDB-8995-C114-54E4EE8F53AC",
+      "Title": "فصل ۱۰: گزاره‌های قیاسی — Categorical Claims (All / Some / No / Only A are B)",
+      "SortOrder": 10
+    },
+    {
+      "Id": "09021632-43BF-CBDB-7DBF-6DC057AC0D47",
+      "ImportKey": "math/chapter6-combinatorics-probability.html#chapter",
+      "CourseCode": "math",
+      "SourceId": "9AD1CEE3-A225-3CCD-7691-660587C34F1A",
+      "Title": "ترکیبات و احتمال",
+      "SortOrder": 6
+    },
+    {
+      "Id": "10628593-DDBE-383E-9C62-BDE18F3BF998",
+      "ImportKey": "logic/ch19-tables.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "3988520F-3CAB-5534-5220-01D13E8437C2",
+      "Title": "فصل ۱۹: حل مسئله با جدول و معادلات همزمان — Tables & Simultaneous Equations",
+      "SortOrder": 19
+    },
+    {
+      "Id": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#chapter",
+      "CourseCode": "biology",
+      "SourceId": "62919066-707D-C4CB-C842-529D943E9145",
+      "Title": "سلول و انرژی‌شناسی زیستی \nThe Cell and Bioenergetics",
+      "SortOrder": 2
+    },
+    {
+      "Id": "1A10C253-A6B2-C26E-0D98-412370F69B6A",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#chapter-5",
+      "CourseCode": "chemistry",
+      "SourceId": "7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5",
+      "Title": "قوانین بنیادی شیمی",
+      "SortOrder": 5
+    },
+    {
+      "Id": "1B9F9E73-DCC2-56A9-79C8-3B61C31FD9C7",
+      "ImportKey": "logic/ch09-necessary-sufficient.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "2D0B80D9-A16D-5BF5-FD86-DA0844DF0087",
+      "Title": "فصل ۹: شرط لازم و کافی — Necessary and Sufficient Conditions",
+      "SortOrder": 9
+    },
+    {
+      "Id": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "ImportKey": "physics/chapter4-pressure.html#chapter",
+      "CourseCode": "physics",
+      "SourceId": "7EA0A24A-3E64-5F99-256B-7B4A6D2F8861",
+      "Title": "فشارPressure",
+      "SortOrder": 4
+    },
+    {
+      "Id": "2C1FA436-1536-0B45-7160-5B9A98A3EA4C",
+      "ImportKey": "logic/ch01-foundations-fa.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "0B42FE17-B855-76B8-08E2-BED445C24111",
+      "Title": "فصل ۱: مبانی — گزاره چیست؟ گزاره‌های ترکیبی چه هستند؟",
+      "SortOrder": 1
+    },
+    {
+      "Id": "44D18ED8-8E2E-187B-1E70-208F3D238B2B",
+      "ImportKey": "logic/20-final-review.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "6109430A-B05F-9057-3E64-C69EB1A9D2E7",
+      "Title": "🧠 Logic Cheat Sheet — چکیده‌ی فشرده‌ی کل جزوه",
+      "SortOrder": 20
+    },
+    {
+      "Id": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#chapter",
+      "CourseCode": "physics",
+      "SourceId": "8F78D75B-1244-01CC-C04F-2BAE4964D664",
+      "Title": "دینامیک ذره، کار و انرژیDynamics, Work & Energy",
+      "SortOrder": 3
+    },
+    {
+      "Id": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#chapter",
+      "CourseCode": "biology",
+      "SourceId": "B4C78CA8-700F-04B6-0772-8E7EA87E1C7E",
+      "Title": "گیاه‌شناسی، بوم‌شناسی و تکامل \nPlant Biology, Ecology and Evolution",
+      "SortOrder": 4
+    },
+    {
+      "Id": "5C14067E-CCD5-C6B9-4DF9-452788D85C93",
+      "ImportKey": "logic/ch08-equivalents.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "89252BC7-A012-C58E-BA93-DEEE353C33F9",
+      "Title": "فصل ۸: معادل‌های شرطی — Equivalent Forms of \"If A then B\"",
+      "SortOrder": 8
+    },
+    {
+      "Id": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#chapter",
+      "CourseCode": "math",
+      "SourceId": "19C7CDBD-2DF8-9F2C-1A05-63D46DE121F4",
+      "Title": "مسترکلاس ریاضی: پایه‌های محاسباتی",
+      "SortOrder": 1
+    },
+    {
+      "Id": "6D01499C-E650-2C71-A319-AB66703EF1AB",
+      "ImportKey": "logic/ch15-piecharts.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "24EDDFE0-94BC-8FCA-4158-6E6FD45480FD",
+      "Title": "فصل ۱۵: خواندن نمودارهای دایره‌ای — Reading Pie Charts",
+      "SortOrder": 15
+    },
+    {
+      "Id": "6E29F749-DB18-E639-6B1E-C3267756CD3C",
+      "ImportKey": "logic/ch06-consistency.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "C818184C-3433-4055-C8C4-041F88038CB4",
+      "Title": "فصل ۶: سازگاری و ناسازگاری — Consistency vs Inconsistency",
+      "SortOrder": 6
+    },
+    {
+      "Id": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#chapter",
+      "CourseCode": "physics",
+      "SourceId": "99E58871-BEAC-5D0B-A94C-E5DF575746DA",
+      "Title": "الکترومغناطیس و امواجElectromagnetism & Waves",
+      "SortOrder": 6
+    },
+    {
+      "Id": "74C76D87-B10A-FC12-22CA-7BBCE457B58F",
+      "ImportKey": "logic/ch03-disjunction.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "0F2CA150-41C3-0AEE-548B-844AE19755F9",
+      "Title": "فصل ۳: فصل — «A or B» (Disjunction)",
+      "SortOrder": 3
+    },
+    {
+      "Id": "7CE953C5-B6CA-3789-4649-D089C88FCC16",
+      "ImportKey": "logic/ch14-barcharts.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "27C6F8B1-8C19-E424-5E42-F16F99BCAB79",
+      "Title": "فصل ۱۴: خواندن نمودارهای میله‌ای — Reading Bar Charts",
+      "SortOrder": 14
+    },
+    {
+      "Id": "7F1C3932-9051-4A18-F6D2-BABDFE2461E1",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#chapter-2",
+      "CourseCode": "chemistry",
+      "SourceId": "7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5",
+      "Title": "تبدیلات شیمیایی: تغییر فیزیکی در برابر شیمیایی",
+      "SortOrder": 2
+    },
+    {
+      "Id": "83E01CD6-0EDD-6202-2C1F-27338A11CF1F",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#chapter-4",
+      "CourseCode": "chemistry",
+      "SourceId": "7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5",
+      "Title": "مخلوط‌های همگن و ناهمگن؛ روش‌های جداسازی",
+      "SortOrder": 4
+    },
+    {
+      "Id": "848BA68E-E652-45E4-E203-5F361C801C1D",
+      "ImportKey": "logic/ch16-linegraphs.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "02B0C98C-BFA6-D4CF-B9DA-EECC6F2C5E3D",
+      "Title": "فصل ۱۶: نمودارهای خطی و تحلیل روند — Line Graphs & Trend Analysis",
+      "SortOrder": 16
+    },
+    {
+      "Id": "85595E57-954D-FCFC-8853-AE13B13CA761",
+      "ImportKey": "logic/ch07-negating-compounds.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "FF7D1F88-D281-635C-9F04-EDAD7FF6B4C3",
+      "Title": "فصل ۷: نقیض گزاره‌های ترکیبی (De Morgan's Rules)",
+      "SortOrder": 7
+    },
+    {
+      "Id": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "ImportKey": "physics/chapter2-kinematics.html#chapter",
+      "CourseCode": "physics",
+      "SourceId": "03D25309-4471-923F-14E4-2A898A42B10E",
+      "Title": "جنبش‌شناسی ذرهPoint-Particle Kinematics",
+      "SortOrder": 2
+    },
+    {
+      "Id": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "ImportKey": "physics/chapter1-physical-quantities.html#chapter",
+      "CourseCode": "physics",
+      "SourceId": "32BC651C-E08E-D293-329A-BF25EA5F804A",
+      "Title": "کمیت‌های فیزیکیPhysical Quantities",
+      "SortOrder": 1
+    },
+    {
+      "Id": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "ImportKey": "biology/chapter3-genetics-fa.html#chapter",
+      "CourseCode": "biology",
+      "SourceId": "044EC217-FC60-4A65-1CE6-36DFABDB96FB",
+      "Title": "ژنتیک مولکولی، چرخهٔ سلولی و وراثت \nMolecular Genetics, the Cell Cycle and Heredity",
+      "SortOrder": 3
+    },
+    {
+      "Id": "9F2CE0B5-0DA0-FF1F-2EEA-B4FBAD480B30",
+      "ImportKey": "logic/ch18-venn.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "A6FED340-4FB2-DF1A-F925-63D5D5223CF5",
+      "Title": "فصل ۱۸: حل مسئله با نمودار ون — Venn Diagram Word Problems",
+      "SortOrder": 18
+    },
+    {
+      "Id": "9FDD3B2E-A297-7848-72D3-A1D3D22F0291",
+      "ImportKey": "biology/chapter1-chemical-foundation-fa.html#chapter",
+      "CourseCode": "biology",
+      "SourceId": "4B4FBFB9-896A-1407-073A-A3F6881591FE",
+      "Title": "بنیان شیمیایی \nThe Chemical Foundation",
+      "SortOrder": 1
+    },
+    {
+      "Id": "AD2CFB7C-5C1E-8AB5-D07F-57B46C072F00",
+      "ImportKey": "logic/ch05-negation.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "1174E3F6-071A-01D4-C9A8-280BEAB9E5B8",
+      "Title": "فصل ۵: نقیض و تضاد — «not-A» (Negation, Contradictories & Contraries)",
+      "SortOrder": 5
+    },
+    {
+      "Id": "B7E9FC82-7E37-9C83-14F4-075F4B9671C2",
+      "ImportKey": "math/trig_chapter.html#chapter",
+      "CourseCode": "math",
+      "SourceId": "BF9D2665-4596-B277-18D4-97F78837DA08",
+      "Title": "مثلثات؛ از رادیان تا حل معادله",
+      "SortOrder": 4
+    },
+    {
+      "Id": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "ImportKey": "math/chapter2.html#chapter",
+      "CourseCode": "math",
+      "SourceId": "E9A151B7-6771-BD88-21E8-92C20F5BE4FC",
+      "Title": "معادلات، نامعادلات و هندسهٔ مختصات",
+      "SortOrder": 2
+    },
+    {
+      "Id": "BE3C4869-ADA1-ADAB-9C5B-97109C708681",
+      "ImportKey": "math/chapter7-statistics.html#chapter",
+      "CourseCode": "math",
+      "SourceId": "252303E1-32E1-77F4-D8E2-B3F765C5F480",
+      "Title": "آمار (Statistics)",
+      "SortOrder": 7
+    },
+    {
+      "Id": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "ImportKey": "physics/chapter5-thermodynamics.html#chapter",
+      "CourseCode": "physics",
+      "SourceId": "21CA9FB7-D3AE-E03C-923B-6BCC18A11C0F",
+      "Title": "ترمودینامیکThermodynamics",
+      "SortOrder": 5
+    },
+    {
+      "Id": "C70F1F47-09F3-63A6-6C82-78CC9B3937A6",
+      "ImportKey": "logic/ch04-conditional.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "A9B4A6D8-4779-AA00-AFDF-4F3E31DE7DA8",
+      "Title": "فصل ۴: شرطی — «If A then B» (Conditional)",
+      "SortOrder": 4
+    },
+    {
+      "Id": "CBAA729D-AFC1-02AD-A226-8E5CA2BEC09B",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#chapter-1",
+      "CourseCode": "chemistry",
+      "SourceId": "7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5",
+      "Title": "مدل ذره‌ای ماده، حالت‌های ماده و تغییرات فیزیکی",
+      "SortOrder": 1
+    },
+    {
+      "Id": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "ImportKey": "math/فصل۳-توابع.html#chapter",
+      "CourseCode": "math",
+      "SourceId": "FF202D05-9692-A6E3-39B6-BB651FBA345A",
+      "Title": "توابع (Functions)",
+      "SortOrder": 3
+    },
+    {
+      "Id": "DB093E0B-5EF6-7206-FEA6-755C64448527",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#chapter-3",
+      "CourseCode": "chemistry",
+      "SourceId": "7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5",
+      "Title": "خواص ماکروسکوپیک گازها، مایعات و جامدات",
+      "SortOrder": 3
+    },
+    {
+      "Id": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#chapter",
+      "CourseCode": "biology",
+      "SourceId": "9250EAC1-6BD0-1F6E-BBDC-E0A7952F1A21",
+      "Title": "آناتومی و فیزیولوژی جانوران \nAnimal Anatomy, Physiology and Homeostasis",
+      "SortOrder": 5
+    },
+    {
+      "Id": "E0D44BD3-5CDD-C99F-EDFB-773CC9F08131",
+      "ImportKey": "math/geometry-chapter.html#chapter",
+      "CourseCode": "math",
+      "SourceId": "FB4BA96D-9049-D967-8C15-D757133E6642",
+      "Title": "هندسه از صفر تا تشابه و مختصات",
+      "SortOrder": 5
+    },
+    {
+      "Id": "E5C9B6EE-50FA-6C46-C32F-BC70706D41C0",
+      "ImportKey": "logic/ch13-quantifiers.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "B7E4AFA2-59FC-382C-AFCF-883920732837",
+      "Title": "فصل ۱۳: نقیض گزاره‌های کمّی — Negating Universal & Existential Statements",
+      "SortOrder": 13
+    },
+    {
+      "Id": "E809725B-17DA-A1AD-6D1A-9B2CB21DC8A9",
+      "ImportKey": "logic/ch02-conjunction.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "00E861CC-37A3-973A-EB9F-622250C58294",
+      "Title": "فصل ۲: عطف — «A and B» (Conjunction)",
+      "SortOrder": 2
+    },
+    {
+      "Id": "FAFDCCF6-05DF-2E2E-9B0A-04DE276D7E3B",
+      "ImportKey": "logic/ch11-square.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "C567E022-D4EF-F1C6-B839-10579E95365D",
+      "Title": "فصل ۱۱: مربع تعارض — Square of Opposition",
+      "SortOrder": 11
+    },
+    {
+      "Id": "FE7415D5-DA50-CCAA-D111-283A46248634",
+      "ImportKey": "logic/ch17-evaluating.html#chapter",
+      "CourseCode": "logic",
+      "SourceId": "1F9B5357-1054-D852-3665-EAC1BF041AA5",
+      "Title": "فصل ۱۷: نتیجه‌گیری و ارزیابیِ ادعاها — Drawing Conclusions & Evaluating Claims",
+      "SortOrder": 17
+    }
+  ]
+}

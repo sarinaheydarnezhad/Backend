@@ -1,0 +1,61 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "audit",
+  "recordCount": 4,
+  "records": [
+    {
+      "table": "cent_documents",
+      "criterion": "same normalized title",
+      "fingerprint": "340df925d05c2e13a1a21ca55ae5c088dc6dca9212bee6c74470f89d994eb7b9",
+      "recordIds": [
+        "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+        "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+        "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+        "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+        "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+        "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E"
+      ],
+      "count": 6,
+      "classification": "candidate-only; no content removed"
+    },
+    {
+      "table": "cent_documents",
+      "criterion": "same normalized title",
+      "fingerprint": "14af4747f34c940625340b70101491134e4533d587bb27e79380390fca8f8783",
+      "recordIds": [
+        "29856693-615D-4665-B11B-98CD6E7E57AD",
+        "43A380FF-1A22-401B-8729-8449ADC673CB",
+        "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E"
+      ],
+      "count": 3,
+      "classification": "candidate-only; no content removed"
+    },
+    {
+      "table": "cent_trainings",
+      "criterion": "same normalized title",
+      "fingerprint": "31cbecad3e9bf7214c4ffca5ffdd8fb92d19c203a1c72cdf248a508c3582a408",
+      "recordIds": [
+        "0B96F1DE-764A-47F7-931B-2FDDFFB3E681",
+        "8B53B160-10DB-46CC-9A06-F4F128553B4D",
+        "CAA10614-F0E6-4F56-84E8-69167147066C",
+        "EB0BD398-C645-4DD1-B47E-633904D18C67",
+        "EE17FD5D-ADE1-43A6-8E3B-C61ED983E56A",
+        "F271F06A-9425-464D-95D6-55B5452316F1"
+      ],
+      "count": 6,
+      "classification": "candidate-only; no content removed"
+    },
+    {
+      "table": "cent_trainings",
+      "criterion": "same normalized title",
+      "fingerprint": "186083e4677cf7ad52f8e7713ff69d605a20c27fd623d3dacc136d5815466784",
+      "recordIds": [
+        "21EF91B0-71F2-4BEC-A0ED-C2F5AD24E0B8",
+        "602AB3A0-D200-4B2D-80E9-DC9157389F92",
+        "AED10460-71F5-4878-A3AD-3E570A9F9AD5"
+      ],
+      "count": 3,
+      "classification": "candidate-only; no content removed"
+    }
+  ]
+}

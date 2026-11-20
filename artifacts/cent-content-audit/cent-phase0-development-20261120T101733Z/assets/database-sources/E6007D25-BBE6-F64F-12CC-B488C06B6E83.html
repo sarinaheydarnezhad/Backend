@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>جزوه لاجیک CEnT — فصل ۱۲: قیاس فرضی و Modus Ponens</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAF9F5;
+    --ink:#1C2321;
+    --ink-soft:#4A5250;
+    --rule:#D8D4C8;
+    --navy:#1F3A5F;
+    --navy-tint:#EAEFF4;
+    --gold:#9C6B12;
+    --gold-tint:#FBF3E4;
+    --rust:#A6362B;
+    --rust-tint:#FBEEEC;
+    --violet:#5B4A8A;
+    --violet-tint:#F1EEF8;
+    --orange:#B0541E;
+    --orange-tint:#FBEEE4;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Vazirmatn', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  .page{ max-width:780px; margin:0 auto; padding:56px 28px 120px; }
+  .kicker{
+    font-family:'IBM Plex Mono', monospace;
+    direction:ltr; text-align:right;
+    font-size:12px; letter-spacing:.03em;
+    color:var(--ink-soft); margin:0 0 8px;
+  }
+  h1{
+    font-family:'Vazirmatn', sans-serif;
+    font-weight:700; font-size:30px; line-height:1.5;
+    margin:0 0 12px; color:var(--ink);
+  }
+  .lede{
+    font-size:16.5px; line-height:2; color:var(--ink-soft);
+    max-width:64ch; margin:0 0 40px;
+    padding-bottom:32px; border-bottom:1px solid var(--rule);
+  }
+  h2{
+    font-weight:700; font-size:21px; margin:52px 0 16px; color:var(--ink);
+    display:flex; align-items:center; gap:10px;
+  }
+  h2 .num{
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--navy);
+    border:1px solid var(--navy); border-radius:3px; padding:1px 7px;
+  }
+  p{ font-size:16px; line-height:2; max-width:66ch; }
+  ul, ol{ font-size:16px; line-height:1.95; max-width:66ch; padding-right:22px; padding-left:0; }
+  li{ margin-bottom:9px; }
+  strong{ color:var(--ink); }
+  .en{ direction:ltr; unicode-bidi:isolate; font-family:'IBM Plex Sans', sans-serif; }
+  code, .term{
+    font-family:'IBM Plex Mono', monospace; direction:ltr; unicode-bidi:isolate;
+    font-size:.86em; background:#F0EEE6; padding:1px 5px; border-radius:3px;
+  }
+
+  .box{ border-right:3px solid var(--navy); border-left:none; background:#fff; padding:18px 22px; margin:18px 0; max-width:68ch; }
+  .box-title{ font-weight:700; font-size:14.5px; margin:0 0 10px; color:var(--navy); direction:ltr; text-align:right; }
+  .box p, .box ul, .box ol{ margin:0; }
+  .box p + p{ margin-top:8px; }
+
+  .box-tip{ border-color:var(--gold); background:var(--gold-tint); }
+  .box-tip .box-title{ color:var(--gold); }
+  .box-mistake{ border-color:var(--rust); background:var(--rust-tint); }
+  .box-mistake .box-title{ color:var(--rust); }
+  .box-quick{ border-color:var(--violet); background:var(--violet-tint); }
+  .box-quick .box-title{ color:var(--violet); }
+  .box-trap{ border-color:var(--orange); background:var(--orange-tint); }
+  .box-trap .box-title{ color:var(--orange); }
+  .box-remember{ border-color:var(--navy); background:var(--navy); color:#fff; }
+  .box-remember .box-title{ color:#fff; opacity:.9; }
+  .box-remember p{ color:#fff; }
+
+  .steps{ list-style:none; padding:0; margin:18px 0; max-width:68ch; counter-reset:step; }
+  .steps li{
+    counter-increment:step; position:relative;
+    padding:10px 50px 10px 0; border-bottom:1px solid var(--rule); margin:0;
+  }
+  .steps li:last-child{ border-bottom:none; }
+  .steps li::before{
+    content:counter(step); position:absolute; right:0; top:9px;
+    width:26px; height:26px; border-radius:50%;
+    background:var(--navy); color:#fff;
+    font-family:'IBM Plex Mono', monospace; font-size:13px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .steps .arrow-final{ color:var(--navy); font-weight:700; }
+
+  .ex-block{ border:1px solid var(--rule); padding:18px 22px; margin:16px 0; max-width:68ch; background:#fff; }
+  .ex-tag{ font-size:13px; color:var(--ink-soft); font-weight:600; margin-bottom:10px; }
+  .en-block{ direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .en-block .q{ font-weight:600; margin-bottom:10px; font-size:15.5px; }
+  .en-block p{ font-size:15px; line-height:1.6; }
+
+  .analysis{ margin-top:16px; padding-top:14px; border-top:1px dashed var(--rule); }
+  .analysis dt{ font-weight:700; font-size:14.5px; color:var(--navy); margin-top:12px; }
+  .analysis dd{ margin:4px 0 0; font-size:15px; line-height:1.9; color:var(--ink-soft); }
+
+  .practice-item{ border-top:1px solid var(--rule); padding:22px 0; max-width:68ch; }
+  .practice-item:first-of-type{ border-top:none; }
+  .difficulty{ display:inline-block; font-size:12.5px; font-weight:600; padding:2px 10px; border-radius:3px; margin-bottom:10px; }
+  .diff-easy{ background:var(--navy-tint); color:var(--navy); }
+  .diff-med{ background:var(--gold-tint); color:var(--gold); }
+  .diff-hard{ background:var(--rust-tint); color:var(--rust); }
+  .options{ list-style:none; padding:0; margin:10px 0; direction:ltr; text-align:left; font-family:'IBM Plex Sans', sans-serif; }
+  .options li{ padding:4px 0; font-size:14.5px; }
+  .options li.correct{ color:var(--navy); font-weight:700; }
+  details{ margin-top:12px; }
+  summary{ cursor:pointer; font-size:14.5px; color:var(--navy); font-weight:700; }
+  details p{ margin-top:10px; font-size:15px; color:var(--ink-soft); line-height:1.9; }
+
+  .review{ background:var(--navy); color:#fff; margin:56px -28px -120px; padding:44px 28px 60px; }
+  .review h2{ color:#fff; margin-top:0; }
+  .review h2 .num{ border-color:#fff; color:#fff; }
+  .review-grid{ display:grid; grid-template-columns:1fr 1fr; gap:28px; max-width:68ch; }
+  .review-grid h3{ font-size:13.5px; margin:0 0 8px; opacity:.75; font-weight:700; }
+  .review-grid ul{ margin:0; padding-right:18px; font-size:14.5px; }
+  .review-grid li{ margin-bottom:6px; }
+  @media (max-width:560px){ .review-grid{ grid-template-columns:1fr; } }
+
+  .square-wrap{ margin:24px 0; max-width:66ch; }
+  .square-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+    border:1px solid var(--rule);
+    position:relative;
+  }
+  .square-corner{
+    padding:16px 18px;
+    border:1px solid var(--rule);
+    background:#fff;
+    text-align:center;
+  }
+  .square-corner .label{ font-size:11px; font-family:'IBM Plex Mono', monospace; direction:ltr; color:var(--ink-soft); display:block; margin-bottom:6px; }
+  .square-corner .form{ font-family:'IBM Plex Sans', sans-serif; direction:ltr; font-weight:600; font-size:14.5px; }
+  .square-edge{
+    text-align:center;
+    font-size:12.5px;
+    color:var(--navy);
+    font-weight:700;
+    padding:6px 0;
+  }
+  .square-edge.diag{ font-size:12px; color:var(--rust); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="kicker">CENT LOGIC — PART A · CHAPTER 12 / 13</p>
+  <h1>فصل ۱۲: قیاس فرضی و Modus Ponens — استنتاج معتبر و نامعتبر</h1>
+  <p class="lede">تا اینجا یاد گرفتی چطور یک گزاره رو ارزیابی یا نقیض کنی. این فصل یک مهارت جدید بهت می‌ده: چطور از چند گزاره‌ی شرطیِ داده‌شده، یک نتیجه‌ی <strong>جدید</strong> و تضمین‌شده بسازی — و مهم‌تر، چطور تشخیص بدی کِی این کار غیرمجازه.</p>
+
+  <h2><span class="num">B</span>این مبحث چیست؟</h2>
+  <p>وقتی چند گزاره‌ی شرطی به‌هم زنجیر می‌شن (تالیِ یکی، مقدمِ اون یکی می‌شه)، می‌شه ازشون نتیجه‌ی جدیدی گرفت. دو تا از معتبرترین الگوهای این کار <span class="term">Modus Ponens</span> و <span class="term">Hypothetical Syllogism</span> هستن — ولی یک الگوی خیلی وسوسه‌انگیزِ دیگه هم هست که <strong>نامعتبره</strong>، و آزمون دقیقاً همون رو تست می‌کنه.</p>
+
+  <h2><span class="num">C</span>مفهوم اصلی</h2>
+
+  <p><strong>قدم ۱ — Modus Ponens: اگه «If A then B» درست باشه و A هم درست باشه، پس B قطعاً درسته.</strong> این ساده‌ترین و پایه‌ای‌ترین قانون استنتاجه.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>1. If it rains, the ground gets wet.<br>2. It is raining.<br>Therefore, the ground is wet.</p>
+    </div>
+  </div>
+
+  <p><strong>قدم ۲ — Hypothetical Syllogism: از «If A then B» و «If B then C»، نتیجه می‌گیریم «If A then C».</strong> دو شرطی که تالیِ اولی با مقدمِ دومی یکیه، به هم زنجیر می‌شن.</p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>1. If the cue ball hits the red ball, then the red ball will hit the blue ball.<br>2. If the red ball hits the blue ball, then the blue ball will go into the pocket.<br>Therefore, if the cue ball hits the red ball, then the blue ball will go into the pocket.</p>
+    </div>
+  </div>
+
+  <p><strong>قدم ۳ — ترکیب هر دو قانون: اگه علاوه‌بر دو شرطیِ زنجیره‌ای، مقدمِ اولین شرطی هم به‌عنوان یک واقعیت داده بشه، می‌تونی مستقیم به نتیجه‌ی نهایی برسی.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>1. If A then B<br>2. If B then C<br>3. A<br>Therefore, C.</p>
+    </div>
+    <p style="margin-top:10px;">این استنتاج در واقع دو مرحله‌ست: اول با Hypothetical Syllogism روی گزاره‌های ۱ و ۲، به «If A then C» می‌رسیم؛ بعد با Modus Ponens روی این نتیجه و گزاره‌ی ۳، به C می‌رسیم.</p>
+  </div>
+
+  <p><strong>قدم ۴ — هشدار: از «If A then B» و «If B then C»، نمی‌شه نتیجه گرفت «If C then A». این یک استنتاج نامعتبره.</strong></p>
+  <div class="ex-block">
+    <div class="ex-tag">نمونه</div>
+    <div class="en-block">
+      <p>1. If John studies hard, then he'll pass the test.<br>2. If he passes the test, then he'll pass the class.<br><strong>❌ Invalid conclusion:</strong> "If John passes the class, then he studied hard."</p>
+    </div>
+    <p style="margin-top:10px;">آیا قبول شدن در کلاس تضمین می‌کنه که جان حتماً درس خونده؟ نه — شاید معلم بهش نمره‌ی اضافه داده، یا امتحان جبرانی گرفته. زنجیره‌ی «A→B→C» هیچ اطلاعاتی درباره‌ی این‌که «C چطور ممکنه از راه‌های دیگه‌ای غیر از A اتفاق بیفته» بهمون نمی‌ده.</p>
+  </div>
+
+  <h2><span class="num">D</span>قوانین و اصول مهم</h2>
+  <ul>
+    <li><strong>Modus Ponens (معتبر):</strong> If A then B, و A ⟹ B.</li>
+    <li><strong>Hypothetical Syllogism (معتبر):</strong> If A then B, و If B then C ⟹ If A then C.</li>
+    <li><strong>ترکیبِ هر دو (معتبر):</strong> If A then B, If B then C, و A ⟹ C.</li>
+    <li><strong>برعکس کردن زنجیره (نامعتبر):</strong> از If A then B و If B then C، هرگز نمی‌شه If C then A نتیجه گرفت.</li>
+  </ul>
+
+  <h2><span class="num">E</span>روش حل</h2>
+  <ol class="steps">
+    <li>همه‌ی گزاره‌های شرطی و هر واقعیتِ جداگانه‌ی داده‌شده رو فهرست کن.</li>
+    <li>دنبال شرطی‌هایی بگرد که تالیِ یکی، دقیقاً مقدمِ یکیِ دیگه‌ست — این‌ها رو زنجیر کن (Hypothetical Syllogism).</li>
+    <li>اگه اولین مقدمِ زنجیره هم به‌عنوان یک واقعیت داده شده، Modus Ponens رو روی نتیجه‌ی زنجیره اعمال کن.</li>
+    <li>هیچ‌وقت جهت زنجیره رو برعکس نکن — نتیجه‌ی معتبر همیشه هم‌جهت با فلش‌های اصلیه.</li>
+    <li class="arrow-final">→ جواب: نتیجه‌ی زنجیره‌شده، در همون جهتِ اصلی.</li>
+  </ol>
+
+  <h2><span class="num">F</span>مثال آموزشی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 1 — برای درک مفهوم</div>
+    <div class="en-block">
+      <p class="q">1. If the power goes out, the backup generator starts. 2. If the backup generator starts, the alarm system stays active. What can we conclude?</p>
+    </div>
+    <p style="margin-top:10px;"><strong>پاسخ:</strong> "If the power goes out, the alarm system stays active." طبق Hypothetical Syllogism، تالیِ گزاره‌ی ۱ («the backup generator starts») دقیقاً مقدمِ گزاره‌ی ۲ است، پس می‌تونیم زنجیرشون کنیم.</p>
+  </div>
+
+  <h2><span class="num">G</span>مثال امتحانی</h2>
+  <div class="ex-block">
+    <div class="ex-tag">Example 2 — CEnT style</div>
+    <div class="en-block">
+      <p class="q">1. If a project is approved, the budget is released. 2. If the budget is released, the team starts hiring. 3. The project was approved. Which conclusion is VALID?</p>
+      <ul class="options">
+        <li>A) "If the team starts hiring, the project was approved."</li>
+        <li class="correct">B) "The team starts hiring."</li>
+        <li>C) "If the budget is released, the project was approved."</li>
+        <li>D) "The project was not approved."</li>
+      </ul>
+    </div>
+    <div class="analysis">
+      <dt>از کجا شروع کنیم؟</dt>
+      <dd>اول گزاره‌های ۱ و ۲ رو با Hypothetical Syllogism زنجیر کن: "If a project is approved, the team starts hiring."</dd>
+      <dt>چه اطلاعاتی مهمه؟</dt>
+      <dd>گزاره‌ی ۳ می‌گه مقدمِ این زنجیره («project was approved») درسته. طبق Modus Ponens، پس تالی («the team starts hiring») هم قطعاً درسته — دقیقاً گزینه‌ی B.</dd>
+      <dt>چی حواس‌پرت‌کنه؟</dt>
+      <dd>گزینه‌های A و C هر دو جهت زنجیره رو برعکس کردن — دقیقاً همون استنتاج نامعتبرِ قدم ۴. گزینه‌ی D هم اصلاً برخلاف گزاره‌ی ۳ است (که صراحتاً گفته پروژه تأیید شده).</dd>
+      <dt>چرا این روش مطمئن‌تره؟</dt>
+      <dd>چون هر دو قانون معتبر (Hypothetical Syllogism و Modus Ponens) رو به‌ترتیب و با دقت به جهتِ فلش‌ها اعمال کردیم، بدون اینکه هیچ‌جا جهت رو برعکس کنیم.</dd>
+    </div>
+  </div>
+
+  <div class="box box-tip">
+    <p class="box-title">🎯 EXAM TIP</p>
+    <p>وقتی چند شرطی زنجیره‌ای دیدی، روی کاغذ (یا در ذهنت) فلش بکش: A → B → C. فقط گزینه‌هایی که هم‌جهت با این فلش‌ها هستن (از A به سمت C) می‌تونن معتبر باشن. هر گزینه‌ای که فلش رو برعکس کنه (C → A)، بدون بررسی بیشتر، رد کن.</p>
+  </div>
+
+  <div class="box box-quick">
+    <p class="box-title">⚡ QUICK METHOD</p>
+    <p>برای چک کردن سریع اینکه یک نتیجه‌گیریِ زنجیره‌ای معتبره یا نه، ببین آیا تالیِ آخرین گزاره‌ی زنجیره، با مقدمِ نتیجه‌ی پیشنهادی یکیه (جهتِ درست) یا برعکس (جهتِ غلط). اگه برعکسه، بدون تحلیل بیشتر مطمئن باش که نامعتبره.</p>
+  </div>
+
+  <div class="box box-mistake">
+    <p class="box-title">⚠️ COMMON MISTAKES</p>
+    <p><strong>اشتباه:</strong> فکر کردن که یک زنجیره‌ی شرطیِ «A → B → C» رو می‌شه برعکس هم خوند، یعنی «C → B → A».</p>
+    <p><strong>چرا اتفاق می‌افته:</strong> وقتی یک زنجیره‌ی علّی یا مرحله‌ای رو می‌بینیم، ذهن به‌طور طبیعی فکر می‌کنه رابطه‌ی «اگر-پس» یک رابطه‌ی دوطرفه و متقارنه — در حالی که (طبق فصل ۴) شرطی اصلاً چنین تقارنی نداره.</p>
+    <p><strong>چطور جلوش رو بگیریم:</strong> همیشه به یاد داشته باش که جهت فلش‌ها مقدس‌ان. نتیجه‌ی معتبر همیشه باید دقیقاً هم‌جهت با فلش‌های داده‌شده باشه، نه برعکسشون.</p>
+  </div>
+
+  <div class="box box-trap">
+    <p class="box-title">🪤 QUESTION TRAP</p>
+    <p>آزمون معمولاً بین گزینه‌ها هم نتیجه‌ی درستِ زنجیره‌ای رو می‌ذاره، هم نسخه‌ی برعکس‌شده‌ی همون رو (که خیلی شبیه به‌نظر می‌رسه ولی نامعتبره). این دو گزینه معمولاً از نظر ظاهری فقط در ترتیب A و C فرق دارن — دقت کن کدوم‌طرف مقدمه و کدوم‌طرف تالیه.</p>
+  </div>
+
+  <div class="box box-remember">
+    <p class="box-title">🧠 MUST REMEMBER</p>
+    <p>Modus Ponens: <code>If A then B, A ⟹ B</code>. Hypothetical Syllogism: <code>If A then B, If B then C ⟹ If A then C</code>. هرگز جهت زنجیره رو برعکس نکن — «If A then B, If B then C» هرگز «If C then A» نمی‌ده.</p>
+  </div>
+
+  <h2><span class="num">📝</span>تمرین</h2>
+
+  <div class="practice-item">
+    <span class="difficulty diff-easy">آسان</span>
+    <div class="en-block">
+      <p class="q">1. If the server crashes, users lose their session. 2. The server crashed. What follows?</p>
+      <ul class="options">
+        <li class="correct">A) Users lost their session.</li>
+        <li>B) The server did not crash.</li>
+        <li>C) If users lose their session, the server crashes.</li>
+        <li>D) Nothing can be concluded.</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: A.</strong> این یک Modus Ponens ساده‌ست: مقدم («server crashes») درسته، پس تالی («users lose their session») هم قطعاً درسته.</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-med">متوسط</span>
+    <div class="en-block">
+      <p class="q">1. If a candidate passes the interview, they receive an offer. 2. If a candidate receives an offer, they are added to payroll. Which conclusion is VALID?</p>
+      <ul class="options">
+        <li>A) "If a candidate is added to payroll, they passed the interview."</li>
+        <li class="correct">B) "If a candidate passes the interview, they are added to payroll."</li>
+        <li>C) "All candidates pass the interview."</li>
+        <li>D) "If a candidate does not pass the interview, they are not added to payroll."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: B.</strong> این دقیقاً Hypothetical Syllogism است — تالیِ گزاره‌ی ۱ («receive an offer») با مقدمِ گزاره‌ی ۲ یکیه، پس زنجیر می‌شن. گزینه‌ی A جهت رو برعکس کرده (دام رایج). گزینه‌ی D هم یک ادعای اضافه‌ست که مستقیماً از این دو گزاره نتیجه نمی‌شه (این در واقع همون inverse فصل ۷ است، نه چیزی که این دو گزاره تضمین کنن).</p>
+    </details>
+  </div>
+
+  <div class="practice-item">
+    <span class="difficulty diff-hard">سخت</span>
+    <div class="en-block">
+      <p class="q">1. If a shipment clears customs, it is loaded onto the truck. 2. If a shipment is loaded onto the truck, it arrives within 3 days. 3. This shipment cleared customs. Which of the following can we conclude with certainty?</p>
+      <ul class="options">
+        <li>A) "This shipment did not arrive within 3 days."</li>
+        <li>B) "If this shipment arrives within 3 days, it cleared customs."</li>
+        <li class="correct">C) "This shipment arrives within 3 days."</li>
+        <li>D) "This shipment was loaded onto the truck, but will not arrive within 3 days."</li>
+      </ul>
+    </div>
+    <details><summary>نمایش پاسخ و توضیح</summary>
+      <p><strong>پاسخ درست: C.</strong> اول با Hypothetical Syllogism، گزاره‌های ۱ و ۲ رو زنجیر می‌کنیم: "If a shipment clears customs, it arrives within 3 days." بعد چون گزاره‌ی ۳ می‌گه این محموله واقعاً گمرک رو رد کرده (مقدم درسته)، طبق Modus Ponens نتیجه می‌گیریم تالی («arrives within 3 days») هم قطعاً درسته. گزینه‌ی B جهت رو برعکس کرده — دقیقاً همون استنتاج نامعتبرِ این فصل. گزینه‌ی D هم خودش با نتیجه‌ی درستِ ما (C) در تناقضه.</p>
+    </details>
+  </div>
+</div>
+
+<div class="review">
+  <div class="page" style="padding:0; margin:0; max-width:780px;">
+    <h2><span class="num">🚀</span>مرور سریع — فصل ۱۲</h2>
+    <div class="review-grid">
+      <div>
+        <h3>مفاهیم اصلی</h3>
+        <ul>
+          <li>Modus Ponens: If A then B, A ⟹ B</li>
+          <li>Hypothetical Syllogism: If A then B, If B then C ⟹ If A then C</li>
+          <li>برعکس کردن زنجیره (C→A) همیشه نامعتبره</li>
+        </ul>
+      </div>
+      <div>
+        <h3>روش</h3>
+        <ul>
+          <li>شرطی‌های هم‌زنجیر رو پیدا و وصل کن.</li>
+          <li>اگه مقدمِ اول واقعیت بود، Modus Ponens رو هم اعمال کن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>اشتباهات رایج</h3>
+        <ul>
+          <li>خوندن زنجیره به‌صورت دوطرفه/متقارن.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>دام‌های تستی</h3>
+        <ul>
+          <li>گزینه‌ی برعکس‌شده‌ی زنجیره، در کنار گزینه‌ی درست.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

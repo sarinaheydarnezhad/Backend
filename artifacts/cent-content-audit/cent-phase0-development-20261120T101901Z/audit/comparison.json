@@ -1,0 +1,2048 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "bundleSha256": "5f5c16c6ab02e019de2604160307ed1e1f9adc734fc94ec840947f36f3f287a9",
+  "bundleImportRecorded": true,
+  "identityRule": "Guid(SHA256(UTF8(\"cent-curriculum-v1:\" + prefixed_key))[0..16]); first GUID fields use .NET little-endian layout",
+  "curriculumPresent": true,
+  "curriculumMatches": true,
+  "summary": [
+    {
+      "kind": "subjects",
+      "table": "cent_courses",
+      "bundled": 5,
+      "database": 5,
+      "exactSemanticMatches": 5,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 0
+    },
+    {
+      "kind": "sources",
+      "table": "cent_sources",
+      "bundled": 39,
+      "database": 39,
+      "exactSemanticMatches": 39,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 0
+    },
+    {
+      "kind": "chapters",
+      "table": "cent_chapters",
+      "bundled": 43,
+      "database": 43,
+      "exactSemanticMatches": 43,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 0
+    },
+    {
+      "kind": "topics",
+      "table": "cent_topics",
+      "bundled": 190,
+      "database": 190,
+      "exactSemanticMatches": 190,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 0
+    },
+    {
+      "kind": "source_sections",
+      "table": "cent_source_sections",
+      "bundled": 430,
+      "database": 430,
+      "exactSemanticMatches": 430,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 0
+    },
+    {
+      "kind": "source_exercises",
+      "table": "cent_source_exercises",
+      "bundled": 666,
+      "database": 666,
+      "exactSemanticMatches": 666,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 0
+    },
+    {
+      "kind": "questions",
+      "table": "cent_questions",
+      "bundled": 819,
+      "database": 819,
+      "exactSemanticMatches": 819,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 0
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "bundled": 39,
+      "database": 48,
+      "exactSemanticMatches": 39,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 9
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "bundled": 5,
+      "database": 14,
+      "exactSemanticMatches": 5,
+      "differing": 0,
+      "missingInDatabase": 0,
+      "databaseOnly": 9
+    }
+  ],
+  "sourceChecks": [
+    {
+      "key": "biology/chapter1-chemical-foundation-fa.html",
+      "databaseSourceId": "4B4FBFB9-896A-1407-073A-A3F6881591FE",
+      "file": "biology/chapter1-chemical-foundation-fa.html",
+      "exists": true,
+      "expectedSha256": "93e489b8640ecaed5fe3d81c4e128ac4d401e1a013e60b45f571ec1026c77eee",
+      "actualSha256": "93e489b8640ecaed5fe3d81c4e128ac4d401e1a013e60b45f571ec1026c77eee",
+      "databaseDeclaredSha256": "93e489b8640ecaed5fe3d81c4e128ac4d401e1a013e60b45f571ec1026c77eee",
+      "databaseHtmlUtf8Sha256": "93e489b8640ecaed5fe3d81c4e128ac4d401e1a013e60b45f571ec1026c77eee",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "biology/chapter2-cell-bioenergetics-fa.html",
+      "databaseSourceId": "62919066-707D-C4CB-C842-529D943E9145",
+      "file": "biology/chapter2-cell-bioenergetics-fa.html",
+      "exists": true,
+      "expectedSha256": "09958373a60356c2381d6d38fe36300bd65f33ad3b03a5a908adbdfe8163008f",
+      "actualSha256": "09958373a60356c2381d6d38fe36300bd65f33ad3b03a5a908adbdfe8163008f",
+      "databaseDeclaredSha256": "09958373a60356c2381d6d38fe36300bd65f33ad3b03a5a908adbdfe8163008f",
+      "databaseHtmlUtf8Sha256": "09958373a60356c2381d6d38fe36300bd65f33ad3b03a5a908adbdfe8163008f",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "biology/chapter3-genetics-fa.html",
+      "databaseSourceId": "044EC217-FC60-4A65-1CE6-36DFABDB96FB",
+      "file": "biology/chapter3-genetics-fa.html",
+      "exists": true,
+      "expectedSha256": "bb4428146992dd4ee9ecde8af3654ca24de4f61ccc0e69ef5b61f13802bd0e24",
+      "actualSha256": "bb4428146992dd4ee9ecde8af3654ca24de4f61ccc0e69ef5b61f13802bd0e24",
+      "databaseDeclaredSha256": "bb4428146992dd4ee9ecde8af3654ca24de4f61ccc0e69ef5b61f13802bd0e24",
+      "databaseHtmlUtf8Sha256": "bb4428146992dd4ee9ecde8af3654ca24de4f61ccc0e69ef5b61f13802bd0e24",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "biology/chapter4-plants-ecology-fa.html",
+      "databaseSourceId": "B4C78CA8-700F-04B6-0772-8E7EA87E1C7E",
+      "file": "biology/chapter4-plants-ecology-fa.html",
+      "exists": true,
+      "expectedSha256": "eaf5ca2875ec28cb1de170d3b40a745676ccf8e6b5dd97805d567ce67c1414e1",
+      "actualSha256": "eaf5ca2875ec28cb1de170d3b40a745676ccf8e6b5dd97805d567ce67c1414e1",
+      "databaseDeclaredSha256": "eaf5ca2875ec28cb1de170d3b40a745676ccf8e6b5dd97805d567ce67c1414e1",
+      "databaseHtmlUtf8Sha256": "eaf5ca2875ec28cb1de170d3b40a745676ccf8e6b5dd97805d567ce67c1414e1",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "biology/chapter5-animal-physiology-fa.html",
+      "databaseSourceId": "9250EAC1-6BD0-1F6E-BBDC-E0A7952F1A21",
+      "file": "biology/chapter5-animal-physiology-fa.html",
+      "exists": true,
+      "expectedSha256": "7fe4018cd7501f83ed2770180a2d70bf5ff31a4a1b27325dbd0c036ac3f5aafd",
+      "actualSha256": "7fe4018cd7501f83ed2770180a2d70bf5ff31a4a1b27325dbd0c036ac3f5aafd",
+      "databaseDeclaredSha256": "7fe4018cd7501f83ed2770180a2d70bf5ff31a4a1b27325dbd0c036ac3f5aafd",
+      "databaseHtmlUtf8Sha256": "7fe4018cd7501f83ed2770180a2d70bf5ff31a4a1b27325dbd0c036ac3f5aafd",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "chemistry/cent-chemistry-ch1-5-deep-1.html",
+      "databaseSourceId": "7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5",
+      "file": "chemistry/cent-chemistry-ch1-5-deep-1.html",
+      "exists": true,
+      "expectedSha256": "e754d153fd8ed2cfc81ed85e2c0123dd42b7af6957dd83478b14323984a1327e",
+      "actualSha256": "e754d153fd8ed2cfc81ed85e2c0123dd42b7af6957dd83478b14323984a1327e",
+      "databaseDeclaredSha256": "e754d153fd8ed2cfc81ed85e2c0123dd42b7af6957dd83478b14323984a1327e",
+      "databaseHtmlUtf8Sha256": "e754d153fd8ed2cfc81ed85e2c0123dd42b7af6957dd83478b14323984a1327e",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/20-final-review.html",
+      "databaseSourceId": "6109430A-B05F-9057-3E64-C69EB1A9D2E7",
+      "file": "logic/20-final-review.html",
+      "exists": true,
+      "expectedSha256": "18a3751be0f0510495b39b30e8ace5c842c94564fda17d955fd341f3d160ebbf",
+      "actualSha256": "18a3751be0f0510495b39b30e8ace5c842c94564fda17d955fd341f3d160ebbf",
+      "databaseDeclaredSha256": "18a3751be0f0510495b39b30e8ace5c842c94564fda17d955fd341f3d160ebbf",
+      "databaseHtmlUtf8Sha256": "18a3751be0f0510495b39b30e8ace5c842c94564fda17d955fd341f3d160ebbf",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch01-foundations-fa.html",
+      "databaseSourceId": "0B42FE17-B855-76B8-08E2-BED445C24111",
+      "file": "logic/ch01-foundations-fa.html",
+      "exists": true,
+      "expectedSha256": "19843c7d72aa04931963a9314b18480dea6f77c425d838e87d795f16266a943e",
+      "actualSha256": "19843c7d72aa04931963a9314b18480dea6f77c425d838e87d795f16266a943e",
+      "databaseDeclaredSha256": "19843c7d72aa04931963a9314b18480dea6f77c425d838e87d795f16266a943e",
+      "databaseHtmlUtf8Sha256": "19843c7d72aa04931963a9314b18480dea6f77c425d838e87d795f16266a943e",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch02-conjunction.html",
+      "databaseSourceId": "00E861CC-37A3-973A-EB9F-622250C58294",
+      "file": "logic/ch02-conjunction.html",
+      "exists": true,
+      "expectedSha256": "f59baac1e9d537edf245f4a42ce05f38b72ed820dde92e26a850bd0e8a2c5bed",
+      "actualSha256": "f59baac1e9d537edf245f4a42ce05f38b72ed820dde92e26a850bd0e8a2c5bed",
+      "databaseDeclaredSha256": "f59baac1e9d537edf245f4a42ce05f38b72ed820dde92e26a850bd0e8a2c5bed",
+      "databaseHtmlUtf8Sha256": "f59baac1e9d537edf245f4a42ce05f38b72ed820dde92e26a850bd0e8a2c5bed",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch03-disjunction.html",
+      "databaseSourceId": "0F2CA150-41C3-0AEE-548B-844AE19755F9",
+      "file": "logic/ch03-disjunction.html",
+      "exists": true,
+      "expectedSha256": "093fdc5a8702df202ecee75d3bc09aa89df9213ba1ef66ed302a6c836c9aa46d",
+      "actualSha256": "093fdc5a8702df202ecee75d3bc09aa89df9213ba1ef66ed302a6c836c9aa46d",
+      "databaseDeclaredSha256": "093fdc5a8702df202ecee75d3bc09aa89df9213ba1ef66ed302a6c836c9aa46d",
+      "databaseHtmlUtf8Sha256": "093fdc5a8702df202ecee75d3bc09aa89df9213ba1ef66ed302a6c836c9aa46d",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch04-conditional.html",
+      "databaseSourceId": "A9B4A6D8-4779-AA00-AFDF-4F3E31DE7DA8",
+      "file": "logic/ch04-conditional.html",
+      "exists": true,
+      "expectedSha256": "b5d0827967a3055ce5165795ef572eb4616b597d903cbe4c08e48c4a074363dd",
+      "actualSha256": "b5d0827967a3055ce5165795ef572eb4616b597d903cbe4c08e48c4a074363dd",
+      "databaseDeclaredSha256": "b5d0827967a3055ce5165795ef572eb4616b597d903cbe4c08e48c4a074363dd",
+      "databaseHtmlUtf8Sha256": "b5d0827967a3055ce5165795ef572eb4616b597d903cbe4c08e48c4a074363dd",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch05-negation.html",
+      "databaseSourceId": "1174E3F6-071A-01D4-C9A8-280BEAB9E5B8",
+      "file": "logic/ch05-negation.html",
+      "exists": true,
+      "expectedSha256": "c0108d5311177f9a5548ac622c1835d446f30ef97c2a067c40a7eea69c4cc59f",
+      "actualSha256": "c0108d5311177f9a5548ac622c1835d446f30ef97c2a067c40a7eea69c4cc59f",
+      "databaseDeclaredSha256": "c0108d5311177f9a5548ac622c1835d446f30ef97c2a067c40a7eea69c4cc59f",
+      "databaseHtmlUtf8Sha256": "c0108d5311177f9a5548ac622c1835d446f30ef97c2a067c40a7eea69c4cc59f",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch06-consistency.html",
+      "databaseSourceId": "C818184C-3433-4055-C8C4-041F88038CB4",
+      "file": "logic/ch06-consistency.html",
+      "exists": true,
+      "expectedSha256": "6110e34551d3c2bbea120f9a1352238e06373c7de82b818fb2b2f22099e244d6",
+      "actualSha256": "6110e34551d3c2bbea120f9a1352238e06373c7de82b818fb2b2f22099e244d6",
+      "databaseDeclaredSha256": "6110e34551d3c2bbea120f9a1352238e06373c7de82b818fb2b2f22099e244d6",
+      "databaseHtmlUtf8Sha256": "6110e34551d3c2bbea120f9a1352238e06373c7de82b818fb2b2f22099e244d6",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch07-negating-compounds.html",
+      "databaseSourceId": "FF7D1F88-D281-635C-9F04-EDAD7FF6B4C3",
+      "file": "logic/ch07-negating-compounds.html",
+      "exists": true,
+      "expectedSha256": "5c65c0b29d5120e7e3d18f1e29b81ed18a3e1e1743c992411a6a22aa3a843cf1",
+      "actualSha256": "5c65c0b29d5120e7e3d18f1e29b81ed18a3e1e1743c992411a6a22aa3a843cf1",
+      "databaseDeclaredSha256": "5c65c0b29d5120e7e3d18f1e29b81ed18a3e1e1743c992411a6a22aa3a843cf1",
+      "databaseHtmlUtf8Sha256": "5c65c0b29d5120e7e3d18f1e29b81ed18a3e1e1743c992411a6a22aa3a843cf1",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch08-equivalents.html",
+      "databaseSourceId": "89252BC7-A012-C58E-BA93-DEEE353C33F9",
+      "file": "logic/ch08-equivalents.html",
+      "exists": true,
+      "expectedSha256": "cd6a39621d6cda884134788392ff844ae15feccbea416685a40b286517974f07",
+      "actualSha256": "cd6a39621d6cda884134788392ff844ae15feccbea416685a40b286517974f07",
+      "databaseDeclaredSha256": "cd6a39621d6cda884134788392ff844ae15feccbea416685a40b286517974f07",
+      "databaseHtmlUtf8Sha256": "cd6a39621d6cda884134788392ff844ae15feccbea416685a40b286517974f07",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch09-necessary-sufficient.html",
+      "databaseSourceId": "2D0B80D9-A16D-5BF5-FD86-DA0844DF0087",
+      "file": "logic/ch09-necessary-sufficient.html",
+      "exists": true,
+      "expectedSha256": "113526898469a26c412f0d10a9a8b6b5ea80d8deb022092a57bd4662ff64efff",
+      "actualSha256": "113526898469a26c412f0d10a9a8b6b5ea80d8deb022092a57bd4662ff64efff",
+      "databaseDeclaredSha256": "113526898469a26c412f0d10a9a8b6b5ea80d8deb022092a57bd4662ff64efff",
+      "databaseHtmlUtf8Sha256": "113526898469a26c412f0d10a9a8b6b5ea80d8deb022092a57bd4662ff64efff",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch10-categorical.html",
+      "databaseSourceId": "040CA2F5-3BDB-8995-C114-54E4EE8F53AC",
+      "file": "logic/ch10-categorical.html",
+      "exists": true,
+      "expectedSha256": "788a04d7769d09fd6858686a50c3e3c68ab917e96e4c1077cfa0772d2dd2dd73",
+      "actualSha256": "788a04d7769d09fd6858686a50c3e3c68ab917e96e4c1077cfa0772d2dd2dd73",
+      "databaseDeclaredSha256": "788a04d7769d09fd6858686a50c3e3c68ab917e96e4c1077cfa0772d2dd2dd73",
+      "databaseHtmlUtf8Sha256": "788a04d7769d09fd6858686a50c3e3c68ab917e96e4c1077cfa0772d2dd2dd73",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch11-square.html",
+      "databaseSourceId": "C567E022-D4EF-F1C6-B839-10579E95365D",
+      "file": "logic/ch11-square.html",
+      "exists": true,
+      "expectedSha256": "dbfd917cf3072fcef2fdae877510b5ce675ee1c6c5a353bdcca387251dfe17ca",
+      "actualSha256": "dbfd917cf3072fcef2fdae877510b5ce675ee1c6c5a353bdcca387251dfe17ca",
+      "databaseDeclaredSha256": "dbfd917cf3072fcef2fdae877510b5ce675ee1c6c5a353bdcca387251dfe17ca",
+      "databaseHtmlUtf8Sha256": "dbfd917cf3072fcef2fdae877510b5ce675ee1c6c5a353bdcca387251dfe17ca",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch12-syllogism.html",
+      "databaseSourceId": "E6007D25-BBE6-F64F-12CC-B488C06B6E83",
+      "file": "logic/ch12-syllogism.html",
+      "exists": true,
+      "expectedSha256": "3a32d3529803c8a684874cf00a9d7c36baccaa1f9da4ad3eeb487f2ac92ae1ee",
+      "actualSha256": "3a32d3529803c8a684874cf00a9d7c36baccaa1f9da4ad3eeb487f2ac92ae1ee",
+      "databaseDeclaredSha256": "3a32d3529803c8a684874cf00a9d7c36baccaa1f9da4ad3eeb487f2ac92ae1ee",
+      "databaseHtmlUtf8Sha256": "3a32d3529803c8a684874cf00a9d7c36baccaa1f9da4ad3eeb487f2ac92ae1ee",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch13-quantifiers.html",
+      "databaseSourceId": "B7E4AFA2-59FC-382C-AFCF-883920732837",
+      "file": "logic/ch13-quantifiers.html",
+      "exists": true,
+      "expectedSha256": "dac4e1b7a6623a935789473efb4ebdf8de4f60bf0ace4b46bac11b82a52d8175",
+      "actualSha256": "dac4e1b7a6623a935789473efb4ebdf8de4f60bf0ace4b46bac11b82a52d8175",
+      "databaseDeclaredSha256": "dac4e1b7a6623a935789473efb4ebdf8de4f60bf0ace4b46bac11b82a52d8175",
+      "databaseHtmlUtf8Sha256": "dac4e1b7a6623a935789473efb4ebdf8de4f60bf0ace4b46bac11b82a52d8175",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch14-barcharts.html",
+      "databaseSourceId": "27C6F8B1-8C19-E424-5E42-F16F99BCAB79",
+      "file": "logic/ch14-barcharts.html",
+      "exists": true,
+      "expectedSha256": "ace929d24b29d83677db6d4ca9ff29e461814b86909271c60af02cff31261017",
+      "actualSha256": "ace929d24b29d83677db6d4ca9ff29e461814b86909271c60af02cff31261017",
+      "databaseDeclaredSha256": "ace929d24b29d83677db6d4ca9ff29e461814b86909271c60af02cff31261017",
+      "databaseHtmlUtf8Sha256": "ace929d24b29d83677db6d4ca9ff29e461814b86909271c60af02cff31261017",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch15-piecharts.html",
+      "databaseSourceId": "24EDDFE0-94BC-8FCA-4158-6E6FD45480FD",
+      "file": "logic/ch15-piecharts.html",
+      "exists": true,
+      "expectedSha256": "0afaf11f0af5aede89e4c6df4d1cde04402af087ff6d4522ddea15e5596f53a0",
+      "actualSha256": "0afaf11f0af5aede89e4c6df4d1cde04402af087ff6d4522ddea15e5596f53a0",
+      "databaseDeclaredSha256": "0afaf11f0af5aede89e4c6df4d1cde04402af087ff6d4522ddea15e5596f53a0",
+      "databaseHtmlUtf8Sha256": "0afaf11f0af5aede89e4c6df4d1cde04402af087ff6d4522ddea15e5596f53a0",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch16-linegraphs.html",
+      "databaseSourceId": "02B0C98C-BFA6-D4CF-B9DA-EECC6F2C5E3D",
+      "file": "logic/ch16-linegraphs.html",
+      "exists": true,
+      "expectedSha256": "615dd9250cc330f4c7d04affbbff1e44a5b9d47938d10472f6a710084f68f47b",
+      "actualSha256": "615dd9250cc330f4c7d04affbbff1e44a5b9d47938d10472f6a710084f68f47b",
+      "databaseDeclaredSha256": "615dd9250cc330f4c7d04affbbff1e44a5b9d47938d10472f6a710084f68f47b",
+      "databaseHtmlUtf8Sha256": "615dd9250cc330f4c7d04affbbff1e44a5b9d47938d10472f6a710084f68f47b",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch17-evaluating.html",
+      "databaseSourceId": "1F9B5357-1054-D852-3665-EAC1BF041AA5",
+      "file": "logic/ch17-evaluating.html",
+      "exists": true,
+      "expectedSha256": "0a3a8b14884124d6cd3e9b8aaedc11e784003e45438d93e54ddf7f440f83d255",
+      "actualSha256": "0a3a8b14884124d6cd3e9b8aaedc11e784003e45438d93e54ddf7f440f83d255",
+      "databaseDeclaredSha256": "0a3a8b14884124d6cd3e9b8aaedc11e784003e45438d93e54ddf7f440f83d255",
+      "databaseHtmlUtf8Sha256": "0a3a8b14884124d6cd3e9b8aaedc11e784003e45438d93e54ddf7f440f83d255",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch18-venn.html",
+      "databaseSourceId": "A6FED340-4FB2-DF1A-F925-63D5D5223CF5",
+      "file": "logic/ch18-venn.html",
+      "exists": true,
+      "expectedSha256": "b01a46b1d326c7b8cf0bcdd481e3f0b7c8ae2b42c6c3f36f863171a96049b000",
+      "actualSha256": "b01a46b1d326c7b8cf0bcdd481e3f0b7c8ae2b42c6c3f36f863171a96049b000",
+      "databaseDeclaredSha256": "b01a46b1d326c7b8cf0bcdd481e3f0b7c8ae2b42c6c3f36f863171a96049b000",
+      "databaseHtmlUtf8Sha256": "b01a46b1d326c7b8cf0bcdd481e3f0b7c8ae2b42c6c3f36f863171a96049b000",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "logic/ch19-tables.html",
+      "databaseSourceId": "3988520F-3CAB-5534-5220-01D13E8437C2",
+      "file": "logic/ch19-tables.html",
+      "exists": true,
+      "expectedSha256": "13b3c38e6e022c691df745c2347965e2a92a90f23c1297f2e4ac1910f359bfe3",
+      "actualSha256": "13b3c38e6e022c691df745c2347965e2a92a90f23c1297f2e4ac1910f359bfe3",
+      "databaseDeclaredSha256": "13b3c38e6e022c691df745c2347965e2a92a90f23c1297f2e4ac1910f359bfe3",
+      "databaseHtmlUtf8Sha256": "13b3c38e6e022c691df745c2347965e2a92a90f23c1297f2e4ac1910f359bfe3",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "math/chapter2.html",
+      "databaseSourceId": "E9A151B7-6771-BD88-21E8-92C20F5BE4FC",
+      "file": "math/chapter2.html",
+      "exists": true,
+      "expectedSha256": "7d29226957fb79e37d3e8f3f95b498d5dd3341fbe924e23fda4f66e5d64c2bb4",
+      "actualSha256": "7d29226957fb79e37d3e8f3f95b498d5dd3341fbe924e23fda4f66e5d64c2bb4",
+      "databaseDeclaredSha256": "7d29226957fb79e37d3e8f3f95b498d5dd3341fbe924e23fda4f66e5d64c2bb4",
+      "databaseHtmlUtf8Sha256": "7d29226957fb79e37d3e8f3f95b498d5dd3341fbe924e23fda4f66e5d64c2bb4",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "math/chapter6-combinatorics-probability.html",
+      "databaseSourceId": "9AD1CEE3-A225-3CCD-7691-660587C34F1A",
+      "file": "math/chapter6-combinatorics-probability.html",
+      "exists": true,
+      "expectedSha256": "90945348f043b8b748672605d766e162e7491c84aea8ce6f10b17004429a8146",
+      "actualSha256": "90945348f043b8b748672605d766e162e7491c84aea8ce6f10b17004429a8146",
+      "databaseDeclaredSha256": "90945348f043b8b748672605d766e162e7491c84aea8ce6f10b17004429a8146",
+      "databaseHtmlUtf8Sha256": "90945348f043b8b748672605d766e162e7491c84aea8ce6f10b17004429a8146",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "math/chapter7-statistics.html",
+      "databaseSourceId": "252303E1-32E1-77F4-D8E2-B3F765C5F480",
+      "file": "math/chapter7-statistics.html",
+      "exists": true,
+      "expectedSha256": "0da4eb5758b297eb6d5ee00c5267def9638661f615fb952370976bbaa56f0244",
+      "actualSha256": "0da4eb5758b297eb6d5ee00c5267def9638661f615fb952370976bbaa56f0244",
+      "databaseDeclaredSha256": "0da4eb5758b297eb6d5ee00c5267def9638661f615fb952370976bbaa56f0244",
+      "databaseHtmlUtf8Sha256": "0da4eb5758b297eb6d5ee00c5267def9638661f615fb952370976bbaa56f0244",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "math/geometry-chapter.html",
+      "databaseSourceId": "FB4BA96D-9049-D967-8C15-D757133E6642",
+      "file": "math/geometry-chapter.html",
+      "exists": true,
+      "expectedSha256": "4b0d843cc6101b3e4fe529968886005c5ea02f11593984f9b7990bdc3f9496b4",
+      "actualSha256": "4b0d843cc6101b3e4fe529968886005c5ea02f11593984f9b7990bdc3f9496b4",
+      "databaseDeclaredSha256": "4b0d843cc6101b3e4fe529968886005c5ea02f11593984f9b7990bdc3f9496b4",
+      "databaseHtmlUtf8Sha256": "4b0d843cc6101b3e4fe529968886005c5ea02f11593984f9b7990bdc3f9496b4",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "math/mastercalss-riazi-fasl1-3.html",
+      "databaseSourceId": "19C7CDBD-2DF8-9F2C-1A05-63D46DE121F4",
+      "file": "math/mastercalss-riazi-fasl1-3.html",
+      "exists": true,
+      "expectedSha256": "f0e83d9eabf9205af6b923f0f57739d28f45b63436b5a2601659807a9087a7bc",
+      "actualSha256": "f0e83d9eabf9205af6b923f0f57739d28f45b63436b5a2601659807a9087a7bc",
+      "databaseDeclaredSha256": "f0e83d9eabf9205af6b923f0f57739d28f45b63436b5a2601659807a9087a7bc",
+      "databaseHtmlUtf8Sha256": "f0e83d9eabf9205af6b923f0f57739d28f45b63436b5a2601659807a9087a7bc",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "math/trig_chapter.html",
+      "databaseSourceId": "BF9D2665-4596-B277-18D4-97F78837DA08",
+      "file": "math/trig_chapter.html",
+      "exists": true,
+      "expectedSha256": "6f1da7b38010545428041b75b20ca513bd3768c0d3b4050ae5e07b4a75af233b",
+      "actualSha256": "6f1da7b38010545428041b75b20ca513bd3768c0d3b4050ae5e07b4a75af233b",
+      "databaseDeclaredSha256": "6f1da7b38010545428041b75b20ca513bd3768c0d3b4050ae5e07b4a75af233b",
+      "databaseHtmlUtf8Sha256": "6f1da7b38010545428041b75b20ca513bd3768c0d3b4050ae5e07b4a75af233b",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "math/فصل۳-توابع.html",
+      "databaseSourceId": "FF202D05-9692-A6E3-39B6-BB651FBA345A",
+      "file": "math/فصل۳-توابع.html",
+      "exists": true,
+      "expectedSha256": "7cd3cf01b2be9e137254ae26d325cac67b81d6b0b5d0f8cb495dba01bfaa84a9",
+      "actualSha256": "7cd3cf01b2be9e137254ae26d325cac67b81d6b0b5d0f8cb495dba01bfaa84a9",
+      "databaseDeclaredSha256": "7cd3cf01b2be9e137254ae26d325cac67b81d6b0b5d0f8cb495dba01bfaa84a9",
+      "databaseHtmlUtf8Sha256": "7cd3cf01b2be9e137254ae26d325cac67b81d6b0b5d0f8cb495dba01bfaa84a9",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "physics/chapter1-physical-quantities.html",
+      "databaseSourceId": "32BC651C-E08E-D293-329A-BF25EA5F804A",
+      "file": "physics/chapter1-physical-quantities.html",
+      "exists": true,
+      "expectedSha256": "40f4e960fe18c035e86104ae59aaa87215106323d05cff649c6b841d2798f585",
+      "actualSha256": "40f4e960fe18c035e86104ae59aaa87215106323d05cff649c6b841d2798f585",
+      "databaseDeclaredSha256": "40f4e960fe18c035e86104ae59aaa87215106323d05cff649c6b841d2798f585",
+      "databaseHtmlUtf8Sha256": "40f4e960fe18c035e86104ae59aaa87215106323d05cff649c6b841d2798f585",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "physics/chapter2-kinematics.html",
+      "databaseSourceId": "03D25309-4471-923F-14E4-2A898A42B10E",
+      "file": "physics/chapter2-kinematics.html",
+      "exists": true,
+      "expectedSha256": "1065b749990e4b119e16c22e316bc7742a988dbaebdd4495f34d5e3f4f4c0775",
+      "actualSha256": "1065b749990e4b119e16c22e316bc7742a988dbaebdd4495f34d5e3f4f4c0775",
+      "databaseDeclaredSha256": "1065b749990e4b119e16c22e316bc7742a988dbaebdd4495f34d5e3f4f4c0775",
+      "databaseHtmlUtf8Sha256": "1065b749990e4b119e16c22e316bc7742a988dbaebdd4495f34d5e3f4f4c0775",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "physics/chapter3-dynamics-work-energy.html",
+      "databaseSourceId": "8F78D75B-1244-01CC-C04F-2BAE4964D664",
+      "file": "physics/chapter3-dynamics-work-energy.html",
+      "exists": true,
+      "expectedSha256": "39fda7c81c250591196781cbcf776a727228c1bd7c900c1d5e280c3b14feedaa",
+      "actualSha256": "39fda7c81c250591196781cbcf776a727228c1bd7c900c1d5e280c3b14feedaa",
+      "databaseDeclaredSha256": "39fda7c81c250591196781cbcf776a727228c1bd7c900c1d5e280c3b14feedaa",
+      "databaseHtmlUtf8Sha256": "39fda7c81c250591196781cbcf776a727228c1bd7c900c1d5e280c3b14feedaa",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "physics/chapter4-pressure.html",
+      "databaseSourceId": "7EA0A24A-3E64-5F99-256B-7B4A6D2F8861",
+      "file": "physics/chapter4-pressure.html",
+      "exists": true,
+      "expectedSha256": "8924057d2126dce162fa7e535f3d06744d9a713c76cc1256a1cdd7f794d62c44",
+      "actualSha256": "8924057d2126dce162fa7e535f3d06744d9a713c76cc1256a1cdd7f794d62c44",
+      "databaseDeclaredSha256": "8924057d2126dce162fa7e535f3d06744d9a713c76cc1256a1cdd7f794d62c44",
+      "databaseHtmlUtf8Sha256": "8924057d2126dce162fa7e535f3d06744d9a713c76cc1256a1cdd7f794d62c44",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "physics/chapter5-thermodynamics.html",
+      "databaseSourceId": "21CA9FB7-D3AE-E03C-923B-6BCC18A11C0F",
+      "file": "physics/chapter5-thermodynamics.html",
+      "exists": true,
+      "expectedSha256": "92471bb682b36d20cb995286fb396627a177e96cf4cd48346145718f1162d108",
+      "actualSha256": "92471bb682b36d20cb995286fb396627a177e96cf4cd48346145718f1162d108",
+      "databaseDeclaredSha256": "92471bb682b36d20cb995286fb396627a177e96cf4cd48346145718f1162d108",
+      "databaseHtmlUtf8Sha256": "92471bb682b36d20cb995286fb396627a177e96cf4cd48346145718f1162d108",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    },
+    {
+      "key": "physics/chapter6-electromagnetism-waves.html",
+      "databaseSourceId": "99E58871-BEAC-5D0B-A94C-E5DF575746DA",
+      "file": "physics/chapter6-electromagnetism-waves.html",
+      "exists": true,
+      "expectedSha256": "3959fbef21f378d7ac288d0d62c7fb52369cdf5ad0e9695aa337ed5c1812cbda",
+      "actualSha256": "3959fbef21f378d7ac288d0d62c7fb52369cdf5ad0e9695aa337ed5c1812cbda",
+      "databaseDeclaredSha256": "3959fbef21f378d7ac288d0d62c7fb52369cdf5ad0e9695aa337ed5c1812cbda",
+      "databaseHtmlUtf8Sha256": "3959fbef21f378d7ac288d0d62c7fb52369cdf5ad0e9695aa337ed5c1812cbda",
+      "rawHtmlMatchesDatabase": true,
+      "checksumMatches": true
+    }
+  ],
+  "optionSerializationOnlyDifferences": [
+    {
+      "table": "cent_source_exercises",
+      "id": "6F3DCAAE-8536-FCBC-D813-F5CA06926EE4",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "52134FDE-9D21-51A1-EA22-40AA82EB9F68",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "88EBFEF2-DA63-87E1-3AF3-1D7BBD039FFF",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "5728BE9B-3D15-90A9-1EFC-F4088351635E",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "5ACE1C78-8743-5872-8CE4-3E982C38E517",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "BFD4DEFA-0766-7BF2-C5A6-1949E56E738D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "69FD6D85-E99A-EEE2-4BA6-E0436124D952",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "A5116EAF-B00D-90ED-1C55-5B126FBBC183",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "2BD55630-E1B2-18F8-646F-C42121B52477",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "284F461D-A93A-B507-B3AA-0ED85C1777C4",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "1AE95848-0DDA-9278-2056-F048CF4858EB",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "35F0317F-8A20-94BD-C18A-F481380FED3A",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "3A033B2A-ACCC-3D46-9BB2-2310DDDD9DA1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "DC415970-1DDD-29A0-205A-3D71901DAA89",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "C18890D9-0548-4CDF-E65B-6FA249F66E11",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "908938CE-5128-3ECB-0D94-610A57C51BAC",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "94A9963E-C9D9-B2EB-CDAD-276DDA19E269",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "EDD7E68F-818F-74D3-5693-8ACC3BE16386",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "51D0565B-ACCE-AAA5-F2D5-2C0142D9E451",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "00BAFEAB-B4ED-40FA-1802-10ECFBC1F86D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "6945EF7B-0B83-A817-B951-255F8F1D2407",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "8B33AD7C-B17D-25F6-2AB9-192B011BED97",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "F890773D-1066-1519-90EA-CE9B16B21345",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "A8F636C1-D3E3-5075-CA52-34D23DF754EB",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "CB502D20-016B-820A-AA25-CC19E501039F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "70A5E396-9484-33B8-81BE-B17D74A14B43",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "7B817118-9C77-179D-F397-DA88D5467880",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "F6E792A3-DCA6-3CB1-905F-A19456DF3FF8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "C3014CBC-EB48-81CE-AB17-79D98EC30071",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "B170734F-7CA9-35DD-509E-3B56D53677D2",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "5A527AAB-D0E6-1C72-1264-0A6E43CEDE52",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "DB6E38E5-75B6-4C34-3180-56EC8F0F945C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "39083C06-B111-E48B-72ED-D40827129D80",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "FE8B1D7E-CCE9-9C30-8720-E32BC888BDDD",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "E4505216-EB06-74B3-3F1E-494AFFD8B635",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "A946839D-7F3A-0937-6C70-6FC0A5EE88E8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "AB02390B-0F10-34BF-CEEA-A8B1843EC78E",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "81B7220F-6A8E-D5EE-012F-9114A3E5E1A3",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "F526C4F7-9B27-F5A8-F7CB-5394AC49B326",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "7E2CFF82-37E6-1B43-77F0-3A5DD6D307F6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "4C3F38AE-98BA-2172-14E4-9E83433F04B9",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "AE2F12F9-3CFE-FD61-C7E6-6D1620E4D0FE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "45265916-40B2-1363-E78E-4E80E7F38785",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "0C3DD0C9-F7B2-B3F9-87B6-FF65AC793431",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "5D4CDE83-816F-C7E4-F461-8BF65A2547CE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "196F22C0-A3C0-F8B9-B6BE-44182880D73E",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "50B7FB8E-555B-BDAB-D80A-47E550991C6D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "6DFD6ED8-86D6-D84C-7720-5BDF33687618",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "8631571E-6866-3C46-0250-3B1D65BE87B8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "B1FF3678-50D6-4651-816D-1ACB7B83CAAF",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "6B38C055-598C-D373-C006-D88140785B3F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "35838691-C03B-B4CF-26DD-78FF7D1F058C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "4064CD8F-05B8-16E7-6DD4-AA69941F6210",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "C398643B-A5A4-46F0-D8FA-A4B036D49DCA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "32B7DD3F-7021-0A69-D61A-A6834E6E8228",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "EE8264FC-10C0-08ED-CD67-718D1DA368E9",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "B5262441-9684-034F-5123-F17A2577BE08",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "F27F835E-1B8A-50A3-9BC2-936205A44F09",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "38C13C46-7084-171F-2BDD-9C2A78702F60",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "DC2E837D-EB2F-A41E-91CD-6D0B39DDA211",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "DCFA57A8-2668-4286-AD19-81B400E5D9AC",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "B55D27DE-2768-3D91-1046-E383719C434B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "A10B327D-D622-4DB7-6D82-1536E4627FC0",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "3081BEB1-72C9-5EC4-183D-CB2DA192F0B0",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "B1EEA362-D1A9-29CF-F589-72AB2C18ACDD",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "194E161C-5506-B659-2E46-E0E09E8F49A2",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "7B0779BF-5649-9797-677A-CC018A57200B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "A572F5D6-5161-6D56-EB3D-D4F899031D39",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "440A309A-70A0-C5BB-CED6-BD5251B50AC1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "C34B171D-DD37-495F-1282-9D22398727DA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "63D22258-6819-C2A6-5DC5-0CA47D2AAD9D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "F6591830-7AB0-CC42-0749-4C7B1457DD49",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "88194C27-DAFE-D864-7A3F-28EACB282B00",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "B79E157E-FCE9-564D-0D5B-7D82B773D97D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "20C81824-3873-A491-D35E-124355BCD49D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "D6FA054D-CE1C-7CAF-5D93-FEE81EE9BFAD",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "94E824FE-590F-04D4-5D4C-3159BD222B6F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "04D9A39D-BEE7-8263-DD8F-967BDBAFD04B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "6DDDDD87-2CAE-3C9D-9A60-16D30C96D051",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "63995E01-2703-0F2B-B328-E7D951C8E33A",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "B86890E2-F031-30B6-712C-D3F9C74110E1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "48DEF554-89AE-AA04-2FC4-8406AFDAE56C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "602382B6-091C-DC62-F31F-95B12458392A",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "2DA5F454-5182-30D0-206E-D116B1B26A68",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "BB129FEE-ED9C-4AA7-AFF0-A85882AB041D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "8AC844E7-ADFE-8391-1FFC-52090624FBA2",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "8855CE8D-2C14-5C40-F5B9-D4195669C428",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "54DC52E7-C918-321A-84CA-E7B4E70DA945",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "03956D5F-699A-AC0C-8C75-5652CC6D7A25",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "A5D36F80-08EE-70DD-8EDC-CD1C8B49D348",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "F7BEFCD5-506F-D12A-A3DE-620AEA7E356F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "F17CB7FC-8BCE-4253-9858-EA952E670190",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "358F11FA-C41A-4BBC-37BB-0CA2059E69E6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "39527293-A34C-26A3-E491-0EB154FBA0C7",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "F9ECD4E1-0509-D007-084A-F6AD09ADCF51",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "2ACFACA0-7556-3AB0-3058-8CF19AC463CA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "AA7F1BEB-6BA0-2041-C27F-F0A78CBA2819",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "4FF7B114-ADF4-8AF5-00ED-53FDDE759DA2",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "882ED41D-F15F-898D-5ADE-BD9B1004C0C9",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "A64A9923-B1D7-8878-B7CF-7786519E98CD",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "963961ED-7C91-DF25-6C70-6C1237ECC9FA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "0BCDC7F0-1176-37D0-DD5B-88331AE190B6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "8A12EBDE-6206-9760-2E9F-AEA5E190CE42",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "07E532AC-CBAC-E0C9-120A-AC3C782311F5",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "0AE78070-2CEE-5C68-74BB-CD4DD031CC72",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "5E3C2696-D6B6-7245-A07C-042799CD0FC5",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "D24EA3E5-3B92-48D7-DCDB-1D1E78BA01BC",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "C0985C01-25D3-90F7-A864-8F09D2EC8B8F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "AD154D3E-77F3-2049-9D17-684400CB16A8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "118E369C-EE6F-304E-27C6-D0F98C89EA90",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "5A92CBD8-0255-FCB0-E470-0390FFB99264",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "42E5F980-92EC-BEE3-A6C5-3C0DD7E1A6F6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_source_exercises",
+      "id": "94DC06E4-08FC-487F-8F01-DC6CD2126954",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "F6443106-676D-F987-696F-128C78B62909",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "752CB042-4BE1-2C4C-629E-9D1F55678924",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "57F67F6B-4686-595E-F639-C25143B9DA84",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "A7E907C1-9E65-5870-F062-16B94B7CB680",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "56DBB3C0-A314-C399-4837-881C812A0C58",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "BF38D14D-2D43-BAD1-0B0F-33F0034F37BB",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "E3084FEA-72E8-D0ED-280A-EC28DBAE4149",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "E6E4F13A-835B-FDB3-4921-C9BA927716F8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "D8B67EBA-E106-A8FB-200D-364824820284",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "7FA0402E-832A-5300-2BAC-B8492C0499EA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "8C1CE48D-85A8-9838-AE7D-F9E3F9DEA414",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "CC1EDEEF-664F-75E1-BE88-BADE0B6B59D6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0BC550D0-F122-4B52-9328-2608046015E1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "62E43082-C69A-4C4A-604A-E7744974BDC7",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0224FCEC-0DD4-8083-415A-9EAAB62E529E",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "A4E998F1-B968-0196-08EC-2237FE8BECFF",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "D46BAFA1-2A0A-7D28-B220-7141339D5999",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "4A68821E-D6F5-2323-39AD-2FE5C0680A7B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "90646CDD-91A9-95FF-4DFA-14208E4038FE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C8F77A97-3EB8-F720-A335-704ABD442F82",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "3FE4A69B-749C-0F1B-2083-C2C6D929A035",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C97C0C9A-9E3A-AC21-18FE-32DAF6D8CD6C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "71379474-F84F-B980-6ED9-D4B165A71A25",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "194F94A0-442E-A5A3-A2CC-59DAB8BC8893",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "A9F87044-69C4-DD0F-80A7-E3A4E056D7A1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "7DED706E-01B7-DB9F-F36F-DD5AAA0BF4F7",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C2DDB9DA-3DE6-201F-5D12-50D360215213",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "F42DBCFA-E226-1D0F-F932-ABB476E7F257",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "ADABDD91-6FC2-5776-FEDC-EE46CAD6EE7C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0356B74F-E5EC-BA4A-C655-31AACB58DD1A",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "D93DAA10-8CA7-5956-8AAB-F66AFC17E6AB",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "A22B967A-2C27-81F1-1BFA-6C75F052F4D1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "89BDEBB7-FB9D-E3D5-6448-6FAE2D65981B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "1758E66B-4A41-65C0-52E5-79A04E0534EB",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "8F8CF982-DE36-5ABB-CE0B-CDDBB78AE1E7",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "FF29E42B-DB96-CFF1-D317-18B58B54EC0C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "32292F3B-F8BB-D149-F602-785D6DBAEBA8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C2709540-87FC-888F-FA02-6EACCF7E36FE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C1D2978E-1A8E-079D-F371-424FC24F5BDE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "8AFCB315-1B1D-BDC4-4DD6-C1E372026F40",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "21052FD1-C224-E4DF-1BE8-F79D028312D8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "BBCE284C-4467-0D65-6E1C-56E9CBD0CCDD",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "CCD5FD9C-B6CA-A87C-8C51-5B32B342E97B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "605F299A-6C89-E4B1-9E02-8040B7FD770F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C6FF52C3-72B6-7239-4627-3CEB7A0A730C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "494F5AB0-9704-5880-9CCF-BAFAE619FFE6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "9EABA741-8801-60EC-B384-575D13CF886F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0951E505-E9B2-C215-B2EE-B7D84A9D4A52",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "CB0A4639-5FA2-3263-E814-A040A499D14C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "4A56A306-E86F-A7BC-4907-4EC74141CC1D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "5532F402-CFBB-8FCC-9824-A6A56544BDEA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "D7160656-5816-6EB2-2F7C-5D404A901938",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0E7BA22F-80B0-E0B7-39C6-4E397B8F1664",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "E3D87108-BADF-B99C-BF8A-250B20FCCCAD",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "A6425456-E57B-13F0-56C6-9ACF8F4D821E",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "037E4B4B-512C-CBBE-8AB8-A157538401E0",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "3689462A-B4E7-0C48-3860-FA844EF621AC",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "3DF237EC-EAC0-71F2-C2A3-CE93E25A2F39",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0ABDFE74-ADF8-B799-1202-20A85FAA23E3",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "E17CDEAE-1357-C3B1-EC63-FABE06D43AA4",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C486EC8D-84FD-3671-BF8F-275F775BE698",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "E08E0249-761A-8E0D-98D8-BA004B6701E8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "B220D394-523E-A52F-C4F9-9AF43F81C384",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "B3FA70BA-BAE0-9659-93B5-F56EA6522D79",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "8FDC761B-8CFB-5501-6EF9-702F6694EA39",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "98217C8A-D489-EBE6-C4B4-C8D6D73BB02D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "22F7971E-DD49-27F1-A41F-8B01CC45AFCA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "F7A4EE90-9C9C-D6A5-61BD-7129A7FDD8E2",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "75B62CED-A485-A269-D8B2-E507F44CD712",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "95427893-ED24-6E0F-6DA0-4B7E57A1ABEC",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "9A5A642B-39F3-A0F7-87C6-371B6743D1EB",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "D60C6F31-75EF-F2D1-9DC9-B05A6A43B881",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "696B9459-060B-5D20-06F7-D183AD1F7A63",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "FEA322FE-A501-2D39-DFE3-1E0DCDC45DAC",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "96775789-2290-3B40-131A-D50D8EC48CF4",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "9BA35CC3-F8A5-20D5-FBED-E7517CDAEDD3",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "811CEE76-3775-FB93-25DC-5F5C48EF98C8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "26CDE949-F9B8-4B15-89DF-CDB8BB15259C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "4B2F6BBA-EAD0-C4D1-8B0D-C40A4B3BDAFE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "94E11458-D776-83F9-EBA0-DDAE0E8F883F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "D2C5A7BB-423C-C516-7E11-495F55FF2E2D",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "1B178901-55D1-D577-93A3-827D3D617520",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "B492EE44-80F8-F211-6969-559892C400C3",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "DA8DFBFB-7B7A-A4FB-CBC9-63AF70D484B9",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "1FAFA75E-4A2B-7695-CA9A-3F1E9E2102E6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "78892DC3-1D62-EFAC-63F8-BE3D371F7097",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "07423CDD-7D47-A6F9-6F69-8C483B544303",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "4672ABC6-557C-7B8F-8A5E-B33AB0BECBA0",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "6CFA4943-BF49-902E-C19A-DCB8C8887D43",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C2B07309-ED0B-8B42-5596-B9EF84BA5D68",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "6392A7A4-1D79-39EE-7C68-4467129962BA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "6C2239E2-FB5E-364E-68AC-F0187D176FC8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "02100EFD-FF23-D222-AC44-CE43F502F3D2",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "7AAB407F-6270-D763-489E-31C20B8676C8",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "849A1E7E-F3A6-D5C9-52D4-9E44AA525706",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "09255E22-E6B4-C276-B052-1D6095BB04ED",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "EFEF9D4E-6AA7-04CD-3D8C-73151AB0DC73",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "EB759758-A341-008E-F76F-908248A1903A",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "FB655AA5-7EF3-9971-078B-62F6D7E39E75",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "5FBEC3E8-22A2-01CB-406E-2E88A953DAA1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C1700BF8-C365-05D2-BC58-5639E24F23DC",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "1096140E-6B79-959F-86E5-0F5FD2BBC6DE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0A12EF14-3531-93DD-B0DC-3E6849A31577",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "93A20980-A82D-74AB-3D37-DC0B5BD34E52",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "5B840C64-8EFA-451C-14E5-91F3EE4EF70B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "79D67F44-F8B7-AFFB-ED63-3B8B8AD60330",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "61AA3D03-9668-A796-ADB7-364349BB94CE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "82231D61-6372-CFB4-C7AE-E9B2DADEAAB4",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0D4AEDD7-DFDE-C469-7841-7943BBC74EC6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "D50B9460-A2DC-DAA8-DD0B-0B6E67657D0F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C9A7DF95-02DD-A2CE-92F2-36527C64C7DA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "47719A6F-8A33-B495-4AF9-6729D696FBEB",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "E29053B6-3D0A-5F61-5FDF-C5729C685075",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "2B91779A-49DB-3348-9179-C7C7B7858AAF",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "290D6C1B-55FB-B1E0-2F69-6619B25DC950",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "8A51D9D6-1BF3-26F7-D37D-578AD519FBFA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "807D7575-D66B-1191-700F-E1B148E30BB9",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "3B85D940-C517-04F6-CAD1-79E014363175",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "D8CF0E86-1811-D63C-EAF9-7459DDD4A3BD",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "A403CA86-0AAB-B05C-6CF9-79EC857A1537",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "FD167EAC-5469-25DD-7837-2A7E0F872BCA",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C7A09920-223E-C014-4B6F-83C06D40399C",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "68CED78E-A714-B630-5DEA-F1B91B2F2E11",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "7B74F3AF-2094-7FF3-6BB5-BF0551865905",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "90582AE0-56F7-433A-731E-25CFF6C5E371",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "14852E8F-0CD7-B8EB-7555-7BF7261ABB6E",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "6E7CF312-CBC6-CFEB-6F4C-01F639B2A0A9",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "6BAFB19D-FCFC-882F-8D67-F756A35199A5",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "F8FAA99B-E6E3-30F1-B301-BEE40B0C24F1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "4ABE461A-55F0-CCA0-2A80-E79CC3DE9DB3",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "82543BA1-B6F3-C4FE-F947-75883EC38D1E",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "DF47FB3D-BD59-DAAD-6AC2-1E99CCB13508",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "8F85381C-949E-5F86-1CB0-CBBECE23145F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "75BE4BE0-ACDF-A3CE-A039-DBDCC82AF85B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "F0B6AC6A-9627-4D7C-17DE-AD349C746D35",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "766A6FFA-B870-ABD4-E733-41A0312C9283",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "2A53D0A4-5D58-4D01-0F66-63796ABDDB35",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "312022FB-9E92-FA5E-0B79-3E5167FE48E9",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "63C81489-7654-BDA3-9801-A17F6A21B733",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "50206625-64C1-B864-9AC0-6F54E46A24A9",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "3902AC14-E94C-2C19-BB3E-7FCF4E8DBB2B",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "E02A3C4A-246E-20A2-327A-9DB15D6FABB4",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0ED2742A-8704-78DE-FDCD-843DA25FAFEE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "A41B8843-EFFA-9A52-D3FB-80424947E661",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "737CA214-5529-2CCB-B5BC-AEA74B3326CF",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "0B3B14CB-1D39-FCC3-E0A1-BC7C22C68E0F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "86B05D79-9D79-F826-7A6C-19B643DB6FB4",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "3EBF6E17-1FC6-394A-3D86-CFAA5CF23D22",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "6BA9D745-C809-516A-BD5B-562BA475D987",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "EC0CFBB1-99B0-A006-0A90-DFEAFC17D201",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "9CD49936-2F12-F8CC-8A77-285B2376F8DF",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "CDAB95AC-EF09-F10A-B6D1-B6F0E52E3D04",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "F63D5F6F-E524-B770-AB33-72BB8AD031EE",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "EA8E7400-1A5B-FF3E-6D4E-4E176B90CE78",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "CEDD2786-3E83-EE00-8E06-B73B2BF874D6",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "F65DB082-A4B1-2F45-80C1-1BB708156DF1",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "311690CC-72E7-99BE-FC5D-7C14B07A7B6F",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "C675E0C8-5325-F8E6-3EC4-5E3DED5FF1DF",
+      "field": "OptionsJson"
+    },
+    {
+      "table": "cent_questions",
+      "id": "5AAEE972-5EC2-EDAB-DEE8-10431E38F13C",
+      "field": "OptionsJson"
+    }
+  ],
+  "differences": [
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+      "status": "database-only"
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+      "status": "database-only"
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "29856693-615D-4665-B11B-98CD6E7E57AD",
+      "status": "database-only"
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "43A380FF-1A22-401B-8729-8449ADC673CB",
+      "status": "database-only"
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+      "status": "database-only"
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E",
+      "status": "database-only"
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+      "status": "database-only"
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+      "status": "database-only"
+    },
+    {
+      "kind": "source_documents",
+      "table": "cent_documents",
+      "id": "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "0B96F1DE-764A-47F7-931B-2FDDFFB3E681",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "21EF91B0-71F2-4BEC-A0ED-C2F5AD24E0B8",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "602AB3A0-D200-4B2D-80E9-DC9157389F92",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "8B53B160-10DB-46CC-9A06-F4F128553B4D",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "AED10460-71F5-4878-A3AD-3E570A9F9AD5",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "CAA10614-F0E6-4F56-84E8-69167147066C",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "EB0BD398-C645-4DD1-B47E-633904D18C67",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "EE17FD5D-ADE1-43A6-8E3B-C61ED983E56A",
+      "status": "database-only"
+    },
+    {
+      "kind": "curriculum_trainings",
+      "table": "cent_trainings",
+      "id": "F271F06A-9425-464D-95D6-55B5452316F1",
+      "status": "database-only"
+    }
+  ],
+  "notes": [
+    "CreatedAt and ImportedAt are runtime metadata, not bundled fields, and are excluded from expected-value comparisons.",
+    "Database-only trainings/documents are preserved as additional development content.",
+    "Source exercise Difficulty and FigureSvg are present in the bundle but are not fields on CentSourceExercise; these values are preserved in bundled/curriculum.json.",
+    "OriginalHtml is compared separately against exact bundled HTML bytes decoded as UTF-8."
+  ]
+}

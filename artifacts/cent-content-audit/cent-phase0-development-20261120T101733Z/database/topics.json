@@ -1,0 +1,1907 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "cent_topics",
+  "recordCount": 190,
+  "records": [
+    {
+      "Id": "0175C3DA-D6BC-2DA1-2B85-76C1808FF7AC",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-08",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "8ماشین‌های گرمایی: توان و بازده (Heat Engines)",
+      "EnglishTitle": "Heat Engines",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "04D69DB4-AEF0-A6C7-28EA-BAACAA494856",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-07",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۵اکوسیستم، زنجیرهٔ غذایی و جریان انرژی",
+      "EnglishTitle": "",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "04F3ACEA-6F1A-736E-B8EC-B73C57203525",
+      "ImportKey": "math/فصل۳-توابع.html#section-09",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "تبدیلات نمودار توابع",
+      "EnglishTitle": "",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "068A5503-C91B-6EB5-87D1-1C73AC34B07F",
+      "ImportKey": "logic/ch15-piecharts.html#topic",
+      "ChapterId": "6D01499C-E650-2C71-A319-AB66703EF1AB",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۵: خواندن نمودارهای دایره‌ای — Reading Pie Charts",
+      "EnglishTitle": "Reading Pie Charts",
+      "SortOrder": 15,
+      "Foundation": 0
+    },
+    {
+      "Id": "06A313B0-9A5C-4CEB-F2BF-A10EADF8CE53",
+      "ImportKey": "math/chapter7-statistics.html#section-02",
+      "ChapterId": "BE3C4869-ADA1-ADAB-9C5B-97109C708681",
+      "CourseCode": "math",
+      "Title": "جامعه و نمونه، انواع متغیرها",
+      "EnglishTitle": "",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "0751AE1D-E70D-02DE-F0AE-7C23C007C748",
+      "ImportKey": "logic/ch08-equivalents.html#topic",
+      "ChapterId": "5C14067E-CCD5-C6B9-4DF9-452788D85C93",
+      "CourseCode": "logic",
+      "Title": "فصل ۸: معادل‌های شرطی — Equivalent Forms of \"If A then B\"",
+      "EnglishTitle": "Equivalent Forms of",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "077D92A5-5E2F-DF1D-3EFE-DE61B88E8C4E",
+      "ImportKey": "math/chapter6-combinatorics-probability.html#section-05",
+      "ChapterId": "09021632-43BF-CBDB-7DBF-6DC057AC0D47",
+      "CourseCode": "math",
+      "Title": "فضای نمونه، پیشامد و احتمال پایه",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "07F881DA-3FA0-F44E-661D-A7E0B6D6F097",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-09",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "9نیروی اصطکاک (Friction)",
+      "EnglishTitle": "Friction",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "09A8C98C-E431-0511-3BDF-FFA43F59ACC7",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-01",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "1متغیرهای حالت و معادلهٔ گاز کامل (State Variables & Ideal Gas Law)",
+      "EnglishTitle": "State Variables & Ideal Gas Law",
+      "SortOrder": 1,
+      "Foundation": 0
+    },
+    {
+      "Id": "0A1C5171-5551-C990-DC7B-529FD431D3A8",
+      "ImportKey": "math/chapter2.html#section-13",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "معادلهٔ دایره (Equation of a Circle)",
+      "EnglishTitle": "Equation of a Circle",
+      "SortOrder": 13,
+      "Foundation": 0
+    },
+    {
+      "Id": "0A2E34B1-2856-410A-6217-BCF80EAE1FFC",
+      "ImportKey": "math/chapter7-statistics.html#section-03",
+      "ChapterId": "BE3C4869-ADA1-ADAB-9C5B-97109C708681",
+      "CourseCode": "math",
+      "Title": "جدول‌های فراوانی",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "0AB16247-0394-8552-6BED-7850266F1646",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-06",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۴دستگاه درون‌ریز و تنظیم قند خون",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "0BB0A7B0-1555-6AE6-6A1D-2223083F007F",
+      "ImportKey": "math/chapter2.html#section-02",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "معادلات درجهٔ یک (Linear Equations)",
+      "EnglishTitle": "Linear Equations",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "0D17D69C-ECAC-E35F-6E5F-C87FD344AC21",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#section-01",
+      "ChapterId": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "CourseCode": "physics",
+      "Title": "1بار الکتریکی، رسانا و عایق (Charge, Conductors & Insulators)",
+      "EnglishTitle": "Charge, Conductors & Insulators",
+      "SortOrder": 1,
+      "Foundation": 0
+    },
+    {
+      "Id": "0DA2F53E-551E-84E4-44E7-82C79C43FCDA",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-11",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۹دستگاه ایمنی",
+      "EnglishTitle": "",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "0DC06989-5CB5-FD3E-49E2-CD7BF3844AF7",
+      "ImportKey": "math/trig_chapter.html#section-03",
+      "ChapterId": "B7E9FC82-7E37-9C83-14F4-075F4B9671C2",
+      "CourseCode": "math",
+      "Title": "نسبت‌های مثلثاتی در مثلث قائم‌الزاویه",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "0EC3B515-DC4F-39D0-08B8-35CC26AFA459",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-02",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "2یکاهای پایه و مشتق SI (SI Units)",
+      "EnglishTitle": "SI (SI Units",
+      "SortOrder": 2,
+      "Foundation": 1
+    },
+    {
+      "Id": "0F228A63-7FE8-E532-42D8-EB7D48B2A42C",
+      "ImportKey": "logic/ch03-disjunction.html#topic",
+      "ChapterId": "74C76D87-B10A-FC12-22CA-7BBCE457B58F",
+      "CourseCode": "logic",
+      "Title": "فصل ۳: فصل — «A or B» (Disjunction)",
+      "EnglishTitle": "A or B",
+      "SortOrder": 3,
+      "Foundation": 1
+    },
+    {
+      "Id": "112B598C-C08D-1FD2-2531-F5D387B10F20",
+      "ImportKey": "physics/chapter2-kinematics.html#section-10",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "10معادلات حرکت با شتاب ثابت (Constant-Acceleration Equations)",
+      "EnglishTitle": "Constant-Acceleration Equations",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "11ECE97E-6CB5-A8AA-68B9-FD269C7AE1B5",
+      "ImportKey": "logic/ch09-necessary-sufficient.html#topic",
+      "ChapterId": "1B9F9E73-DCC2-56A9-79C8-3B61C31FD9C7",
+      "CourseCode": "logic",
+      "Title": "فصل ۹: شرط لازم و کافی — Necessary and Sufficient Conditions",
+      "EnglishTitle": "Necessary and Sufficient Conditions",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "13944C0F-AA3A-EDC4-04A2-F03E99A72C30",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-14",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "14نیروی مرکزگرا (Centripetal Force)",
+      "EnglishTitle": "Centripetal Force",
+      "SortOrder": 14,
+      "Foundation": 0
+    },
+    {
+      "Id": "14C70AA2-7785-D3DF-F4CB-ACFE16DB2213",
+      "ImportKey": "logic/ch17-evaluating.html#topic",
+      "ChapterId": "FE7415D5-DA50-CCAA-D111-283A46248634",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۷: نتیجه‌گیری و ارزیابیِ ادعاها — Drawing Conclusions & Evaluating Claims",
+      "EnglishTitle": "Drawing Conclusions & Evaluating Claims",
+      "SortOrder": 17,
+      "Foundation": 0
+    },
+    {
+      "Id": "157EA9FC-2ED3-5676-1C07-CE91C57DC0DF",
+      "ImportKey": "physics/chapter4-pressure.html#section-06",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "6سانتی‌متر جیوه: یکای خاص فشار (cmHg)",
+      "EnglishTitle": "cmHg",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "1A9577F6-E8D8-68FC-CDBE-716E3CD13698",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-03",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "3همگنی معادلات فیزیکی (Homogeneity)",
+      "EnglishTitle": "Homogeneity",
+      "SortOrder": 3,
+      "Foundation": 1
+    },
+    {
+      "Id": "1AE4320B-98E6-8F98-E6C9-3542B30CBC26",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#section-07",
+      "ChapterId": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "CourseCode": "biology",
+      "Title": "۵انرژی‌شناسی زیستی: متابولیسم و ATP",
+      "EnglishTitle": "ATP",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "1CDE6105-4E86-5A1A-60C3-E933C5AA7D62",
+      "ImportKey": "logic/ch11-square.html#topic",
+      "ChapterId": "FAFDCCF6-05DF-2E2E-9B0A-04DE276D7E3B",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۱: مربع تعارض — Square of Opposition",
+      "EnglishTitle": "Square of Opposition",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "1D27CC8A-8D2F-51CC-D074-71EC3856F8B0",
+      "ImportKey": "math/chapter7-statistics.html#section-04",
+      "ChapterId": "BE3C4869-ADA1-ADAB-9C5B-97109C708681",
+      "CourseCode": "math",
+      "Title": "نمودارها",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "1E98878F-2E92-4B30-E0A8-4A9C60CD5571",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#section-08",
+      "ChapterId": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "CourseCode": "physics",
+      "Title": "8طیف الکترومغناطیسی (Electromagnetic Spectrum)",
+      "EnglishTitle": "Electromagnetic Spectrum",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "1F836C92-840A-8C4A-7CD4-8211CE13B1A8",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-11",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۹وراثت مندلی",
+      "EnglishTitle": "",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "20281958-B4F4-D891-5CD8-155CDF8F4FB3",
+      "ImportKey": "physics/chapter2-kinematics.html#section-02",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "2سرعت متوسط و تندی متوسط (Average Velocity & Speed)",
+      "EnglishTitle": "Average Velocity & Speed",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "20CF1252-6F9C-5208-F00B-37F64BB67106",
+      "ImportKey": "math/chapter7-statistics.html#section-05",
+      "ChapterId": "BE3C4869-ADA1-ADAB-9C5B-97109C708681",
+      "CourseCode": "math",
+      "Title": "شاخص‌های مرکزی: میانگین، میانه و مد",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "22DD9953-E054-8DA2-0C9C-EA7B21A3B2A6",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-06",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "6فرایند بی‌دررو (آدیاباتیک) (Adiabatic Process)",
+      "EnglishTitle": "Adiabatic Process",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "2499AFF2-B445-6E20-0F69-AF15886E44A6",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#section-10",
+      "ChapterId": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "CourseCode": "biology",
+      "Title": "۸ارتباط سلولی و آپوپتوز",
+      "EnglishTitle": "",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "259D8486-034E-15EA-83E5-D3086B74055B",
+      "ImportKey": "math/chapter2.html#section-04",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "معادلات درجهٔ دو (Quadratic Equations)",
+      "EnglishTitle": "Quadratic Equations",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "2BD93CC5-6E88-3BBE-D7CF-97473E27E664",
+      "ImportKey": "math/chapter2.html#section-06",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "نامعادلات درجهٔ دو (Quadratic Inequalities)",
+      "EnglishTitle": "Quadratic Inequalities",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "3099FD95-E795-F3F3-0125-3B1395AE644A",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#section-04",
+      "ChapterId": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "CourseCode": "physics",
+      "Title": "4جریان الکتریکی (Electric Current)",
+      "EnglishTitle": "Electric Current",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "348CB3EB-AA3A-DD92-C61F-7C3808630AF9",
+      "ImportKey": "math/trig_chapter.html#section-08",
+      "ChapterId": "B7E9FC82-7E37-9C83-14F4-075F4B9671C2",
+      "CourseCode": "math",
+      "Title": "توابع مثلثاتی: نمودار، دامنه و برد",
+      "EnglishTitle": "",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "365580B2-7FF9-A23C-9134-339AF78DB5FB",
+      "ImportKey": "physics/chapter2-kinematics.html#section-04",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "4علامت مکان و علامت سرعت (Sign Convention)",
+      "EnglishTitle": "Sign Convention",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "36E8B2A0-1CBB-ED67-798C-958E2F88DB74",
+      "ImportKey": "math/chapter6-combinatorics-probability.html#section-02",
+      "ChapterId": "09021632-43BF-CBDB-7DBF-6DC057AC0D47",
+      "CourseCode": "math",
+      "Title": "اصل ضرب و اصل متمم",
+      "EnglishTitle": "",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "38AAD899-8B24-A698-53E6-2F1DF8942B50",
+      "ImportKey": "physics/chapter2-kinematics.html#section-08",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "8نمودار سرعت–زمان (Velocity–Time Graph)",
+      "EnglishTitle": "Velocity–Time Graph",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "3959340C-71CD-6BCC-C157-E88538039D14",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-06",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۴ترجمه، کد ژنتیکی و جهش‌ها",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "3C1BE244-A742-CF98-BBE7-CC56A77817AF",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-07",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۵دستگاه گردش خون",
+      "EnglishTitle": "",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "3ED40B21-22E2-6A14-B51E-3E262A7F226C",
+      "ImportKey": "logic/ch06-consistency.html#topic",
+      "ChapterId": "6E29F749-DB18-E639-6B1E-C3267756CD3C",
+      "CourseCode": "logic",
+      "Title": "فصل ۶: سازگاری و ناسازگاری — Consistency vs Inconsistency",
+      "EnglishTitle": "Consistency vs Inconsistency",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "3F7E203F-DF36-A0A2-58DC-0927A386EF72",
+      "ImportKey": "math/chapter6-combinatorics-probability.html#section-06",
+      "ChapterId": "09021632-43BF-CBDB-7DBF-6DC057AC0D47",
+      "CourseCode": "math",
+      "Title": "قوانین احتمال",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "410AD063-F209-0676-AD59-2237FEB0F1FF",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-02",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "2کار نیروی وزن و اصطکاک (Work of Weight & Friction)",
+      "EnglishTitle": "Work of Weight & Friction",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "42BB73AE-B303-0A55-664E-DF695AF05F32",
+      "ImportKey": "math/فصل۳-توابع.html#section-11",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "حل معادله و نامعادله با نمودار — تعیین علامت کامل",
+      "EnglishTitle": "",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "45152A19-B9B1-B7B2-EF0D-EE83D5F0154D",
+      "ImportKey": "math/trig_chapter.html#section-04",
+      "ChapterId": "B7E9FC82-7E37-9C83-14F4-075F4B9671C2",
+      "CourseCode": "math",
+      "Title": "دایرهٔ مثلثاتی، علامت نسبت‌ها و زوایای ویژه",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "4599E1D9-C8F3-1165-C701-FF207899E1C0",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-13",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "13نیروی گرانشی و شتاب گرانشی (Gravitation)",
+      "EnglishTitle": "Gravitation",
+      "SortOrder": 13,
+      "Foundation": 0
+    },
+    {
+      "Id": "49A87EC8-F364-0A55-1262-8F9EC44D79F7",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-04",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "4فرایند هم‌دما (Isothermal Process)",
+      "EnglishTitle": "Isothermal Process",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "4A4E9F67-2633-1582-550E-F9012B81BABA",
+      "ImportKey": "biology/chapter1-chemical-foundation-fa.html#section-10",
+      "ChapterId": "9FDD3B2E-A297-7848-72D3-A1D3D22F0291",
+      "CourseCode": "biology",
+      "Title": "۶پروتئین‌ها و اسیدهای نوکلئیک در عمق",
+      "EnglishTitle": "",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "4C64920F-4C48-DC55-4576-58395BFE2CA9",
+      "ImportKey": "physics/chapter4-pressure.html#section-11",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "11بارومتر: فشارسنج هوا (Barometer)",
+      "EnglishTitle": "Barometer",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "515A9EA8-AE74-14E3-D9E3-0F1B240E88C4",
+      "ImportKey": "logic/ch14-barcharts.html#topic",
+      "ChapterId": "7CE953C5-B6CA-3789-4649-D089C88FCC16",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۴: خواندن نمودارهای میله‌ای — Reading Bar Charts",
+      "EnglishTitle": "Reading Bar Charts",
+      "SortOrder": 14,
+      "Foundation": 0
+    },
+    {
+      "Id": "536D0F93-236E-9945-FAEA-5A8504DBEB71",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-11",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "11نیروی کشش نخ (Tension)",
+      "EnglishTitle": "Tension",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "55FBDA4B-9CD1-3CAB-5C91-4ECF9A67FF33",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-04",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۲گل، میوه و دانه",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "5889003D-5BAD-F198-B63E-BB0D0A183572",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-03",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۱ژنوم و سازمان کروموزوم‌ها",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "5C3C4A60-321C-24C0-A845-C1EF3D7C8B23",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-06",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "بخش‌پذیری اعداد (Divisibility Rules)",
+      "EnglishTitle": "Divisibility Rules",
+      "SortOrder": 6,
+      "Foundation": 1
+    },
+    {
+      "Id": "5CA66134-E548-6626-D84B-7D2585A7B61D",
+      "ImportKey": "physics/chapter4-pressure.html#section-04",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "4فشار ناشی از وزن اجسام جامد (Pressure from Solid Weight)",
+      "EnglishTitle": "Pressure from Solid Weight",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "5D555010-46A2-847B-7098-BA2956D0735E",
+      "ImportKey": "physics/chapter4-pressure.html#section-14",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "14آهنگ شارش حجمی، پیوستگی و برنولی (Continuity & Bernoulli)",
+      "EnglishTitle": "Continuity & Bernoulli",
+      "SortOrder": 14,
+      "Foundation": 0
+    },
+    {
+      "Id": "5DBD8DBC-CFF1-AB10-1D57-33C6D98C4262",
+      "ImportKey": "physics/chapter4-pressure.html#section-01",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "1حالت‌های ماده (States of Matter)",
+      "EnglishTitle": "States of Matter",
+      "SortOrder": 1,
+      "Foundation": 0
+    },
+    {
+      "Id": "5DDBA5FA-0E1F-3988-9B7F-8D7E5D0582E4",
+      "ImportKey": "biology/chapter1-chemical-foundation-fa.html#section-05",
+      "ChapterId": "9FDD3B2E-A297-7848-72D3-A1D3D22F0291",
+      "CourseCode": "biology",
+      "Title": "۱ماده و انرژی: اتم، ایزوتوپ، الکترون ظرفیت و پیوندها",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 1
+    },
+    {
+      "Id": "5E8633BA-6A3F-0F16-B60C-4D3B21AE37A5",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-05",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "5توان‌های ده، نماد علمی و مرتبهٔ بزرگی (Powers of Ten)",
+      "EnglishTitle": "Powers of Ten",
+      "SortOrder": 5,
+      "Foundation": 1
+    },
+    {
+      "Id": "5EFFB83E-D0CA-AA63-CDAE-3D330F1E48BE",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#section-04",
+      "ChapterId": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "CourseCode": "biology",
+      "Title": "۲غشای سلولی و انتقال مواد",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "6077D4D2-E21A-D02F-4185-87D7FCA6F9C5",
+      "ImportKey": "math.algebraic-expressions",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "عبارت‌های جبری",
+      "EnglishTitle": "Algebraic expressions",
+      "SortOrder": 11,
+      "Foundation": 1
+    },
+    {
+      "Id": "675B6883-B9FA-8B47-0C43-068636BE1B77",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-03",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "3فرایند هم‌حجم (Isochoric Process)",
+      "EnglishTitle": "Isochoric Process",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "6859547B-6597-F627-EC13-F153BF1866FF",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-05",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "5فرایند هم‌فشار (Isobaric Process)",
+      "EnglishTitle": "Isobaric Process",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "68B8C5BB-70F6-31CD-C2D9-651959907051",
+      "ImportKey": "physics/chapter2-kinematics.html#section-03",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "3حرکت یکنواخت روی خط راست (Uniform Motion)",
+      "EnglishTitle": "Uniform Motion",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "68FCAC9C-E5CB-9A4E-2220-C33C150AB3A3",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#section-04",
+      "ChapterId": "83E01CD6-0EDD-6202-2C1F-27338A11CF1F",
+      "CourseCode": "chemistry",
+      "Title": "مخلوط‌های همگن و ناهمگن؛ روش‌های جداسازی",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 1
+    },
+    {
+      "Id": "6989A4BB-1180-ED92-B409-9308763C3C15",
+      "ImportKey": "math/trig_chapter.html#section-07",
+      "ChapterId": "B7E9FC82-7E37-9C83-14F4-075F4B9671C2",
+      "CourseCode": "math",
+      "Title": "معادلات مثلثاتی",
+      "EnglishTitle": "",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "6A11DC6C-D936-5213-F08F-22FF5B6576F9",
+      "ImportKey": "math/geometry-chapter.html#section-06",
+      "ChapterId": "E0D44BD3-5CDD-C99F-EDFB-773CC9F08131",
+      "CourseCode": "math",
+      "Title": "تشابه اشکال و مختصات دکارتی",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "6AB1CF4F-B0C5-E780-DB53-B88771373893",
+      "ImportKey": "math/chapter2.html#section-05",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "آشنایی با تعیین علامت (Sign Analysis)",
+      "EnglishTitle": "Sign Analysis",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "6AC93CC0-E598-91FF-0685-87ECA3DA1606",
+      "ImportKey": "physics/chapter2-kinematics.html#section-01",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "1مکان، جابه‌جایی و مسافت (Position, Displacement & Distance)",
+      "EnglishTitle": "Position, Displacement & Distance",
+      "SortOrder": 1,
+      "Foundation": 0
+    },
+    {
+      "Id": "6B958E8C-0453-E9F8-4DEE-AECB8A623053",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#section-08",
+      "ChapterId": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "CourseCode": "biology",
+      "Title": "۶تنفس سلولی: از گلوکز به ATP",
+      "EnglishTitle": "ATP",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "6BF5017E-FD9B-9697-B0DC-F70588567617",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-03",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۱اندام‌ها و بافت‌های گیاه: ریشه، ساقه، برگ",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "72CD907F-DF36-A992-A29A-23899A73AE63",
+      "ImportKey": "physics/chapter4-pressure.html#section-07",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "7نیروی وارد از مایع به کف ظرف (Force on Container Base)",
+      "EnglishTitle": "Force on Container Base",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "73058EE7-0D77-1470-79EB-A64A90CE3CAB",
+      "ImportKey": "biology/chapter1-chemical-foundation-fa.html#section-09",
+      "ChapterId": "9FDD3B2E-A297-7848-72D3-A1D3D22F0291",
+      "CourseCode": "biology",
+      "Title": "۵آب‌دوستی و آب‌گریزی، کربوهیدرات‌ها و لیپیدها",
+      "EnglishTitle": "",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "733415F2-23FF-209F-5FB7-206618F3EBCB",
+      "ImportKey": "math/chapter7-statistics.html#section-06",
+      "ChapterId": "BE3C4869-ADA1-ADAB-9C5B-97109C708681",
+      "CourseCode": "math",
+      "Title": "شاخص‌های پراکندگی",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "7582C863-A92C-1185-1F59-C59A6E52AE1A",
+      "ImportKey": "math/geometry-chapter.html#section-04",
+      "ChapterId": "E0D44BD3-5CDD-C99F-EDFB-773CC9F08131",
+      "CourseCode": "math",
+      "Title": "دایره",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "76B365DD-72BF-763D-C86A-F59A718068E6",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-05",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۳دستگاه عصبی: پتانسیل عمل و سیناپس",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "77046236-B43B-4F61-09CA-FA57E760750B",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#section-03",
+      "ChapterId": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "CourseCode": "physics",
+      "Title": "3میدان الکتریکی (Electric Field)",
+      "EnglishTitle": "Electric Field",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "77694045-6A8D-A5C1-02E8-EC90F7D81A8B",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-01",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "1کمیت فیزیکی چیست؟ (Physical Quantity)",
+      "EnglishTitle": "Physical Quantity",
+      "SortOrder": 1,
+      "Foundation": 1
+    },
+    {
+      "Id": "7793D950-1609-1330-F594-708E42AE9DFB",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-09",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "9یخچال‌ها (Refrigerators)",
+      "EnglishTitle": "Refrigerators",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "78C092E7-5C32-92A7-9F8D-82F24FFFEBD9",
+      "ImportKey": "math/chapter2.html#section-07",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "دستگاه معادلات دو مجهولی (System of Equations)",
+      "EnglishTitle": "System of Equations",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "79BA8728-9BF6-3CC0-7297-9859672FDB37",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-08",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۶چرخهٔ مواد: کربن و نیتروژن",
+      "EnglishTitle": "",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "79BC368D-0E70-A098-F148-709A8804AAAD",
+      "ImportKey": "logic/ch13-quantifiers.html#topic",
+      "ChapterId": "E5C9B6EE-50FA-6C46-C32F-BC70706D41C0",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۳: نقیض گزاره‌های کمّی — Negating Universal & Existential Statements",
+      "EnglishTitle": "Negating Universal & Existential Statements",
+      "SortOrder": 13,
+      "Foundation": 0
+    },
+    {
+      "Id": "7A8032FD-0154-1490-F5F4-1A8D8E58FE8A",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-04",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۲همانندسازی DNA",
+      "EnglishTitle": "DNA",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "7ABB2DE5-5B34-FC5E-22E2-5DF3D0FC9A68",
+      "ImportKey": "math/فصل۳-توابع.html#section-02",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "مفهوم تابع، دامنه، برد و ویژگی‌های پایه",
+      "EnglishTitle": "",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "7B6881AF-8671-5B5F-6C2B-86AF26FB8AE8",
+      "ImportKey": "biology/chapter1-chemical-foundation-fa.html#section-08",
+      "ChapterId": "9FDD3B2E-A297-7848-72D3-A1D3D22F0291",
+      "CourseCode": "biology",
+      "Title": "۴جزئیات درشت‌مولکول‌ها: پروتئین، اسید نوکلئیک، لیپید و بیشتر",
+      "EnglishTitle": "",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "7E6B813D-1566-F136-298E-D090684FE92C",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-03",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۱بافت‌ها و هومئوستاز",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "7FDA1CEC-3341-77A8-1BC5-ED72A9746CB8",
+      "ImportKey": "physics/chapter4-pressure.html#section-12",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "12فشار پیمانه‌ای (Gauge Pressure)",
+      "EnglishTitle": "Gauge Pressure",
+      "SortOrder": 12,
+      "Foundation": 0
+    },
+    {
+      "Id": "7FE8D33F-FFCB-19A3-8EEF-C6FF7B7F53C8",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-07",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "درصدها: زبان تغییرات",
+      "EnglishTitle": "",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "8055C704-DC4D-85A0-FD60-856FF4BF0400",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-07",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "7مقایسهٔ فرایندهای ترمودینامیکی خاص (Comparing the Four Processes)",
+      "EnglishTitle": "Comparing the Four Processes",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "805BB3EF-DE5F-40FA-360C-8C401A77E6E7",
+      "ImportKey": "physics/chapter2-kinematics.html#section-07",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "7نمودار مکان–زمان (Position–Time Graph)",
+      "EnglishTitle": "Position–Time Graph",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "82A1BF52-141E-35DB-64CF-1556C0C7AC2F",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-02",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "2قانون اول ترمودینامیک: گرما، کار و انرژی درونی (First Law)",
+      "EnglishTitle": "First Law",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "853BC396-C475-A39A-56D4-E2F399339855",
+      "ImportKey": "physics/chapter4-pressure.html#section-13",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "13نیروی شناوری (Buoyancy)",
+      "EnglishTitle": "Buoyancy",
+      "SortOrder": 13,
+      "Foundation": 0
+    },
+    {
+      "Id": "87C979F4-8AEA-5866-7325-E40381CB90DD",
+      "ImportKey": "math/trig_chapter.html#section-05",
+      "ChapterId": "B7E9FC82-7E37-9C83-14F4-075F4B9671C2",
+      "CourseCode": "math",
+      "Title": "فرمول‌های تبدیل زاویه (زوایای وتری)",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "88B413C9-0A40-432D-1C5E-634BDCC61D54",
+      "ImportKey": "math/geometry-chapter.html#section-03",
+      "ChapterId": "E0D44BD3-5CDD-C99F-EDFB-773CC9F08131",
+      "CourseCode": "math",
+      "Title": "مثلث و چندضلعی‌ها",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "8A081DCC-ADFE-58E5-D694-D5202EBB0344",
+      "ImportKey": "logic/ch18-venn.html#topic",
+      "ChapterId": "9F2CE0B5-0DA0-FF1F-2EEA-B4FBAD480B30",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۸: حل مسئله با نمودار ون — Venn Diagram Word Problems",
+      "EnglishTitle": "Venn Diagram Word Problems",
+      "SortOrder": 18,
+      "Foundation": 0
+    },
+    {
+      "Id": "8BB969C2-79F5-AAD2-6D43-CA1668AC942F",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#section-07",
+      "ChapterId": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "CourseCode": "physics",
+      "Title": "7امواج: نور و صدا (Waves: Light & Sound)",
+      "EnglishTitle": "Waves",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "8C408399-DC9A-A2E5-B3E2-9CC919CA934E",
+      "ImportKey": "physics/chapter2-kinematics.html#section-09",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "9نمودار شتاب–زمان (Acceleration–Time Graph)",
+      "EnglishTitle": "Acceleration–Time Graph",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "8D0D492E-2C3C-E47C-9C25-5CA153BC8E32",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#section-03",
+      "ChapterId": "DB093E0B-5EF6-7206-FEA6-755C64448527",
+      "CourseCode": "chemistry",
+      "Title": "خواص ماکروسکوپیک گازها، مایعات و جامدات",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 1
+    },
+    {
+      "Id": "8D56BC33-9A9E-CCAB-4E16-B23460722BCA",
+      "ImportKey": "physics/chapter5-thermodynamics.html#section-10",
+      "ChapterId": "C68FE75D-3A1F-FEC1-9BCF-04814DBED7B6",
+      "CourseCode": "physics",
+      "Title": "10گرما، گرمای ویژه و تغییر فاز (Heat, Specific Heat & Phase Change)",
+      "EnglishTitle": "Heat, Specific Heat & Phase Change",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "8F525E4B-411A-95A9-8701-6832889126E0",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-05",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "عوامل، مضرب‌ها، اعداد اول و تجزیه",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 1
+    },
+    {
+      "Id": "910A32E8-36E5-7109-9ECF-EBFEA7843F6D",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#section-05",
+      "ChapterId": "1A10C253-A6B2-C26E-0D98-412370F69B6A",
+      "CourseCode": "chemistry",
+      "Title": "قوانین بنیادی شیمی",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 1
+    },
+    {
+      "Id": "9192A9BD-E54A-0DC4-4780-B1ECB79BDB38",
+      "ImportKey": "logic/ch05-negation.html#topic",
+      "ChapterId": "AD2CFB7C-5C1E-8AB5-D07F-57B46C072F00",
+      "CourseCode": "logic",
+      "Title": "فصل ۵: نقیض و تضاد — «not-A» (Negation, Contradictories & Contraries)",
+      "EnglishTitle": "not-A",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "921D360E-D200-2C63-3260-84383C87D246",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-08",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "8ابزارهای اندازه‌گیری و رزولوشن (Measuring Instruments)",
+      "EnglishTitle": "Measuring Instruments",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "923AA894-4842-05A3-7221-A4252DB6682A",
+      "ImportKey": "math/chapter6-combinatorics-probability.html#section-07",
+      "ChapterId": "09021632-43BF-CBDB-7DBF-6DC057AC0D47",
+      "CourseCode": "math",
+      "Title": "احتمال شرطی",
+      "EnglishTitle": "",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "934B3EAD-A232-B831-5DA7-D6DD4BDB2DF4",
+      "ImportKey": "math/chapter2.html#section-09",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "وضعیت دو خط نسبت به هم (Position of Two Lines)",
+      "EnglishTitle": "Position of Two Lines",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "94B0560E-92F3-9E12-1C82-6695FD19A2D7",
+      "ImportKey": "logic/ch12-syllogism.html#topic",
+      "ChapterId": "06E23775-BF1F-90E6-3AE6-923590B9D6DD",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۲: قیاس فرضی و Modus Ponens — استنتاج معتبر و نامعتبر",
+      "EnglishTitle": "Modus Ponens —",
+      "SortOrder": 12,
+      "Foundation": 0
+    },
+    {
+      "Id": "95C4CB1C-1CCA-626D-C2CE-8A76B5C80485",
+      "ImportKey": "logic/ch10-categorical.html#topic",
+      "ChapterId": "07043965-DF1E-6937-86F1-2D61A77E15D3",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۰: گزاره‌های قیاسی — Categorical Claims (All / Some / No / Only A are B)",
+      "EnglishTitle": "Categorical Claims (All",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "95D5102F-4374-EF39-AAD0-F6F7E477F45A",
+      "ImportKey": "physics/chapter2-kinematics.html#section-12",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "12حرکت دایره‌ای یکنواخت (Uniform Circular Motion)",
+      "EnglishTitle": "Uniform Circular Motion",
+      "SortOrder": 12,
+      "Foundation": 0
+    },
+    {
+      "Id": "96084829-D678-725C-1795-90B257474D73",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-10",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۸برهم‌کنش‌های زیستی",
+      "EnglishTitle": "",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "966E92EB-6780-7697-598A-4DA77EB74313",
+      "ImportKey": "math/فصل۳-توابع.html#section-04",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "معادلهٔ درجه دوم و نمودار سهمی",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "99CA183C-3C31-03F8-8249-E7CC5B969255",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-09",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "ریشه‌ها و رادیکال‌ها: ضرب، تقسیم و ساده‌سازی",
+      "EnglishTitle": "",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "9A2484E5-693A-069A-BCB5-34559C9C48DB",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-07",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۵تنظیم بیان ژن",
+      "EnglishTitle": "",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "9C68C592-2A04-58C3-56AE-0EF8C5B77663",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-02",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "معماری اعداد: مجموعه‌های تو در تو",
+      "EnglishTitle": "",
+      "SortOrder": 2,
+      "Foundation": 1
+    },
+    {
+      "Id": "A02513D2-1471-D5B0-C7D2-774EF17588AA",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-12",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "اتحادهای جبری و فاکتورگیری",
+      "EnglishTitle": "",
+      "SortOrder": 12,
+      "Foundation": 0
+    },
+    {
+      "Id": "A1AC83DA-94B8-6FEA-9549-AD151F1FA506",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-09",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۷دستگاه گوارش",
+      "EnglishTitle": "",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "A2BB973C-A047-5CF7-0BFA-B9BD6F55A13C",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-07",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "7عملیات برداری (Vector Operations)",
+      "EnglishTitle": "Vector Operations",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "A2CABDC4-826A-8F26-248D-61B7FC2F8588",
+      "ImportKey": "math/chapter2.html#section-10",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "فاصلهٔ دو نقطه (Distance Between Two Points) و میانهٔ پاره‌خط (Midpoint)",
+      "EnglishTitle": "Distance Between Two Points",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "A30EC228-B985-6282-35C5-D7B6A8F1E228",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-04",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "مقایسه اعداد، تخمین و تلهٔ اعداد منفی",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 1
+    },
+    {
+      "Id": "A4F78F75-26C6-70FD-5C6D-7C2C93893466",
+      "ImportKey": "biology/chapter1-chemical-foundation-fa.html#section-06",
+      "ChapterId": "9FDD3B2E-A297-7848-72D3-A1D3D22F0291",
+      "CourseCode": "biology",
+      "Title": "۲آب و pH: ماتریس زندگی",
+      "EnglishTitle": "pH",
+      "SortOrder": 6,
+      "Foundation": 1
+    },
+    {
+      "Id": "A522AA4A-B71F-2AAA-D401-3E013834F716",
+      "ImportKey": "logic/ch02-conjunction.html#topic",
+      "ChapterId": "E809725B-17DA-A1AD-6D1A-9B2CB21DC8A9",
+      "CourseCode": "logic",
+      "Title": "فصل ۲: عطف — «A and B» (Conjunction)",
+      "EnglishTitle": "A and B",
+      "SortOrder": 2,
+      "Foundation": 1
+    },
+    {
+      "Id": "A538D178-6FB3-44B4-0606-0E292C2158CF",
+      "ImportKey": "math/فصل۳-توابع.html#section-03",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "توابع پایه و آناتومی نماد لگاریتم",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "A62ADF83-75A1-8D1C-3D5A-89EC072843E3",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#section-05",
+      "ChapterId": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "CourseCode": "biology",
+      "Title": "۳هسته، ریبوزوم، سامانهٔ اندوممبران و اسکلت سلولی",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "A7DF0D2C-E046-ECAB-03E5-DD908B933D14",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-01",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "1کار (Work)",
+      "EnglishTitle": "Work",
+      "SortOrder": 1,
+      "Foundation": 0
+    },
+    {
+      "Id": "A88CF4D1-4023-27F7-03FB-48BFCA1CE69E",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-06",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "6پایستگی انرژی مکانیکی (Conservation of Mechanical Energy)",
+      "EnglishTitle": "Conservation of Mechanical Energy",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "A8D8CE6C-E07B-5D97-DBF2-8D936C917B1D",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#section-06",
+      "ChapterId": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "CourseCode": "physics",
+      "Title": "6آهنرباها و میدان مغناطیسی (Magnets & Magnetic Field)",
+      "EnglishTitle": "Magnets & Magnetic Field",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "AA5A9CA4-3683-B905-2940-62679EA405D3",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#section-01",
+      "ChapterId": "CBAA729D-AFC1-02AD-A226-8E5CA2BEC09B",
+      "CourseCode": "chemistry",
+      "Title": "مدل ذره‌ای ماده، حالت‌های ماده و تغییرات فیزیکی",
+      "EnglishTitle": "",
+      "SortOrder": 1,
+      "Foundation": 1
+    },
+    {
+      "Id": "AA8859F5-05A5-190D-AAEC-6C6EF27CC7DC",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-10",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۸دستگاه دفع و تنظیم آب",
+      "EnglishTitle": "",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "AB3C4345-F546-316A-6A51-7F51D064ACC3",
+      "ImportKey": "math/chapter2.html#section-12",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "مرکز ثقل مثلث (Centroid of a Triangle) و متوازی‌الاضلاع (Parallelogram)",
+      "EnglishTitle": "Centroid of a Triangle",
+      "SortOrder": 12,
+      "Foundation": 0
+    },
+    {
+      "Id": "AB43AA05-F0D7-6D40-F16C-1CD6BE98094C",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-10",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "10نیروی سطح و نیروی فنر (Normal Force & Spring Force)",
+      "EnglishTitle": "Normal Force & Spring Force",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "ACCF2B07-CFBD-03BD-3782-4F9D9FAE98B6",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-09",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۷بوم‌شناسی جمعیت",
+      "EnglishTitle": "",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "B1192BBB-DC2A-7189-9FD7-3745CFFBA91D",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-08",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۶زیست‌فناوری: PCR، ژل و CRISPR",
+      "EnglishTitle": "PCR",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "B129AD3C-3842-09A1-1EE2-FA6C7767B5B5",
+      "ImportKey": "math/فصل۳-توابع.html#section-06",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "معادلات گویا و گنگ",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "B5903C66-79C7-0ACA-D551-481118E9F8A2",
+      "ImportKey": "math/chapter6-combinatorics-probability.html#section-04",
+      "ChapterId": "09021632-43BF-CBDB-7DBF-6DC057AC0D47",
+      "CourseCode": "math",
+      "Title": "ترکیب (Combinations)",
+      "EnglishTitle": "Combinations",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "B62EDB44-C620-044C-480E-A00B57ED208E",
+      "ImportKey": "math/فصل۳-توابع.html#section-07",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "تابع نمایی (Exponential)",
+      "EnglishTitle": "Exponential",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "B75E569E-0D7F-5626-ECC8-42ACED8EA533",
+      "ImportKey": "math/فصل۳-توابع.html#section-08",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "تابع لگاریتمی (کامل)",
+      "EnglishTitle": "",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "B8F39AF3-AB38-7789-CF64-5C2D0926C461",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-06",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۴هورمون‌ها و پاسخ‌های گیاهی",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "BC0ED43A-87B0-D015-4BF5-ABCFD715D1A3",
+      "ImportKey": "physics/chapter2-kinematics.html#section-06",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "6شتاب و انواع حرکت (Acceleration)",
+      "EnglishTitle": "Acceleration",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "BC40A8E2-C9D6-E41A-F921-D50330546B37",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-11",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۹تکامل: سازوکارها و شواهد",
+      "EnglishTitle": "",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "BC9707DD-B7E7-F2C8-7C16-3910A542358F",
+      "ImportKey": "logic/ch07-negating-compounds.html#topic",
+      "ChapterId": "85595E57-954D-FCFC-8853-AE13B13CA761",
+      "CourseCode": "logic",
+      "Title": "فصل ۷: نقیض گزاره‌های ترکیبی (De Morgan's Rules)",
+      "EnglishTitle": "De Morgan's Rules",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "BFBAD06B-6E39-1527-BDA5-F7A2058FD9CC",
+      "ImportKey": "math/فصل۳-توابع.html#section-10",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "ترکیب توابع و تابع وارون",
+      "EnglishTitle": "",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "C20F4B82-9657-6FCC-9257-59584E9C53F0",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-08",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "قوانین پایهٔ توان‌ها (۷ قانون طلایی)",
+      "EnglishTitle": "",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "C2842F77-E3ED-8FF1-8EFD-215288CF6349",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#section-09",
+      "ChapterId": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "CourseCode": "biology",
+      "Title": "۷فتوسنتز: مبدل انرژی خورشید",
+      "EnglishTitle": "",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "C36A66B0-EA42-B0B4-64C6-499AA15B4E8C",
+      "ImportKey": "math/trig_chapter.html#section-02",
+      "ChapterId": "B7E9FC82-7E37-9C83-14F4-075F4B9671C2",
+      "CourseCode": "math",
+      "Title": "رادیان، درجه، طول کمان و مساحت مطاع",
+      "EnglishTitle": "",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "C4F49594-AD30-31F6-D741-C22D4E2433D3",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-09",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۷چرخهٔ سلولی و میتوز",
+      "EnglishTitle": "",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "C5CAB292-7605-BB6F-95EE-AE0E4B651595",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-05",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۳رونویسی و پردازش RNA",
+      "EnglishTitle": "RNA",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "C648E305-1FD7-259E-7CF8-8B17A4B2D0FB",
+      "ImportKey": "physics/chapter4-pressure.html#section-08",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "8اصل پاسکال (Pascal's Principle)",
+      "EnglishTitle": "Pascal's Principle",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "C7B45E17-F222-8D9D-8B0C-258B45639543",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-10",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "ترتیب عملیات (BODMAS/PEMDAS)",
+      "EnglishTitle": "BODMAS",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "C7EAAE68-643B-8F85-1A61-15013B01C6AB",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#section-03",
+      "ChapterId": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "CourseCode": "biology",
+      "Title": "۱انواع سلول: پروکاریوت، یوکاریوت، گیاهی و جانوری",
+      "EnglishTitle": "",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "C8967B99-DBBB-4D94-DED7-C8D4258FAA77",
+      "ImportKey": "physics/chapter4-pressure.html#section-02",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "2فشار چیست؟ (Pressure)",
+      "EnglishTitle": "Pressure",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "CEA84EF9-05AB-C2A6-1C5E-428176DB82C3",
+      "ImportKey": "logic/20-final-review.html#topic",
+      "ChapterId": "44D18ED8-8E2E-187B-1E70-208F3D238B2B",
+      "CourseCode": "logic",
+      "Title": "🧠 Logic Cheat Sheet — چکیده‌ی فشرده‌ی کل جزوه",
+      "EnglishTitle": "Logic Cheat Sheet —",
+      "SortOrder": 20,
+      "Foundation": 0
+    },
+    {
+      "Id": "CFF31DD0-0D9C-E91A-2E88-C00187633B6C",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-08",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۶دستگاه تنفس و تبادل گاز",
+      "EnglishTitle": "",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "D1F21DB0-E4CB-5131-BF83-EC03FBD2A2C1",
+      "ImportKey": "physics/chapter2-kinematics.html#section-13",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "13حرکت نسبی و تبدیل گالیله (Relative Motion & Galilean Transformation)",
+      "EnglishTitle": "Relative Motion & Galilean Transformation",
+      "SortOrder": 13,
+      "Foundation": 0
+    },
+    {
+      "Id": "D370E294-F4EB-F403-59E5-2270C9A24DD7",
+      "ImportKey": "math/chapter2.html#section-11",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "فاصلهٔ نقطه از خط (Distance from a Point to a Line) و دو خط موازی (Parallel Lines)",
+      "EnglishTitle": "Distance from a Point to a Line",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "D8048576-5B02-ED5D-5ABE-848872BEDD90",
+      "ImportKey": "math/chapter2.html#section-08",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "دستگاه مختصات (Coordinate System) و معادلهٔ خط (Equation of a Line)",
+      "EnglishTitle": "Coordinate System",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "D84AD582-AAB8-83F0-C2C3-AB6B674A06AE",
+      "ImportKey": "math/geometry-chapter.html#section-02",
+      "ChapterId": "E0D44BD3-5CDD-C99F-EDFB-773CC9F08131",
+      "CourseCode": "math",
+      "Title": "مفاهیم پایهٔ هندسه",
+      "EnglishTitle": "",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "D84BF522-D656-FFC9-8717-760C08912006",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-05",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "5انرژی جنبشی و پتانسیل گرانشی (Kinetic & Gravitational Potential Energy)",
+      "EnglishTitle": "Kinetic & Gravitational Potential Energy",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "D8574FE3-B012-4CC9-AFCB-FD2950A72782",
+      "ImportKey": "physics/chapter4-pressure.html#section-09",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "9فشار جو زمین با ارتفاع (Atmospheric Pressure vs. Altitude)",
+      "EnglishTitle": "Atmospheric Pressure vs",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "D904B1E4-EE57-BE3E-E6A3-DACDC222477F",
+      "ImportKey": "logic/ch19-tables.html#topic",
+      "ChapterId": "10628593-DDBE-383E-9C62-BDE18F3BF998",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۹: حل مسئله با جدول و معادلات همزمان — Tables & Simultaneous Equations",
+      "EnglishTitle": "Tables & Simultaneous Equations",
+      "SortOrder": 19,
+      "Foundation": 0
+    },
+    {
+      "Id": "DB9E5B9D-B824-2D75-2142-70FACCE8BABD",
+      "ImportKey": "math/geometry-chapter.html#section-05",
+      "ChapterId": "E0D44BD3-5CDD-C99F-EDFB-773CC9F08131",
+      "CourseCode": "math",
+      "Title": "اشکال فضایی",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "DCCB8044-432E-3F51-7168-6EAFE96ED807",
+      "ImportKey": "biology/chapter1-chemical-foundation-fa.html#section-07",
+      "ChapterId": "9FDD3B2E-A297-7848-72D3-A1D3D22F0291",
+      "CourseCode": "biology",
+      "Title": "۳سینتیک آنزیم‌ها: کاتالیزورهای زندگی",
+      "EnglishTitle": "",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "DDA59698-6E0E-2AF7-05E8-D2D57E182072",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-06",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "6نمودارها و مدل‌های تابعی (Graphs & Functional Models)",
+      "EnglishTitle": "Graphs & Functional Models",
+      "SortOrder": 6,
+      "Foundation": 1
+    },
+    {
+      "Id": "DF3D8C15-EE3C-EFD3-8458-4B8919EAB06C",
+      "ImportKey": "biology/chapter2-cell-bioenergetics-fa.html#section-06",
+      "ChapterId": "1519F349-9F20-EE06-D97E-18CA705FD23D",
+      "CourseCode": "biology",
+      "Title": "۴میتوکندری، کلروپلاست، واکوئل و دیوارهٔ سلولی",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "DF822AEC-E8F6-2F15-450F-2D9F2505B569",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-08",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "8قوانین سه‌گانهٔ نیوتن (Newton's Laws)",
+      "EnglishTitle": "Newton's Laws",
+      "SortOrder": 8,
+      "Foundation": 0
+    },
+    {
+      "Id": "E04C1A50-0493-310B-EABB-BF71FF74FE36",
+      "ImportKey": "biology/chapter4-plants-ecology-fa.html#section-05",
+      "ChapterId": "4E0F3CB2-292E-11C7-26BD-26B3622EC9A5",
+      "CourseCode": "biology",
+      "Title": "۳انتقال در گیاه: آب، قند و مواد معدنی",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "E0C34653-57D0-7EE6-E2D0-C3C1ADAD2110",
+      "ImportKey": "physics/chapter2-kinematics.html#section-05",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "5تعداد تغییر جهت حرکت (Direction Changes)",
+      "EnglishTitle": "Direction Changes",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "E500B580-EDBA-8619-8580-4F95A0CB3BEA",
+      "ImportKey": "logic/ch16-linegraphs.html#topic",
+      "ChapterId": "848BA68E-E652-45E4-E203-5F361C801C1D",
+      "CourseCode": "logic",
+      "Title": "فصل ۱۶: نمودارهای خطی و تحلیل روند — Line Graphs & Trend Analysis",
+      "EnglishTitle": "Line Graphs & Trend Analysis",
+      "SortOrder": 16,
+      "Foundation": 0
+    },
+    {
+      "Id": "E7D2E5FD-B816-60FE-8243-AA7A4B8A447C",
+      "ImportKey": "math/trig_chapter.html#section-06",
+      "ChapterId": "B7E9FC82-7E37-9C83-14F4-075F4B9671C2",
+      "CourseCode": "math",
+      "Title": "فرمول‌های مجموع، تفاضل و زاویهٔ دوبرابر",
+      "EnglishTitle": "",
+      "SortOrder": 6,
+      "Foundation": 0
+    },
+    {
+      "Id": "E8A92547-47E4-18CB-B9AB-0B43D4F8B9E9",
+      "ImportKey": "physics/chapter4-pressure.html#section-10",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "10مانومتر: فشارسنج گازها (Manometer)",
+      "EnglishTitle": "Manometer",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "EB2ACA61-7106-254E-CF08-4FEF60D877D5",
+      "ImportKey": "physics/chapter4-pressure.html#section-05",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "5فشار مایع (Fluid Pressure)",
+      "EnglishTitle": "Fluid Pressure",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "EBC26562-4452-F61C-07F4-1CF4987854F3",
+      "ImportKey": "chemistry/cent-chemistry-ch1-5-deep-1.html#section-02",
+      "ChapterId": "7F1C3932-9051-4A18-F6D2-BABDFE2461E1",
+      "CourseCode": "chemistry",
+      "Title": "تبدیلات شیمیایی: تغییر فیزیکی در برابر شیمیایی",
+      "EnglishTitle": "",
+      "SortOrder": 2,
+      "Foundation": 1
+    },
+    {
+      "Id": "EBDCD75F-2B59-7C65-8A63-4DA0A2560E20",
+      "ImportKey": "biology/chapter5-animal-physiology-fa.html#section-04",
+      "ChapterId": "DF61EC7B-C9B9-51A2-5740-20D772C72F10",
+      "CourseCode": "biology",
+      "Title": "۲دستگاه اسکلتی–ماهیچه‌ای و انقباض",
+      "EnglishTitle": "",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "EE985878-D8F6-6828-FB7B-1942F20701F3",
+      "ImportKey": "math/chapter6-combinatorics-probability.html#section-03",
+      "ChapterId": "09021632-43BF-CBDB-7DBF-6DC057AC0D47",
+      "CourseCode": "math",
+      "Title": "جایگشت (Permutations)",
+      "EnglishTitle": "Permutations",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "EF726FED-EEC0-64B4-992A-5725C9571916",
+      "ImportKey": "biology/chapter3-genetics-fa.html#section-10",
+      "ChapterId": "9AFC93A4-1176-5EA5-0506-7249F1869F8D",
+      "CourseCode": "biology",
+      "Title": "۸میوز و تنوع ژنتیکی",
+      "EnglishTitle": "",
+      "SortOrder": 10,
+      "Foundation": 0
+    },
+    {
+      "Id": "EF8DA87C-9742-82B1-3454-D557A81A742F",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-04",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "4توان (Power)",
+      "EnglishTitle": "Power",
+      "SortOrder": 4,
+      "Foundation": 0
+    },
+    {
+      "Id": "EFA7A380-7846-2EAE-CE7E-E557F57AF533",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-12",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "12تکانه و ضربه (Momentum & Impulse)",
+      "EnglishTitle": "Momentum & Impulse",
+      "SortOrder": 12,
+      "Foundation": 0
+    },
+    {
+      "Id": "F03B9959-47D3-9ECE-ACDA-8538DF221BDC",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-07",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "7بازده (Efficiency)",
+      "EnglishTitle": "Efficiency",
+      "SortOrder": 7,
+      "Foundation": 0
+    },
+    {
+      "Id": "F32BFE6C-A952-89AC-8C48-B11665E3B06C",
+      "ImportKey": "physics/chapter4-pressure.html#section-03",
+      "ChapterId": "2079C083-CDBA-FE40-AC34-DA2F0658FC05",
+      "CourseCode": "physics",
+      "Title": "3چگالی (Density)",
+      "EnglishTitle": "Density",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "F3739AF3-25FA-521F-89C9-1DF9A50DACCE",
+      "ImportKey": "logic/ch01-foundations-fa.html#topic",
+      "ChapterId": "2C1FA436-1536-0B45-7160-5B9A98A3EA4C",
+      "CourseCode": "logic",
+      "Title": "فصل ۱: مبانی — گزاره چیست؟ گزاره‌های ترکیبی چه هستند؟",
+      "EnglishTitle": "",
+      "SortOrder": 1,
+      "Foundation": 1
+    },
+    {
+      "Id": "F3A1ED00-9C3D-58E2-B651-84C69B37E8E0",
+      "ImportKey": "math/mastercalss-riazi-fasl1-3.html#section-03",
+      "ChapterId": "5F638A27-17B8-6E3F-8528-CA999B607C08",
+      "CourseCode": "math",
+      "Title": "اعداد اعشاری و نمایش علمی (Scientific Notation)",
+      "EnglishTitle": "Scientific Notation",
+      "SortOrder": 3,
+      "Foundation": 1
+    },
+    {
+      "Id": "F65044D1-934F-E279-3D8D-69D936008808",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-09",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "9خطاهای تصادفی و سیستماتیک (Random & Systematic Errors)",
+      "EnglishTitle": "Random & Systematic Errors",
+      "SortOrder": 9,
+      "Foundation": 0
+    },
+    {
+      "Id": "F71D0FB9-3243-CC22-FA91-2797FD6DF766",
+      "ImportKey": "physics/chapter3-dynamics-work-energy.html#section-03",
+      "ChapterId": "4BAA7073-A8FB-48A0-A1F5-A2F05B498C1D",
+      "CourseCode": "physics",
+      "Title": "3کار کل و قضیهٔ کار–انرژی جنبشی (Work–Energy Theorem)",
+      "EnglishTitle": "Work–Energy Theorem",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "F83438F2-396D-0701-B4BE-B96AAC48A227",
+      "ImportKey": "math/chapter2.html#section-03",
+      "ChapterId": "B9AD6937-56D2-F4AE-EBAE-BBE9E9D8F4E1",
+      "CourseCode": "math",
+      "Title": "نامعادلات درجهٔ یک (Linear Inequalities)",
+      "EnglishTitle": "Linear Inequalities",
+      "SortOrder": 3,
+      "Foundation": 0
+    },
+    {
+      "Id": "FAA22362-8878-75FF-DA5C-DC11AEE06F02",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#section-05",
+      "ChapterId": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "CourseCode": "physics",
+      "Title": "5مقاومت و قانون اهم (Resistance & Ohm's Law)",
+      "EnglishTitle": "Resistance & Ohm's Law",
+      "SortOrder": 5,
+      "Foundation": 0
+    },
+    {
+      "Id": "FCEABDDB-2246-159C-29DB-6165CFD37E52",
+      "ImportKey": "physics/chapter2-kinematics.html#section-11",
+      "ChapterId": "8C9B7BCF-153D-BF85-93B9-A7C4E3E1DE08",
+      "CourseCode": "physics",
+      "Title": "11سقوط آزاد (Free Fall)",
+      "EnglishTitle": "Free Fall",
+      "SortOrder": 11,
+      "Foundation": 0
+    },
+    {
+      "Id": "FCF9F073-7A7F-0BC7-E0EF-386AC7D7A642",
+      "ImportKey": "physics/chapter1-physical-quantities.html#section-04",
+      "ChapterId": "92E8D369-9FD0-9BEF-5FBA-57AF7C5D04D2",
+      "CourseCode": "physics",
+      "Title": "4کمیت‌های نرده‌ای و برداری (Scalars & Vectors)",
+      "EnglishTitle": "Scalars & Vectors",
+      "SortOrder": 4,
+      "Foundation": 1
+    },
+    {
+      "Id": "FD1EB2B5-6D6B-B153-ECAB-036AA32B53BD",
+      "ImportKey": "physics/chapter6-electromagnetism-waves.html#section-02",
+      "ChapterId": "7028AF81-8A95-4CBA-F887-97C0FFF1F5BB",
+      "CourseCode": "physics",
+      "Title": "2قانون کولن (Coulomb's Law)",
+      "EnglishTitle": "Coulomb's Law",
+      "SortOrder": 2,
+      "Foundation": 0
+    },
+    {
+      "Id": "FFB3F563-4CFB-6493-5EC7-833AA3140226",
+      "ImportKey": "logic/ch04-conditional.html#topic",
+      "ChapterId": "C70F1F47-09F3-63A6-6C82-78CC9B3937A6",
+      "CourseCode": "logic",
+      "Title": "فصل ۴: شرطی — «If A then B» (Conditional)",
+      "EnglishTitle": "If A then B",
+      "SortOrder": 4,
+      "Foundation": 1
+    },
+    {
+      "Id": "FFCB1D1D-F310-35E6-3BC2-6E86FA734D17",
+      "ImportKey": "math/فصل۳-توابع.html#section-05",
+      "ChapterId": "D24A0455-C541-8D8E-EAC6-949F51C82E52",
+      "CourseCode": "math",
+      "Title": "قدرمطلق — معادله و نامعادله کامل",
+      "EnglishTitle": "",
+      "SortOrder": 5,
+      "Foundation": 0
+    }
+  ]
+}

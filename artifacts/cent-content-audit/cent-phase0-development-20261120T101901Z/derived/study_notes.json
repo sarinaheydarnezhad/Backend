@@ -1,0 +1,12 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "recordCount": 0,
+  "records": [],
+  "status": "No separately modelled editorial study-note entity was identified.",
+  "educationalTextLocations": [
+    "database/sources.json: PlainText, OriginalHtml",
+    "database/source_sections.json: Text, Html",
+    "bundled/curriculum.json and bundled/Sources"
+  ],
+  "excluded": "cent_notes is personal user-generated annotation data; it was neither queried nor exported."
+}

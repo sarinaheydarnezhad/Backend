@@ -1,0 +1,119 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "cent_trainings",
+  "recordCount": 14,
+  "records": [
+    {
+      "Id": "0B96F1DE-764A-47F7-931B-2FDDFFB3E681",
+      "Title": "جبر؛ از مثال تا تمرین",
+      "Description": "مثال‌های معادله خطی و تمرین برای مرور روش حل.",
+      "IncludedInSubscription": 0,
+      "Published": 1,
+      "CreatedAt": "639306920026077136"
+    },
+    {
+      "Id": "21EF91B0-71F2-4BEC-A0ED-C2F5AD24E0B8",
+      "Title": "از پایه تا حل مسئله — جبر",
+      "Description": "مرور مفاهیم اصلی جبر، مثال‌های حل‌شده و تمرین‌های هدفمند. این آموزش فقط برای آزمایش محلی ساخته شده است.",
+      "IncludedInSubscription": 1,
+      "Published": 1,
+      "CreatedAt": "639306125019506589"
+    },
+    {
+      "Id": "58D5D94D-6AEC-A74B-3F43-663981885E96",
+      "Title": "شیمی — منابع اصلی CEnT",
+      "Description": "درس‌نامه‌ها و تمرین‌های منبع اصلی شیمی. دسترسی خریداری‌شده در محیط مطالعه ارائه می‌شود.",
+      "IncludedInSubscription": 1,
+      "Published": 1,
+      "CreatedAt": "639297219422701002"
+    },
+    {
+      "Id": "602AB3A0-D200-4B2D-80E9-DC9157389F92",
+      "Title": "از پایه تا حل مسئله — جبر",
+      "Description": "مرور مفاهیم اصلی جبر، مثال‌های حل‌شده و تمرین‌های هدفمند. این آموزش فقط برای آزمایش محلی ساخته شده است.",
+      "IncludedInSubscription": 1,
+      "Published": 1,
+      "CreatedAt": "639306126777434743"
+    },
+    {
+      "Id": "771B2AF9-F1AD-7DBB-11E6-238B06A18611",
+      "Title": "ریاضی — منابع اصلی CEnT",
+      "Description": "درس‌نامه‌ها و تمرین‌های منبع اصلی ریاضی. دسترسی خریداری‌شده در محیط مطالعه ارائه می‌شود.",
+      "IncludedInSubscription": 1,
+      "Published": 1,
+      "CreatedAt": "639297219415543823"
+    },
+    {
+      "Id": "8B53B160-10DB-46CC-9A06-F4F128553B4D",
+      "Title": "جبر؛ از مثال تا تمرین",
+      "Description": "مثال‌های معادله خطی و تمرین برای مرور روش حل.",
+      "IncludedInSubscription": 0,
+      "Published": 1,
+      "CreatedAt": "639306916283898084"
+    },
+    {
+      "Id": "AED10460-71F5-4878-A3AD-3E570A9F9AD5",
+      "Title": "از پایه تا حل مسئله — جبر",
+      "Description": "مرور مفاهیم اصلی جبر، مثال‌های حل‌شده و تمرین‌های هدفمند. این آموزش فقط برای آزمایش محلی ساخته شده است.",
+      "IncludedInSubscription": 1,
+      "Published": 1,
+      "CreatedAt": "639306156731168856"
+    },
+    {
+      "Id": "C08B0D99-0903-A706-A033-4552009C94EE",
+      "Title": "فیزیک — منابع اصلی CEnT",
+      "Description": "درس‌نامه‌ها و تمرین‌های منبع اصلی فیزیک. دسترسی خریداری‌شده در محیط مطالعه ارائه می‌شود.",
+      "IncludedInSubscription": 1,
+      "Published": 1,
+      "CreatedAt": "639297219422720398"
+    },
+    {
+      "Id": "CAA10614-F0E6-4F56-84E8-69167147066C",
+      "Title": "جبر؛ از مثال تا تمرین",
+      "Description": "مثال‌های معادله خطی و تمرین برای مرور روش حل.",
+      "IncludedInSubscription": 0,
+      "Published": 1,
+      "CreatedAt": "639306914992915877"
+    },
+    {
+      "Id": "D006A122-8150-BAB1-506D-519014A87BB2",
+      "Title": "زیست‌شناسی — منابع اصلی CEnT",
+      "Description": "درس‌نامه‌ها و تمرین‌های منبع اصلی زیست‌شناسی. دسترسی خریداری‌شده در محیط مطالعه ارائه می‌شود.",
+      "IncludedInSubscription": 1,
+      "Published": 1,
+      "CreatedAt": "639297219422675325"
+    },
+    {
+      "Id": "EB0BD398-C645-4DD1-B47E-633904D18C67",
+      "Title": "جبر؛ از مثال تا تمرین",
+      "Description": "مثال‌های معادله خطی و تمرین برای مرور روش حل.",
+      "IncludedInSubscription": 0,
+      "Published": 1,
+      "CreatedAt": "639306918334967028"
+    },
+    {
+      "Id": "EE17FD5D-ADE1-43A6-8E3B-C61ED983E56A",
+      "Title": "جبر؛ از مثال تا تمرین",
+      "Description": "مثال‌های معادله خطی و تمرین برای مرور روش حل.",
+      "IncludedInSubscription": 0,
+      "Published": 1,
+      "CreatedAt": "639306913453290764"
+    },
+    {
+      "Id": "F271F06A-9425-464D-95D6-55B5452316F1",
+      "Title": "جبر؛ از مثال تا تمرین",
+      "Description": "مثال‌های معادله خطی و تمرین برای مرور روش حل.",
+      "IncludedInSubscription": 0,
+      "Published": 1,
+      "CreatedAt": "639306920017842074"
+    },
+    {
+      "Id": "FFF8F03F-C7F8-668B-5C9B-4F0C710CCD59",
+      "Title": "منطق و تحلیل داده — منابع اصلی CEnT",
+      "Description": "درس‌نامه‌ها و تمرین‌های منبع اصلی منطق و تحلیل داده. دسترسی خریداری‌شده در محیط مطالعه ارائه می‌شود.",
+      "IncludedInSubscription": 1,
+      "Published": 1,
+      "CreatedAt": "639297219422435568"
+    }
+  ]
+}

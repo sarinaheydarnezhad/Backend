@@ -1,0 +1,1619 @@
+{
+  "formatVersion": 1,
+  "datasetLabel": "DEVELOPMENT DATA",
+  "generatedUtc": "2026-11-20T10:19:06.587Z",
+  "authorizedDatabase": {
+    "provider": "SQLite",
+    "path": "D:\\Lerona\\Backend\\backend\\Cent.Preview\\App_Data\\preview.db",
+    "environment": "DEVELOPMENT",
+    "noFallback": true
+  },
+  "bundleSha256": "5f5c16c6ab02e019de2604160307ed1e1f9adc734fc94ec840947f36f3f287a9",
+  "summary": {
+    "subjects": 5,
+    "chapters": 43,
+    "topics": 190,
+    "lessons": 48,
+    "sourceBasedLessons": 39,
+    "imageBasedLessons": 9,
+    "sources": 39,
+    "sourceSections": 430,
+    "sourceExercises": 666,
+    "questions": 819,
+    "answerChoices": 5232,
+    "storedReusableMockExamDefinitions": 0,
+    "standaloneEditorialStudyNotes": "not separately modelled",
+    "personalNotes": "excluded and not counted",
+    "curriculumPresent": true,
+    "curriculumMatches": true
+  },
+  "recordCountsByDatabaseTable": {
+    "cent_courses": 5,
+    "cent_chapters": 43,
+    "cent_topics": 190,
+    "cent_trainings": 14,
+    "cent_documents": 48,
+    "cent_document_pages": 18,
+    "cent_document_sections": 4,
+    "cent_sources": 39,
+    "cent_source_sections": 430,
+    "cent_source_exercises": 666,
+    "cent_questions": 819,
+    "cent_curriculum_imports": 2
+  },
+  "bundledRecordCounts": {
+    "sources": 39,
+    "chapters": 43,
+    "topics": 190,
+    "sections": 430,
+    "exercises": 666,
+    "questions": 819,
+    "findings": 5
+  },
+  "subjectCounts": [
+    {
+      "subjectCode": "biology",
+      "subjectTitle": "زیست‌شناسی",
+      "chapters": 5,
+      "topics": 41,
+      "sources": 5,
+      "lessons": 5,
+      "sourceBasedLessons": 5,
+      "imageBasedLessons": 0,
+      "documentPages": 0,
+      "documentSections": 0,
+      "sourceSections": 78,
+      "sourceExercises": 335,
+      "questions": 350,
+      "activeQuestions": 350,
+      "trainings": 1
+    },
+    {
+      "subjectCode": "chemistry",
+      "subjectTitle": "شیمی",
+      "chapters": 5,
+      "topics": 5,
+      "sources": 1,
+      "lessons": 1,
+      "sourceBasedLessons": 1,
+      "imageBasedLessons": 0,
+      "documentPages": 0,
+      "documentSections": 0,
+      "sourceSections": 6,
+      "sourceExercises": 16,
+      "questions": 31,
+      "activeQuestions": 31,
+      "trainings": 1
+    },
+    {
+      "subjectCode": "logic",
+      "subjectTitle": "منطق و تحلیل داده",
+      "chapters": 20,
+      "topics": 20,
+      "sources": 20,
+      "lessons": 20,
+      "sourceBasedLessons": 20,
+      "imageBasedLessons": 0,
+      "documentPages": 0,
+      "documentSections": 0,
+      "sourceSections": 174,
+      "sourceExercises": 57,
+      "questions": 60,
+      "activeQuestions": 60,
+      "trainings": 1
+    },
+    {
+      "subjectCode": "math",
+      "subjectTitle": "ریاضی",
+      "chapters": 7,
+      "topics": 56,
+      "sources": 7,
+      "lessons": 7,
+      "sourceBasedLessons": 7,
+      "imageBasedLessons": 0,
+      "documentPages": 0,
+      "documentSections": 0,
+      "sourceSections": 80,
+      "sourceExercises": 177,
+      "questions": 174,
+      "activeQuestions": 174,
+      "trainings": 1
+    },
+    {
+      "subjectCode": "physics",
+      "subjectTitle": "فیزیک",
+      "chapters": 6,
+      "topics": 68,
+      "sources": 6,
+      "lessons": 6,
+      "sourceBasedLessons": 6,
+      "imageBasedLessons": 0,
+      "documentPages": 0,
+      "documentSections": 0,
+      "sourceSections": 92,
+      "sourceExercises": 81,
+      "questions": 204,
+      "activeQuestions": 204,
+      "trainings": 1
+    },
+    {
+      "subjectCode": null,
+      "subjectTitle": "UNASSIGNED — no stored subject relationship",
+      "chapters": 0,
+      "topics": 0,
+      "sources": 0,
+      "lessons": 9,
+      "sourceBasedLessons": 0,
+      "imageBasedLessons": 9,
+      "documentPages": 18,
+      "documentSections": 4,
+      "sourceSections": 0,
+      "sourceExercises": 0,
+      "questions": 0,
+      "activeQuestions": 0,
+      "trainings": 9
+    }
+  ],
+  "bankDistributions": {
+    "byDifficulty": {
+      "easy": 127,
+      "hard": 108,
+      "medium": 584
+    },
+    "byOrigin": {
+      "authored": 331,
+      "review-clarified": 1,
+      "review-corrected": 2,
+      "source-mcq": 485
+    },
+    "byKind": {
+      "both": 819
+    }
+  },
+  "exerciseStatusCounts": {
+    "open-response": 177,
+    "quarantined": 1,
+    "source-mcq": 488
+  },
+  "assetReferenceStatusCounts": {
+    "external-not-fetched": 134,
+    "in-document-fragment": 532
+  },
+  "issueCountsBySeverity": {
+    "error": 0,
+    "warning": 9,
+    "info": 270
+  },
+  "issueCountsByCode": {
+    "DUPLICATE_CANDIDATE": 6,
+    "IMAGE_ONLY_LESSON": 9,
+    "MISSING_ENGLISH_TOPIC_TITLE": 78,
+    "QUESTION_EXERCISE_TOPIC_MISMATCH": 8,
+    "SOURCE_EXERCISE_REVIEW_STATUS": 1,
+    "SOURCE_EXERCISE_WITHOUT_ANSWER_INDEX": 177
+  },
+  "duplicateCandidateGroups": 6,
+  "completeness": {
+    "educationalTableExportComplete": true,
+    "bundledCurriculumIdentitiesPresent": true,
+    "importerManagedValuesAndHtmlMatch": true,
+    "allBundledHtmlChecksumsMatch": true,
+    "databaseUnchanged": true,
+    "publicationFiltersApplied": false,
+    "rowLimitApplied": false,
+    "limitationsFile": "CONTENT_ISSUES.md"
+  },
+  "privacy": {
+    "mode": "Explicit table AND column allowlist; no user-table SELECTs, API calls, login, seeding, application startup, migrations, or external network access.",
+    "excludedTables": [
+      "cent_ai_analyses",
+      "cent_attempt_questions",
+      "cent_attempts",
+      "cent_audit_events",
+      "cent_entitlements",
+      "cent_google_attempts",
+      "cent_notes",
+      "cent_orders",
+      "cent_payment_events",
+      "cent_products",
+      "cent_sessions",
+      "cent_study_progress",
+      "cent_users"
+    ],
+    "excludedCategories": [
+      "all users and account identifiers",
+      "authentication sessions and OAuth state",
+      "personal notes and study progress",
+      "products, prices, purchases, orders, entitlements and payment events",
+      "learner attempts, answer snapshots, results and AI analyses",
+      "administrator audit events",
+      "all Lerona tables and records",
+      "whole SQLite database and backups"
+    ],
+    "exportedContentTimestamps": "Only educational content creation/import timestamps; no owner or actor metadata."
+  },
+  "fileCountExcludingManifest": 172,
+  "manifestDigestPolicy": "files contains every package file except EXPORT_MANIFEST.json. ZIP has an external .sha256 sidecar; archive integrity is checked separately.",
+  "files": [
+    {
+      "path": "CONTENT_INVENTORY.md",
+      "bytes": 9251,
+      "sha256": "e0aa74bab00f1685902a7f305eef6a7a87107fc4696becff8f5d390c0955648d",
+      "description": "Main development educational inventory report.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "CONTENT_ISSUES.md",
+      "bytes": 8763,
+      "sha256": "5fb4138d1cf56b0ab4d21155fd2d5519cd9be348503efe5cb62f4b689148135e",
+      "description": "Export limitations, relationship checks, missing fields, duplicate candidates and unchanged prior findings.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "CONTENT_SCHEMA.md",
+      "bytes": 11427,
+      "sha256": "db057db6d4de627f8d25c485c163a19ef117eb942a5b238393dec279445ffb31",
+      "description": "Actual educational schema, entity meanings, relationships, value encodings and exclusions.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "EXPORT_METHOD.mjs",
+      "bytes": 70643,
+      "sha256": "2c5674508db783afa865b2e4bb6c8f7d54daa1b96153c88eda88dd57d332ea37",
+      "description": "Standalone read-only export utility, supplied for reproducibility; never starts application code.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "VERIFY_METHOD.mjs",
+      "bytes": 6276,
+      "sha256": "470a669096fbfe303041892207e519e3231eab89a7e93a9e5df6c90328803a20",
+      "description": "Independent payload verifier supplied for reproducibility; only confirmed SQLite content is queried.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "assets/database-sources/00E861CC-37A3-973A-EB9F-622250C58294.html",
+      "bytes": 22665,
+      "sha256": "f59baac1e9d537edf245f4a42ce05f38b72ed820dde92e26a850bd0e8a2c5bed",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/02B0C98C-BFA6-D4CF-B9DA-EECC6F2C5E3D.html",
+      "bytes": 23180,
+      "sha256": "615dd9250cc330f4c7d04affbbff1e44a5b9d47938d10472f6a710084f68f47b",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/03D25309-4471-923F-14E4-2A898A42B10E.html",
+      "bytes": 101856,
+      "sha256": "1065b749990e4b119e16c22e316bc7742a988dbaebdd4495f34d5e3f4f4c0775",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/040CA2F5-3BDB-8995-C114-54E4EE8F53AC.html",
+      "bytes": 21984,
+      "sha256": "788a04d7769d09fd6858686a50c3e3c68ab917e96e4c1077cfa0772d2dd2dd73",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/044EC217-FC60-4A65-1CE6-36DFABDB96FB.html",
+      "bytes": 237012,
+      "sha256": "bb4428146992dd4ee9ecde8af3654ca24de4f61ccc0e69ef5b61f13802bd0e24",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/0B42FE17-B855-76B8-08E2-BED445C24111.html",
+      "bytes": 21337,
+      "sha256": "19843c7d72aa04931963a9314b18480dea6f77c425d838e87d795f16266a943e",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/0F2CA150-41C3-0AEE-548B-844AE19755F9.html",
+      "bytes": 23441,
+      "sha256": "093fdc5a8702df202ecee75d3bc09aa89df9213ba1ef66ed302a6c836c9aa46d",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/1174E3F6-071A-01D4-C9A8-280BEAB9E5B8.html",
+      "bytes": 22556,
+      "sha256": "c0108d5311177f9a5548ac622c1835d446f30ef97c2a067c40a7eea69c4cc59f",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/19C7CDBD-2DF8-9F2C-1A05-63D46DE121F4.html",
+      "bytes": 125493,
+      "sha256": "f0e83d9eabf9205af6b923f0f57739d28f45b63436b5a2601659807a9087a7bc",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/1F9B5357-1054-D852-3665-EAC1BF041AA5.html",
+      "bytes": 23165,
+      "sha256": "0a3a8b14884124d6cd3e9b8aaedc11e784003e45438d93e54ddf7f440f83d255",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/21CA9FB7-D3AE-E03C-923B-6BCC18A11C0F.html",
+      "bytes": 79565,
+      "sha256": "92471bb682b36d20cb995286fb396627a177e96cf4cd48346145718f1162d108",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/24EDDFE0-94BC-8FCA-4158-6E6FD45480FD.html",
+      "bytes": 22054,
+      "sha256": "0afaf11f0af5aede89e4c6df4d1cde04402af087ff6d4522ddea15e5596f53a0",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/252303E1-32E1-77F4-D8E2-B3F765C5F480.html",
+      "bytes": 42518,
+      "sha256": "0da4eb5758b297eb6d5ee00c5267def9638661f615fb952370976bbaa56f0244",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/27C6F8B1-8C19-E424-5E42-F16F99BCAB79.html",
+      "bytes": 23434,
+      "sha256": "ace929d24b29d83677db6d4ca9ff29e461814b86909271c60af02cff31261017",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/2D0B80D9-A16D-5BF5-FD86-DA0844DF0087.html",
+      "bytes": 21543,
+      "sha256": "113526898469a26c412f0d10a9a8b6b5ea80d8deb022092a57bd4662ff64efff",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/32BC651C-E08E-D293-329A-BF25EA5F804A.html",
+      "bytes": 76041,
+      "sha256": "40f4e960fe18c035e86104ae59aaa87215106323d05cff649c6b841d2798f585",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/3988520F-3CAB-5534-5220-01D13E8437C2.html",
+      "bytes": 21352,
+      "sha256": "13b3c38e6e022c691df745c2347965e2a92a90f23c1297f2e4ac1910f359bfe3",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/4B4FBFB9-896A-1407-073A-A3F6881591FE.html",
+      "bytes": 276784,
+      "sha256": "93e489b8640ecaed5fe3d81c4e128ac4d401e1a013e60b45f571ec1026c77eee",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/6109430A-B05F-9057-3E64-C69EB1A9D2E7.html",
+      "bytes": 20320,
+      "sha256": "18a3751be0f0510495b39b30e8ace5c842c94564fda17d955fd341f3d160ebbf",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/62919066-707D-C4CB-C842-529D943E9145.html",
+      "bytes": 232780,
+      "sha256": "09958373a60356c2381d6d38fe36300bd65f33ad3b03a5a908adbdfe8163008f",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5.html",
+      "bytes": 80240,
+      "sha256": "e754d153fd8ed2cfc81ed85e2c0123dd42b7af6957dd83478b14323984a1327e",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/7EA0A24A-3E64-5F99-256B-7B4A6D2F8861.html",
+      "bytes": 80351,
+      "sha256": "8924057d2126dce162fa7e535f3d06744d9a713c76cc1256a1cdd7f794d62c44",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/89252BC7-A012-C58E-BA93-DEEE353C33F9.html",
+      "bytes": 22886,
+      "sha256": "cd6a39621d6cda884134788392ff844ae15feccbea416685a40b286517974f07",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/8F78D75B-1244-01CC-C04F-2BAE4964D664.html",
+      "bytes": 102991,
+      "sha256": "39fda7c81c250591196781cbcf776a727228c1bd7c900c1d5e280c3b14feedaa",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/9250EAC1-6BD0-1F6E-BBDC-E0A7952F1A21.html",
+      "bytes": 236936,
+      "sha256": "7fe4018cd7501f83ed2770180a2d70bf5ff31a4a1b27325dbd0c036ac3f5aafd",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/99E58871-BEAC-5D0B-A94C-E5DF575746DA.html",
+      "bytes": 72767,
+      "sha256": "3959fbef21f378d7ac288d0d62c7fb52369cdf5ad0e9695aa337ed5c1812cbda",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/9AD1CEE3-A225-3CCD-7691-660587C34F1A.html",
+      "bytes": 63586,
+      "sha256": "90945348f043b8b748672605d766e162e7491c84aea8ce6f10b17004429a8146",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/A6FED340-4FB2-DF1A-F925-63D5D5223CF5.html",
+      "bytes": 20990,
+      "sha256": "b01a46b1d326c7b8cf0bcdd481e3f0b7c8ae2b42c6c3f36f863171a96049b000",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/A9B4A6D8-4779-AA00-AFDF-4F3E31DE7DA8.html",
+      "bytes": 22791,
+      "sha256": "b5d0827967a3055ce5165795ef572eb4616b597d903cbe4c08e48c4a074363dd",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/B4C78CA8-700F-04B6-0772-8E7EA87E1C7E.html",
+      "bytes": 231726,
+      "sha256": "eaf5ca2875ec28cb1de170d3b40a745676ccf8e6b5dd97805d567ce67c1414e1",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/B7E4AFA2-59FC-382C-AFCF-883920732837.html",
+      "bytes": 22231,
+      "sha256": "dac4e1b7a6623a935789473efb4ebdf8de4f60bf0ace4b46bac11b82a52d8175",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/BF9D2665-4596-B277-18D4-97F78837DA08.html",
+      "bytes": 81976,
+      "sha256": "6f1da7b38010545428041b75b20ca513bd3768c0d3b4050ae5e07b4a75af233b",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/C567E022-D4EF-F1C6-B839-10579E95365D.html",
+      "bytes": 23739,
+      "sha256": "dbfd917cf3072fcef2fdae877510b5ce675ee1c6c5a353bdcca387251dfe17ca",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/C818184C-3433-4055-C8C4-041F88038CB4.html",
+      "bytes": 24300,
+      "sha256": "6110e34551d3c2bbea120f9a1352238e06373c7de82b818fb2b2f22099e244d6",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/E6007D25-BBE6-F64F-12CC-B488C06B6E83.html",
+      "bytes": 22714,
+      "sha256": "3a32d3529803c8a684874cf00a9d7c36baccaa1f9da4ad3eeb487f2ac92ae1ee",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/E9A151B7-6771-BD88-21E8-92C20F5BE4FC.html",
+      "bytes": 142048,
+      "sha256": "7d29226957fb79e37d3e8f3f95b498d5dd3341fbe924e23fda4f66e5d64c2bb4",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/FB4BA96D-9049-D967-8C15-D757133E6642.html",
+      "bytes": 65502,
+      "sha256": "4b0d843cc6101b3e4fe529968886005c5ea02f11593984f9b7990bdc3f9496b4",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/FF202D05-9692-A6E3-39B6-BB651FBA345A.html",
+      "bytes": 178096,
+      "sha256": "7cd3cf01b2be9e137254ae26d325cac67b81d6b0b5d0f8cb495dba01bfaa84a9",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/database-sources/FF7D1F88-D281-635C-9F04-EDAD7FF6B4C3.html",
+      "bytes": 22241,
+      "sha256": "5c65c0b29d5120e7e3d18f1e29b81ed18a3e1e1743c992411a6a22aa3a843cf1",
+      "description": "Database OriginalHtml encoded as UTF-8, independently preserved from the bundled source.",
+      "recordCount": 1,
+      "source": "cent_sources.OriginalHtml"
+    },
+    {
+      "path": "assets/document-pages/02B7FEB1-CCE1-4EB3-BF77-61F390571AC5/1.webp",
+      "bytes": 18386,
+      "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/02B7FEB1-CCE1-4EB3-BF77-61F390571AC5/2.webp",
+      "bytes": 22604,
+      "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/0FEA7086-ED9E-41A0-9323-E2E42C9B20BD/1.webp",
+      "bytes": 18386,
+      "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/0FEA7086-ED9E-41A0-9323-E2E42C9B20BD/2.webp",
+      "bytes": 22604,
+      "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/29856693-615D-4665-B11B-98CD6E7E57AD/1.webp",
+      "bytes": 14588,
+      "sha256": "4fbb454dfa0b329098e659f35759ccd8befc498b387fc52144060c405ae9f258",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/29856693-615D-4665-B11B-98CD6E7E57AD/2.webp",
+      "bytes": 15764,
+      "sha256": "a6a2b467fe3663857855e9b1787364f4a126e6bf5fb07521ffba7505230198b2",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/43A380FF-1A22-401B-8729-8449ADC673CB/1.webp",
+      "bytes": 14588,
+      "sha256": "4fbb454dfa0b329098e659f35759ccd8befc498b387fc52144060c405ae9f258",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/43A380FF-1A22-401B-8729-8449ADC673CB/2.webp",
+      "bytes": 15764,
+      "sha256": "a6a2b467fe3663857855e9b1787364f4a126e6bf5fb07521ffba7505230198b2",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/705262B2-72ED-4FCD-839A-50D76C6B49DE/1.webp",
+      "bytes": 18386,
+      "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/705262B2-72ED-4FCD-839A-50D76C6B49DE/2.webp",
+      "bytes": 22604,
+      "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E/1.webp",
+      "bytes": 14588,
+      "sha256": "4fbb454dfa0b329098e659f35759ccd8befc498b387fc52144060c405ae9f258",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E/2.webp",
+      "bytes": 15764,
+      "sha256": "a6a2b467fe3663857855e9b1787364f4a126e6bf5fb07521ffba7505230198b2",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7/1.webp",
+      "bytes": 18386,
+      "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7/2.webp",
+      "bytes": 22604,
+      "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/D3DDCA98-78FD-48F0-A91C-EAA61C44D99C/1.webp",
+      "bytes": 18386,
+      "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/D3DDCA98-78FD-48F0-A91C-EAA61C44D99C/2.webp",
+      "bytes": 22604,
+      "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/FC18C2D6-E80F-460C-ACE3-D848FBE50F1E/1.webp",
+      "bytes": 18386,
+      "sha256": "244134e7eac146e103aef40dac0a8446fd9566bf7c574f0a56808ecc3e307a56",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "assets/document-pages/FC18C2D6-E80F-460C-ACE3-D848FBE50F1E/2.webp",
+      "bytes": 22604,
+      "sha256": "d55732e87b39467858a49f531308c19385d3bc0cd5cb13574528b3112489b72c",
+      "description": "Exact educational document page BLOB; no watermark was added.",
+      "recordCount": 1,
+      "source": "cent_document_pages.Image"
+    },
+    {
+      "path": "audit/asset_references.json",
+      "bytes": 196562,
+      "sha256": "d162fae5fcb7901577cc966ff82e8a6210d01d7ff5f56d2232ed7c570310aecd",
+      "description": "HTML/SVG/CSS references found without executing markup or fetching remote files. Local resolution and export paths included.",
+      "recordCount": 666,
+      "source": "source markup"
+    },
+    {
+      "path": "audit/comparison.json",
+      "bytes": 66610,
+      "sha256": "1abbcab97c571176394f24fb496bdac93b309103b0f8d6de09736d8cb3a6838f",
+      "description": "Record-by-record expected importer values, stable GUID checks, raw HTML checksums, exact missing/differing IDs and fields.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "audit/duplicate_candidates.json",
+      "bytes": 3189,
+      "sha256": "698e618084a12d741fa9f46e8fe59ccf05e23d7138fee38d34c47ddeb59df4a1",
+      "description": "Normalized exact duplicate candidates; repeated titles alone do not prove duplicate content.",
+      "recordCount": 6,
+      "source": "audit"
+    },
+    {
+      "path": "audit/issues.json",
+      "bytes": 101831,
+      "sha256": "591fbf4670302a4815f6376f66faf096d320dcb602ecb63550022fa215f2e513",
+      "description": "Mechanical inventory findings with exact IDs; academic correctness has not been assessed.",
+      "recordCount": 279,
+      "source": "audit"
+    },
+    {
+      "path": "audit/privacy_scope.json",
+      "bytes": 1061,
+      "sha256": "7b8b7a717023ea29851f92ce910f65f440b1bcd430ebbf49555b048b4a6aaf4a",
+      "description": "Explicit exclusions and content-only export scope.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "audit/read_only_evidence.json",
+      "bytes": 4002,
+      "sha256": "3cc92ba8f949c8716381669dce3c70cbbe9a88e4a8569753cfc9298dcaca4a8f",
+      "description": "Database and sidecar fingerprints before/after extraction, earlier coordination-file observation, and read-only methodology.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "audit/schema.json",
+      "bytes": 36703,
+      "sha256": "1df884b5b77f096fefc0f0bcf651d4c54f402ec67b4dd5d8862bed27b66fd649",
+      "description": "Actual SQLite columns, primary keys, content-only foreign keys and indexes.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "audit/source_architecture_evidence.json",
+      "bytes": 4713,
+      "sha256": "1a01e610d60e7c127f08ae5ca48e2d25645c5132b753d39ddd62a453b5d373fe",
+      "description": "Source architecture evidence and hashes; no configuration file contents or credentials included.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "bundled/Review/biology-chapter1-chemical-foundation-fa.txt",
+      "bytes": 167338,
+      "sha256": "44e6ac0970b209c2a41f402351083e6038681a049f37d6b2936d8022b6b35a31",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/biology-chapter2-cell-bioenergetics-fa.txt",
+      "bytes": 133391,
+      "sha256": "f1fd118717aad5a515c6a8eb6c55caa179420301065cc1c400c443ec2364c8c5",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/biology-chapter3-genetics-fa.txt",
+      "bytes": 131127,
+      "sha256": "380acbba790666dd1089a4fca19b20ad6330cf440c6fce988b51eb0c5862c828",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/biology-chapter4-plants-ecology-fa.txt",
+      "bytes": 122840,
+      "sha256": "f5373ac898be1355df670a4b66a783d66ead815152130582a3857391b57f67e3",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/biology-chapter5-animal-physiology-fa.txt",
+      "bytes": 132190,
+      "sha256": "538d7fd103870275a01c8c2c6a5eea13e13acab8dff72c0c31edb085c20267ae",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/chemistry-cent-chemistry-ch1-5-deep-1.txt",
+      "bytes": 33968,
+      "sha256": "e1992b9f58c7a5b0fc6ec0419d09db94f563b27cb88425089a0c949f9ecc554b",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/inventory.json",
+      "bytes": 156753,
+      "sha256": "4562f24372d15c35fdb794e5b022eb4052dd289fc5ff2599fd5dc3ee3ccae7d5",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-20-final-review.txt",
+      "bytes": 9445,
+      "sha256": "07546b5f8ddd72a254554c65b3c27c62f50d04eb9e7b7bfaa656b2fc8cf1de52",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch01-foundations-fa.txt",
+      "bytes": 9856,
+      "sha256": "581f7db9177a149d4439d80fbd5c389c3a5fc458cff713fded07e3aea3a9df38",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch02-conjunction.txt",
+      "bytes": 11032,
+      "sha256": "22280cce32ac356ce6daa0d62806645548f15036a5565adc732c867dd6b123ed",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch03-disjunction.txt",
+      "bytes": 11485,
+      "sha256": "d7d3f11aa01e4a15d7065e644129af0eba18a984ea25292b047a4cf6da2299d8",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch04-conditional.txt",
+      "bytes": 10987,
+      "sha256": "4db7d2a239dfc2e43abf067e204ba2f184000a7226dd9bf0696a2ea62b7acab4",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch05-negation.txt",
+      "bytes": 10821,
+      "sha256": "675ea16a8e1e2448a25f8eb70eaa244b1ff995762341b038b75e2554ec0bac20",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch06-consistency.txt",
+      "bytes": 12729,
+      "sha256": "5621570872d4d1d9044109bf7234afbd973cabacccaa39bfbae1a74a627d4d29",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch07-negating-compounds.txt",
+      "bytes": 10484,
+      "sha256": "e80ddd4f3c6775b86d5587c82e8b5915fc20cb021eb39b473ff22ceebd6c6f93",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch08-equivalents.txt",
+      "bytes": 10914,
+      "sha256": "1d133bce97e40e7adb4bbe9dd6238fd399270d91a0f114b959bb63960d925c31",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch09-necessary-sufficient.txt",
+      "bytes": 10078,
+      "sha256": "08c956b516d7afa6124ec540f78f41d6d9d1526654f1a98bfc21242dfb06bece",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch10-categorical.txt",
+      "bytes": 10070,
+      "sha256": "3d5a016655406a29c6e041d85ae523fd7ff9f4711e21df0fda2f92f948777c8e",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch11-square.txt",
+      "bytes": 11059,
+      "sha256": "cbe6d334de42aaaf7e7781c35eb86981a86567a7d2fb637c7e86a62c292c12d2",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch12-syllogism.txt",
+      "bytes": 10731,
+      "sha256": "026d268fc24ad6b9ff33994a94167c479b67ca1fe539e79d67f52faa6c03bdb1",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch13-quantifiers.txt",
+      "bytes": 9817,
+      "sha256": "00b3f47301c1bfc9d642c60fdd1f1ff048ba5f1d5e9c53e2556184a3c7d40505",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch14-barcharts.txt",
+      "bytes": 10354,
+      "sha256": "731358d14f5c9949844811c31cb5fa5b489371a943f63341fc09064abbfd4cbe",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch15-piecharts.txt",
+      "bytes": 9273,
+      "sha256": "130f63eefc22b8ea44f5d4ce12bfa90bd5720a9a8eb12dfc29e78523e956edb0",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch16-linegraphs.txt",
+      "bytes": 10471,
+      "sha256": "982e4611337e436678f46efaa92dd48e0889761aeb098f2e6bdb12f4376e8a19",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch17-evaluating.txt",
+      "bytes": 10774,
+      "sha256": "55fb0bb46cf504070779d9b5b2f217222e780bf72efa979189ca97867e798317",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch18-venn.txt",
+      "bytes": 7952,
+      "sha256": "351c4035592f65e03b0f8218e2c40524370ab2fd178adc34d29170446c3ba8d1",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/logic-ch19-tables.txt",
+      "bytes": 9261,
+      "sha256": "9cb58fbd2eede331415bf2b81ac725ee1d5cb252c39a0d7f882d231ed0428816",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/math-chapter2.txt",
+      "bytes": 46418,
+      "sha256": "5e7a446e711ba4a4210f9ae34433f1e5b45bb81f7a88ec0a34caa0bf8283cca9",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/math-chapter6-combinatorics-probability.txt",
+      "bytes": 19885,
+      "sha256": "d1ffbae253d7e0d9fe6fd941abc3a8877f946ee50fd679689c11c03adefa7558",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/math-chapter7-statistics.txt",
+      "bytes": 19763,
+      "sha256": "d8415e9396d4bf9ea6361251a98f7c8b66188e9dd1779e115427d4849321b5c6",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/math-geometry-chapter.txt",
+      "bytes": 16115,
+      "sha256": "181239c542b5b1d9dec0e626a66e26e737baa4d6b962277df50cb761501c7bcb",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/math-mastercalss-riazi-fasl1-3.txt",
+      "bytes": 33874,
+      "sha256": "a96ecb7e4bf833c165c2d30d60d8afb441d4e9e9d08945b9a9316ccfa2391137",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/math-trig_chapter.txt",
+      "bytes": 26159,
+      "sha256": "970c4fbc0330efa5d0ce844baee8881d645c9f70a3510408323f62620384b739",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/math-فصل۳-توابع.txt",
+      "bytes": 66974,
+      "sha256": "651f23f9f1373c2ea47c3ea682e42e88979d67900a8caebfcfb64ef14d571310",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/physics-chapter1-physical-quantities.txt",
+      "bytes": 20839,
+      "sha256": "44b414236fbf86cc340b38c3da96b6d27665e2cd100c101e1abe392a4cf7f70f",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/physics-chapter2-kinematics.txt",
+      "bytes": 22799,
+      "sha256": "41f2aad630f98c680d2229c5f0e294dc8af52354e98a57b860a9d76f5ad126af",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/physics-chapter3-dynamics-work-energy.txt",
+      "bytes": 22620,
+      "sha256": "21257df78e1dcd0e75edc467ceac907b8938655490fc8c4bcea92cfdab8a2e50",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/physics-chapter4-pressure.txt",
+      "bytes": 17363,
+      "sha256": "eae444e0d3be387242eb459def01704639bf1d5e0cbb3fb18d773e8eb6d60e47",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/physics-chapter5-thermodynamics.txt",
+      "bytes": 14519,
+      "sha256": "b2502b957d9372b0f2e7cf42fb5e0b122170eb9f0e238612dd660463831075ac",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Review/physics-chapter6-electromagnetism-waves.txt",
+      "bytes": 14327,
+      "sha256": "9346a784415c1fff88bf6aacb3cc9ca4d1308a4df78fc144065e7183abd25299",
+      "description": "Existing derived curriculum review text/inventory; not an independent source or additional lesson.",
+      "recordCount": null,
+      "source": "repository Content/Review"
+    },
+    {
+      "path": "bundled/Sources/biology/chapter1-chemical-foundation-fa.html",
+      "bytes": 276784,
+      "sha256": "93e489b8640ecaed5fe3d81c4e128ac4d401e1a013e60b45f571ec1026c77eee",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/biology/chapter2-cell-bioenergetics-fa.html",
+      "bytes": 232780,
+      "sha256": "09958373a60356c2381d6d38fe36300bd65f33ad3b03a5a908adbdfe8163008f",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/biology/chapter3-genetics-fa.html",
+      "bytes": 237012,
+      "sha256": "bb4428146992dd4ee9ecde8af3654ca24de4f61ccc0e69ef5b61f13802bd0e24",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/biology/chapter4-plants-ecology-fa.html",
+      "bytes": 231726,
+      "sha256": "eaf5ca2875ec28cb1de170d3b40a745676ccf8e6b5dd97805d567ce67c1414e1",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/biology/chapter5-animal-physiology-fa.html",
+      "bytes": 236936,
+      "sha256": "7fe4018cd7501f83ed2770180a2d70bf5ff31a4a1b27325dbd0c036ac3f5aafd",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/chemistry/cent-chemistry-ch1-5-deep-1.html",
+      "bytes": 80240,
+      "sha256": "e754d153fd8ed2cfc81ed85e2c0123dd42b7af6957dd83478b14323984a1327e",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/20-final-review.html",
+      "bytes": 20320,
+      "sha256": "18a3751be0f0510495b39b30e8ace5c842c94564fda17d955fd341f3d160ebbf",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch01-foundations-fa.html",
+      "bytes": 21337,
+      "sha256": "19843c7d72aa04931963a9314b18480dea6f77c425d838e87d795f16266a943e",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch02-conjunction.html",
+      "bytes": 22665,
+      "sha256": "f59baac1e9d537edf245f4a42ce05f38b72ed820dde92e26a850bd0e8a2c5bed",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch03-disjunction.html",
+      "bytes": 23441,
+      "sha256": "093fdc5a8702df202ecee75d3bc09aa89df9213ba1ef66ed302a6c836c9aa46d",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch04-conditional.html",
+      "bytes": 22791,
+      "sha256": "b5d0827967a3055ce5165795ef572eb4616b597d903cbe4c08e48c4a074363dd",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch05-negation.html",
+      "bytes": 22556,
+      "sha256": "c0108d5311177f9a5548ac622c1835d446f30ef97c2a067c40a7eea69c4cc59f",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch06-consistency.html",
+      "bytes": 24300,
+      "sha256": "6110e34551d3c2bbea120f9a1352238e06373c7de82b818fb2b2f22099e244d6",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch07-negating-compounds.html",
+      "bytes": 22241,
+      "sha256": "5c65c0b29d5120e7e3d18f1e29b81ed18a3e1e1743c992411a6a22aa3a843cf1",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch08-equivalents.html",
+      "bytes": 22886,
+      "sha256": "cd6a39621d6cda884134788392ff844ae15feccbea416685a40b286517974f07",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch09-necessary-sufficient.html",
+      "bytes": 21543,
+      "sha256": "113526898469a26c412f0d10a9a8b6b5ea80d8deb022092a57bd4662ff64efff",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch10-categorical.html",
+      "bytes": 21984,
+      "sha256": "788a04d7769d09fd6858686a50c3e3c68ab917e96e4c1077cfa0772d2dd2dd73",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch11-square.html",
+      "bytes": 23739,
+      "sha256": "dbfd917cf3072fcef2fdae877510b5ce675ee1c6c5a353bdcca387251dfe17ca",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch12-syllogism.html",
+      "bytes": 22714,
+      "sha256": "3a32d3529803c8a684874cf00a9d7c36baccaa1f9da4ad3eeb487f2ac92ae1ee",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch13-quantifiers.html",
+      "bytes": 22231,
+      "sha256": "dac4e1b7a6623a935789473efb4ebdf8de4f60bf0ace4b46bac11b82a52d8175",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch14-barcharts.html",
+      "bytes": 23434,
+      "sha256": "ace929d24b29d83677db6d4ca9ff29e461814b86909271c60af02cff31261017",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch15-piecharts.html",
+      "bytes": 22054,
+      "sha256": "0afaf11f0af5aede89e4c6df4d1cde04402af087ff6d4522ddea15e5596f53a0",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch16-linegraphs.html",
+      "bytes": 23180,
+      "sha256": "615dd9250cc330f4c7d04affbbff1e44a5b9d47938d10472f6a710084f68f47b",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch17-evaluating.html",
+      "bytes": 23165,
+      "sha256": "0a3a8b14884124d6cd3e9b8aaedc11e784003e45438d93e54ddf7f440f83d255",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch18-venn.html",
+      "bytes": 20990,
+      "sha256": "b01a46b1d326c7b8cf0bcdd481e3f0b7c8ae2b42c6c3f36f863171a96049b000",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/logic/ch19-tables.html",
+      "bytes": 21352,
+      "sha256": "13b3c38e6e022c691df745c2347965e2a92a90f23c1297f2e4ac1910f359bfe3",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/math/chapter2.html",
+      "bytes": 142048,
+      "sha256": "7d29226957fb79e37d3e8f3f95b498d5dd3341fbe924e23fda4f66e5d64c2bb4",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/math/chapter6-combinatorics-probability.html",
+      "bytes": 63586,
+      "sha256": "90945348f043b8b748672605d766e162e7491c84aea8ce6f10b17004429a8146",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/math/chapter7-statistics.html",
+      "bytes": 42518,
+      "sha256": "0da4eb5758b297eb6d5ee00c5267def9638661f615fb952370976bbaa56f0244",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/math/geometry-chapter.html",
+      "bytes": 65502,
+      "sha256": "4b0d843cc6101b3e4fe529968886005c5ea02f11593984f9b7990bdc3f9496b4",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/math/mastercalss-riazi-fasl1-3.html",
+      "bytes": 125493,
+      "sha256": "f0e83d9eabf9205af6b923f0f57739d28f45b63436b5a2601659807a9087a7bc",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/math/trig_chapter.html",
+      "bytes": 81976,
+      "sha256": "6f1da7b38010545428041b75b20ca513bd3768c0d3b4050ae5e07b4a75af233b",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/math/فصل۳-توابع.html",
+      "bytes": 178096,
+      "sha256": "7cd3cf01b2be9e137254ae26d325cac67b81d6b0b5d0f8cb495dba01bfaa84a9",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/physics/chapter1-physical-quantities.html",
+      "bytes": 76041,
+      "sha256": "40f4e960fe18c035e86104ae59aaa87215106323d05cff649c6b841d2798f585",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/physics/chapter2-kinematics.html",
+      "bytes": 101856,
+      "sha256": "1065b749990e4b119e16c22e316bc7742a988dbaebdd4495f34d5e3f4f4c0775",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/physics/chapter3-dynamics-work-energy.html",
+      "bytes": 102991,
+      "sha256": "39fda7c81c250591196781cbcf776a727228c1bd7c900c1d5e280c3b14feedaa",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/physics/chapter4-pressure.html",
+      "bytes": 80351,
+      "sha256": "8924057d2126dce162fa7e535f3d06744d9a713c76cc1256a1cdd7f794d62c44",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/physics/chapter5-thermodynamics.html",
+      "bytes": 79565,
+      "sha256": "92471bb682b36d20cb995286fb396627a177e96cf4cd48346145718f1162d108",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/Sources/physics/chapter6-electromagnetism-waves.html",
+      "bytes": 72767,
+      "sha256": "3959fbef21f378d7ac288d0d62c7fb52369cdf5ad0e9695aa337ed5c1812cbda",
+      "description": "Exact bundled HTML bytes; scripts and remote references are preserved but were not executed.",
+      "recordCount": 1,
+      "source": "repository bundled HTML"
+    },
+    {
+      "path": "bundled/curriculum.json",
+      "bytes": 7163817,
+      "sha256": "5f5c16c6ab02e019de2604160307ed1e1f9adc734fc94ec840947f36f3f287a9",
+      "description": "Exact UTF-8 bundled curriculum with source keys, original exercise difficulty/figures, authored questions and existing review findings.",
+      "recordCount": null,
+      "source": "backend/Cent.Module/Content/curriculum.json"
+    },
+    {
+      "path": "database/chapters.json",
+      "bytes": 14130,
+      "sha256": "72d777a0f468270280704db2728dfd7fe4eb1fcaf2efa8d0f82d7b72da17bb0c",
+      "description": "All allowlisted educational fields from cent_chapters, including unpublished/inactive rows if present.",
+      "recordCount": 43,
+      "source": "cent_chapters"
+    },
+    {
+      "path": "database/curriculum_imports.json",
+      "bytes": 561,
+      "sha256": "77dbb4d96779d3d0f0f89019a212082639784c82bec3ac142570bb97928d0326",
+      "description": "All allowlisted educational fields from cent_curriculum_imports, including unpublished/inactive rows if present.",
+      "recordCount": 2,
+      "source": "cent_curriculum_imports"
+    },
+    {
+      "path": "database/document_pages.json",
+      "bytes": 7784,
+      "sha256": "1584fb51dd2156b4a86562cf01119d0e49d59fa67fd8449059ca916cb2bf3acd",
+      "description": "All allowlisted educational fields from cent_document_pages, including unpublished/inactive rows if present.",
+      "recordCount": 18,
+      "source": "cent_document_pages"
+    },
+    {
+      "path": "database/document_sections.json",
+      "bytes": 808,
+      "sha256": "fc46a64c8f397f95525fcca847b1a58186eed6824dd9152ee68a2abc2932df31",
+      "description": "All allowlisted educational fields from cent_document_sections, including unpublished/inactive rows if present.",
+      "recordCount": 4,
+      "source": "cent_document_sections"
+    },
+    {
+      "path": "database/lessons.json",
+      "bytes": 17764,
+      "sha256": "71e80f7445ce53e6272f4759ed21c49b1d232e3d08320b90cdcb44ea7d932c13",
+      "description": "All allowlisted educational fields from cent_documents, including unpublished/inactive rows if present.",
+      "recordCount": 48,
+      "source": "cent_documents"
+    },
+    {
+      "path": "database/questions.json",
+      "bytes": 819907,
+      "sha256": "d84f41cdd6176528edf5ecc8c9a95922d0a7dea358f4a8e52667d43194ef3868",
+      "description": "All allowlisted educational fields from cent_questions, including unpublished/inactive rows if present.",
+      "recordCount": 819,
+      "source": "cent_questions"
+    },
+    {
+      "path": "database/source_exercises.json",
+      "bytes": 565088,
+      "sha256": "fe7cd8d2c843053a61cb5188e0f1265dbb92ad98a924a04909806214e1bc3030",
+      "description": "All allowlisted educational fields from cent_source_exercises, including unpublished/inactive rows if present.",
+      "recordCount": 666,
+      "source": "cent_source_exercises"
+    },
+    {
+      "path": "database/source_sections.json",
+      "bytes": 4191312,
+      "sha256": "ab813e91f168ff8771034515bba0b8c8516ed872f4f09d03d3f1ab1b615d5b85",
+      "description": "All allowlisted educational fields from cent_source_sections, including unpublished/inactive rows if present.",
+      "recordCount": 430,
+      "source": "cent_source_sections"
+    },
+    {
+      "path": "database/sources.json",
+      "bytes": 4624557,
+      "sha256": "d31920a914ab6ded1f0ec2e3efa57713f701c39a40bb721e238d4b407aa6d435",
+      "description": "All allowlisted educational fields from cent_sources, including unpublished/inactive rows if present.",
+      "recordCount": 39,
+      "source": "cent_sources"
+    },
+    {
+      "path": "database/subjects.json",
+      "bytes": 1163,
+      "sha256": "786ddf1957f12ffbce021bb8f43f417f587be249f75c73ffceb7c94bc6e9420b",
+      "description": "All allowlisted educational fields from cent_courses, including unpublished/inactive rows if present.",
+      "recordCount": 5,
+      "source": "cent_courses"
+    },
+    {
+      "path": "database/topics.json",
+      "bytes": 72278,
+      "sha256": "2c267d678fe21c9b25cbb7b1917d120d37bc25a1f14861d0aa849cb2eb403f93",
+      "description": "All allowlisted educational fields from cent_topics, including unpublished/inactive rows if present.",
+      "recordCount": 190,
+      "source": "cent_topics"
+    },
+    {
+      "path": "database/trainings.json",
+      "bytes": 5510,
+      "sha256": "7f8127fcc7979f5e7e3b7119e845511a04f310b0eeed3cd228648bc6237ee9a9",
+      "description": "All allowlisted educational fields from cent_trainings, including unpublished/inactive rows if present.",
+      "recordCount": 14,
+      "source": "cent_trainings"
+    },
+    {
+      "path": "derived/answer_choices.json",
+      "bytes": 998854,
+      "sha256": "25b86a5a71cbe3492cfeb6f4f7495aa22550dc7a35a068252f05a0a06b780601",
+      "description": "Parsed ordered choices; composite identity is parentTable + parentId + position (zero-based). Original OptionsJson remains in parent records.",
+      "recordCount": 5232,
+      "source": "derived from database OptionsJson"
+    },
+    {
+      "path": "derived/counts_by_subject.json",
+      "bytes": 2643,
+      "sha256": "309da11e2c52e54c4e8b0a93ec785c5966f04bfaaa8eaf707df99315e96f36db",
+      "description": "Counts include an explicit unassigned bucket; no subject was inferred from lesson titles.",
+      "recordCount": 6,
+      "source": "derived from database relationships"
+    },
+    {
+      "path": "derived/counts_by_topic.json",
+      "bytes": 173443,
+      "sha256": "13b4e5472be68a3526c2d488cc38ed164e9982217a6246196818ef7d1cdb16eb",
+      "description": "Per-topic question/difficulty and exercise counts, source links and lesson IDs. Lesson associations can overlap across topics.",
+      "recordCount": 190,
+      "source": "derived from database relationships"
+    },
+    {
+      "path": "derived/document_coverage.json",
+      "bytes": 14693,
+      "sha256": "ea39a6200b273dbdd56f1901443d22045a53a5a3043e812e556e76a92ffe3bdd",
+      "description": "Page counts distinguish source-section virtual pages from image BLOB pages.",
+      "recordCount": 48,
+      "source": "derived from database relationships"
+    },
+    {
+      "path": "derived/mock_exams.json",
+      "bytes": 909,
+      "sha256": "c6aecd620ebd4eb2e3e9cb8ea3caeca60ad8aae1aa26df80655e3845756ae92c",
+      "description": "No reusable mock templates exist in this schema; source-inspected runtime assembly rules and exclusion of private attempts.",
+      "recordCount": 0,
+      "source": "source inspection"
+    },
+    {
+      "path": "derived/question_groupings.json",
+      "bytes": 72849,
+      "sha256": "751d300ad60ad53826535f29967556f3db060055ea13874d3cfb95c5c3cb7ba6",
+      "description": "Convenience groupings by existing TopicId; these are derived views, not stored question-group entities.",
+      "recordCount": 190,
+      "source": "derived"
+    },
+    {
+      "path": "derived/study_notes.json",
+      "bytes": 459,
+      "sha256": "2570b1bf4dc51409299621bda96b65356230b5d8f45d0ab941015fcf684998fb",
+      "description": "Explains where editorial study text is stored and why personal notes are excluded.",
+      "recordCount": 0,
+      "source": "source inspection"
+    },
+    {
+      "path": "derived/subject_hierarchy.json",
+      "bytes": 195990,
+      "sha256": "1267786b40acdc9efa80f681c8f90327d65d5ac050fb4a5c752fc15bed6fe613",
+      "description": "Subject/chapter/topic tree with stable relationship IDs; full texts remain in database exports.",
+      "recordCount": 5,
+      "source": "derived from database relationships"
+    },
+    {
+      "path": "derived/unmapped_content.json",
+      "bytes": 4412,
+      "sha256": "df361422dd5e549f3d9e3943e952663672e59b6a9b716d10afc8edcf718e04dc",
+      "description": "Exact IDs of content without topic/subject assessment links.",
+      "recordCount": null,
+      "source": null
+    },
+    {
+      "path": "audit/verification.json",
+      "bytes": 1167,
+      "sha256": "1ecc1ce2aed2de2d58b78a0354efafe11729d167b47a06c1d5aee7dc9ee3cdba",
+      "description": "Independent UTF-8/JSON/hash verification, fresh read-only database field comparison, and content privacy checks.",
+      "recordCount": null,
+      "source": "independent audit verification"
+    }
+  ],
+  "verification": {
+    "result": "PASS",
+    "details": "audit/verification.json"
+  }
+}

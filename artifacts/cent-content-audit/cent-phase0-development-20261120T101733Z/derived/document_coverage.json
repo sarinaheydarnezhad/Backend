@@ -1,0 +1,487 @@
+{
+  "datasetLabel": "DEVELOPMENT DATA",
+  "source": "derived from database relationships",
+  "recordCount": 48,
+  "records": [
+    {
+      "documentId": "02B7FEB1-CCE1-4EB3-BF77-61F390571AC5",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "0345BE8D-B1A6-198F-5806-098DA3D3DECB",
+      "sourceId": "0F2CA150-41C3-0AEE-548B-844AE19755F9",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "0EDDA12B-31E3-3FCB-FC06-59CAF8DCEDEF",
+      "sourceId": "03D25309-4471-923F-14E4-2A898A42B10E",
+      "published": 1,
+      "declaredPageCount": 17,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 17,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "0FEA7086-ED9E-41A0-9323-E2E42C9B20BD",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "1563F1FF-1228-2A36-9349-3981C70E2BE2",
+      "sourceId": "040CA2F5-3BDB-8995-C114-54E4EE8F53AC",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "26559545-07B6-5BD7-0723-EA951534B1D7",
+      "sourceId": "19C7CDBD-2DF8-9F2C-1A05-63D46DE121F4",
+      "published": 1,
+      "declaredPageCount": 14,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 14,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "29856693-615D-4665-B11B-98CD6E7E57AD",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "2A4CEDD5-21DF-8B00-58DC-0DBA2FA1D0A1",
+      "sourceId": "A9B4A6D8-4779-AA00-AFDF-4F3E31DE7DA8",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "3654F019-3168-659A-4E44-7FD523681601",
+      "sourceId": "FF202D05-9692-A6E3-39B6-BB651FBA345A",
+      "published": 1,
+      "declaredPageCount": 14,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 14,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "3E4B118A-332B-7900-537A-9B6EBA687B13",
+      "sourceId": "1F9B5357-1054-D852-3665-EAC1BF041AA5",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "43A380FF-1A22-401B-8729-8449ADC673CB",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "44826601-8419-0CBD-C04D-B45A54B8B2F5",
+      "sourceId": "4B4FBFB9-896A-1407-073A-A3F6881591FE",
+      "published": 1,
+      "declaredPageCount": 15,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 15,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "47B18324-10AA-0CAD-08E3-FB93D52BE7BA",
+      "sourceId": "0B42FE17-B855-76B8-08E2-BED445C24111",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "51CE5339-D72C-8290-A2BD-31EE70A0251E",
+      "sourceId": "02B0C98C-BFA6-D4CF-B9DA-EECC6F2C5E3D",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "64DF0494-1D9D-04B2-1069-BECFA1961716",
+      "sourceId": "A6FED340-4FB2-DF1A-F925-63D5D5223CF5",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "6B6F7581-5069-1143-06F4-37830DFAF983",
+      "sourceId": "3988520F-3CAB-5534-5220-01D13E8437C2",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "6D7121B2-4929-1B2B-B2C3-F290EC70C69B",
+      "sourceId": "E9A151B7-6771-BD88-21E8-92C20F5BE4FC",
+      "published": 1,
+      "declaredPageCount": 15,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 15,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "705262B2-72ED-4FCD-839A-50D76C6B49DE",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "738E0E4B-4FE4-CB54-6EDC-1D71FB5E7C92",
+      "sourceId": "6109430A-B05F-9057-3E64-C69EB1A9D2E7",
+      "published": 1,
+      "declaredPageCount": 3,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 3,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "7B7194C1-8DE6-E33F-6AF0-A7D1F7A6CAA1",
+      "sourceId": "00E861CC-37A3-973A-EB9F-622250C58294",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "7F112198-7F2A-89F8-E8BC-8CA74E9BE285",
+      "sourceId": "32BC651C-E08E-D293-329A-BF25EA5F804A",
+      "published": 1,
+      "declaredPageCount": 13,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 13,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "83C57C7A-1577-D89B-4A55-51CC0984AEC0",
+      "sourceId": "BF9D2665-4596-B277-18D4-97F78837DA08",
+      "published": 1,
+      "declaredPageCount": 10,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 10,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "8998E945-388D-ABD7-7ADC-8A5A6632B10C",
+      "sourceId": "7DAE0575-DCA5-2448-3E3A-29A0BC9DB9C5",
+      "published": 1,
+      "declaredPageCount": 6,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 6,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "9D4726C0-BDFB-9A84-739D-352668CD0CF7",
+      "sourceId": "1174E3F6-071A-01D4-C9A8-280BEAB9E5B8",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "9DCCE30C-576A-46A0-B6C1-4ABF6EC75E7E",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "9DF88A6A-17F1-4377-BF4C-8947A3C7ACE7",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "9ED82E4F-0310-EEFC-9678-5F3DE44BE0CB",
+      "sourceId": "62919066-707D-C4CB-C842-529D943E9145",
+      "published": 1,
+      "declaredPageCount": 15,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 15,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "9FC2A48E-FAB4-214B-B6DA-323D96ECC7CF",
+      "sourceId": "2D0B80D9-A16D-5BF5-FD86-DA0844DF0087",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "A623F8F8-A440-011E-FEE6-346274A6F253",
+      "sourceId": "B4C78CA8-700F-04B6-0772-8E7EA87E1C7E",
+      "published": 1,
+      "declaredPageCount": 16,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 16,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "A76EB7A7-43C6-B02D-B891-EB953B2C75F9",
+      "sourceId": "99E58871-BEAC-5D0B-A94C-E5DF575746DA",
+      "published": 1,
+      "declaredPageCount": 12,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 12,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "A840A773-6EB1-13F8-A41F-E43DC382669F",
+      "sourceId": "C818184C-3433-4055-C8C4-041F88038CB4",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "B0A8F648-71A0-17AD-4370-2AA9BC86A816",
+      "sourceId": "9AD1CEE3-A225-3CCD-7691-660587C34F1A",
+      "published": 1,
+      "declaredPageCount": 11,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 11,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "B8A4DBAE-ABE7-F49B-C0CC-FB34D024F7D6",
+      "sourceId": "27C6F8B1-8C19-E424-5E42-F16F99BCAB79",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "C2EE0F94-DE1C-DB14-BE5B-B3227118ABA6",
+      "sourceId": "B7E4AFA2-59FC-382C-AFCF-883920732837",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "C48A81E2-E25B-8BEF-B55D-35FA669FF459",
+      "sourceId": "FB4BA96D-9049-D967-8C15-D757133E6642",
+      "published": 1,
+      "declaredPageCount": 8,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 8,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "CA0F7CA0-403B-CAB5-4E97-063D5F074475",
+      "sourceId": "8F78D75B-1244-01CC-C04F-2BAE4964D664",
+      "published": 1,
+      "declaredPageCount": 18,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 18,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "CE12F957-E736-9E1B-C9FD-5955A91FB384",
+      "sourceId": "E6007D25-BBE6-F64F-12CC-B488C06B6E83",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "D1E3D053-D382-25D9-D2AA-4C7DD87B823C",
+      "sourceId": "89252BC7-A012-C58E-BA93-DEEE353C33F9",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "D3003336-18F0-D405-4B1E-CAE651782812",
+      "sourceId": "7EA0A24A-3E64-5F99-256B-7B4A6D2F8861",
+      "published": 1,
+      "declaredPageCount": 18,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 18,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "D3DDCA98-78FD-48F0-A91C-EAA61C44D99C",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "D5659FCB-E36C-48BF-7D15-0D6AC81B44E1",
+      "sourceId": "24EDDFE0-94BC-8FCA-4158-6E6FD45480FD",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "DD4DCB48-A86C-15AD-A3D3-BF447C2F49C4",
+      "sourceId": "9250EAC1-6BD0-1F6E-BBDC-E0A7952F1A21",
+      "published": 1,
+      "declaredPageCount": 16,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 16,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "E1E81FC8-642B-94E5-24B8-663CB39C2E29",
+      "sourceId": "044EC217-FC60-4A65-1CE6-36DFABDB96FB",
+      "published": 1,
+      "declaredPageCount": 16,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 16,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "E35E3009-C939-1C85-351B-9C88FA91817A",
+      "sourceId": "C567E022-D4EF-F1C6-B839-10579E95365D",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "E9CB7B90-D5D5-1D04-4662-D9AD0015BBB7",
+      "sourceId": "252303E1-32E1-77F4-D8E2-B3F765C5F480",
+      "published": 1,
+      "declaredPageCount": 8,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 8,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "EA9FD74D-457A-A9A3-C8BA-2832D33747E9",
+      "sourceId": "FF7D1F88-D281-635C-9F04-EDAD7FF6B4C3",
+      "published": 1,
+      "declaredPageCount": 9,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 9,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "ED57EB67-56AE-E14A-343A-9E92B34A3C91",
+      "sourceId": "21CA9FB7-D3AE-E03C-923B-6BCC18A11C0F",
+      "published": 1,
+      "declaredPageCount": 14,
+      "storage": "source-sections",
+      "storedPageImages": 0,
+      "sourceSectionCount": 14,
+      "missingPageNumbers": []
+    },
+    {
+      "documentId": "FC18C2D6-E80F-460C-ACE3-D848FBE50F1E",
+      "sourceId": null,
+      "published": 1,
+      "declaredPageCount": 2,
+      "storage": "webp-pages",
+      "storedPageImages": 2,
+      "sourceSectionCount": 0,
+      "missingPageNumbers": []
+    }
+  ]
+}
