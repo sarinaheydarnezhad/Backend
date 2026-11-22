@@ -8,6 +8,8 @@ public interface ISmsOtpSender
 {
     bool IsConfigured { get; }
     Task SendAsync(string phoneNumber, string code, CancellationToken cancellationToken);
+    Task SendAsync(string phoneNumber, string code, string purpose, CancellationToken cancellationToken) =>
+        SendAsync(phoneNumber, code, cancellationToken);
 }
 
 public sealed class WebhookSmsOtpSender(HttpClient client, IConfiguration configuration) : ISmsOtpSender

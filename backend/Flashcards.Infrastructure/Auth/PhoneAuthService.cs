@@ -57,7 +57,7 @@ public sealed class PhoneAuthService(FlashcardsDbContext database, TokenService 
             await transaction.CommitAsync(cancellationToken);
         }
         var id = challenge.Id;
-        await sender.SendAsync(phone, code, cancellationToken);
+        await sender.SendAsync(phone, code, purpose, cancellationToken);
         await database.OtpChallenges.Where(x => x.PhoneNumber == phone && x.Id == id)
             .ExecuteUpdateAsync(u => u.SetProperty(x => x.Delivered, true), cancellationToken);
         return new OtpRequestResponse(id, challenge.ExpiresAtUtc, now.AddSeconds(otp.ResendCooldownSeconds), 6);

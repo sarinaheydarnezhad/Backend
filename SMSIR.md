@@ -1,5 +1,28 @@
 # SMS.ir OTP integration
 
+## MeliPayamak Console alternative
+
+Lerona generates and verifies its own codes. Use the Console's shared service-line
+API (`/api/send/shared/{apiKey}`) to deliver those codes through approved
+patterns. The Console's `/api/send/otp` method generates a separate code.
+
+Create one approved pattern per purpose, with a single `{0}` placeholder:
+
+- Registration: `کد تأیید ثبت‌نام لرونا: {0}`
+- Password reset: `کد بازیابی رمز عبور لرونا: {0}`
+
+After deploying a backend build with the adapter, set these Liara backend
+environment variables together:
+
+- `Sms__Provider=MeliPayamak`
+- `MeliPayamak__ApiKey` to the Console API key
+- `MeliPayamak__RegistrationBodyId` to the approved registration pattern code
+- `MeliPayamak__ResetBodyId` to the approved password reset pattern code
+
+The Console key is a server secret. Test signup with a fresh test number and
+recovery with an existing test account. A send receipt confirms provider
+acceptance. Verify handset delivery and code acceptance for both paths.
+
 For the current user flow and endpoint purposes, see [password login with SMS-verified signup/recovery](docs/PHONE_PASSWORD_OTP_REPORT.md). Normal password login does not send SMS.
 
 The adapter extends the existing `ISmsOtpSender`; registration/login, OTP storage/expiry/rate limits and JWT/refresh handling are unchanged. No mobile API or navigation change is required.
