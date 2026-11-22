@@ -190,6 +190,13 @@ public sealed class CurriculumReleaseTests
         await db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(db).Import();
         var user = new CentUser { Email = "practice@example.invalid", NormalizedEmail = "PRACTICE@EXAMPLE.INVALID" };
         db.Users.Add(user); await db.SaveChangesAsync();
+        var product = new CentProduct { Title = "Paid Practice fixture", Kind = "TRAINING", PriceRial = 1,
+            TrainingId = CurriculumIdentity.Id("training:reading") };
+        db.Products.Add(product); await db.SaveChangesAsync();
+        var order = new CentOrder { UserId = user.Id, ProductId = product.Id, RequestId = Guid.NewGuid(), Kind = "TRAINING", Status = "PAID" };
+        db.Orders.Add(order); await db.SaveChangesAsync();
+        db.Entitlements.Add(new() { UserId = user.Id, OrderId = order.Id, Kind = "TRAINING", TrainingId = product.TrainingId,
+            StartsAt = DateTimeOffset.UtcNow.AddMinutes(-1) }); await db.SaveChangesAsync();
         var practice = new CentPractice(db, new CentAccess(db)); var request = Guid.NewGuid();
         var topic = CurriculumIdentity.Id("topic:reading/updates-2026-r1.html#main-idea");
         JsonElement AsJson(object value) => JsonSerializer.SerializeToElement(value, CentExamJson.Options);

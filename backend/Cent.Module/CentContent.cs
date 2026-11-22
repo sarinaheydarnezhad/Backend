@@ -8,6 +8,27 @@ namespace Cent.Module;
 
 public sealed class CentAccess(CentDbContext db)
 {
+    public async Task<HashSet<Guid>> ReviewedSources(Guid user, Guid training, CancellationToken ct)
+    {
+        var now = DateTimeOffset.UtcNow;
+        var releases = await (from a in db.Set<CentSubjectAccess>() join e in db.Entitlements on a.EntitlementId equals e.Id
+            join c in db.Courses on a.SubjectId equals c.Code where a.UserId == user && c.TrainingId == training &&
+            a.RevokedAt == null && e.RevokedAt == null && a.StartsAt <= now && a.ExpiresAt > now select a.ContentReleaseId).Distinct().ToListAsync(ct);
+        var snapshots = await db.CurriculumRevisions.AsNoTracking().Where(r => releases.Contains(r.Id)).Select(r => r.PayloadJson).ToListAsync(ct);
+        var reviewed = snapshots.Select(s => System.Text.Json.JsonSerializer.Deserialize<Curriculum.CurriculumRelease>(s, Curriculum.CurriculumReleases.Json)!)
+            .SelectMany(r => r.Resources).Where(r => r.Kind == "lesson" && r.ReviewStatus is "academically-reviewed" or "agent-reviewed")
+            .Select(r => Curriculum.CurriculumIdentity.Id("section:" + r.Key)).ToHashSet();
+        var sections = await db.SourceSections.AsNoTracking().Where(s => db.Sources.Any(src => src.Id == s.SourceId &&
+            db.Courses.Any(c => c.Code == src.CourseCode && c.TrainingId == training))).Select(s => new { s.Id, s.SourceId }).ToListAsync(ct);
+        return sections.GroupBy(s => s.SourceId).Where(g => g.All(s => reviewed.Contains(s.Id))).Select(g => g.Key).ToHashSet();
+    }
+    public async Task<bool> HasSubject(Guid userId, string subjectId, CancellationToken ct)
+    {
+        var now = DateTimeOffset.UtcNow;
+        return await (from a in db.Set<CentSubjectAccess>() join e in db.Entitlements on a.EntitlementId equals e.Id
+            where a.UserId == userId && a.SubjectId == subjectId && a.RevokedAt == null && e.RevokedAt == null &&
+                a.StartsAt <= now && a.ExpiresAt > now select a.Id).AnyAsync(ct);
+    }
     public async Task<bool> HasSubscription(Guid userId, CancellationToken ct)
     {
         var now = DateTimeOffset.UtcNow;
@@ -20,7 +41,8 @@ public sealed class CentAccess(CentDbContext db)
         var training = await db.Trainings.AsNoTracking().SingleOrDefaultAsync(t => t.Id == trainingId && t.Published, ct);
         if (training is null) return false;
         var now = DateTimeOffset.UtcNow;
-        return await db.Entitlements.AnyAsync(e => e.UserId == userId && e.RevokedAt == null && e.StartsAt <= now &&
+        var subject = await db.Courses.Where(c => c.TrainingId == trainingId).Select(c => c.Code).SingleOrDefaultAsync(ct);
+        return (subject is not null && await HasSubject(userId, subject, ct)) || await db.Entitlements.AnyAsync(e => e.UserId == userId && e.RevokedAt == null && e.StartsAt <= now &&
             (e.ExpiresAt == null || e.ExpiresAt > now) &&
             ((e.Kind == "TRAINING" && e.TrainingId == trainingId) || (training.IncludedInSubscription && e.Kind == "SUBSCRIPTION")), ct);
     }
@@ -30,6 +52,17 @@ public sealed class CentAccess(CentDbContext db)
         var document = await db.Documents.AsNoTracking().SingleOrDefaultAsync(d => d.Id == documentId && d.Published, ct);
         CentModule.Check(document is not null, "این درس پیدا نشد.", 404);
         CentModule.Check(await CanRead(userId, document!.TrainingId, ct), "برای مطالعه این آموزش، خرید یا اشتراک فعال لازم است.", 403, "access_required");
+        var now = DateTimeOffset.UtcNow;
+        var legacy = await db.Entitlements.AnyAsync(e => e.UserId == userId && e.RevokedAt == null && e.StartsAt <= now &&
+            (e.ExpiresAt == null || e.ExpiresAt > now) && ((e.Kind == "TRAINING" && e.TrainingId == document.TrainingId) ||
+            (e.Kind == "SUBSCRIPTION" && db.Trainings.Any(t => t.Id == document.TrainingId && t.IncludedInSubscription))), ct);
+        if (!legacy) {
+            // New subject sales include reviewed released sources only. Never
+            // turn ownership of a subject into access to an unrelated draft.
+            var sources = await ReviewedSources(userId, document.TrainingId, ct);
+            CentModule.Check(document.SourceId is { } source && sources.Contains(source),
+                "این منبع هنوز بازبینی نهایی نشده است.", 403, "content_review_pending");
+        }
         return document;
     }
 }
@@ -42,10 +75,13 @@ public static class CentContentEndpoints
     public static void MapCentContent(this RouteGroupBuilder group)
     {
         group.MapGet("/catalog", async (CentDbContext db, CancellationToken ct) => {
-            var trainings = await db.Trainings.AsNoTracking().Where(t => t.Published).OrderBy(t => t.Title).ToListAsync(ct);
-            var products = await db.Products.AsNoTracking().Where(p => p.Active && (p.Kind == "SUBSCRIPTION" ||
-                db.Trainings.Any(t => t.Id == p.TrainingId && t.Published))).OrderBy(p => p.PriceRial).ToListAsync(ct);
-            return Results.Ok(new { trainings, products });
+            var subjects = await CentSubjectCatalog.Read(db, ct);
+            var ids = subjects.Select(s => s.TrainingId).ToArray();
+            var trainings = await db.Trainings.AsNoTracking().Where(t => t.Published && ids.Contains(t.Id)).OrderBy(t => t.Title).ToListAsync(ct);
+            var products = await db.Products.AsNoTracking().Where(p => p.Kind == "SUBJECT" && p.Active && ids.Contains(p.TrainingId)).ToListAsync(ct);
+            var bundles = await db.Set<CentRecommendedBundle>().AsNoTracking().Where(b => b.Active).ToListAsync(ct);
+            return Results.Ok(new { trainings, products, subjects, bundles = bundles.Select(b => new { b.Id, b.Title, subjectIds = System.Text.Json.JsonSerializer.Deserialize<string[]>(b.SubjectsJson), b.Rationale }),
+                currency = "IRR", accessMonths = 12, basePriceRial = CentSubjectPricing.BaseRial, pricingVersion = CentSubjectPricing.Version });
         });
         var me = group.MapGroup("/me").RequireAuthorization("CentUser");
         me.MapGet("/library", async (ClaimsPrincipal p, CentDbContext db, CentAccess access, CancellationToken ct) => {
@@ -56,16 +92,27 @@ public static class CentContentEndpoints
                 .Select(g => new { documentId = g.Key, count = g.Count() }).ToListAsync(ct);
             var hasSubscription = await access.HasSubscription(userId, ct);
             var ownedIds = grants.Where(e => e.Kind == "TRAINING").Select(e => e.TrainingId).ToArray();
+            var subjectIds = await db.Set<CentSubjectAccess>().Where(a => a.UserId == userId).Select(a => a.SubjectId).Distinct().ToListAsync(ct);
+            var subjectTrainingIds = db.Courses.Where(c => subjectIds.Contains(c.Code)).Select(c => c.TrainingId);
             var visitedDocs = progress.Select(x => x.DocumentId).Concat(notes.Select(n => n.documentId)).ToArray();
             var visitedTrainings = db.Documents.Where(d => visitedDocs.Contains(d.Id)).Select(d => d.TrainingId);
-            var trainings = await db.Trainings.AsNoTracking().Where(t => ownedIds.Contains(t.Id) || visitedTrainings.Contains(t.Id) ||
+            var trainings = await db.Trainings.AsNoTracking().Where(t => ownedIds.Contains(t.Id) || subjectTrainingIds.Contains(t.Id) || visitedTrainings.Contains(t.Id) ||
                 (hasSubscription && t.IncludedInSubscription && t.Published)).OrderBy(t => t.Title).ToListAsync(ct);
             var ids = trainings.Select(t => t.Id).ToArray();
             var documents = await db.Documents.AsNoTracking().Where(d => ids.Contains(d.TrainingId) && d.Published)
                 .OrderBy(d => d.SortOrder).Select(d => new { d.Id, d.TrainingId, d.SourceId, d.Title, d.PageCount, d.SortOrder }).ToListAsync(ct);
             var readable = new List<Guid>();
             foreach (var t in trainings) if (await access.CanRead(userId, t.Id, ct)) readable.Add(t.Id);
-            return Results.Ok(new { trainings, documents, progress, notes, entitlements = grants, hasSubscription, readableTrainingIds = readable });
+            var readableDocuments = new List<Guid>(); var now = DateTimeOffset.UtcNow;
+            foreach (var t in trainings.Where(t => readable.Contains(t.Id))) {
+                var legacy = grants.Any(e => e.RevokedAt == null && e.StartsAt <= now && (e.ExpiresAt == null || e.ExpiresAt > now) &&
+                    ((e.Kind == "TRAINING" && e.TrainingId == t.Id) || (e.Kind == "SUBSCRIPTION" && t.IncludedInSubscription)));
+                var sources = legacy ? [] : await access.ReviewedSources(userId, t.Id, ct);
+                readableDocuments.AddRange(documents.Where(d => d.TrainingId == t.Id && (legacy || d.SourceId is { } src && sources.Contains(src))).Select(d => d.Id));
+            }
+            var subjectAccess = await (from a in db.Set<CentSubjectAccess>().AsNoTracking() join e in db.Entitlements on a.EntitlementId equals e.Id
+                where a.UserId == userId select new { a.Id, a.SubjectId, a.StartsAt, a.ExpiresAt, revokedAt = a.RevokedAt ?? e.RevokedAt }).ToListAsync(ct);
+            return Results.Ok(new { trainings, documents, progress, notes, entitlements = grants, subjectAccess, hasSubscription, readableTrainingIds = readable, readableDocumentIds = readableDocuments });
         });
         me.MapGet("/notes", async (ClaimsPrincipal p, CentDbContext db, CancellationToken ct) =>
             Results.Ok(await (from n in db.Notes.AsNoTracking() join d in db.Documents on n.DocumentId equals d.Id

@@ -24,6 +24,10 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
         var attempt = await db.Attempts.SingleOrDefaultAsync(a => a.UserId == userId && a.RequestId == requestId, ct);
         if (attempt is not null) CentModule.Check(attempt.Kind == kind && attempt.CourseCodesJson == JsonSerializer.Serialize(course is null ? Array.Empty<string>() : new[] { course }) && attempt.AssessmentMode == (topicId?.ToString() ?? "overview"), "شناسه درخواست تکراری است.", 409);
         if (attempt is null) {
+            if (versioned && course is not null) {
+                var training = await db.Courses.Where(c => c.Code == course).Select(c => c.TrainingId).SingleOrDefaultAsync(ct);
+                CentModule.Check(training is { } id && await access.CanRead(userId, id, ct), "برای تمرین این درس دسترسی فعال لازم است.", 403, "access_required");
+            }
             var day = DateTimeOffset.UtcNow.AddDays(-1);
             CentModule.Check(await db.Attempts.CountAsync(a => a.UserId == userId && a.CreatedAt > day, ct) < 20, "سقف روزانه آزمون‌ها تکمیل شده است.", 429);
             var candidates = await db.Questions.AsNoTracking().Where(q => q.Active && (q.Kind == kind || q.Kind == "both") &&
@@ -47,6 +51,12 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
                         CorrectAnswer = f.CorrectAnswer, Explanation = f.Explanation, FigureSvg = f.FigureSvg };
                 }).ToList();
             } else candidates = candidates.Where(q => q.Kind != "practice").ToList();
+            if (versioned && course is null) {
+                var allowed = new List<string>();
+                foreach (var c in await db.Courses.AsNoTracking().Where(c => c.Active && c.TrainingId != null).ToListAsync(ct))
+                    if (await access.CanRead(userId, c.TrainingId!.Value, ct)) allowed.Add(c.Code);
+                candidates = candidates.Where(q => allowed.Contains(q.Subject)).ToList();
+            }
             // Round-robin across subjects and topics; randomize within each skill and vary difficulty.
             var groups = candidates.GroupBy(q => q.Subject).OrderBy(_ => Random.Shared.Next()).Select(g =>
                 new Queue<CentQuestion>(g.GroupBy(q => q.TopicId?.ToString() ?? q.Topic).OrderBy(_ => Random.Shared.Next())

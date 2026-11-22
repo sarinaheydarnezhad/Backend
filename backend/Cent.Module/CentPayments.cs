@@ -16,6 +16,7 @@ public sealed class CentGateway(HttpClient http, IConfiguration config, IHostEnv
     public bool Sandbox => config.GetValue("Cent:Payments:Sandbox", true);
     public string Mode => IsMock ? "DEVELOPMENT_MOCK" : string.IsNullOrWhiteSpace(config["Cent:Payments:MerchantId"]) ? "NOT_CONFIGURED" : Sandbox ? "SANDBOX" : "LIVE";
     public string ResultUrl(Guid orderId) => BaseUrl("Cent:ClientBaseUrl") + "/checkout/success?order=" + orderId;
+    public string DevelopmentUrl(Guid orderId) => BaseUrl("Cent:ClientBaseUrl") + "/checkout/development?order=" + orderId;
     private static string OrderHost(CentOrder order) => order.Provider switch {
         "SANDBOX" => "https://sandbox.zarinpal.com",
         "ZARINPAL" => "https://payment.zarinpal.com",
@@ -115,6 +116,7 @@ public sealed class CentPayments(CentDbContext db, CentGateway gateway)
             gateway.CheckReady();
             var product = await db.Products.AsNoTracking().SingleOrDefaultAsync(p => p.Id == productId && p.Active, ct);
             CentModule.Check(product is not null, "محصول در دسترس نیست.", 404);
+            CentModule.Check(product!.Kind is "TRAINING" or "SUBSCRIPTION", "برای خرید درس از پیش‌فاکتور استفاده کن.", 409, "subject_quote_required");
             if (product!.Kind == "TRAINING") {
                 CentModule.Check(await db.Trainings.AnyAsync(t => t.Id == product.TrainingId && t.Published, ct), "این آموزش منتشر نشده است.", 404);
                 CentModule.Check(!await db.Entitlements.AnyAsync(e => e.UserId == userId && e.Kind == "TRAINING" && e.TrainingId == product.TrainingId && e.RevokedAt == null, ct),
@@ -166,9 +168,14 @@ public sealed class CentPayments(CentDbContext db, CentGateway gateway)
         var order = await db.Orders.AsNoTracking().SingleAsync(o => o.Id == orderId, ct);
         if (order.Status == "PAID") return true;
         CentModule.Check(order.Authority is not null, "درخواست پرداخت هنوز آماده نیست.", 409);
+        if (order.Kind == "SUBJECT_ORDER" && order.Provider == "MOCK") {
+            CentModule.Check(gateway.IsMock, "پرداخت آزمایشی غیرفعال است.", 403, "mock_payment_disabled");
+            if (!await db.Set<CentSubjectOrder>().AnyAsync(s => s.OrderId == order.Id && s.DevelopmentOutcome == "success", ct)) return false;
+        }
         var verified = await gateway.Verify(order, ct);
         db.PaymentEvents.Add(new CentPaymentEvent { OrderId = order.Id, Action = "VERIFY", Code = verified.Code });
         if (verified.Code is not (100 or 101) || string.IsNullOrWhiteSpace(verified.Reference) || verified.Reference == "0") {
+            if (order.Kind == "SUBJECT_ORDER") await db.Orders.Where(o => o.Id == order.Id && o.Status != "PAID").ExecuteUpdateAsync(s => s.SetProperty(o => o.Status, "FAILED"), ct);
             await db.SaveChangesAsync(ct); return false;
         }
         // Serialize purchases per Cent user. Grant and payment state commit atomically; retries cannot double-extend a subscription.
@@ -176,6 +183,8 @@ public sealed class CentPayments(CentDbContext db, CentGateway gateway)
         await db.Users.Where(u => u.Id == order.UserId).ExecuteUpdateAsync(u => u.SetProperty(x => x.PurchaseVersion, x => x.PurchaseVersion + 1), ct);
         var fresh = await db.Orders.AsNoTracking().SingleAsync(o => o.Id == orderId, ct);
         if (fresh.Status == "PAID") { await transaction.CommitAsync(ct); db.ChangeTracker.Clear(); return true; }
+        CentModule.Check(!await db.Orders.AsNoTracking().AnyAsync(o => o.Id != orderId && o.Provider == order.Provider && o.Reference == verified.Reference, ct),
+            "این کد پیگیری قبلاً برای سفارش دیگری ثبت شده است؛ وضعیت پرداخت نیاز به بررسی دارد.", 409, "payment_reference_reused");
         var now = DateTimeOffset.UtcNow;
         var starts = now;
         if (order.Kind == "SUBSCRIPTION") {
@@ -185,8 +194,12 @@ public sealed class CentPayments(CentDbContext db, CentGateway gateway)
         }
         await db.Orders.Where(o => o.Id == orderId).ExecuteUpdateAsync(u => u.SetProperty(o => o.Status, "PAID")
             .SetProperty(o => o.PaidAt, now).SetProperty(o => o.Reference, verified.Reference), ct);
-        db.Entitlements.Add(new CentEntitlement { UserId = order.UserId, OrderId = order.Id, TrainingId = order.TrainingId,
-            Kind = order.Kind, StartsAt = starts, ExpiresAt = order.Kind == "SUBSCRIPTION" ? starts.AddDays(order.DurationDays!.Value) : null });
+        if (order.Kind == "SUBJECT_ORDER") await new CentSubjectCommerce(db, gateway).Grant(order, now, ct);
+        else {
+            CentModule.Check(order.Kind is "TRAINING" or "SUBSCRIPTION", "نوع سفارش معتبر نیست.", 409, "order_integrity_error");
+            db.Entitlements.Add(new CentEntitlement { UserId = order.UserId, OrderId = order.Id, TrainingId = order.TrainingId,
+                Kind = order.Kind, StartsAt = starts, ExpiresAt = order.Kind == "SUBSCRIPTION" ? starts.AddDays(order.DurationDays!.Value) : null });
+        }
         await db.SaveChangesAsync(ct); await transaction.CommitAsync(ct); db.ChangeTracker.Clear(); return true;
     }
 }

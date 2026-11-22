@@ -32,6 +32,7 @@ public static class CentModule
         services.AddScoped<IPasswordHasher<CentUser>, PasswordHasher<CentUser>>();
         services.AddScoped<CentAccess>();
         services.AddScoped<CentPayments>();
+        services.AddScoped<CentSubjectCommerce>();
         services.AddScoped<CentPractice>();
         services.AddScoped<CentLearning>();
         if (config.GetValue<bool>("Cent:Exams:Enabled")) Exams.CentExamEndpoints.AddCentExams(services);
@@ -89,6 +90,7 @@ public static class CentModule
         group.MapCentAuth();
         group.MapCentContent();
         group.MapCentCommerce();
+        group.MapCentSubjects();
         group.MapCentAdmin();
         group.MapCentPractice();
         group.MapCentLearning();

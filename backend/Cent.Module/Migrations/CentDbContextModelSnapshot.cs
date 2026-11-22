@@ -559,7 +559,7 @@ namespace Cent.Module.Migrations
 
                     b.ToTable("cent_products", null, t =>
                         {
-                            t.HasCheckConstraint("CK_cent_product_access", "([Kind] = 'TRAINING' AND [TrainingId] IS NOT NULL AND [DurationDays] IS NULL) OR ([Kind] = 'SUBSCRIPTION' AND [TrainingId] IS NULL AND [DurationDays] BETWEEN 1 AND 366)");
+                            t.HasCheckConstraint("CK_cent_product_access", "([Kind] IN ('TRAINING', 'SUBJECT') AND [TrainingId] IS NOT NULL AND [DurationDays] IS NULL) OR ([Kind] = 'SUBSCRIPTION' AND [TrainingId] IS NULL AND [DurationDays] BETWEEN 1 AND 366)");
 
                             t.HasCheckConstraint("CK_cent_product_price", "[PriceRial] > 0");
                         });
@@ -676,6 +676,37 @@ namespace Cent.Module.Migrations
                     b.HasIndex("Subject", "Active", "TopicId");
 
                     b.ToTable("cent_questions", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentRecommendedBundle", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("Active")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Evidence")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rationale")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectsJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("cent_recommended_bundles", (string)null);
                 });
 
             modelBuilder.Entity("Cent.Module.CentSection", b =>
@@ -888,6 +919,182 @@ namespace Cent.Module.Migrations
                         .IsUnique();
 
                     b.ToTable("cent_source_sections", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectAccess", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ContentReleaseId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("EntitlementId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("ExpiresAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("RevokedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("StartsAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("SubjectId")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EntitlementId");
+
+                    b.HasIndex("SubjectId");
+
+                    b.HasIndex("OrderId", "SubjectId")
+                        .IsUnique();
+
+                    b.HasIndex("UserId", "SubjectId", "ExpiresAt");
+
+                    b.ToTable("cent_subject_access", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_cent_subject_term", "[ExpiresAt] > [StartsAt]");
+                        });
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectOffer", b =>
+                {
+                    b.Property<string>("SubjectId")
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.Property<bool>("Available")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ContentReleaseId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("ReviewedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ReviewedBy")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("SubjectId");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.ToTable("cent_subject_offers", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectOrder", b =>
+                {
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("DevelopmentOutcome")
+                        .HasMaxLength(16)
+                        .HasColumnType("nvarchar(16)");
+
+                    b.Property<string>("InitiationState")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.Property<string>("PayloadJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("QuoteId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("QuoteId")
+                        .IsUnique();
+
+                    b.ToTable("cent_subject_orders", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectOrderLine", b =>
+                {
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SubjectId")
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.Property<string>("ContentReleaseId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<long>("DiscountRial")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("ListRial")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("PayableRial")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("OrderId", "SubjectId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("cent_subject_order_lines", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_cent_subject_line_amount", "[ListRial] > 0 AND [DiscountRial] >= 0 AND [PayableRial] = [ListRial] - [DiscountRial] AND [PayableRial] > 0");
+                        });
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectQuote", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("ExpiresAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("OrderId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PayloadJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("UserId", "ExpiresAt");
+
+                    b.ToTable("cent_subject_quotes", (string)null);
                 });
 
             modelBuilder.Entity("Cent.Module.CentTopic", b =>
@@ -1572,6 +1779,92 @@ namespace Cent.Module.Migrations
                         .WithMany()
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.NoAction);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectAccess", b =>
+                {
+                    b.HasOne("Cent.Module.CentEntitlement", null)
+                        .WithMany()
+                        .HasForeignKey("EntitlementId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cent.Module.CentOrder", null)
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cent.Module.CentCourse", null)
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cent.Module.CentUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectOffer", b =>
+                {
+                    b.HasOne("Cent.Module.CentProduct", null)
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cent.Module.CentCourse", null)
+                        .WithMany()
+                        .HasForeignKey("SubjectId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectOrder", b =>
+                {
+                    b.HasOne("Cent.Module.CentOrder", null)
+                        .WithOne()
+                        .HasForeignKey("Cent.Module.CentSubjectOrder", "OrderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cent.Module.CentSubjectQuote", null)
+                        .WithMany()
+                        .HasForeignKey("QuoteId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectOrderLine", b =>
+                {
+                    b.HasOne("Cent.Module.CentOrder", null)
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cent.Module.CentProduct", null)
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSubjectQuote", b =>
+                {
+                    b.HasOne("Cent.Module.CentOrder", null)
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Cent.Module.CentUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Cent.Module.CentTopic", b =>

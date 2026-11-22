@@ -19,15 +19,14 @@ builder.WebHost.UseUrls(builder.Configuration["urls"] ?? "http://127.0.0.1:5108"
 builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?> {
     ["Cent:Enabled"] = "true",
     ["Cent:Payments:AllowDevelopmentMock"] = "true",
-    ["Cent:ClientBaseUrl"] = "http://localhost:5173/cent-s",
-    ["Cent:PublicApiBaseUrl"] = "http://127.0.0.1:5108"
+    ["Cent:ClientBaseUrl"] = builder.Configuration["Cent:ClientBaseUrl"] ?? "http://localhost:5173/cent-s",
+    ["Cent:PublicApiBaseUrl"] = builder.Configuration["Cent:PublicApiBaseUrl"] ?? "http://127.0.0.1:5108"
 });
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Warning);
 builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Information);
 builder.Services.AddCentModule(builder.Configuration);
-builder.Services.AddDataProtection().UseEphemeralDataProtectionProvider();
 
 // Keep local data inside this checkout, independent of the shell's working directory.
 var sourceDirectory = new DirectoryInfo(AppContext.BaseDirectory);
@@ -36,7 +35,19 @@ while (sourceDirectory is not null && !File.Exists(Path.Combine(sourceDirectory.
 var dataDirectory = Path.Combine(sourceDirectory?.FullName ?? AppContext.BaseDirectory, "App_Data");
 Directory.CreateDirectory(dataDirectory);
 var databasePath = Path.Combine(dataDirectory, "preview.db");
+var isolatedPath = builder.Configuration["isolated-database"];
+if (isolatedPath is not null) {
+    databasePath = Path.GetFullPath(isolatedPath);
+    var allowed = Path.GetFullPath(Path.Combine(dataDirectory, "isolated")) + Path.DirectorySeparatorChar;
+    if (!databasePath.StartsWith(allowed, StringComparison.OrdinalIgnoreCase) || File.Exists(databasePath))
+        throw new InvalidOperationException("Use a new disposable database under Cent.Preview/App_Data/isolated. Existing files are never overwritten.");
+    Directory.CreateDirectory(Path.GetDirectoryName(databasePath)!);
+}
 var connectionString = new SqliteConnectionStringBuilder { DataSource = databasePath }.ToString();
+// Keep the framework's background key warmup inside the disposable preview as
+// well; never inspect or write the user's shared Windows key ring.
+builder.Services.AddDataProtection().PersistKeysToFileSystem(new DirectoryInfo(
+    Path.Combine(Path.GetDirectoryName(databasePath)!, "preview-keys"))).UseEphemeralDataProtectionProvider();
 
 // Optional, one-time online SQLite backup preserves an existing local preview without overwriting data.
 var importPath = builder.Configuration["import-preview-db"];
@@ -102,6 +113,18 @@ using (var scope = app.Services.CreateScope()) {
     if (builder.Configuration.GetValue<bool>("import-curriculum")) {
         var report = await new CentCurriculumImporter(db).Import();
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(report));
+    }
+    if (builder.Configuration.GetValue<bool>("prepare-subject-offers")) await CentSubjectCatalog.PrepareOffers(db);
+    if (builder.Configuration.GetValue<bool>("sandbox-subject-offers")) {
+        if (isolatedPath is null || !scope.ServiceProvider.GetRequiredService<CentGateway>().IsMock)
+            throw new InvalidOperationException("Sandbox offers require a new disposable database and the development fake gateway.");
+        foreach (var offer in await db.Set<CentSubjectOffer>().ToListAsync()) {
+            offer.Available = true; offer.ReviewedAt = DateTimeOffset.UtcNow;
+            offer.ReviewedBy = "LOCAL PAYMENT TEST ONLY; independent academic acceptance remains pending";
+            (await db.Products.FindAsync(offer.ProductId))!.Active = true;
+        }
+        await db.SaveChangesAsync();
+        Console.WriteLine("LOCAL SANDBOX: subject offers are for fake payments only; this is not academic or production acceptance.");
     }
 }
 await app.RunAsync();

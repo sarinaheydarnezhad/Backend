@@ -41,6 +41,7 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
 
     protected override void OnModelCreating(ModelBuilder b)
     {
+        CentSubjectCommerceModel.Configure(b);
         Exams.CentExamModel.Configure(b);
         CentCurriculumModel.Configure(b);
         Curriculum.CurriculumReleases.Configure(b);
@@ -96,7 +97,7 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
         });
         b.Entity<CentProduct>(e => {
             e.ToTable("cent_products", t => {
-                t.HasCheckConstraint("CK_cent_product_access", "([Kind] = 'TRAINING' AND [TrainingId] IS NOT NULL AND [DurationDays] IS NULL) OR ([Kind] = 'SUBSCRIPTION' AND [TrainingId] IS NULL AND [DurationDays] BETWEEN 1 AND 366)");
+                t.HasCheckConstraint("CK_cent_product_access", "([Kind] IN ('TRAINING', 'SUBJECT') AND [TrainingId] IS NOT NULL AND [DurationDays] IS NULL) OR ([Kind] = 'SUBSCRIPTION' AND [TrainingId] IS NULL AND [DurationDays] BETWEEN 1 AND 366)");
                 t.HasCheckConstraint("CK_cent_product_price", "[PriceRial] > 0");
             });
             e.HasKey(x => x.Id); e.Property(x => x.Title).HasMaxLength(200); e.Property(x => x.Kind).HasMaxLength(16);

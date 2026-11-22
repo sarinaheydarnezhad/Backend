@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Microsoft.Extensions.Configuration;
 
 namespace Cent.Module.Exams;
 
@@ -21,13 +22,16 @@ public sealed class PendingCentMockAdmission : ICentMockAdmission
 // Phase 4 reuses the existing simulator access decision; it creates no new grant,
 // product or unrestricted start path. Content/publication gates still apply before
 // admission, and terminal owner review survives later subscription expiry.
-public sealed class ExistingCentMockAdmission(CentAccess access) : ICentMockAdmission
+public sealed class ExistingCentMockAdmission(CentAccess access, IConfiguration? config = null) : ICentMockAdmission
 {
     public bool IsConfigured => true;
     public async Task<string> AuthorizeStart(Guid owner, ExamDefinition definition, CancellationToken ct)
     {
-        CentModule.Check(await access.HasSubscription(owner, ct), "دسترسی فعلی آزمون‌های شبیه‌ساز برای شروع لازم است.", 403, "exam_access_required");
-        return "existing-simulator-access-v1";
+        if (await access.HasSubscription(owner, ct)) return "existing-simulator-access-v1";
+        CentModule.Check(config?["Cent:Commerce:MockAdmissionPolicy"] == "all-subjects-v1", "دسترسی آزمون کامل برای این حساب فعال نیست.", 403, "exam_access_required");
+        foreach (var subject in definition.Sections.Select(s => s.SubjectId).Distinct())
+            CentModule.Check(await access.HasSubject(owner, subject, ct), "برای شروع آزمون کامل، دسترسی فعال همهٔ درس‌های نسخهٔ آزمون لازم است.", 403, "exam_access_required");
+        return "all-subjects-at-start-v1";
     }
     public Task AuthorizeReview(Guid owner, Guid attempt, CancellationToken ct) => Task.CompletedTask;
 }
