@@ -15,6 +15,11 @@ if ([IO.File]::Exists($additionalPath)) {
     $addition = [IO.File]::ReadAllText($additionalPath, $utf8) | ConvertFrom-Json
     $sources += @($addition.sources)
 }
+$expansionPath = Join-Path $contentRoot 'curriculum-2026-r2.json'
+if ([IO.File]::Exists($expansionPath)) {
+    $expansion = [IO.File]::ReadAllText($expansionPath, $utf8) | ConvertFrom-Json
+    $sources += @($expansion.sources)
+}
 if (@($package.sources).Count -eq 0) { throw 'The curriculum package has no sources.' }
 $duplicates = @($sources | Group-Object file | Where-Object Count -gt 1)
 if ($duplicates.Count -gt 0) { throw 'The curriculum package contains duplicate source filenames.' }

@@ -50,6 +50,14 @@ public static class CentExamBlueprints
         new(2025, 11, 1), new(2026, 10, 31), Sections(false), new());
     public static ExamDefinition Current => new("cent-s-2026-2027-r1", "CEnT-S 2026–2027", "blueprint-2026-2027-r1",
         new(2026, 11, 1), new(2027, 10, 31), Sections(true), new());
+    // A new identity binds content and the selected timeout policy. The seeded
+    // blueprint and all previously published definitions remain byte-for-byte intact.
+    public static ExamDefinition ForContent(string releaseId, string syllabusId) => Current with {
+        ExamVersionId = Current.ExamVersionId + "-" + releaseId,
+        ConfigurationRevision = "config:" + releaseId,
+        ContentReleaseId = releaseId + ":current", SyllabusRevisionId = syllabusId,
+        SubmissionPolicyId = "expired-feedback-v1"
+    };
     private static ExamSectionDefinition[] Sections(bool reading)
     {
         var rows = new List<(string Subject, int Questions, int Seconds)>();

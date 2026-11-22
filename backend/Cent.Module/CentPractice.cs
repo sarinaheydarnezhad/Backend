@@ -108,7 +108,7 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
         foreach (var row in rows) row.Answer = answers.GetValueOrDefault(row.QuestionId);
         db.Analyses.Add(new CentAiAnalysis { AttemptId = id, Provider = "rules", PayloadJson = JsonSerializer.Serialize(analysis, Json) });
         await db.SaveChangesAsync(ct); await transaction.CommitAsync(ct);
-        return new { result, analysis, review = questions.Select(q => new { q.Id, q.CorrectAnswer, q.Explanation, q.Topic }) };
+        return await Result(userId, id, ct);
     }
 
     public async Task<object> Result(Guid userId, Guid id, CancellationToken ct)
@@ -117,8 +117,15 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
         CentModule.Check(attempt is not null, "نتیجه پیدا نشد.", 404);
         var analysis = await db.Analyses.AsNoTracking().SingleAsync(a => a.AttemptId == id, ct);
         var rows = await db.AttemptQuestions.AsNoTracking().Where(q => q.AttemptId == id).OrderBy(q => q.Position).ToListAsync(ct);
+        var questions = rows.Select(r => JsonSerializer.Deserialize<QuestionSnapshot>(r.SnapshotJson, Json)!).ToArray();
+        // Legacy results need no companion table. Issued versioned snapshots retain
+        // their own passage context and are reviewed only after terminal submission.
+        var content = questions.Any(q => q.ContentReleaseId is not null)
+            ? await db.PracticeContent.AsNoTracking().SingleOrDefaultAsync(p => p.AttemptId == id, ct) : null;
         return new { result = JsonSerializer.Deserialize<JsonElement>(attempt!.ResultJson!), analysis = JsonSerializer.Deserialize<JsonElement>(analysis.PayloadJson),
-            review = rows.Select(r => { var q = JsonSerializer.Deserialize<QuestionSnapshot>(r.SnapshotJson, Json)!; return new { q.Id, q.CorrectAnswer, q.Explanation, q.Topic }; }) };
+            contentContract = content is null ? null : "passage-v1",
+            passages = content is null ? Array.Empty<PracticePassage>() : JsonSerializer.Deserialize<PracticePassage[]>(content.PassagesJson, Json),
+            review = questions.Select(q => new { q.Id, q.CorrectAnswer, q.Explanation, q.Topic, q.Text, q.Options, q.PassageId, q.FigureSvg }) };
     }
 
     public sealed record Breakdown(int Total, int Correct, int Incorrect, int Unanswered, int Percentage);

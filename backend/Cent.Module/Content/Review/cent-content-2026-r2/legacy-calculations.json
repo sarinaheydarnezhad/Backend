@@ -1,0 +1,1694 @@
+[
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Ordering negative integers",
+    "expected": -2,
+    "actual": -2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-05:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Euclidean algorithm",
+    "expected": 6,
+    "actual": 6,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-07:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Original price times 1+p/100",
+    "expected": 240,
+    "actual": 240,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Product of powers",
+    "expected": 32,
+    "actual": 32,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-09:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Nonnegative principal root",
+    "expected": 6,
+    "actual": 6,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-10:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Order of operations",
+    "expected": 50,
+    "actual": 50,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math.algebraic-expressions:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Polynomial substitution",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-02:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Linear equation",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-07:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Elimination of y",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Coordinate slope",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-10:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Coordinate norm",
+    "expected": 10,
+    "actual": 10,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-11:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Distance to horizontal line",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-13:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Circle radius from radius squared",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-02:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Product rule",
+    "expected": 40,
+    "actual": 40,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-03:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Permutations",
+    "expected": 6,
+    "actual": 6,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Combinations",
+    "expected": 6,
+    "actual": 6,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-03:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Relative frequency",
+    "expected": 0.2,
+    "actual": 0.2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Proportion of 360 degrees",
+    "expected": 72,
+    "actual": 72,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-05:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Arithmetic mean",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-06:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Maximum minus minimum",
+    "expected": 8,
+    "actual": 8,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-02:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Supplementary angle sum",
+    "expected": 140,
+    "actual": 140,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-03:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Triangle area",
+    "expected": 10,
+    "actual": 10,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-05:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Cuboid volume",
+    "expected": 30,
+    "actual": 30,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-06:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Area similarity scaling",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/trig_chapter.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Quadrant intervals",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/trig_chapter.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Maximum of positive-amplitude sine",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Vertex -b/2a",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-07:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Inverse exponent",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Logarithm definition",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-10:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Function composition",
+    "expected": 9,
+    "actual": 9,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-04:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Ordering negative integers",
+    "expected": -3,
+    "actual": -3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-05:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Euclidean algorithm",
+    "expected": 9,
+    "actual": 9,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-07:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Original price times 1+p/100",
+    "expected": 260,
+    "actual": 260,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-08:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Product of powers",
+    "expected": 64,
+    "actual": 64,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-09:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Nonnegative principal root",
+    "expected": 9,
+    "actual": 9,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-10:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Order of operations",
+    "expected": 51,
+    "actual": 51,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math.algebraic-expressions:6",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Polynomial substitution",
+    "expected": 10,
+    "actual": 10,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-02:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Linear equation",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-07:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Elimination of y",
+    "expected": 5,
+    "actual": 5,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-08:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Coordinate slope",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-10:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Coordinate norm",
+    "expected": 15,
+    "actual": 15,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-11:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Distance to horizontal line",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-13:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Circle radius from radius squared",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-02:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Product rule",
+    "expected": 50,
+    "actual": 50,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-03:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Permutations",
+    "expected": 24,
+    "actual": 24,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-04:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Combinations",
+    "expected": 10,
+    "actual": 10,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-03:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Relative frequency",
+    "expected": 0.3,
+    "actual": 0.3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-04:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Proportion of 360 degrees",
+    "expected": 108,
+    "actual": 108,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-05:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Arithmetic mean",
+    "expected": 5,
+    "actual": 5,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-06:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Maximum minus minimum",
+    "expected": 8,
+    "actual": 8,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-02:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Supplementary angle sum",
+    "expected": 120,
+    "actual": 120,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-03:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Triangle area",
+    "expected": 15,
+    "actual": 15,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-05:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Cuboid volume",
+    "expected": 45,
+    "actual": 45,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-06:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Area similarity scaling",
+    "expected": 9,
+    "actual": 9,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/trig_chapter.html#section-04:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Quadrant intervals",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/trig_chapter.html#section-08:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Maximum of positive-amplitude sine",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-04:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Vertex -b/2a",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-07:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Inverse exponent",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-08:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Logarithm definition",
+    "expected": 2.0000000000000004,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-10:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Function composition",
+    "expected": 19,
+    "actual": 19,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-04:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Ordering negative integers",
+    "expected": -4,
+    "actual": -4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-05:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Euclidean algorithm",
+    "expected": 12,
+    "actual": 12,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-07:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Original price times 1+p/100",
+    "expected": 280,
+    "actual": 280,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-08:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Product of powers",
+    "expected": 128,
+    "actual": 128,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-09:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Nonnegative principal root",
+    "expected": 12,
+    "actual": 12,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/mastercalss-riazi-fasl1-3.html#section-10:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Order of operations",
+    "expected": 52,
+    "actual": 52,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math.algebraic-expressions:9",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Polynomial substitution",
+    "expected": 21,
+    "actual": 21,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-02:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Linear equation",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-07:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Elimination of y",
+    "expected": 6,
+    "actual": 6,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-08:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Coordinate slope",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-10:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Coordinate norm",
+    "expected": 20,
+    "actual": 20,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-11:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Distance to horizontal line",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter2.html#section-13:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Circle radius from radius squared",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-02:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Product rule",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-03:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Permutations",
+    "expected": 120,
+    "actual": 120,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter6-combinatorics-probability.html#section-04:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Combinations",
+    "expected": 15,
+    "actual": 15,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-03:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Relative frequency",
+    "expected": 0.4,
+    "actual": 0.4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-04:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Proportion of 360 degrees",
+    "expected": 144,
+    "actual": 144,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-05:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Arithmetic mean",
+    "expected": 6,
+    "actual": 6,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/chapter7-statistics.html#section-06:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Maximum minus minimum",
+    "expected": 8,
+    "actual": 8,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-02:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Supplementary angle sum",
+    "expected": 100,
+    "actual": 100,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-03:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Triangle area",
+    "expected": 20,
+    "actual": 20,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-05:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Cuboid volume",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/geometry-chapter.html#section-06:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Area similarity scaling",
+    "expected": 16,
+    "actual": 16,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/trig_chapter.html#section-04:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Quadrant intervals",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/trig_chapter.html#section-08:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Maximum of positive-amplitude sine",
+    "expected": 5,
+    "actual": 5,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-04:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Vertex -b/2a",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-07:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Inverse exponent",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-08:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Logarithm definition",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:math/فصل۳-توابع.html#section-10:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Function composition",
+    "expected": 33,
+    "actual": 33,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter1-physical-quantities.html#section-07:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Pythagorean vector sum",
+    "expected": 10,
+    "actual": 10,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter1-physical-quantities.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Centimetres to millimetres",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-02:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Distance over elapsed time",
+    "expected": 10,
+    "actual": 10,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-03:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Uniform motion",
+    "expected": 13,
+    "actual": 13,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-06:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Average acceleration",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Signed area under velocity graph",
+    "expected": 12,
+    "actual": 12,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-12:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Centripetal acceleration",
+    "expected": 8,
+    "actual": 8,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-13:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Relative velocity",
+    "expected": 6,
+    "actual": 6,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-01:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Work of parallel force",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-02:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Negative work of gravity, stated g=10",
+    "expected": -60,
+    "actual": -60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-03:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Work-energy theorem",
+    "expected": 16,
+    "actual": 16,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Average power",
+    "expected": 40,
+    "actual": 40,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-05:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Kinetic energy",
+    "expected": 36,
+    "actual": 36,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-06:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "v squared=2gh with stated g=10",
+    "expected": 200,
+    "actual": 200,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-07:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Efficiency",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Newton second law",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-09:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Kinetic friction",
+    "expected": 40,
+    "actual": 40,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-10:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Hooke law magnitude",
+    "expected": 20,
+    "actual": 20,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-11:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Equilibrium tension with stated g=10",
+    "expected": 20,
+    "actual": 20,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-12:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Signed momentum change",
+    "expected": -10,
+    "actual": -10,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-13:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Inverse square gravity",
+    "expected": 0.25,
+    "actual": 0.25,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-14:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Net centripetal force",
+    "expected": 16,
+    "actual": 16,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-02:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Pressure",
+    "expected": 600,
+    "actual": 600,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-03:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Density",
+    "expected": 1000,
+    "actual": 1000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Weight over area with stated g=10",
+    "expected": 1000,
+    "actual": 1000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-05:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Hydrostatic pressure with stated g=10",
+    "expected": 2000,
+    "actual": 2000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-06:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Mercury head in SI units",
+    "expected": 2720,
+    "actual": 2720,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-07:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Pressure difference times area",
+    "expected": 40,
+    "actual": 40,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Pascal ideal press",
+    "expected": 100,
+    "actual": 100,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-10:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "rho g h, water and stated g=10",
+    "expected": 200,
+    "actual": 200,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-11:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Fixed pressure, doubled density",
+    "expected": 20,
+    "actual": 20,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-12:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Gauge pressure",
+    "expected": 20,
+    "actual": 20,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-13:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Buoyancy for stated rho=1000 and g=10",
+    "expected": 20,
+    "actual": 20,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-14:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Continuity",
+    "expected": 4,
+    "actual": 4,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-02:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "First law, work done by gas",
+    "expected": 150,
+    "actual": 150,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-03:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Isochoric boundary work zero",
+    "expected": 200,
+    "actual": 200,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Isothermal ideal gas",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-05:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Boundary work, kPa L equals J",
+    "expected": 400,
+    "actual": 400,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-06:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Adiabatic work on gas",
+    "expected": 200,
+    "actual": 200,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-08:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Cyclic engine efficiency",
+    "expected": 80,
+    "actual": 80,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-09:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Refrigerator COP",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-10:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Sensible heat",
+    "expected": 4000,
+    "actual": 4000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter6-electromagnetism-waves.html#section-03:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Electric field definition",
+    "expected": 10,
+    "actual": 10,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter6-electromagnetism-waves.html#section-04:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Current definition",
+    "expected": 6,
+    "actual": 6,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter6-electromagnetism-waves.html#section-06:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Magnetic wire force",
+    "expected": 2,
+    "actual": 2,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter1-physical-quantities.html#section-08:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Centimetres to millimetres",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-03:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Uniform motion",
+    "expected": 18,
+    "actual": 18,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-08:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Signed area under velocity graph",
+    "expected": 18,
+    "actual": 18,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-12:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Centripetal acceleration",
+    "expected": 12,
+    "actual": 12,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-01:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Work of parallel force",
+    "expected": 90,
+    "actual": 90,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-02:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Negative work of gravity, stated g=10",
+    "expected": -90,
+    "actual": -90,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-03:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Work-energy theorem",
+    "expected": 24,
+    "actual": 24,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-04:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Average power",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-05:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Kinetic energy",
+    "expected": 54,
+    "actual": 54,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-06:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "v squared=2gh with stated g=10",
+    "expected": 300,
+    "actual": 300,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-07:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Efficiency",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-09:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Kinetic friction",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-10:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Hooke law magnitude",
+    "expected": 30,
+    "actual": 30,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-11:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Equilibrium tension with stated g=10",
+    "expected": 30,
+    "actual": 30,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-12:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Signed momentum change",
+    "expected": -15,
+    "actual": -15,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-02:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Pressure",
+    "expected": 900,
+    "actual": 900,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-03:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Density",
+    "expected": 1500,
+    "actual": 1500,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-04:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Weight over area with stated g=10",
+    "expected": 1500,
+    "actual": 1500,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-05:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Hydrostatic pressure with stated g=10",
+    "expected": 3000,
+    "actual": 3000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-06:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Mercury head in SI units",
+    "expected": 4080,
+    "actual": 4080,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-07:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Pressure difference times area",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-08:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Pascal ideal press",
+    "expected": 150,
+    "actual": 150,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-10:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "rho g h, water and stated g=10",
+    "expected": 300,
+    "actual": 300,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-11:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Fixed pressure, doubled density",
+    "expected": 30,
+    "actual": 30,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-12:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Gauge pressure",
+    "expected": 30,
+    "actual": 30,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-13:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Buoyancy for stated rho=1000 and g=10",
+    "expected": 30,
+    "actual": 30,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-02:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "First law, work done by gas",
+    "expected": 250,
+    "actual": 250,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-05:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Boundary work, kPa L equals J",
+    "expected": 600,
+    "actual": 600,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-06:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Adiabatic work on gas",
+    "expected": 300,
+    "actual": 300,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-08:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Cyclic engine efficiency",
+    "expected": 70,
+    "actual": 70,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter5-thermodynamics.html#section-09:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Refrigerator COP",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter6-electromagnetism-waves.html#section-03:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Electric field definition",
+    "expected": 15,
+    "actual": 15,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter6-electromagnetism-waves.html#section-04:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Current definition",
+    "expected": 9,
+    "actual": 9,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter6-electromagnetism-waves.html#section-06:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Magnetic wire force",
+    "expected": 3,
+    "actual": 3,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-03:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Uniform motion",
+    "expected": 23,
+    "actual": 23,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter2-kinematics.html#section-08:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Signed area under velocity graph",
+    "expected": 24,
+    "actual": 24,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-02:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Negative work of gravity, stated g=10",
+    "expected": -120,
+    "actual": -120,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter3-dynamics-work-energy.html#section-05:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Kinetic energy",
+    "expected": 72,
+    "actual": 72,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-04:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Weight over area with stated g=10",
+    "expected": 2000,
+    "actual": 2000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-06:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Mercury head in SI units",
+    "expected": 5440,
+    "actual": 5440,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:physics/chapter4-pressure.html#section-12:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Gauge pressure",
+    "expected": 40,
+    "actual": 40,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-01:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Phase transition heat",
+    "expected": 4000,
+    "actual": 4000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-05:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Closed-system mass conservation",
+    "expected": 30,
+    "actual": 30,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:biology/chapter1-chemical-foundation-fa.html#section-05:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Atomic number definition",
+    "expected": 7,
+    "actual": 7,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:biology/chapter4-plants-ecology-fa.html#section-07:1",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Explicit trophic transfer assumption",
+    "expected": 200,
+    "actual": 200,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-01:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Phase transition heat",
+    "expected": 6000,
+    "actual": 6000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-05:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Closed-system mass conservation",
+    "expected": 45,
+    "actual": 45,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:biology/chapter1-chemical-foundation-fa.html#section-05:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Atomic number definition",
+    "expected": 8,
+    "actual": 8,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:biology/chapter4-plants-ecology-fa.html#section-07:2",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Explicit trophic transfer assumption",
+    "expected": 300,
+    "actual": 300,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-01:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Phase transition heat",
+    "expected": 8000,
+    "actual": 8000,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-05:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Closed-system mass conservation",
+    "expected": 60,
+    "actual": 60,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:biology/chapter1-chemical-foundation-fa.html#section-05:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Atomic number definition",
+    "expected": 9,
+    "actual": 9,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  },
+  {
+    "key": "authored:biology/chapter4-plants-ecology-fa.html#section-07:3",
+    "kind": "question",
+    "status": "calculation-verified",
+    "method": "Explicit trophic transfer assumption",
+    "expected": 400,
+    "actual": 400,
+    "scope": "Numerical key only. Distractor plausibility, wording, rights and optical interpretation are not certified."
+  }
+]

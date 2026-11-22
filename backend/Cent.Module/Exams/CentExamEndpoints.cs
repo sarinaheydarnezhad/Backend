@@ -17,7 +17,7 @@ public static class CentExamEndpoints
     {
         services.TryAddSingleton(TimeProvider.System);
         services.TryAddScoped<ICentExamStore, CentExamStore>();
-        services.TryAddScoped<ICentMockAdmission, PendingCentMockAdmission>();
+        services.TryAddScoped<ICentMockAdmission, ExistingCentMockAdmission>();
         services.AddScoped<CentExamService>();
         services.AddHostedService<CentExamDeadlineWorker>();
         return services;
@@ -71,6 +71,20 @@ public static class CentExamEndpoints
                 ContentReleaseId = input.ContentReleaseId, Status = "PUBLISHED" };
             db.ExamVersions.Add(row); CentAdminEndpoints.Audit(db, p, "PUBLISH_EXAM_VERSION", Guid.Empty);
             await db.SaveChangesAsync(ct); return Results.Created($"/api/cent/v1/assessment/exam-versions/{row.Id}/configuration", new { row.Id, row.ConfigurationRevision });
+        });
+        admin.MapPost("/{versionId}/publish", async (string versionId, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
+            var row = await db.ExamVersions.SingleOrDefaultAsync(v => v.Id == versionId, ct);
+            CentModule.Check(row is not null && row.Status == "DRAFT", "Only an imported draft can be published.", 409, "exam_unavailable");
+            var d = CentExamJson.Read<ExamDefinition>(row!.DefinitionJson); d.Validate();
+            CentModule.Check(row.Id == d.ExamVersionId && row.ConfigurationRevision == d.ConfigurationRevision &&
+                row.ContentReleaseId == d.ContentReleaseId && row.SyllabusRevisionId == d.SyllabusRevisionId,
+                "Draft metadata does not match its immutable definition.", 409, "exam_unavailable");
+            var release = await db.ExamContentReleases.AsNoTracking().SingleOrDefaultAsync(r => r.Id == d.ContentReleaseId, ct);
+            CentExamAssembly.Ready(release is not null && release.ExamVersionId == row.Id && release.SyllabusRevisionId == d.SyllabusRevisionId);
+            CentExamAssembly.Assemble(p.UserId(), Guid.NewGuid(), d, CentExamJson.Read<ExamContentManifest>(release!.ManifestJson), "publication-validation", DateTimeOffset.UnixEpoch);
+            row.Status = "PUBLISHED"; row.AvailableForNewStarts = false; row.Revision++;
+            CentAdminEndpoints.Audit(db, p, "PUBLISH_EXAM_VERSION", Guid.Empty);
+            await db.SaveChangesAsync(ct); return Results.Ok(new { row.Id, row.Status, row.AvailableForNewStarts });
         });
         admin.MapPost("/{versionId}/archive", async (string versionId, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             var row = await db.ExamVersions.SingleOrDefaultAsync(v => v.Id == versionId, ct);

@@ -1,0 +1,248 @@
+{
+  "legacyQuestions": 819,
+  "legacyExercises": 666,
+  "legacyLessons": 430,
+  "calculationChecks": 188,
+  "calculationMismatches": 0,
+  "relatedTemplateFamilies": 107,
+  "originalReplacements": 4,
+  "sourceRights": [
+    {
+      "key": "biology/chapter1-chemical-foundation-fa.html",
+      "status": "unverified",
+      "attribution": "آمادگی زیست‌شناسی CEnT · فصل ۱ · بنیان شیمیایی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "biology/chapter2-cell-bioenergetics-fa.html",
+      "status": "unverified",
+      "attribution": "آمادگی زیست‌شناسی CEnT · فصل ۲ · سلول و انرژی‌شناسی زیستی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "biology/chapter3-genetics-fa.html",
+      "status": "unverified",
+      "attribution": "آمادگی زیست‌شناسی CEnT · فصل ۳ · ژنتیک مولکولی، چرخهٔ سلولی و وراثت",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "biology/chapter4-plants-ecology-fa.html",
+      "status": "unverified",
+      "attribution": "آمادگی زیست‌شناسی CEnT · فصل ۴ · گیاه‌شناسی، بوم‌شناسی و تکامل",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "biology/chapter5-animal-physiology-fa.html",
+      "status": "unverified",
+      "attribution": "آمادگی زیست‌شناسی CEnT · فصل ۵ · آناتومی و فیزیولوژی جانوران",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "chemistry/cent-chemistry-ch1-5-deep-1.html",
+      "status": "unverified",
+      "attribution": "CEnT Chemistry Preparation | فصل‌های ۱ تا ۵",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/20-final-review.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — جمع‌بندی نهایی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch01-foundations-fa.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱: مبانی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch02-conjunction.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۲: عطف",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch03-disjunction.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۳: فصل",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch04-conditional.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۴: شرطی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch05-negation.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۵: نقیض و تضاد",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch06-consistency.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۶: سازگاری و ناسازگاری",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch07-negating-compounds.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۷: نقیض گزاره‌های ترکیبی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch08-equivalents.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۸: معادل‌های شرطی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch09-necessary-sufficient.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۹: شرط لازم و کافی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch10-categorical.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۰: گزاره‌های قیاسی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch11-square.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۱: مربع تعارض",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch12-syllogism.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۲: قیاس فرضی و Modus Ponens",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch13-quantifiers.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۲: قیاس فرضی و Modus Ponens",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch14-barcharts.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۴: نمودار میله‌ای",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch15-piecharts.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۵: نمودار دایره‌ای",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch16-linegraphs.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۶: نمودار خطی و روند",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch17-evaluating.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۷: نتیجه‌گیری و ارزیابی ادعاها",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch18-venn.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۸: نمودار ون",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "logic/ch19-tables.html",
+      "status": "unverified",
+      "attribution": "جزوه لاجیک CEnT — فصل ۱۹: جدول و معادلات همزمان",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "math/chapter2.html",
+      "status": "unverified",
+      "attribution": "ریاضی - فصل ۲: معادلات، نامعادلات و هندسهٔ مختصات",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "math/chapter6-combinatorics-probability.html",
+      "status": "unverified",
+      "attribution": "فصل ۶ | ترکیبات و احتمال",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "math/chapter7-statistics.html",
+      "status": "unverified",
+      "attribution": "فصل ۷ | آمار",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "math/geometry-chapter.html",
+      "status": "unverified",
+      "attribution": "جزوهٔ آموزشی هندسه — فصل مقدماتی: اشکال هندسی، محیط و مساحت، حجم و تشابه",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "math/mastercalss-riazi-fasl1-3.html",
+      "status": "unverified",
+      "attribution": "مسترکلاس ریاضی: پایه‌های محاسباتی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "math/trig_chapter.html",
+      "status": "unverified",
+      "attribution": "فصل مثلثات | جزوهٔ آموزشی گام‌به‌گام",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "math/فصل۳-توابع.html",
+      "status": "unverified",
+      "attribution": "فصل ۳ | توابع (Functions)",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "physics/chapter1-physical-quantities.html",
+      "status": "unverified",
+      "attribution": "کمیت‌های فیزیکی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "physics/chapter2-kinematics.html",
+      "status": "unverified",
+      "attribution": "جنبش‌شناسی ذره",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "physics/chapter3-dynamics-work-energy.html",
+      "status": "unverified",
+      "attribution": "دینامیک ذره، کار و انرژی",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "physics/chapter4-pressure.html",
+      "status": "unverified",
+      "attribution": "فشار",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "physics/chapter5-thermodynamics.html",
+      "status": "unverified",
+      "attribution": "ترمودینامیک",
+      "licence": "Not supplied; no licence invented"
+    },
+    {
+      "key": "physics/chapter6-electromagnetism-waves.html",
+      "status": "unverified",
+      "attribution": "الکترومغناطیس و امواج",
+      "licence": "Not supplied; no licence invented"
+    }
+  ],
+  "independentAcceptance": "pending; automated calculations and agent editorial review are not external academic, legal or psychometric certification",
+  "newQuestions": 52,
+  "newPassages": 2
+}

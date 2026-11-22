@@ -37,7 +37,7 @@ public sealed record PracticeSelection(CentQuestion[] Questions, PracticePassage
 
 public static class CurriculumReleases
 {
-    public const string BundledReleaseId = "cent-content-2026-r1";
+    public const string BundledReleaseId = "cent-content-2026-r2";
     public static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
     public static string Hash(string value) => Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(value))).ToLowerInvariant();
     public static void Configure(ModelBuilder b)
@@ -124,7 +124,15 @@ public static class CurriculumReleases
     public static bool ContainsPersian(string s) => s.Any(c => c is >= '\u0600' and <= '\u06ff');
 
     public static ExamContentManifest Manifest(Corpus p, string examVersionId)
+        => Manifest(p, examVersionId == CentExamBlueprints.Current.ExamVersionId ? CentExamBlueprints.Current :
+            examVersionId == CentExamBlueprints.Historical.ExamVersionId ? CentExamBlueprints.Historical : throw new InvalidOperationException("Unknown blueprint."));
+
+    public static ExamContentManifest Manifest(Corpus p, ExamDefinition definition)
     {
+        definition.Validate();
+        var blueprint = definition.CycleStartDate == CentExamBlueprints.Historical.CycleStartDate ? CentExamBlueprints.Historical : CentExamBlueprints.Current;
+        if (definition.CycleStartDate != blueprint.CycleStartDate || definition.CycleEndDateInclusive != blueprint.CycleEndDateInclusive || !definition.Sections.SequenceEqual(blueprint.Sections))
+            throw new InvalidOperationException("Unknown official blueprint structure.");
         CentCurriculumImporter.Validate(p);
         var r = p.Release ?? throw new InvalidOperationException("Versioned release required.");
         var reviews = r.Reviews.Where(x => x.Status == "academically-reviewed").ToDictionary(x => x.Key);
@@ -139,13 +147,11 @@ public static class CurriculumReleases
         var groups = r.Groups.Where(g => g.QuestionKeys.All(reviews.ContainsKey)).Select(g =>
             new ExamGroup(g.Id, g.Subject, g.PassageId, g.QuestionKeys.Select(k => reviews[k].Revision).ToArray())).ToArray();
         var passages = r.Passages.Where(p => groups.Any(g => g.PassageRevisionId == p.Id)).Select(p => new ExamPassage(p.Id, p.Text)).ToArray();
-        var definition = examVersionId == CentExamBlueprints.Current.ExamVersionId ? CentExamBlueprints.Current :
-            examVersionId == CentExamBlueprints.Historical.ExamVersionId ? CentExamBlueprints.Historical : throw new InvalidOperationException("Unknown blueprint.");
         var subjects = definition.Sections.Select(s => s.SubjectId).ToHashSet();
         questions = questions.Where(q => subjects.Contains(q.SubjectId)).ToArray();
         groups = groups.Where(g => subjects.Contains(g.SubjectId)).ToArray();
         passages = passages.Where(p => groups.Any(g => g.PassageRevisionId == p.PassageRevisionId)).ToArray();
-        return new(examVersionId, r.SyllabusRevisionId, questions, passages, groups,
+        return new(definition.ExamVersionId, r.SyllabusRevisionId, questions, passages, groups,
             questions.Select(q => new ExamEligibility(q.QuestionRevisionId, definition.Sections.Single(s => s.SubjectId == q.SubjectId).SectionKey, "eligible")).ToArray());
     }
 

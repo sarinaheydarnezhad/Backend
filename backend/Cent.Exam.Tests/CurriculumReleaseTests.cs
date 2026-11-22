@@ -12,6 +12,44 @@ public sealed class CurriculumReleaseTests
 {
     private static Corpus Package() => CentCurriculumImporter.Bundled();
     [Fact]
+    public async Task Mock_admission_preserves_existing_access_and_terminal_review_after_expiry()
+    {
+        using var connection = new SqliteConnection("Data Source=:memory:"); await connection.OpenAsync();
+        using var db = new ReleaseTestContext(new DbContextOptionsBuilder<CentDbContext>().UseSqlite(connection).Options);
+        await db.Database.EnsureCreatedAsync();
+        var user = new CentUser { Email = "access@example.invalid", NormalizedEmail = "ACCESS@EXAMPLE.INVALID" };
+        var product = new CentProduct { Title = "Isolated fixture", Kind = "SUBSCRIPTION", DurationDays = 30, PriceRial = 1 };
+        db.Users.Add(user); db.Products.Add(product); await db.SaveChangesAsync();
+        var admission = new ExistingCentMockAdmission(new CentAccess(db));
+        var denied = await Assert.ThrowsAsync<CentException>(() => admission.AuthorizeStart(user.Id, CentExamBlueprints.Current, default));
+        Assert.Equal(403, denied.Status);
+        var order = new CentOrder { UserId = user.Id, ProductId = product.Id, RequestId = Guid.NewGuid(), Title = "Fixture only", Kind = "SUBSCRIPTION" };
+        db.Orders.Add(order); await db.SaveChangesAsync();
+        var grant = new CentEntitlement { UserId = user.Id, OrderId = order.Id, Kind = "SUBSCRIPTION", StartsAt = DateTimeOffset.UtcNow.AddDays(-1), ExpiresAt = DateTimeOffset.UtcNow.AddDays(1) };
+        db.Entitlements.Add(grant); await db.SaveChangesAsync();
+        Assert.Equal("existing-simulator-access-v1", await admission.AuthorizeStart(user.Id, CentExamBlueprints.Current, default));
+        grant.RevokedAt = DateTimeOffset.UtcNow; await db.SaveChangesAsync();
+        await Assert.ThrowsAsync<CentException>(() => admission.AuthorizeStart(user.Id, CentExamBlueprints.Current, default));
+        var fixture = new ExamFixture(); var id = await fixture.Start(); fixture.Clock.Now = fixture.Clock.Now.AddMinutes(141);
+        var service = new CentExamService(fixture.Store, admission);
+        Assert.NotNull(await service.Review(fixture.Owner, id, default));
+        Assert.Equal(404, (await Assert.ThrowsAsync<CentException>(() => service.Review(Guid.NewGuid(), id, default))).Status);
+    }
+    [Fact]
+    public void Expansion_retains_r1_payloads_and_uses_a_new_bound_draft_identity()
+    {
+        using var stream = typeof(CentCurriculumImporter).Assembly.GetManifestResourceStream("Cent.Module.Content.curriculum-2026.json");
+        var previous = JsonSerializer.Deserialize<Corpus>(stream!, CurriculumReleases.Json)!; var current = Package();
+        foreach (var q in previous.Questions) Assert.Equal(JsonSerializer.Serialize(q), JsonSerializer.Serialize(current.Questions.Single(x => x.Key == q.Key)));
+        foreach (var p in previous.Release!.Passages) Assert.Equal(p, current.Release!.Passages.Single(x => x.Id == p.Id));
+        Assert.NotEqual(previous.Release.Id, current.Release!.Id);
+        var definition = CentExamBlueprints.ForContent(current.Release.Id, current.Release.SyllabusRevisionId);
+        Assert.NotEqual(CentExamBlueprints.Current.ExamVersionId, definition.ExamVersionId);
+        Assert.Equal("expired-feedback-v1", definition.SubmissionPolicyId); Assert.Null(CentExamBlueprints.Current.SubmissionPolicyId);
+        Assert.Equal(definition.ExamVersionId, CurriculumReleases.Manifest(current, definition).ExamVersionId);
+        Assert.Equal(166, current.Questions.Count(q => q.Origin == "authored-2026-reviewed"));
+    }
+    [Fact]
     public void All_six_subjects_have_mapped_Persian_lessons_and_English_reviewed_assessments()
     {
         var p = Package(); CentCurriculumImporter.Validate(p);
@@ -74,7 +112,11 @@ public sealed class CurriculumReleaseTests
             });
             Assert.All(run.Rules.Passages, passage => Assert.Equal(p.Release.Passages.Single(x => x.Id == passage.PassageRevisionId).Text, passage.Text));
             var active = JsonSerializer.Serialize(CentExamService.ActiveContent(run, DateTimeOffset.UtcNow), CentExamJson.Options);
-            Assert.DoesNotContain("correctOptionId", active); Assert.DoesNotContain("explanation", active);
+            var payload = JsonDocument.Parse(active).RootElement;
+            Assert.All(payload.GetProperty("questions").EnumerateArray(), q => {
+                Assert.False(q.TryGetProperty("correctOptionId", out _));
+                Assert.False(q.TryGetProperty("explanation", out _));
+            });
         }
     }
     [Fact]
@@ -129,6 +171,8 @@ public sealed class CurriculumReleaseTests
         Assert.Equal("{\"original\":true}", (await db.Attempts.FindAsync(attempt.Id))!.ResultJson);
         var manifest = await db.ExamContentReleases.SingleAsync();
         Assert.Null(manifest.ReviewedAt); Assert.Null(manifest.ReviewedBy);
+        var draft = await db.ExamVersions.SingleAsync(v => v.ContentReleaseId == manifest.Id);
+        Assert.Equal("DRAFT", draft.Status); Assert.False(draft.AvailableForNewStarts);
         Assert.All(await db.ExamVersions.ToArrayAsync(), v => Assert.False(v.AvailableForNewStarts));
     }
     [Fact]
@@ -166,6 +210,12 @@ public sealed class CurriculumReleaseTests
         var keys = await db.Questions.ToDictionaryAsync(q => q.Id, q => q.CorrectAnswer);
         var outcome = AsJson(await practice.Submit(user.Id, id, questions.ToDictionary(q => q.GetProperty("id").GetGuid(), q => (int?)keys[q.GetProperty("id").GetGuid()]), default));
         Assert.Equal(100, outcome.GetProperty("result").GetProperty("percentage").GetInt32());
+        Assert.Single(outcome.GetProperty("passages").EnumerateArray());
+        Assert.All(outcome.GetProperty("review").EnumerateArray(), q => {
+            Assert.True(q.TryGetProperty("text", out _)); Assert.Equal(5, q.GetProperty("options").GetArrayLength());
+            if (q.GetProperty("passageId").ValueKind == JsonValueKind.String)
+                Assert.Contains(outcome.GetProperty("passages").EnumerateArray(), p => p.GetProperty("id").GetString() == q.GetProperty("passageId").GetString());
+        });
         db.ChangeTracker.Clear();
         var saved = (await db.Attempts.FindAsync(id))!.ResultJson;
         await practice.Submit(user.Id, id, [], default);
@@ -182,7 +232,7 @@ public sealed class CurriculumReleaseTests
         var legacy = JsonSerializer.SerializeToElement(await learning.Mastery(Guid.NewGuid(), default), CentExamJson.Options);
         var current = JsonSerializer.SerializeToElement(await learning.Mastery(Guid.NewGuid(), default, Package().Release!.SyllabusRevisionId), CentExamJson.Options);
         Assert.Equal(190, legacy.GetProperty("courses").EnumerateArray().Sum(c => c.GetProperty("totalTopics").GetInt32()));
-        Assert.Equal(38, current.GetProperty("courses").EnumerateArray().Sum(c => c.GetProperty("totalTopics").GetInt32()));
+        Assert.Equal(Package().Release!.Resources.Count(r => r.Kind == "lesson"), current.GetProperty("courses").EnumerateArray().Sum(c => c.GetProperty("totalTopics").GetInt32()));
         Assert.Equal(Package().Release!.SyllabusRevisionId, current.GetProperty("syllabusRevisionId").GetString());
         await Assert.ThrowsAsync<CentException>(() => learning.Mastery(Guid.NewGuid(), default, "unknown"));
     }

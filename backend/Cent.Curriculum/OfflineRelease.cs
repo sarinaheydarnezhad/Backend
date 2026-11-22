@@ -20,9 +20,8 @@ internal static class OfflineRelease
             var actual = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes.ToArray())).ToLowerInvariant();
             if (actual != source.Sha256) throw new InvalidOperationException("Source hash mismatch: " + source.File);
         }
-        var manifest = CurriculumReleases.Manifest(package, CentExamBlueprints.Current.ExamVersionId);
-        var definition = CentExamBlueprints.Current with { SyllabusRevisionId = release.SyllabusRevisionId,
-            ContentReleaseId = release.Id + ":current", SubmissionPolicyId = "expired-feedback-v1" };
+        var definition = CentExamBlueprints.ForContent(release.Id, release.SyllabusRevisionId);
+        var manifest = CurriculumReleases.Manifest(package, definition);
         // Synthetic assembly only. The chosen test profile does not approve runtime policy.
         var run = CentExamAssembly.Assemble(Guid.NewGuid(), Guid.NewGuid(), definition, manifest, "offline-validation-only", DateTimeOffset.UtcNow);
         if (run.Questions.Count != definition.TotalQuestions) throw new InvalidOperationException("Quota mismatch.");

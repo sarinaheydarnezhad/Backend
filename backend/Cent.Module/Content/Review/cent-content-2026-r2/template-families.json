@@ -1,0 +1,932 @@
+[
+  {
+    "template": "Which is the smallest listed number set containing √#?",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-02:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-02:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Write # in normalized scientific notation.",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-03:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-03:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-03:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Which is the greatest number: −#, −#, −#, −#?",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-04:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-04:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "What is the greatest common divisor of # and #?",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-05:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-05:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Which listed number divides # exactly?",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-06:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-06:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A price of # increases by #%. What is the new price?",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-07:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-07:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-07:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Evaluate #^# × #^#.",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-08:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-08:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-08:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Evaluate √#.",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-09:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-09:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-09:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Evaluate # + # × #^#.",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-10:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-10:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-10:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Simplify #x + # − #x + #.",
+    "keys": [
+      "authored:math.algebraic-expressions:1",
+      "authored:math.algebraic-expressions:4",
+      "authored:math.algebraic-expressions:7"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Expand #(x − #) + #x.",
+    "keys": [
+      "authored:math.algebraic-expressions:2",
+      "authored:math.algebraic-expressions:5",
+      "authored:math.algebraic-expressions:8"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "If x=#, evaluate #x^# − #x + #.",
+    "keys": [
+      "authored:math.algebraic-expressions:3",
+      "authored:math.algebraic-expressions:6",
+      "authored:math.algebraic-expressions:9"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Factor x^# − #.",
+    "keys": [
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-12:1",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-12:2",
+      "authored:math/mastercalss-riazi-fasl1-3.html#section-12:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Solve #x + # = #.",
+    "keys": [
+      "authored:math/chapter2.html#section-02:1",
+      "authored:math/chapter2.html#section-02:2",
+      "authored:math/chapter2.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Solve −#x < #.",
+    "keys": [
+      "authored:math/chapter2.html#section-03:1",
+      "authored:math/chapter2.html#section-03:2",
+      "authored:math/chapter2.html#section-03:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Find both roots of x² − #x + # = #.",
+    "keys": [
+      "authored:math/chapter2.html#section-04:1",
+      "authored:math/chapter2.html#section-04:2",
+      "authored:math/chapter2.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Where is (x − #)(x + #) negative?",
+    "keys": [
+      "authored:math/chapter2.html#section-05:1",
+      "authored:math/chapter2.html#section-05:2",
+      "authored:math/chapter2.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Solve x² ≤ #.",
+    "keys": [
+      "authored:math/chapter2.html#section-06:1",
+      "authored:math/chapter2.html#section-06:2",
+      "authored:math/chapter2.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Solve x+y=# and x−y=#. What is x?",
+    "keys": [
+      "authored:math/chapter2.html#section-07:1",
+      "authored:math/chapter2.html#section-07:2",
+      "authored:math/chapter2.html#section-07:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "What is the slope of the line through (#,#) and (#,#)?",
+    "keys": [
+      "authored:math/chapter2.html#section-08:1",
+      "authored:math/chapter2.html#section-08:2",
+      "authored:math/chapter2.html#section-08:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Two distinct lines have equations y=#x+# and y=#x−#. They are:",
+    "keys": [
+      "authored:math/chapter2.html#section-09:1",
+      "authored:math/chapter2.html#section-09:2",
+      "authored:math/chapter2.html#section-09:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "What is the distance between (#,#) and (#,#)?",
+    "keys": [
+      "authored:math/chapter2.html#section-10:1",
+      "authored:math/chapter2.html#section-10:2",
+      "authored:math/chapter2.html#section-10:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "What is the distance from (#,#) to the line y=#?",
+    "keys": [
+      "authored:math/chapter2.html#section-11:1",
+      "authored:math/chapter2.html#section-11:2",
+      "authored:math/chapter2.html#section-11:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Find the centroid of vertices (#,#), (#,#), (#,#).",
+    "keys": [
+      "authored:math/chapter2.html#section-12:1",
+      "authored:math/chapter2.html#section-12:2",
+      "authored:math/chapter2.html#section-12:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "What is the radius of (x−#)²+(y+#)²=#?",
+    "keys": [
+      "authored:math/chapter2.html#section-13:1",
+      "authored:math/chapter2.html#section-13:2",
+      "authored:math/chapter2.html#section-13:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A code has one letter chosen from # letters and one digit chosen from # digits. How many codes are possible?",
+    "keys": [
+      "authored:math/chapter6-combinatorics-probability.html#section-02:1",
+      "authored:math/chapter6-combinatorics-probability.html#section-02:2",
+      "authored:math/chapter6-combinatorics-probability.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "In how many ways can # distinct books be arranged in a row?",
+    "keys": [
+      "authored:math/chapter6-combinatorics-probability.html#section-03:1",
+      "authored:math/chapter6-combinatorics-probability.html#section-03:2",
+      "authored:math/chapter6-combinatorics-probability.html#section-03:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "How many unordered pairs can be selected from # people?",
+    "keys": [
+      "authored:math/chapter6-combinatorics-probability.html#section-04:1",
+      "authored:math/chapter6-combinatorics-probability.html#section-04:2",
+      "authored:math/chapter6-combinatorics-probability.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A fair die is rolled. What is the probability of a result at most #?",
+    "keys": [
+      "authored:math/chapter6-combinatorics-probability.html#section-05:1",
+      "authored:math/chapter6-combinatorics-probability.html#section-05:2",
+      "authored:math/chapter6-combinatorics-probability.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "P(A)=#, P(B)=# and A,B are mutually exclusive. Find P(A or B).",
+    "keys": [
+      "authored:math/chapter6-combinatorics-probability.html#section-06:1",
+      "authored:math/chapter6-combinatorics-probability.html#section-06:2",
+      "authored:math/chapter6-combinatorics-probability.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Among # red balls, # are marked. Given that a selected ball is red, what is the probability it is marked?",
+    "keys": [
+      "authored:math/chapter6-combinatorics-probability.html#section-07:1",
+      "authored:math/chapter6-combinatorics-probability.html#section-07:2",
+      "authored:math/chapter6-combinatorics-probability.html#section-07:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A study selects # residents from a city of #,#. The selected residents form the:",
+    "keys": [
+      "authored:math/chapter7-statistics.html#section-02:1",
+      "authored:math/chapter7-statistics.html#section-02:2",
+      "authored:math/chapter7-statistics.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A value occurs # times in a dataset of # observations. What is its relative frequency?",
+    "keys": [
+      "authored:math/chapter7-statistics.html#section-03:1",
+      "authored:math/chapter7-statistics.html#section-03:2",
+      "authored:math/chapter7-statistics.html#section-03:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A pie-chart category represents #% of observations. What is its central angle in degrees?",
+    "keys": [
+      "authored:math/chapter7-statistics.html#section-04:1",
+      "authored:math/chapter7-statistics.html#section-04:2",
+      "authored:math/chapter7-statistics.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Find the arithmetic mean of #, #, #.",
+    "keys": [
+      "authored:math/chapter7-statistics.html#section-05:1",
+      "authored:math/chapter7-statistics.html#section-05:2",
+      "authored:math/chapter7-statistics.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Find the range of #, #, #.",
+    "keys": [
+      "authored:math/chapter7-statistics.html#section-06:1",
+      "authored:math/chapter7-statistics.html#section-06:2",
+      "authored:math/chapter7-statistics.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Two supplementary angles are #° and x°. Find x.",
+    "keys": [
+      "authored:math/geometry-chapter.html#section-02:1",
+      "authored:math/geometry-chapter.html#section-02:2",
+      "authored:math/geometry-chapter.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A triangle has base # and perpendicular height #. Find its area.",
+    "keys": [
+      "authored:math/geometry-chapter.html#section-03:1",
+      "authored:math/geometry-chapter.html#section-03:2",
+      "authored:math/geometry-chapter.html#section-03:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "What is the area of a circle of radius #?",
+    "keys": [
+      "authored:math/geometry-chapter.html#section-04:1",
+      "authored:math/geometry-chapter.html#section-04:2",
+      "authored:math/geometry-chapter.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A rectangular cuboid has dimensions #, # and #. Find its volume.",
+    "keys": [
+      "authored:math/geometry-chapter.html#section-05:1",
+      "authored:math/geometry-chapter.html#section-05:2",
+      "authored:math/geometry-chapter.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "The side lengths of two similar figures have scale factor #. What is the ratio of their areas?",
+    "keys": [
+      "authored:math/geometry-chapter.html#section-06:1",
+      "authored:math/geometry-chapter.html#section-06:2",
+      "authored:math/geometry-chapter.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Convert #° to radians.",
+    "keys": [
+      "authored:math/trig_chapter.html#section-02:1",
+      "authored:math/trig_chapter.html#section-02:2",
+      "authored:math/trig_chapter.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A right triangle has opposite side #, adjacent side #, hypotenuse #. Find sin θ.",
+    "keys": [
+      "authored:math/trig_chapter.html#section-03:1",
+      "authored:math/trig_chapter.html#section-03:2",
+      "authored:math/trig_chapter.html#section-03:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Which quadrant contains an angle of #°?",
+    "keys": [
+      "authored:math/trig_chapter.html#section-04:1",
+      "authored:math/trig_chapter.html#section-04:2",
+      "authored:math/trig_chapter.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "For θ=#°, simplify sin(#°−θ).",
+    "keys": [
+      "authored:math/trig_chapter.html#section-05:1",
+      "authored:math/trig_chapter.html#section-05:2",
+      "authored:math/trig_chapter.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "If sin θ=#/# and cos θ is positive, what is sin(#θ) in terms of cos θ? Give the coefficient multiplying cos θ.",
+    "keys": [
+      "authored:math/trig_chapter.html#section-06:1",
+      "authored:math/trig_chapter.html#section-06:2",
+      "authored:math/trig_chapter.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "How many solutions does sin x=# have in [#,#π]?",
+    "keys": [
+      "authored:math/trig_chapter.html#section-07:1",
+      "authored:math/trig_chapter.html#section-07:2",
+      "authored:math/trig_chapter.html#section-07:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "What is the maximum value of f(x)=#sin x+#?",
+    "keys": [
+      "authored:math/trig_chapter.html#section-08:1",
+      "authored:math/trig_chapter.html#section-08:2",
+      "authored:math/trig_chapter.html#section-08:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Find the real domain of f(x)=√(x−#).",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-02:1",
+      "authored:math/فصل۳-توابع.html#section-02:2",
+      "authored:math/فصل۳-توابع.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Which function is the inverse of f(x)=#^x?",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-03:1",
+      "authored:math/فصل۳-توابع.html#section-03:2",
+      "authored:math/فصل۳-توابع.html#section-03:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Find the x-coordinate of the vertex of y=x²−#x+#.",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-04:1",
+      "authored:math/فصل۳-توابع.html#section-04:2",
+      "authored:math/فصل۳-توابع.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Solve |x|=#.",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-05:1",
+      "authored:math/فصل۳-توابع.html#section-05:2",
+      "authored:math/فصل۳-توابع.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "What value must be excluded from the domain of f(x)=#/(x−#)?",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-06:1",
+      "authored:math/فصل۳-توابع.html#section-06:2",
+      "authored:math/فصل۳-توابع.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Solve #^x=#.",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-07:1",
+      "authored:math/فصل۳-توابع.html#section-07:2",
+      "authored:math/فصل۳-توابع.html#section-07:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Evaluate log_#(#).",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-08:1",
+      "authored:math/فصل۳-توابع.html#section-08:2",
+      "authored:math/فصل۳-توابع.html#section-08:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Relative to y=x², y=(x−#)² is shifted:",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-09:1",
+      "authored:math/فصل۳-توابع.html#section-09:2",
+      "authored:math/فصل۳-توابع.html#section-09:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "If f(x)=#x+# and g(x)=x², find f(g(#)).",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-10:1",
+      "authored:math/فصل۳-توابع.html#section-10:2",
+      "authored:math/فصل۳-توابع.html#section-10:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "The graph of y=x²−# lies below the x-axis for:",
+    "keys": [
+      "authored:math/فصل۳-توابع.html#section-11:1",
+      "authored:math/فصل۳-توابع.html#section-11:2",
+      "authored:math/فصل۳-توابع.html#section-11:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A model has y=k/x². If x becomes # times as large, by what factor does y change?",
+    "keys": [
+      "authored:physics/chapter1-physical-quantities.html#section-06:1",
+      "authored:physics/chapter1-physical-quantities.html#section-06:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A ruler's smallest division is # cm. What is its resolution in millimetres?",
+    "keys": [
+      "authored:physics/chapter1-physical-quantities.html#section-08:1",
+      "authored:physics/chapter1-physical-quantities.html#section-08:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A balance always reads # g too high. Which change directly corrects this error?",
+    "keys": [
+      "authored:physics/chapter1-physical-quantities.html#section-09:1",
+      "authored:physics/chapter1-physical-quantities.html#section-09:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "An object goes from x=# m to x=# m, then returns to x=# m. Find the total displacement in metres.",
+    "keys": [
+      "authored:physics/chapter2-kinematics.html#section-01:1",
+      "authored:physics/chapter2-kinematics.html#section-01:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Uniform motion starts at x₀=# m with velocity # m/s. Find x after # s in metres.",
+    "keys": [
+      "authored:physics/chapter2-kinematics.html#section-03:1",
+      "authored:physics/chapter2-kinematics.html#section-03:2",
+      "authored:physics/chapter2-kinematics.html#section-03:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "An object is at x=−# m and has velocity +# m/s. Which statement is correct?",
+    "keys": [
+      "authored:physics/chapter2-kinematics.html#section-04:1",
+      "authored:physics/chapter2-kinematics.html#section-04:2",
+      "authored:physics/chapter2-kinematics.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A position–time graph is the line x=#t+# (SI). What is the velocity in m/s?",
+    "keys": [
+      "authored:physics/chapter2-kinematics.html#section-07:1",
+      "authored:physics/chapter2-kinematics.html#section-07:2",
+      "authored:physics/chapter2-kinematics.html#section-07:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A velocity–time graph is horizontal at # m/s from t=# to t=# s. Find the displacement in metres.",
+    "keys": [
+      "authored:physics/chapter2-kinematics.html#section-08:1",
+      "authored:physics/chapter2-kinematics.html#section-08:2",
+      "authored:physics/chapter2-kinematics.html#section-08:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Acceleration is constant at # m/s² for # s. What is the change in velocity in m/s?",
+    "keys": [
+      "authored:physics/chapter2-kinematics.html#section-09:1",
+      "authored:physics/chapter2-kinematics.html#section-09:2",
+      "authored:physics/chapter2-kinematics.html#section-09:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Uniform circular motion has speed # m/s and radius # m. Find centripetal acceleration in m/s².",
+    "keys": [
+      "authored:physics/chapter2-kinematics.html#section-12:1",
+      "authored:physics/chapter2-kinematics.html#section-12:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A constant # N force acts parallel to a displacement of # m. Find its work in joules.",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-01:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-01:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A # kg object is raised vertically by # m at constant speed. What is the work done by gravity in joules? Use g=# m/s².",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-02:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-02:2",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A # kg object initially at rest reaches # m/s. What is the net work in joules?",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-03:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-03:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A machine performs # J of work in # s. Find its average power in watts.",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-04:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-04:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A # kg object moves at # m/s. What is its kinetic energy in joules?",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-05:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-05:2",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "An object falls from rest through # m without losses. Find its speed squared in m²/s², using g=# m/s².",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-06:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-06:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A machine receives # J and delivers # J of useful output. What is its efficiency as a percentage?",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-07:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-07:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A body rests on a horizontal surface with normal force # N. If μk=#, find kinetic friction in newtons when it slides.",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-09:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-09:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A spring with k=# N/m is extended by # m. Find the restoring force magnitude in newtons.",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-10:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-10:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A # kg body hangs motionless from a light vertical rope. Find tension in newtons, using g=# m/s².",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-11:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-11:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A # kg object's velocity changes from +# to −# m/s. What is its change in momentum in kg·m/s?",
+    "keys": [
+      "authored:physics/chapter3-dynamics-work-energy.html#section-12:1",
+      "authored:physics/chapter3-dynamics-work-energy.html#section-12:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A perpendicular force of # N acts on # m². Find pressure in pascals.",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-02:1",
+      "authored:physics/chapter4-pressure.html#section-02:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A sample has mass # kg and volume # m³. Find its density in kg/m³.",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-03:1",
+      "authored:physics/chapter4-pressure.html#section-03:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A # kg object rests on a horizontal base of area # m². Find its pressure on the base, using g=# m/s².",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-04:1",
+      "authored:physics/chapter4-pressure.html#section-04:2",
+      "authored:physics/chapter4-pressure.html#section-04:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Find the gauge pressure at depth # m in water of density # kg/m³, using g=# m/s².",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-05:1",
+      "authored:physics/chapter4-pressure.html#section-05:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A mercury column has height # cm. Use ρHg=# kg/m³ and g=# m/s². What pressure does it represent in pascals?",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-06:1",
+      "authored:physics/chapter4-pressure.html#section-06:2",
+      "authored:physics/chapter4-pressure.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A liquid creates # Pa of pressure above the pressure outside a flat base of area # m². Find the net pressure force in newtons.",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-07:1",
+      "authored:physics/chapter4-pressure.html#section-07:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A hydraulic press has output piston area # times the input area. An input force of # N gives what ideal output force in newtons?",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-08:1",
+      "authored:physics/chapter4-pressure.html#section-08:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A measurement is taken # m higher in the atmosphere. All else being typical, atmospheric pressure:",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-09:1",
+      "authored:physics/chapter4-pressure.html#section-09:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "An open water manometer has a # cm level difference. Find the pressure difference in pascals with ρ=# kg/m³ and g=# m/s².",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-10:1",
+      "authored:physics/chapter4-pressure.html#section-10:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "An ideal barometer's fluid density doubles while the atmospheric pressure stays fixed. If its original height was # cm, what is its new height in cm?",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-11:1",
+      "authored:physics/chapter4-pressure.html#section-11:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Absolute pressure is # kPa and local atmospheric pressure is # kPa. Find gauge pressure in kPa.",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-12:1",
+      "authored:physics/chapter4-pressure.html#section-12:2",
+      "authored:physics/chapter4-pressure.html#section-12:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "An object displaces # m³ of water. Find the buoyant force in newtons, using ρ=# kg/m³ and g=# m/s².",
+    "keys": [
+      "authored:physics/chapter4-pressure.html#section-13:1",
+      "authored:physics/chapter4-pressure.html#section-13:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A gas absorbs # J of heat and does # J of work on its surroundings. Find ΔU in joules.",
+    "keys": [
+      "authored:physics/chapter5-thermodynamics.html#section-02:1",
+      "authored:physics/chapter5-thermodynamics.html#section-02:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A gas expands isobarically at # kPa by # litres. Find work done by the gas in joules.",
+    "keys": [
+      "authored:physics/chapter5-thermodynamics.html#section-05:1",
+      "authored:physics/chapter5-thermodynamics.html#section-05:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A gas receives # J of work during an adiabatic compression. Find ΔU in joules.",
+    "keys": [
+      "authored:physics/chapter5-thermodynamics.html#section-06:1",
+      "authored:physics/chapter5-thermodynamics.html#section-06:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A heat engine absorbs # J and rejects # J per cycle. Find efficiency as a percentage.",
+    "keys": [
+      "authored:physics/chapter5-thermodynamics.html#section-08:1",
+      "authored:physics/chapter5-thermodynamics.html#section-08:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A refrigerator removes # J from its interior using # J of work. Find its coefficient of performance.",
+    "keys": [
+      "authored:physics/chapter5-thermodynamics.html#section-09:1",
+      "authored:physics/chapter5-thermodynamics.html#section-09:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A neutral conductor loses # electrons. Its net charge is:",
+    "keys": [
+      "authored:physics/chapter6-electromagnetism-waves.html#section-01:1",
+      "authored:physics/chapter6-electromagnetism-waves.html#section-01:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A positive test charge of # C feels a # N force. Find the electric field magnitude in N/C.",
+    "keys": [
+      "authored:physics/chapter6-electromagnetism-waves.html#section-03:1",
+      "authored:physics/chapter6-electromagnetism-waves.html#section-03:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A charge of # C passes a cross-section in # s. Find current in amperes.",
+    "keys": [
+      "authored:physics/chapter6-electromagnetism-waves.html#section-04:1",
+      "authored:physics/chapter6-electromagnetism-waves.html#section-04:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A # m wire carries # A perpendicular to a # T field. Find the magnetic force in newtons.",
+    "keys": [
+      "authored:physics/chapter6-electromagnetism-waves.html#section-06:1",
+      "authored:physics/chapter6-electromagnetism-waves.html#section-06:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Compare photons with frequencies f and #f. The photon with the higher frequency has:",
+    "keys": [
+      "authored:physics/chapter6-electromagnetism-waves.html#section-08:1",
+      "authored:physics/chapter6-electromagnetism-waves.html#section-08:2"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A # g sample melts at constant temperature. Its latent heat of fusion is # J/g. How much heat is absorbed, in joules?",
+    "keys": [
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-01:1",
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-01:2",
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-01:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Which change produces new chemical substances in example #?",
+    "keys": [
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-02:1",
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-02:2",
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-02:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "In a closed system, # g of A reacts completely with # g of B to form only C. Find the mass of C in grams.",
+    "keys": [
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-05:1",
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-05:2",
+      "authored:chemistry/cent-chemistry-ch1-5-deep-1.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "A neutral atom has atomic number #. How many protons does it have?",
+    "keys": [
+      "authored:biology/chapter1-chemical-foundation-fa.html#section-05:1",
+      "authored:biology/chapter1-chemical-foundation-fa.html#section-05:2",
+      "authored:biology/chapter1-chemical-foundation-fa.html#section-05:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "Producers contain # kJ available energy. If #% transfers to primary consumers, how much energy reaches those consumers in kJ?",
+    "keys": [
+      "authored:biology/chapter4-plants-ecology-fa.html#section-07:1",
+      "authored:biology/chapter4-plants-ecology-fa.html#section-07:2",
+      "authored:biology/chapter4-plants-ecology-fa.html#section-07:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  },
+  {
+    "template": "After a meal, blood glucose rises from its fasting level by # units. Which hormone normally promotes glucose uptake and storage?",
+    "keys": [
+      "authored:biology/chapter5-animal-physiology-fa.html#section-06:1",
+      "authored:biology/chapter5-animal-physiology-fa.html#section-06:2",
+      "authored:biology/chapter5-animal-physiology-fa.html#section-06:3"
+    ],
+    "status": "related-template-family; not an assertion of semantic identity"
+  }
+]

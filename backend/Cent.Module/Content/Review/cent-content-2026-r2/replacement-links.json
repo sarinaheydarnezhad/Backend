@@ -1,0 +1,22 @@
+[
+  {
+    "legacy": "biology/chapter1-chemical-foundation-fa.html#exercise-002",
+    "replacement": "chemistry/updates-2026-r1.html#periodic/question-isotope",
+    "issue": "Remove blanket tip that every isotope question is answered by neutrons; explicitly distinguish proton, neutron, mass number and ion electron counts."
+  },
+  {
+    "legacy": "biology/chapter1-chemical-foundation-fa.html#exercise-004",
+    "replacement": "biology/updates-2026-r2.html#molecules-membranes/question-protein-hbond",
+    "issue": "Replace blanket intermolecular hydrogen-bond shortcut with a valid intramolecular protein example."
+  },
+  {
+    "legacy": "biology/chapter1-chemical-foundation-fa.html#exercise-005",
+    "replacement": "chemistry/updates-2026-r2.html#buffers-hydrolysis",
+    "issue": "Explain pH through hydrogen-ion activity (dilute concentration approximation), not an undefined generic acidity ratio."
+  },
+  {
+    "legacy": "logic/ch06-consistency.html#exercise-002",
+    "replacement": "logic/updates-2026-r2.html#models-evidence/question-necessary",
+    "issue": "Keep historically quarantined overlapping/changed-premise exercise ineligible. Use an original conditional-direction item instead."
+  }
+]

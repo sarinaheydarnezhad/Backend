@@ -8,15 +8,22 @@ import {nodes, sourceUrl} from './Syllabus.mjs'
 import {lessons as core} from './Core.mjs'
 import {lessons as chemistry} from './Chemistry.mjs'
 import {lessons as reading, passages} from './Reading.mjs'
+import {lessons as expansion, passages as expansionPassages} from './Expansion.mjs'
+import {auditLegacy} from './LegacyAudit.mjs'
 
 const content = fileURLToPath(new URL('../../Cent.Module/Content/', import.meta.url))
-const legacy = JSON.parse(fs.readFileSync(path.join(content, 'curriculum.json'), 'utf8'))
+const original = JSON.parse(fs.readFileSync(path.join(content, 'curriculum.json'), 'utf8'))
+const expanding = process.argv.includes('--expand')
+const prior = expanding ? JSON.parse(fs.readFileSync(path.join(content, 'curriculum-2026.json'), 'utf8')) : null
+const legacy = prior ? Object.fromEntries(Object.keys(original).map(key => [key, [...original[key], ...prior[key]]])) : original
 const sha = s => createHash('sha256').update(s).digest('hex')
 const html = s => s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;')
 const fa = /[\u0600-\u06ff]/u
-const lessons = [...reading, ...core, ...chemistry]
-const releaseId = 'cent-content-2026-r1'
-const syllabusRevisionId = 'cent-syllabus-2026-11-22-r1'
+const lessons = expanding ? expansion : [...reading, ...core, ...chemistry]
+const currentPassages = expanding ? expansionPassages : passages
+const suffix = expanding ? 'r2' : 'r1'
+const releaseId = 'cent-content-2026-' + suffix
+const syllabusRevisionId = 'cent-syllabus-2026-11-22-' + suffix
 const date = '2026-11-22T00:00:00Z'
 const subjects = ['reading', 'math', 'logic', 'biology', 'chemistry', 'physics']
 const rights = 'Original Itatest educational content authored for this task; no CISIA or commercial questions copied.'
@@ -25,7 +32,7 @@ const reviewDir = path.join(content, 'Review', releaseId)
 fs.mkdirSync(reviewDir, {recursive: true})
 const addition = {sources: [], chapters: [], topics: [], sections: [], exercises: [], questions: [], findings: []}
 const release = {id: releaseId, syllabusRevisionId, sourceUrl, retrievedAt: date, nodes,
-  topics: [], resources: [], reviews: [], passages: [], groups: []}
+  topics: [...(prior?.release.topics || [])], resources: [...(prior?.release.resources || [])], reviews: [...(prior?.release.reviews || [])], passages: [...(prior?.release.passages || [])], groups: [...(prior?.release.groups || [])]}
 addition.release = release
 
 // Old topic IDs stay intact. Mappings indicate structural affinity, never academic certification.
@@ -52,6 +59,7 @@ function legacyNodes(t) {
   return []
 }
 for (const t of legacy.topics) {
+  if (release.topics.some(x => x.topicKey === t.key)) continue
   const nodeKeys = legacyNodes(t)
   const supplementary = /CRISPR|PCR|تکامل|هورمون|ایمنی|بیان ژن|جمعیت|شرطی|پراکندگی/.test(t.title) || nodeKeys.length === 0
   release.topics.push({topicKey: t.key, nodeKeys, status: supplementary ? 'out-of-scope' : 'requires-source-verification',
@@ -59,7 +67,7 @@ for (const t of legacy.topics) {
 }
 
 function addQuestion(q, lesson, context = {}) {
-  const topicKey = `${lesson.subject}/updates-2026-r1.html#${lesson.id}`
+  const topicKey = `${lesson.subject}/updates-2026-${suffix}.html#${lesson.id}`
   const key = `${topicKey}/question-${q.id}`
   assert.equal(q.options.length, 5, key)
   assert.equal(new Set(q.options.map(x => x.trim())).size, 5, key)
@@ -71,7 +79,7 @@ function addQuestion(q, lesson, context = {}) {
     options: ordering.map(x => x.text), correctAnswer: ordering.findIndex(x => x.i === q.correctAnswer),
     explanation: q.explanation, difficulty: q.difficulty, figureSvg: null, origin: 'authored-2026-reviewed'}
   addition.questions.push(row)
-  addition.exercises.push({key: row.exerciseKey, sourceKey: `${lesson.subject}/updates-2026-r1.html`, sectionKey: topicKey,
+  addition.exercises.push({key: row.exerciseKey, sourceKey: `${lesson.subject}/updates-2026-${suffix}.html`, sectionKey: topicKey,
     topicKey, course: lesson.subject, text: row.text, options: row.options, correctAnswer: row.correctAnswer,
     solution: row.explanation, difficulty: row.difficulty, figureSvg: null, status: 'reviewed'})
   release.reviews.push({key, revision: key + ':r1', status: 'academically-reviewed', reviewer: reviewIdentity,
@@ -82,14 +90,16 @@ function addQuestion(q, lesson, context = {}) {
 }
 
 for (const subject of subjects) {
-  const sourceKey = `${subject}/updates-2026-r1.html`
+  const sourceKey = `${subject}/updates-2026-${suffix}.html`
   const selected = lessons.filter(l => l.subject === subject)
   const sections = selected.map((lesson, i) => {
     const key = sourceKey + '#' + lesson.id
     assert.ok(nodes.some(n => n.key === lesson.node && n.subject === subject))
     assert.ok(fa.test(lesson.teaching) && lesson.teaching.length > 300)
     addition.topics.push({key, chapterKey: sourceKey + '#chapter', course: subject, title: lesson.title, englishTitle: lesson.englishTitle, sortOrder: i + 1, foundation: true})
-    release.topics.push({topicKey: key, nodeKeys: [lesson.node], status: 'valid', note: 'Original Persian foundation supplement with worked example and English assessment. Agent review; no independent academic certification.'})
+    const nodeKeys = lesson.nodeKeys || [lesson.node]
+    assert.ok(nodeKeys.every(k => nodes.some(n => n.key === k && n.subject === subject)))
+    release.topics.push({topicKey: key, nodeKeys, status: 'valid', note: 'Original Persian foundation supplement with worked example and English assessment. Agent review; no independent academic certification.'})
     const text = `${lesson.title}\nهدف یادگیری: ${lesson.title}\n${lesson.teaching}\nنمونهٔ حل‌شده\n${lesson.example}\nخطای رایج و راهبرد آزمون\n${lesson.mistake}`
     const markup = `<section id="${lesson.id}"><h2>${html(lesson.title)}</h2><p>${html(lesson.teaching)}</p><h3>نمونهٔ حل‌شده</h3><p>${html(lesson.example)}</p><h3>خطای رایج و راهبرد آزمون</h3><p>${html(lesson.mistake)}</p></section>`
     release.resources.push({kind: 'lesson', key, subject, topicKey: key, revision: key + ':r1', language: 'fa', reviewStatus: 'agent-reviewed'})
@@ -103,10 +113,10 @@ for (const subject of subjects) {
   addition.sources.push({key: sourceKey, course: subject, file: sourceKey, title: `CEnT-S 2026 — ${selected[0].title} و درس‌های تکمیلی`, originalTitle: `Original ${subject} foundations ${releaseId}`, sha256: sha(markup), text: sections.map(s => s.text).join('\n\n')})
   addition.chapters.push({key: sourceKey + '#chapter', course: subject, title: `مبانی و تکمیل سرفصل CEnT-S — ${subject}`, sortOrder: 100})
 }
-for (const p of passages) {
+for (const p of currentPassages) {
   release.passages.push({id: p.id, subject: 'reading', genre: p.genre, level: 'B2-target (editorial estimate, uncalibrated)', text: p.text,
     rights, source: 'Original fictional educational text; not a CISIA passage', reviewStatus: 'agent-reviewed'})
-  const lesson = reading.find(l => l.id === p.lessonId)
+  const lesson = lessons.find(l => l.id === p.lessonId)
   const id = p.id + '-group'
   const keys = p.questions.map(q => addQuestion(q, lesson, {groupId: id, passageId: p.id}))
   release.groups.push({id, subject: 'reading', passageId: p.id, questionKeys: keys})
@@ -125,8 +135,8 @@ function audit(row, kind) {
   flags.push('independent-academic-and-rights-review-pending')
   return {key: row.key, kind, subject: row.course, topicKey: row.topicKey, status: flags.includes('previously-quarantined') ? 'requires-correction' : 'requires-source-verification', flags}
 }
-const auditRows = [...legacy.questions.map(q => audit(q, 'question')), ...legacy.exercises.map(q => audit(q, 'exercise'))]
-for (const q of legacy.questions) release.reviews.push({key: q.key, revision: q.key + ':legacy-preserved', status: 'requires-source-verification',
+const auditRows = [...original.questions.map(q => audit(q, 'question')), ...original.exercises.map(q => audit(q, 'exercise'))]
+for (const q of original.questions.filter(q => !release.reviews.some(r => r.key === q.key))) release.reviews.push({key: q.key, revision: q.key + ':legacy-preserved', status: 'requires-source-verification',
   reviewer: 'Automated structure/language audit only', evidence: 'See Review/' + releaseId + '/legacy-item-audit.json; not eligible for new mocks', rights: 'Source rights not independently verified'})
 for (const row of auditRows.filter(r => r.flags.some(f => f !== 'independent-academic-and-rights-review-pending')))
   addition.findings.push({key: row.key, action: 'retained-for-review', reason: row.flags.join('; ')})
@@ -134,15 +144,15 @@ for (const row of auditRows.filter(r => r.flags.some(f => f !== 'independent-aca
 const stems = [...legacy.questions, ...addition.questions].map(q => q.text.trim().replace(/\s+/g, ' '))
 assert.equal(new Set(stems).size, stems.length, 'Duplicate bank question stems: ' + stems.filter((s,i) => stems.indexOf(s) !== i).join(' | '))
 assert.equal(new Set(release.topics.map(t => t.topicKey)).size, legacy.topics.length + addition.topics.length)
-assert.equal(new Set(lessons.map(l => l.node)).size, nodes.length)
+assert.ok(nodes.every(n => release.topics.some(t => t.status === 'valid' && t.nodeKeys.includes(n.key))))
 const json = value => JSON.stringify(value, null, 2) + '\n'
 const outputs = {
-  [path.join(content, 'curriculum-2026.json')]: json(addition),
+  [path.join(content, expanding ? 'curriculum-2026-r2.json' : 'curriculum-2026.json')]: json(addition),
   [path.join(reviewDir, 'legacy-item-audit.json')]: json(auditRows),
 }
-const before = {subjects: new Set(legacy.topics.map(t => t.course)).size, sources: legacy.sources.length, topics: legacy.topics.length, sourceSections: legacy.sections.length, exercises: legacy.exercises.length, questions: legacy.questions.length, passages: 0}
-const after = {subjects: subjects.length, sources: legacy.sources.length + addition.sources.length, topics: legacy.topics.length + addition.topics.length, sourceSections: legacy.sections.length + addition.sections.length, newLessonSupplements: lessons.length, exercises: legacy.exercises.length + addition.exercises.length, questions: legacy.questions.length + addition.questions.length, passages: passages.length}
-const counts = subjects.map(subject => ({subject, newLessons: addition.topics.filter(t => t.course === subject).length, candidateQuestions: addition.questions.filter(q => q.course === subject).length, required: {reading:10,math:15,logic:15,biology:10,chemistry:10,physics:5}[subject]}))
+const before = {subjects: new Set(legacy.topics.map(t => t.course)).size, sources: legacy.sources.length, topics: legacy.topics.length, sourceSections: legacy.sections.length, exercises: legacy.exercises.length, questions: legacy.questions.length, passages: prior?.release.passages.length || 0}
+const after = {subjects: subjects.length, sources: legacy.sources.length + addition.sources.length, topics: legacy.topics.length + addition.topics.length, sourceSections: legacy.sections.length + addition.sections.length, newLessonSupplements: release.resources.filter(r => r.kind === 'lesson').length, exercises: legacy.exercises.length + addition.exercises.length, questions: legacy.questions.length + addition.questions.length, passages: release.passages.length}
+const counts = subjects.map(subject => ({subject, newLessons: [...(prior?.topics || []),...addition.topics].filter(t => t.course === subject).length, candidateQuestions: [...(prior?.questions || []),...addition.questions].filter(q => q.course === subject).length, required: {reading:10,math:15,logic:15,biology:10,chemistry:10,physics:5}[subject]}))
 outputs[path.join(reviewDir, 'summary.json')] = json({releaseId, syllabusRevisionId, sourceUrl, retrievedAt: date, legacySha256: sha(fs.readFileSync(path.join(content,'curriculum.json'))), before, after, counts, auditedLegacyItems: auditRows.length, independentReview: 'pending; agent review is not external academic certification', activation: 'disabled; no DB connection or migration application'})
 // Standalone printable teaching material. These are review artifacts, never public
 // static website assets and never exposed by an unprotected download endpoint.
@@ -152,16 +162,17 @@ for (const subject of subjects) {
   const relevant = lessons.filter(l => l.subject === subject)
   const renderQuestion = row => `<article lang="en" dir="ltr"><h4>${html(row.text)}</h4><ol type="A">${row.options.map(o => `<li>${html(o)}</li>`).join('')}</ol><details><summary>Answer and explanation</summary><p>${String.fromCharCode(65 + row.correctAnswer)}. ${html(row.explanation)}</p></details></article>`
   const teaching = relevant.map(l => {
-    const key = `${subject}/updates-2026-r1.html#${l.id}`
+    const key = `${subject}/updates-2026-${suffix}.html#${l.id}`
     const section = addition.sections.find(s => s.key === key)
     const independent = addition.questions.filter(q => q.topicKey === key && !release.reviews.find(r => r.key === q.key)?.groupId)
     return section.html + independent.map(renderQuestion).join('\n')
   }).join('\n')
-  const grouped = release.passages.filter(p => p.subject === subject).map(p => {
+  const grouped = release.passages.filter(p => p.subject === subject && addition.release.groups.some(g => g.passageId === p.id && g.questionKeys.every(k => addition.questions.some(q => q.key === k)))).map(p => {
     const group = release.groups.find(g => g.passageId === p.id)
     return `<section lang="en" dir="ltr"><h2>Reading passage</h2>${p.text.split(/\n\s*\n/).map(t => `<p>${html(t)}</p>`).join('')}${group.questionKeys.map(k => renderQuestion(addition.questions.find(q => q.key === k))).join('')}</section>`
   }).join('\n')
   outputs[path.join(materials, subject + '.html')] = `<!doctype html><html lang="fa" dir="rtl"><head><meta charset="utf-8"><title>CEnT-S — ${subject} — ${syllabusRevisionId}</title><style>body{font-family:system-ui,sans-serif;max-width:55rem;margin:auto;padding:2rem;line-height:1.8}article,section{break-inside:avoid}details{margin-block:1rem}@media print{details{display:block}details>p{display:block}}</style></head><body><h1>${html(subject)} — مبانی و تمرین</h1><p>ویرایش ${syllabusRevisionId}. درس‌ها و مثال‌های آموزشی فارسی؛ سنجش انگلیسی. این متن آموزشی تألیفی است؛ درجهٔ دشواری برآورد آموزشی است.</p>${teaching}${grouped}<footer><p>مرجع دامنهٔ سرفصل: <a href="${sourceUrl}">CISIA syllabus</a> — retrieved ${date}. Original educational material; agent review only; independent specialist acceptance pending.</p></footer></body></html>\n`
 }
 for (const [file, value] of Object.entries(outputs)) fs.writeFileSync(file, value)
+if (expanding) auditLegacy(original, auditRows, reviewDir, addition)
 console.log(json({before, after, counts, auditedLegacyItems: auditRows.length}))

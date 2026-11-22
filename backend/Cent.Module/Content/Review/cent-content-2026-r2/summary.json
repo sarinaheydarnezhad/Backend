@@ -1,0 +1,67 @@
+{
+  "releaseId": "cent-content-2026-r2",
+  "syllabusRevisionId": "cent-syllabus-2026-11-22-r2",
+  "sourceUrl": "https://www.cisiaonline.it/en/cent/cent-s/structure-and-syllabus",
+  "retrievedAt": "2026-11-22T00:00:00Z",
+  "legacySha256": "5f5c16c6ab02e019de2604160307ed1e1f9adc734fc94ec840947f36f3f287a9",
+  "before": {
+    "subjects": 6,
+    "sources": 45,
+    "topics": 228,
+    "sourceSections": 468,
+    "exercises": 780,
+    "questions": 933,
+    "passages": 3
+  },
+  "after": {
+    "subjects": 6,
+    "sources": 51,
+    "topics": 247,
+    "sourceSections": 487,
+    "newLessonSupplements": 57,
+    "exercises": 832,
+    "questions": 985,
+    "passages": 5
+  },
+  "counts": [
+    {
+      "subject": "reading",
+      "newLessons": 10,
+      "candidateQuestions": 33,
+      "required": 10
+    },
+    {
+      "subject": "math",
+      "newLessons": 9,
+      "candidateQuestions": 27,
+      "required": 15
+    },
+    {
+      "subject": "logic",
+      "newLessons": 4,
+      "candidateQuestions": 19,
+      "required": 15
+    },
+    {
+      "subject": "biology",
+      "newLessons": 7,
+      "candidateQuestions": 21,
+      "required": 10
+    },
+    {
+      "subject": "chemistry",
+      "newLessons": 20,
+      "candidateQuestions": 50,
+      "required": 10
+    },
+    {
+      "subject": "physics",
+      "newLessons": 7,
+      "candidateQuestions": 16,
+      "required": 5
+    }
+  ],
+  "auditedLegacyItems": 1485,
+  "independentReview": "pending; agent review is not external academic certification",
+  "activation": "disabled; no DB connection or migration application"
+}

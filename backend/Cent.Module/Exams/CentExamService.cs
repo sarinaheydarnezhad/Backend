@@ -8,15 +8,28 @@ public interface ICentMockAdmission
     Task<string> AuthorizeStart(Guid owner, ExamDefinition definition, CancellationToken ct);
     Task AuthorizeReview(Guid owner, Guid attempt, CancellationToken ct);
 }
-// P1-C05/C12 remain unresolved. Never reinterpret the old simulator subscription as
-// approval for full Mock Exam admission or post-expiry review.
+// Fail-closed alternative retained for hosts that have not selected an access policy.
 public sealed class PendingCentMockAdmission : ICentMockAdmission
 {
     public bool IsConfigured => false;
     public Task<string> AuthorizeStart(Guid owner, ExamDefinition definition, CancellationToken ct) =>
         throw new CentException(409, "exam_unavailable", "Mock Exam benefit/admission policy awaits approval.");
     public Task AuthorizeReview(Guid owner, Guid attempt, CancellationToken ct) =>
-        throw new CentException(409, "exam_unavailable", "Post-expiry question-review policy awaits approval.");
+        Task.CompletedTask; // Service checks ownership and terminal status first.
+}
+
+// Phase 4 reuses the existing simulator access decision; it creates no new grant,
+// product or unrestricted start path. Content/publication gates still apply before
+// admission, and terminal owner review survives later subscription expiry.
+public sealed class ExistingCentMockAdmission(CentAccess access) : ICentMockAdmission
+{
+    public bool IsConfigured => true;
+    public async Task<string> AuthorizeStart(Guid owner, ExamDefinition definition, CancellationToken ct)
+    {
+        CentModule.Check(await access.HasSubscription(owner, ct), "دسترسی فعلی آزمون‌های شبیه‌ساز برای شروع لازم است.", 403, "exam_access_required");
+        return "existing-simulator-access-v1";
+    }
+    public Task AuthorizeReview(Guid owner, Guid attempt, CancellationToken ct) => Task.CompletedTask;
 }
 public sealed record StartMockExam(Guid RequestId, string ExamVersionId, string ConfigurationRevision);
 public sealed record StartedMockExam(bool Created, object State);

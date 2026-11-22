@@ -25,7 +25,9 @@ public sealed class CentCurriculumImporter(CentDbContext db)
         using var stream = typeof(CentCurriculumImporter).Assembly.GetManifestResourceStream("Cent.Module.Content.curriculum-2026.json");
         if (stream is null) return legacy;
         var addition = JsonSerializer.Deserialize<Corpus>(stream, Json) ?? throw new InvalidOperationException("Empty content release.");
-        return Merge(legacy, addition);
+        var first = Merge(legacy, addition);
+        using var expansion = typeof(CentCurriculumImporter).Assembly.GetManifestResourceStream("Cent.Module.Content.curriculum-2026-r2.json");
+        return expansion is null ? first : Merge(first, JsonSerializer.Deserialize<Corpus>(expansion, Json) ?? throw new InvalidOperationException("Empty expansion."));
     }
     public static Corpus Merge(Corpus original, Corpus addition) => new(
         [.. original.Sources, .. addition.Sources], [.. original.Chapters, .. addition.Chapters],
@@ -152,7 +154,8 @@ public sealed class CentCurriculumImporter(CentDbContext db)
             else RequireSame(content.PayloadJson, payload, release.Id);
             // Import-ready engine companion. No publication/activation or administrator
             // sign-off is fabricated: ReviewedAt/ReviewedBy deliberately stay null.
-            var manifest = CurriculumReleases.Manifest(package, Exams.CentExamBlueprints.Current.ExamVersionId);
+            var definition = Exams.CentExamBlueprints.ForContent(release.Id, release.SyllabusRevisionId);
+            var manifest = CurriculumReleases.Manifest(package, definition);
             var manifestId = release.Id + ":current";
             var existingManifest = await db.ExamContentReleases.FindAsync([manifestId], ct);
             var manifestJson = Exams.CentExamJson.Write(manifest);
@@ -160,6 +163,12 @@ public sealed class CentCurriculumImporter(CentDbContext db)
                 Id = manifestId, ExamVersionId = manifest.ExamVersionId, SyllabusRevisionId = manifest.SyllabusRevisionId,
                 ManifestJson = manifestJson });
             else RequireSame(existingManifest.ManifestJson, manifestJson, manifestId);
+            var version = await db.ExamVersions.FindAsync([definition.ExamVersionId], ct);
+            var definitionJson = Exams.CentExamJson.Write(definition);
+            if (version is null) db.ExamVersions.Add(new Exams.CentExamVersion { Id = definition.ExamVersionId,
+                ConfigurationRevision = definition.ConfigurationRevision, DefinitionJson = definitionJson,
+                SyllabusRevisionId = release.SyllabusRevisionId, ContentReleaseId = manifestId, Status = "DRAFT", AvailableForNewStarts = false });
+            else RequireSame(version.DefinitionJson, definitionJson, definition.ExamVersionId);
         }
         db.CurriculumImports.Add(new CentCurriculumImport { PackageHash = hash, SourceCount = package.Sources.Count, TopicCount = package.Topics.Count, QuestionCount = package.Questions.Count });
         await db.SaveChangesAsync(ct);

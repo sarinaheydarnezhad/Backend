@@ -2,6 +2,27 @@
 
 ## Current additive release — 2026-11-22
 
+The latest candidate is `curriculum-2026-r2.json`, layered over the unchanged r1
+candidate and original bundle. Regenerate it with
+`node backend/Cent.Curriculum/Authoring/build-release.mjs --expand`.
+It adds 19 Persian supplements, 52 English questions and two original passages.
+Merged totals: 51 source documents, 247 topics, 487 source sections, 832 exercises,
+985 bank questions; 166 original five-option candidates and five shared passages.
+The 57 supplements are foundation teaching, not a claim of exhaustive course depth.
+The r2 review directory records 430 legacy section audits, 1,485 item audits,
+188 independently recomputed numerical keys (zero mismatches), 107 related template
+families and four original replacement links. Remaining prose, distractor, optical,
+language and rights checks are explicitly unresolved. No source licence is invented.
+
+Import prepares a separate, **disabled DRAFT** exam identity bound to r2 and the
+`expired-feedback-v1` policy. It does not change seeded or published blueprints.
+Publication and activation are distinct administrator operations; content sign-off
+remains absent. Existing simulator entitlement checks guard new starts; terminal
+owner review does not require a continuing subscription. No commerce feature is added.
+No migration, import, publication or activation was run against an existing database.
+
+The paragraphs below describe the preserved r1 layer.
+
 The original `curriculum.json` and its 39 HTML sources remain unchanged. The
 additional `curriculum-2026.json` and six `Sources/*/updates-2026-r1.html` files
 provide 38 Persian foundation lessons, 114 original English exercises/questions,
