@@ -78,6 +78,10 @@ public static class DependencyInjection
                 })
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false })
                 .RemoveAllLoggers(); // Kavenegar embeds its secret in the URL path.
+        else if (string.Equals(smsProvider, "MeliPayamak", StringComparison.OrdinalIgnoreCase))
+            services.AddHttpClient<ISmsOtpSender, MeliPayamakOtpSender>(client => client.Timeout = TimeSpan.FromSeconds(10))
+                .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false })
+                .RemoveAllLoggers(); // The Console API key is part of the URL path.
         else if (string.Equals(smsProvider, "SmsIr", StringComparison.OrdinalIgnoreCase))
             services.AddHttpClient<ISmsOtpSender, SmsIrOtpSender>(client => client.Timeout = TimeSpan.FromSeconds(10))
                 .ConfigurePrimaryHttpMessageHandler(() => new HttpClientHandler { AllowAutoRedirect = false })
@@ -86,7 +90,7 @@ public static class DependencyInjection
             services.AddHttpClient<ISmsOtpSender, WebhookSmsOtpSender>(client => client.Timeout = TimeSpan.FromSeconds(10))
                 .RedactLoggedHeaders(["Authorization"]);
         else
-            throw new InvalidOperationException("Sms:Provider must be SmsIr, Webhook or Kavenegar.");
+            throw new InvalidOperationException("Sms:Provider must be MeliPayamak, SmsIr, Webhook or Kavenegar.");
         services.AddScoped<SyncService>();
         services.AddSingleton<PlanCatalog>();
         services.AddSingleton(MyketSettings.FromConfiguration(configuration));
