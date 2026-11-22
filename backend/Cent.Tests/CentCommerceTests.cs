@@ -178,7 +178,11 @@ public sealed class CentCommerceTests
         using var store = new Store(); await store.Seed(); var first = await store.PendingOrder(); var second = await store.PendingOrder();
         var handler = new GatewayHandler(_ => "{\"data\":{\"code\":100,\"ref_id\":123456}}");
         using (var db = store.Open()) Assert.True(await new CentPayments(db, Gateway(handler)).Confirm(first.Id, default));
-        using (var db = store.Open()) await Assert.ThrowsAsync<SqliteException>(() => new CentPayments(db, Gateway(handler)).Confirm(second.Id, default));
+        using (var db = store.Open()) {
+            var conflict = await Assert.ThrowsAsync<CentException>(() => new CentPayments(db, Gateway(handler)).Confirm(second.Id, default));
+            Assert.Equal(409, conflict.Status);
+            Assert.Equal("payment_reference_reused", conflict.Code);
+        }
         using var verify = store.Open();
         Assert.Single(await verify.Entitlements.ToListAsync()); Assert.Equal("PENDING", (await verify.Orders.SingleAsync(o => o.Id == second.Id)).Status);
     }

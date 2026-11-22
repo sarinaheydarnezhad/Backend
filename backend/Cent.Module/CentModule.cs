@@ -55,7 +55,7 @@ public static class CentModule
         services.AddAuthentication().AddScheme<AuthenticationSchemeOptions, CentSessionHandler>(Scheme, _ => { });
         services.AddAuthorization(options => {
             options.AddPolicy("CentUser", p => p.AddAuthenticationSchemes(Scheme).RequireAuthenticatedUser());
-            options.AddPolicy("CentAdmin", p => p.AddAuthenticationSchemes(Scheme).RequireAuthenticatedUser().RequireRole("ADMIN"));
+            CentAdminSecurity.Policies(options);
         });
         services.AddRateLimiter(options => {
             options.AddPolicy("cent-auth", c => RateLimitPartition.GetFixedWindowLimiter(
@@ -78,7 +78,18 @@ public static class CentModule
             response.Headers["X-Content-Type-Options"] = "nosniff";
             response.Headers["Referrer-Policy"] = "no-referrer";
             try { return await next(context); }
-            catch (CentException e) { return Results.Json(new { message = e.Message, code = e.Code }, statusCode: e.Status); }
+            catch (CentException e) {
+                if (context.HttpContext.Request.Path.StartsWithSegments("/api/cent/v1/admin") &&
+                    context.HttpContext.Request.Method is "POST" or "PUT" or "DELETE" &&
+                    CentAdminSecurity.IsAdmin(context.HttpContext.User.FindFirstValue(ClaimTypes.Role))) {
+                    var db = context.HttpContext.RequestServices.GetRequiredService<CentDbContext>();
+                    db.ChangeTracker.Clear();
+                    var target = Guid.TryParse(context.HttpContext.Request.RouteValues["id"]?.ToString(), out var id) ? id : Guid.Empty;
+                    CentAdminEndpoints.Audit(db, context.HttpContext.User, $"ADMIN_REJECTED_{e.Status}", target);
+                    await db.SaveChangesAsync(context.HttpContext.RequestAborted);
+                }
+                return Results.Json(new { message = e.Message, code = e.Code }, statusCode: e.Status);
+            }
             catch (DbUpdateConcurrencyException) { return Results.Conflict(new { message = "این یادداشت در پنجره دیگری تغییر کرده؛ دوباره بارگذاری کنید.", code = "revision_conflict" }); }
             catch (Exception e) when (e is DbException or DbUpdateException or TimeoutException or HttpRequestException or TaskCanceledException) {
                 context.HttpContext.RequestServices.GetRequiredService<ILoggerFactory>().CreateLogger("Cent")
@@ -186,21 +197,22 @@ public static class CentAuthEndpoints
             if (verified == PasswordVerificationResult.SuccessRehashNeeded) user!.PasswordHash = hasher.HashPassword(user, input.Password);
             return Results.Ok(await StartSession(user!, db, ct));
         });
-        // One-time bootstrap: server secret, explicit operator call, never public self-assigned administrator roles.
-        auth.MapPost("/bootstrap", async (Credentials input, HttpContext http, IConfiguration config, CentDbContext db,
-            IPasswordHasher<CentUser> hasher, CancellationToken ct) => {
+        // Explicit operator secret bound to an existing verified, authenticated identity.
+        auth.MapPost("/bootstrap", async (ClaimsPrincipal principal, HttpContext http, IConfiguration config, CentDbContext db, CancellationToken ct) => {
             var expected = config["Cent:BootstrapToken"] ?? "";
             var supplied = http.Request.Headers["X-Cent-Bootstrap"].ToString();
-            CentModule.Check(expected.Length >= 32 && CryptographicOperations.FixedTimeEquals(
+            CentModule.Check(expected.Length >= 32 && supplied.Length <= 256 && CryptographicOperations.FixedTimeEquals(
                 SHA256.HashData(Encoding.UTF8.GetBytes(expected)), SHA256.HashData(Encoding.UTF8.GetBytes(supplied))), "این مسیر فعال نیست.", 404);
-            Validate(input, true);
+            CentModule.Check(Guid.TryParse(config["Cent:BootstrapUserId"], out var target) && target == principal.UserId(), "این مسیر فعال نیست.", 404);
             await using var transaction = await db.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable, ct);
-            CentModule.Check(!await db.Users.AnyAsync(u => u.Role == "ADMIN", ct), "مدیر قبلاً ساخته شده است.", 409);
-            var user = new CentUser { Name = input.Name!.Trim(), Email = input.Email.Trim(), NormalizedEmail = input.Email.Trim().ToUpperInvariant(), Role = "ADMIN" };
-            user.PasswordHash = hasher.HashPassword(user, input.Password); db.Users.Add(user);
-            var result = await StartSession(user, db, ct); await transaction.CommitAsync(ct);
-            return Results.Ok(result);
-        });
+            var user = await db.Users.SingleAsync(u => u.Id == target, ct);
+            CentModule.Check(!string.IsNullOrEmpty(user.GoogleSubject), "هویت تأییدشده لازم است.", 409);
+            CentModule.Check(!await db.Users.AnyAsync(u => u.Role == "ADMIN" || u.Role == "SuperAdmin", ct), "مدیر ارشد قبلاً تعیین شده است.", 409);
+            user.Role = "SuperAdmin";
+            CentAdminEndpoints.Audit(db, principal, "BOOTSTRAP_SUPERADMIN_OK", user.Id);
+            await db.SaveChangesAsync(ct); await transaction.CommitAsync(ct);
+            return Results.Ok(new { user.Id, user.Role });
+        }).RequireAuthorization("CentUser");
         group.MapGet("/me", (ClaimsPrincipal principal) => Results.Ok(new {
             id = principal.UserId(), name = principal.Identity!.Name,
             email = principal.FindFirstValue(ClaimTypes.Email), role = principal.FindFirstValue(ClaimTypes.Role)

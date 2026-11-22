@@ -181,14 +181,15 @@ public static class CentPracticeEndpoints
         attempts.MapGet("/", async (ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => Results.Ok(await db.Attempts.AsNoTracking()
             .Where(a => a.UserId == p.UserId() && a.SubmittedAt != null).OrderByDescending(a => a.CreatedAt)
             .Select(a => new { a.Id, a.Kind, a.CreatedAt, a.ResultJson }).Take(100).ToListAsync(ct)));
-        var admin = group.MapGroup("/admin/questions").RequireAuthorization("CentAdmin");
-        admin.MapGet("/", async (CentDbContext db, CancellationToken ct) => Results.Ok((await db.Questions.AsNoTracking().OrderBy(q => q.Topic).ToListAsync(ct))
+        var admin = group.MapGroup("/admin/questions").RequireAuthorization("CentAdmin:exams");
+        admin.MapGet("/", async (CentDbContext db, CancellationToken ct) => Results.Ok((await db.Questions.AsNoTracking().OrderBy(q => q.Topic).Take(100).ToListAsync(ct))
             .Select(q => new { q.Id, q.Subject, q.Topic, q.TopicId, q.Difficulty, q.Text, options = JsonSerializer.Deserialize<string[]>(q.OptionsJson), q.CorrectAnswer, q.Explanation, q.Kind, q.Active })));
         admin.MapPut("/{id:guid}", async (Guid id, QuestionInput input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             CentModule.Check(id != Guid.Empty && Curriculum.CurriculumIdentity.Courses.Any(c => c.Code == input.Subject) && input.Difficulty is "easy" or "medium" or "hard" && input.Kind is "diagnostic" or "simulator" or "both", "نوع سؤال معتبر نیست.");
             CentModule.Check(input.Text is { Length: > 0 and <= 8000 } && input.Topic is { Length: > 0 and <= 500 } && input.Explanation is { Length: <= 8000 } &&
                 input.Options is { Length: >= 2 and <= 6 } && input.Options.All(s => s is { Length: > 0 and <= 1000 }) && input.CorrectAnswer >= 0 && input.CorrectAnswer < input.Options.Length, "متن و گزینه‌ها معتبر نیستند.");
             var row = await db.Questions.SingleOrDefaultAsync(q => q.Id == id, ct);
+            CentModule.Check(row is null || (!row.Active && row.ImportKey == null), "سؤال منتشرشده یا متعلق به نسخه محتوا قابل بازنویسی نیست؛ پیش‌نویس تازه بسازید.", 409);
             if (row is null) { row = new CentQuestion { Id = id }; db.Questions.Add(row); }
             if (input.TopicId is not null) CentModule.Check(await db.Topics.AnyAsync(t => t.Id == input.TopicId && t.CourseCode == input.Subject, ct), "موضوع با درس انتخاب‌شده سازگار نیست.");
             row.TopicId = input.TopicId;

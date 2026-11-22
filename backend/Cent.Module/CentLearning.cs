@@ -87,7 +87,7 @@ public static class CentLearningEndpoints
             CentAdminEndpoints.Audit(db, p, "IMPORT_CURRICULUM", Guid.Empty);
             await db.SaveChangesAsync(ct);
             return Results.Ok(result);
-        }).RequireAuthorization("CentAdmin");
+        }).RequireAuthorization("CentAdmin:content");
         group.MapGet("/documents/{id:guid}/source-sections", async (Guid id, ClaimsPrincipal p, CentDbContext db, CentAccess access, CancellationToken ct) => {
             var doc = await access.RequireDocument(p.UserId(), id, ct);
             CentModule.Check(doc.SourceId != null, "این درس منبع متنی ندارد.", 404);

@@ -157,10 +157,21 @@ public sealed class CentApiTests
     [Fact]
     public async Task Administrator_upload_requires_all_pages_and_published_pages_are_immutable()
     {
-        using var factory = new CentFactory(); using var client = factory.CreateClient();
+        using var factory = new CentFactory(); using var client = await Register(factory, "admin@example.invalid");
+        // Isolated identity fixture only; exercise the operator-bound bootstrap
+        // with an existing authenticated account rather than creating an admin.
+        using (var scope = factory.Services.CreateScope()) {
+            var db = scope.ServiceProvider.GetRequiredService<CentDbContext>();
+            var user = await db.Users.SingleAsync(u => u.Email == "admin@example.invalid");
+            user.GoogleSubject = "TEST-VERIFIED-IDENTITY:" + Guid.NewGuid();
+            await db.SaveChangesAsync();
+            factory.Services.GetRequiredService<IConfiguration>()["Cent:BootstrapUserId"] = user.Id.ToString();
+        }
         client.DefaultRequestHeaders.Add("X-Cent-Bootstrap", "cent-test-bootstrap-token-with-32-characters");
-        var auth = await Json(await client.PostAsJsonAsync("/api/cent/v1/auth/bootstrap", new { email = "admin@example.com", password = "long-test-password", name = "Admin" }));
-        client.DefaultRequestHeaders.Remove("X-Cent-Bootstrap"); client.DefaultRequestHeaders.Authorization = new("Bearer", auth.GetProperty("token").GetString());
+        var bootstrap = await Json(await client.PostAsJsonAsync("/api/cent/v1/auth/bootstrap", new { }));
+        Assert.Equal("SuperAdmin", bootstrap.GetProperty("role").GetString());
+        Assert.False(bootstrap.TryGetProperty("token", out _));
+        client.DefaultRequestHeaders.Remove("X-Cent-Bootstrap");
         var trainingId = Guid.NewGuid();
         Assert.Equal(HttpStatusCode.OK, (await client.PutAsJsonAsync($"/api/cent/v1/admin/trainings/{trainingId}", new { title = "Algebra", description = "Training", includedInSubscription = true, published = true })).StatusCode);
         var document = await Json(await client.PostAsJsonAsync("/api/cent/v1/admin/documents", new { trainingId, title = "Lesson one", pageCount = 2, sortOrder = 0 }));

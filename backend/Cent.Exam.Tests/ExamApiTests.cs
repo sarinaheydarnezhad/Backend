@@ -27,10 +27,10 @@ public sealed class ExamApiTests
         builder.Services.AddScoped<CentExamService>();
         if (isolatedDatabase is not null) builder.Services.AddSingleton(isolatedDatabase);
         else builder.Services.AddDbContext<CentDbContext>(o => o.UseSqlServer("Server=offline.invalid;Database=NeverConnect;Integrated Security=true;TrustServerCertificate=true"));
-        builder.Services.AddAuthentication("TestCent").AddScheme<AuthenticationSchemeOptions, TestAuth>("TestCent", _ => { });
+        builder.Services.AddAuthentication(CentModule.Scheme).AddScheme<AuthenticationSchemeOptions, TestAuth>(CentModule.Scheme, _ => { });
         builder.Services.AddAuthorization(o => {
             o.AddPolicy("CentUser", p => p.RequireAuthenticatedUser());
-            o.AddPolicy("CentAdmin", p => p.RequireAuthenticatedUser().RequireRole("ADMIN"));
+            CentAdminSecurity.Policies(o);
         });
         var app = builder.Build(); app.UseAuthentication(); app.UseAuthorization();
         var group = app.MapGroup("/api/cent/v1");

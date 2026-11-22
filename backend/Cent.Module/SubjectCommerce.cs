@@ -171,7 +171,7 @@ public static class CentSubjectEndpoints
             await CentSubjectCatalog.PrepareOffers(db, ct);
             CentAdminEndpoints.Audit(db, p, "PREPARE_SUBJECT_OFFERS", Guid.Empty); await db.SaveChangesAsync(ct);
             return Results.Ok(await CentSubjectCatalog.Read(db, ct));
-        }).RequireAuthorization("CentAdmin");
+        }).RequireAuthorization("CentAdmin:finance");
         group.MapPut("/admin/subject-offers/{subjectId}", async (string subjectId, OfferApproval input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             var offer = await db.Set<CentSubjectOffer>().SingleOrDefaultAsync(o => o.SubjectId == subjectId, ct);
             CentModule.Check(offer is not null, "محصول درسی پیدا نشد.", 404);
@@ -182,7 +182,7 @@ public static class CentSubjectEndpoints
             (await db.Products.SingleAsync(product => product.Id == offer.ProductId, ct)).Active = input.Available;
             CentAdminEndpoints.Audit(db, p, input.Available ? "APPROVE_SUBJECT_OFFER" : "DISABLE_SUBJECT_OFFER", offer.ProductId);
             await db.SaveChangesAsync(ct); return Results.Ok(offer);
-        }).RequireAuthorization("CentAdmin");
+        }).RequireAuthorization("CentAdmin:finance");
         group.MapPut("/admin/recommended-bundles/{id}", async (string id, BundleInput input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             CentModule.Check(id == input.Id && id.Length is > 0 and <= 100 && input.Title.Length is > 0 and <= 200 &&
                 input.SubjectIds is { Length: >= 1 and <= 6 } && input.SubjectIds.Distinct().Count() == input.SubjectIds.Length &&
@@ -192,7 +192,7 @@ public static class CentSubjectEndpoints
             if (row is null) { row = new() { Id = id }; db.Add(row); }
             row.Title = input.Title; row.SubjectsJson = JsonSerializer.Serialize(input.SubjectIds); row.Rationale = input.Rationale; row.Evidence = input.Evidence; row.Active = input.Active;
             CentAdminEndpoints.Audit(db, p, "UPDATE_RECOMMENDED_BUNDLE", Guid.Empty); await db.SaveChangesAsync(ct); return Results.Ok(row);
-        }).RequireAuthorization("CentAdmin");
+        }).RequireAuthorization("CentAdmin:finance");
         group.MapGet("/subject-quotes/{id:guid}", async (Guid id, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             var quote = await db.Set<CentSubjectQuote>().AsNoTracking().SingleOrDefaultAsync(q => q.Id == id && q.UserId == p.UserId(), ct);
             CentModule.Check(quote is not null, "پیش‌فاکتور پیدا نشد.", 404);

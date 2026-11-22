@@ -18,17 +18,10 @@ public static class CentAdminEndpoints
 
     public static void MapCentAdmin(this RouteGroupBuilder group)
     {
-        var admin = group.MapGroup("/admin").RequireAuthorization("CentAdmin");
-        admin.MapGet("/overview", async (CentDbContext db, CancellationToken ct) => Results.Ok(new {
-            users = await db.Users.CountAsync(ct), trainings = await db.Trainings.CountAsync(ct),
-            paidOrders = await db.Orders.CountAsync(o => o.Status == "PAID", ct),
-            incomeRial = await db.Orders.Where(o => o.Status == "PAID" && o.Provider == "ZARINPAL").SumAsync(o => (long?)o.AmountRial, ct) ?? 0,
-            storageBytes = await db.Pages.SumAsync(p => (long?)p.Image.Length, ct) ?? 0
-        }));
+        var admin = group.MapGroup("/admin").RequireAuthorization("CentAdmin:content");
         admin.MapGet("/trainings", async (CentDbContext db, CancellationToken ct) => Results.Ok(new {
-            trainings = await db.Trainings.AsNoTracking().OrderBy(t => t.Title).ToListAsync(ct),
-            documents = await db.Documents.AsNoTracking().OrderBy(d => d.SortOrder).ToListAsync(ct),
-            products = await db.Products.AsNoTracking().ToListAsync(ct)
+            trainings = await db.Trainings.AsNoTracking().OrderBy(t => t.Title).Take(200).ToListAsync(ct),
+            documents = await db.Documents.AsNoTracking().OrderBy(d => d.SortOrder).Take(500).ToListAsync(ct)
         }));
         admin.MapPut("/trainings/{id:guid}", async (Guid id, TrainingInput input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             CentModule.Check(id != Guid.Empty && !string.IsNullOrWhiteSpace(input.Title) && input.Title.Length <= 200 && input.Description is { Length: <= 8000 }, "عنوان یا توضیح آموزش معتبر نیست.");
@@ -37,7 +30,7 @@ public static class CentAdminEndpoints
             row.Title = input.Title.Trim(); row.Description = input.Description.Trim(); row.IncludedInSubscription = input.IncludedInSubscription; row.Published = input.Published;
             Audit(db, p, "SAVE_TRAINING", id); await db.SaveChangesAsync(ct); return Results.Ok(row);
         });
-        admin.MapPut("/products/{id:guid}", async (Guid id, ProductInput input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
+        group.MapPut("/admin/products/{id:guid}", async (Guid id, ProductInput input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             CentModule.Check(id != Guid.Empty && !string.IsNullOrWhiteSpace(input.Title) && input.Title.Length <= 200 && input.PriceRial is > 0 and <= 1_000_000_000_000,
                 "عنوان و قیمت معتبر (به ریال) وارد کنید.");
             CentModule.Check((input.Kind == "TRAINING" && input.TrainingId is not null && input.DurationDays is null) ||
@@ -50,7 +43,7 @@ public static class CentAdminEndpoints
             row.Title = input.Title.Trim(); row.Kind = input.Kind; row.TrainingId = input.TrainingId;
             row.PriceRial = input.PriceRial; row.DurationDays = input.DurationDays; row.Active = input.Active;
             Audit(db, p, "SAVE_PRODUCT", id); await db.SaveChangesAsync(ct); return Results.Ok(row);
-        });
+        }).RequireAuthorization("CentAdmin:finance");
         admin.MapPost("/documents", async (DocumentInput input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             CentModule.Check(input.Title is { Length: > 0 and <= 200 } && input.PageCount is >= 1 and <= 200 && input.SortOrder is >= 0 and <= 10000,
                 "عنوان، تعداد صفحات (حداکثر ۲۰۰) و ترتیب درس معتبر نیست.");
@@ -105,14 +98,13 @@ public static class CentAdminEndpoints
             db.Documents.Remove(row!); Audit(db, p, "DELETE_DRAFT", id); await db.SaveChangesAsync(ct); await transaction.CommitAsync(ct);
             return Results.NoContent();
         });
-        admin.MapGet("/users", async (CentDbContext db, CancellationToken ct) => Results.Ok(await db.Users.AsNoTracking()
-            .OrderByDescending(u => u.CreatedAt).Select(u => new { u.Id, u.Name, u.Email, u.Role, u.CreatedAt }).Take(500).ToListAsync(ct)));
-        admin.MapGet("/orders", async (CentDbContext db, CancellationToken ct) => Results.Ok(await db.Orders.AsNoTracking().OrderByDescending(o => o.CreatedAt).Take(500).ToListAsync(ct)));
-        admin.MapPost("/entitlements/{id:guid}/revoke", async (Guid id, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
+        group.MapPost("/admin/entitlements/{id:guid}/revoke", async (Guid id, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
+            await using var transaction = await db.Database.BeginTransactionAsync(ct);
             var count = await db.Entitlements.Where(e => e.Id == id && e.RevokedAt == null).ExecuteUpdateAsync(u => u.SetProperty(e => e.RevokedAt, DateTimeOffset.UtcNow), ct);
-            CentModule.Check(count == 1, "دسترسی پیدا نشد.", 404); Audit(db, p, "REVOKE_ENTITLEMENT", id); await db.SaveChangesAsync(ct);
+            CentModule.Check(count == 1, "دسترسی پیدا نشد.", 404); Audit(db, p, "REVOKE_ENTITLEMENT_OK", id); await db.SaveChangesAsync(ct); await transaction.CommitAsync(ct);
             return Results.NoContent();
-        });
+        }).RequireAuthorization("CentAdmin:finance");
+        group.MapCentAdminConsole();
     }
 
     internal static void Audit(CentDbContext db, ClaimsPrincipal p, string action, Guid entityId) =>

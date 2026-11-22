@@ -101,14 +101,37 @@ using (var scope = app.Services.CreateScope()) {
         await GoogleAuthUpgrade.Apply((PreviewDb)db, databasePath);
     if (builder.Configuration.GetValue<bool>("upgrade-curriculum"))
         await CurriculumUpgrade.Apply((PreviewDb)db, databasePath);
-    if (!await db.Users.AnyAsync()) {
-        var admin = new CentUser {
-            Name = "مدیر آزمایش", Email = "admin@cent.local", NormalizedEmail = "ADMIN@CENT.LOCAL", Role = "ADMIN"
-        };
-        admin.PasswordHash = scope.ServiceProvider.GetRequiredService<IPasswordHasher<CentUser>>()
-            .HashPassword(admin, "cent-local-preview-only");
-        db.Users.Add(admin);
+    // No automatic administrator or known password. Explicit disposable fixtures
+    // are permitted only in a brand-new isolated development database.
+    if (builder.Configuration.GetValue<bool>("admin-fixtures")) {
+        if (isolatedPath is null) throw new InvalidOperationException("Admin fixtures require a new isolated database.");
+        var fixtures = new List<object>();
+        foreach (var role in CentAdminSecurity.Roles.Append("STUDENT")) {
+            var user = new CentUser { Name = role == "STUDENT" ? "دانشجوی آزمایشی" : "مدیر آزمایشی", Email = role.ToLowerInvariant() + "@example.invalid", NormalizedEmail = role.ToUpperInvariant() + "@EXAMPLE.INVALID", Role = role, GoogleSubject = "DISPOSABLE-NOT-GOOGLE:" + Guid.NewGuid() };
+            db.Users.Add(user);
+            var token = Convert.ToHexString(System.Security.Cryptography.RandomNumberGenerator.GetBytes(32));
+            var expiresAt = DateTimeOffset.UtcNow.AddHours(4);
+            db.Sessions.Add(new CentSession { UserId = user.Id, TokenHash = CentModule.Hash(token), ExpiresAt = expiresAt });
+            fixtures.Add(new { role, user.Id, token, expiresAt });
+        }
         await db.SaveChangesAsync();
+        var fixtureOwner = await db.Users.SingleAsync(u => u.Role == "STUDENT");
+        var fixtureTraining = new CentTraining { Title = "آموزش آزمایشی مدیریت", Description = "فقط داده ساختگی پایگاه جداگانه", Published = true };
+        var fixturePlan = new CentProduct { Kind = "SUBSCRIPTION", Title = "اشتراک آزمایشی سی‌روزه", PriceRial = 1000000, DurationDays = 30, Active = false };
+        db.Trainings.Add(fixtureTraining); db.Products.Add(fixturePlan); await db.SaveChangesAsync();
+        for (var i = 0; i < 5; i++) {
+            var paid = i < 4; var created = DateTimeOffset.UtcNow.AddDays(-i - 1);
+            var order = new CentOrder { UserId = fixtureOwner.Id, ProductId = fixturePlan.Id, RequestId = Guid.NewGuid(), Title = fixturePlan.Title, Kind = "SUBSCRIPTION", DurationDays = 30, AmountRial = fixturePlan.PriceRial, Provider = "MOCK", Status = paid ? "PAID" : "PENDING", Reference = paid ? "DISPOSABLE-" + Guid.NewGuid() : null, CreatedAt = created, PaidAt = paid ? created : null };
+            db.Orders.Add(order);
+            if (paid) {
+                var starts = i == 1 ? created.AddDays(-60) : i == 2 ? created.AddDays(35) : created;
+                db.Entitlements.Add(new CentEntitlement { UserId = fixtureOwner.Id, OrderId = order.Id, Kind = "SUBSCRIPTION", StartsAt = starts, ExpiresAt = starts.AddDays(30), RevokedAt = i == 3 ? created : null });
+                db.PaymentEvents.Add(new() { OrderId = order.Id, Action = "FIXTURE_ONLY", Code = 0, CreatedAt = created });
+            }
+        }
+        await db.SaveChangesAsync();
+        await File.WriteAllTextAsync(Path.Combine(Path.GetDirectoryName(databasePath)!, "admin-fixtures.json"), System.Text.Json.JsonSerializer.Serialize(fixtures));
+        Console.WriteLine("Disposable admin fixture sessions written beside isolated database; never use as identity verification evidence.");
     }
     if (builder.Configuration.GetValue<bool>("import-curriculum")) {
         var report = await new CentCurriculumImporter(db).Import();

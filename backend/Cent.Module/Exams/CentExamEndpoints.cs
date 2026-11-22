@@ -54,7 +54,7 @@ public static class CentExamEndpoints
         attempts.MapGet("/{id:guid}/review", async (Guid id, ClaimsPrincipal p, CentExamService s, CancellationToken ct) => Results.Ok(await s.Review(p.UserId(), id, ct)));
         attempts.MapGet("/", async (Guid? cursor, int? limit, ClaimsPrincipal p, CentExamService s, CancellationToken ct) => Results.Ok(await s.History(p.UserId(), cursor, limit ?? 20, ct)));
 
-        var admin = cent.MapGroup("/admin/exam-versions").RequireAuthorization("CentAdmin");
+        var admin = cent.MapGroup("/admin/exam-versions").RequireAuthorization("CentAdmin:exams");
         admin.MapPost("/", async (ExamDefinition input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             input.Validate();
             var blueprint = input.CycleStartDate == CentExamBlueprints.Historical.CycleStartDate ? CentExamBlueprints.Historical : CentExamBlueprints.Current;
