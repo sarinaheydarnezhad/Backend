@@ -14,6 +14,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Content/curriculum.json" />
+    <EmbeddedResource Include="Content/curriculum-2026.json" Condition="Exists('Content/curriculum-2026.json')" />
     <EmbeddedResource Include="Content/Sources/**/*.html" />
   </ItemGroup>
 </Project>

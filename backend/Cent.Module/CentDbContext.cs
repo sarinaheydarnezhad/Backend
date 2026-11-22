@@ -5,6 +5,14 @@ namespace Cent.Module;
 
 public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(options)
 {
+    public DbSet<Curriculum.CentCurriculumRevision> CurriculumRevisions => Set<Curriculum.CentCurriculumRevision>();
+    public DbSet<Curriculum.CentPracticeContent> PracticeContent => Set<Curriculum.CentPracticeContent>();
+    public DbSet<Exams.CentExamVersion> ExamVersions => Set<Exams.CentExamVersion>();
+    public DbSet<Exams.CentSyllabusRevision> SyllabusRevisions => Set<Exams.CentSyllabusRevision>();
+    public DbSet<Exams.CentExamContentRelease> ExamContentReleases => Set<Exams.CentExamContentRelease>();
+    public DbSet<Exams.CentMockAttempt> MockAttempts => Set<Exams.CentMockAttempt>();
+    public DbSet<Exams.CentAttemptSection> AttemptSections => Set<Exams.CentAttemptSection>();
+    public DbSet<Exams.CentExamCommandReceipt> ExamCommandReceipts => Set<Exams.CentExamCommandReceipt>();
     public DbSet<CentUser> Users => Set<CentUser>();
     public DbSet<CentSession> Sessions => Set<CentSession>();
     public DbSet<CentGoogleAttempt> GoogleAttempts => Set<CentGoogleAttempt>();
@@ -33,7 +41,9 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
 
     protected override void OnModelCreating(ModelBuilder b)
     {
+        Exams.CentExamModel.Configure(b);
         CentCurriculumModel.Configure(b);
+        Curriculum.CurriculumReleases.Configure(b);
         b.Entity<CentUser>(e => {
             e.ToTable("cent_users"); e.HasKey(x => x.Id);
             e.Property(x => x.Name).HasMaxLength(120); e.Property(x => x.Email).HasMaxLength(256);
@@ -142,6 +152,17 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
             e.ToTable("cent_audit_events"); e.HasKey(x => x.Id); e.Property(x => x.Action).HasMaxLength(64);
             e.HasIndex(x => x.CreatedAt);
         });
+    }
+
+    public override int SaveChanges(bool acceptAllChangesOnSuccess)
+    {
+        Exams.CentExamIntegrity.Validate(ChangeTracker);
+        return base.SaveChanges(acceptAllChangesOnSuccess);
+    }
+    public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
+    {
+        Exams.CentExamIntegrity.Validate(ChangeTracker);
+        return base.SaveChangesAsync(acceptAllChangesOnSuccess, cancellationToken);
     }
 }
 

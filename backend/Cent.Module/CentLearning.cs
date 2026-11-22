@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
+using Cent.Module.Curriculum;
 
 namespace Cent.Module;
 
@@ -14,15 +15,22 @@ public sealed class CentLearning(CentDbContext db)
 {
     // The latest answer to each distinct question counts once. Repetition cannot increase evidence.
     // Submitted practice and assessment answers both contribute to provisional progress.
-    public async Task<object> Mastery(Guid userId, CancellationToken ct)
+    public async Task<object> Mastery(Guid userId, CancellationToken ct, string? syllabusRevisionId = null)
     {
         var topics = await db.Topics.AsNoTracking().OrderBy(t => t.SortOrder).ToListAsync(ct);
+        var release = CentCurriculumImporter.Bundled().Release;
+        var newTopicIds = release?.Resources.Where(r => r.Kind == "lesson").Select(r => CurriculumIdentity.Id("topic:" + r.TopicKey)).ToHashSet() ?? [];
+        if (syllabusRevisionId is null) topics = topics.Where(t => !newTopicIds.Contains(t.Id)).ToList();
+        else {
+            CentModule.Check(release is not null && release.SyllabusRevisionId == syllabusRevisionId, "نسخهٔ سرفصل پیدا نشد.", 404);
+            topics = topics.Where(t => newTopicIds.Contains(t.Id)).ToList();
+        }
         var bank = await db.Questions.AsNoTracking().Where(q => q.Active && q.TopicId != null)
             .Select(q => new { q.Id, q.TopicId }).ToListAsync(ct);
         var activeIds = bank.Select(q => q.Id).ToHashSet();
         var history = await (from q in db.AttemptQuestions.AsNoTracking()
             join a in db.Attempts.AsNoTracking() on q.AttemptId equals a.Id
-            where a.UserId == userId && a.SubmittedAt != null
+            where a.UserId == userId && a.SubmittedAt != null && a.Kind != "mock"
             orderby a.SubmittedAt descending, a.Id descending
             select new { q.SnapshotJson, q.Answer, a.SubmittedAt }).ToListAsync(ct);
         var latest = history.Select(h => new { Q = JsonSerializer.Deserialize<QuestionSnapshot>(h.SnapshotJson, CentPractice.Json)!, h.Answer, h.SubmittedAt })
@@ -39,8 +47,8 @@ public sealed class CentLearning(CentDbContext db)
         }).ToArray();
         var courses = await db.Courses.AsNoTracking().Where(c => c.Active).OrderBy(c => c.SortOrder).ToListAsync(ct);
         return new {
-            method = "latest-distinct-10-v2", minimumEvidence = 3,
-            explanation = "Each topic uses the latest submitted practice or assessment answer to up to 10 distinct questions; at least 3 are required. Subject progress is the equal-weight mean across ALL imported topics, with unassessed or insufficient topics contributing zero confirmed progress. It is provisional and covers the supplied curriculum. Reading alone does not count as question evidence.",
+            method = "latest-distinct-10-v2", syllabusRevisionId, minimumEvidence = 3,
+            explanation = "Each topic uses the latest submitted practice or assessment answer to up to 10 distinct questions; at least 3 are required. Subject progress is the equal-weight mean across topics in the selected curriculum scope; without a syllabus revision the original topic scope is retained. Unassessed topics contribute zero. Reading material alone does not count as question evidence. New Mock Exams do not contribute.",
             courses = courses.Select(c => {
                 var ts = topicResults.Where(t => t.Course == c.Code).ToArray();
                 var assessed = ts.Count(t => t.MasteryPercentage != null);
@@ -59,14 +67,20 @@ public static class CentLearningEndpoints
     public static void MapCentLearning(this RouteGroupBuilder group)
     {
         group.MapGet("/curriculum", async (CentDbContext db, CancellationToken ct) => Results.Ok(new {
-            courses = await db.Courses.AsNoTracking().Where(c => c.Active).OrderBy(c => c.SortOrder).ToListAsync(ct),
+            syllabusRevisionId = await db.CurriculumRevisions.AsNoTracking()
+                .Where(r => r.Id == CurriculumReleases.BundledReleaseId).Select(r => r.SyllabusRevisionId).SingleOrDefaultAsync(ct),
+            courses = await db.Courses.AsNoTracking().Where(c => c.Active).OrderBy(c => c.SortOrder).Select(c => new {
+                c.Code, c.Title, c.EnglishTitle, c.SortOrder, c.TrainingId, c.Active,
+                supportsLegacyAssessment = db.Questions.Any(q => q.Active && q.Subject == c.Code && (q.Kind == "both" || q.Kind == "diagnostic" || q.Kind == "simulator"))
+            }).ToListAsync(ct),
             chapters = await db.Chapters.AsNoTracking().OrderBy(c => c.SortOrder).ToListAsync(ct),
             topics = await db.Topics.AsNoTracking().OrderBy(t => t.SortOrder).Select(t => new { t.Id, t.ChapterId, t.CourseCode, t.Title, t.EnglishTitle,
+                contentContract = db.Questions.Any(q => q.Active && q.TopicId == t.Id && q.Kind == "practice") ? "passage-v1" : null,
                 questionCount = db.Questions.Count(q => q.Active && q.TopicId == t.Id) }).ToListAsync(ct),
             documents = await db.Documents.AsNoTracking().Where(d => d.Published && d.SourceId != null && db.Courses.Any(c => c.Active && c.TrainingId == d.TrainingId))
                 .OrderBy(d => d.SortOrder).Select(d => new { d.Id, d.TrainingId, d.SourceId, d.Title, d.PageCount, d.SortOrder }).ToListAsync(ct)
         })); // Public outlines expose metadata; source text still requires purchased access.
-        group.MapGet("/me/mastery", async (ClaimsPrincipal p, CentLearning service, CancellationToken ct) => Results.Ok(await service.Mastery(p.UserId(), ct)))
+        group.MapGet("/me/mastery", async (ClaimsPrincipal p, CentLearning service, CancellationToken ct, string? syllabusRevisionId) => Results.Ok(await service.Mastery(p.UserId(), ct, syllabusRevisionId)))
             .RequireAuthorization("CentUser");
         group.MapPost("/admin/curriculum/import", async (ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             var result = await new CentCurriculumImporter(db).Import(ct);

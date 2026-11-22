@@ -16,11 +16,13 @@ public sealed record Corpus(List<SourceFile> Sources, List<Chapter> Chapters, Li
 {
     public List<BankQuestion> Questions { get; set; } = [];
     public List<ReviewFinding> Findings { get; set; } = [];
+    public CurriculumRelease? Release { get; set; }
 }
 public static class CurriculumIdentity
 {
     public static Guid Id(string key) => new(SHA256.HashData(Encoding.UTF8.GetBytes("cent-curriculum-v1:" + key))[..16]);
     public static readonly (string Code, string Title, string EnglishTitle)[] Courses = [
+        ("reading", "درک مطلب انگلیسی", "Reading and Comprehension"),
         ("math", "ریاضی", "Mathematics"), ("logic", "منطق و تحلیل داده", "Logic and data interpretation"),
         ("biology", "زیست‌شناسی", "Biology"), ("chemistry", "شیمی", "Chemistry"), ("physics", "فیزیک", "Physics")
     ];

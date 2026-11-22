@@ -1022,6 +1022,325 @@ namespace Cent.Module.Migrations
                     b.ToTable("cent_users", (string)null);
                 });
 
+            modelBuilder.Entity("Cent.Module.Curriculum.CentCurriculumRevision", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("PackageHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<string>("PayloadJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SyllabusRevisionId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PackageHash")
+                        .IsUnique();
+
+                    b.HasIndex("SyllabusRevisionId");
+
+                    b.ToTable("cent_curriculum_revisions", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.Curriculum.CentPracticeContent", b =>
+                {
+                    b.Property<Guid>("AttemptId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PassagesJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReleaseId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("AttemptId");
+
+                    b.HasIndex("ReleaseId");
+
+                    b.ToTable("cent_practice_content", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentAttemptSection", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("ActivatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid>("AttemptId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("ClosedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset?>("Deadline")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("DurationSeconds")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Order")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset?>("ProcessedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("QuestionCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SectionKey")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.Property<string>("SubjectId")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttemptId")
+                        .IsUnique()
+                        .HasDatabaseName("IX_cent_attempt_sections_active")
+                        .HasFilter("[State] = 'ACTIVE'");
+
+                    b.HasIndex("AttemptId", "Order")
+                        .IsUnique();
+
+                    b.HasIndex("AttemptId", "SectionKey")
+                        .IsUnique();
+
+                    b.ToTable("cent_attempt_sections", null, t =>
+                        {
+                            t.HasCheckConstraint("CK_cent_attempt_section_deadline", "([ActivatedAt] IS NULL AND [Deadline] IS NULL AND [State] = 'PENDING') OR ([ActivatedAt] IS NOT NULL AND [Deadline] IS NOT NULL)");
+
+                            t.HasCheckConstraint("CK_cent_attempt_section_quota", "[QuestionCount] > 0 AND [DurationSeconds] > 0");
+                        });
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentExamCommandReceipt", b =>
+                {
+                    b.Property<Guid>("AttemptId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("CommandId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PayloadHash")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<string>("ReceiptJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AttemptId", "CommandId");
+
+                    b.ToTable("cent_exam_command_receipts", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentExamContentRelease", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ExamVersionId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ManifestJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset?>("ReviewedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("ReviewedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SyllabusRevisionId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ReviewedBy");
+
+                    b.HasIndex("SyllabusRevisionId");
+
+                    b.ToTable("cent_exam_content_releases", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentExamVersion", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("AvailableForNewStarts")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("ConfigurationRevision")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("ContentReleaseId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("DefinitionJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Revision")
+                        .IsConcurrencyToken()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.Property<string>("SyllabusRevisionId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConfigurationRevision")
+                        .IsUnique();
+
+                    b.HasIndex("ContentReleaseId");
+
+                    b.HasIndex("SyllabusRevisionId");
+
+                    b.ToTable("cent_exam_versions", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "cent-s-2025-2026-r1",
+                            AvailableForNewStarts = false,
+                            ConfigurationRevision = "blueprint-2025-2026-r1",
+                            DefinitionJson = "{\"examVersionId\":\"cent-s-2025-2026-r1\",\"label\":\"CEnT-S 2025\\u20132026\",\"configurationRevision\":\"blueprint-2025-2026-r1\",\"cycleStartDate\":\"2025-11-01\",\"cycleEndDateInclusive\":\"2026-10-31\",\"sections\":[{\"sectionKey\":\"math\",\"order\":1,\"subjectId\":\"math\",\"questionCount\":15,\"durationSeconds\":1800},{\"sectionKey\":\"logic\",\"order\":2,\"subjectId\":\"logic\",\"questionCount\":15,\"durationSeconds\":1800},{\"sectionKey\":\"biology\",\"order\":3,\"subjectId\":\"biology\",\"questionCount\":10,\"durationSeconds\":1200},{\"sectionKey\":\"chemistry\",\"order\":4,\"subjectId\":\"chemistry\",\"questionCount\":10,\"durationSeconds\":1200},{\"sectionKey\":\"physics\",\"order\":5,\"subjectId\":\"physics\",\"questionCount\":5,\"durationSeconds\":600}],\"scoring\":{\"policyId\":\"raw-quarter-point-v1\",\"correctQuarterPoints\":4,\"incorrectQuarterPoints\":-1,\"unansweredQuarterPoints\":0},\"syllabusRevisionId\":null,\"contentReleaseId\":null,\"timingPolicyId\":\"continuous-v1\",\"submissionPolicyId\":null,\"totalQuestions\":55,\"totalDurationSeconds\":6600}",
+                            Revision = 1,
+                            Status = "PUBLISHED"
+                        },
+                        new
+                        {
+                            Id = "cent-s-2026-2027-r1",
+                            AvailableForNewStarts = false,
+                            ConfigurationRevision = "blueprint-2026-2027-r1",
+                            DefinitionJson = "{\"examVersionId\":\"cent-s-2026-2027-r1\",\"label\":\"CEnT-S 2026\\u20132027\",\"configurationRevision\":\"blueprint-2026-2027-r1\",\"cycleStartDate\":\"2026-11-01\",\"cycleEndDateInclusive\":\"2027-10-31\",\"sections\":[{\"sectionKey\":\"reading\",\"order\":1,\"subjectId\":\"reading\",\"questionCount\":10,\"durationSeconds\":1800},{\"sectionKey\":\"math\",\"order\":2,\"subjectId\":\"math\",\"questionCount\":15,\"durationSeconds\":1800},{\"sectionKey\":\"logic\",\"order\":3,\"subjectId\":\"logic\",\"questionCount\":15,\"durationSeconds\":1800},{\"sectionKey\":\"biology\",\"order\":4,\"subjectId\":\"biology\",\"questionCount\":10,\"durationSeconds\":1200},{\"sectionKey\":\"chemistry\",\"order\":5,\"subjectId\":\"chemistry\",\"questionCount\":10,\"durationSeconds\":1200},{\"sectionKey\":\"physics\",\"order\":6,\"subjectId\":\"physics\",\"questionCount\":5,\"durationSeconds\":600}],\"scoring\":{\"policyId\":\"raw-quarter-point-v1\",\"correctQuarterPoints\":4,\"incorrectQuarterPoints\":-1,\"unansweredQuarterPoints\":0},\"syllabusRevisionId\":null,\"contentReleaseId\":null,\"timingPolicyId\":\"continuous-v1\",\"submissionPolicyId\":null,\"totalQuestions\":65,\"totalDurationSeconds\":8400}",
+                            Revision = 1,
+                            Status = "PUBLISHED"
+                        });
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentMockAttempt", b =>
+                {
+                    b.Property<Guid>("AttemptId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset?>("ActiveDeadline")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("ActiveSectionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConfigurationRevision")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTimeOffset?>("EffectiveEndedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("ExamVersionId")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("FinalizationReason")
+                        .HasMaxLength(40)
+                        .HasColumnType("nvarchar(40)");
+
+                    b.Property<string>("ResultJson")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Revision")
+                        .IsConcurrencyToken()
+                        .HasColumnType("int");
+
+                    b.Property<string>("RulesSnapshotJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasMaxLength(24)
+                        .HasColumnType("nvarchar(24)");
+
+                    b.HasKey("AttemptId");
+
+                    b.HasIndex("ExamVersionId");
+
+                    b.HasIndex("Status", "ActiveDeadline");
+
+                    b.ToTable("cent_mock_attempts", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentSyllabusRevision", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("EvidenceJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("RetrievedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("SourceUrl")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("cent_syllabus_revisions", (string)null);
+                });
+
             modelBuilder.Entity("Cent.Module.CentAiAnalysis", b =>
                 {
                     b.HasOne("Cent.Module.CentAttempt", null)
@@ -1266,6 +1585,90 @@ namespace Cent.Module.Migrations
                     b.HasOne("Cent.Module.CentCourse", null)
                         .WithMany()
                         .HasForeignKey("CourseCode")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.Curriculum.CentCurriculumRevision", b =>
+                {
+                    b.HasOne("Cent.Module.Exams.CentSyllabusRevision", null)
+                        .WithMany()
+                        .HasForeignKey("SyllabusRevisionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.Curriculum.CentPracticeContent", b =>
+                {
+                    b.HasOne("Cent.Module.CentAttempt", null)
+                        .WithOne()
+                        .HasForeignKey("Cent.Module.Curriculum.CentPracticeContent", "AttemptId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cent.Module.Curriculum.CentCurriculumRevision", null)
+                        .WithMany()
+                        .HasForeignKey("ReleaseId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentAttemptSection", b =>
+                {
+                    b.HasOne("Cent.Module.Exams.CentMockAttempt", null)
+                        .WithMany()
+                        .HasForeignKey("AttemptId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentExamCommandReceipt", b =>
+                {
+                    b.HasOne("Cent.Module.Exams.CentMockAttempt", null)
+                        .WithMany()
+                        .HasForeignKey("AttemptId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentExamContentRelease", b =>
+                {
+                    b.HasOne("Cent.Module.CentUser", null)
+                        .WithMany()
+                        .HasForeignKey("ReviewedBy")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Cent.Module.Exams.CentSyllabusRevision", null)
+                        .WithMany()
+                        .HasForeignKey("SyllabusRevisionId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentExamVersion", b =>
+                {
+                    b.HasOne("Cent.Module.Exams.CentExamContentRelease", null)
+                        .WithMany()
+                        .HasForeignKey("ContentReleaseId")
+                        .OnDelete(DeleteBehavior.NoAction);
+
+                    b.HasOne("Cent.Module.Exams.CentSyllabusRevision", null)
+                        .WithMany()
+                        .HasForeignKey("SyllabusRevisionId")
+                        .OnDelete(DeleteBehavior.NoAction);
+                });
+
+            modelBuilder.Entity("Cent.Module.Exams.CentMockAttempt", b =>
+                {
+                    b.HasOne("Cent.Module.CentAttempt", null)
+                        .WithOne()
+                        .HasForeignKey("Cent.Module.Exams.CentMockAttempt", "AttemptId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("Cent.Module.Exams.CentExamVersion", null)
+                        .WithMany()
+                        .HasForeignKey("ExamVersionId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
                 });

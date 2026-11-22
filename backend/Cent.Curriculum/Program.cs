@@ -5,7 +5,13 @@ using AngleSharp.Dom;
 using AngleSharp.Html.Parser;
 using Cent.Curriculum;
 
+if (args.FirstOrDefault() == "--verify-release") {
+    OfflineRelease.Verify(args.Skip(1).FirstOrDefault());
+    return;
+}
 var sourceRoot = args.Length > 0 ? Path.GetFullPath(args[0]) : Path.GetFullPath("backend/Cent.Module/Content/Sources");
+if (Directory.EnumerateFiles(sourceRoot, "updates-2026-r1.html", SearchOption.AllDirectories).Any())
+    throw new InvalidOperationException("Legacy regeneration is disabled while additive releases are present. Use Authoring/build-release.mjs and --verify-release; do not rewrite legacy identities.");
 var output = Path.Combine(sourceRoot, "..", "Review");
 Directory.CreateDirectory(output);
 var corpus = SourceReader.Read(sourceRoot);

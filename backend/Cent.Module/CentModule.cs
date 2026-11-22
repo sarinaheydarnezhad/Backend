@@ -34,6 +34,7 @@ public static class CentModule
         services.AddScoped<CentPayments>();
         services.AddScoped<CentPractice>();
         services.AddScoped<CentLearning>();
+        if (config.GetValue<bool>("Cent:Exams:Enabled")) Exams.CentExamEndpoints.AddCentExams(services);
         services.AddScoped<CentGoogleAuth>();
         services.AddScoped<CentGoogleGisAuth>();
         services.AddSingleton<CentGooglePublicKeys>();
@@ -91,6 +92,7 @@ public static class CentModule
         group.MapCentAdmin();
         group.MapCentPractice();
         group.MapCentLearning();
+        if (app.Configuration.GetValue<bool>("Cent:Exams:Enabled")) Exams.CentExamEndpoints.MapCentExams(group);
     }
 
     public static void UseCentModule(this WebApplication app)

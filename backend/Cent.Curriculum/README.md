@@ -1,5 +1,65 @@
 # Curriculum sources and checksums
 
+## Current additive release — 2026-11-22
+
+The original `curriculum.json` and its 39 HTML sources remain unchanged. The
+additional `curriculum-2026.json` and six `Sources/*/updates-2026-r1.html` files
+provide 38 Persian foundation lessons, 114 original English exercises/questions,
+and three original English shared passages. All six subjects are represented.
+The merged package has 45 sources, 228 topics, 468 source sections, 780 extracted
+or authored exercises and 933 bank questions. Source sections are not the historical
+export's database "lessons" count.
+
+Generate the additive artifacts offline, preserving legacy IDs and bytes:
+
+```powershell
+node backend/Cent.Curriculum/Authoring/build-release.mjs
+powershell -NoProfile -File backend/Cent.Curriculum/Verify-Curriculum.ps1
+dotnet test backend/Cent.Exam.Tests/Cent.Exam.Tests.csproj --no-restore
+```
+
+The module-only test project references no shared API host or Lerona project.
+The `OfflineRelease` verifier is linked into these tests, so validation/export
+does not need the legacy author's AngleSharp dependency. Set `CENT_CONTENT_EXPORT_DIR`
+to an intended review directory to export the engine manifest while running that
+test. Without it, export uses an isolated temporary directory. An optional
+`Cent.Curriculum --verify-release <output-directory>` command exposes the same
+verifier when the original authoring dependencies are available.
+
+`Content/Materials/cent-content-2026-r1/` contains six standalone printable HTML
+booklets. They retain the same syllabus identity and show English questions with
+collapsible English solutions; no original PDF/image material is replaced. These
+are local review/import artifacts, not publicly served website assets.
+
+`Content/Review/cent-content-2026-r1/` holds the exact source counts, per-item audit
+of all 1,485 legacy exercises/questions and the candidate engine manifest.
+Agent academic/editorial review is explicitly identified; independent specialist,
+language-level/difficulty calibration, rights and optical acceptance of legacy
+content remain pending. The original 819 four-option questions are retained for
+legacy behavior and are not certified for new Mock Exams.
+
+Migration `20261122081723_VersionedCurriculum` and
+`Cent.Module/Deployment/cent-versioned-curriculum.sql` are **review-only, unapplied**.
+They add two Cent companion tables after the exam infrastructure migration. An
+authorized isolated schema rehearsal and import must precede deployment of the
+new content-aware application. Do not use the historical preview import command
+below against an existing database for this release; its old SQLite upgrade path
+has not been extended/rehearsed here. No runtime flag, publication or database is
+changed by generation/verification.
+
+The importer rejects same-ID content conflicts rather than overwriting/retiring
+existing content. Reading is not automatically included in subscription access;
+sale/entitlement rules remain a separate workstream. New `passage-v1` Practice
+requests snapshot context once; old flat Practice and diagnostic clients retain
+their old bank. New mock release records retain null administrator review fields
+and cannot activate. Syllabus-scoped mastery is explicit; the legacy denominator
+remains unchanged.
+
+## Historical original-package workflow
+
+The instructions below describe the original five-subject package. Its counts
+and preview upgrades are not instructions to apply the additive release.
+
 Run these commands from the backend repository root. The complete import package is
 `backend/Cent.Module/Content/curriculum.json` plus all 39 HTML files under
 `backend/Cent.Module/Content/Sources/`. Both are included in Git and embedded in

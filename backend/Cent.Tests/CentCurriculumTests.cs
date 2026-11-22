@@ -21,9 +21,10 @@ public sealed class CentCurriculumTests
         var json = await response.Content.ReadAsStringAsync();
         using var document = JsonDocument.Parse(json);
         var root = document.RootElement;
-        Assert.Equal(5, root.GetProperty("courses").GetArrayLength());
-        Assert.Equal(39, root.GetProperty("documents").GetArrayLength());
-        Assert.Equal(190, root.GetProperty("topics").GetArrayLength());
+        var package = CentCurriculumImporter.Bundled();
+        Assert.Equal(Cent.Module.Curriculum.CurriculumIdentity.Courses.Length, root.GetProperty("courses").GetArrayLength());
+        Assert.Equal(package.Sources.Count, root.GetProperty("documents").GetArrayLength());
+        Assert.Equal(package.Topics.Count, root.GetProperty("topics").GetArrayLength());
         foreach (var privateKey in new[] { "text", "html", "originalHtml", "plainText", "correctAnswer", "explanation", "options" })
             Assert.DoesNotContain("\"" + privateKey + "\":", json);
         var id = root.GetProperty("documents")[0].GetProperty("id").GetGuid();
@@ -72,12 +73,13 @@ public sealed class CentCurriculumTests
         await db.Database.EnsureCreatedAsync();
         var importer = new CentCurriculumImporter(db);
         var report = await importer.Import();
-        Assert.Equal(39, report.Sources);
-        Assert.Equal(819, report.Questions);
+        var package = CentCurriculumImporter.Bundled();
+        Assert.Equal(package.Sources.Count, report.Sources);
+        Assert.Equal(package.Questions.Count, report.Questions);
         Assert.True((await importer.Import()).AlreadyImported);
-        Assert.Equal(819, await db.Questions.CountAsync());
-        Assert.Equal(5, await db.Courses.CountAsync());
-        Assert.Equal(190, await db.Topics.CountAsync());
+        Assert.Equal(package.Questions.Count, await db.Questions.CountAsync());
+        Assert.Equal(Cent.Module.Curriculum.CurriculumIdentity.Courses.Length, await db.Courses.CountAsync());
+        Assert.Equal(package.Topics.Count, await db.Topics.CountAsync());
         Assert.All(await db.Topics.ToArrayAsync(), t => Assert.True(db.Questions.Any(q => q.TopicId == t.Id)));
         Assert.All(await db.Questions.ToArrayAsync(), q => {
             Assert.Contains(q.Difficulty, new[] { "easy", "medium", "hard" });
