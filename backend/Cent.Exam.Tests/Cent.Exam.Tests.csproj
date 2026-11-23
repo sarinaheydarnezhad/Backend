@@ -16,4 +16,9 @@
   <ItemGroup><Using Include="Xunit" /></ItemGroup>
   <ItemGroup><Compile Include="../Cent.Curriculum/OfflineRelease.cs" Link="OfflineRelease.cs" /></ItemGroup>
   <ItemGroup><Compile Include="../Cent.Tests/CentGatewayTests.cs" Link="CentGatewayTests.cs" /></ItemGroup>
+  <ItemGroup>
+    <Compile Include="../Cent.Preview/CurriculumUpgrade.cs" Link="Preview/CurriculumUpgrade.cs" />
+    <Compile Include="../Cent.Preview/PreviewBackup.cs" Link="Preview/PreviewBackup.cs" />
+    <Compile Include="../Cent.Preview/PreviewRateLimits.cs" Link="Preview/PreviewRateLimits.cs" />
+  </ItemGroup>
 </Project>

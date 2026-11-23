@@ -1,0 +1,129 @@
+Itatest / Cent local environment report - 23 November 2026
+
+Result: the local schema, curriculum, storefront and learning API are repaired.
+Real Google sign-in remains blocked by the existing Google client's authorized
+JavaScript origins. Production readiness is not established.
+
+Code currency
+- Backend main: 8ad1480; frontend main: 9ea235c. Read-only GitHub revision checks
+  confirmed each local branch already contains remote main and is one commit ahead.
+  No pull, merge, commit, push, release or deployment was needed or performed.
+
+Root causes
+- The existing SQLite database had 28 tables and the legacy five-subject corpus.
+  Current code also queries 14 missing exam, versioned-curriculum and commerce
+  tables; /curriculum and /catalog actually returned 503 before repair.
+- The old product CHECK constraint rejected SUBJECT products. CREATE TABLE IF
+  NOT EXISTS cannot update that existing constraint.
+- The preview upgrade sent seeded exam JSON through EF's composite SQL formatter,
+  causing a FormatException on braces. Repeated upgrades also needed to preserve
+  existing blueprint seed identities rather than insert duplicates.
+- Preview auth throttling used ASP.NET's empty default 503 rejection. The shared
+  host/test host already supply their own rejection behavior.
+- Two frontend type unions omitted actual SUBJECT/SUBJECT_ORDER responses, and
+  one GIS browser assertion expected the HTTPS referrer policy on HTTP localhost.
+
+Local database work
+- Made a uniquely named online backup before any modifying API probe; verified
+  integrity, foreign keys and SHA-256. Rehearsed upgrade/import on a separate copy
+  and compared all existing rows across all 28 original tables.
+- Stopped only the verified local Cent preview, then ran its explicit curriculum
+  upgrade/import and offer-preparation flags, with exit-after-setup enabled.
+- The upgrade created and verified another backup immediately before DDL:
+  backend/Cent.Preview/App_Data/preview.db.before-curriculum-335c42e9f3804d99826c910c985ff79b.bak
+  SHA-256: d06675dadee68363b75b8dc42486b250b42a6cec6fb61e9f317a69adbb4d68aa
+- Added 14 missing tables and their indexes; transactionally widened the product
+  constraint using a checked table copy. The database file was never reset,
+  recreated, replaced or deleted. No existing backup was overwritten.
+- Imported bundled r2 content additively: 6 subjects, 55 chapters, 247 topics,
+  51 sources/documents, 832 source exercises and 985 bank questions. Prepared six
+  disabled review-gated offers and one recommended six-subject bundle.
+- Existing Google/SMS columns, tables and indexes were already present; no auth
+  schema upgrade was necessary. No authentication/account-linking logic changed.
+- Original-row comparison passed for every pre-upgrade table. Protected counts
+  remain 52 users, 31 orders, 31 entitlements, 35 notes and 20 progress records.
+  Final integrity_check is OK; foreign_key_check reports zero violations.
+- Comparison against a fresh current-model SQLite database found no missing or
+  differing columns, named indexes or foreign keys across 42 tables.
+
+Changes made
+- Cent.Preview: exclusive verified backup helper, checked transactional product
+  constraint upgrade, provider-level seeded SQL execution, repeat-safe seeding,
+  exit-after-setup, and 429 JSON/Retry-After handling for preview rate limits.
+- Added preservation/rollback/repeatability and preview-rate regression tests,
+  an offline complete SQL Server migration audit, and VerifyLocal.py HTTP checks.
+- Itatest: aligned product/entitlement TypeScript unions and corrected the GIS
+  localhost assertion. Updated Cent-only setup and migration documentation.
+- Main preview is running on 127.0.0.1:5108; existing Vite remains at
+  http://localhost:5173/cent-s/. Optional exam routes are enabled locally, with
+  new exam starts still gated by their existing content acceptance rules.
+
+Actual API and browser verification
+- Original database: 10 HTTP checks passed, including status, public curriculum,
+  catalog, bundles/prices and exam version/configuration metadata. Authentication
+  is still required for protected APIs, and retired password login returns 404.
+- Disposable database only: 44 HTTP checks passed for one-through-six-subject
+  pricing, quote ownership, repeat checkout, fake payment, repeat confirmation,
+  two subject access grants, reading, foreign-account denial, notes, progress,
+  passage-aware Practice/submission/review/history, mastery and renewal consent.
+- Verified payable totals in rials for 1..6 subjects: 4,900,000; 9,310,000;
+  13,230,000; 16,660,000; 19,600,000; 22,050,000. Discounts: 0/5/10/15/20/25%.
+- Backend GIS discovery and allowed-origin challenge returned 200; live public
+  key retrieval succeeded. Invalid signatures/replays returned 401; an untrusted
+  origin returned 403. Actual preview limit exhaustion returned 429 JSON with
+  Retry-After. Windows TLS required running the preview outside the sandbox.
+- Browser loaded Google's SDK/style through inherited Psiphon settings, but the
+  button iframe returned 403 and Google's console explicitly reported:
+  "The given origin is not allowed for the given client ID."
+  The existing Cent client must authorize http://localhost:5173 in Google Cloud
+  before a real local account round trip can succeed. No client ID, secret,
+  proxy value or account-sharing rule was changed to bypass this restriction.
+- Actual Math course and mobile storefront loaded 200 API data without page
+  exceptions or horizontal overflow. New screenshots are under
+  TestResults/local-environment/browser-complete/. No real Google login or SMS
+  delivery is claimed. Synthetic auth browser results are separate evidence.
+
+Tests and builds
+- Cent.Tests: 130 passed, zero failed/skipped.
+- Cent.Exam.Tests full run: 89 passed, zero failed/skipped. Final focused preview
+  run: 4 passed, including the subsequently added rate-limit test; three overlap
+  the full run, so these totals must not be added as unique tests.
+- Frontend final unit run: 216 passed in 21 files. ESLint and TypeScript/Vite
+  production build passed after the final frontend changes. Nothing was published.
+- Browser auth regressions: 14 GIS and 7 SMS scenarios passed with synthetic
+  providers. Final Cent preview build: zero warnings and zero errors.
+- Initial checks exposed a parallel build file lock, the SQL brace defect, a
+  stale GIS assertion and preview throttling; final relevant reruns passed.
+- TRX, preservation/schema comparisons, API results, pricing and provider probes
+  are saved under TestResults/local-environment/ (ignored local evidence).
+
+Production migration audit - generated/reviewed only, never applied
+- Current ordered chain: 20261107101801_InitialCent;
+  20261107130614_Curriculum; 20261109184203_AddCentGoogleAuthentication;
+  20261120134304_VersionedMockExams; 20261122081723_VersionedCurriculum;
+  20261122102343_SubjectCommerce; 20261123135254_AddCentSmsAuthentication.
+- Offline generation verified model/snapshot agreement, cent_-only objects and
+  independent cent_migrations_history. Review artifact:
+  TestResults/local-environment/cent-sqlserver-review-only.sql.
+- Checked-in partial scripts are not a complete deployment chain; notably there
+  is no standalone SubjectCommerce script. Actual production migration history
+  was deliberately not queried, so production-applied/pending status is unknown.
+  These seven migrations are the ordered candidates for later operator review.
+
+Remaining blockers and production readiness
+- Authorize the existing Cent Google client's localhost origin and perform one
+  real provider sign-in. Password-only historical accounts still require the
+  established ownership recovery/linking process; password login was not restored.
+- Existing-preview subject offers remain review-pending and unavailable for new
+  sales. No academic approval, publication or exam activation was fabricated.
+  Fake commerce verification used only an explicitly disposable sandbox.
+- Live SMS/payment delivery, independent content/rights acceptance, SQL Server
+  locking/concurrency rehearsal, backup/recovery, explicit Cent connection,
+  HTTPS/CORS/CSP and production provider settings remain external release gates.
+  Frontend and backend remain independently deployable/configurable.
+
+Safety confirmation
+No deployment/publication, production database access/change, production migration,
+commit, push or release occurred. No Lerona code, data, configuration, migration
+or authentication was modified. Only Cent preview/test/documentation and Itatest
+contract/test files changed. Existing local business data and backups were kept.

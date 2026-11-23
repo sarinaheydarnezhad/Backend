@@ -27,6 +27,7 @@ builder.Logging.AddConsole();
 builder.Logging.SetMinimumLevel(LogLevel.Warning);
 builder.Logging.AddFilter("Microsoft.Hosting.Lifetime", LogLevel.Information);
 builder.Services.AddCentModule(builder.Configuration);
+builder.Services.Configure<Microsoft.AspNetCore.RateLimiting.RateLimiterOptions>(PreviewRateLimits.Configure);
 
 // Keep local data inside this checkout, independent of the shell's working directory.
 var sourceDirectory = new DirectoryInfo(AppContext.BaseDirectory);
@@ -152,6 +153,9 @@ using (var scope = app.Services.CreateScope()) {
         Console.WriteLine("LOCAL SANDBOX: subject offers are for fake payments only; this is not academic or production acceptance.");
     }
 }
+// One-shot maintenance never needs to bind an HTTP port or leave upgrade flags
+// on a long-running development server command line.
+if (builder.Configuration.GetValue<bool>("exit-after-setup")) return;
 await app.RunAsync();
 
 public sealed class PreviewDb(DbContextOptions<CentDbContext> options) : CentDbContext(options)

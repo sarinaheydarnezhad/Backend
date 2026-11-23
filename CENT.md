@@ -1,5 +1,12 @@
 # Cent module in the existing Lerona host
 
+Current Cent guidance (23 November 2026): use `docs/CENT-AUTHENTICATION.md` for
+GIS/SMS, identity linking and authenticated bootstrap, and
+`backend/Cent.Preview/README.md` for local upgrades and disposable fixtures.
+The historical password/admin credentials and password bootstrap examples below
+are retired. The current model has 42 Cent tables and seven SQL Server migrations;
+`backend/Cent.Module/Deployment/README.md` documents the complete review order.
+
 Cent is an independent module, enabled only with `Cent__Enabled=true`. `lm` is untouched. Existing Lerona endpoints, domain entities, DbContext, authentication scheme, tables, migrations, backup keys and payment services are unchanged. The API composition root adds Cent service, middleware and route hooks; the release staging script additionally copies `Cent.Module`, which the API now references.
 
 ## Isolation

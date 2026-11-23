@@ -61,12 +61,12 @@ legacy behavior and are not certified for new Mock Exams.
 
 Migration `20261122081723_VersionedCurriculum` and
 `Cent.Module/Deployment/cent-versioned-curriculum.sql` are **review-only, unapplied**.
-They add two Cent companion tables after the exam infrastructure migration. An
-authorized isolated schema rehearsal and import must precede deployment of the
-new content-aware application. Do not use the historical preview import command
-below against an existing database for this release; its old SQLite upgrade path
-has not been extended/rehearsed here. No runtime flag, publication or database is
-changed by generation/verification.
+They add two Cent companion tables after the exam infrastructure migration.
+The local-only preview upgrade was extended and rehearsed on 23 November 2026:
+it preserves legacy rows, adds the current schema and accepts the additive r2
+import. See `Cent.Preview/README.md` for the explicit backed-up maintenance command.
+This does not rehearse SQL Server concurrency or authorize production migration,
+content publication or exam activation. Generation/verification changes no database.
 
 The importer rejects same-ID content conflicts rather than overwriting/retiring
 existing content. Reading is not automatically included in subscription access;
