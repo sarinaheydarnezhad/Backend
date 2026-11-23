@@ -58,7 +58,7 @@ public sealed class CentGoogleGisTests
         Assert.Equal(64, session.Length); Assert.Equal("STUDENT", auth.GetProperty("user").GetProperty("role").GetString());
         client.DefaultRequestHeaders.Authorization = new("Bearer", session);
         Assert.Equal(HttpStatusCode.OK, (await client.GetAsync("/api/cent/v1/me")).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync("/api/v1/me")).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await client.GetAsync("/api/v1/me")).StatusCode);
         // The established GoogleSubject is authoritative even after Google's email changes.
         var second = await host.Challenge();
         using var login = await host.Complete(second, host.Token(second, c => c["email"] = "changed@example.com"));
@@ -72,8 +72,8 @@ public sealed class CentGoogleGisTests
             Assert.All(await db.Sessions.ToListAsync(), s => Assert.NotEqual(session, s.TokenHash));
             Assert.Empty(await db.GoogleAttempts.ToListAsync());
         }
-        Assert.Equal(1, host.Keys.Calls); Assert.Equal(0, host.Exchange.Calls);
-        Assert.Equal(HttpStatusCode.ServiceUnavailable, (await client.PostAsync(Root + "/start", null)).StatusCode);
+        Assert.Equal(1, host.Keys.Calls);
+        Assert.Equal(HttpStatusCode.NotFound, (await client.PostAsync(Root + "/start", null)).StatusCode);
         Assert.Equal(HttpStatusCode.NoContent, (await client.PostAsync("/api/cent/v1/auth/logout", null)).StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync("/api/cent/v1/me")).StatusCode);
     }
@@ -122,7 +122,7 @@ public sealed class CentGoogleGisTests
         });
         await Error(await host.Complete(challenge, token), HttpStatusCode.Unauthorized, "invalid_google_credentials");
         await Error(await host.Complete(challenge), HttpStatusCode.Unauthorized, "invalid_google_credentials");
-        await host.AssertNoAccounts(); Assert.Equal(0, host.Exchange.Calls);
+        await host.AssertNoAccounts();
     }
 
     [Fact]
@@ -174,22 +174,17 @@ public sealed class CentGoogleGisTests
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async Task Matching_email_never_links_password_or_other_Google_subjects_and_password_login_survives(bool linked)
+    public async Task Matching_email_never_merges_existing_accounts(bool linked)
     {
         using var host = new GisHost();
-        Assert.Equal(HttpStatusCode.OK, (await host.Client.PostAsJsonAsync("/api/cent/v1/auth/register", new {
-            email = "gis@example.com", password = "existing-test-password", name = "Existing"
-        })).StatusCode);
+        await TestAccounts.Create(host.App, "gis@example.com");
         if (linked) {
             using var scope = host.App.Services.CreateScope(); var db = scope.ServiceProvider.GetRequiredService<CentDbContext>();
             (await db.Users.SingleAsync()).GoogleSubject = "another-google-subject"; await db.SaveChangesAsync();
         }
         await Error(await host.Complete(await host.Challenge()), HttpStatusCode.Conflict, "google_account_conflict");
-        Assert.Equal(HttpStatusCode.OK, (await host.Client.PostAsJsonAsync("/api/cent/v1/auth/login", new {
-            email = "gis@example.com", password = "existing-test-password"
-        })).StatusCode);
         using var finalScope = host.App.Services.CreateScope(); var database = finalScope.ServiceProvider.GetRequiredService<CentDbContext>();
-        Assert.Single(await database.Users.ToListAsync()); Assert.Equal(2, await database.Sessions.CountAsync());
+        Assert.Single(await database.Users.ToListAsync()); Assert.Single(await database.Sessions.ToListAsync());
     }
 
     [Theory]
@@ -238,7 +233,7 @@ public sealed class CentGoogleGisTests
     {
         using var host = new GisHost();
         var config = host.App.Services.GetRequiredService<Microsoft.Extensions.Configuration.IConfiguration>();
-        foreach (var pair in new[] { ("Mode", "AuthorizationCode"), ("Mode", "typo"), ("Enabled", "false"), ("ClientId", "") }) {
+        foreach (var pair in new[] { ("Enabled", "false"), ("ClientId", "") }) {
             config["Cent:Google:" + pair.Item1] = pair.Item2;
             await Error(await host.Client.PostAsJsonAsync(Root + "/gis/challenge", new { }), HttpStatusCode.ServiceUnavailable, "google_unavailable");
             config["Cent:Google:Mode"] = "GisIdToken"; config["Cent:Google:Enabled"] = "true"; config["Cent:Google:ClientId"] = "test-web-client";
@@ -273,7 +268,7 @@ public sealed class CentGoogleGisTests
         Assert.Equal(1, host.Keys.Calls); await host.AssertNoAccounts();
         host.Clock.Advance(TimeSpan.FromSeconds(6)); host.Keys.Status = HttpStatusCode.OK;
         Assert.Equal(HttpStatusCode.OK, (await host.Complete(await host.Challenge())).StatusCode);
-        Assert.Equal(2, host.Keys.Calls); Assert.Equal(0, host.Exchange.Calls);
+        Assert.Equal(2, host.Keys.Calls);
     }
 
     [Fact]
@@ -315,7 +310,7 @@ public sealed class CentGoogleGisTests
         };
         host.Keys.Timeout = failure == "timeout";
         await Error(await host.Complete(await host.Challenge()), HttpStatusCode.ServiceUnavailable, "google_unavailable");
-        await host.AssertNoAccounts(); Assert.Equal(0, host.Exchange.Calls);
+        await host.AssertNoAccounts();
     }
 
     [Theory]
@@ -367,26 +362,15 @@ public sealed class CentGoogleGisTests
     }
 
     [Fact]
-    public async Task Google_flows_cannot_consume_each_others_attempts_when_mode_changes()
+    public async Task Legacy_routes_are_absent_and_stale_mode_cannot_enable_them()
     {
-        using var host = new GisHost(); var gis = await host.Challenge();
-        var config = host.App.Services.GetRequiredService<Microsoft.Extensions.Configuration.IConfiguration>();
-        config["Cent:Google:Mode"] = "AuthorizationCode";
-        config["Cent:Google:ClientSecret"] = "test-placeholder-secret";
-        config["Cent:Google:RedirectUri"] = "https://itatest.ir/auth/google/callback";
-        var start = (await (await host.Client.PostAsync(Root + "/start", null)).Content.ReadFromJsonAsync<CentGoogleStart>())!;
-        Assert.Equal(HttpStatusCode.Unauthorized, (await host.Client.PostAsJsonAsync(Root + "/complete", new {
-            state = gis.ChallengeId, codeVerifier = gis.BrowserBinding, code = "placeholder-code"
-        })).StatusCode);
-        config["Cent:Google:Mode"] = "GisIdToken";
-        await Error(await host.Complete(gis with { ChallengeId = start.State, BrowserBinding = start.CodeVerifier }),
-            HttpStatusCode.Unauthorized, "invalid_google_credentials");
-        Assert.Equal(HttpStatusCode.OK, (await host.Complete(gis)).StatusCode);
-        using var scope = host.App.Services.CreateScope();
-        var attempt = await scope.ServiceProvider.GetRequiredService<CentDbContext>().GoogleAttempts.SingleAsync();
-        Assert.Equal(CentModule.Hash(start.State), attempt.StateHash); Assert.Equal(0, host.Exchange.Calls);
-        var discovery = await (await host.Client.GetAsync(Root + "/config")).Content.ReadFromJsonAsync<JsonElement>();
-        Assert.Equal("GisIdToken", discovery.GetProperty("mode").GetString());
+        using var host = new GisHost();
+        host.App.Services.GetRequiredService<Microsoft.Extensions.Configuration.IConfiguration>()["Cent:Google:Mode"] = "AuthorizationCode";
+        Assert.Equal(HttpStatusCode.NotFound, (await host.Client.PostAsync(Root + "/start", null)).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await host.Client.PostAsJsonAsync(Root + "/complete", new {})).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await host.Client.PostAsJsonAsync("/api/cent/v1/auth/login", new {})).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await host.Client.PostAsJsonAsync("/api/cent/v1/auth/register", new {})).StatusCode);
+        Assert.Equal(HttpStatusCode.OK, (await host.Complete(await host.Challenge())).StatusCode);
     }
 
     [Fact]
@@ -408,6 +392,27 @@ public sealed class CentGoogleGisTests
             Assert.Equal(status, response.StatusCode);
             Assert.Equal(code, (await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
         }
+    }
+
+    [Fact]
+    public async Task Google_linking_requires_session_and_proof_and_cannot_replace_or_steal_identity()
+    {
+        using var host = new GisHost();
+        var seed = await (await TestAccounts.Create(host.App, "mobile-owner@accounts.itatest.invalid")).Content.ReadFromJsonAsync<JsonElement>();
+        var id = seed.GetProperty("user").GetProperty("id").GetGuid();
+        Assert.Equal(HttpStatusCode.Unauthorized, (await host.Client.PostAsJsonAsync("/api/cent/v1/auth/identities/google/gis/challenge", new {})).StatusCode);
+        host.Client.DefaultRequestHeaders.Authorization = new("Bearer", seed.GetProperty("token").GetString());
+        var proof = (await (await host.Client.PostAsJsonAsync("/api/cent/v1/auth/identities/google/gis/challenge", new {})).Content.ReadFromJsonAsync<CentGoogleGisChallenge>())!;
+        await Error(await host.Complete(proof), HttpStatusCode.Unauthorized, "invalid_google_credentials");
+        var linked = await host.Client.PostAsJsonAsync("/api/cent/v1/auth/identities/google/gis/complete", new { proof.ChallengeId, proof.BrowserBinding, idToken = host.Token(proof) });
+        Assert.Equal(HttpStatusCode.OK, linked.StatusCode);
+        Assert.Equal(id, (await linked.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("user").GetProperty("id").GetGuid());
+        var login = await host.Complete(await host.Challenge());
+        Assert.Equal(id, (await login.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("user").GetProperty("id").GetGuid());
+        using var scope = host.App.Services.CreateScope();
+        var db = scope.ServiceProvider.GetRequiredService<CentDbContext>();
+        Assert.Equal("google-gis-subject", (await db.Users.SingleAsync()).GoogleSubject);
+        Assert.Equal(1, await db.Users.CountAsync());
     }
 
     private static Dictionary<string, object> StandardClaims(string nonce) => new() {
@@ -433,13 +438,12 @@ public sealed class CentGoogleGisTests
         public SigningMaterial Signing { get; } = new("test-key");
         public KeyHandler Keys { get; }
         public TestClock Clock { get; } = new();
-        public ForbiddenExchange Exchange { get; } = new();
         public WebApplicationFactory<Program> App { get; }
         public HttpClient Client { get; }
         public GisHost(bool production = true, string origin = "https://itatest.ir", string backend = "https://lerona-app.com")
         {
             Keys = new(Signing);
-            factory = new CentFactory(production: production, googleClient: Exchange, environmentVariables: new Dictionary<string, string?> {
+            factory = new CentFactory(production: production, environmentVariables: new Dictionary<string, string?> {
                 ["Cent__Google__Enabled"] = "true", ["Cent__Google__Mode"] = "GisIdToken", ["Cent__Google__ClientId"] = "test-web-client",
                 ["Cent__Google__ClientSecret"] = "", ["Cent__Google__RedirectUri"] = "", ["Cent__AllowedOrigins__0"] = origin,
                 ["Cent__AllowedOrigins__1"] = "https://second.example"
@@ -523,14 +527,6 @@ public sealed class CentGoogleGisTests
     private sealed class TestHttpFactory(HttpMessageHandler handler) : IHttpClientFactory
     {
         public HttpClient CreateClient(string name) { Assert.Equal(CentGooglePublicKeys.HttpClientName, name); return new(handler, false); }
-    }
-    private sealed class ForbiddenExchange : ICentGoogleClient
-    {
-        public int Calls;
-        public Task<CentGoogleIdentity> ExchangeAndValidate(CentGoogleSettings settings, string code, string verifier, string nonceHash, CancellationToken ct)
-        {
-            Interlocked.Increment(ref Calls); throw new InvalidOperationException("GIS must never exchange an authorization code.");
-        }
     }
     private sealed class UnknownLengthContent : HttpContent
     {

@@ -37,7 +37,7 @@ public sealed class CentGoogleIdTokenValidator(CentGooglePublicKeys keys) : ICen
             // Interpret application claims ONLY after cryptographic validation by IdentityModel.
             using var claims = JsonDocument.Parse(WebEncoders.Base64UrlDecode(parts[1]));
             RequireUniqueProperties(claims.RootElement);
-            CentGoogleClient.ValidateAdditionalClaims(claims.RootElement, clientId, nonceHash);
+            CentGoogleClaims.ValidateAdditionalClaims(claims.RootElement, clientId, nonceHash);
             var root = claims.RootElement;
             var subject = root.GetProperty("sub").GetString();
             var email = root.GetProperty("email").GetString();

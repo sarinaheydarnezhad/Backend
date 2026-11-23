@@ -14,14 +14,8 @@ namespace Cent.Module;
 
 public static class CentGoogleMode
 {
-    public const string AuthorizationCode = "AuthorizationCode";
     public const string GisIdToken = "GisIdToken";
-
-    public static string Read(IConfiguration config) => config["Cent:Google:Mode"] switch {
-        null or "" or AuthorizationCode => AuthorizationCode,
-        GisIdToken => GisIdToken,
-        _ => throw CentGoogleSettings.Unavailable()
-    };
+    public static string Read(IConfiguration config) => GisIdToken;
 
     public static string GisClientId(IConfiguration config)
     {
@@ -50,22 +44,22 @@ public interface ICentGoogleIdTokenValidator
 public sealed class CentGoogleGisAuth(CentDbContext db, IConfiguration config, CentGoogleAuth accounts,
     ICentGoogleIdTokenValidator validator)
 {
-    public async Task<CentGoogleGisChallenge> Challenge(string origin, CancellationToken ct)
+    public async Task<CentGoogleGisChallenge> Challenge(string origin, CancellationToken ct, Guid? target = null)
     {
         _ = CentGoogleMode.GisClientId(config);
         var id = Random(); var nonce = Random(); var binding = Random();
         var now = DateTimeOffset.UtcNow; var expires = now.AddMinutes(5);
         await db.GoogleAttempts.Where(a => a.ExpiresAt <= now).ExecuteDeleteAsync(ct);
-        // Domain separation prevents either flow from consuming the other's attempts. No schema change.
+        // Preserve the existing Cent single-use nonce proofs.
         db.GoogleAttempts.Add(new CentGoogleAttempt {
-            StateHash = ChallengeHash(id), VerifierHash = BindingHash(origin, binding),
+            LinkUserId = target, StateHash = ChallengeHash(id), VerifierHash = BindingHash(origin, binding),
             NonceHash = CentModule.Hash(nonce), ExpiresAt = expires
         });
         await db.SaveChangesAsync(ct);
         return new(id, nonce, binding, expires);
     }
 
-    public async Task<object> Complete(CentGoogleGisComplete input, string origin, CancellationToken ct)
+    public async Task<object> Complete(CentGoogleGisComplete input, string origin, CancellationToken ct, Guid? target = null)
     {
         var clientId = CentGoogleMode.GisClientId(config);
         if (!IsRandom(input.ChallengeId) || !IsRandom(input.BrowserBinding) ||
@@ -73,14 +67,14 @@ public sealed class CentGoogleGisAuth(CentDbContext db, IConfiguration config, C
             throw new CentException(400, "invalid_request", "Invalid GIS completion format.");
         var stateHash = ChallengeHash(input.ChallengeId); var bindingHash = BindingHash(origin, input.BrowserBinding);
         var now = DateTimeOffset.UtcNow;
-        var pending = db.GoogleAttempts.Where(a => a.StateHash == stateHash && a.VerifierHash == bindingHash && a.ExpiresAt > now);
+        var pending = db.GoogleAttempts.Where(a => a.StateHash == stateHash && a.VerifierHash == bindingHash && a.LinkUserId == target && a.ExpiresAt > now);
         var attempt = await pending.AsNoTracking().SingleOrDefaultAsync(ct);
         var consumedAt = DateTimeOffset.UtcNow;
         if (attempt is null || await pending.Where(a => a.ExpiresAt > consumedAt).ExecuteDeleteAsync(ct) != 1)
             throw CentGoogleSettings.Invalid();
         // Atomic consume BEFORE validation: concurrent requests and retries can never issue a second session.
         var identity = await validator.Validate(input.IdToken, clientId, attempt.NonceHash, ct);
-        return await accounts.AuthenticateIdentity(identity, ct);
+        return await accounts.AuthenticateIdentity(identity, ct, target);
     }
 
     private static string Random() => WebEncoders.Base64UrlEncode(RandomNumberGenerator.GetBytes(32));
@@ -103,11 +97,15 @@ public static class CentGoogleGisEndpoints
             var mode = CentGoogleMode.Read(config);
             var enabled = config.GetValue<bool>("Cent:Google:Enabled");
             string? clientId = null;
-            if (enabled) clientId = mode == CentGoogleMode.GisIdToken ? CentGoogleMode.GisClientId(config)
-                : CentGoogleSettings.Read(config, env).ClientId;
+            if (enabled) clientId = CentGoogleMode.GisClientId(config);
             return Results.Ok(new { enabled, mode, clientId });
         });
-        var gis = auth.MapGroup("/google/gis");
+        Map(auth.MapGroup("/google/gis"), false);
+        Map(auth.MapGroup("/identities/google/gis").RequireAuthorization("CentUser"), true);
+    }
+
+    private static void Map(RouteGroupBuilder gis, bool link)
+    {
         gis.AddEndpointFilter(async (context, next) => {
             var http = context.HttpContext;
             var config = http.RequestServices.GetRequiredService<IConfiguration>();
@@ -127,24 +125,24 @@ public static class CentGoogleGisEndpoints
             var body = await ReadJson<JsonElement>(http.Request, 256, ct);
             if (body.ValueKind != JsonValueKind.Object || body.EnumerateObject().Any())
                 throw new CentException(400, "invalid_request", "Challenge body must be an empty JSON object.");
-            return Results.Ok(await service.Challenge(http.Request.Headers.Origin.ToString(), ct));
+            return Results.Ok(await service.Challenge(http.Request.Headers.Origin.ToString(), ct, link ? http.User.UserId() : null));
         });
         gis.MapPost("/complete", async (HttpContext http, CentGoogleGisAuth service, CancellationToken ct) => {
             var input = await ReadJson<CentGoogleGisComplete>(http.Request, 16384, ct);
-            return Results.Ok(await service.Complete(input, http.Request.Headers.Origin.ToString(), ct));
+            return Results.Ok(await service.Complete(input, http.Request.Headers.Origin.ToString(), ct, link ? http.User.UserId() : null));
         });
     }
 
-    private static async Task<T> ReadJson<T>(HttpRequest request, int limit, CancellationToken ct)
+    internal static async Task<T> ReadJson<T>(HttpRequest request, int limit, CancellationToken ct)
     {
-        if (request.ContentLength > limit) throw new CentException(413, "request_too_large", "GIS request is too large.");
+        if (request.ContentLength > limit) throw new CentException(413, "request_too_large", "حجم درخواست ورود بیش از حد مجاز است.");
         try {
             var bytes = await CentGooglePublicKeys.ReadBounded(request.Body, limit, ct);
             using var json = JsonDocument.Parse(bytes, new JsonDocumentOptions { MaxDepth = 4 });
             CentGoogleIdTokenValidator.RequireUniqueProperties(json.RootElement);
             return JsonSerializer.Deserialize<T>(bytes, JsonOptions) ?? throw new JsonException();
         }
-        catch (CentBodyTooLargeException) { throw new CentException(413, "request_too_large", "GIS request is too large."); }
-        catch (JsonException) { throw new CentException(400, "invalid_request", "Invalid GIS JSON request."); }
+        catch (CentBodyTooLargeException) { throw new CentException(413, "request_too_large", "حجم درخواست ورود بیش از حد مجاز است."); }
+        catch (JsonException) { throw new CentException(400, "invalid_request", "درخواست ورود معتبر نیست."); }
     }
 }

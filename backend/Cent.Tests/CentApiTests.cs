@@ -4,6 +4,7 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using Cent.Module;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
@@ -18,14 +19,14 @@ namespace Cent.Tests;
 public sealed class CentApiTests
 {
     [Fact]
-    public async Task Disabled_module_preserves_Lerona_routes_and_exposes_no_Cent_routes()
+    public async Task Disabled_module_exposes_no_Cent_routes_in_isolated_host()
     {
         using var factory = new CentFactory(enabled: false);
         using var client = factory.CreateClient();
         Assert.Equal(HttpStatusCode.OK, (await client.GetAsync("/health")).StatusCode);
-        Assert.Equal(HttpStatusCode.OK, (await client.GetAsync("/api/v1/status")).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await client.GetAsync("/api/v1/status")).StatusCode);
         Assert.Equal(HttpStatusCode.NotFound, (await client.GetAsync("/api/cent/v1/status")).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync("/api/v1/me")).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await client.GetAsync("/api/v1/me")).StatusCode);
     }
 
     [Fact]
@@ -34,13 +35,13 @@ public sealed class CentApiTests
         using var factory = new CentFactory();
         using var client = factory.CreateClient();
         Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync("/api/cent/v1/admin/trainings")).StatusCode);
-        var response = await client.PostAsJsonAsync("/api/cent/v1/auth/register", new { email = "student@example.com", password = "long-test-password", name = "Student", role = "ADMIN" });
+        var response = await TestAccounts.Create(factory, "student@example.com");
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         var auth = await Json(response);
         Assert.Equal("STUDENT", auth.GetProperty("user").GetProperty("role").GetString());
         client.DefaultRequestHeaders.Authorization = new("Bearer", auth.GetProperty("token").GetString());
         Assert.Equal(HttpStatusCode.Forbidden, (await client.GetAsync("/api/cent/v1/admin/trainings")).StatusCode);
-        Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync("/api/v1/me")).StatusCode);
+        Assert.Equal(HttpStatusCode.NotFound, (await client.GetAsync("/api/v1/me")).StatusCode);
         Assert.Equal(HttpStatusCode.OK, (await client.GetAsync("/api/cent/v1/me")).StatusCode);
         Assert.Equal(HttpStatusCode.NoContent, (await client.PostAsJsonAsync("/api/cent/v1/auth/logout", new { })).StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized, (await client.GetAsync("/api/cent/v1/me")).StatusCode);
@@ -222,7 +223,7 @@ public sealed class CentApiTests
     private static async Task<HttpClient> Register(CentFactory factory, string email)
     {
         var client = factory.CreateClient();
-        var response = await client.PostAsJsonAsync("/api/cent/v1/auth/register", new { email, password = "long-test-password", name = "Student" });
+        var response = await TestAccounts.Create(factory, email);
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", (await Json(response)).GetProperty("token").GetString());
         return client;
@@ -247,17 +248,14 @@ public sealed class CentFactory : WebApplicationFactory<Program>
 {
     private readonly bool enabled;
     private readonly bool production;
-    private readonly ICentGoogleClient? googleClient;
     private readonly Dictionary<string, string?> previous = new();
     private readonly SqliteConnection connection = new("Data Source=:memory:");
-    public CentFactory(bool enabled = true, bool production = false, ICentGoogleClient? googleClient = null,
+    public CentFactory(bool enabled = true, bool production = false,
         IReadOnlyDictionary<string, string?>? environmentVariables = null)
     {
-        this.enabled = enabled; this.production = production; this.googleClient = googleClient;
+        this.enabled = enabled; this.production = production;
         // Minimal hosting reads these before WebApplicationFactory applies ConfigureAppConfiguration.
         var values = new Dictionary<string, string?> {
-            ["Auth__Issuer"] = "Flashcards.Api", ["Auth__Audience"] = "Flashcards.Mobile",
-            ["Auth__SigningKey"] = Convert.ToBase64String(Enumerable.Repeat((byte)0x5a, 32).ToArray()),
             ["Cent__Enabled"] = enabled.ToString(), ["Cent__Payments__AllowDevelopmentMock"] = "true",
             ["Cent__ClientBaseUrl"] = "https://cent.example", ["Cent__PublicApiBaseUrl"] = "https://api.example",
             ["Cent__AllowedOrigins__0"] = "https://cent.example",
@@ -271,16 +269,17 @@ public sealed class CentFactory : WebApplicationFactory<Program>
     {
         builder.UseEnvironment(production ? "Production" : "Development");
         builder.ConfigureAppConfiguration((_, configuration) => configuration.AddInMemoryCollection(new Dictionary<string, string?> {
-            ["Auth:SigningKey"] = Convert.ToBase64String(Enumerable.Repeat((byte)0x5a, 32).ToArray()),
             ["Cent:Enabled"] = enabled.ToString(), ["Cent:Payments:AllowDevelopmentMock"] = "true",
             ["Cent:ClientBaseUrl"] = "https://cent.example", ["Cent:PublicApiBaseUrl"] = "https://api.example",
             ["Cent:Payments:MerchantId"] = "", ["Cent:BootstrapToken"] = "cent-test-bootstrap-token-with-32-characters"
         }));
         builder.ConfigureTestServices(services => {
+            services.AddDataProtection().UseEphemeralDataProtectionProvider();
+            // Cent opaque sessions do not use the host's machine key ring. Do not start its warmup in tests.
+            foreach (var descriptor in services.Where(d => d.ServiceType == typeof(Microsoft.Extensions.Hosting.IHostedService) &&
+                d.ImplementationType?.FullName == "Microsoft.AspNetCore.DataProtection.Internal.DataProtectionHostedService").ToArray())
+                services.Remove(descriptor);
             if (!enabled) return;
-            if (googleClient is not null) {
-                services.RemoveAll<ICentGoogleClient>(); services.AddSingleton(googleClient);
-            }
             connection.Open();
             services.RemoveAll<CentDbContext>(); services.RemoveAll<DbContextOptions<CentDbContext>>();
             services.AddScoped<CentDbContext>(_ => new SqliteCentContext(new DbContextOptionsBuilder<CentDbContext>().UseSqlite(connection).Options));

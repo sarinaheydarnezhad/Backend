@@ -42,10 +42,10 @@ public static class CentAdminConsole
             var q = Search(search); var query = db.Users.AsNoTracking().Where(x => q == "" || x.Name.Contains(q) || x.Email.Contains(q));
             if (!string.IsNullOrEmpty(role)) query = query.Where(x => x.Role == role);
             return Results.Ok(await List(query.OrderByDescending(x => x.CreatedAt).ThenBy(x => x.Id)
-                .Select(x => new { x.Id, x.Name, x.Email, x.Role, x.CreatedAt, verifiedIdentity = x.GoogleSubject != null }), page, size, ct));
+                .Select(x => new { x.Id, x.Name, x.Email, x.Role, x.CreatedAt, verifiedIdentity = x.GoogleSubject != null || db.Set<CentMobileIdentity>().Any(i => i.UserId == x.Id) }), page, size, ct));
         }).RequireAuthorization("CentAdmin:users");
         admin.MapGet("/users/{id:guid}", async (Guid id, CentDbContext db, CancellationToken ct) => {
-            var user = await db.Users.AsNoTracking().Where(x => x.Id == id).Select(x => new { x.Id, x.Name, x.Email, x.Role, x.CreatedAt, verifiedIdentity = x.GoogleSubject != null }).SingleOrDefaultAsync(ct);
+            var user = await db.Users.AsNoTracking().Where(x => x.Id == id).Select(x => new { x.Id, x.Name, x.Email, x.Role, x.CreatedAt, verifiedIdentity = x.GoogleSubject != null || db.Set<CentMobileIdentity>().Any(i => i.UserId == x.Id) }).SingleOrDefaultAsync(ct);
             CentModule.Check(user is not null, "کاربر پیدا نشد.", 404);
             return Results.Ok(new { user, orders = await db.Orders.CountAsync(x => x.UserId == id, ct),
                 paidOrders = await db.Orders.CountAsync(x => x.UserId == id && x.Status == "PAID", ct),

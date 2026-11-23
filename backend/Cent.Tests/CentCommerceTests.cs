@@ -24,7 +24,7 @@ public sealed class CentCommerceTests
     {
         using var factory = new CentFactory();
         using var client = factory.CreateClient();
-        var auth = await Json(await client.PostAsJsonAsync("/api/cent/v1/auth/register", new { email = "commerce@example.com", password = "commerce-test-password", name = "Buyer" }));
+        var auth = await Json(await TestAccounts.Create(factory, "commerce@example.com"));
         client.DefaultRequestHeaders.Authorization = new("Bearer", auth.GetProperty("token").GetString());
         Guid productId;
         using (var scope = factory.Services.CreateScope()) {
@@ -45,7 +45,7 @@ public sealed class CentCommerceTests
     public async Task Catalog_and_checkout_exclude_inactive_products_and_unpublished_trainings()
     {
         using var factory = new CentFactory(); using var client = factory.CreateClient();
-        var auth = await Json(await client.PostAsJsonAsync("/api/cent/v1/auth/register", new { email = "availability@example.com", password = "commerce-test-password", name = "Buyer" }));
+        var auth = await Json(await TestAccounts.Create(factory, "availability@example.com"));
         client.DefaultRequestHeaders.Authorization = new("Bearer", auth.GetProperty("token").GetString());
         var hidden = new CentTraining { Title = "Hidden", Published = false };
         var inactive = Subscription(); inactive.Active = false;
@@ -68,7 +68,7 @@ public sealed class CentCommerceTests
         using var configured = factory.WithWebHostBuilder(builder => builder.ConfigureTestServices(services =>
             services.AddTransient(_ => Gateway(handler))));
         using var client = configured.CreateClient(new() { AllowAutoRedirect = false });
-        var auth = await Json(await client.PostAsJsonAsync("/api/cent/v1/auth/register", new { email = "callback@example.com", password = "commerce-test-password", name = "Buyer" }));
+        var auth = await Json(await TestAccounts.Create(configured, "callback@example.com"));
         var userId = auth.GetProperty("user").GetProperty("id").GetGuid();
         client.DefaultRequestHeaders.Authorization = new("Bearer", auth.GetProperty("token").GetString());
         var order = new CentOrder { UserId = userId, Title = "Monthly", Kind = "SUBSCRIPTION", DurationDays = 30, AmountRial = 250000, Authority = Authority, Provider = "SANDBOX", RequestId = Guid.NewGuid() };

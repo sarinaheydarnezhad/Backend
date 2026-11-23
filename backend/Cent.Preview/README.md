@@ -20,7 +20,7 @@ After updating to Google authentication, existing preview databases require the 
 dotnet run --project backend/Cent.Preview/Cent.Preview.csproj -- --upgrade-google-auth true
 ```
 
-Fresh previews create the current schema automatically. See [Cent Google authentication](../../docs/CENT-GOOGLE-AUTHENTICATION.md) for the environment variables, Google Cloud setup and frontend callback contract.
+For the current GIS and SMS schema, existing previews also need the explicit additive, backed-up `--upgrade-sms-auth true` upgrade. This adds the Cent SMS tables and the GIS linking column; it does not reset accounts or learning data. Run the older Google upgrade first if that schema is missing. Fresh isolated previews create the current schema automatically. Production uses the separate Cent SQL Server migration, not these preview upgrades. See [Cent authentication](../../docs/CENT-AUTHENTICATION.md) for configuration, contracts, migration and recovery details.
 
 In the frontend repository, run:
 

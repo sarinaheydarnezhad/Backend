@@ -360,6 +360,9 @@ namespace Cent.Module.Migrations
                     b.Property<DateTimeOffset>("ExpiresAt")
                         .HasColumnType("datetimeoffset");
 
+                    b.Property<Guid?>("LinkUserId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("NonceHash")
                         .IsRequired()
                         .HasMaxLength(64)
@@ -377,6 +380,27 @@ namespace Cent.Module.Migrations
                     b.HasIndex("ExpiresAt");
 
                     b.ToTable("cent_google_attempts", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentMobileIdentity", b =>
+                {
+                    b.Property<string>("Phone")
+                        .HasMaxLength(13)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(13)");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTimeOffset>("VerifiedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Phone");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("cent_mobile_identities", (string)null);
                 });
 
             modelBuilder.Entity("Cent.Module.CentNote", b =>
@@ -762,6 +786,75 @@ namespace Cent.Module.Migrations
                     b.HasIndex("UserId", "ExpiresAt");
 
                     b.ToTable("cent_sessions", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSmsBudget", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasMaxLength(80)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(80)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTimeOffset>("NextAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("ResetAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Key");
+
+                    b.HasIndex("ResetAt");
+
+                    b.ToTable("cent_sms_budgets", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentSmsChallenge", b =>
+                {
+                    b.Property<string>("IdHash")
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.Property<int>("Attempts")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Consumed")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("Delivered")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTimeOffset>("ExpiresAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<Guid?>("LinkUserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(13)");
+
+                    b.Property<DateTimeOffset>("ResendAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<string>("Verifier")
+                        .IsRequired()
+                        .HasMaxLength(64)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(64)");
+
+                    b.HasKey("IdHash");
+
+                    b.HasIndex("ExpiresAt");
+
+                    b.HasIndex("Phone");
+
+                    b.ToTable("cent_sms_challenges", (string)null);
                 });
 
             modelBuilder.Entity("Cent.Module.CentSource", b =>
@@ -1634,6 +1727,15 @@ namespace Cent.Module.Migrations
                         .HasForeignKey("TrainingId")
                         .OnDelete(DeleteBehavior.NoAction);
 
+                    b.HasOne("Cent.Module.CentUser", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Cent.Module.CentMobileIdentity", b =>
+                {
                     b.HasOne("Cent.Module.CentUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")

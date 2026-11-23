@@ -13,9 +13,10 @@ public sealed class CentUser
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 }
 
-// No raw state, nonce or PKCE verifier is persisted.
+// Single-use GIS proofs; historical column names retained for compatibility.
 public sealed class CentGoogleAttempt
 {
+    public Guid? LinkUserId { get; set; }
     public string StateHash { get; set; } = "";
     public string VerifierHash { get; set; } = "";
     public string NonceHash { get; set; } = "";

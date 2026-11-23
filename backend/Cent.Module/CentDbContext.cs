@@ -41,6 +41,7 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
 
     protected override void OnModelCreating(ModelBuilder b)
     {
+        CentSmsModel.Configure(b);
         CentSubjectCommerceModel.Configure(b);
         Exams.CentExamModel.Configure(b);
         CentCurriculumModel.Configure(b);

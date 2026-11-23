@@ -99,6 +99,8 @@ using (var scope = app.Services.CreateScope()) {
     await db.Database.EnsureCreatedAsync();
     if (builder.Configuration.GetValue<bool>("upgrade-google-auth"))
         await GoogleAuthUpgrade.Apply((PreviewDb)db, databasePath);
+    if (builder.Configuration.GetValue<bool>("upgrade-sms-auth"))
+        await SmsAuthUpgrade.Apply((PreviewDb)db, databasePath);
     if (builder.Configuration.GetValue<bool>("upgrade-curriculum"))
         await CurriculumUpgrade.Apply((PreviewDb)db, databasePath);
     // No automatic administrator or known password. Explicit disposable fixtures
