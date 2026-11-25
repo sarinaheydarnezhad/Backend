@@ -18,6 +18,7 @@ internal static class CurriculumUpgrade
         try {
             await using var transaction = await db.Database.BeginTransactionAsync();
             var additions = new Dictionary<string, string[]> {
+                ["cent_notes"] = ["AnchorJson TEXT NULL"],
                 ["cent_documents"] = ["SourceId TEXT NULL"],
                 ["cent_questions"] = ["TopicId TEXT NULL", "SourceSectionId TEXT NULL", "SourceExerciseId TEXT NULL", "ImportKey TEXT NULL", "Origin TEXT NOT NULL DEFAULT 'manual'", "FigureSvg TEXT NULL"],
                 ["cent_attempts"] = ["CourseCodesJson TEXT NOT NULL DEFAULT '[]'", "AssessmentMode TEXT NOT NULL DEFAULT 'overview'", "DurationMinutes INTEGER NOT NULL DEFAULT 60"]
@@ -30,6 +31,8 @@ internal static class CurriculumUpgrade
                     using var reader = await command.ExecuteReaderAsync();
                     while (await reader.ReadAsync()) present.Add(reader.GetString(1));
                 }
+                // Missing tables are created by the complete provider script below.
+                if (present.Count == 0) continue;
                 foreach (var column in columns)
                     if (!present.Contains(column.Split(' ')[0])) {
                         // Identifiers and definitions come exclusively from the fixed dictionary above.

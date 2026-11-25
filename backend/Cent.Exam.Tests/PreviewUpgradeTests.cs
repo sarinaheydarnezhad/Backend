@@ -31,6 +31,7 @@ public sealed class PreviewUpgradeTests
             new CentProgress { UserId = owner.Id, DocumentId = document.Id, LastPage = 1, FurthestPage = 1 });
         await db.SaveChangesAsync();
         // Simulate the real legacy preview, without modifying an operator database.
+        await db.Database.ExecuteSqlRawAsync("ALTER TABLE cent_notes DROP COLUMN AnchorJson;");
         foreach (var table in new[] { "cent_subject_access", "cent_subject_order_lines", "cent_subject_orders", "cent_subject_quotes", "cent_subject_offers", "cent_recommended_bundles", "cent_practice_content", "cent_curriculum_revisions", "cent_exam_command_receipts", "cent_attempt_sections", "cent_mock_attempts", "cent_exam_versions", "cent_exam_content_releases", "cent_syllabus_revisions" })
         {
             var sql = $"DROP TABLE \"{table}\";"; // Fixed disposable-fixture table list above.

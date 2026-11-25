@@ -18,6 +18,7 @@ public static class CentAdminEndpoints
 
     public static void MapCentAdmin(this RouteGroupBuilder group)
     {
+        group.MapContentPreview();
         var admin = group.MapGroup("/admin").RequireAuthorization("CentAdmin:content");
         admin.MapGet("/trainings", async (CentDbContext db, CancellationToken ct) => Results.Ok(new {
             trainings = await db.Trainings.AsNoTracking().OrderBy(t => t.Title).Take(200).ToListAsync(ct),

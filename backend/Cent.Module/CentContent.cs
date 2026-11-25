@@ -6,8 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Cent.Module;
 
-public sealed class CentAccess(CentDbContext db)
+public sealed class CentAccess(CentDbContext db, Microsoft.Extensions.Configuration.IConfiguration? configuration = null,
+    Microsoft.Extensions.Hosting.IHostEnvironment? environment = null)
 {
+    public Guid[] LocalReviewDocuments(Guid user) => CentLocalDraftReview.Documents(user, configuration, environment);
     public async Task<HashSet<Guid>> ReviewedSources(Guid user, Guid training, CancellationToken ct)
     {
         var now = DateTimeOffset.UtcNow;
@@ -49,14 +51,15 @@ public sealed class CentAccess(CentDbContext db)
 
     public async Task<CentDocument> RequireDocument(Guid userId, Guid documentId, CancellationToken ct)
     {
-        var document = await db.Documents.AsNoTracking().SingleOrDefaultAsync(d => d.Id == documentId && d.Published, ct);
+        var review = LocalReviewDocuments(userId);
+        var document = await db.Documents.AsNoTracking().SingleOrDefaultAsync(d => d.Id == documentId && (d.Published || review.Contains(d.Id)), ct);
         CentModule.Check(document is not null, "این درس پیدا نشد.", 404);
         CentModule.Check(await CanRead(userId, document!.TrainingId, ct), "برای مطالعه این آموزش، خرید یا اشتراک فعال لازم است.", 403, "access_required");
         var now = DateTimeOffset.UtcNow;
         var legacy = await db.Entitlements.AnyAsync(e => e.UserId == userId && e.RevokedAt == null && e.StartsAt <= now &&
             (e.ExpiresAt == null || e.ExpiresAt > now) && ((e.Kind == "TRAINING" && e.TrainingId == document.TrainingId) ||
             (e.Kind == "SUBSCRIPTION" && db.Trainings.Any(t => t.Id == document.TrainingId && t.IncludedInSubscription))), ct);
-        if (!legacy) {
+        if (!legacy && !review.Contains(document.Id)) {
             // New subject sales include reviewed released sources only. Never
             // turn ownership of a subject into access to an unrelated draft.
             var sources = await ReviewedSources(userId, document.TrainingId, ct);
@@ -86,6 +89,7 @@ public static class CentContentEndpoints
         var me = group.MapGroup("/me").RequireAuthorization("CentUser");
         me.MapGet("/library", async (ClaimsPrincipal p, CentDbContext db, CentAccess access, CancellationToken ct) => {
             var userId = p.UserId();
+            var localReview = access.LocalReviewDocuments(userId);
             var grants = await db.Entitlements.AsNoTracking().Where(e => e.UserId == userId).ToListAsync(ct);
             var progress = await db.Progress.AsNoTracking().Where(x => x.UserId == userId).ToListAsync(ct);
             var notes = await db.Notes.AsNoTracking().Where(n => n.UserId == userId).GroupBy(n => n.DocumentId)
@@ -99,8 +103,8 @@ public static class CentContentEndpoints
             var trainings = await db.Trainings.AsNoTracking().Where(t => ownedIds.Contains(t.Id) || subjectTrainingIds.Contains(t.Id) || visitedTrainings.Contains(t.Id) ||
                 (hasSubscription && t.IncludedInSubscription && t.Published)).OrderBy(t => t.Title).ToListAsync(ct);
             var ids = trainings.Select(t => t.Id).ToArray();
-            var documents = await db.Documents.AsNoTracking().Where(d => ids.Contains(d.TrainingId) && d.Published && (d.SourceId == null || !db.CurriculumImports.Any(i => i.PackageHash == CentReviewedContent.Hash) || !CentReviewedContent.Content.ArchivedSourceIds.Contains(d.SourceId.Value) || visitedDocs.Contains(d.Id)))
-                .OrderBy(d => d.SortOrder).Select(d => new { d.Id, d.TrainingId, d.SourceId, d.Title, d.PageCount, d.SortOrder }).ToListAsync(ct);
+            var documents = await db.Documents.AsNoTracking().Where(d => ids.Contains(d.TrainingId) && (d.Published || localReview.Contains(d.Id)) && (d.SourceId == null || !db.CurriculumImports.Any(i => i.PackageHash == CentReviewedContent.Hash) || !CentReviewedContent.Content.ArchivedSourceIds.Contains(d.SourceId.Value) || visitedDocs.Contains(d.Id)))
+                .OrderBy(d => d.SortOrder).Select(d => new { d.Id, d.TrainingId, d.SourceId, d.Title, d.PageCount, d.SortOrder, d.Published }).ToListAsync(ct);
             var readable = new List<Guid>();
             foreach (var t in trainings) if (await access.CanRead(userId, t.Id, ct)) readable.Add(t.Id);
             var readableDocuments = new List<Guid>(); var now = DateTimeOffset.UtcNow;
@@ -108,7 +112,7 @@ public static class CentContentEndpoints
                 var legacy = grants.Any(e => e.RevokedAt == null && e.StartsAt <= now && (e.ExpiresAt == null || e.ExpiresAt > now) &&
                     ((e.Kind == "TRAINING" && e.TrainingId == t.Id) || (e.Kind == "SUBSCRIPTION" && t.IncludedInSubscription)));
                 var sources = legacy ? [] : await access.ReviewedSources(userId, t.Id, ct);
-                readableDocuments.AddRange(documents.Where(d => d.TrainingId == t.Id && (legacy || d.SourceId is { } src && sources.Contains(src))).Select(d => d.Id));
+                readableDocuments.AddRange(documents.Where(d => d.TrainingId == t.Id && (legacy || localReview.Contains(d.Id) || d.SourceId is { } src && sources.Contains(src))).Select(d => d.Id));
             }
             var subjectAccess = await (from a in db.Set<CentSubjectAccess>().AsNoTracking() join e in db.Entitlements on a.EntitlementId equals e.Id
                 where a.UserId == userId select new { a.Id, a.SubjectId, a.StartsAt, a.ExpiresAt, revokedAt = a.RevokedAt ?? e.RevokedAt }).ToListAsync(ct);
