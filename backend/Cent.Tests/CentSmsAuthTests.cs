@@ -171,13 +171,78 @@ public sealed class CentSmsAuthTests
         Assert.Equal(0, host.Sender.Calls);
     }
 
+    [Fact]
+    public async Task Password_registration_and_reset_preserve_identity_reject_cross_purpose_codes_and_revoke_sessions()
+    {
+        const string phone = "09123456789";
+        const string initial = "a unique initial password";
+        const string replacement = "a different recovery password";
+        using var host = new SmsHost();
+        var challenge = await host.Request();
+        var loginCode = host.Sender.Code;
+        Assert.Equal(CentSmsPurpose.SignIn, host.Sender.Purpose);
+        using var wrongPurpose = await Reset(challenge, loginCode);
+        Assert.Equal(HttpStatusCode.Unauthorized, wrongPurpose.StatusCode);
+
+        using var register = await host.Client.PostAsJsonAsync("/api/cent/v1/auth/sms/verify",
+            new { challenge.ChallengeId, code = loginCode, password = initial });
+        Assert.Equal(HttpStatusCode.OK, register.StatusCode);
+        var original = await register.Content.ReadFromJsonAsync<JsonElement>();
+        var originalId = original.GetProperty("user").GetProperty("id").GetGuid();
+        using var signedIn = await Login(initial);
+        Assert.Equal(HttpStatusCode.OK, signedIn.StatusCode);
+
+        host.Clock.Advance(61);
+        using var request = await host.Client.PostAsJsonAsync("/api/cent/v1/auth/password/reset/request", new { phone });
+        Assert.Equal(HttpStatusCode.OK, request.StatusCode);
+        var recovery = (await request.Content.ReadFromJsonAsync<CentSmsRequested>())!;
+        Assert.Equal(CentSmsPurpose.PasswordReset, host.Sender.Purpose);
+        using var recoveryAsLogin = await host.VerifyResponse(recovery);
+        Assert.Equal(HttpStatusCode.Unauthorized, recoveryAsLogin.StatusCode);
+        using var reset = await Reset(recovery, host.Sender.Code);
+        Assert.Equal(HttpStatusCode.NoContent, reset.StatusCode);
+        using var replay = await Reset(recovery, host.Sender.Code);
+        Assert.Equal(HttpStatusCode.Unauthorized, replay.StatusCode);
+        using var oldLogin = await Login(initial);
+        Assert.Equal(HttpStatusCode.Unauthorized, oldLogin.StatusCode);
+
+        using var profile = new HttpRequestMessage(HttpMethod.Get, "/api/cent/v1/me");
+        profile.Headers.Authorization = new("Bearer", original.GetProperty("token").GetString());
+        using var revoked = await host.Client.SendAsync(profile);
+        Assert.Equal(HttpStatusCode.Unauthorized, revoked.StatusCode);
+        using var newLogin = await Login(replacement);
+        Assert.Equal(HttpStatusCode.OK, newLogin.StatusCode);
+        var restored = await newLogin.Content.ReadFromJsonAsync<JsonElement>();
+        Assert.Equal(originalId, restored.GetProperty("user").GetProperty("id").GetGuid());
+
+        Task<HttpResponseMessage> Login(string password) =>
+            host.Client.PostAsJsonAsync("/api/cent/v1/auth/password/login", new { phone, password });
+        Task<HttpResponseMessage> Reset(CentSmsRequested sms, string code) =>
+            host.Client.PostAsJsonAsync("/api/cent/v1/auth/password/reset/verify", new { sms.ChallengeId, code, password = replacement });
+    }
+
+    [Fact]
+    public async Task Recovery_cannot_create_an_account()
+    {
+        using var host = new SmsHost();
+        using var request = await host.Client.PostAsJsonAsync("/api/cent/v1/auth/password/reset/request", new { phone = "09123456789" });
+        Assert.Equal(HttpStatusCode.OK, request.StatusCode);
+        var challenge = (await request.Content.ReadFromJsonAsync<CentSmsRequested>())!;
+        using var response = await host.Client.PostAsJsonAsync("/api/cent/v1/auth/password/reset/verify",
+            new { challenge.ChallengeId, code = host.Sender.Code, password = "a brand new password" });
+        Assert.Equal(HttpStatusCode.Conflict, response.StatusCode);
+        using var scope = host.App.Services.CreateScope();
+        Assert.False(await scope.ServiceProvider.GetRequiredService<CentDbContext>().Users.AnyAsync());
+    }
+
     private sealed class FakeSender : ICentSmsSender
     {
         public string Code = "";
         public int Calls;
         public bool Fail;
-        public Task Send(string phone, string code, CancellationToken ct) {
-            Calls++; Code = code;
+        public CentSmsPurpose Purpose;
+        public Task Send(string phone, string code, CentSmsPurpose purpose, CancellationToken ct) {
+            Calls++; Code = code; Purpose = purpose;
             if (Fail) throw CentMelipayamak.Unavailable();
             return Task.CompletedTask;
         }
@@ -226,7 +291,7 @@ public sealed class CentSmsAuthTests
         public async Task<CentSmsRequested> RequestService(string phone = "09123456789", string ip = "test-ip", Guid? target = null) {
             using var scope = App.Services.CreateScope(); return await scope.ServiceProvider.GetRequiredService<CentSmsAuth>().Request(phone, ip, target, default);
         }
-        public async Task<object> VerifyService(CentSmsRequested challenge, Guid? target = null) {
+        public async Task<object?> VerifyService(CentSmsRequested challenge, Guid? target = null) {
             using var scope = App.Services.CreateScope(); return await scope.ServiceProvider.GetRequiredService<CentSmsAuth>().Verify(new(challenge.ChallengeId, Sender.Code), target, default);
         }
         public void Dispose() { Client.Dispose(); App.Dispose(); root.Dispose(); Microsoft.Data.Sqlite.SqliteConnection.ClearAllPools(); if (File.Exists(file)) File.Delete(file); }

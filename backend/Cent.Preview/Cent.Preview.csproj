@@ -3,6 +3,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <UserSecretsId>Cent.Preview.Sms</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="../Cent.Module/Cent.Module.csproj" />

@@ -1,5 +1,29 @@
 # Itatest authentication repair — implementation report
 
+## Cent-S SMS patterns and passwords
+
+Cent-S registration and SMS sign-in use pattern **596855**. Password reset uses pattern **596857**. New users can register with an SMS code and choose a password, or keep using passwordless SMS. Google sign-in and authenticated identity linking remain available.
+
+Password sign-in takes a previously verified Iranian mobile number and password. Reset requires a fresh SMS code sent through the recovery pattern, resets the password on the original Cent user record, and revokes that user's existing Cent sessions. Accounts without a verified mobile number can link one from their profile after signing in through an existing method. A signed-out legacy account with no verified identity still requires operator-assisted recovery.
+
+| Cent endpoint | JSON body | Result |
+| --- | --- | --- |
+| POST `/auth/sms/request` | `{phone}` | Sign-in or registration challenge |
+| POST `/auth/sms/verify` | `{challengeId,code,password?}` | Cent session. The optional password is accepted only for new accounts. |
+| POST `/auth/password/login` | `{phone,password}` | Cent session |
+| POST `/auth/password/reset/request` | `{phone}` | Recovery challenge |
+| POST `/auth/password/reset/verify` | `{challengeId,code,password}` | 204. Sign in with the new password. |
+
+The recovery routes use the existing Cent SMS schema. The `AddCentSmsAuthentication` migration is sufficient. Set `ConnectionStrings__CentDb` explicitly to a separate Cent database for production data isolation. The shared host supports a historical connection fallback.
+
+Set `Cent__Sms__Enabled=true` and `Cent__Sms__VerifierKey` (at least 32 random bytes, Base64 encoded) in the Cent backend configuration. Cent-S uses Melipayamak. Configure its Cent-only API key as `Cent__Sms__Melipayamak__ApiKey`, its login pattern as `Cent__Sms__Melipayamak__BodyId=596855`, and its recovery pattern as `Cent__Sms__Melipayamak__RecoveryBodyId=596857`.
+
+Each Melipayamak pattern takes one positional OTP argument. The Cent-S adapter reads only Cent-S configuration. Use a separate provider account for independent account credit and quotas.
+
+For local development, use the preview project's .NET user secrets with the same configuration keys written with colons. Keep live credentials outside the repo and frontend. Before enabling production SMS, confirm both templates and run one controlled registration, SMS sign-in, password sign-in, and reset with an authorized test number.
+
+## Original GIS and passwordless SMS rollout
+
 Date: 23 November 2026. Scope: Itatest frontend and Cent-owned backend only. No deployment, commit, push, production migration or live SMS send was performed.
 
 ## A. Root cause analysis

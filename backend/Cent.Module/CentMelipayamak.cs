@@ -8,22 +8,25 @@ using Microsoft.Extensions.Logging;
 
 namespace Cent.Module;
 
+public enum CentSmsPurpose { SignIn, PasswordReset }
+
 public interface ICentSmsSender
 {
-    Task Send(string phone, string code, CancellationToken ct);
+    Task Send(string phone, string code, CentSmsPurpose purpose, CancellationToken ct);
 }
 
 // Independent implementation of Melipayamak console's shared-template API.
 public sealed class CentMelipayamak(HttpClient client, IConfiguration config, ILogger<CentMelipayamak> log) : ICentSmsSender
 {
-    public async Task Send(string phone, string code, CancellationToken ct)
+    public async Task Send(string phone, string code, CentSmsPurpose purpose, CancellationToken ct)
     {
         const string root = "Cent:Sms:Melipayamak:";
         var key = config[root + "ApiKey"] ?? "";
         var endpoint = config[root + "Endpoint"] ?? "https://console.melipayamak.com/api/send/shared/";
         // This API requires its key in the provider path. HTTP-client logging is disabled in DI.
+        var pattern = purpose == CentSmsPurpose.PasswordReset ? "RecoveryBodyId" : "BodyId";
         if (!Regex.IsMatch(key, "\\A[A-Za-z0-9_-]{8,256}\\z") ||
-            !int.TryParse(config[root + "BodyId"], out var bodyId) || bodyId <= 0 ||
+            !int.TryParse(config[root + pattern], out var bodyId) || bodyId <= 0 ||
             endpoint != "https://console.melipayamak.com/api/send/shared/") throw Unavailable();
         using var timeout = CancellationTokenSource.CreateLinkedTokenSource(ct);
         timeout.CancelAfter(TimeSpan.FromSeconds(Math.Clamp(config.GetValue(root + "TimeoutSeconds", 10), 1, 30)));

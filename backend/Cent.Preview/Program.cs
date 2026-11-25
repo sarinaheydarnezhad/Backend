@@ -73,7 +73,7 @@ builder.Services.AddOpenApi(options => {
         document.Components.SecuritySchemes["CentSession"] = new OpenApiSecurityScheme {
             Type = SecuritySchemeType.Http,
             Scheme = "bearer",
-            Description = "Log in with /api/cent/v1/auth/login, then paste the returned token here."
+            Description = "Sign in through the Cent SMS, password, or Google flow, then paste the returned Cent token here."
         };
         return Task.CompletedTask;
     });
