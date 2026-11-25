@@ -27,7 +27,7 @@ public sealed record CentSmsRequest(string Phone)
 {
     public override string ToString() => "Cent SMS request (redacted)";
 }
-public sealed record CentSmsVerify(string ChallengeId, string Code, string? Password = null)
+public sealed record CentSmsVerify(string ChallengeId, string Code, string? Password = null, string? Name = null)
 {
     public override string ToString() => "Cent SMS verification (redacted)";
 }
@@ -111,6 +111,13 @@ public sealed partial class CentSmsAuth(CentDbContext db, IConfiguration config,
         var key = Key(); var now = clock.GetUtcNow();
         if (input.ChallengeId is null || !Regex.IsMatch(input.ChallengeId, "\\A[0-9A-F]{64}\\z") ||
             input.Code is null || !Regex.IsMatch(input.Code, "\\A[0-9]{6}\\z")) throw Invalid();
+        var name = input.Name?.Trim();
+        if (name is not null) {
+            CentModule.Check(!recovery && target is null && input.Password is not null,
+                "درخواست معتبر نیست.", 400, "invalid_request");
+            CentModule.Check(name.Length is >= 1 and <= 120,
+                "نام باید بین ۱ تا ۱۲۰ نویسه باشد.", 400, "invalid_name");
+        }
         if (recovery || input.Password is not null) ValidateNewPassword(input.Password);
         var hash = ChallengeHash(input.ChallengeId, recovery);
         var max = Setting("MaxAttempts", 5, 1, 5);
@@ -147,7 +154,7 @@ public sealed partial class CentSmsAuth(CentDbContext db, IConfiguration config,
             }
             user = await db.Users.SingleAsync(u => u.Id == identity.UserId, ct);
         } else {
-            user = new CentUser { Name = "کاربر ایتاتست" };
+            user = new CentUser { Name = name ?? "کاربر ایتاتست" };
             // Keep the established required/unique email columns without pretending phone is an email identity.
             user.Email = $"mobile-{user.Id:N}@accounts.itatest.invalid"; user.NormalizedEmail = user.Email.ToUpperInvariant(); db.Add(user);
             if (input.Password is not null) user.PasswordHash = PasswordHasher.HashPassword(user, input.Password);

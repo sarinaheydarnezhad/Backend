@@ -194,13 +194,15 @@ public sealed class CentSmsAuthTests
         Assert.Equal(HttpStatusCode.Unauthorized, wrongPurpose.StatusCode);
 
         using var register = await host.Client.PostAsJsonAsync("/api/cent/v1/auth/sms/verify",
-            new { challenge.ChallengeId, code = loginCode, password = initial });
+            new { challenge.ChallengeId, code = loginCode, password = initial, name = "  سارا احمدی  " });
         Assert.Equal(HttpStatusCode.OK, register.StatusCode);
         var original = await register.Content.ReadFromJsonAsync<JsonElement>();
         var originalId = original.GetProperty("user").GetProperty("id").GetGuid();
+        Assert.Equal("سارا احمدی", original.GetProperty("user").GetProperty("name").GetString());
         using var signedIn = await Login(initial);
         Assert.Equal(HttpStatusCode.OK, signedIn.StatusCode);
         var passwordUser = (await signedIn.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("user");
+        Assert.Equal("سارا احمدی", passwordUser.GetProperty("name").GetString());
         Assert.Equal(challenge.Phone, passwordUser.GetProperty("phone").GetString());
         Assert.True(passwordUser.GetProperty("hasPassword").GetBoolean());
 
