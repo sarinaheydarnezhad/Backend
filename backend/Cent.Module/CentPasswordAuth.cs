@@ -16,8 +16,8 @@ public sealed partial class CentSmsAuth
         PasswordHasher.HashPassword(new CentUser(), "Cent missing password credential"));
 
     private static void ValidateNewPassword(string? password) =>
-        CentModule.Check(password is { Length: >= 15 and <= 128 } && !string.IsNullOrWhiteSpace(password),
-            "رمز عبور باید بین ۱۵ تا ۱۲۸ نویسه باشد.", 400, "invalid_password");
+        CentModule.Check(password is { Length: >= 8 and <= 128 } && !string.IsNullOrWhiteSpace(password),
+            "رمز عبور باید بین ۸ تا ۱۲۸ نویسه باشد.", 400, "invalid_password");
 
     public async Task<object> SignInWithPassword(CentPasswordLogin input, string ip, CancellationToken ct)
     {

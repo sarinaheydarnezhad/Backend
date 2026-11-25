@@ -61,6 +61,9 @@ public sealed partial class CentSmsAuth(CentDbContext db, IConfiguration config,
             ExpiresAt = now.AddSeconds(Setting("LifetimeSeconds", 120, 60, 120)), ResendAt = now.AddSeconds(cooldown) };
         // Serialize durable budget reservations and supersession across instances. On contention fail closed.
         await using (var tx = await db.Database.BeginTransactionAsync(IsolationLevel.Serializable, ct)) {
+            if (!recovery && target is { } userId &&
+                await db.Set<CentMobileIdentity>().AnyAsync(i => i.UserId == userId, ct))
+                throw new CentException(409, "phone_already_linked", "حساب شما از قبل شماره موبایل تأییدشده دارد.");
             await Budget("global", Setting("GlobalPerMinute", 100, 1, 1000), 60, 0, now, ct);
             await Budget("ip:" + Mac(key, ip), Setting("IpPerHour", 20, 1, 100), 3600, 0, now, ct);
             await Budget("phone:" + Mac(key, phone), Setting("PhonePerHour", 5, 1, 10), 3600, cooldown, now, ct);

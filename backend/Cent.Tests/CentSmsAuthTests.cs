@@ -53,9 +53,12 @@ public sealed class CentSmsAuthTests
             Assert.NotEqual(host.Sender.Code, row.Verifier); Assert.NotEqual(challenge.ChallengeId, row.IdHash);
         }
         var session = await host.Verify(challenge);
-        var id = session.GetProperty("user").GetProperty("id").GetGuid();
+        var user = session.GetProperty("user");
+        var id = user.GetProperty("id").GetGuid();
+        Assert.Equal(challenge.Phone, user.GetProperty("phone").GetString());
         host.Client.DefaultRequestHeaders.Authorization = new("Bearer", session.GetProperty("token").GetString());
-        Assert.Equal(HttpStatusCode.OK, (await host.Client.GetAsync("/api/cent/v1/me")).StatusCode);
+        var profile = await host.Client.GetFromJsonAsync<JsonElement>("/api/cent/v1/me");
+        Assert.Equal(challenge.Phone, profile.GetProperty("phone").GetString());
         Assert.Equal(HttpStatusCode.NotFound, (await host.Client.GetAsync("/api/v1/me")).StatusCode);
         Assert.Equal(HttpStatusCode.Unauthorized, (await host.VerifyResponse(challenge)).StatusCode);
         Assert.Equal(HttpStatusCode.NoContent, (await host.Client.PostAsync("/api/cent/v1/auth/logout", null)).StatusCode);
@@ -131,10 +134,16 @@ public sealed class CentSmsAuthTests
         var seed = await (await TestAccounts.Create(host.App, "google-owner@example.com")).Content.ReadFromJsonAsync<JsonElement>();
         var id = seed.GetProperty("user").GetProperty("id").GetGuid();
         host.Client.DefaultRequestHeaders.Authorization = new("Bearer", seed.GetProperty("token").GetString());
+        var originalProfile = await host.Client.GetFromJsonAsync<JsonElement>("/api/cent/v1/me");
+        Assert.Equal(JsonValueKind.Null, originalProfile.GetProperty("phone").ValueKind);
         var challenge = await host.Request(link: true);
         Assert.Equal(HttpStatusCode.Unauthorized, (await host.VerifyResponse(challenge)).StatusCode);
         var linked = await host.Verify(challenge, link: true);
         Assert.Equal(id, linked.GetProperty("user").GetProperty("id").GetGuid());
+        Assert.Equal(challenge.Phone, linked.GetProperty("user").GetProperty("phone").GetString());
+        using var replacement = await host.Client.PostAsJsonAsync("/api/cent/v1/auth/identities/sms/request", new { phone = "09912345678" });
+        Assert.Equal(HttpStatusCode.Conflict, replacement.StatusCode);
+        Assert.Equal(1, host.Sender.Calls);
         host.Clock.Advance(61);
         var login = await host.Verify(await host.Request());
         Assert.Equal(id, login.GetProperty("user").GetProperty("id").GetGuid());
@@ -175,8 +184,8 @@ public sealed class CentSmsAuthTests
     public async Task Password_registration_and_reset_preserve_identity_reject_cross_purpose_codes_and_revoke_sessions()
     {
         const string phone = "09123456789";
-        const string initial = "a unique initial password";
-        const string replacement = "a different recovery password";
+        const string initial = "Cent-one";
+        const string replacement = "Cent-two";
         using var host = new SmsHost();
         var challenge = await host.Request();
         var loginCode = host.Sender.Code;
@@ -191,6 +200,9 @@ public sealed class CentSmsAuthTests
         var originalId = original.GetProperty("user").GetProperty("id").GetGuid();
         using var signedIn = await Login(initial);
         Assert.Equal(HttpStatusCode.OK, signedIn.StatusCode);
+        var passwordUser = (await signedIn.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("user");
+        Assert.Equal(challenge.Phone, passwordUser.GetProperty("phone").GetString());
+        Assert.True(passwordUser.GetProperty("hasPassword").GetBoolean());
 
         host.Clock.Advance(61);
         using var request = await host.Client.PostAsJsonAsync("/api/cent/v1/auth/password/reset/request", new { phone });
@@ -219,6 +231,21 @@ public sealed class CentSmsAuthTests
             host.Client.PostAsJsonAsync("/api/cent/v1/auth/password/login", new { phone, password });
         Task<HttpResponseMessage> Reset(CentSmsRequested sms, string code) =>
             host.Client.PostAsJsonAsync("/api/cent/v1/auth/password/reset/verify", new { sms.ChallengeId, code, password = replacement });
+    }
+
+    [Theory]
+    [InlineData("/auth/sms")]
+    [InlineData("/auth/password/reset")]
+    public async Task Sms_password_setup_rejects_seven_characters(string path)
+    {
+        using var host = new SmsHost();
+        using var request = await host.Client.PostAsJsonAsync("/api/cent/v1" + path + "/request", new { phone = "09123456789" });
+        Assert.Equal(HttpStatusCode.OK, request.StatusCode);
+        var challenge = (await request.Content.ReadFromJsonAsync<CentSmsRequested>())!;
+        using var response = await host.Client.PostAsJsonAsync("/api/cent/v1" + path + "/verify",
+            new { challenge.ChallengeId, code = host.Sender.Code, password = "1234567" });
+        Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
+        Assert.Equal("invalid_password", (await response.Content.ReadFromJsonAsync<JsonElement>()).GetProperty("code").GetString());
     }
 
     [Fact]

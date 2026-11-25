@@ -197,10 +197,10 @@ public static class CentAuthEndpoints
             await db.SaveChangesAsync(ct); await transaction.CommitAsync(ct);
             return Results.Ok(new { user.Id, user.Role });
         }).RequireAuthorization("CentUser");
-        group.MapGet("/me", (ClaimsPrincipal principal) => Results.Ok(new {
-            id = principal.UserId(), name = principal.Identity!.Name,
-            email = principal.FindFirstValue(ClaimTypes.Email), role = principal.FindFirstValue(ClaimTypes.Role)
-        })).RequireAuthorization("CentUser");
+        group.MapGet("/me", async (ClaimsPrincipal principal, CentDbContext db, CancellationToken ct) => {
+            var profile = await ReadProfile(principal.UserId(), db, ct);
+            return profile is null ? Results.Unauthorized() : Results.Ok(profile);
+        }).RequireAuthorization("CentUser");
         group.MapPost("/auth/logout", async (ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             var sessionId = Guid.Parse(p.FindFirstValue("cent_session")!);
             await db.Sessions.Where(s => s.Id == sessionId && s.UserId == p.UserId()).ExecuteUpdateAsync(
@@ -214,7 +214,20 @@ public static class CentAuthEndpoints
         var token = Convert.ToHexString(RandomNumberGenerator.GetBytes(32));
         var session = new CentSession { UserId = user.Id, TokenHash = CentModule.Hash(token), ExpiresAt = DateTimeOffset.UtcNow.AddDays(7) };
         db.Sessions.Add(session); await db.SaveChangesAsync(ct);
-        return new { token, expiresAt = session.ExpiresAt, user = new { user.Id, user.Name, email = PublicEmail(user.Email), user.Role } };
+        return new { token, expiresAt = session.ExpiresAt, user = await ReadProfile(user.Id, db, ct) };
     }
+
+    private sealed record AccountProfile(Guid Id, string Name, string Email, string Role, string? Phone, bool HasPassword);
+
+    private static async Task<AccountProfile?> ReadProfile(Guid userId, CentDbContext db, CancellationToken ct)
+    {
+        var profile = await db.Users.Where(u => u.Id == userId)
+            .Select(u => new AccountProfile(u.Id, u.Name, u.Email, u.Role,
+                db.Set<CentMobileIdentity>().Where(i => i.UserId == u.Id).Select(i => i.Phone).FirstOrDefault(),
+                u.PasswordHash != null && u.PasswordHash != ""))
+            .SingleOrDefaultAsync(ct);
+        return profile is null ? null : profile with { Email = PublicEmail(profile.Email) };
+    }
+
     internal static string PublicEmail(string email) => email.EndsWith("@accounts.itatest.invalid", StringComparison.OrdinalIgnoreCase) ? "" : email;
 }
