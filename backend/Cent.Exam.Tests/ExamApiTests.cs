@@ -48,7 +48,7 @@ public sealed class ExamApiTests
     {
         using var connection = new Microsoft.Data.Sqlite.SqliteConnection("Data Source=:memory:"); await connection.OpenAsync();
         using var db = new ReleaseTestContext(new DbContextOptionsBuilder<CentDbContext>().UseSqlite(connection).Options);
-        await db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(db).Import();
+        await db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(db).Import(includeReviewed: false);
         var f = new ExamFixture();
         db.Users.Add(new CentUser { Id = f.Owner, Email = "admin-fixture@example.invalid", NormalizedEmail = "ADMIN-FIXTURE@EXAMPLE.INVALID", Role = "ADMIN" }); await db.SaveChangesAsync();
         var draft = await db.ExamVersions.SingleAsync(v => v.Status == "DRAFT");

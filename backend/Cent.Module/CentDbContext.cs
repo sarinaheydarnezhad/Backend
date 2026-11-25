@@ -41,6 +41,10 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
 
     protected override void OnModelCreating(ModelBuilder b)
     {
+        b.Entity<CentReaderBudget>(e => {
+            e.ToTable("cent_reader_budgets"); e.HasKey(x => x.Key); e.Property(x => x.Key).HasMaxLength(96);
+            e.HasIndex(x => x.UpdatedAt);
+        });
         CentSmsModel.Configure(b);
         CentSubjectCommerceModel.Configure(b);
         Exams.CentExamModel.Configure(b);
@@ -87,6 +91,7 @@ public class CentDbContext(DbContextOptions<CentDbContext> options) : DbContext(
         });
         b.Entity<CentNote>(e => {
             e.ToTable("cent_notes"); e.HasKey(x => x.Id); e.Property(x => x.Body).HasMaxLength(4000);
+            e.Property(x => x.AnchorJson).HasMaxLength(2000);
             e.Property(x => x.Revision).IsConcurrencyToken(); e.HasIndex(x => new { x.UserId, x.DocumentId, x.Page });
             e.HasOne<CentUser>().WithMany().HasForeignKey(x => x.UserId).OnDelete(DeleteBehavior.NoAction);
             e.HasOne<CentDocument>().WithMany().HasForeignKey(x => x.DocumentId).OnDelete(DeleteBehavior.NoAction);

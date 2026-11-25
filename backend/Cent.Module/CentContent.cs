@@ -69,7 +69,7 @@ public sealed class CentAccess(CentDbContext db)
 
 public static class CentContentEndpoints
 {
-    public sealed record NoteInput(Guid DocumentId, int Page, double AnchorY, string Body, long Revision);
+    public sealed record NoteInput(Guid DocumentId, int Page, double AnchorY, string Body, long Revision, string? AnchorJson = null);
     public sealed record ProgressInput(int Page);
 
     public static void MapCentContent(this RouteGroupBuilder group)
@@ -99,7 +99,7 @@ public static class CentContentEndpoints
             var trainings = await db.Trainings.AsNoTracking().Where(t => ownedIds.Contains(t.Id) || subjectTrainingIds.Contains(t.Id) || visitedTrainings.Contains(t.Id) ||
                 (hasSubscription && t.IncludedInSubscription && t.Published)).OrderBy(t => t.Title).ToListAsync(ct);
             var ids = trainings.Select(t => t.Id).ToArray();
-            var documents = await db.Documents.AsNoTracking().Where(d => ids.Contains(d.TrainingId) && d.Published)
+            var documents = await db.Documents.AsNoTracking().Where(d => ids.Contains(d.TrainingId) && d.Published && (d.SourceId == null || !db.CurriculumImports.Any(i => i.PackageHash == CentReviewedContent.Hash) || !CentReviewedContent.Content.ArchivedSourceIds.Contains(d.SourceId.Value) || visitedDocs.Contains(d.Id)))
                 .OrderBy(d => d.SortOrder).Select(d => new { d.Id, d.TrainingId, d.SourceId, d.Title, d.PageCount, d.SortOrder }).ToListAsync(ct);
             var readable = new List<Guid>();
             foreach (var t in trainings) if (await access.CanRead(userId, t.Id, ct)) readable.Add(t.Id);
@@ -117,10 +117,10 @@ public static class CentContentEndpoints
         me.MapGet("/notes", async (ClaimsPrincipal p, CentDbContext db, CancellationToken ct) =>
             Results.Ok(await (from n in db.Notes.AsNoTracking() join d in db.Documents on n.DocumentId equals d.Id
                 where n.UserId == p.UserId() orderby n.UpdatedAt descending
-                select new { n.Id, n.DocumentId, documentTitle = d.Title, n.Page, n.AnchorY, n.Body, n.Revision, n.UpdatedAt }).Take(1000).ToListAsync(ct)));
+                select new { n.Id, n.DocumentId, documentTitle = d.Title, n.Page, n.AnchorY, n.AnchorJson, n.Body, n.Revision, n.UpdatedAt }).Take(1000).ToListAsync(ct)));
 
         var documents = group.MapGroup("/documents").RequireAuthorization("CentUser");
-        documents.MapGet("/{id:guid}", async (Guid id, ClaimsPrincipal p, CentDbContext db, CentAccess access, CancellationToken ct) => {
+        documents.MapGet("/{id:guid}", async (Guid id, ClaimsPrincipal p, CentDbContext db, CentAccess access, Microsoft.Extensions.Configuration.IConfiguration config, CancellationToken ct) => {
             var document = await access.RequireDocument(p.UserId(), id, ct);
             var sections = await db.Sections.AsNoTracking().Where(s => s.DocumentId == id).OrderBy(s => s.StartPage).ToListAsync(ct);
             if (document.SourceId is not null) {
@@ -129,15 +129,25 @@ public static class CentContentEndpoints
             }
             var notes = await db.Notes.AsNoTracking().Where(n => n.DocumentId == id && n.UserId == p.UserId()).OrderBy(n => n.Page).ToListAsync(ct);
             var progress = await db.Progress.AsNoTracking().SingleOrDefaultAsync(x => x.UserId == p.UserId() && x.DocumentId == id, ct);
-            return Results.Ok(new { document, sections, notes, progress, watermark = $"{p.FindFirstValue(ClaimTypes.Email)} · {p.UserId().ToString()[..8]}" });
+            // Every HTML lesson uses an opaque private audit mapping, including compatibility mode.
+            var trace = new CentAuditEvent { ActorId = p.UserId(), EntityId = id, Action = "READER_DOCUMENT_OPEN" };
+            db.Audit.Add(trace); await db.SaveChangesAsync(ct);
+            return Results.Ok(new { document, sections, notes, progress, watermark = "IT-" + trace.Id.ToString("N") });
         });
-        documents.MapGet("/{id:guid}/pages/{page:int}", async (Guid id, int page, ClaimsPrincipal p, CentDbContext db, CentAccess access, HttpContext http, CancellationToken ct) => {
+        documents.MapGet("/{id:guid}/pages/{page:int}", async (Guid id, int page, ClaimsPrincipal p, CentDbContext db, CentAccess access,
+            Microsoft.Extensions.Configuration.IConfiguration config, CentReaderProtection protection, HttpContext http, CancellationToken ct) => {
             var doc = await access.RequireDocument(p.UserId(), id, ct);
+            var secured = await CentReaderRollout.General(db, config, doc, ct);
+            // Imported HTML cannot expose equivalent PDF/image pages as a bulk-delivery escape hatch.
+            CentModule.Check(!secured || doc.SourceId is null, "HTML lessons use protected section delivery.", 404);
+            var contentId = Curriculum.CurriculumIdentity.Id($"page:{id}:{page}");
+            await using var permit = secured ? await protection.Enter(p.UserId(), http.Connection.RemoteIpAddress?.ToString() ?? "unknown", contentId, false, ct) : null;
             CentModule.Check(page >= 1 && page <= doc.PageCount, "صفحه پیدا نشد.", 404);
             var bytes = await db.Pages.Where(x => x.DocumentId == id && x.Number == page).Select(x => x.Image).SingleOrDefaultAsync(ct);
             CentModule.Check(bytes is not null, "صفحه پیدا نشد.", 404);
             http.Response.Headers["Content-Disposition"] = "inline";
-            return Results.Bytes(bytes!, "image/webp", enableRangeProcessing: false);
+            await Results.Bytes(bytes!, "image/webp", enableRangeProcessing: false).ExecuteAsync(http);
+            return Results.Empty;
         }).RequireRateLimiting("cent-pages");
         documents.MapPut("/{id:guid}/progress", async (Guid id, ProgressInput input, ClaimsPrincipal p, CentDbContext db, CentAccess access, CancellationToken ct) => {
             var doc = await access.RequireDocument(p.UserId(), id, ct);
@@ -152,17 +162,19 @@ public static class CentContentEndpoints
             CentModule.Check(id != Guid.Empty && input.Page >= 1 && input.Page <= doc.PageCount && double.IsFinite(input.AnchorY) && input.AnchorY >= 0 && input.AnchorY <= 1,
                 "محل یادداشت معتبر نیست.");
             CentModule.Check(!string.IsNullOrWhiteSpace(input.Body) && input.Body.Length <= 4000, "یادداشت باید بین ۱ تا ۴۰۰۰ نویسه باشد.");
+            CentReaderPilot.ValidateAnchor(input.AnchorJson);
             var note = await db.Notes.SingleOrDefaultAsync(n => n.Id == id, ct);
             if (note is not null) {
                 CentModule.Check(note.UserId == p.UserId(), "یادداشت پیدا نشد.", 404);
                 CentModule.Check(note.DocumentId == input.DocumentId && note.Page == input.Page, "محل یادداشت قابل تغییر نیست.");
-                if (note.Body == input.Body.Trim() && note.AnchorY == input.AnchorY) return Results.Ok(note);
+                if (note.Body == input.Body.Trim() && note.AnchorY == input.AnchorY && (input.AnchorJson == null || note.AnchorJson == input.AnchorJson)) return Results.Ok(note);
                 CentModule.Check(note.Revision == input.Revision, "یادداشت تغییر کرده؛ دوباره بارگذاری کنید.", 409, "revision_conflict");
                 note.Revision++;
             } else {
                 CentModule.Check(input.Revision == 0, "این یادداشت حذف شده است.", 409);
                 note = new CentNote { Id = id, UserId = p.UserId(), DocumentId = input.DocumentId, Page = input.Page }; db.Notes.Add(note);
             }
+            note.AnchorJson = input.AnchorJson ?? note.AnchorJson;
             note.Body = input.Body.Trim(); note.AnchorY = input.AnchorY; note.UpdatedAt = DateTimeOffset.UtcNow;
             await db.SaveChangesAsync(ct); return Results.Ok(note);
         }).RequireAuthorization("CentUser");

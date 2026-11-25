@@ -15,8 +15,8 @@ public sealed class ProductionPrerequisiteTests
             "Server=offline.invalid;Database=NeverConnect;Integrated Security=true;TrustServerCertificate=true",
             sql => sql.MigrationsHistoryTable("cent_migrations_history")).Options);
         var migrations = db.Database.GetMigrations().ToArray();
-        Assert.Equal(7, migrations.Length);
-        Assert.Equal("20261123135254_AddCentSmsAuthentication", migrations[^1]);
+        Assert.Equal(9, migrations.Length);
+        Assert.Equal("20261124174931_ReaderProtectionBudgets", migrations[^1]);
         Assert.False(db.GetService<IMigrator>().HasPendingModelChanges());
         var script = db.GetService<IMigrator>().GenerateScript(options: MigrationsSqlGenerationOptions.Idempotent);
         foreach (Match table in Regex.Matches(script, @"(?:CREATE TABLE|ALTER TABLE|INSERT INTO|UPDATE|DELETE FROM|DROP TABLE) \[([^\]]+)\]"))

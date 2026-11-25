@@ -137,10 +137,37 @@ using (var scope = app.Services.CreateScope()) {
         Console.WriteLine("Disposable admin fixture sessions written beside isolated database; never use as identity verification evidence.");
     }
     if (builder.Configuration.GetValue<bool>("import-curriculum")) {
+        // SQLite online backup includes WAL state. Verify the copy before an
+        // existing local content store can enter the reviewed import transaction.
+        using (var backupSource = new SqliteConnection(connectionString)) {
+            backupSource.Open();
+            using var existingContent = backupSource.CreateCommand();
+            existingContent.CommandText = "SELECT COUNT(*) FROM cent_sources";
+            if (Convert.ToInt32(existingContent.ExecuteScalar()) > 0) {
+                var backupPath = databasePath + ".before-reviewed-" + DateTimeOffset.UtcNow.ToString("yyyyMMddHHmmssfff") + ".bak";
+                using (var destination = new SqliteConnection(new SqliteConnectionStringBuilder { DataSource = backupPath, Pooling = false }.ToString())) {
+                    destination.Open(); backupSource.BackupDatabase(destination);
+                    using var check = destination.CreateCommand(); check.CommandText = "PRAGMA integrity_check";
+                    if (!string.Equals(Convert.ToString(check.ExecuteScalar()), "ok", StringComparison.Ordinal)) throw new InvalidOperationException("Local content backup failed integrity verification.");
+                }
+                var digest = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(await File.ReadAllBytesAsync(backupPath)));
+                await File.WriteAllTextAsync(backupPath + ".sha256", digest);
+                Console.WriteLine("Verified private local content backup: " + Path.GetFileName(backupPath));
+            }
+        }
         var report = await new CentCurriculumImporter(db).Import();
         Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(report));
+        Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(new { reviewedPackageHash = CentReviewedContent.Hash,
+            sources = await db.Sources.CountAsync(), sections = await db.SourceSections.CountAsync(),
+            exercises = await db.SourceExercises.CountAsync(), questions = await db.Questions.CountAsync() }));
     }
     if (builder.Configuration.GetValue<bool>("prepare-subject-offers")) await CentSubjectCatalog.PrepareOffers(db);
+    if (builder.Configuration.GetValue<bool>("reviewed-reader-fixtures")) {
+        if (isolatedPath is null) throw new InvalidOperationException("Reviewed reader fixtures require a new isolated database.");
+        var ids = CentReviewedContent.Content.Changes.Where(c => c.Entity == "documents" && c.Before is null).Select(c => c.Id).ToArray();
+        foreach (var document in await db.Documents.Where(d => ids.Contains(d.Id)).ToListAsync()) document.Published = true;
+        await db.SaveChangesAsync();
+    }
     if (builder.Configuration.GetValue<bool>("sandbox-subject-offers")) {
         if (isolatedPath is null || !scope.ServiceProvider.GetRequiredService<CentGateway>().IsMock)
             throw new InvalidOperationException("Sandbox offers require a new disposable database and the development fake gateway.");

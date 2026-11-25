@@ -9,7 +9,7 @@ using Cent.Module.Curriculum;
 namespace Cent.Module;
 
 public sealed record QuestionInput(string Subject, string Topic, string Difficulty, string Text, string[] Options, int CorrectAnswer, string Explanation, string Kind, bool Active, Guid? TopicId = null);
-public sealed record QuestionSnapshot(Guid Id, string Subject, string Topic, string Difficulty, string Text, string[] Options, int CorrectAnswer, string Explanation, Guid? TopicId = null, Guid? SourceSectionId = null, string? FigureSvg = null, string? PassageId = null, string? ContentReleaseId = null);
+public sealed record QuestionSnapshot(Guid Id, string Subject, string Topic, string Difficulty, string Text, string[] Options, int CorrectAnswer, string Explanation, Guid? TopicId = null, Guid? SourceSectionId = null, string? FigureSvg = null, string? PassageId = null, string? ContentReleaseId = null, string? PassageText = null);
 public sealed class CentPractice(CentDbContext db, CentAccess access)
 {
     internal static readonly JsonSerializerOptions Json = new(JsonSerializerDefaults.Web);
@@ -42,8 +42,11 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
                     "محتوای نسخه‌دار تمرین هنوز وارد نشده است.", 409, "content_not_ready");
                 var frozen = package.Questions.Where(q => release!.Reviews.Any(r => r.Key == q.Key && r.Status == "academically-reviewed"))
                     .ToDictionary(q => CurriculumIdentity.Id("question:" + q.Key));
+                var reviewed = await CentReviewedContent.Imported(db, ct);
+                var canonical = CentReviewedContent.Content.QuestionBank.ToDictionary(q => q.Id);
                 candidates = candidates.Where(q => frozen.TryGetValue(q.Id, out var f) && q.Subject == f.Course &&
-                    q.TopicId == CurriculumIdentity.Id("topic:" + f.TopicKey)).Select(q => {
+                    q.TopicId == CurriculumIdentity.Id("topic:" + f.TopicKey) || reviewed && canonical.TryGetValue(q.Id, out var current) && current.Kind != "package-only").Select(q => {
+                    if (reviewed && canonical.TryGetValue(q.Id, out var current)) return current;
                     var f = frozen[q.Id];
                     // Resolve immutable released content, not subsequently edited admin text.
                     return new CentQuestion { Id = q.Id, Subject = f.Course, TopicId = q.TopicId, Topic = package.Topics.Single(t => t.Key == f.TopicKey).Title,
@@ -58,6 +61,11 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
                 candidates = candidates.Where(q => allowed.Contains(q.Subject)).ToList();
             }
             // Round-robin across subjects and topics; randomize within each skill and vary difficulty.
+            var variantSeen = new HashSet<int>();
+            candidates = candidates.Where(q => {
+                var group = Array.FindIndex(CentReviewedContent.Content.VariantGroups, g => g.Contains(q.Id));
+                return group < 0 || variantSeen.Add(group);
+            }).ToList();
             var groups = candidates.GroupBy(q => q.Subject).OrderBy(_ => Random.Shared.Next()).Select(g =>
                 new Queue<CentQuestion>(g.GroupBy(q => q.TopicId?.ToString() ?? q.Topic).OrderBy(_ => Random.Shared.Next())
                     .SelectMany(t => t.OrderBy(_ => Random.Shared.Next())
@@ -91,7 +99,7 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
         if (versioned) CentModule.Check(passageSnapshot is not null, "شناسه درخواست با قرارداد محتوای دیگری استفاده شده است.", 409);
         if (!versioned) CentModule.Check(rows.All(r => JsonSerializer.Deserialize<QuestionSnapshot>(r.SnapshotJson, Json)!.ContentReleaseId is null),
             "شناسه درخواست با قرارداد محتوای دیگری استفاده شده است.", 409);
-        return new { attempt.Id, attempt.Kind, attempt.CreatedAt, expiresAt = attempt.CreatedAt.AddMinutes(60),
+        return new { attempt.Id, attempt.Kind, attempt.CreatedAt, expiresAt = attempt.CreatedAt.AddMinutes(attempt.DurationMinutes),
             contentContract = passageSnapshot is null ? null : "passage-v1",
             passages = passageSnapshot is null ? Array.Empty<PracticePassage>() : JsonSerializer.Deserialize<PracticePassage[]>(passageSnapshot.PassagesJson, Json),
             questions = rows.Select(r => { var q = JsonSerializer.Deserialize<QuestionSnapshot>(r.SnapshotJson, Json)!;
@@ -103,7 +111,7 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
         var attempt = await db.Attempts.SingleOrDefaultAsync(a => a.Id == id && a.UserId == userId && a.Kind != "mock", ct);
         CentModule.Check(attempt is not null, "آزمون پیدا نشد.", 404);
         if (attempt!.SubmittedAt is not null) return await Result(userId, id, ct);
-        CentModule.Check(DateTimeOffset.UtcNow <= attempt.CreatedAt.AddMinutes(60), "زمان این تلاش تمام شده؛ آزمون تازه‌ای شروع کنید.", 409);
+        CentModule.Check(DateTimeOffset.UtcNow <= attempt.CreatedAt.AddMinutes(attempt.DurationMinutes), "زمان این تلاش تمام شده؛ آزمون تازه‌ای شروع کنید.", 409);
         if (attempt.Kind == "simulator") CentModule.Check(await access.HasSubscription(userId, ct), "اشتراک فعال لازم است.", 403);
         var rows = await db.AttemptQuestions.Where(q => q.AttemptId == id).OrderBy(q => q.Position).ToListAsync(ct);
         var questions = rows.Select(r => JsonSerializer.Deserialize<QuestionSnapshot>(r.SnapshotJson, Json)!).ToArray();
@@ -133,8 +141,12 @@ public sealed class CentPractice(CentDbContext db, CentAccess access)
         var content = questions.Any(q => q.ContentReleaseId is not null)
             ? await db.PracticeContent.AsNoTracking().SingleOrDefaultAsync(p => p.AttemptId == id, ct) : null;
         return new { result = JsonSerializer.Deserialize<JsonElement>(attempt!.ResultJson!), analysis = JsonSerializer.Deserialize<JsonElement>(analysis.PayloadJson),
-            contentContract = content is null ? null : "passage-v1",
-            passages = content is null ? Array.Empty<PracticePassage>() : JsonSerializer.Deserialize<PracticePassage[]>(content.PassagesJson, Json),
+            contentContract = content is null && !attempt.AssessmentMode.StartsWith("v4:") ? null : "passage-v1",
+            passages = content is null ? questions.Where(q => q.PassageId != null).DistinctBy(q => q.PassageId).Select(q => new PracticePassage(q.PassageId!, q.PassageText!)).ToArray() : JsonSerializer.Deserialize<PracticePassage[]>(content.PassagesJson, Json),
+            practiceScoring = attempt.AssessmentMode.StartsWith("v4:") ? new {
+                correct = 1m, incorrect = -.25m, unanswered = 0m, official = false,
+                points = questions.Sum(q => rows.Single(r => r.QuestionId == q.Id).Answer is not {} answer ? 0m : answer == q.CorrectAnswer ? 1m : -.25m)
+            } : null,
             review = questions.Select(q => new { q.Id, q.CorrectAnswer, q.Explanation, q.Topic, q.Text, q.Options, q.PassageId, q.FigureSvg }) };
     }
 
@@ -172,6 +184,7 @@ public static class CentPracticeEndpoints
     public sealed record SubmitInput(Dictionary<Guid, int?> Answers);
     public static void MapCentPractice(this RouteGroupBuilder group)
     {
+        group.MapReviewedAssessments();
         var attempts = group.MapGroup("/attempts").RequireAuthorization("CentUser");
         attempts.MapPost("/", async (StartInput input, ClaimsPrincipal p, CentPractice service, CancellationToken ct) => Results.Ok(await service.Start(p.UserId(), input.Kind, input.RequestId, ct, input.Course, input.TopicId, input.ContentContract)));
         attempts.MapPost("/{id:guid}/submit", async (Guid id, SubmitInput input, ClaimsPrincipal p, CentPractice service, CancellationToken ct) => {

@@ -20,7 +20,8 @@ public sealed class CentLearning(CentDbContext db)
         var topics = await db.Topics.AsNoTracking().OrderBy(t => t.SortOrder).ToListAsync(ct);
         var release = CentCurriculumImporter.Bundled().Release;
         var newTopicIds = release?.Resources.Where(r => r.Kind == "lesson").Select(r => CurriculumIdentity.Id("topic:" + r.TopicKey)).ToHashSet() ?? [];
-        if (syllabusRevisionId is null) topics = topics.Where(t => !newTopicIds.Contains(t.Id)).ToList();
+        var newReviewedTopics = CentReviewedContent.Content.Changes.Where(c => c.Entity == "topics" && c.Before is null).Select(c => c.Id).ToHashSet();
+        if (syllabusRevisionId is null) topics = topics.Where(t => !newTopicIds.Contains(t.Id) && !newReviewedTopics.Contains(t.Id)).ToList();
         else {
             CentModule.Check(release is not null && release.SyllabusRevisionId == syllabusRevisionId, "نسخهٔ سرفصل پیدا نشد.", 404);
             topics = topics.Where(t => newTopicIds.Contains(t.Id)).ToList();
@@ -73,11 +74,11 @@ public static class CentLearningEndpoints
                 c.Code, c.Title, c.EnglishTitle, c.SortOrder, c.TrainingId, c.Active,
                 supportsLegacyAssessment = db.Questions.Any(q => q.Active && q.Subject == c.Code && (q.Kind == "both" || q.Kind == "diagnostic" || q.Kind == "simulator"))
             }).ToListAsync(ct),
-            chapters = await db.Chapters.AsNoTracking().OrderBy(c => c.SortOrder).ToListAsync(ct),
-            topics = await db.Topics.AsNoTracking().OrderBy(t => t.SortOrder).Select(t => new { t.Id, t.ChapterId, t.CourseCode, t.Title, t.EnglishTitle,
+            chapters = await db.Chapters.AsNoTracking().Where(c => !db.CurriculumImports.Any(i => i.PackageHash == CentReviewedContent.Hash) || !CentReviewedContent.Content.ArchivedChapterIds.Contains(c.Id)).OrderBy(c => c.SortOrder).ToListAsync(ct),
+            topics = await db.Topics.AsNoTracking().Where(t => !db.CurriculumImports.Any(i => i.PackageHash == CentReviewedContent.Hash) || !CentReviewedContent.Content.ArchivedTopicIds.Contains(t.Id)).OrderBy(t => t.SortOrder).Select(t => new { t.Id, t.ChapterId, t.CourseCode, t.Title, t.EnglishTitle,
                 contentContract = db.Questions.Any(q => q.Active && q.TopicId == t.Id && q.Kind == "practice") ? "passage-v1" : null,
                 questionCount = db.Questions.Count(q => q.Active && q.TopicId == t.Id) }).ToListAsync(ct),
-            documents = await db.Documents.AsNoTracking().Where(d => d.Published && d.SourceId != null && db.Courses.Any(c => c.Active && c.TrainingId == d.TrainingId))
+            documents = await db.Documents.AsNoTracking().Where(d => d.Published && d.SourceId != null && (!db.CurriculumImports.Any(i => i.PackageHash == CentReviewedContent.Hash) || !CentReviewedContent.Content.ArchivedSourceIds.Contains(d.SourceId.Value)) && db.Courses.Any(c => c.Active && c.TrainingId == d.TrainingId))
                 .OrderBy(d => d.SortOrder).Select(d => new { d.Id, d.TrainingId, d.SourceId, d.Title, d.PageCount, d.SortOrder }).ToListAsync(ct)
         })); // Public outlines expose metadata; source text still requires purchased access.
         group.MapGet("/me/mastery", async (ClaimsPrincipal p, CentLearning service, CancellationToken ct, string? syllabusRevisionId) => Results.Ok(await service.Mastery(p.UserId(), ct, syllabusRevisionId)))
@@ -88,11 +89,59 @@ public static class CentLearningEndpoints
             await db.SaveChangesAsync(ct);
             return Results.Ok(result);
         }).RequireAuthorization("CentAdmin:content");
-        group.MapGet("/documents/{id:guid}/source-sections", async (Guid id, ClaimsPrincipal p, CentDbContext db, CentAccess access, CancellationToken ct) => {
+        group.MapGet("/documents/{id:guid}/source-sections", async (Guid id, ClaimsPrincipal p, CentDbContext db, CentAccess access, Microsoft.Extensions.Configuration.IConfiguration config, CancellationToken ct) => {
             var doc = await access.RequireDocument(p.UserId(), id, ct);
             CentModule.Check(doc.SourceId != null, "این درس منبع متنی ندارد.", 404);
-            return Results.Ok(await db.SourceSections.AsNoTracking().Where(s => s.SourceId == doc.SourceId).OrderBy(s => s.SortOrder)
-                .Select(s => new { s.Id, s.TopicId, s.Heading, s.SortOrder, s.Text }).ToListAsync(ct));
+            var general = await CentReaderRollout.General(db, config, doc, ct);
+            var granular = general || await CentReaderRollout.Granular(db, config, doc, ct);
+            var rows = await db.SourceSections.AsNoTracking().Where(s => s.SourceId == doc.SourceId).OrderBy(s => s.SortOrder)
+                .Select(s => new { s.Id, s.TopicId, s.Heading, s.SortOrder, text = granular ? "" : s.Text, delivery = granular ? "section-v1" : null,
+                    pilot = general || granular && s.ImportKey == CentReaderPilot.SectionKey }).ToListAsync(ct);
+            return Results.Ok(rows);
         }).RequireAuthorization("CentUser");
+        group.MapGet("/documents/{id:guid}/source-sections/{sectionId:guid}", async (Guid id, Guid sectionId, ClaimsPrincipal p, CentDbContext db, CentAccess access,
+            Microsoft.Extensions.Configuration.IConfiguration config, CentPilotProtection protection, CentReaderProtection readerProtection, HttpContext http, CancellationToken ct) => {
+            var doc = await access.RequireDocument(p.UserId(), id, ct);
+            CentModule.Check(doc.SourceId != null && await CentReaderRollout.Granular(db, config, doc, ct), "Section delivery unavailable.", 404);
+            var general = await CentReaderRollout.General(db, config, doc, ct);
+            using var permit = general ? null : protection.Enter(p.UserId(), http.Connection.RemoteIpAddress?.ToString() ?? "unknown", sectionId);
+            await using var readerPermit = general ? await readerProtection.Enter(p.UserId(), http.Connection.RemoteIpAddress?.ToString() ?? "unknown", sectionId, false, ct) : null;
+            var section = await db.SourceSections.AsNoTracking().SingleOrDefaultAsync(s => s.Id == sectionId && s.SourceId == doc.SourceId, ct);
+            CentModule.Check(section is not null, "Section not found.", 404);
+            var pilot = general || section!.ImportKey == CentReaderPilot.SectionKey;
+            var source = general ? await db.Sources.AsNoTracking().SingleAsync(s => s.Id == doc.SourceId, ct) : null;
+            var fragment = general ? await CentReviewedContent.Imported(db, ct)
+                ? CentEducationalContent.Fragment(section!.Html, source!.ImportKey)
+                : CentEducationalContent.Section(section!.ImportKey, source!.OriginalHtml) : null;
+            // Existing private audit storage provides durable account-to-trace association, without PII in the reader.
+            var trace = new CentAuditEvent { ActorId = p.UserId(), EntityId = sectionId, Action = general ? "READER_SECTION_DELIVERY" : "PILOT_SECTION_DELIVERY" };
+            db.Audit.Add(trace); await db.SaveChangesAsync(ct);
+            await Results.Ok(new { section!.Id, section.TopicId, section.Heading, section.SortOrder,
+                text = pilot ? "" : section.Text, pilotHtml = fragment?.Html ?? (pilot ? CentReaderPilot.Html() : null),
+                contentRevision = fragment?.Revision ?? (pilot ? CentReaderPilot.Revision : CentModule.Hash(section.Text)[..24]),
+                assets = fragment?.Assets.Select(a => new { a.Id, a.Mime, a.Alt }), findings = fragment?.Findings, subject = source?.CourseCode,
+                watermark = "IT-" + trace.Id.ToString("N") }).ExecuteAsync(http);
+            return Results.Empty;
+        }).RequireAuthorization("CentUser");
+
+        group.MapGet("/documents/{id:guid}/source-sections/{sectionId:guid}/assets/{assetId}", async (Guid id, Guid sectionId, string assetId,
+            ClaimsPrincipal p, CentDbContext db, CentAccess access, Microsoft.Extensions.Configuration.IConfiguration config,
+            CentReaderProtection protection, HttpContext http, CancellationToken ct) => {
+            var doc = await access.RequireDocument(p.UserId(), id, ct);
+            CentModule.Check(await CentReaderRollout.General(db, config, doc, ct) && doc.SourceId != null, "Asset unavailable.", 404);
+            await using var permit = await protection.Enter(p.UserId(), http.Connection.RemoteIpAddress?.ToString() ?? "unknown", sectionId, true, ct);
+            var section = await db.SourceSections.AsNoTracking().SingleOrDefaultAsync(s => s.Id == sectionId && s.SourceId == doc.SourceId, ct);
+            CentModule.Check(section is not null, "Section not found.", 404);
+            var source = await db.Sources.AsNoTracking().SingleAsync(s => s.Id == doc.SourceId, ct);
+            var fragment = await CentReviewedContent.Imported(db, ct) ? CentEducationalContent.Fragment(section!.Html, source.ImportKey)
+                : CentEducationalContent.Section(section!.ImportKey, source.OriginalHtml);
+            var asset = fragment.Assets.SingleOrDefault(a => a.Id == assetId);
+            CentModule.Check(asset is not null, "Asset not found.", 404);
+            http.Response.Headers.ContentSecurityPolicy = "default-src 'none'; sandbox";
+            http.Response.Headers.ContentDisposition = "inline";
+            await Results.Bytes(asset!.Bytes, asset.Mime, enableRangeProcessing: false).ExecuteAsync(http);
+            return Results.Empty;
+        }).RequireAuthorization("CentUser");
+
     }
 }

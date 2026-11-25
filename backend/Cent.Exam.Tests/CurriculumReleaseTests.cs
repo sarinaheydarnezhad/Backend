@@ -149,7 +149,7 @@ public sealed class CurriculumReleaseTests
         using var db = new ReleaseTestContext(new DbContextOptionsBuilder<CentDbContext>().UseSqlite(connection).Options);
         await db.Database.EnsureCreatedAsync(); // Disposable fixture only; never apply migrations.
         var importer = new CentCurriculumImporter(db);
-        var first = await importer.Import();
+        var first = await importer.Import(includeReviewed: false);
         Assert.False(first.AlreadyImported);
         Assert.Equal(Package().Questions.Count, await db.Questions.CountAsync());
         Assert.Equal(6, await db.Courses.CountAsync());
@@ -163,8 +163,8 @@ public sealed class CurriculumReleaseTests
         var note = new CentNote { UserId = user.Id, DocumentId = doc.Id, Page = 1, Body = "fixture note", Revision = 7 };
         db.Notes.Add(note); await db.SaveChangesAsync();
         var importRow = await db.CurriculumImports.SingleAsync(); db.CurriculumImports.Remove(importRow); await db.SaveChangesAsync();
-        Assert.False((await importer.Import()).AlreadyImported); // Full replay, not just receipt fast path.
-        Assert.True((await importer.Import()).AlreadyImported);
+        Assert.False((await importer.Import(includeReviewed: false)).AlreadyImported); // Full replay, not just receipt fast path.
+        Assert.True((await importer.Import(includeReviewed: false)).AlreadyImported);
         db.ChangeTracker.Clear();
         Assert.False((await db.Documents.FindAsync(doc.Id))!.Published);
         Assert.Equal(7, (await db.Notes.FindAsync(note.Id))!.Revision);
@@ -187,7 +187,7 @@ public sealed class CurriculumReleaseTests
     {
         using var connection = new SqliteConnection("Data Source=:memory:"); await connection.OpenAsync();
         using var db = new ReleaseTestContext(new DbContextOptionsBuilder<CentDbContext>().UseSqlite(connection).Options);
-        await db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(db).Import();
+        await db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(db).Import(includeReviewed: false);
         var user = new CentUser { Email = "practice@example.invalid", NormalizedEmail = "PRACTICE@EXAMPLE.INVALID" };
         db.Users.Add(user); await db.SaveChangesAsync();
         var product = new CentProduct { Title = "Paid Practice fixture", Kind = "TRAINING", PriceRial = 1,
@@ -234,7 +234,7 @@ public sealed class CurriculumReleaseTests
     {
         using var connection = new SqliteConnection("Data Source=:memory:"); await connection.OpenAsync();
         using var db = new ReleaseTestContext(new DbContextOptionsBuilder<CentDbContext>().UseSqlite(connection).Options);
-        await db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(db).Import();
+        await db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(db).Import(includeReviewed: false);
         var learning = new CentLearning(db);
         var legacy = JsonSerializer.SerializeToElement(await learning.Mastery(Guid.NewGuid(), default), CentExamJson.Options);
         var current = JsonSerializer.SerializeToElement(await learning.Mastery(Guid.NewGuid(), default, Package().Release!.SyllabusRevisionId), CentExamJson.Options);

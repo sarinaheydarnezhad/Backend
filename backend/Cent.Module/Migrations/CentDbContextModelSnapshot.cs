@@ -409,6 +409,10 @@ namespace Cent.Module.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("AnchorJson")
+                        .HasMaxLength(2000)
+                        .HasColumnType("nvarchar(2000)");
+
                     b.Property<double>("AnchorY")
                         .HasColumnType("float");
 
@@ -700,6 +704,26 @@ namespace Cent.Module.Migrations
                     b.HasIndex("Subject", "Active", "TopicId");
 
                     b.ToTable("cent_questions", (string)null);
+                });
+
+            modelBuilder.Entity("Cent.Module.CentReaderBudget", b =>
+                {
+                    b.Property<string>("Key")
+                        .HasMaxLength(96)
+                        .HasColumnType("nvarchar(96)");
+
+                    b.Property<string>("StateJson")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("UpdatedAt")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Key");
+
+                    b.HasIndex("UpdatedAt");
+
+                    b.ToTable("cent_reader_budgets", (string)null);
                 });
 
             modelBuilder.Entity("Cent.Module.CentRecommendedBundle", b =>

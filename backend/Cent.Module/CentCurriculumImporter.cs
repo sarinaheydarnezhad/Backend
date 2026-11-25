@@ -34,16 +34,26 @@ public sealed class CentCurriculumImporter(CentDbContext db)
         [.. original.Topics, .. addition.Topics], [.. original.Sections, .. addition.Sections], [.. original.Exercises, .. addition.Exercises])
         { Questions = [.. original.Questions, .. addition.Questions], Findings = [.. original.Findings, .. addition.Findings], Release = addition.Release };
 
-    public async Task<CurriculumImportReport> Import(CancellationToken ct = default)
+    public async Task<CurriculumImportReport> Import(CancellationToken ct = default, bool includeReviewed = true)
+    {
+        try { return await ImportCore(ct, includeReviewed); }
+        catch { db.ChangeTracker.Clear(); throw; } // A rolled-back partial patch must not leak into a later SaveChanges.
+    }
+    private async Task<CurriculumImportReport> ImportCore(CancellationToken ct, bool includeReviewed)
     {
         var assembly = typeof(CentCurriculumImporter).Assembly;
         var package = Bundled();
         var hash = CurriculumReleases.Hash(JsonSerializer.Serialize(package, Json));
         var report = new CurriculumImportReport(hash, package.Sources.Count, package.Chapters.Count, package.Topics.Count,
             package.Exercises.Count, package.Questions.Count, package.Questions.Count(q => q.Origin == "authored"), false);
-        if (await db.CurriculumImports.AnyAsync(i => i.PackageHash == hash, ct)) return report with { AlreadyImported = true };
+        await using var transaction = await db.Database.BeginTransactionAsync(System.Data.IsolationLevel.Serializable, ct);
+        await CentReviewedContent.LockImport(db, ct);
+        if (await db.CurriculumImports.AnyAsync(i => i.PackageHash == hash, ct)) {
+            if (includeReviewed) await CentReviewedContent.Apply(db, ct);
+            await transaction.CommitAsync(ct);
+            return report with { AlreadyImported = true };
+        }
         Validate(package);
-        await using var transaction = await db.Database.BeginTransactionAsync(ct);
         var trainingIds = await db.Trainings.Select(t => t.Id).ToListAsync(ct);
         foreach (var (code, title, english) in CurriculumIdentity.Courses) {
             var trainingId = CurriculumIdentity.Id("training:" + code);
@@ -172,6 +182,7 @@ public sealed class CentCurriculumImporter(CentDbContext db)
         }
         db.CurriculumImports.Add(new CentCurriculumImport { PackageHash = hash, SourceCount = package.Sources.Count, TopicCount = package.Topics.Count, QuestionCount = package.Questions.Count });
         await db.SaveChangesAsync(ct);
+        if (includeReviewed) await CentReviewedContent.Apply(db, ct);
         await transaction.CommitAsync(ct);
         return report;
     }

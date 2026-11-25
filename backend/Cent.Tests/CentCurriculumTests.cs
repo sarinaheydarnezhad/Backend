@@ -23,8 +23,8 @@ public sealed class CentCurriculumTests
         var root = document.RootElement;
         var package = CentCurriculumImporter.Bundled();
         Assert.Equal(Cent.Module.Curriculum.CurriculumIdentity.Courses.Length, root.GetProperty("courses").GetArrayLength());
-        Assert.Equal(package.Sources.Count, root.GetProperty("documents").GetArrayLength());
-        Assert.Equal(package.Topics.Count, root.GetProperty("topics").GetArrayLength());
+        Assert.Equal(package.Sources.Count - CentReviewedContent.Content.ArchivedSourceIds.Length, root.GetProperty("documents").GetArrayLength());
+        Assert.Equal(package.Topics.Count + CentReviewedContent.Content.Changes.Count(c => c.Entity == "topics" && c.Before is null) - CentReviewedContent.Content.ArchivedTopicIds.Length, root.GetProperty("topics").GetArrayLength());
         foreach (var privateKey in new[] { "text", "html", "originalHtml", "plainText", "correctAnswer", "explanation", "options" })
             Assert.DoesNotContain("\"" + privateKey + "\":", json);
         var id = root.GetProperty("documents")[0].GetProperty("id").GetGuid();
@@ -77,12 +77,14 @@ public sealed class CentCurriculumTests
         Assert.Equal(package.Sources.Count, report.Sources);
         Assert.Equal(package.Questions.Count, report.Questions);
         Assert.True((await importer.Import()).AlreadyImported);
-        Assert.Equal(package.Questions.Count, await db.Questions.CountAsync());
+        Assert.Equal(package.Questions.Count + CentReviewedContent.Content.Changes.Count(c => c.Entity == "questions" && c.Before is null), await db.Questions.CountAsync());
         Assert.Equal(Cent.Module.Curriculum.CurriculumIdentity.Courses.Length, await db.Courses.CountAsync());
-        Assert.Equal(package.Topics.Count, await db.Topics.CountAsync());
-        Assert.All(await db.Topics.ToArrayAsync(), t => Assert.True(db.Questions.Any(q => q.TopicId == t.Id)));
+        Assert.Equal(package.Topics.Count + CentReviewedContent.Content.Changes.Count(c => c.Entity == "topics" && c.Before is null), await db.Topics.CountAsync());
+        // Retired topics and the new teaching-only supplement deliberately have
+        // no active questions. Every question must retain a valid topic instead.
+        Assert.All(await db.Questions.ToArrayAsync(), q => Assert.True(db.Topics.Any(t => t.Id == q.TopicId)));
         Assert.All(await db.Questions.ToArrayAsync(), q => {
-            Assert.Contains(q.Difficulty, new[] { "easy", "medium", "hard" });
+            Assert.Contains(q.Difficulty, new[] { "easy", "medium", "hard", "unrated" });
             Assert.NotNull(q.SourceSectionId); Assert.NotNull(q.TopicId); Assert.NotEmpty(q.Explanation);
         });
         Assert.Single(await db.SourceExercises.Where(e => e.Status == "quarantined").ToArrayAsync());

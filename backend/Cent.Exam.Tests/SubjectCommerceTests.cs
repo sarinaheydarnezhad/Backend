@@ -36,7 +36,7 @@ public sealed class SubjectCommerceTests
         {
             var f = new Fixture(); await f.Connection.OpenAsync();
             f.Db = new(new DbContextOptionsBuilder<CentDbContext>().UseSqlite(f.Connection).Options);
-            await f.Db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(f.Db).Import();
+            await f.Db.Database.EnsureCreatedAsync(); await new CentCurriculumImporter(f.Db).Import(includeReviewed: false);
             f.Db.Users.Add(f.Owner); await f.Db.SaveChangesAsync(); await CentSubjectCatalog.PrepareOffers(f.Db);
             // A disposable test-only approval exercises payment mechanics. It is
             // never written to a normal catalog or used as academic evidence.

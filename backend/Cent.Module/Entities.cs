@@ -78,6 +78,7 @@ public sealed class CentNote
     public Guid DocumentId { get; set; }
     public int Page { get; set; }
     public double AnchorY { get; set; }
+    public string? AnchorJson { get; set; }
     public string Body { get; set; } = "";
     public long Revision { get; set; } = 1;
     public DateTimeOffset UpdatedAt { get; set; } = DateTimeOffset.UtcNow;

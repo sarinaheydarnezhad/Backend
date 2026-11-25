@@ -85,7 +85,15 @@ public static class CentAdminEndpoints
         admin.MapPost("/documents/{id:guid}/publish", async (Guid id, PublishInput input, ClaimsPrincipal p, CentDbContext db, CancellationToken ct) => {
             var document = await db.Documents.SingleOrDefaultAsync(d => d.Id == id, ct);
             CentModule.Check(document is not null && !document.Published, "درس پیدا نشد یا قبلاً منتشر شده است.", 409);
-            CentModule.Check(await db.Pages.CountAsync(x => x.DocumentId == id, ct) == document!.PageCount, "همه صفحات باید پیش از انتشار بارگذاری شوند.", 409);
+            var complete = document!.SourceId is {} sourceId
+                ? await db.SourceSections.CountAsync(s => s.SourceId == sourceId, ct) == document.PageCount
+                : await db.Pages.CountAsync(x => x.DocumentId == id, ct) == document.PageCount;
+            CentModule.Check(complete, "همه صفحات باید پیش از انتشار بارگذاری شوند.", 409);
+            if (document.SourceId is {} htmlSource) {
+                var source = await db.Sources.SingleAsync(s => s.Id == htmlSource, ct);
+                foreach (var section in await db.SourceSections.Where(s => s.SourceId == htmlSource).ToArrayAsync(ct))
+                    CentEducationalContent.Fragment(section.Html, source.ImportKey);
+            }
             CentModule.Check(input.Sections is { Length: <= 200 } && input.Sections.All(s => s.Title is { Length: > 0 and <= 200 } && s.StartPage >= 1 && s.StartPage <= document.PageCount), "فهرست بخش‌ها معتبر نیست.");
             foreach (var section in input.Sections!) db.Sections.Add(new CentSection { DocumentId = id, Title = section.Title.Trim(), StartPage = section.StartPage });
             document.Published = true; Audit(db, p, "PUBLISH_DOCUMENT", id); await db.SaveChangesAsync(ct); return Results.Ok(document);
